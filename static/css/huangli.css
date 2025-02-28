@@ -1,0 +1,297 @@
+/* 黄历页面样式 */
+.huangli-bg {
+    background-image: url('../images/ancient-bg.jpg');
+}
+
+.nav-links {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.small-btn {
+    font-size: 14px;
+    padding: 5px 10px;
+    margin: 0 5px;
+}
+
+.date-selector {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.date-picker {
+    padding: 5px;
+    border: 1px solid #d4a017;
+    border-radius: 5px;
+    background-color: rgba(255, 248, 220, 0.8);
+    color: #8b4513;
+    font-family: inherit;
+    margin: 0 10px;
+}
+
+.current-date {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0 15px;
+    padding: 5px 15px;
+    background-color: rgba(255, 248, 220, 0.8);
+    border-radius: 5px;
+    border: 1px solid #d4a017;
+}
+
+.huangli-container {
+    background-color: rgba(255, 248, 220, 0.9);
+    border-radius: 10px;
+    border: 2px solid #d4a017;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 800px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.huangli-header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #d4a017;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+.date-info {
+    text-align: left;
+}
+
+.solar-date {
+    font-size: 24px;
+    font-weight: bold;
+    color: #8b4513;
+}
+
+.lunar-date {
+    font-size: 18px;
+    color: #a0522d;
+    margin-top: 5px;
+}
+
+.zodiac-info {
+    text-align: right;
+}
+
+.gan-zhi, .zodiac, .star-sign {
+    margin: 5px 0;
+    color: #8b4513;
+}
+
+.huangli-section {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 8px;
+    border: 1px solid #d4a017;
+}
+
+.huangli-section h3 {
+    color: #8b4513;
+    border-bottom: 1px solid #d4a017;
+    padding-bottom: 8px;
+    margin-top: 0;
+}
+
+.suitable-list, .unsuitable-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.suitable-list span, .unsuitable-list span {
+    background-color: #f5f5dc;
+    border: 1px solid #d4a017;
+    border-radius: 5px;
+    padding: 5px 10px;
+    display: inline-block;
+}
+
+.tag {
+    background-color: #f5f5dc;
+    border: 1px solid #d4a017;
+    border-radius: 5px;
+    padding: 5px 10px;
+    display: inline-block;
+    margin: 3px;
+}
+
+.lucky-info, .shen-sha-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+}
+
+.lucky-item, .shen-sha-item {
+    margin: 5px 0;
+}
+
+.lucky-label, .shen-sha-label {
+    font-weight: bold;
+    color: #8b4513;
+}
+
+.day-fortune {
+    font-size: 18px;
+    text-align: center;
+    padding: 10px;
+    background-color: #f5f5dc;
+    border-radius: 5px;
+    border: 1px solid #d4a017;
+}
+
+.solar-term-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #8b4513;
+    margin-bottom: 10px;
+}
+
+.solar-term-desc {
+    line-height: 1.6;
+}
+
+.festival-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.festival-item {
+    background-color: #f5f5dc;
+    border: 1px solid #d4a017;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.festival-name {
+    font-weight: bold;
+    color: #8b4513;
+    margin-bottom: 5px;
+}
+
+.week-preview {
+    margin: 30px auto;
+    max-width: 800px;
+}
+
+.week-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.day-card {
+    background-color: rgba(255, 248, 220, 0.9);
+    border: 1px solid #d4a017;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.day-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.day-card.active {
+    border: 2px solid #8b4513;
+    background-color: #f5f5dc;
+}
+
+.day-header {
+    border-bottom: 1px solid #d4a017;
+    padding-bottom: 5px;
+    margin-bottom: 8px;
+}
+
+.day-name {
+    font-weight: bold;
+    color: #8b4513;
+}
+
+.day-date {
+    font-size: 14px;
+    color: #a0522d;
+}
+
+.day-content {
+    font-size: 13px;
+}
+
+.lunar-date {
+    margin-bottom: 5px;
+}
+
+.gan-zhi-day {
+    color: #8b4513;
+    margin-bottom: 5px;
+}
+
+.day-suitable, .day-unsuitable {
+    text-align: left;
+    margin: 5px 0;
+}
+
+.label {
+    font-weight: bold;
+    color: #8b4513;
+}
+
+.huangli-footer {
+    text-align: center;
+    margin: 20px 0;
+    color: #8b4513;
+    font-style: italic;
+}
+
+.hidden {
+    display: none;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .huangli-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .zodiac-info {
+        text-align: center;
+        margin-top: 10px;
+    }
+    
+    .lucky-info, .shen-sha-info {
+        grid-template-columns: 1fr;
+    }
+    
+    .week-container {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    }
+    
+    .date-selector {
+        flex-wrap: wrap;
+    }
+    
+    .date-picker {
+        order: -1;
+        width: 100%;
+        margin: 10px 0;
+    }
+    
+    .current-date {
+        width: 100%;
+        text-align: center;
+        margin: 10px 0;
+    }
+} 

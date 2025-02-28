@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>诸葛神算 - 论命</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="ancient-bg">
+        <div class="scroll-container">
+            <div class="scroll-header"></div>
+            <div class="scroll-content">
+                <h1 class="title">诸葛神算 - 论命</h1>
+                
+                <div class="nav-links">
+                    <a href="/" class="ancient-btn small-btn">黄历</a>
+                    <a href="/suanshi" class="ancient-btn small-btn">算事</a>
+                </div>
+                
+                <div class="poetry-section">
+                    <div class="poetry-container">
+                        <div class="poem-line" style="animation-delay: 0.1s">命由天定亦由人</div>
+                        <div class="poem-line" style="animation-delay: 0.3s">一线生机在己身</div>
+                        <div class="poem-line" style="animation-delay: 0.5s">若问前程如何算</div>
+                        <div class="poem-line" style="animation-delay: 0.7s">且待功能开发成</div>
+                    </div>
+                </div>
+                <div class="divider">
+                    <span class="cloud-pattern"></span>
+                </div>
+                
+                <div class="intro-text">
+                    <p class="tou">论命功能正在开发中，敬请期待...</p>
+                    <p class="tou">此功能将基于传统命理学，结合现代科技，为您提供更全面的命运分析。</p>
+                    <p class="tou">功能上线后，您将可以通过输入生辰八字，获取命盘分析、流年运势、事业财运、姻缘健康等多方面的解读。</p>
+                </div>
+                
+                <div class="coming-soon">
+                    <img src="{{ url_for('static', filename='images/coming-soon.png') }}" alt="敬请期待" onerror="this.style.display='none'">
+                    <h2>功能开发中，敬请期待</h2>
+                </div>
+                
+            </div>
+            <div class="scroll-footer"></div>
+        </div>
+    </div>
+</body>
+</html> 
