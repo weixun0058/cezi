@@ -1,0 +1,651 @@
+:root {
+    --primary-color: #8b1313;
+    --secondary-color: #d2691e;
+    --background-color: #f4e4bc;
+    --text-color: #4a3728;
+    --border-color: #8b4513;
+    --base-font-size: 16px;
+}
+/* 楷体 */
+@font-face {
+    font-family: 'KaiTi';
+    src: url('../fonts/simfang.ttf') format('truetype');
+    
+}
+/* 颜楷体 */
+@font-face {
+    font-family: 'YanTi';
+    src: url('../fonts/fzqk.TTF') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+  }
+
+body {
+    font-family: 'KaiTi', 'STKaiti', serif;
+    background: #2c1810 url('../images/ancient-bg.jpg') center/cover fixed;
+    color: var(--text-color);
+    margin: 0;
+    padding: 10px;
+    line-height: 1.6;
+}
+
+.tou {
+    font-size: 1.3em;
+    letter-spacing: -0.05em;
+    line-height: 1.8;
+    text-align: left;
+    font-stretch: ultra-expanded;
+}
+.ancient-bg {
+    /* min-height: 150vh; */
+    padding: 0;
+    margin: 0;
+}
+
+.scroll-container {
+    width: 95%;
+    max-width: 1080px;
+    margin: 0 auto;
+    background: var(--background-color);
+    border-radius: 5px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    position: relative;
+    padding: 20px;
+    background-image: url('../images/paper-texture.png');
+}
+
+.scroll-header, .scroll-footer {
+    height: 30px;
+    background: url('../images/scroll-edge.png') repeat-x;
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
+.scroll-header {
+    top: 0;
+}
+
+.scroll-footer {
+    bottom: -10px;
+    transform: rotate(180deg);
+}
+
+.title {
+    text-align: center;
+    color: var(--primary-color);
+    font-family: 'YanTi', 'STKaiti', serif;
+    font-size: 3.2em;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.poetry- {
+    display: flex;
+    justify-content: center;
+    margin: 0px 0;
+    padding: 0px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+}
+
+.poetry-container {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 20px;
+    padding: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.poem-line {
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    font-size: 1.5em;
+    line-height: 1.8;
+    padding: 15px 5px;
+    color: var(--primary-color);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    border-right: 2px solid transparent;
+    animation: fadeInRight 1s ease forwards, borderGlow 2s ease infinite;
+    opacity: 0;
+    transform: translateX(20px);
+    background: rgba(255,255,255,0.3);
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    font-family: 'YanTi', 'STKaiti', serif;
+    position: relative;
+}
+
+.poem-line:hover {
+    background: rgba(255,255,255,0.5);
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes borderGlow {
+    0%, 100% {
+        border-right-color: rgba(139, 69, 19, 0.3);
+    }
+    50% {
+        border-right-color: rgba(139, 69, 19, 0.8);
+    }
+}
+
+.poem-line::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: radial-gradient(circle at 50% 50%, 
+                              rgba(139, 69, 19, 0.05) 0%, 
+                              transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.poem-line:hover::before {
+    opacity: 1;
+}
+
+.vertical-text {
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    font-size: 1.3em;
+    line-height: 2;
+    padding: 20px;
+    border-right: 2px solid var(--border-color);
+    border-left: 2px solid var(--border-color);
+    background: rgba(255,255,255,0.5);
+}
+
+.intro-text {
+    margin: 0px 0;
+    padding: 20px;
+    font-size: 0.8em;
+    line-height: 1.8;
+    border-bottom: 5px solid var(--border-color);
+    background: rgba(255,255,255,0.3);
+   
+}
+
+.intro-text p {
+    margin: 15px 0;
+    text-indent: 2em;
+    
+}
+
+.divider {
+    text-align: center;
+    margin: 5px 0;
+    height: 10px;
+    background: url('../images/cloud-pattern.png') repeat-x center;
+}
+
+.character-inputs {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 30px 0;
+}
+
+.char-input {
+    width: clamp(40px, 10vw, 70px);
+    height: clamp(40px, 10vw, 70px);
+    font-size: clamp(16px, 4vw, 32px);
+    text-align: center;
+    border: 2px solid var(--border-color);
+    border-radius: 5px;
+    background: rgba(255,255,255,0.7);
+    font-family: 'KaiTi', 'STKaiti', serif;
+}
+
+.ancient-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--primary-color);
+    color: #fff;
+    border: none;
+    padding: clamp(8px, 2vw, 12px) clamp(15px, 4vw, 30px);
+    font-size: clamp(14px, 5vw, 24px);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: 'KaiTi', 'STKaiti', serif;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    width: fit-content;
+    margin: 20px auto;
+}
+
+.ancient-btn:hover {
+    background: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+.ancient-text {
+    font-size: 1.2em;
+    line-height: 1.8;
+    color: var(--text-color);
+    padding: 15px;
+    background: rgba(255,255,255,0.5);
+    border-radius: 5px;
+    display: block;
+    white-space: pre-wrap;
+}
+
+.gua-section, .interpretation-section {
+    margin: 20px 0;
+    padding: 20px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 5px;
+    border-left: 3px solid var(--border-color);
+    display: block;
+}
+
+.sign-number {
+    font-size: 48px;
+    text-align: center;
+    color: var(--primary-color);
+    margin: 30px 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+h2, h3 {
+    font-size: 2.2em;
+    color: var(--primary-color);
+    text-align: center;
+    margin: 20px 0;
+}
+
+.hidden {
+    display: none;
+}
+
+/* 平板设备 */
+@media screen and (max-width: 1024px) {
+    .scroll-container {
+        max-width: 95%;
+        padding: 20px;
+    }
+
+    .intro-text {
+        font-size: 0.5em;
+    }
+
+    .tou {
+        font-size: 1.1em;
+    }
+
+    .poem-line {
+        font-size: 1.2em;
+        padding: 10px 5px;
+    }
+    
+    .poetry-container {
+        gap: 10px;
+        padding: 10px;
+    }
+}
+
+/* 手机设备 - 竖屏 */
+@media screen and (max-width: 480px) and (orientation: portrait) {
+    body {
+        padding: auto;
+    }
+    .scroll-content {
+        /* width: 60%; */
+        max-width: 100%;
+        padding: 0 auto;
+        margin:  auto;
+    }
+    .scroll-container {
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    .intro-text {
+        font-size: 0.4em;
+        padding: 1px;
+    }
+    .intro-text p{
+        font-size: 1.1em;
+        margin: 0px;
+        line-height: 1.1;
+        padding: 5px;
+    }
+    .tou {
+        font-size: 0.9em;
+        letter-spacing: 0;
+    }
+
+    .char-input {
+        width: 60px;
+        height: 60px;
+        font-size: 24px;
+    }
+
+    .ancient-btn {
+        width: 80%;
+        max-width: 300px;
+        margin: 15px auto;
+        padding: 8px 15px;
+    }
+
+    .poem-line {
+        font-size: 1em;
+        padding: 8px 3px;
+    }
+    
+    .poetry-container {
+        gap: 5px;
+        padding: 5px;
+    }
+    
+    .title {
+        font-size: 2em;
+        margin-bottom: 15px;
+    }
+}
+
+/* 手机设备 - 横屏 */
+@media screen and (max-height: 480px) and (orientation: landscape) {
+    .scroll-content {
+        width: 100%;
+        max-width: 100%;
+        padding: 0 auto;
+        margin:  auto;
+    }
+    .scroll-footer {
+        display: none;
+        bottom: 1;
+        transform: rotate(180deg);
+    }
+    
+
+    .poetry-section {
+        width: 100%;
+        max-width: 100%;
+    }
+    .scroll-container {
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    .intro-text {
+        margin: 0px 0;
+        font-size: 1.1em;
+        padding: 10px;
+        
+    }
+    .intro-text p{
+
+        font-size: 1em;
+
+        
+    }
+
+
+    .tou {
+        font-size: 0.85em;
+    }
+
+    .poem-line {
+        font-size: 0.9em;
+        padding: 5px 2px;
+    }
+    
+    .poetry-container {
+        gap: 5px;
+        padding: 5px;
+    }
+}
+
+/* 超小屏幕设备 */
+@media screen and (max-width: 320px) {
+    .intro-text {
+        margin: 0px 0;
+        font-size: 0.8em;
+    }
+
+    .tou {
+        font-size: 0.3em;
+    }
+
+    .char-input {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+}
+
+.strokes-display {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin: 5px 0;
+}
+
+.strokes-display span {
+    color: var(--primary-color);
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    /* background: rgba(255,255,255,0.3); */
+    padding: 0 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.char-display {
+    font-size: 36px;
+    margin-bottom: 0px;
+}
+
+.stroke-display {
+    font-size: 18px;
+    color: var(--text-color);
+}
+
+@media screen and (max-width: 1024px) {
+    :root {
+        --base-font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    :root {
+        --base-font-size: 12px;
+    }
+    
+    .intro-text {
+        font-size: calc(var(--base-font-size) * 1.1);
+    }
+    
+    .tou {
+        font-size: calc(var(--base-font-size) * 1.2);
+    }
+}
+
+/* 修改媒体查询部分 */
+@media screen and (max-width: 480px) {
+    .scroll-container {
+        width: 100%;
+        height: auto;
+        max-width: 100%;
+        padding: 30px auto;
+        margin: 10px auto;
+    }
+
+    .scroll-content {
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    .ancient-btn {
+        width: 80%;
+        max-width: 300px;
+        margin: 15px auto;
+        padding: 8px 15px;
+    }
+
+    .result-section {
+        margin: 10px 0;
+        padding: 10px;
+    }
+
+    .gua-section, .interpretation-section {
+        margin: 10px 0;
+        padding: 10px;
+    }
+}
+
+/* 超小屏幕设备的特殊处理 */
+@media screen and (max-width: 320px) {
+    .scroll-container {
+        padding: 5px;
+    }
+
+    .ancient-btn {
+        width: 90%;
+        padding: 6px 12px;
+        font-size: 0.9em;
+    }
+
+    .ancient-text {
+        font-size: 0.9em;
+        padding: 8px;
+    }
+}
+
+/* 横屏模式的特殊处理 */
+@media screen and (max-height: 480px) and (orientation: landscape) {
+    .scroll-container {
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    .result-section {
+        margin: 5px 0;
+    }
+
+    .ancient-btn {
+        margin: 10px auto;
+        padding: 5px 15px;
+    }
+}
+
+/* 求测类型区域样式 */
+.qc-type-section {
+    margin: 30px auto;
+    text-align: center;
+}
+
+.qc-type-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    margin: 20px auto;
+    max-width: 800px;
+}
+
+.qc-type-btn {
+    width: 80px;
+    height: 80px;
+    padding: 10px;
+    font-size: clamp(14px, 3vw, 20px);
+    background: var(--primary-color);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: 'KaiTi', 'STKaiti', serif;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+.qc-sy-type-btn {
+    width: 200px;
+    height: 80px;
+    padding: 10px;
+    font-size: clamp(14px, 5vw, 20px);
+    background: var(--primary-color);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: 'KaiTi', 'STKaiti', serif;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 3px 2px 4px rgba(0,0,0,0.2);
+}
+
+.qc-type-btn:hover {
+    background: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+.qc-type-btn.selected {
+    background: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .qc-type-buttons {
+        gap: 15px;
+    }
+    
+    .qc-type-btn {
+        width: 100px;
+        height: 100px;
+        font-size: 1.4rem;
+    }
+}
+
+/* 超小屏幕适配 */
+@media (max-width: 320px) {
+    .qc-type-btn {
+        width: 80px;
+        height: 80px;
+        font-size: 1.2rem;
+        padding: 5px;
+    }
+}
+
+/* 解签结果区域样式更新 */
+.interpretation-section {
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 5px;
+}
+
+#specificTitle {
+    color: #8B4513;
+    margin-bottom: 10px;
+    font-family: "楷体", "KaiTi", serif;
+} 
