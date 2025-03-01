@@ -3,6 +3,7 @@ from database import Database
 from utils import cale_character_count, num_to_chinese_upper
 from huangli import HuangLi
 from datetime import datetime, timedelta
+import json
 
 app = Flask(__name__)
 db = Database()
@@ -117,82 +118,72 @@ def get_gua_info():
             'study': '暂无解签',
             'general': '暂无解签'
         })
-    
-
-# @app.route('/image-url')
-# def image_url():
-#     # 使用 url_for 函数生成图片的 URL
-#     image_url = url_for('static', filename='static/images/ancient-bg.jpg')
-#     return f'The URL of the image is: <a href="{image_url}">{image_url}</a>'
 
 @app.route('/huangli')
 def huangli_page():
-    """黄历页面 - 为了兼容旧链接"""
+    """黄历页面"""
     return render_template('huangli.html')
 
 @app.route('/api/huangli', methods=['GET'])
 def get_huangli():
     """获取黄历API"""
-    date_str = request.args.get('date')
-    
-    # 如果没有提供日期，使用当前日期
-    if not date_str:
-        date_str = datetime.now().strftime('%Y-%m-%d')
-    
     try:
+        date_str = request.args.get('date')
+        
+        # 如果没有提供日期，使用当前日期
+        if not date_str:
+            date_str = datetime.now().strftime('%Y-%m-%d')
+        
+        print(f"获取黄历数据: {date_str}")
+        
         # 验证日期格式
-        date_obj = datetime.strptime(date_str, '%Y-%m-%d')
+        try:
+            date_obj = datetime.strptime(date_str, '%Y-%m-%d')
+        except ValueError:
+            print(f"日期格式无效: {date_str}")
+            return jsonify({'error': '日期格式无效，请使用YYYY-MM-DD格式'}), 400
         
         # 获取黄历数据
         huangli_data = huangli.get_daily_huangli(date_str)
         
         if not huangli_data:
+            print(f"无法获取黄历数据: {date_str}")
             return jsonify({'error': '无法获取黄历数据'}), 404
         
-        # 获取节气信息
-        solar_term = huangli.get_solar_term(date_str)
+        # 如果festivals是JSON字符串，将其转换为Python对象
+        if isinstance(huangli_data.get('festivals'), str):
+            try:
+                huangli_data['festivals'] = json.loads(huangli_data['festivals'])
+            except:
+                huangli_data['festivals'] = []
         
-        # 获取节日信息
-        festivals = huangli.get_festivals(date_str)
-        
-        # 直接返回黄历数据，添加节气和节日信息
-        huangli_data['solar_term'] = solar_term
-        huangli_data['festivals'] = festivals
-        
+        print(f"成功获取黄历数据: {date_str}")
+        print(f"彭祖百忌: {huangli_data.get('peng_zu_bai_ji', '无')}")
+        print(f"喜神: {huangli_data.get('xi_shen', '无')}")
+        print(f"福神: {huangli_data.get('fu_shen', '无')}")
+        print(f"财神: {huangli_data.get('cai_shen', '无')}")
         return jsonify(huangli_data)
         
-    except ValueError:
-        return jsonify({'error': '日期格式无效，请使用YYYY-MM-DD格式'}), 400
     except Exception as e:
+        print(f"获取黄历数据时出错: {str(e)}")
         return jsonify({'error': f'获取黄历数据时出错: {str(e)}'}), 500
 
 @app.route('/api/huangli/week', methods=['GET'])
 def get_week_huangli():
     """获取一周黄历数据"""
     try:
-        today = datetime.now()
-        week_data = []
+        # 获取一周黄历数据
+        week_data = huangli.get_week_huangli()
         
-        # 获取今天和未来6天的数据
-        for i in range(7):
-            date = today + timedelta(days=i)
-            date_str = date.strftime('%Y-%m-%d')
-            
-            huangli_data = huangli.get_daily_huangli(date_str)
-            if huangli_data:
-                # 简化数据，只返回关键信息
-                simplified_data = {
-                    'date': date_str,
-                    'lunar_date': huangli_data['lunar_date'],
-                    'suitable': huangli_data['suitable'],
-                    'unsuitable': huangli_data['unsuitable'],
-                    'day_fortune': huangli_data['day_fortune']
-                }
-                week_data.append(simplified_data)
+        if not week_data:
+            print("无法获取一周黄历数据")
+            return jsonify({'error': '无法获取一周黄历数据'}), 404
         
+        print(f"成功获取一周黄历数据，共{len(week_data)}天")
         return jsonify(week_data)
         
     except Exception as e:
+        print(f"获取一周黄历数据时出错: {str(e)}")
         return jsonify({'error': f'获取一周黄历数据时出错: {str(e)}'}), 500
 
 if __name__ == '__main__':

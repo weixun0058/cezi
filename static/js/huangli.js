@@ -55,39 +55,45 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 显示黄历数据
     function displayHuangliData(data, date) {
+        // 调试日志
+        console.log("黄历数据:", data);
+        console.log("彭祖百忌:", data.peng_zu_bai_ji);
+        console.log("喜神:", data.xi_shen);
+        console.log("福神:", data.fu_shen);
+        console.log("财神:", data.cai_shen);
+        
         // 显示日期信息
         document.getElementById('currentDate').textContent = formatDisplayDate(date);
         document.getElementById('solarDate').textContent = formatDisplayDate(date);
-        document.getElementById('lunarDate').textContent = data.lunar_date;
+        document.getElementById('lunarDate').textContent = data.lunar_date || '无';
         
         // 显示天干地支和生肖
-        const ganZhiText = `${data.gan_zhi_year} ${data.gan_zhi_month} ${data.gan_zhi_day}`;
+        const ganZhiText = `${data.gan_zhi_year || ''} ${data.gan_zhi_month || ''} ${data.gan_zhi_day || ''}`;
         document.getElementById('ganZhi').textContent = ganZhiText;
-        document.getElementById('zodiac').textContent = data.zodiac;
-        document.getElementById('starSign').textContent = getStarSign(date.getMonth() + 1, date.getDate());
+        document.getElementById('ganZhiHour').textContent = data.gan_zhi_hour || '无';
+        document.getElementById('zodiac').textContent = data.zodiac || '无';
         
         // 显示宜忌
-        displayListItems('suitable', data.suitable.split('、'));
-        displayListItems('unsuitable', data.unsuitable.split('、'));
+        const suitableItems = data.suitable ? data.suitable.split('、') : [];
+        const unsuitableItems = data.unsuitable ? data.unsuitable.split('、') : [];
+        displayListItems('suitable', suitableItems);
+        displayListItems('unsuitable', unsuitableItems);
         
-        // 显示吉祥信息
-        document.getElementById('luckyDirection').textContent = data.lucky_direction;
-        document.getElementById('luckyColor').textContent = data.lucky_color;
-        document.getElementById('luckyNumber').textContent = data.lucky_number;
+        // 显示彭祖百忌
+        document.getElementById('pengZuBaiJi').textContent = data.peng_zu_bai_ji || '无';
         
         // 显示神煞信息
-        document.getElementById('chongSha').textContent = data.chong_sha;
-        document.getElementById('jiShen').textContent = data.ji_shen;
-        document.getElementById('xiongShen').textContent = data.xiong_shen;
-        
-        // 显示当日运势
-        document.getElementById('dayFortune').textContent = data.day_fortune;
+        document.getElementById('chongSha').textContent = data.chong_sha || '无';
+        document.getElementById('xiShen').textContent = data.xi_shen || '无';
+        document.getElementById('fuShen').textContent = data.fu_shen || '无';
+        document.getElementById('caiShen').textContent = data.cai_shen || '无';
+        document.getElementById('jiShen').textContent = data.ji_shen || '无';
+        document.getElementById('xiongShen').textContent = data.xiong_shen || '无';
         
         // 显示节气信息（如果有）
         const solarTermSection = document.getElementById('solarTermSection');
-        if (data.solar_term) {
-            document.getElementById('solarTermName').textContent = data.solar_term.name;
-            document.getElementById('solarTermDesc').textContent = data.solar_term.description;
+        if (data.solar_term && data.solar_term !== '无') {
+            document.getElementById('solarTermName').textContent = data.solar_term;
             solarTermSection.classList.remove('hidden');
         } else {
             solarTermSection.classList.add('hidden');
@@ -108,12 +114,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 festivalName.className = 'festival-name';
                 festivalName.textContent = `${festival.name} (${festival.type})`;
                 
-                const festivalDesc = document.createElement('div');
-                festivalDesc.className = 'festival-desc';
-                festivalDesc.textContent = festival.description;
-                
                 festivalItem.appendChild(festivalName);
-                festivalItem.appendChild(festivalDesc);
                 festivalList.appendChild(festivalItem);
             });
             
@@ -128,6 +129,14 @@ document.addEventListener('DOMContentLoaded', function() {
         const container = document.getElementById(elementId);
         container.innerHTML = '';
         
+        if (items.length === 0) {
+            const span = document.createElement('span');
+            span.className = 'tag';
+            span.textContent = '无';
+            container.appendChild(span);
+            return;
+        }
+        
         items.forEach(item => {
             if (item.trim()) {
                 const span = document.createElement('span');
@@ -138,37 +147,44 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // 加载一周黄历数据
-    async function loadWeekHuangliData() {
+    // 加载九天黄历数据
+    async function loadNineDaysHuangliData() {
         try {
-            const startDate = formatDate(currentDate);
-            const response = await fetch(`/api/huangli/week?start_date=${startDate}`);
+            const response = await fetch('/api/huangli/week');
             
             if (!response.ok) {
-                throw new Error('获取一周黄历数据失败');
+                throw new Error('获取九天黄历数据失败');
             }
             
             const data = await response.json();
-            displayWeekHuangliData(data);
+            displayNineDaysHuangliData(data);
             
         } catch (error) {
-            console.error('加载一周黄历数据出错:', error);
-            alert('加载一周黄历数据时出错，请重试');
+            console.error('加载九天黄历数据出错:', error);
+            alert('加载九天黄历数据时出错，请重试');
         }
     }
     
-    // 显示一周黄历数据
-    function displayWeekHuangliData(weekData) {
+    // 显示九天黄历数据
+    function displayNineDaysHuangliData(weekData) {
         const weekContainer = document.getElementById('weekHuangliContainer');
         if (!weekContainer) return;
         
         weekContainer.innerHTML = '';
+        
+        // 获取今天的日期字符串，用于比较
+        const todayStr = formatDate(new Date());
         
         weekData.forEach(dayData => {
             const date = new Date(dayData.date);
             
             const dayCard = document.createElement('div');
             dayCard.className = 'day-card';
+            
+            // 如果是今天，添加active类
+            if (dayData.date === todayStr) {
+                dayCard.classList.add('active');
+            }
             
             // 日期头部
             const dayHeader = document.createElement('div');
@@ -191,24 +207,63 @@ document.addEventListener('DOMContentLoaded', function() {
             
             const lunarDate = document.createElement('div');
             lunarDate.className = 'lunar-date';
-            lunarDate.textContent = dayData.lunar_date;
+            lunarDate.textContent = dayData.lunar_date || '无';
             
             const ganZhiDay = document.createElement('div');
             ganZhiDay.className = 'gan-zhi-day';
-            ganZhiDay.textContent = dayData.gan_zhi_day;
+            ganZhiDay.textContent = dayData.gan_zhi_day || '无';
             
             const suitableItem = document.createElement('div');
             suitableItem.className = 'day-suitable';
-            suitableItem.innerHTML = `<span class="label">宜:</span> ${dayData.suitable}`;
+            
+            // 处理宜忌数据，取第一项显示
+            let suitableText = '无';
+            if (dayData.suitable) {
+                const suitableItems = dayData.suitable.split('、');
+                if (suitableItems.length > 0 && suitableItems[0].trim()) {
+                    suitableText = suitableItems[0];
+                }
+            }
+            suitableItem.innerHTML = `<span class="label">宜:</span> ${suitableText}`;
             
             const unsuitableItem = document.createElement('div');
             unsuitableItem.className = 'day-unsuitable';
-            unsuitableItem.innerHTML = `<span class="label">忌:</span> ${dayData.unsuitable}`;
+            
+            let unsuitableText = '无';
+            if (dayData.unsuitable) {
+                const unsuitableItems = dayData.unsuitable.split('、');
+                if (unsuitableItems.length > 0 && unsuitableItems[0].trim()) {
+                    unsuitableText = unsuitableItems[0];
+                }
+            }
+            unsuitableItem.innerHTML = `<span class="label">忌:</span> ${unsuitableText}`;
+            
+            // 添加冲煞信息
+            const chongShaItem = document.createElement('div');
+            chongShaItem.className = 'day-chong-sha';
+            
+            let chongText = '无';
+            if (dayData.chong_sha) {
+                try {
+                    // 提取冲的动物
+                    const match = dayData.chong_sha.match(/冲(.*?)[\(（]/);
+                    if (match && match[1]) {
+                        chongText = match[1];
+                    } else {
+                        chongText = dayData.chong_sha.replace('冲', '');
+                    }
+                } catch (e) {
+                    console.error('处理冲煞信息出错:', e);
+                    chongText = '无';
+                }
+            }
+            chongShaItem.innerHTML = `<span class="label">冲:</span> ${chongText}`;
             
             dayContent.appendChild(lunarDate);
             dayContent.appendChild(ganZhiDay);
             dayContent.appendChild(suitableItem);
             dayContent.appendChild(unsuitableItem);
+            dayContent.appendChild(chongShaItem);
             
             // 组装卡片
             dayCard.appendChild(dayHeader);
@@ -218,6 +273,18 @@ document.addEventListener('DOMContentLoaded', function() {
             dayCard.addEventListener('click', () => {
                 currentDate = date;
                 loadHuangliData(date);
+                
+                // 更新日期选择器
+                const datePicker = document.getElementById('datePicker');
+                if (datePicker) {
+                    datePicker.valueAsDate = date;
+                }
+                
+                // 移除其他卡片的active类，给当前卡片添加active类
+                document.querySelectorAll('.day-card').forEach(card => {
+                    card.classList.remove('active');
+                });
+                dayCard.classList.add('active');
             });
             
             weekContainer.appendChild(dayCard);
@@ -229,8 +296,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // 加载当天黄历
         loadHuangliData(currentDate);
         
-        // 加载一周黄历
-        loadWeekHuangliData();
+        // 加载九天黄历
+        loadNineDaysHuangliData();
         
         // 绑定日期选择器
         const datePicker = document.getElementById('datePicker');
@@ -269,7 +336,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 currentDate = new Date();
                 if (datePicker) datePicker.valueAsDate = currentDate;
                 loadHuangliData(currentDate);
-                loadWeekHuangliData();
+                loadNineDaysHuangliData();
             });
         }
     }

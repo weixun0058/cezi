@@ -2,124 +2,148 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>诸葛神算 - 每日黄历</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>诸葛神算 - 传统黄历</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/huangli.css') }}">
 </head>
 <body>
-    <div class="ancient-bg huangli-bg">
-        <div class="scroll-container">
-            <div class="scroll-header"></div>
-            <div class="scroll-content">
-                <h1 class="title">诸葛神算 - 每日黄历</h1>
+    <div class="container">
+        <header>
+            <h1 class="site-title">诸葛神算</h1>
+            <nav>
+                <ul>
+                    <li><a href="/" class="active">黄历</a></li>
+                    <li><a href="/suanshi">算事</a></li>
+                    <li><a href="/lunming">论命</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <main>
+            <div class="content-wrapper">
+                <h2 class="page-title">传统黄历</h2>
                 
-                <div class="nav-links">
-                    <a href="/" class="ancient-btn small-btn">返回首页</a>
-                    <a href="/suanshi" class="ancient-btn small-btn">算事</a>
-                    <a href="/lunming" class="ancient-btn small-btn">论命</a>
-                </div>
-                
-                <div class="date-selector">
-                    <button id="prevDayBtn" class="ancient-btn small-btn">前一天</button>
+                <div class="date-controls">
+                    <button id="prevDayBtn" class="btn">前一天</button>
                     <input type="date" id="datePicker" class="date-picker">
-                    <div id="currentDate" class="current-date"></div>
-                    <button id="nextDayBtn" class="ancient-btn small-btn">后一天</button>
-                    <button id="todayBtn" class="ancient-btn small-btn">今天</button>
+                    <button id="nextDayBtn" class="btn">后一天</button>
+                    <button id="todayBtn" class="btn btn-primary">今天</button>
                 </div>
                 
                 <div class="huangli-container">
                     <div class="huangli-header">
-                        <div class="date-info">
-                            <div id="solarDate" class="solar-date"></div>
-                            <div id="lunarDate" class="lunar-date"></div>
-                        </div>
-                        <div class="zodiac-info">
-                            <div id="ganZhi" class="gan-zhi"></div>
-                            <div id="zodiac" class="zodiac"></div>
-                            <div id="starSign" class="star-sign"></div>
-                        </div>
+                        <h3 id="currentDate">加载中...</h3>
                     </div>
                     
                     <div class="huangli-content">
-                        <div class="huangli-section">
-                            <h3>今日宜</h3>
-                            <div id="suitable" class="suitable-list"></div>
+                        <div class="date-info">
+                            <div class="solar-date">
+                                <span class="label">阳历：</span>
+                                <span id="solarDate">加载中...</span>
+                            </div>
+                            <div class="lunar-date">
+                                <span class="label">农历：</span>
+                                <span id="lunarDate">加载中...</span>
+                            </div>
+                            <div class="gan-zhi">
+                                <span class="label">干支：</span>
+                                <span id="ganZhi">加载中...</span>
+                            </div>
+                            <div class="gan-zhi-hour">
+                                <span class="label">时辰：</span>
+                                <span id="ganZhiHour">加载中...</span>
+                            </div>
+                            <div class="zodiac">
+                                <span class="label">生肖：</span>
+                                <span id="zodiac">加载中...</span>
+                            </div>
                         </div>
                         
-                        <div class="huangli-section">
-                            <h3>今日忌</h3>
-                            <div id="unsuitable" class="unsuitable-list"></div>
+                        <div class="solar-term-section" id="solarTermSection">
+                            <h4>节气</h4>
+                            <div class="solar-term">
+                                <span id="solarTermName">加载中...</span>
+                            </div>
                         </div>
                         
-                        <div class="huangli-section">
-                            <h3>吉祥信息</h3>
-                            <div class="lucky-info">
-                                <div class="lucky-item">
-                                    <span class="lucky-label">吉方位：</span>
-                                    <span id="luckyDirection" class="lucky-value"></span>
+                        <div class="festival-section" id="festivalSection">
+                            <h4>节日</h4>
+                            <div id="festivalList" class="festival-list">
+                                加载中...
+                            </div>
+                        </div>
+                        
+                        <div class="suitable-unsuitable">
+                            <div class="suitable-section">
+                                <h4>宜</h4>
+                                <div id="suitable" class="tag-container">
+                                    加载中...
                                 </div>
-                                <div class="lucky-item">
-                                    <span class="lucky-label">吉祥色：</span>
-                                    <span id="luckyColor" class="lucky-value"></span>
-                                </div>
-                                <div class="lucky-item">
-                                    <span class="lucky-label">幸运数字：</span>
-                                    <span id="luckyNumber" class="lucky-value"></span>
+                            </div>
+                            <div class="unsuitable-section">
+                                <h4>忌</h4>
+                                <div id="unsuitable" class="tag-container">
+                                    加载中...
                                 </div>
                             </div>
                         </div>
                         
-                        <div class="huangli-section">
-                            <h3>神煞信息</h3>
+                        <div class="peng-zu-section">
+                            <h4>彭祖百忌</h4>
+                            <div id="pengZuBaiJi" class="peng-zu-bai-ji">
+                                加载中...
+                            </div>
+                        </div>
+                        
+                        <div class="shen-sha-section">
+                            <h4>神煞信息</h4>
                             <div class="shen-sha-info">
                                 <div class="shen-sha-item">
-                                    <span class="shen-sha-label">冲煞：</span>
-                                    <span id="chongSha" class="shen-sha-value"></span>
+                                    <span class="label">冲煞：</span>
+                                    <span id="chongSha">加载中...</span>
                                 </div>
                                 <div class="shen-sha-item">
-                                    <span class="shen-sha-label">吉神：</span>
-                                    <span id="jiShen" class="shen-sha-value"></span>
+                                    <span class="label">喜神：</span>
+                                    <span id="xiShen">加载中...</span>
                                 </div>
                                 <div class="shen-sha-item">
-                                    <span class="shen-sha-label">凶神：</span>
-                                    <span id="xiongShen" class="shen-sha-value"></span>
+                                    <span class="label">福神：</span>
+                                    <span id="fuShen">加载中...</span>
+                                </div>
+                                <div class="shen-sha-item">
+                                    <span class="label">财神：</span>
+                                    <span id="caiShen">加载中...</span>
+                                </div>
+                                <div class="shen-sha-item">
+                                    <span class="label">吉神：</span>
+                                    <span id="jiShen">加载中...</span>
+                                </div>
+                                <div class="shen-sha-item">
+                                    <span class="label">凶神：</span>
+                                    <span id="xiongShen">加载中...</span>
                                 </div>
                             </div>
-                        </div>
-                        
-                        <div class="huangli-section">
-                            <h3>今日运势</h3>
-                            <div id="dayFortune" class="day-fortune"></div>
-                        </div>
-                        
-                        <div id="solarTermSection" class="huangli-section solar-term-section hidden">
-                            <h3>节气</h3>
-                            <div class="solar-term-info">
-                                <div id="solarTermName" class="solar-term-name"></div>
-                                <div id="solarTermDesc" class="solar-term-desc"></div>
-                            </div>
-                        </div>
-                        
-                        <div id="festivalSection" class="huangli-section festival-section hidden">
-                            <h3>传统节日</h3>
-                            <div id="festivalList" class="festival-list"></div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="week-preview">
-                    <h3>一周黄历预览</h3>
-                    <div id="weekHuangliContainer" class="week-container"></div>
-                </div>
-                
-                <div class="huangli-footer">
-                    <p>黄历数据仅供参考，吉凶祸福，尽在人为。</p>
+                <div class="week-huangli">
+                    <h3>九天黄历</h3>
+                    <div id="weekHuangliContainer" class="week-container">
+                        <!-- 九天黄历数据将通过JavaScript动态加载 -->
+                        <div class="loading">加载中...</div>
+                    </div>
                 </div>
             </div>
-            <div class="scroll-footer"></div>
-        </div>
+        </main>
+        
+        <footer>
+            <p>黄历数据依据传统历法推算，吉凶祸福，尽在人为。</p>
+            <p>&copy; 2023 诸葛神算 版权所有</p>
+        </footer>
     </div>
+    
     <script src="{{ url_for('static', filename='js/huangli.js') }}"></script>
 </body>
 </html> 

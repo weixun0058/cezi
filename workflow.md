@@ -1,147 +1,265 @@
-# 诸葛神算 V2 工作流程
+# 诸葛神算V2 工作流程
 
-本文档详细描述了诸葛神算 V2 项目的工作流程，包括黄历系统、算事系统和论命系统的处理流程。
+本文档记录诸葛神算V2项目的工作流程、开发过程和使用方法。
 
-## 应用路由结构
+## 开发流程
 
-- `/` - 主页，显示黄历功能
-- `/suanshi` - 算事功能页面
-- `/lunming` - 论命功能页面（开发中）
-- `/huangli` - 黄历功能页面（兼容旧链接）
-- `/api/huangli` - 黄历数据API
-- `/api/huangli/week` - 一周黄历数据API
-- `/get_strokes` - 获取汉字笔画数API
-- `/calculate_sign` - 计算签号API
-- `/get_gua_info` - 获取卦象信息API
+### 1. 黄历功能
 
-## 黄历系统工作流程
+黄历功能是本项目的核心模块之一，提供专业的传统黄历查询服务。
 
-### 1. 初始化
-- 用户访问主页 `/`
-- 前端加载黄历页面模板
-- 页面加载完成后，JavaScript 初始化当前日期为今天
-- 前端通过 AJAX 请求获取当天黄历数据和一周黄历预览
+#### 1.1 数据获取流程
 
-### 2. 黄历数据获取
-- 前端发送请求到 `/api/huangli` 接口，带上日期参数
-- 后端处理流程：
-  1. 验证日期格式
-  2. 检查数据库中是否已有该日期的黄历数据
-  3. 如果有，直接返回数据库中的记录
-  4. 如果没有，使用 lunar-python 库生成黄历数据：
-     - 将阳历日期转换为农历日期
-     - 获取天干地支、生肖等信息
-     - 获取节气信息
-     - 获取节日信息
-     - 生成宜忌活动、吉神凶煞、吉祥方位等信息
-  5. 将生成的数据保存到数据库
-  6. 返回黄历数据给前端
+1. 用户访问黄历页面或通过API请求黄历数据
+2. 系统检查数据库中是否已有该日期的黄历数据
+   - 如果有，直接从数据库返回数据
+   - 如果没有，调用`lunar_python`库生成黄历数据
+3. 生成的黄历数据包括：
+   - 农历日期、天干地支、生肖
+   - 每日宜忌事项（通过`lunar_python`库的`getDayYi`和`getDayJi`方法获取）
+   - 彭祖百忌（通过`lunar_python`库的`getPengZuGan`和`getPengZuZhi`方法获取）
+   - 神煞信息：
+     - 冲煞（通过`getChong`、`getChongGan`和`getSha`方法获取）
+     - 喜神（通过`getDayPositionXi`和`getDayPositionXiDesc`方法获取）
+     - 福神（通过`getDayPositionFu`和`getDayPositionFuDesc`方法获取）
+     - 财神（通过`getDayPositionCai`和`getDayPositionCaiDesc`方法获取）
+     - 吉神（通过`getDayJiShen`方法获取）
+     - 凶神（通过`getDayXiongSha`方法获取）
+   - 节气信息（通过`getJieQi`方法获取）
+   - 节日信息（通过`getFestivals`方法获取）
+4. 将生成的数据保存到数据库，并返回给用户
 
-### 3. 一周黄历预览获取
-- 前端发送请求到 `/api/huangli/week` 接口，带上起始日期参数
-- 后端处理流程：
-  1. 获取从起始日期开始的7天黄历数据
-  2. 对每一天的数据进行简化，只返回关键信息
-  3. 返回一周黄历数据给前端
+#### 1.2 前端展示流程
 
-### 4. 日期切换
-- 用户可以通过以下方式切换日期：
-  - 点击"前一天"/"后一天"按钮
-  - 使用日期选择器选择特定日期
-  - 点击"今天"按钮返回当天
-  - 点击一周预览中的任意日期
-- 日期切换后，前端重新请求该日期的黄历数据
-- 更新页面显示
+1. 页面加载时，通过JavaScript获取当前日期
+2. 调用API获取当日黄历数据
+3. 将数据渲染到页面对应位置
+4. 同时获取九天黄历预览数据（前2天、今天和未来6天）
+5. 用户可以通过日期选择器或前后按钮切换日期
 
-### 5. 数据展示
-- 前端接收到黄历数据后，动态更新页面内容：
-  - 显示阳历和农历日期
-  - 显示天干地支和生肖信息
-  - 显示宜忌活动列表
-  - 显示吉祥方位、颜色、数字
-  - 显示神煞信息
-  - 显示当日运势
-  - 如果有节气，显示节气信息
-  - 如果有节日，显示节日信息
-- 同时更新一周黄历预览区域
+### 2. 算事功能
 
-## 算事系统工作流程
+算事功能基于传统卜卦方法，为用户提供问事预测服务。
 
-### 1. 用户输入处理
-- 用户访问 `/suanshi` 页面
-- 用户在前端界面输入三个汉字
-- 前端通过 AJAX 请求将汉字发送到后端 `/get_strokes` 接口
-- 后端查询数据库获取汉字的笔画数
-- 返回笔画数给前端
+#### 2.1 卜卦流程
 
-### 2. 卦象生成
-- 前端接收到笔画数后，发送到 `/calculate_sign` 接口
-- 后端根据笔画数计算签号（1-384之间）
-- 返回签号给前端
+1. 用户输入三个汉字
+2. 系统查询每个汉字的康熙笔画数
+3. 根据笔画数计算签号（1-383之间）
+4. 根据签号查询对应的卦象信息
+5. 返回卦象解读和多维度运势分析
 
-### 3. 卦象解读
-- 前端接收到签号后，发送到 `/get_gua_info` 接口
-- 后端根据签号查询数据库获取卦象信息
-- 返回卦象信息给前端，包括：
-  - 签文
-  - 卦属
-  - 吉凶
-  - 解签
-  - 事业、财运、情感、健康、学业等多维度解读
+#### 2.2 前端展示流程
 
-### 4. 结果展示
-- 前端接收到卦象信息后，动态更新页面
-- 展示卦象解读和多维度运势分析
-- 提供重新占卜的选项
+1. 用户在输入框中输入三个汉字
+2. 点击"开始测算"按钮
+3. 系统显示测算过程动画
+4. 显示卦象结果，包括签文、卦属、吉凶等信息
+5. 显示多维度解读，包括事业、财运、情感、健康、学业等
 
-## 论命系统工作流程
+### 3. 论命功能
 
-### 1. 功能占位
-- 用户访问 `/lunming` 页面
-- 显示功能开发中的提示信息
-- 提供返回主页和算事页面的导航链接
-
-### 2. 未来功能规划
-- 用户输入生辰八字信息
-- 系统生成命盘
-- 提供多维度命运分析
-- 显示流年运势预测
-
-## 数据流图
-
-```
-用户 -> 前端界面 -> AJAX请求 -> Flask后端 -> 数据库/lunar-python库
-                                  |
-                                  v
-用户 <- 前端界面 <- JSON响应 <- Flask后端
-```
+论命功能目前处于开发中，将提供基于生辰八字的命盘分析。
 
 ## 数据库结构
 
-### 算事系统表
-- `characters`: 存储汉字及其笔画数
-- `gua_info`: 存储卦象信息，包括签文和多维度解读
+### 1. 黄历数据表 (huangli_daily)
 
-### 黄历系统表
-- `huangli_daily`: 存储每日黄历数据，包括：
-  - 日期（阳历）
-  - 农历日期
-  - 天干地支（年月日）
-  - 生肖
-  - 宜忌活动
-  - 吉祥方位、颜色、数字
-  - 神煞信息
-  - 当日运势
-  - 更新时间
+```sql
+CREATE TABLE huangli_daily (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    date TEXT UNIQUE,
+    lunar_date TEXT,
+    gan_zhi_year TEXT,
+    gan_zhi_month TEXT,
+    gan_zhi_day TEXT,
+    gan_zhi_hour TEXT,
+    zodiac TEXT,
+    suitable TEXT,
+    unsuitable TEXT,
+    chong_sha TEXT,
+    ji_shen TEXT,
+    xiong_shen TEXT,
+    peng_zu_bai_ji TEXT,
+    xi_shen TEXT,
+    fu_shen TEXT,
+    cai_shen TEXT,
+    solar_term TEXT,
+    festivals TEXT,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)
+```
 
-## 错误处理
+### 2. 卦象数据表
 
-### 算事系统
-- 如果输入的汉字不在数据库中，使用默认笔画数1
-- 如果签号超出有效范围，返回错误信息
-- 如果数据库查询失败，返回默认错误信息
+卦象数据存储在数据库中，包含383个卦象的详细信息。
 
-### 黄历系统
-- 如果日期格式无效，返回400错误
-- 如果无法获取黄历数据，返回404错误
-- 如果处理过程中出现异常，返回500错误并附带错误信息 
+## API接口
+
+### 1. 黄历API
+
+#### 1.1 获取指定日期的黄历数据
+
+- 请求：`GET /api/huangli?date=YYYY-MM-DD`
+- 响应：黄历数据JSON对象，包含以下字段：
+  - `date`: 阳历日期
+  - `lunar_date`: 农历日期
+  - `gan_zhi_year`: 年干支
+  - `gan_zhi_month`: 月干支
+  - `gan_zhi_day`: 日干支
+  - `gan_zhi_hour`: 时辰干支
+  - `zodiac`: 生肖
+  - `suitable`: 宜事项（以"、"分隔）
+  - `unsuitable`: 忌事项（以"、"分隔）
+  - `chong_sha`: 冲煞信息
+  - `ji_shen`: 吉神信息
+  - `xiong_shen`: 凶神信息
+  - `peng_zu_bai_ji`: 彭祖百忌
+  - `xi_shen`: 喜神方位
+  - `fu_shen`: 福神方位
+  - `cai_shen`: 财神方位
+  - `solar_term`: 节气信息
+  - `festivals`: 节日信息数组
+
+#### 1.2 获取九天黄历预览数据
+
+- 请求：`GET /api/huangli/week`
+- 响应：九天黄历数据JSON数组，每个元素包含简化的黄历信息
+
+### 2. 算事API
+
+#### 2.1 获取汉字笔画数
+
+- 请求：`POST /get_strokes`
+- 请求体：`{"character": "汉字"}`
+- 响应：`{"strokes": 笔画数}`
+
+#### 2.2 计算签号
+
+- 请求：`POST /calculate_sign`
+- 请求体：`{"strokes": [笔画数1, 笔画数2, 笔画数3]}`
+- 响应：`{"sign_number": 签号}`
+
+#### 2.3 获取卦象信息
+
+- 请求：`POST /get_gua_info`
+- 请求体：`{"sign_number": 签号}`
+- 响应：卦象详细信息JSON对象
+
+## 使用方法
+
+### 1. 黄历功能
+
+1. 访问主页 `/` 或 `/huangli`
+2. 查看当日黄历信息，包括：
+   - 阳历和农历日期
+   - 天干地支和生肖
+   - 宜忌事项
+   - 彭祖百忌
+   - 神煞信息（冲煞、喜神、福神、财神、吉神、凶神）
+   - 节气和节日信息
+3. 使用日期选择器或前后按钮切换日期
+4. 查看九天黄历预览，点击任意日期查看详情
+
+### 2. 算事功能
+
+1. 点击主页的"算事"链接或直接访问 `/suanshi`
+2. 在输入框中输入三个汉字
+3. 点击"开始测算"按钮
+4. 查看卦象解读和多维度运势分析
+
+### 3. 论命功能
+
+1. 点击主页的"论命"链接或直接访问 `/lunming`
+2. 此功能正在开发中，敬请期待
+
+## 维护与更新
+
+1. 定期检查`lunar_python`库的更新，确保黄历数据的准确性
+2. 根据用户反馈优化界面和功能
+3. 完善论命功能的开发
+4. 考虑添加更多传统命理学内容，如六爻、梅花易数等
+
+## lunar_python库使用说明
+
+本项目使用`lunar_python`库获取准确的中国传统历法数据。以下是主要使用的方法：
+
+1. **创建日期对象**：
+   ```python
+   from lunar_python import Solar, Lunar
+   
+   # 创建阳历日期对象
+   solar = Solar.fromYmd(2023, 2, 28)
+   
+   # 转换为农历日期对象
+   lunar = solar.getLunar()
+   ```
+
+2. **获取基本信息**：
+   ```python
+   # 获取农历日期
+   lunar_month = lunar.getMonthInChinese()  # 返回如"正"、"二"等
+   lunar_day = lunar.getDayInChinese()      # 返回如"初一"、"十五"等
+   
+   # 获取天干地支
+   gan_zhi_year = lunar.getYearInGanZhi()   # 返回如"甲子"
+   gan_zhi_month = lunar.getMonthInGanZhi() # 返回如"丙寅"
+   gan_zhi_day = lunar.getDayInGanZhi()     # 返回如"壬辰"
+   gan_zhi_hour = lunar.getTimeInGanZhi()   # 返回如"丙子"
+   
+   # 获取生肖
+   shengxiao = lunar.getYearShengXiao()     # 返回如"鼠"、"牛"等
+   ```
+
+3. **获取宜忌信息**：
+   ```python
+   # 获取宜事项
+   yi_list = lunar.getDayYi()               # 返回宜事项列表
+   
+   # 获取忌事项
+   ji_list = lunar.getDayJi()               # 返回忌事项列表
+   ```
+
+4. **获取神煞信息**：
+   ```python
+   # 获取冲煞
+   chong = lunar.getChong()                 # 返回冲的生肖
+   chong_gan = lunar.getChongGan()          # 返回冲的天干
+   sha = lunar.getSha()                     # 返回煞方位
+   
+   # 获取喜神方位
+   xi_position = lunar.getDayPositionXi()   # 返回喜神方位
+   xi_desc = lunar.getDayPositionXiDesc()   # 返回喜神方位描述
+   
+   # 获取福神方位
+   fu_position = lunar.getDayPositionFu()   # 返回福神方位
+   fu_desc = lunar.getDayPositionFuDesc()   # 返回福神方位描述
+   
+   # 获取财神方位
+   cai_position = lunar.getDayPositionCai() # 返回财神方位
+   cai_desc = lunar.getDayPositionCaiDesc() # 返回财神方位描述
+   
+   # 获取吉神凶煞
+   ji_shen = lunar.getDayJiShen()           # 返回吉神列表
+   xiong_sha = lunar.getDayXiongSha()       # 返回凶煞列表
+   ```
+
+5. **获取彭祖百忌**：
+   ```python
+   # 获取彭祖百忌
+   peng_zu_gan = lunar.getPengZuGan()       # 返回天干百忌
+   peng_zu_zhi = lunar.getPengZuZhi()       # 返回地支百忌
+   ```
+
+6. **获取节气和节日**：
+   ```python
+   # 获取节气
+   jie_qi = lunar.getJieQi()                # 返回节气名称，如无则返回None
+   
+   # 获取农历节日
+   lunar_festivals = lunar.getFestivals()   # 返回农历节日列表
+   
+   # 获取阳历节日
+   solar_festivals = solar.getFestivals()   # 返回阳历节日列表
+   ```
+  </rewritten_file> 

@@ -1,297 +1,344 @@
 /* 黄历页面样式 */
-.huangli-bg {
-    background-image: url('../images/ancient-bg.jpg');
+.content-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-.nav-links {
-    display: flex;
-    justify-content: center;
-    margin: 10px 0;
+.page-title {
+    text-align: center;
+    color: #8b0000;
+    margin-bottom: 30px;
+    font-size: 2rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-.small-btn {
-    font-size: 14px;
-    padding: 5px 10px;
-    margin: 0 5px;
-}
-
-.date-selector {
+/* 日期控制区域 */
+.date-controls {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 20px 0;
+    margin-bottom: 20px;
+    gap: 10px;
 }
 
 .date-picker {
-    padding: 5px;
-    border: 1px solid #d4a017;
-    border-radius: 5px;
-    background-color: rgba(255, 248, 220, 0.8);
-    color: #8b4513;
-    font-family: inherit;
-    margin: 0 10px;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
 }
 
-.current-date {
-    font-size: 20px;
-    font-weight: bold;
-    margin: 0 15px;
-    padding: 5px 15px;
-    background-color: rgba(255, 248, 220, 0.8);
-    border-radius: 5px;
-    border: 1px solid #d4a017;
+.btn {
+    padding: 8px 15px;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
 }
 
+.btn:hover {
+    background-color: #e9e9e9;
+}
+
+.btn-primary {
+    background-color: #8b0000;
+    color: white;
+    border-color: #8b0000;
+}
+
+.btn-primary:hover {
+    background-color: #a52a2a;
+}
+
+/* 黄历容器 */
 .huangli-container {
-    background-color: rgba(255, 248, 220, 0.9);
-    border-radius: 10px;
-    border: 2px solid #d4a017;
-    padding: 20px;
-    margin: 20px auto;
-    max-width: 800px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    overflow: hidden;
+    border: 1px solid #e0e0e0;
 }
 
 .huangli-header {
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid #d4a017;
-    padding-bottom: 15px;
-    margin-bottom: 15px;
+    background-color: #8b0000;
+    color: white;
+    padding: 15px 20px;
+    text-align: center;
 }
 
+.huangli-header h3 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.huangli-content {
+    padding: 20px;
+}
+
+/* 日期信息区域 */
 .date-info {
-    text-align: left;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px dashed #e0e0e0;
 }
 
-.solar-date {
-    font-size: 24px;
+.date-info > div {
+    padding: 8px 0;
+}
+
+.label {
     font-weight: bold;
-    color: #8b4513;
+    color: #8b0000;
+    margin-right: 5px;
 }
 
-.lunar-date {
-    font-size: 18px;
-    color: #a0522d;
+.gan-zhi-hour {
+    font-style: italic;
+    color: #555;
     margin-top: 5px;
 }
 
-.zodiac-info {
-    text-align: right;
+/* 节气和节日区域 */
+.solar-term-section,
+.festival-section {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px dashed #e0e0e0;
 }
 
-.gan-zhi, .zodiac, .star-sign {
-    margin: 5px 0;
-    color: #8b4513;
-}
-
-.huangli-section {
-    margin: 20px 0;
-    padding: 15px;
-    background-color: rgba(255, 255, 255, 0.7);
-    border-radius: 8px;
-    border: 1px solid #d4a017;
-}
-
-.huangli-section h3 {
-    color: #8b4513;
-    border-bottom: 1px solid #d4a017;
-    padding-bottom: 8px;
-    margin-top: 0;
-}
-
-.suitable-list, .unsuitable-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.suitable-list span, .unsuitable-list span {
-    background-color: #f5f5dc;
-    border: 1px solid #d4a017;
-    border-radius: 5px;
-    padding: 5px 10px;
-    display: inline-block;
-}
-
-.tag {
-    background-color: #f5f5dc;
-    border: 1px solid #d4a017;
-    border-radius: 5px;
-    padding: 5px 10px;
-    display: inline-block;
-    margin: 3px;
-}
-
-.lucky-info, .shen-sha-info {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 10px;
-}
-
-.lucky-item, .shen-sha-item {
-    margin: 5px 0;
-}
-
-.lucky-label, .shen-sha-label {
-    font-weight: bold;
-    color: #8b4513;
-}
-
-.day-fortune {
-    font-size: 18px;
-    text-align: center;
-    padding: 10px;
-    background-color: #f5f5dc;
-    border-radius: 5px;
-    border: 1px solid #d4a017;
-}
-
-.solar-term-name {
-    font-size: 18px;
-    font-weight: bold;
-    color: #8b4513;
+.solar-term-section h4,
+.festival-section h4 {
+    color: #8b0000;
     margin-bottom: 10px;
-}
-
-.solar-term-desc {
-    line-height: 1.6;
 }
 
 .festival-list {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 10px;
 }
 
 .festival-item {
-    background-color: #f5f5dc;
-    border: 1px solid #d4a017;
-    border-radius: 5px;
+    background-color: #f9f9f9;
     padding: 10px;
+    border-radius: 4px;
+    border-left: 3px solid #8b0000;
 }
 
 .festival-name {
     font-weight: bold;
-    color: #8b4513;
     margin-bottom: 5px;
 }
 
-.week-preview {
-    margin: 30px auto;
-    max-width: 800px;
-}
-
-.week-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 10px;
-    margin-top: 15px;
-}
-
-.day-card {
-    background-color: rgba(255, 248, 220, 0.9);
-    border: 1px solid #d4a017;
-    border-radius: 5px;
-    padding: 10px;
-    text-align: center;
-    cursor: pointer;
-    transition: transform 0.2s;
-}
-
-.day-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-}
-
-.day-card.active {
-    border: 2px solid #8b4513;
-    background-color: #f5f5dc;
-}
-
-.day-header {
-    border-bottom: 1px solid #d4a017;
-    padding-bottom: 5px;
-    margin-bottom: 8px;
-}
-
-.day-name {
-    font-weight: bold;
-    color: #8b4513;
-}
-
-.day-date {
-    font-size: 14px;
-    color: #a0522d;
-}
-
-.day-content {
-    font-size: 13px;
-}
-
-.lunar-date {
-    margin-bottom: 5px;
-}
-
-.gan-zhi-day {
-    color: #8b4513;
-    margin-bottom: 5px;
-}
-
-.day-suitable, .day-unsuitable {
-    text-align: left;
-    margin: 5px 0;
-}
-
-.label {
-    font-weight: bold;
-    color: #8b4513;
-}
-
-.huangli-footer {
-    text-align: center;
-    margin: 20px 0;
-    color: #8b4513;
-    font-style: italic;
+.festival-desc {
+    font-size: 0.9rem;
+    color: #666;
 }
 
 .hidden {
     display: none;
 }
 
-/* 响应式设计 */
+/* 宜忌区域 */
+.suitable-unsuitable {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px dashed #e0e0e0;
+}
+
+.suitable-section h4,
+.unsuitable-section h4 {
+    color: #8b0000;
+    margin-bottom: 10px;
+}
+
+.tag-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tag {
+    background-color: #f5f5f5;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.suitable-section .tag {
+    background-color: #e6f7e6;
+    color: #2e8b57;
+}
+
+.unsuitable-section .tag {
+    background-color: #ffebeb;
+    color: #d9534f;
+}
+
+/* 彭祖百忌区域 */
+.peng-zu-section {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px dashed #e0e0e0;
+}
+
+.peng-zu-section h4 {
+    color: #8b0000;
+    margin-bottom: 10px;
+}
+
+.peng-zu-bai-ji {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 4px;
+    font-family: "SimSun", "宋体", serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* 神煞信息区域 */
+.shen-sha-section {
+    margin-bottom: 20px;
+}
+
+.shen-sha-section h4 {
+    color: #8b0000;
+    margin-bottom: 10px;
+}
+
+.shen-sha-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 4px;
+}
+
+.shen-sha-item {
+    padding: 5px 0;
+}
+
+/* 九天黄历区域 */
+.week-huangli {
+    margin-top: 30px;
+}
+
+.week-huangli h3 {
+    color: #8b0000;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.week-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    overflow-x: auto;
+}
+
+.day-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: all 0.3s;
+    cursor: pointer;
+    border: 1px solid #e0e0e0;
+}
+
+.day-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.day-card.active {
+    border: 2px solid #8b0000;
+}
+
+.day-header {
+    background-color: #8b0000;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+.day-name {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.day-date {
+    font-size: 0.9rem;
+    margin-top: 3px;
+}
+
+.day-content {
+    padding: 15px;
+}
+
+.lunar-date {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.gan-zhi-day {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.day-suitable,
+.day-unsuitable,
+.day-chong-sha {
+    margin-top: 5px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.day-suitable .label,
+.day-unsuitable .label,
+.day-chong-sha .label {
+    font-weight: bold;
+    color: #8b0000;
+}
+
+.loading {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+}
+
+/* 响应式调整 */
 @media (max-width: 768px) {
-    .huangli-header {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .zodiac-info {
-        text-align: center;
-        margin-top: 10px;
-    }
-    
-    .lucky-info, .shen-sha-info {
+    .suitable-unsuitable {
         grid-template-columns: 1fr;
     }
     
     .week-container {
-        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        grid-template-columns: repeat(3, 1fr);
+        overflow-x: scroll;
+    }
+}
+
+@media (max-width: 480px) {
+    .date-controls {
+        flex-direction: column;
     }
     
-    .date-selector {
-        flex-wrap: wrap;
-    }
-    
-    .date-picker {
-        order: -1;
-        width: 100%;
-        margin: 10px 0;
-    }
-    
-    .current-date {
-        width: 100%;
-        text-align: center;
-        margin: 10px 0;
+    .week-container {
+        grid-template-columns: repeat(2, 1fr);
     }
 } 

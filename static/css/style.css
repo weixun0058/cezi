@@ -75,7 +75,7 @@ body {
     text-align: center;
     color: var(--primary-color);
     font-family: 'YanTi', 'STKaiti', serif;
-    font-size: 3.2em;
+    font-size: 4.0em;
     margin-bottom: 30px;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
 }
@@ -648,4 +648,30 @@ h2, h3 {
     color: #8B4513;
     margin-bottom: 10px;
     font-family: "楷体", "KaiTi", serif;
+}
+
+.nav-links {
+    display: flex;
+    justify-content: center;
+    gap: 150px;
+    margin: 20px 0;
+}
+
+/* 导航按钮样式 */
+.nav-btn {
+    font-size: 36px;
+    padding: 8px 20px;
+    margin: 0 15px;
+    font-weight: normal;
+    box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.8);
+    transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 } 
+
+a {
+    text-decoration: none;
+}
