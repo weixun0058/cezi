@@ -141,14 +141,14 @@ def get_huangli():
             date_obj = datetime.strptime(date_str, '%Y-%m-%d')
         except ValueError:
             print(f"日期格式无效: {date_str}")
-            return jsonify({'error': '日期格式无效，请使用YYYY-MM-DD格式'}), 400
+            return jsonify({'success': False, 'message': '日期格式无效，请使用YYYY-MM-DD格式'}), 400
         
         # 获取黄历数据
         huangli_data = huangli.get_daily_huangli(date_str)
         
         if not huangli_data:
             print(f"无法获取黄历数据: {date_str}")
-            return jsonify({'error': '无法获取黄历数据'}), 404
+            return jsonify({'success': False, 'message': '无法获取黄历数据'}), 404
         
         # 如果festivals是JSON字符串，将其转换为Python对象
         if isinstance(huangli_data.get('festivals'), str):
@@ -162,13 +162,13 @@ def get_huangli():
         print(f"喜神: {huangli_data.get('xi_shen', '无')}")
         print(f"福神: {huangli_data.get('fu_shen', '无')}")
         print(f"财神: {huangli_data.get('cai_shen', '无')}")
-        return jsonify(huangli_data)
+        return jsonify({'success': True, 'data': huangli_data})
         
     except Exception as e:
         print(f"获取黄历数据时出错: {str(e)}")
-        return jsonify({'error': f'获取黄历数据时出错: {str(e)}'}), 500
+        return jsonify({'success': False, 'message': f'获取黄历数据时出错: {str(e)}'}), 500
 
-@app.route('/api/huangli/week', methods=['GET'])
+@app.route('/api/week_huangli', methods=['GET'])
 def get_week_huangli():
     """获取一周黄历数据"""
     try:
@@ -177,14 +177,14 @@ def get_week_huangli():
         
         if not week_data:
             print("无法获取一周黄历数据")
-            return jsonify({'error': '无法获取一周黄历数据'}), 404
+            return jsonify({'success': False, 'message': '无法获取一周黄历数据'}), 404
         
         print(f"成功获取一周黄历数据，共{len(week_data)}天")
-        return jsonify(week_data)
+        return jsonify({'success': True, 'data': week_data})
         
     except Exception as e:
         print(f"获取一周黄历数据时出错: {str(e)}")
-        return jsonify({'error': f'获取一周黄历数据时出错: {str(e)}'}), 500
+        return jsonify({'success': False, 'message': f'获取一周黄历数据时出错: {str(e)}'}), 500
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=False)

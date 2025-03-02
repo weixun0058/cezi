@@ -128,10 +128,26 @@ class HuangLi:
             
             # 获取宜忌
             try:
-                suitable = "、".join(lunar.getDayYi())
-                unsuitable = "、".join(lunar.getDayJi())
+                print(f"获取宜忌...")
+                yi_list = lunar.getDayYi()
+                ji_list = lunar.getDayJi()
+                
+                if yi_list and isinstance(yi_list, list):
+                    suitable = "、".join(yi_list)
+                else:
+                    suitable = "无"
+                    
+                if ji_list and isinstance(ji_list, list):
+                    unsuitable = "、".join(ji_list)
+                else:
+                    unsuitable = "无"
+                    
+                print(f"宜: {suitable}")
+                print(f"忌: {unsuitable}")
             except Exception as e:
                 print(f"获取宜忌出错: {str(e)}")
+                import traceback
+                traceback.print_exc()
                 suitable = "无"
                 unsuitable = "无"
             
