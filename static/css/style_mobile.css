@@ -4,59 +4,60 @@
     --background-color: #f4e4bc;
     --text-color: #4a3728;
     --border-color: #8b4513;
-    --base-font-size: 16px;
+    --base-font-size: 14px;
 }
+
 /* 楷体 */
 @font-face {
     font-family: 'KaiTi';
     src: url('../fonts/simfang.ttf') format('truetype');
-    
 }
+
 /* 颜楷体 */
 @font-face {
     font-family: 'YanTi';
     src: url('../fonts/fzqk.TTF') format('truetype');
     font-weight: bold;
     font-style: normal;
-  }
+}
 
 body {
     font-family: 'KaiTi', 'STKaiti', serif;
     background: #2c1810 url('../images/ancient-bg.jpg') center/cover fixed;
     color: var(--text-color);
     margin: 0;
-    padding: 10px;
-    line-height: 1.6;
+    padding: 5px;
+    line-height: 1.5;
+    font-size: var(--base-font-size);
 }
 
 .tou {
-    font-size: 1.3em;
-    letter-spacing: -0.05em;
-    line-height: 1.8;
+    font-size: 1.1em;
+    letter-spacing: -0.03em;
+    line-height: 1.6;
     text-align: left;
-    font-stretch: ultra-expanded;
 }
+
 .ancient-bg {
-    /* min-height: 150vh; */
     padding: 0;
     margin: 0;
 }
 
 .scroll-container {
-    width: 95%;
-    max-width: 1080px;
+    width: 98%;
     margin: 0 auto;
     background: var(--background-color);
     border-radius: 5px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
     position: relative;
-    padding: 20px;
+    padding: 10px;
     background-image: url('../images/paper-texture.png');
 }
 
 .scroll-header, .scroll-footer {
-    height: 30px;
+    height: 20px;
     background: url('../images/scroll-edge.png') repeat-x;
+    background-size: auto 20px;
     position: absolute;
     left: 0;
     right: 0;
@@ -67,7 +68,7 @@ body {
 }
 
 .scroll-footer {
-    bottom: -10px;
+    bottom: -5px;
     transform: rotate(180deg);
 }
 
@@ -75,27 +76,16 @@ body {
     text-align: center;
     color: var(--primary-color);
     font-family: 'YanTi', 'STKaiti', serif;
-    font-size: 4.0em;
-    margin-bottom: 30px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-}
-
-.poetry- {
-    display: flex;
-    justify-content: center;
-    margin: 0px 0;
-    padding: 0px;
-    background: rgba(255,255,255,0.1);
-    border-radius: 10px;
-    flex-wrap: nowrap;
-    overflow-x: auto;
+    font-size: 2.5em;
+    margin: 25px 0 20px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
 }
 
 .poetry-container {
     display: flex;
     flex-direction: row;
-    gap: 20px;
-    padding: 20px;
+    gap: 10px;
+    padding: 10px;
     flex-wrap: wrap;
     justify-content: center;
 }
@@ -103,32 +93,33 @@ body {
 .poem-line {
     writing-mode: vertical-rl;
     text-orientation: upright;
-    font-size: 1.5em;
-    line-height: 1.8;
-    padding: 15px 5px;
+    font-size: 1.2em;
+    line-height: 1.6;
+    padding: 10px 3px;
     color: var(--primary-color);
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-    border-right: 2px solid transparent;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+    border-right: 1px solid transparent;
     animation: fadeInRight 1s ease forwards, borderGlow 2s ease infinite;
     opacity: 0;
-    transform: translateX(20px);
+    transform: translateX(10px);
     background: rgba(255,255,255,0.3);
     border-radius: 5px;
     transition: all 0.3s ease;
     font-family: 'YanTi', 'STKaiti', serif;
     position: relative;
+    height: 120px;
 }
 
 .poem-line:hover {
     background: rgba(255,255,255,0.5);
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transform: translateY(-3px);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
 }
 
 @keyframes fadeInRight {
     from {
         opacity: 0;
-        transform: translateX(20px);
+        transform: translateX(10px);
     }
     to {
         opacity: 1;
@@ -166,48 +157,47 @@ body {
 .vertical-text {
     writing-mode: vertical-rl;
     text-orientation: upright;
-    font-size: 1.3em;
-    line-height: 2;
-    padding: 20px;
-    border-right: 2px solid var(--border-color);
-    border-left: 2px solid var(--border-color);
+    font-size: 1.1em;
+    line-height: 1.8;
+    padding: 15px;
+    border-right: 1px solid var(--border-color);
+    border-left: 1px solid var(--border-color);
     background: rgba(255,255,255,0.5);
 }
 
 .intro-text {
-    margin: 0px 0;
-    padding: 20px;
-    font-size: 0.8em;
-    line-height: 1.8;
-    border-bottom: 5px solid var(--border-color);
+    margin: 0;
+    padding: 15px;
+    font-size: 0.9em;
+    line-height: 1.6;
+    border-bottom: 3px solid var(--border-color);
     background: rgba(255,255,255,0.3);
-   
 }
 
 .intro-text p {
-    margin: 15px 0;
-    text-indent: 2em;
-    
+    margin: 10px 0;
+    text-indent: 1.5em;
 }
 
 .divider {
     text-align: center;
     margin: 5px 0;
-    height: 10px;
+    height: 8px;
     background: url('../images/cloud-pattern.png') repeat-x center;
+    background-size: auto 8px;
 }
 
 .character-inputs {
     display: flex;
     justify-content: center;
-    gap: 30px;
-    margin: 30px 0;
+    gap: 15px;
+    margin: 20px 0;
 }
 
 .char-input {
-    width: clamp(40px, 10vw, 70px);
-    height: clamp(40px, 10vw, 70px);
-    font-size: clamp(16px, 4vw, 32px);
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
     text-align: center;
     border: 2px solid var(--border-color);
     border-radius: 5px;
@@ -222,15 +212,15 @@ body {
     background: var(--primary-color);
     color: #fff;
     border: none;
-    padding: clamp(8px, 2vw, 12px) clamp(15px, 4vw, 30px);
-    font-size: clamp(14px, 5vw, 24px);
+    padding: 8px 15px;
+    font-size: 16px;
     border-radius: 5px;
     cursor: pointer;
     transition: all 0.3s;
     font-family: 'KaiTi', 'STKaiti', serif;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
     width: fit-content;
-    margin: 20px auto;
+    margin: 15px auto;
 }
 
 .ancient-btn:hover {
@@ -239,10 +229,10 @@ body {
 }
 
 .ancient-text {
-    font-size: 1.2em;
-    line-height: 1.8;
+    font-size: 1.1em;
+    line-height: 1.6;
     color: var(--text-color);
-    padding: 15px;
+    padding: 10px;
     background: rgba(255,255,255,0.5);
     border-radius: 5px;
     display: block;
@@ -250,27 +240,27 @@ body {
 }
 
 .gua-section, .interpretation-section {
-    margin: 20px 0;
-    padding: 20px;
+    margin: 15px 0;
+    padding: 15px;
     background: rgba(255,255,255,0.3);
     border-radius: 5px;
-    border-left: 3px solid var(--border-color);
+    border-left: 2px solid var(--border-color);
     display: block;
 }
 
 .sign-number {
-    font-size: 48px;
+    font-size: 36px;
     text-align: center;
     color: var(--primary-color);
-    margin: 30px 0;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    margin: 20px 0;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
 }
 
 h2, h3 {
-    font-size: 2.2em;
+    font-size: 1.8em;
     color: var(--primary-color);
     text-align: center;
-    margin: 20px 0;
+    margin: 15px 0;
 }
 
 .hidden {
@@ -280,34 +270,34 @@ h2, h3 {
 .strokes-display {
     display: flex;
     justify-content: center;
-    gap: 5px;
+    gap: 3px;
     margin: 5px 0;
+    flex-wrap: wrap;
 }
 
 .strokes-display span {
     color: var(--primary-color);
     text-align: center;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-    /* background: rgba(255,255,255,0.3); */
-    padding: 0 5px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    padding: 0 3px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 .char-display {
-    font-size: 36px;
-    margin-bottom: 0px;
+    font-size: 28px;
+    margin-bottom: 0;
 }
 
 .stroke-display {
-    font-size: 18px;
+    font-size: 14px;
     color: var(--text-color);
 }
 
 /* 求测类型区域样式 */
 .qc-type-section {
-    margin: 30px auto;
+    margin: 20px auto;
     text-align: center;
 }
 
@@ -315,19 +305,19 @@ h2, h3 {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 25px;
-    margin: 20px auto;
-    max-width: 800px;
+    gap: 10px;
+    margin: 15px auto;
+    max-width: 100%;
 }
 
 .qc-type-btn {
-    width: 80px;
-    height: 80px;
-    padding: 10px;
-    font-size: clamp(14px, 3vw, 20px);
+    width: 60px;
+    height: 60px;
+    padding: 8px;
+    font-size: 14px;
     background: var(--primary-color);
     border: none;
-    border-radius: 8px;
+    border-radius: 6px;
     cursor: pointer;
     transition: all 0.3s;
     font-family: 'KaiTi', 'STKaiti', serif;
@@ -335,16 +325,17 @@ h2, h3 {
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 3px rgba(0,0,0,0.2);
 }
+
 .qc-sy-type-btn {
-    width: 200px;
-    height: 80px;
-    padding: 10px;
-    font-size: clamp(14px, 5vw, 20px);
+    width: 120px;
+    height: 60px;
+    padding: 8px;
+    font-size: 14px;
     background: var(--primary-color);
     border: none;
-    border-radius: 8px;
+    border-radius: 6px;
     cursor: pointer;
     transition: all 0.3s;
     font-family: 'KaiTi', 'STKaiti', serif;
@@ -352,7 +343,7 @@ h2, h3 {
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 3px 2px 4px rgba(0,0,0,0.2);
+    box-shadow: 2px 1px 3px rgba(0,0,0,0.2);
 }
 
 .qc-type-btn:hover {
@@ -363,51 +354,47 @@ h2, h3 {
 .qc-type-btn.selected {
     background: var(--secondary-color);
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    box-shadow: 0 3px 5px rgba(0,0,0,0.3);
 }
-
 
 /* 解签结果区域样式更新 */
 .interpretation-section {
-    margin: 20px 0;
-    padding: 15px;
+    margin: 15px 0;
+    padding: 10px;
     background: rgba(255, 255, 255, 0.8);
     border-radius: 5px;
 }
 
 #specificTitle {
     color: #8B4513;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     font-family: "楷体", "KaiTi", serif;
-}
-
-.nav-links {
-    display: flex;
-    justify-content: center;
-    gap: 150px;
-    margin: 20px 0;
+    font-size: 1.3em;
 }
 
 /* 通用导航样式 */
 .nav-links {
     display: flex;
     justify-content: center;
-    gap: 150px;
-    margin: 20px 0;
+    gap: 50px;
+    margin: 5px 0;
+    flex-wrap: wrap;
 }
+
 .nav-btn {
-    font-size: 36px;
-    padding: 8px 20px;
-    margin: 0 15px;
+    font-size: 24px;
+    padding: 6px 12px;
+    margin: 5px;
     font-weight: normal;
-    box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.8);
+    box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.8);
     transition: all 0.3s ease;
 }
+
 .nav-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 a {
     text-decoration: none;
-}
+} 

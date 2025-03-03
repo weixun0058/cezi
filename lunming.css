@@ -1,0 +1,248 @@
+/* 论命页面专用样式 */
+
+/* 表单容器 */
+.lunming-form-container {
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 8px;
+    border-left: 3px solid var(--border-color);
+}
+
+.lunming-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* 表单组 */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.form-group label {
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+@media (min-width: 481px) {
+    .form-group {
+        flex-direction: row;
+        align-items: center;
+    }
+    
+    .form-group label {
+        width: 100px;
+        text-align: right;
+        margin-right: 10px;
+    }
+}
+
+/* 输入框样式 */
+.ancient-input {
+    padding: 8px 12px;
+    border: 2px solid var(--border-color);
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.7);
+    font-family: 'KaiTi', 'STKaiti', serif;
+    font-size: 16px;
+}
+
+.ancient-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 5px rgba(139, 19, 19, 0.3);
+}
+
+/* 性别选择 */
+.gender-selection {
+    display: flex;
+    gap: 20px;
+}
+
+.gender-label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.gender-label input[type="radio"] {
+    margin-right: 5px;
+}
+
+.gender-text {
+    font-size: 1em;
+}
+
+/* 按钮容器 */
+.form-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+/* 次要按钮 */
+.secondary-btn {
+    background: #8b8b8b;
+}
+
+.secondary-btn:hover {
+    background: #a0a0a0;
+}
+
+/* 加载动画 */
+.loading-animation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 30px 0;
+}
+
+.loading-text {
+    font-size: 18px;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(139, 19, 19, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--primary-color);
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* 分析结果样式 */
+.analysis-content {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    color: #333;
+    text-align: left;
+    white-space: pre-wrap; /* 保留格式 */
+}
+
+.analysis-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    color: #8b4513;
+    border-bottom: 1px solid #d4a76a;
+    padding-bottom: 5px;
+    text-align: left;
+}
+
+.analysis-list-item {
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 5px 0 5px 20px;
+    color: #333;
+    text-align: left;
+    position: relative;
+    padding-left: 15px;
+}
+
+.analysis-list-item::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 5px;
+    height: 5px;
+    background-color: #d4a76a;
+    border-radius: 50%;
+}
+
+.analysis-error {
+    color: #d9534f;
+    background: #f9f2f2;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin: 10px 0;
+    line-height: 1.6;
+    font-size: 16px;
+    border-left: 4px solid #d9534f;
+}
+
+/* 结果容器样式 */
+#analysis-content {
+    padding: 20px;
+    background-color: rgba(255, 253, 245, 0.9);
+    border-radius: 8px;
+    border: 1px solid #d4a76a;
+    box-shadow: 0 2px 10px rgba(139, 69, 19, 0.1);
+    margin-top: 20px;
+}
+
+/* 媒体查询，适配移动设备 */
+@media screen and (max-width: 480px) {
+    .lunming-form-container {
+        padding: 10px;
+    }
+    
+    .form-group {
+        flex-direction: column;
+    }
+    
+    .ancient-btn {
+        width: 100%;
+        margin: 5px 0;
+    }
+    
+    .analysis-title {
+        font-size: 18px;
+    }
+    
+    .analysis-content, 
+    .analysis-list-item {
+        font-size: 14px;
+    }
+    
+    #analysis-content {
+        padding: 10px;
+    }
+}
+
+/* 隐藏元素 */
+.hidden {
+    display: none;
+}
+
+/* 移动端适配 */
+@media (max-width: 480px) {
+    .lunming-form-container {
+        padding: 10px;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .ancient-btn {
+        width: 80%;
+    }
+    
+    .analysis-content {
+        font-size: 1em;
+        padding: 10px;
+    }
+    
+    .analysis-error {
+        font-size: 0.9em;
+        padding: 10px;
+    }
+} 

@@ -1,13 +1,18 @@
-from flask import Flask, request, jsonify, render_template,url_for
+from flask import Flask, request, jsonify, render_template,url_for, Response
 from database import Database
 from utils import cale_character_count, num_to_chinese_upper
 from huangli import HuangLi
+from lunming import LunMing
 from datetime import datetime, timedelta
 import json
+import traceback
+import time
 
 app = Flask(__name__)
+app.config['JSONIFY_PRETTYPRINT_REGULAR'] = False
 db = Database()
 huangli = HuangLi()
+lunming = LunMing()
 
 @app.route('/')
 def index():
@@ -185,6 +190,131 @@ def get_week_huangli():
     except Exception as e:
         print(f"获取一周黄历数据时出错: {str(e)}")
         return jsonify({'success': False, 'message': f'获取一周黄历数据时出错: {str(e)}'}), 500
+
+@app.route('/api/lunming/analyze', methods=['POST'])
+def analyze_bazi():
+    """分析八字命理API"""
+    try:
+        data = request.json
+        name = data.get('name', '')
+        gender = data.get('gender', '男')
+        birth_date = data.get('birth_date', '')
+        birth_time = data.get('birth_time', '')
+        
+        print(f"收到八字分析请求: 姓名={name}, 性别={gender}, 出生日期={birth_date}, 出生时间={birth_time}")
+        
+        # 验证输入
+        if not name or not birth_date or not birth_time:
+            print("输入数据不完整")
+            return jsonify({
+                'success': False, 
+                'message': '请提供完整的姓名、性别、出生日期和时间'
+            }), 400
+        
+        # 调用论命功能进行分析
+        result = lunming.analyze_bazi(name, gender, birth_date, birth_time)
+        
+        if not result.get('success', False):
+            print(f"八字分析失败: {result.get('error', '未知错误')}")
+            return jsonify({
+                'success': False,
+                'message': result.get('error', '分析失败，请稍后再试')
+            }), 500
+        
+        print(f"八字分析成功")
+        return jsonify({
+            'success': True,
+            'data': {
+                'prompt': result.get('prompt', ''),
+                'analysis': result.get('analysis', '')
+            }
+        })
+        
+    except Exception as e:
+        print(f"处理八字分析请求时出错: {str(e)}")
+        return jsonify({
+            'success': False,
+            'message': f'处理请求时出错: {str(e)}'
+        }), 500
+
+@app.route('/api/lunming/stream', methods=['GET'])
+def stream_bazi_analysis():
+    """流式输出八字分析结果API"""
+    try:
+        # 从查询参数中获取数据
+        name = request.args.get('name', '')
+        gender = request.args.get('gender', '男')
+        birth_date = request.args.get('birth_date', '')
+        birth_time = request.args.get('birth_time', '')
+        
+        print(f"收到八字分析流式请求: 姓名={name}, 性别={gender}, 出生日期={birth_date}, 出生时间={birth_time}")
+        
+        # 验证输入
+        if not name or not birth_date or not birth_time:
+            return jsonify({
+                'success': False, 
+                'message': '请提供完整的姓名、性别、出生日期和时间'
+            }), 400
+            
+        def generate():
+            try:
+                # 使用全局的lunming实例
+                print("开始生成分析结果...")
+                
+                # 先发送一个开始信号
+                print("发送开始信号...")
+                yield f"data: {json.dumps({'text': '正在分析，请稍候...'})}\n\n"
+                
+                # 使用修改后的analyze_bazi方法
+                print("开始调用analyze_bazi方法...")
+                chars_count = 0
+                for char in lunming.analyze_bazi(name, gender, birth_date, birth_time):
+                    if char:
+                        chars_count += 1
+                        # 确保每个字符都被单独发送
+                        if chars_count % 10 == 0:  # 每10个字符打印一次日志，减少日志量
+                            print(f"已发送{chars_count}个字符", flush=True)
+                        json_data = json.dumps({'text': char})
+                        yield f"data: {json_data}\n\n"
+                        # 强制刷新
+                        if hasattr(generate, 'flush'):
+                            generate.flush()
+                
+                # 检查是否有字符输出
+                if chars_count == 0:
+                    print("警告：没有收到任何字符输出")
+                    yield f"data: {json.dumps({'error': '分析过程没有产生任何结果，请重试'})}\n\n"
+                else:
+                    print(f"成功发送了{chars_count}个字符")
+                
+                # 发送完成信号
+                print("分析完成，发送完成信号")
+                yield f"data: {json.dumps({'done': True})}\n\n"
+                
+            except Exception as e:
+                print(f"生成分析结果时出错: {str(e)}")
+                import traceback
+                error_traceback = traceback.format_exc()
+                print(f"错误堆栈: {error_traceback}")
+                # 发送错误信息
+                detailed_error = f"生成分析结果时出错: {str(e)}"
+                yield f"data: {json.dumps({'error': detailed_error})}\n\n"
+                yield f"data: {json.dumps({'done': True})}\n\n"
+        
+        # 设置响应头，禁用缓冲
+        response = Response(generate(), mimetype='text/event-stream')
+        response.headers['Cache-Control'] = 'no-cache'
+        response.headers['X-Accel-Buffering'] = 'no'  # 禁用Nginx缓冲
+        response.headers['Connection'] = 'keep-alive'
+        return response
+        
+    except Exception as e:
+        print(f"处理流式请求时出错: {str(e)}")
+        traceback.print_exc()  # 打印完整的错误堆栈
+        return jsonify({
+            'success': False,
+            'message': f'处理请求时出错: {str(e)}'
+        }), 500
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=False)
