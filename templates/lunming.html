@@ -76,23 +76,16 @@
                     </div>
                 </div>
                 
-                <div id="loading-container" class="hidden">
-                    <div class="loading-animation">
-                        <div class="loading-text">正在推演命理，请稍候...</div>
+                <!-- 结果区域 -->
+                <div id="result-container" class="result-container hidden">
+                    <!-- 加载指示器 -->
+                    <div id="loading-container" class="loading-container">
                         <div class="loading-spinner"></div>
-                    </div>
-                </div>
-                
-                <div id="result-container" class="hidden">
-                    <div class="divider">
-                        <span class="cloud-pattern"></span>
+                        <span>正在分析，请稍候...</span>
                     </div>
                     
-                    <h2 class="result-title">命理分析结果</h2>
-                    
-                    <div id="analysis-content" class="analysis-content">
-                        <!-- 分析结果将通过JavaScript动态插入 -->
-                    </div>
+                    <!-- 分析内容 -->
+                    <div id="analysis-content" class="analysis-content"></div>
                 </div>
                 
             </div>

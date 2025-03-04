@@ -1,6 +1,6 @@
 from lunar_python import Lunar
 
-lunar = Lunar.fromYmd(1986, 4, 21)
+lunar = Lunar(1986, 4, 21,21,15,00)
 
 #获取节日
 l = lunar.getFestivals()
