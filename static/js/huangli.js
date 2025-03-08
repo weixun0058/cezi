@@ -39,9 +39,82 @@ document.addEventListener('DOMContentLoaded', function() {
         fetchAndDisplayHuangliData(formatDate(new Date()));
     });
     
-    // 日期选择器变化事件
+    // 添加日期选择器的change事件监听器
     datePicker.addEventListener('change', function() {
-        fetchAndDisplayHuangliData(this.value);
+        const selectedDate = this.value;
+        if (selectedDate) {
+            fetchAndDisplayHuangliData(selectedDate);
+        }
+    });
+    
+    // 添加回车键确认事件
+    datePicker.addEventListener('keyup', function(e) {
+        if (e.key === 'Enter') {
+            const selectedDate = this.value;
+            if (selectedDate) {
+                fetchAndDisplayHuangliData(selectedDate);
+            }
+        }
+    });
+
+    datePicker.addEventListener('keydown', function(e) {
+        // 只处理数字键输入，忽略控制键
+        if (/^\d$/.test(e.key) && !e.ctrlKey && !e.altKey && !e.metaKey) {
+            const curValue = this.value;
+            const selStart = this.selectionStart;
+            
+            // 检查是否在输入年份部分
+            if (!curValue.includes('-') || selStart <= curValue.indexOf('-')) {
+                // 如果已经输入了4位年份，且光标在第4位之后
+                const yearPart = !curValue.includes('-') ? curValue : curValue.split('-')[0];
+                if (yearPart.length === 4 && selStart >= 4) {
+                    // 阻止默认行为，添加分隔符并跳转到月份部分
+                    e.preventDefault();
+                    const newValue = yearPart + '-' + e.key;
+                    this.value = newValue;
+                    
+                    // 设置光标位置到月份部分
+                    setTimeout(() => this.setSelectionRange(6, 6), 0);
+                    return;
+                }
+            }
+            
+            // 检查是否在输入月份部分
+            if (curValue.includes('-') && curValue.split('-').length === 2) {
+                const monthPart = curValue.split('-')[1];
+                const monthStart = curValue.indexOf('-') + 1;
+                
+                // 如果已经输入了2位月份，且光标在月份末尾
+                if (monthPart.length === 2 && selStart === monthStart + 2) {
+                    // 阻止默认行为，添加分隔符并跳转到日期部分
+                    e.preventDefault();
+                    const newValue = curValue + '-' + e.key;
+                    this.value = newValue;
+                    
+                    // 设置光标位置到日期部分
+                    setTimeout(() => this.setSelectionRange(newValue.length, newValue.length), 0);
+                    return;
+                }
+            }
+            
+            // 检查是否在输入日期部分
+            if (curValue.includes('-') && curValue.split('-').length === 3) {
+                const datePart = curValue.split('-')[2];
+                const dateStart = curValue.lastIndexOf('-') + 1;
+                
+                // 如果已经输入了2位日期，且光标在日期末尾
+                if (datePart.length === 2 && selStart === dateStart + 2) {
+                    // 阻止默认行为
+                    e.preventDefault();
+                    
+                    // 日期输入完成，触发数据更新
+                    setTimeout(() => {
+                        fetchAndDisplayHuangliData(this.value);
+                    }, 0);
+                    return;
+                }
+            }
+        }
     });
     
     // 初始加载今天的黄历数据
@@ -61,16 +134,17 @@ function updateCurrentTime() {
     const now = new Date();
     const hours = now.getHours();
     const minutes = now.getMinutes();
-    const timeElement = document.getElementById('currentTime');
+    
+    // 更新时间显示在currentDate
+    const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+    document.getElementById('currentDate').textContent = formattedTime;
     
     // 计算当前时辰
     const chineseHour = getChineseHour(hours);
     
-    // 格式化当前时间
-    const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
-    
-    // 更新显示
-    timeElement.textContent = `当前时辰: ${chineseHour} (${formattedTime})`;
+    // 只在currentTime中显示时辰信息
+    const timeElement = document.getElementById('currentTime');
+    timeElement.textContent = `当前时辰: ${chineseHour}`;
     
     // 每分钟更新一次
     setTimeout(updateCurrentTime, 60000 - (now.getSeconds() * 1000));
@@ -177,30 +251,49 @@ function displayHuangliData(data) {
     try {
         console.log("显示黄历数据:", data);
         
-        // 更新日期标题
-        document.getElementById('currentDate').textContent = data.date || '未知日期';
+        // 获取当前时间，显示在标题处
+        const now = new Date();
+        const hours = now.getHours();
+        const minutes = now.getMinutes();
+        const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
         
-        // 更新日期信息
-        document.getElementById('solarDate').textContent = data.date || '未知';
+        // 更新为当前时间而不是日期
+        document.getElementById('currentDate').textContent = formattedTime;
+        
+        // 更新日期信息 - 移除对solarDate的引用
         document.getElementById('lunarDate').textContent = data.lunar_date || '未知';
         document.getElementById('ganZhi').textContent = `${data.gan_zhi_year || '未知'} ${data.gan_zhi_month || '未知'} ${data.gan_zhi_day || '未知'}`;
         
         // 更新时辰信息
         const ganZhiHourElement = document.getElementById('ganZhiHour');
-        if (data.gan_zhi_hour) {
-            ganZhiHourElement.textContent = data.gan_zhi_hour;
-        } else {
-            // 如果API没有返回时辰信息，则使用当前时辰
-            const now = new Date();
-            const hours = now.getHours();
-            const chineseHour = getChineseHour(hours);
-            ganZhiHourElement.textContent = chineseHour;
-        }
+        // 始终使用当前时辰，而不是API返回的固定时辰
+        const chineseHour = getChineseHour(hours);
+        ganZhiHourElement.textContent = `${formattedTime} ${chineseHour}`;
         
         document.getElementById('zodiac').textContent = data.zodiac || '未知';
         
         // 更新节气
         document.getElementById('solarTermName').textContent = data.solar_term || '无';
+        
+        // 详细打印节气相关信息，用于调试
+        console.log("节气相关数据:", {
+            "当前节气": data.solar_term,
+            "上一节气名称": data.prev_solar_term,
+            "上一节气天数": data.prev_solar_term_days,
+            "下一节气名称": data.next_solar_term, 
+            "下一节气天数": data.next_solar_term_days
+        });
+        
+        // 更新上一个节气和下一个节气信息
+        const prevSolarTermElement = document.getElementById('prevSolarTerm');
+        const nextSolarTermElement = document.getElementById('nextSolarTerm');
+        
+        // 无论是否有数据，都尝试显示，方便调试
+        prevSolarTermElement.innerHTML = `<span>${data.prev_solar_term || '未知'}</span> <small>(${data.prev_solar_term_days || '?'}天前)</small>`;
+        prevSolarTermElement.style.display = 'block';
+        
+        nextSolarTermElement.innerHTML = `<span>${data.next_solar_term || '未知'}</span> <small>(还有${data.next_solar_term_days || '?'}天)</small>`;
+        nextSolarTermElement.style.display = 'block';
         
         // 更新节日
         const festivalList = document.getElementById('festivalList');

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>诸葛神算V2 - 公农历日期转换器</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- 引入本地的lunar-javascript库 -->
+    <script src="lunar/lunar.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>诸葛神算V2 - 公农历日期转换器</h1>
+            <p>在公历与农历之间轻松转换日期</p>
+        </header>
+
+        <main>
+            <div class="calendar-container">
+                <div class="calendar-section">
+                    <h2>公历日期</h2>
+                    <div class="date-picker">
+                        <input type="date" id="gregorian-date" min="1900-01-01" max="2100-12-31">
+                    </div>
+                </div>
+
+                <div class="divider">
+                    <div class="arrow-left"></div>
+                    <div class="arrow-right"></div>
+                </div>
+
+                <div class="calendar-section">
+                    <h2>农历日期</h2>
+                    <div class="lunar-picker">
+                        <div class="lunar-year">
+                            <label for="lunar-year">年份</label>
+                            <div class="select-container">
+                                <input type="number" id="lunar-year" min="1900" max="2100" placeholder="1900-2100">
+                            </div>
+                        </div>
+                        <div class="lunar-month">
+                            <label for="lunar-month">月份</label>
+                            <div class="select-container">
+                                <select id="lunar-month"></select>
+                            </div>
+                        </div>
+                        <div class="lunar-day">
+                            <label for="lunar-day">日期</label>
+                            <div class="select-container">
+                                <select id="lunar-day"></select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-panel">
+                <div id="current-date-info">
+                    <p>今天是：<span id="today-gregorian"></span></p>
+                    <p>农历：<span id="today-lunar"></span></p>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>© 2023 诸葛神算V2 - 支持1900年至2100年的公农历转换</p>
+        </footer>
+    </div>
+
+    <script src="js/calendar.js"></script>
+    
+    <!-- 调试信息 -->
+    <script>
+        // 检查lunar-javascript库是否正确加载
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                console.log('检查lunar-javascript库是否加载:');
+                console.log('Solar:', typeof Solar !== 'undefined' ? '已加载' : '未加载');
+                console.log('Lunar:', typeof Lunar !== 'undefined' ? '已加载' : '未加载');
+                
+                if (typeof Solar !== 'undefined' && typeof Lunar !== 'undefined') {
+                    try {
+                        // 测试库的基本功能
+                        var testSolar = Solar.fromYmd(2023, 1, 1);
+                        var testLunar = testSolar.getLunar();
+                        console.log('测试转换:', testSolar.toString(), '->', testLunar.toString());
+                    } catch (e) {
+                        console.error('测试库功能失败:', e);
+                    }
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html> 

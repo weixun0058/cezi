@@ -22,9 +22,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // 重置按钮事件
     resetBtn.addEventListener('click', () => {
         document.getElementById('name').value = '';
-        document.getElementById('birth-date').value = formattedDate;
-        document.getElementById('birth-time').value = formattedTime;
         document.querySelector('input[name="gender"][value="男"]').checked = true;
+        
+        // 日期重置已在lunar_date_handler.js中处理
         
         resultContainer.classList.add('hidden');
         analysisContent.innerHTML = '';

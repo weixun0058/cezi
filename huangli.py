@@ -33,6 +33,11 @@ class HuangLi:
             fu_shen TEXT,
             cai_shen TEXT,
             solar_term TEXT,
+            prev_solar_term TEXT,
+            prev_solar_term_days INTEGER,
+            next_solar_term TEXT,
+            next_solar_term_days INTEGER,
+            formatted_solar_term_info TEXT,
             festivals TEXT,
             updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
@@ -62,6 +67,27 @@ class HuangLi:
         if 'gan_zhi_hour' not in columns:
             print("添加时辰干支字段")
             cursor.execute("ALTER TABLE huangli_daily ADD COLUMN gan_zhi_hour TEXT")
+            
+        # 检查节气相关字段
+        if 'prev_solar_term' not in columns:
+            print("添加上一节气字段")
+            cursor.execute("ALTER TABLE huangli_daily ADD COLUMN prev_solar_term TEXT")
+            
+        if 'prev_solar_term_days' not in columns:
+            print("添加上一节气天数字段")
+            cursor.execute("ALTER TABLE huangli_daily ADD COLUMN prev_solar_term_days INTEGER")
+            
+        if 'next_solar_term' not in columns:
+            print("添加下一节气字段")
+            cursor.execute("ALTER TABLE huangli_daily ADD COLUMN next_solar_term TEXT")
+            
+        if 'next_solar_term_days' not in columns:
+            print("添加下一节气天数字段")
+            cursor.execute("ALTER TABLE huangli_daily ADD COLUMN next_solar_term_days INTEGER")
+        
+        if 'formatted_solar_term_info' not in columns:
+            print("添加格式化节气信息字段")
+            cursor.execute("ALTER TABLE huangli_daily ADD COLUMN formatted_solar_term_info TEXT")
         
         conn.commit()
         conn.close()
@@ -76,6 +102,15 @@ class HuangLi:
         conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()
         
+        # 临时措施：删除旧数据以强制重新生成带有节气信息的数据
+        # 删除旧缓存数据
+        try:
+            cursor.execute("DELETE FROM huangli_daily WHERE date = ?", (date,))
+            conn.commit()
+            print(f"已删除日期 {date} 的旧缓存数据，将重新生成")
+        except Exception as e:
+            print(f"删除旧数据时出错: {e}")
+        
         # 查询数据库中是否已有该日期的黄历
         cursor.execute("SELECT * FROM huangli_daily WHERE date = ?", (date,))
         result = cursor.fetchone()
@@ -86,6 +121,13 @@ class HuangLi:
             huangli_data = dict(zip(columns, result))
             conn.close()
             print(f"从数据库获取黄历数据: {date}")
+            
+            # 调试输出节气相关信息
+            print(f"调试 - 节气相关数据:")
+            print(f"  当前节气: {huangli_data.get('solar_term')}")
+            print(f"  上一节气: {huangli_data.get('prev_solar_term')} ({huangli_data.get('prev_solar_term_days')}天前)")
+            print(f"  下一节气: {huangli_data.get('next_solar_term')} (还有{huangli_data.get('next_solar_term_days')}天)")
+            
             return huangli_data
         else:
             # 从lunar_python库获取黄历数据
@@ -95,6 +137,13 @@ class HuangLi:
                 self._save_huangli_to_db(huangli_data)
                 conn.close()
                 print(f"生成并保存黄历数据: {date}")
+                
+                # 调试输出节气相关信息
+                print(f"调试 - 新生成节气相关数据:")
+                print(f"  当前节气: {huangli_data.get('solar_term')}")
+                print(f"  上一节气: {huangli_data.get('prev_solar_term')} ({huangli_data.get('prev_solar_term_days')}天前)")
+                print(f"  下一节气: {huangli_data.get('next_solar_term')} (还有{huangli_data.get('next_solar_term_days')}天)")
+                
                 return huangli_data
             
             conn.close()
@@ -212,6 +261,73 @@ class HuangLi:
             # 获取节气
             solar_term = lunar.getJieQi() or "无"
             
+            # 获取上一个和下一个节气信息 - 使用正确的lunar_python库API
+            try:
+                print("开始计算节气信息...")
+                # 获取当前日期
+                current_date = datetime.strptime(date_str, '%Y-%m-%d')
+                
+                # 获取上一个节气
+                prev_jieqi_obj = lunar.getPrevJieQi()
+                prev_solar_term = prev_jieqi_obj.getName()
+                
+                # 计算上一个节气距今天的天数
+                prev_jieqi_date = datetime(prev_jieqi_obj.getSolar().getYear(), 
+                                          prev_jieqi_obj.getSolar().getMonth(), 
+                                          prev_jieqi_obj.getSolar().getDay())
+                prev_solar_term_days = (current_date - prev_jieqi_date).days
+                
+                # 获取下一个节气
+                next_jieqi_obj = lunar.getNextJieQi()
+                
+                # 特殊处理：如果当天正好是节气日，需要获取下下个节气
+                if solar_term != "无":
+                    print(f"当天是节气日：{solar_term}，获取下下个节气")
+                    # 先获取下一个节气的日期
+                    next_jieqi_date = datetime(next_jieqi_obj.getSolar().getYear(), 
+                                              next_jieqi_obj.getSolar().getMonth(), 
+                                              next_jieqi_obj.getSolar().getDay())
+                    
+                    # 验证下一个节气不是当天
+                    if (next_jieqi_date - current_date).days == 0:
+                        print("下一个节气是当天，继续获取下下个节气")
+                        # 如果下一个节气就是当天，那么需要继续获取下下个节气
+                        # 创建一个未来一天的日期对象，再获取其下一个节气
+                        future_date = current_date + timedelta(days=1)
+                        future_solar = Solar.fromYmd(future_date.year, future_date.month, future_date.day)
+                        future_lunar = future_solar.getLunar()
+                        next_jieqi_obj = future_lunar.getNextJieQi()
+                
+                next_solar_term = next_jieqi_obj.getName()
+                
+                # 计算下一个节气距今天的天数
+                next_jieqi_date = datetime(next_jieqi_obj.getSolar().getYear(), 
+                                          next_jieqi_obj.getSolar().getMonth(), 
+                                          next_jieqi_obj.getSolar().getDay())
+                next_solar_term_days = (next_jieqi_date - current_date).days
+                
+                print(f"上一节气: {prev_solar_term} ({prev_solar_term_days}天前)")
+                print(f"当前节气: {solar_term if solar_term != '无' else '无'}")
+                print(f"下一节气: {next_solar_term} (还有{next_solar_term_days}天)")
+                
+                # 为横向显示准备格式化的数据
+                if solar_term == "无":
+                    formatted_solar_term_info = f"{prev_solar_term}({prev_solar_term_days}天前) --- 无 --- {next_solar_term}(还有{next_solar_term_days}天)"
+                else:
+                    formatted_solar_term_info = f"{prev_solar_term}({prev_solar_term_days}天前) --- {solar_term}(今日) --- {next_solar_term}(还有{next_solar_term_days}天)"
+                
+                print(f"格式化节气信息: {formatted_solar_term_info}")
+                
+            except Exception as e:
+                print(f"获取节气信息出错: {str(e)}")
+                import traceback
+                traceback.print_exc()
+                prev_solar_term = "未知"
+                prev_solar_term_days = 0
+                next_solar_term = "未知"
+                next_solar_term_days = 0
+                formatted_solar_term_info = "未知 --- 未知 --- 未知"
+            
             # 获取节日
             festivals = []
             lunar_festivals = lunar.getFestivals()
@@ -243,6 +359,11 @@ class HuangLi:
                 'fu_shen': fu_shen,
                 'cai_shen': cai_shen,
                 'solar_term': solar_term,
+                'prev_solar_term': prev_solar_term,
+                'prev_solar_term_days': prev_solar_term_days,
+                'next_solar_term': next_solar_term,
+                'next_solar_term_days': next_solar_term_days,
+                'formatted_solar_term_info': formatted_solar_term_info,
                 'festivals': festivals
             }
             
@@ -266,7 +387,7 @@ class HuangLi:
             festivals_json = json.dumps(huangli_data['festivals'], ensure_ascii=False)
             
             # 检查数据中是否包含所有必要字段
-            fields = ['peng_zu_bai_ji', 'xi_shen', 'fu_shen', 'cai_shen']
+            fields = ['peng_zu_bai_ji', 'xi_shen', 'fu_shen', 'cai_shen', 'formatted_solar_term_info']
             for field in fields:
                 if field not in huangli_data or not huangli_data[field]:
                     print(f"警告: 数据中缺少{field}字段或为空，设置为默认值'无'")
@@ -278,8 +399,9 @@ class HuangLi:
             INSERT OR REPLACE INTO huangli_daily 
             (date, lunar_date, gan_zhi_year, gan_zhi_month, gan_zhi_day, gan_zhi_hour, 
             zodiac, suitable, unsuitable, chong_sha, ji_shen, xiong_shen, 
-            peng_zu_bai_ji, xi_shen, fu_shen, cai_shen, solar_term, festivals)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            peng_zu_bai_ji, xi_shen, fu_shen, cai_shen, solar_term, prev_solar_term, 
+            prev_solar_term_days, next_solar_term, next_solar_term_days, formatted_solar_term_info, festivals)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             ''', (
                 huangli_data['date'],
                 huangli_data['lunar_date'],
@@ -298,6 +420,11 @@ class HuangLi:
                 huangli_data['fu_shen'],
                 huangli_data['cai_shen'],
                 huangli_data['solar_term'],
+                huangli_data['prev_solar_term'],
+                huangli_data['prev_solar_term_days'],
+                huangli_data['next_solar_term'],
+                huangli_data['next_solar_term_days'],
+                huangli_data['formatted_solar_term_info'],
                 festivals_json
             ))
             

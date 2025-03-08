@@ -1,0 +1,213 @@
+/* 全局样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f5f7fa;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* 头部样式 */
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px 0;
+    border-bottom: 1px solid #eaeaea;
+}
+
+header h1 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+header p {
+    color: #7f8c8d;
+}
+
+/* 主要内容样式 */
+main {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+/* 日历容器样式 */
+.calendar-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.calendar-section {
+    flex: 1;
+    min-width: 300px;
+    padding: 20px;
+}
+
+.calendar-section h2 {
+    margin-bottom: 20px;
+    color: #2c3e50;
+    text-align: center;
+}
+
+/* 分隔线样式 */
+.divider {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.arrow-left, .arrow-right {
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    margin: 5px 0;
+}
+
+.arrow-left {
+    border-right: 15px solid #3498db;
+}
+
+.arrow-right {
+    border-left: 15px solid #3498db;
+}
+
+/* 日期选择器样式 */
+.date-picker {
+    text-align: center;
+}
+
+.date-picker input[type="date"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #333;
+}
+
+/* 农历选择器样式 */
+.lunar-picker {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.lunar-year, .lunar-month, .lunar-day {
+    display: flex;
+    flex-direction: column;
+}
+
+.lunar-picker label {
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.select-container {
+    position: relative;
+}
+
+.lunar-picker select, .lunar-picker input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #333;
+    background-color: #fff;
+    appearance: none;
+}
+
+.lunar-picker input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.lunar-picker input[type="number"]::-webkit-inner-spin-button,
+.lunar-picker input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.select-container::after {
+    content: '';
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #555;
+    pointer-events: none;
+}
+
+/* 信息面板样式 */
+.info-panel {
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+#current-date-info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+#current-date-info p {
+    margin: 5px 0;
+}
+
+/* 页脚样式 */
+footer {
+    text-align: center;
+    padding: 20px 0;
+    color: #7f8c8d;
+    font-size: 14px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .calendar-container {
+        flex-direction: column;
+    }
+    
+    .calendar-section {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    
+    .divider {
+        flex-direction: row;
+        margin: 10px 0;
+    }
+    
+    .arrow-left {
+        transform: rotate(90deg);
+        margin-right: 10px;
+    }
+    
+    .arrow-right {
+        transform: rotate(90deg);
+        margin-left: 10px;
+    }
+} 

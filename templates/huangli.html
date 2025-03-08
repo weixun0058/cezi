@@ -35,7 +35,7 @@
                 
                 <div class="date-controls">
                     <button id="prevDayBtn" class="btn btn-primary">前一天</button>
-                    <input type="date" id="datePicker" class="date-picker">
+                    <input type="date" id="datePicker" min="0001-01-01" max="9999-12-31" class="date-picker">
                     <button id="nextDayBtn" class="btn btn-primary">后一天</button>
                     <button id="todayBtn" class="btn btn-primary">今天</button>
                 </div>
@@ -43,7 +43,7 @@
                 <div class="huangli-container">
                     <div class="huangli-header">
                         <h3 id="currentDate">加载中...</h3>
-                        <div id="currentTime" class="current-time">当前时辰: 加载中...</div>
+                        <div id="currentTime" class="current-time">加载中...</div>
                     </div>
                     
                     <div class="huangli-content">
@@ -53,10 +53,6 @@
                             <div class="info-card date-info">
                                 <h4 class="card-title">日期信息</h4>
                                 <div class="info-grid">
-                                    <div class="info-item solar-date">
-                                        <span class="label">阳历：</span>
-                                        <span id="solarDate">加载中...</span>
-                                    </div>
                                     <div class="info-item lunar-date">
                                         <span class="label">农历：</span>
                                         <span id="lunarDate">加载中...</span>
@@ -82,7 +78,14 @@
                                 <div class="info-grid">
                                     <div class="info-item solar-term">
                                         <span class="label">节气：</span>
-                                        <span id="solarTermName">加载中...</span>
+                                        <div class="solar-term-content">
+                                            <div id="currentSolarTerm"><span id="solarTermName">加载中...</span></div>
+                                        </div>
+                                        <div class="adjacent-solar-terms">
+                                            <div id="prevSolarTerm" class="prev-solar-term"><span>加载中...</span></div>
+                                            <div id="nextSolarTerm" class="next-solar-term"><span>加载中...</span></div>
+                                        </div>
+                                        
                                     </div>
                                     <div class="info-item festival">
                                         <span class="label">节日：</span>
@@ -101,13 +104,13 @@
                                 <h4 class="card-title">今日宜忌</h4>
                                 <div class="suitable-unsuitable">
                                     <div class="suitable-section">
-                                        <h5>宜</h5>
+                                        <h5 class="yi-background">宜</h5>
                                         <div id="suitable" class="tag-container">
                                             加载中...
                                         </div>
                                     </div>
                                     <div class="unsuitable-section">
-                                        <h5>忌</h5>
+                                        <h5 class="ji-background">忌</h5>
                                         <div id="unsuitable" class="tag-container">
                                             加载中...
                                         </div>
@@ -123,22 +126,22 @@
                                 <h4 class="card-title">神煞信息</h4>
                                 <div class="shen-sha-info">
                                     <div class="shen-sha-row-x">
-                                        <div class="shen-sha-item">
+                                        <div class="shen-sha-item ji-background">
                                             <span class="label">冲煞：</span>
                                             <span id="chongSha">加载中...</span>
                                         </div>
                                     </div>
                                     
                                     <div class="shen-sha-row-j">
-                                        <div class="shen-sha-item">
+                                        <div class="shen-sha-item yi-background">
                                             <span class="label">喜神：</span>
                                             <span id="xiShen">加载中...</span>
                                         </div>
-                                        <div class="shen-sha-item">
+                                        <div class="shen-sha-item yi-background">
                                             <span class="label">福神：</span>
                                             <span id="fuShen">加载中...</span>
                                         </div>
-                                        <div class="shen-sha-item">
+                                        <div class="shen-sha-item yi-background">
                                             <span class="label">财神：</span>
                                             <span id="caiShen">加载中...</span>
                                         </div>
@@ -146,13 +149,13 @@
                                     
                                     <div class="shen-sha-row ji-xiong-row">
                                         <div class="shen-sha-column-j">
-                                            <div class="shen-sha-item">
+                                            <div class="shen-sha-item yi-background">
                                                 <span class="label">吉神：</span>
                                                 <span id="jiShen">加载中...</span>
                                             </div>
                                         </div>
                                         <div class="shen-sha-column-x">
-                                            <div class="shen-sha-item">
+                                            <div class="shen-sha-item ji-background">
                                                 <span class="label">凶神：</span>
                                                 <span id="xiongShen">加载中...</span>
                                             </div>

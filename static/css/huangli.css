@@ -379,12 +379,15 @@
 
 .solar-term, .festival {
     display: flex;
-    align-items: flex-start;
+    justify-content: space-between;
 }
 
 .festival-list {
     display: flex;
     flex-wrap: wrap;
+    color: #006400;
+    font-weight: bold;
+    font-style: italic;
     gap: 5px;
 }
 

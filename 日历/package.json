@@ -1,0 +1,11 @@
+{
+  "name": "zhuge-calendar",
+  "version": "1.0.0",
+  "description": "诸葛神算V2 - 公农历日期转换器",
+  "main": "index.html",
+  "dependencies": {
+    "lunar-javascript": "^1.6.7"
+  },
+  "author": "",
+  "license": "MIT"
+} 
