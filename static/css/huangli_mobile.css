@@ -59,7 +59,7 @@
 .huangli-container {
     background-color: rgba(255, 248, 220, 0.9);
     border-radius: 8px;
-    padding: 15px;
+    padding: 5px;
     margin: 15px 0;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
 }
@@ -128,7 +128,7 @@
     color: #8b4513;
     border-bottom: 1px dashed #d4a76a;
     padding-bottom: 5px;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
 }
 
 .info-grid {
@@ -139,7 +139,7 @@
 .info-item {
     display: flex;
     align-items: center;
-    font-size: 0.8rem;
+    font-size: 1rem;
 }
 
 /* 通用标签样式 */
@@ -202,12 +202,13 @@
     flex-wrap: wrap;
     gap: 6px;
     margin-top: 8px;
+    justify-content: center;
 }
 
 .tag {
     padding: 3px 8px;
     border-radius: 4px;
-    font-size: 0.85em;
+    font-size: 1.08em;
 }
 
 .suitable-tag {
@@ -291,8 +292,9 @@
 }
 
 .day-card.today {
-    border: 2px solid #8b4513;
-    background-color: #f5e9d3;
+    border: 2px solid #8b0000;
+    background-color: #ffa50010;
+    box-shadow: 10px 10px 10px 0 rgba(0, 0, 0, 0.5);
 }
 
 .date-title {
@@ -313,7 +315,7 @@
 }
 
 .lunar-date {
-    font-size: 0.9em;
+    font-size: 1.2rem;
     color: #8b4513;
 }
 
@@ -383,7 +385,7 @@
 .solar-term, .festival {
     display: flex;
     justify-content: space-between;
-    font-size: 0.9rem;
+    font-size: 1rem;
 }
 
 .festival-list {
@@ -415,7 +417,7 @@
 
 /* 适配卷轴容器样式 */
 .scroll-content {
-    padding: 15px;
+    padding: 5px;
 }
 
 

@@ -7,71 +7,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/lunming.css') }}">
     <link rel="stylesheet" media="screen and (min-width: 481px)" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" media="screen and (max-width: 480px)" href="{{ url_for('static', filename='css/style_mobile.css') }}">
-    <script src="{{ url_for('static', filename='js/lunar_date_handler.js') }}"></script>
+    <!-- <script src="{{ url_for('static', filename='js/lunar_date_handler.js') }}"></script> -->
     <script src="{{ url_for('static', filename='js/lunar.js') }}"></script>
-    <style>
-        /* 日期选择器样式，与黄历页面保持一致 */
-        .date-picker {
-            padding: 8px 12px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 1rem;
-            font-family: inherit;
-        }
-        
-        /* 阴历日期选择器样式 */
-        .lunar-date-select {
-            padding: 8px 12px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 1rem;
-            font-family: inherit;
-            margin-right: 5px;
-        }
-        
-        /* 日历类型选择器样式 */
-        .calendar-type-selection {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        
-        .calendar-type-label {
-            margin-right: 10px;
-            display: flex;
-            align-items: center;
-        }
-        
-        /* 日期输入区域样式 */
-        .date-input-container {
-            margin-top: 10px;
-        }
-        
-        .date-input-row {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        
-        .date-input-row > * {
-            margin-right: 5px;
-            margin-bottom: 5px;
-        }
-        
-        /* 响应式调整 */
-        @media screen and (max-width: 480px) {
-            .date-input-row {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .date-input-row > * {
-                margin-bottom: 10px;
-                width: 100%;
-            }
-        }
-    </style>
 </head>
 <body>
     <div class="ancient-bg">
@@ -105,49 +42,84 @@
                 
                 <div class="lunming-form-container">
                     <div class="lunming-form">
-                        <div class="form-group">
-                            <label for="name">姓名：</label>
-                            <input type="text" id="name" class="ancient-input" placeholder="请输入您的姓名">
-                            <div class="gender-selection">
-                                <label class="gender-label">
-                                    <input type="radio" name="gender" value="男" checked>
-                                    <span class="gender-text">男</span>
-                                </label>
-                                <label class="gender-label">
-                                    <input type="radio" name="gender" value="女">
-                                    <span class="gender-text">女</span>
-                                </label>
+                        <!-- 基本信息区域 -->
+                        <div class="form-section">
+                            <h3 class="section-title">基本信息</h3>
+                            <div class="form-group">
+                                <label for="name">姓名：</label>
+                                <input type="text" id="name" class="ancient-input name-input" placeholder="请输入您的姓名">
+                                <div class="gender-selection">
+                                    <label class="gender-label">
+                                        <input type="radio" name="gender" value="男" checked>
+                                        <span class="gender-text">男</span>
+                                    </label>
+                                    <label class="gender-label">
+                                        <input type="radio" name="gender" value="女">
+                                        <span class="gender-text">女</span>
+                                    </label>
+                                </div>
                             </div>
                         </div>
                         
-                        <div class="form-group">
+                        <!-- 出生日期区域 -->
+                        <div class="form-section">
+                            <h3 class="section-title">出生日期</h3>
                             <div class="date-input-container">
                                 <!-- 公历日期输入 -->
-                                <div id="solar-date-container" class="date-input-row">
-                                    <label for="birth-date">公历日期：</label>
-                                    <input type="date" id="birth-date" class="date-picker" min="0001-01-01" max="9999-12-31">
+                                <div class="date-group">
+                                    <div class="date-label">公历日期：</div>
+                                    <div class="date-input-row">
+                                        <div class="date-field">
+                                            <input type="date" id="birth-date" class="date-picker" min="0001-01-01" max="9999-12-31">
+                                        </div>
+                                    </div>
                                 </div>
                                 
                                 <!-- 农历日期输入 -->
-                                <div id="lunar-date-container" class="date-input-row">
-                                    <label for="lunar-year">农历日期：</label>
-                                    <input type="number" id="lunar-year" class="lunar-date-select" placeholder="年" min="1900" max="2100">
-                                    <select id="lunar-month" class="lunar-date-select">
-                                        <option value="">请选择月份</option>
-                                    </select>
-                                    <select id="lunar-day" class="lunar-date-select">
-                                        <option value="">请选择日期</option>
-                                    </select>
+                                <div class="date-group">
+                                    <div class="date-label">农历日期：</div>
+                                    <div id="lunar-date-container" class="date-input-row">
+                                        <div class="date-field lunar-year-field">
+                                            <div class="lunar-year-input-container">
+                                                <input type="number" id="lunar-year" class="lunar-date-select lunar-year-input" 
+                                                       placeholder="年" min="1900" max="2050" step="1"
+                                                       data-ganzhi="">
+                                                <span class="lunar-year-ganzhi" id="year-ganzhi-display"></span>
+                                                <div class="year-picker-icon" id="year-picker-icon">▼</div>
+                                                <div class="year-dropdown" id="year-dropdown"></div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="date-field">
+                                            <select id="lunar-month" class="lunar-date-select">
+                                                <option value="">请选择月份</option>
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="date-field">
+                                            <select id="lunar-day" class="lunar-date-select">
+                                                <option value="">请选择日期</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="birth-time">出生时间：</label>
-                            <input type="time" id="birth-time" class="ancient-input">
+                        
+                        <!-- 出生时辰区域 -->
+                        <div class="form-section">
+                            <h3 class="section-title">出生时辰</h3>
+                            <div class="form-group">
+                                <label for="birth-time">时辰：</label>
+                                <select id="birth-time" class="lunar-date-select time-select">
+                                    <option value="">请选择时辰</option>
+                                </select>
+                            </div>
                         </div>
                         
+                        <!-- 操作按钮区域 -->
                         <div class="form-actions">
-                            <button id="analyze-btn" class="ancient-btn">开始分析</button>
+                            <button id="analyze-btn" class="ancient-btn primary-btn">开始分析</button>
                             <button id="reset-btn" class="ancient-btn secondary-btn">重置</button>
                         </div>
                     </div>
@@ -176,15 +148,5 @@
     <script src="{{ url_for('static', filename='js/date_input_handler.js') }}"></script>
     <!-- 引入阴阳历日期处理工具 -->
     <script src="{{ url_for('static', filename='js/lunar_date_handler.js') }}"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // 初始化日期输入框
-            const birthDateInput = document.getElementById('birth-date');
-            setupDateInput(birthDateInput, function(selectedDate) {
-                console.log('日期已更新:', selectedDate);
-                // 这里可以添加日期变更后的处理逻辑
-            });
-        });
-    </script>
 </body>
 </html> 
