@@ -19,9 +19,26 @@ document.addEventListener('DOMContentLoaded', () => {
     
     console.log("初始化阴阳历联动");
     
-    // 初始化阳历日期为今天
-    const today = new Date();
-    birthDateInput.valueAsDate = today;
+    // 创建遮罩层
+    let overlay = document.createElement('div');
+    overlay.className = 'year-dropdown-overlay';
+    document.body.appendChild(overlay);
+    
+    // 点击遮罩层关闭年份选择器
+    overlay.addEventListener('click', function() {
+        yearDropdown.style.display = 'none';
+        overlay.style.display = 'none';
+    });
+    
+    // 初始化阳历日期为东八区的今天
+    const now = new Date();
+    // 获取当前的UTC时间，并调整为东八区(UTC+8)的时间
+    const utcDate = now.getTime() + (now.getTimezoneOffset() * 60000);
+    const today = new Date(utcDate + (3600000 * 8)); // UTC+8 对应东八区
+    
+    // 创建日期字符串，格式：YYYY-MM-DD
+    const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+    birthDateInput.value = todayStr; // 使用字符串值而不是valueAsDate，避免浏览器的时区转换
     
     // 处理日期标签页切换
     if (dateTabs.length > 0) {
@@ -151,84 +168,182 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     /**
-     * 获取干支纪年
-     * @param {number} year - 年份
-     * @return {string} 干支表示
+     * 获取中国干支纪年
      */
-    function getGanZhiYear(year) {
-        // 创建一个农历对象来获取干支纪年
+    function getChineseYearGanzhi(year) {
+        year = parseInt(year);
+        if (isNaN(year)) return '';
+        
+        // 创建农历对象获取干支纪年
         const lunar = Lunar.fromYmd(year, 1, 1);
         return lunar.getYearInGanZhi();
     }
     
     /**
-     * 生成年份选项
+     * 更新干支显示
      */
-    function generateYearOptions() {
-        yearDropdown.innerHTML = '';
-        
-        // 创建行容器
-        let rowDiv = document.createElement('div');
-        rowDiv.className = 'year-dropdown-row';
-        
-        // 计算当前选中的年份或默认值
-        const currentYear = parseInt(lunarYearInput.value) || new Date().getFullYear();
-        
-        // 生成从1900到2050的年份选项
-        for (let year = 1900; year <= 2050; year++) {
-            const yearOption = document.createElement('div');
-            yearOption.className = 'year-option';
-            yearOption.textContent = year;
-            yearOption.dataset.year = year;
-            
-            // 点击年份选项时更新输入框
-            yearOption.addEventListener('click', function() {
-                lunarYearInput.value = this.dataset.year;
-                
-                // 手动触发input事件，使其更新干支和其他依赖项
-                const event = new Event('input', { bubbles: true });
-                lunarYearInput.dispatchEvent(event);
-                
-                yearDropdown.style.display = 'none';
-            });
-            
-            rowDiv.appendChild(yearOption);
-            
-            // 每行显示3个，创建新行
-            if ((year - 1900 + 1) % 3 === 0) {
-                yearDropdown.appendChild(rowDiv);
-                rowDiv = document.createElement('div');
-                rowDiv.className = 'year-dropdown-row';
+    function updateGanzhiDisplay(year) {
+        year = parseInt(year);
+        if (!isNaN(year)) {
+            // 获取干支
+            const ganzhi = getChineseYearGanzhi(year);
+            // 更新显示
+            if (yearGanzhiDisplay) {
+                yearGanzhiDisplay.textContent = ganzhi;
+                yearGanzhiDisplay.style.display = 'block';
             }
         }
+    }
+    
+    /**
+     * 生成年份选择器
+     */
+    function generateYearDropdown() {
+        const yearDropdown = document.getElementById('year-dropdown');
+        yearDropdown.innerHTML = '';
         
-        // 添加最后一行（如果有剩余）
-        if (rowDiv.children.length > 0) {
-            yearDropdown.appendChild(rowDiv);
-        }
+        // 添加关闭按钮
+        const closeButton = document.createElement('div');
+        closeButton.className = 'year-dropdown-close';
+        closeButton.innerHTML = '×';
+        closeButton.addEventListener('click', function() {
+            yearDropdown.style.display = 'none';
+            document.querySelector('.year-dropdown-overlay').style.display = 'none';
+        });
+        yearDropdown.appendChild(closeButton);
         
-        // 滚动到当前年份附近
+        const decades = [
+            { title: '1900年代', start: 1900, end: 1909 },
+            { title: '1910年代', start: 1910, end: 1919 },
+            { title: '1920年代', start: 1920, end: 1929 },
+            { title: '1930年代', start: 1930, end: 1939 },
+            { title: '1940年代', start: 1940, end: 1949 },
+            { title: '1950年代', start: 1950, end: 1959 },
+            { title: '1960年代', start: 1960, end: 1969 },
+            { title: '1970年代', start: 1970, end: 1979 },
+            { title: '1980年代', start: 1980, end: 1989 },
+            { title: '1990年代', start: 1990, end: 1999 },
+            { title: '2000年代', start: 2000, end: 2009 },
+            { title: '2010年代', start: 2010, end: 2019 },
+            { title: '2020年代', start: 2020, end: 2029 },
+            { title: '2030年代', start: 2030, end: 2039 },
+            { title: '2040年代', start: 2040, end: 2049 }
+        ];
+        
+        // 获取当前年份
+        const currentYear = new Date().getFullYear();
+        // 获取当前选中的年份
+        const selectedYear = parseInt(document.getElementById('lunar-year').value) || currentYear;
+        
+        // 创建并添加每个年代区块
+        decades.forEach(decade => {
+            const sectionDiv = document.createElement('div');
+            sectionDiv.className = 'year-section';
+            sectionDiv.id = `decade-${decade.start}`;
+            
+            // 添加年代标题
+            const titleDiv = document.createElement('div');
+            titleDiv.className = 'year-section-title';
+            titleDiv.textContent = decade.title;
+            sectionDiv.appendChild(titleDiv);
+            
+            // 添加年份按钮容器
+            const yearRowDiv = document.createElement('div');
+            yearRowDiv.className = 'year-row';
+            
+            // 添加年份按钮
+            for (let year = decade.start; year <= decade.end; year++) {
+                const yearButton = document.createElement('button');
+                yearButton.className = 'year-option';
+                yearButton.textContent = year;
+                yearButton.dataset.year = year;
+                
+                // 如果是当前年份，添加高亮样式
+                if (year === currentYear) {
+                    yearButton.classList.add('current-year');
+                }
+                
+                // 如果是选中的年份，添加选中样式
+                if (year === selectedYear) {
+                    yearButton.classList.add('selected');
+                }
+                
+                yearButton.addEventListener('click', function() {
+                    // 更新年份输入框的值
+                    document.getElementById('lunar-year').value = year;
+                    
+                    // 隐藏年份选择器和遮罩层
+                    yearDropdown.style.display = 'none';
+                    document.querySelector('.year-dropdown-overlay').style.display = 'none';
+                    
+                    // 触发input事件，使其执行与手动输入相同的操作
+                    const inputEvent = new Event('input', { bubbles: true });
+                    document.getElementById('lunar-year').dispatchEvent(inputEvent);
+                });
+                
+                yearRowDiv.appendChild(yearButton);
+            }
+            
+            sectionDiv.appendChild(yearRowDiv);
+            yearDropdown.appendChild(sectionDiv);
+        });
+        
+        // 滚动到包含当前选中年份的区块
         setTimeout(() => {
-            const yearIndex = currentYear - 1900;
-            const scrollPosition = Math.max(0, (yearIndex / 3) * 30 - 100);
-            yearDropdown.scrollTop = scrollPosition;
-        }, 10);
+            const selectedDecadeStart = Math.floor(selectedYear / 10) * 10;
+            const selectedDecadeElement = document.getElementById(`decade-${selectedDecadeStart}`);
+            if (selectedDecadeElement) {
+                selectedDecadeElement.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'center'  // 确保元素在视口中居中显示
+                });
+                
+                // 找到当前选中的年份按钮并添加视觉提示
+                const yearButtons = document.querySelectorAll('.year-option');
+                yearButtons.forEach(btn => {
+                    if (parseInt(btn.dataset.year) === selectedYear) {
+                        btn.classList.add('selected');
+                        // 为按钮添加一个闪烁动画，提高可见性
+                        btn.style.animation = 'highlight 1s ease-in-out';
+                    }
+                });
+            }
+        }, 150); // 增加延迟时间，确保DOM渲染完成
     }
     
     // 初始化阴历日期（从阳历）
     initLunar();
     
+    // 确保时辰选项被正确初始化，即使initLunar因为某些原因失败
+    updateBirthTimeOptions();
+    
     // 阳历日期变更事件
-    birthDateInput.addEventListener('change', initLunar);
+    birthDateInput.addEventListener('change', function() {
+        initLunar();
+        // 直接调用updateBirthTimeOptions确保时辰选项更新
+        updateBirthTimeOptions();
+    });
     
     // 阴历年份变更事件
-    lunarYearInput.addEventListener('input', updateFromLunarYear);
+    lunarYearInput.addEventListener('input', function() {
+        updateFromLunarYear();
+        // 更新时辰选项
+        updateBirthTimeOptions();
+    });
     
     // 阴历月份变更事件
-    lunarMonthSelect.addEventListener('change', updateFromLunarMonth);
+    lunarMonthSelect.addEventListener('change', function() {
+        updateFromLunarMonth();
+        // 更新时辰选项
+        updateBirthTimeOptions();
+    });
     
     // 阴历日期变更事件
-    lunarDaySelect.addEventListener('change', updateFromLunarDay);
+    lunarDaySelect.addEventListener('change', function() {
+        updateFromLunarDay();
+        // 更新时辰选项
+        updateBirthTimeOptions();
+    });
     
     // 监听年份输入框的变化和data-ganzhi属性的变化
     const observer = new MutationObserver(function(mutations) {
@@ -252,9 +367,27 @@ document.addEventListener('DOMContentLoaded', () => {
             
             if (yearDropdown.style.display === 'block') {
                 yearDropdown.style.display = 'none';
+                overlay.style.display = 'none';
             } else {
-                generateYearOptions();
+                generateYearDropdown();
                 yearDropdown.style.display = 'block';
+                overlay.style.display = 'block';
+                
+                // 延迟执行滚动，确保DOM完全渲染
+                setTimeout(() => {
+                    // 获取当前选中的年份
+                    const selectedYear = parseInt(lunarYearInput.value) || new Date().getFullYear();
+                    const selectedDecadeStart = Math.floor(selectedYear / 10) * 10;
+                    const selectedDecadeElement = document.getElementById(`decade-${selectedDecadeStart}`);
+                    
+                    if (selectedDecadeElement) {
+                        // 使用scrollIntoView滚动到对应区块
+                        selectedDecadeElement.scrollIntoView({ 
+                            behavior: 'smooth', 
+                            block: 'center'  // 确保元素在视口中居中显示
+                        });
+                    }
+                }, 150); // 增加延迟时间，确保DOM渲染完成
             }
         });
     }
@@ -263,6 +396,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('click', function() {
         if (yearDropdown) {
             yearDropdown.style.display = 'none';
+            overlay.style.display = 'none';
         }
     });
     
@@ -278,8 +412,12 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     function initLunar() {
         try {
-            // 获取阳历日期
-            const date = birthDateInput.valueAsDate;
+            // 获取阳历日期字符串
+            const dateStr = birthDateInput.value;
+            if (!dateStr) return;
+            
+            // 将日期字符串转换为日期对象
+            const date = new Date(dateStr);
             console.log("阳历日期:", date);
             
             // 使用Lunar.fromDate获取阴历对象
@@ -301,16 +439,11 @@ document.addEventListener('DOMContentLoaded', () => {
             // 设置阴历日期选项（现在月份已经设置好了）
             updateLunarDayOptions();
             
-            // 设置出生时辰选项
-            updateBirthTimeOptions();
-            
             // 设置阴历日期值
             lunarDaySelect.value = lunar.getDay();
             
-            // 立即更新干支显示
-            if (yearGanzhiDisplay) {
-                yearGanzhiDisplay.textContent = '(' + getGanZhiYear(lunar.getYear()) + ')';
-            }
+            // 更新时辰选项
+            updateBirthTimeOptions();
         } catch (error) {
             console.error("初始化阴历失败:", error);
         }
@@ -322,7 +455,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateYearDisplay() {
         const year = parseInt(lunarYearInput.value);
         if (!isNaN(year)) {
-            const ganZhi = getGanZhiYear(year);
+            const ganZhi = getChineseYearGanzhi(year);
             lunarYearInput.setAttribute('data-ganzhi', ganZhi);
             
             // 直接更新显示
@@ -378,12 +511,12 @@ document.addEventListener('DOMContentLoaded', () => {
             
             const lunarYear = LunarYear.fromYear(year);
             const months = lunarYear.getMonths();
-            
+
             // 获取两种表示方式
             const monthNumbers = months.map(month => month.getMonth()); // 阿拉伯数字，用于值
             const monthStrings = months.map(month => month.toString()); // 完整汉字表示，用于显示
             
-            // 填充新选项
+        // 填充新选项
             for (let i = 0; i < monthNumbers.length; i++) {
                 const option = document.createElement("option");
                 option.value = monthNumbers[i];// 选项的值保持原有的月份值（可能为负数表示闰月）
@@ -445,20 +578,13 @@ document.addEventListener('DOMContentLoaded', () => {
             defaultOption.textContent = '请选择时辰';
             birthTimeSelect.appendChild(defaultOption);
             
-            // 添加时辰选项，包含干支和时间范围
-            const timeOptions = [
-                { value: '子', text: '甲子时 (23:00-01:00)' },
-                { value: '丑', text: '乙丑时 (01:00-03:00)' },
-                { value: '寅', text: '丙寅时 (03:00-05:00)' },
-                { value: '卯', text: '丁卯时 (05:00-07:00)' },
-                { value: '辰', text: '戊辰时 (07:00-09:00)' },
-                { value: '巳', text: '己巳时 (09:00-11:00)' },
-                { value: '午', text: '庚午时 (11:00-13:00)' },
-                { value: '未', text: '辛未时 (13:00-15:00)' },
-                { value: '申', text: '壬申时 (15:00-17:00)' },
-                { value: '酉', text: '癸酉时 (17:00-19:00)' },
-                { value: '戌', text: '甲戌时 (19:00-21:00)' },
-                { value: '亥', text: '乙亥时 (21:00-23:00)' }
+            // 时辰的地支（固定的）
+            const zhi = ['子', '丑', '寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥'];
+            // 时间范围
+            const timeRanges = [
+                '23:00-01:00', '01:00-03:00', '03:00-05:00', '05:00-07:00', 
+                '07:00-09:00', '09:00-11:00', '11:00-13:00', '13:00-15:00', 
+                '15:00-17:00', '17:00-19:00', '19:00-21:00', '21:00-23:00'
             ];
             
             // 获取阴历年月日信息，用于确定天干
@@ -474,58 +600,93 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     // 获取当日干支
                     const dayGan = lunar.getDayGan();
+                    console.log("当日天干:", dayGan);
                     
-                    // 根据日干确定时辰干支
+                    // 根据口诀确定子时的天干
+                    let ziGanIndex; // 子时的天干索引
                     const gan = ['甲', '乙', '丙', '丁', '戊', '己', '庚', '辛', '壬', '癸'];
-                    const zhi = ['子', '丑', '寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥'];
-                    const dayGanIndex = gan.indexOf(dayGan);
                     
-                    if (dayGanIndex !== -1) {
-                        // 循环添加时辰选项
-                        zhi.forEach((z, index) => {
-                            const ganIndex = (dayGanIndex * 2 + index) % 10; // 根据日干推算时辰干
-                            const timeGan = gan[ganIndex];
-                            
-                            const option = document.createElement('option');
-                            option.value = z;
-                            
-                            // 时间范围
-                            let timeRange = '';
-                            switch (z) {
-                                case '子': timeRange = '23:00-01:00'; break;
-                                case '丑': timeRange = '01:00-03:00'; break;
-                                case '寅': timeRange = '03:00-05:00'; break;
-                                case '卯': timeRange = '05:00-07:00'; break;
-                                case '辰': timeRange = '07:00-09:00'; break;
-                                case '巳': timeRange = '09:00-11:00'; break;
-                                case '午': timeRange = '11:00-13:00'; break;
-                                case '未': timeRange = '13:00-15:00'; break;
-                                case '申': timeRange = '15:00-17:00'; break;
-                                case '酉': timeRange = '17:00-19:00'; break;
-                                case '戌': timeRange = '19:00-21:00'; break;
-                                case '亥': timeRange = '21:00-23:00'; break;
-                            }
-                            
-                            option.textContent = `${timeGan}${z}时 (${timeRange})`;
-                            birthTimeSelect.appendChild(option);
-                        });
-                        
-                        return; // 成功生成时辰选项后返回
+                    // 甲己还加甲
+                    if (dayGan === '甲' || dayGan === '己') {
+                        ziGanIndex = gan.indexOf('甲');
                     }
+                    // 乙庚丙作初
+                    else if (dayGan === '乙' || dayGan === '庚') {
+                        ziGanIndex = gan.indexOf('丙');
+                    }
+                    // 丙辛从戊起
+                    else if (dayGan === '丙' || dayGan === '辛') {
+                        ziGanIndex = gan.indexOf('戊');
+                    }
+                    // 丁壬庚子居
+                    else if (dayGan === '丁' || dayGan === '壬') {
+                        ziGanIndex = gan.indexOf('庚');
+                    }
+                    // 戊癸何方发，壬子是真途
+                    else if (dayGan === '戊' || dayGan === '癸') {
+                        ziGanIndex = gan.indexOf('壬');
+                    }
+                    
+                    console.log("子时天干索引:", ziGanIndex);
+                    
+                    // 生成所有时辰的天干地支
+                    for (let i = 0; i < zhi.length; i++) {
+                        // 计算当前时辰的天干
+                        const currentGanIndex = (ziGanIndex + i) % 10;
+                        const currentGan = gan[currentGanIndex];
+                        const currentZhi = zhi[i];
+                        
+                        // 创建选项
+                        const option = document.createElement('option');
+                        option.value = currentZhi; // 仍然只存储地支作为值
+                        option.textContent = `${currentGan}${currentZhi}时 (${timeRanges[i]})`;
+                        
+                        // 添加自定义属性以存储完整干支
+                        option.dataset.ganzhi = `${currentGan}${currentZhi}`;
+                        
+                        birthTimeSelect.appendChild(option);
+                    }
+                    
+                    console.log("成功生成时辰选项");
                 } catch (error) {
-                    console.error("根据日干生成时辰干支失败:", error);
+                    console.error("确定时辰干支时出错:", error);
+                    
+                    // 如果出错，使用默认的时辰选项（不准确，但至少不会阻止用户选择）
+                    fallbackTimeOptions();
                 }
+            } else {
+                // 如果没有完整的年月日信息，使用默认的时辰选项
+                fallbackTimeOptions();
             }
-            
-            // 如果无法根据日干确定时辰干支，使用默认的时辰选项
-            timeOptions.forEach(option => {
-                const elem = document.createElement('option');
-                elem.value = option.value;
-                elem.textContent = option.text;
-                birthTimeSelect.appendChild(elem);
-            });
         } catch (error) {
-            console.error("更新时辰选项失败:", error);
+            console.error("更新时辰选项时出错:", error);
+            // 使用默认选项
+            fallbackTimeOptions();
+        }
+        
+        // 回退方案：使用固定干支的时辰选项
+        function fallbackTimeOptions() {
+            const defaultOptions = [
+                { value: '子', text: '子时 (23:00-01:00)' },
+                { value: '丑', text: '丑时 (01:00-03:00)' },
+                { value: '寅', text: '寅时 (03:00-05:00)' },
+                { value: '卯', text: '卯时 (05:00-07:00)' },
+                { value: '辰', text: '辰时 (07:00-09:00)' },
+                { value: '巳', text: '巳时 (09:00-11:00)' },
+                { value: '午', text: '午时 (11:00-13:00)' },
+                { value: '未', text: '未时 (13:00-15:00)' },
+                { value: '申', text: '申时 (15:00-17:00)' },
+                { value: '酉', text: '酉时 (17:00-19:00)' },
+                { value: '戌', text: '戌时 (19:00-21:00)' },
+                { value: '亥', text: '亥时 (21:00-23:00)' }
+            ];
+            
+            defaultOptions.forEach(option => {
+                const el = document.createElement('option');
+                el.value = option.value;
+                el.textContent = option.text;
+                birthTimeSelect.appendChild(el);
+            });
         }
     }
     

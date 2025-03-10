@@ -6,13 +6,18 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('datePicker元素:', document.getElementById('datePicker') ? '存在' : '不存在');
     console.log('weekHuangliContainer元素:', document.getElementById('weekHuangliContainer') ? '存在' : '不存在');
     
-    // 获取当前日期
-    const today = new Date();
+    // 获取东八区的当前日期
+    const now = new Date();
+    // 获取当前的UTC时间，并调整为东八区(UTC+8)的时间
+    const utcDate = now.getTime() + (now.getTimezoneOffset() * 60000);
+    const today = new Date(utcDate + (3600000 * 8)); // UTC+8 对应东八区
     const datePicker = document.getElementById('datePicker');
     
-    // 设置日期选择器的默认值为今天
-    datePicker.valueAsDate = today;
-    console.log('设置日期选择器默认值为:', formatDate(today));
+    // 设置日期选择器的默认值为东八区的今天
+    // 使用日期字符串而不是valueAsDate，避免浏览器的时区转换
+    const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+    datePicker.value = todayStr;
+    console.log('设置日期选择器默认值为:', todayStr);
     
     // 获取按钮元素
     const prevDayBtn = document.getElementById('prevDayBtn');
@@ -35,8 +40,19 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     todayBtn.addEventListener('click', function() {
-        datePicker.valueAsDate = new Date();
-        fetchAndDisplayHuangliData(formatDate(new Date()));
+        // 获取东八区的当前日期
+        const now = new Date();
+        // 获取当前的UTC时间，并调整为东八区(UTC+8)的时间
+        const utcDate = now.getTime() + (now.getTimezoneOffset() * 60000);
+        const today = new Date(utcDate + (3600000 * 8)); // UTC+8 对应东八区
+        
+        // 使用日期字符串格式
+        const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+        datePicker.value = todayStr;
+        
+        // 触发日期变更事件
+        const event = new Event('change');
+        datePicker.dispatchEvent(event);
     });
     
     // 添加日期选择器的change事件监听器

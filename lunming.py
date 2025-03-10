@@ -21,24 +21,55 @@ class LunMing:
         name (str): 用户姓名
         gender (str): 性别，'男'或'女'
         birth_date (str): 出生日期，格式为'YYYY-MM-DD'
-        birth_time (str): 出生时间，格式为'HH:MM'
+        birth_time (str): 出生时间，可能是'HH:MM'或地支字符如'子'
         
         返回:
         str: 生成的提示词
         """
         try:
-            # 解析日期和时间
-            birth_datetime = datetime.strptime(f"{birth_date} {birth_time}", "%Y-%m-%d %H:%M")
+            # 地支到时间段的映射
+            time_map = {
+                '子': '23:00-01:00',
+                '丑': '01:00-03:00',
+                '寅': '03:00-05:00',
+                '卯': '05:00-07:00',
+                '辰': '07:00-09:00',
+                '巳': '09:00-11:00',
+                '午': '11:00-13:00',
+                '未': '13:00-15:00',
+                '申': '15:00-17:00',
+                '酉': '17:00-19:00',
+                '戌': '19:00-21:00',
+                '亥': '21:00-23:00'
+            }
+            
+            # 检查birth_time是否为地支字符
+            time_display = birth_time
+            if birth_time in time_map:
+                time_display = f"{birth_time}时 ({time_map[birth_time]})"
+            
+            # 这里不再尝试解析日期时间，而是直接使用原始的日期和时间值
+            print(f"生成提示词：日期={birth_date}, 时间={birth_time}, 显示时间={time_display}")
             
             # 格式化提示词
             prompt = f"""
-            请根据以下信息，进行传统八字命理分析：
+            请根据以下信息，进行八字命理分析：
             
             姓名：{name}
             性别：{gender}
             出生日期：{birth_date}
-            出生时间：{birth_time}
+            出生时辰：{time_display}
             
+            # 请根据以下原则进行分析：
+            # 1. 以传统八字命理为基础，结合现代命理学，利用传统文化中既有的象征体系建立信任感。
+            # 2. 通过星座/生肖性格模板，调用跨文化原型数据库，组合不同体系的共性描述
+            # 3. 结合社会学数据，对特定年龄层共性经历进行推测
+            # 4. 利用巴纳姆效应、正例谬误等心理学效应，增加分析的可信度
+            # 5. 运用开放性话术工程，增加分析的趣味性
+            # 6. 结合个性化故事算法，增加分析的个性化
+            # 7. 使用"你"作为第一人称，增加亲和力
+
+
             请提供以下内容：
             1. 八字命盘：年柱、月柱、日柱、时柱的天干地支
             2. 命理特征：五行分析、日主强弱、喜用神
@@ -66,12 +97,14 @@ class LunMing:
         name (str): 用户姓名
         gender (str): 性别，'男'或'女'
         birth_date (str): 出生日期，格式为'YYYY-MM-DD'
-        birth_time (str): 出生时间，格式为'HH:MM'
+        birth_time (str): 出生时辰，地支字符如'子'、'丑'等
         
         返回:
         generator: 生成器对象，用于流式输出分析结果
         """
         try:
+            print(f"开始分析八字：姓名={name}, 性别={gender}, 日期={birth_date}, 时辰={birth_time}")
+            
             # 生成提示词
             prompt = self.generate_prompt(name, gender, birth_date, birth_time)
             print(f"准备进行流式分析，提示词长度: {len(prompt)}")

@@ -8,6 +8,7 @@
     <link rel="stylesheet" media="screen and (max-width: 480px)" href="{{ url_for('static', filename='css/style_mobile.css') }}">
     <link rel="stylesheet" media="screen and (min-width: 481px)" href="{{ url_for('static', filename='css/huangli.css') }}">
     <link rel="stylesheet" media="screen and (max-width: 480px)" href="{{ url_for('static', filename='css/huangli_mobile.css') }}">
+    <script src="{{ url_for('static', filename='js/lunar.js') }}"></script>
 </head>
 <body>
     <div class="ancient-bg">
@@ -34,10 +35,45 @@
                 </div>
                 
                 <div class="date-controls">
-                    <button id="prevDayBtn" class="btn btn-primary">前一天</button>
-                    <input type="date" id="datePicker" min="0001-01-01" max="9999-12-31" class="date-picker">
-                    <button id="nextDayBtn" class="btn btn-primary">后一天</button>
-                    <button id="todayBtn" class="btn btn-primary">今天</button>
+                    <!-- 日期导航按钮 -->
+                    <div class="date-navigation">
+                        <button id="prevDayBtn" class="btn btn-primary">前一天</button>
+                        <button id="todayBtn" class="btn btn-primary">今天</button>
+                        <button id="nextDayBtn" class="btn btn-primary">后一天</button>
+                    </div>
+                    
+                    <!-- 日期选择区域 -->
+                    <div class="date-selection-wrapper">
+                        <!-- 公历日期选择 -->
+                        <div class="date-group">
+                            <div class="date-label">公历</div>
+                            <div class="date-selection-container" id="solar-date-container">
+                                <input type="date" id="datePicker" min="0001-01-01" max="9999-12-31" class="date-picker">
+                            </div>
+                        </div>
+                        
+                        <!-- 农历日期选择 -->
+                        <div class="date-group">
+                            <div class="date-label">农历</div>
+                            <div class="date-selection-container" id="lunar-date-container">
+                                <div class="lunar-date-inputs">
+                                    <div class="lunar-year-input-container">
+                                        <input type="number" id="lunar-year" class="lunar-date-select" 
+                                               placeholder="年" min="1900" max="2050" step="1" data-ganzhi="">
+                                        <span class="lunar-year-ganzhi" id="year-ganzhi-display"></span>
+                                        <div class="year-picker-icon" id="year-picker-icon">▼</div>
+                                        <div class="year-dropdown" id="year-dropdown"></div>
+                                    </div>
+                                    <select id="lunar-month" class="lunar-date-select">
+                                        <option value="">月</option>
+                                    </select>
+                                    <select id="lunar-day" class="lunar-date-select">
+                                        <option value="">日</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="huangli-container">
@@ -188,5 +224,6 @@
     </div>
     
     <script src="{{ url_for('static', filename='js/huangli.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/huangli_lunar_handler.js') }}"></script>
 </body>
 </html> 
