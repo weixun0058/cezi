@@ -239,6 +239,22 @@ def analyze_bazi():
 
 @app.route('/api/lunming/stream', methods=['GET'])
 def stream_bazi_analysis():
+    import pprint
+    args = request.args
+    print("\n" + "="*40 + " 接收参数详情 " + "="*40)
+    print("参数类型:", type(args))
+    print("原始参数:", pprint.pformat(args))
+    print("解析后的参数:")
+    print(f"name: {args.get('name')} (类型: {type(args.get('name'))})")
+    print(f"gender: {args.get('gender')} (类型: {type(args.get('gender'))})")
+    print(f"birth_date: {args.get('birth_date')} (类型: {type(args.get('birth_date'))})")
+    print(f"birth_time: {args.get('birth_time')} (类型: {type(args.get('birth_time'))})")
+    print("="*90 + "\n")
+
+
+
+
+
     """流式输出八字分析结果API"""
     try:
         # 从查询参数中获取数据
