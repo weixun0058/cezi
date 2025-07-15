@@ -172,7 +172,6 @@ class LunMing:
                             content = chunk.choices[0].delta.content
                             # 一个字符一个字符地返回
                             for char in content:
-                                print(char, end='', flush=True)
                                 yield char
             except Exception as e:
                 print(f"处理API响应时出错: {str(e)}")

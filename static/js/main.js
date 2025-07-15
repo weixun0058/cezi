@@ -283,8 +283,8 @@ document.addEventListener('DOMContentLoaded', function() {
             section.classList.add('hidden');
         });
         
-        // 隐藏所有按钮（除了开始测算按钮）
-        document.querySelectorAll('.ancient-btn').forEach(btn => {
+        // 隐藏所有功能按钮（不隐藏导航按钮）
+        document.querySelectorAll('.ancient-btn:not(.nav-btn)').forEach(btn => {
             if (btn !== calculateBtn) {
                 btn.classList.add('hidden');
             }
@@ -308,6 +308,10 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('characterInput').classList.remove('hidden');
         document.querySelectorAll('.intro-text').forEach(element => {
             element.classList.remove('hidden');
+        });
+        // 显示导航按钮
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.classList.remove('hidden');
         });
     });
 
