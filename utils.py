@@ -1,5 +1,3 @@
-import sqlite3
-
 def cale_character_count(num1, num2, num3):
     """
     计算三个数字对应的签号
@@ -19,12 +17,7 @@ def cale_character_count(num1, num2, num3):
     new_number = last_digit1 * 100 + last_digit2 * 10 + last_digit3
     
     result = new_number % 384
-    
-    
-    print(f"笔画数: {num1}, {num2}, {num3}")
-    print(f"笔画组成数: {new_number}")
-    print(f"计算结果: {result}")
-    return result
+    return result or 383
 
 
 def num_to_chinese_upper(num):
