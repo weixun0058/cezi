@@ -1,123 +1,52 @@
-# 诸葛神算
+# 诸葛神算 V3
 
-一个基于传统文化的命理预测系统，包含黄历、算事和论命三大功能。
+诸葛神算 V3 是一个传统文化主题的 Flask Web 应用，提供黄历、三字起卦和八字文化解读。黄历与四柱基础数据由确定性历法库计算，语言模型只负责解释结构化结果。
 
-## 项目概述
+> 传统文化娱乐参考，不构成医疗、投资或人生决策建议。
 
-诸葛神算是一个集成了传统命理学的Web应用，提供以下功能：
+## 功能
 
-1. **黄历功能**：提供每日吉凶宜忌、神煞信息、节气节日等传统黄历内容
-2. **算事功能**：根据用户提供的信息，预测事情的吉凶
-3. **论命功能**：基于用户的生辰八字，分析命理
+- 黄历：单日详情、九天比较、场景筛选、收藏、复制、分享和打印。
+- 算事：问题确认、重复提醒、三字笔画起卦、分类解签和本地记录。
+- 论命：四柱、生肖、五行、纳音、大运、时辰未知、时区和真太阳时修正。
+- 隐私：论命使用 POST 流传输；收藏、起卦记录和报告只保存在浏览器本地。
 
 ## 技术栈
 
-- 后端：Python + Flask
-- 前端：HTML + CSS + JavaScript
-- 数据库：SQLite
-- 第三方库：lunar-python（中国农历库）
-- AI集成：支持调用AI大模型进行命理分析
-- 部署：Docker
+- Python 3.13、Flask 3、Gunicorn
+- SQLite、openpyxl、pandas
+- lunar-python
+- OpenAI 兼容模型接口
+- HTML、CSS、原生 JavaScript、Server-Sent Events
+- pytest、Black、Ruff、GitHub Actions、Docker
 
-## 功能特点
+## 本地运行
 
-### 黄历功能
-
-- 显示当日及未来九天的黄历信息
-- 包含农历日期、干支、宜忌、神煞、彭祖百忌等信息
-- 支持节气和传统节日显示
-- 动态显示当前时辰
-- 美观的3x3网格布局展示九天黄历
-
-### 算事功能
-
-- 根据用户提供的姓名、性别、出生日期和问题进行预测
-- 提供事情吉凶、发展趋势和建议
-
-### 论命功能
-
-- 基于用户的生辰八字进行命理分析
-- 提供八字命盘、命理特征、大运走势等多方面内容
-- 支持性别选择，提供更准确的命理分析
-- 采用流式输出，实时展示分析结果
-- 结合AI大模型，提供个性化的命理解读
-
-### 移动设备适配
-
-- 针对不同屏幕尺寸提供响应式布局
-- 为移动设备（<=480px）提供专门优化的CSS样式
-- 通过媒体查询自动加载适合当前设备的样式表
-- 优化了移动设备上的字体大小、间距和布局结构
-- 改进了触摸交互体验
-
-## 项目结构
-
-```
-诸葛神算/
-├── app.py                 # 主应用入口
-├── huangli.py             # 黄历功能实现
-├── suanshi.py             # 算事功能实现
-├── lunming.py             # 论命功能实现
-├── database/              # 数据库文件
-├── static/                # 静态资源
-│   ├── css/               # 样式文件
-│   │   ├── style.css          # 桌面端样式
-│   │   ├── style_mobile.css   # 移动端样式
-│   │   ├── huangli.css        # 黄历桌面端样式
-│   │   ├── huangli_mobile.css # 黄历移动端样式
-│   │   └── lunming.css        # 论命页面样式
-│   ├── js/                # JavaScript文件
-│   └── images/            # 图片资源
-└── templates/             # HTML模板
-    ├── huangli.html       # 黄历页面
-    ├── suanshi.html       # 算事页面
-    └── lunming.html       # 论命页面
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt
+Copy-Item .env.example .env
+.\.venv\Scripts\python.exe app.py
 ```
 
-## 安装与运行
+默认访问 `http://127.0.0.1:8000`。如需 AI 解读，在 `.env` 中配置新的 `AI_API_KEY`；不要把密钥提交到仓库。
 
-1. 克隆项目
-2. 安装依赖：`pip install -r requirements.txt`
-3. 运行应用：`python app.py`
-4. 在浏览器中访问：`http://localhost:80`
+## 验证
 
-## 最近更新
+```powershell
+.\.venv\Scripts\python.exe -m black --check app.py api_utils.py config.py logging_config.py database.py huangli.py lunming.py bazi_service.py bailian.py gunicorn.conf.py blueprints tests
+.\.venv\Scripts\python.exe -m ruff check app.py api_utils.py config.py logging_config.py database.py huangli.py lunming.py bazi_service.py bailian.py gunicorn.conf.py blueprints tests
+.\.venv\Scripts\python.exe -m pytest
+node --check static\js\huangli.js
+node --check static\js\lunming.js
+node --check static\js\main.js
+```
 
-- 添加了论命页面的阴阳历日期选择功能，支持阴阳历互转
-- 优化了八字分析功能，删除了冗余的 `stream_analysis` 函数
-- 改进了流式输出的前端处理逻辑，解决了内容重复显示的问题
-- 添加了对标题和列表项的智能识别与格式化显示
-- 优化了移动设备的响应式布局
-- 添加了错误处理逻辑，确保用户体验流畅
-- 2023-12-16: 修复日期输入框年份输入超过4位才跳转到月份的问题，优化用户输入体验。
+## 目录边界
 
-## 重要说明
-- 黄历数据依据传统历法通过lunar_python库推算，准确性较高
-- 本应用中的占卜和命理分析仅供娱乐参考，请理性看待
-- 吉凶祸福，尽在人为，请勿过度迷信
+- `blueprints/`：HTTP 路由。
+- `database.py`、`huangli.py`、`lunming.py`、`bazi_service.py`：业务服务。
+- `instance/`：运行时数据库和本地备份，不进入版本控制。
+- `日历/`：早期独立 JavaScript 日历实验及其上游测试，不由 Flask 引用，不进入 Docker 镜像；归档或删除需另行确认。
 
-## 更新日志
-- 2023-12-21: 优化阴阳历日期联动功能
-  - 实现公历和农历日期的自动联动转换
-  - 支持闰月选择，确保农历日期符合真实历法规则
-  - 优化日期选择器UI，提升用户体验
-  - 修复日历类型切换功能，确保正确显示对应的日期输入区域
-- 2023-12-20: 添加论命页面阴阳历日期选择功能
-  - 支持公历和农历日期输入方式切换
-  - 实现阴阳历日期自动联动转换
-  - 支持闰月选择和农历日期实时验证
-  - 优化移动设备上的日期输入体验
-- 2023-12-15: 修复流式输出在前端显示不正确的问题
-  - 重构前端JavaScript处理逻辑，使用缓冲区处理字符
-  - 添加智能文本解析，区分标题、正文和列表
-  - 改进CSS样式，增强视觉效果
-- 2023-12-10: 移除了多余的 `stream_analysis` 函数
-  - 优化了 `analyze_bazi` 函数，实现流式输出
-  - 改进错误处理逻辑
-- 2023-04-15: 优化论命功能代码结构，删除冗余函数，移除模拟数据
-- 2023-04-10: 添加论命功能，实现八字命理分析
-- 2023-03-15: 修复黄历数据中节气、节日、宜忌等信息无法显示的问题
-- 2023-03-10: 修复九天黄历数据显示问题，优化UI设计
-- 2023-02-28: 重新设计黄历系统，使用lunar_python库获取真实黄历数据，替换原有的随机生成数据
-- 2023-02-19: 添加算事功能，实现诸葛神算
-- 2023-01-12: 项目初始化，基础框架搭建 
+接口细节见 `API文档.md`，部署见 `部署指南.md`。

@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: pip install -r requirements-dev.txt
+      - run: black --check app.py api_utils.py config.py logging_config.py database.py huangli.py lunming.py bazi_service.py bailian.py gunicorn.conf.py blueprints tests
+      - run: ruff check app.py api_utils.py config.py logging_config.py database.py huangli.py lunming.py bazi_service.py bailian.py gunicorn.conf.py blueprints tests
+      - run: pytest --cov=. --cov-report=term-missing
+      - run: node --check static/js/huangli.js
+      - run: node --check static/js/lunming.js
+      - run: node --check static/js/main.js
