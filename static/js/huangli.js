@@ -1,3 +1,6 @@
+let currentHuangliData = null;
+const HUANGLI_FAVORITES_KEY = 'zhugeshen.huangli.favorites.v1';
+
 document.addEventListener('DOMContentLoaded', function() {
     console.log('页面加载完成，初始化黄历功能');
     
@@ -132,6 +135,25 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+
+    document.getElementById('scenarioFilter').addEventListener('change', () => {
+        fetchAndDisplayHuangliData(datePicker.value);
+        fetchAndDisplayNineDaysHuangliData();
+    });
+    document.getElementById('favoriteDate').addEventListener('click', toggleFavoriteDate);
+    document.getElementById('clearFavorites').addEventListener('click', () => {
+        localStorage.removeItem(HUANGLI_FAVORITES_KEY);
+        renderHuangliFavorites();
+    });
+    document.getElementById('exportFavorites').addEventListener('click', exportHuangliFavorites);
+    document.getElementById('toggleHuangliView').addEventListener('click', event => {
+        const compact = document.querySelector('.huangli-container').classList.toggle('compact-view');
+        event.currentTarget.textContent = compact ? '详版' : '简版';
+    });
+    document.getElementById('copyHuangli').addEventListener('click', () => copyOrShareHuangli(false));
+    document.getElementById('shareHuangli').addEventListener('click', () => copyOrShareHuangli(true));
+    document.getElementById('printHuangli').addEventListener('click', () => window.print());
+    renderHuangliFavorites();
     
     // 初始加载今天的黄历数据
     fetchAndDisplayHuangliData(formatDate(today));
@@ -151,19 +173,14 @@ function updateCurrentTime() {
     const hours = now.getHours();
     const minutes = now.getMinutes();
     
-    // 更新时间显示在currentDate
     const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
-    document.getElementById('currentDate').textContent = formattedTime;
     
     // 计算当前时辰
     const chineseHour = getChineseHour(hours);
     
     // 只在currentTime中显示时辰信息
     const timeElement = document.getElementById('currentTime');
-    timeElement.textContent = `当前时辰: ${chineseHour}`;
-    
-    // 每分钟更新一次
-    setTimeout(updateCurrentTime, 60000 - (now.getSeconds() * 1000));
+    timeElement.textContent = `当前时间：${formattedTime} · ${chineseHour}`;
 }
 
 // 获取中国传统时辰
@@ -211,8 +228,9 @@ function formatDate(date) {
 
 // 获取并显示黄历数据
 function fetchAndDisplayHuangliData(date) {
-    console.log('开始获取黄历数据:', date);
-    fetch(`/api/huangli?date=${date}`)
+    showHuangliStatus('正在加载黄历…');
+    const scenario = document.getElementById('scenarioFilter')?.value || '';
+    fetch(`/api/huangli?date=${encodeURIComponent(date)}&scenario=${encodeURIComponent(scenario)}`)
         .then(response => {
             console.log('黄历API响应状态:', response.status);
             if (!response.ok) {
@@ -227,19 +245,20 @@ function fetchAndDisplayHuangliData(date) {
                 displayHuangliData(data.data);
             } else {
                 console.error('获取黄历数据失败:', data ? data.message : '未知错误');
-                alert('获取黄历数据失败，请稍后再试。');
+                showHuangliStatus(data?.error?.message || '获取黄历数据失败，请稍后再试。', 'error');
             }
         })
         .catch(error => {
             console.error('获取黄历数据出错:', error);
-            alert('获取黄历数据出错，请稍后再试。');
+            showHuangliStatus('获取黄历数据出错，请稍后再试。', 'error');
         });
 }
 
 // 获取并显示九天黄历数据
 function fetchAndDisplayNineDaysHuangliData() {
     console.log('开始获取九天黄历数据');
-    fetch('/api/week_huangli')
+    const scenario = document.getElementById('scenarioFilter')?.value || '';
+    fetch(`/api/week_huangli?scenario=${encodeURIComponent(scenario)}`)
         .then(response => {
             console.log('九天黄历API响应状态:', response.status);
             if (!response.ok) {
@@ -267,14 +286,18 @@ function displayHuangliData(data) {
     try {
         console.log("显示黄历数据:", data);
         
-        // 获取当前时间，显示在标题处
+        currentHuangliData = data;
+        showHuangliStatus('');
+        // 获取当前时间，用于实时钟表
         const now = new Date();
         const hours = now.getHours();
         const minutes = now.getMinutes();
         const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
         
-        // 更新为当前时间而不是日期
-        document.getElementById('currentDate').textContent = formattedTime;
+        const selectedDate = new Date(`${data.date}T00:00:00`);
+        document.getElementById('currentDate').textContent = selectedDate.toLocaleDateString('zh-CN', {
+            year: 'numeric', month: 'long', day: 'numeric', weekday: 'long'
+        });
         
         // 更新日期信息 - 移除对solarDate的引用
         document.getElementById('lunarDate').textContent = data.lunar_date || '未知';
@@ -282,9 +305,7 @@ function displayHuangliData(data) {
         
         // 更新时辰信息
         const ganZhiHourElement = document.getElementById('ganZhiHour');
-        // 始终使用当前时辰，而不是API返回的固定时辰
-        const chineseHour = getChineseHour(hours);
-        ganZhiHourElement.textContent = `${formattedTime} ${chineseHour}`;
+        ganZhiHourElement.textContent = `所选日期子时：${data.gan_zhi_hour || '未知'}`;
         
         document.getElementById('zodiac').textContent = data.zodiac || '未知';
         
@@ -422,7 +443,7 @@ function displayHuangliData(data) {
         }
     } catch (error) {
         console.error('显示黄历数据出错:', error);
-        alert('显示黄历数据出错，请稍后再试。');
+        showHuangliStatus('显示黄历数据出错，请稍后再试。', 'error');
     }
 }
 
@@ -579,6 +600,12 @@ function displayNineDaysHuangliData(weekData) {
             
             // 组装卡片
             dayCard.appendChild(dateSection);
+            if (dayData.scenario_assessment) {
+                const scenarioBadge = document.createElement('div');
+                scenarioBadge.className = `scenario-badge scenario-${dayData.scenario_assessment.status}`;
+                scenarioBadge.textContent = `${dayData.scenario_assessment.scenario}：${dayData.scenario_assessment.status}`;
+                dayCard.appendChild(scenarioBadge);
+            }
             dayCard.appendChild(suitableUnsuitableSection);
             dayCard.appendChild(shenShaSection);
             
@@ -604,6 +631,75 @@ function displayNineDaysHuangliData(weekData) {
         
     } catch (error) {
         console.error("显示九天黄历数据时出错:", error);
-        alert("显示黄历数据失败，请刷新页面重试。");
+        showHuangliStatus('显示九天黄历失败，请稍后重试。', 'error');
     }
-} 
+}
+
+function showHuangliStatus(message, type = '') {
+    const status = document.getElementById('huangliStatus');
+    if (!status) return;
+    status.textContent = message;
+    status.dataset.type = type;
+}
+
+function getHuangliFavorites() {
+    try {
+        return JSON.parse(localStorage.getItem(HUANGLI_FAVORITES_KEY) || '[]');
+    } catch (_error) {
+        return [];
+    }
+}
+
+function toggleFavoriteDate() {
+    if (!currentHuangliData) return;
+    const favorites = getHuangliFavorites();
+    const index = favorites.findIndex(item => item.date === currentHuangliData.date);
+    if (index >= 0) favorites.splice(index, 1);
+    else favorites.unshift({
+        date: currentHuangliData.date,
+        lunar_date: currentHuangliData.lunar_date,
+        suitable: currentHuangliData.suitable,
+        unsuitable: currentHuangliData.unsuitable
+    });
+    localStorage.setItem(HUANGLI_FAVORITES_KEY, JSON.stringify(favorites.slice(0, 30)));
+    renderHuangliFavorites();
+}
+
+function renderHuangliFavorites() {
+    const container = document.getElementById('huangliFavorites');
+    container.replaceChildren();
+    getHuangliFavorites().forEach(item => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.textContent = item.date;
+        button.addEventListener('click', () => {
+            document.getElementById('datePicker').value = item.date;
+            fetchAndDisplayHuangliData(item.date);
+        });
+        container.appendChild(button);
+    });
+}
+
+function huangliShareText() {
+    if (!currentHuangliData) return '';
+    return `${currentHuangliData.date} ${currentHuangliData.lunar_date}\n宜：${currentHuangliData.suitable}\n忌：${currentHuangliData.unsuitable}\n传统文化娱乐参考，不构成决策建议。`;
+}
+
+async function copyOrShareHuangli(preferShare) {
+    const text = huangliShareText();
+    if (!text) return;
+    if (preferShare && navigator.share) await navigator.share({ title: '诸葛神算黄历', text });
+    else {
+        await navigator.clipboard.writeText(text);
+        showHuangliStatus(preferShare ? '当前浏览器不支持分享，内容已复制。' : '黄历已复制。', 'success');
+    }
+}
+
+function exportHuangliFavorites() {
+    const blob = new Blob([JSON.stringify(getHuangliFavorites(), null, 2)], { type: 'application/json' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = `诸葛神算-黄历收藏-${new Date().toISOString().slice(0, 10)}.json`;
+    link.click();
+    URL.revokeObjectURL(link.href);
+}

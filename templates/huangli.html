@@ -75,6 +75,28 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="huangli-tools" aria-label="黄历筛选与操作">
+                    <label for="scenarioFilter">场景</label>
+                    <select id="scenarioFilter" class="lunar-date-select">
+                        <option value="">全部宜忌</option>
+                        <option value="结婚">结婚</option>
+                        <option value="搬家">搬家</option>
+                        <option value="开业">开业</option>
+                        <option value="出行">出行</option>
+                        <option value="签约">签约</option>
+                        <option value="理发">理发</option>
+                    </select>
+                    <button type="button" id="favoriteDate" class="ancient-btn secondary-btn">收藏</button>
+                    <button type="button" id="exportFavorites" class="ancient-btn secondary-btn">导出收藏</button>
+                    <button type="button" id="clearFavorites" class="ancient-btn secondary-btn">清空收藏</button>
+                    <button type="button" id="toggleHuangliView" class="ancient-btn secondary-btn">简版</button>
+                    <button type="button" id="copyHuangli" class="ancient-btn secondary-btn">复制</button>
+                    <button type="button" id="shareHuangli" class="ancient-btn secondary-btn">分享</button>
+                    <button type="button" id="printHuangli" class="ancient-btn secondary-btn">打印</button>
+                </div>
+                <div id="huangliStatus" class="inline-status" role="status" aria-live="polite"></div>
+                <div id="huangliFavorites" class="huangli-favorites"></div>
                 
                 <div class="huangli-container">
                     <div class="huangli-header">
@@ -218,6 +240,7 @@
                         <div class="loading">加载中...</div>
                     </div>
                 </div>
+                <p class="responsible-use-notice">传统文化娱乐参考，不构成医疗、投资或人生决策建议。</p>
             </div>
             <div class="scroll-footer"></div>
         </div>
@@ -226,4 +249,4 @@
     <script src="{{ url_for('static', filename='js/huangli.js') }}"></script>
     <script src="{{ url_for('static', filename='js/huangli_lunar_handler.js') }}"></script>
 </body>
-</html> 
+</html>

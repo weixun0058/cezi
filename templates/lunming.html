@@ -41,13 +41,13 @@
                 </div>
                 
                 <div class="lunming-form-container">
-                    <div class="lunming-form">
+                    <div class="lunming-form" id="lunming-form">
                         <!-- 基本信息区域 -->
                         <div class="form-section">
                             <h3 class="section-title">基本信息</h3>
                             <div class="form-group">
                                 <label for="name">姓名：</label>
-                                <input type="text" id="name" class="ancient-input name-input" placeholder="请输入您的姓名">
+                                <input type="text" id="name" class="ancient-input name-input" maxlength="30" autocomplete="name" placeholder="请输入您的姓名">
                                 <div class="gender-selection">
                                     <label class="gender-label">
                                         <input type="radio" name="gender" value="男" checked>
@@ -113,15 +113,41 @@
                                 <label for="birth-time">时辰：</label>
                                 <select id="birth-time" class="lunar-date-select time-select">
                                     <option value="">请选择时辰</option>
+                                    <option value="未知">时辰未知</option>
                                 </select>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3 class="section-title">出生地与时间</h3>
+                            <div class="form-group location-fields">
+                                <label for="birth-place">出生地：</label>
+                                <input type="text" id="birth-place" class="ancient-input" maxlength="80" placeholder="选填，仅用于报告备注">
+                                <label for="timezone">时区：</label>
+                                <select id="timezone" class="lunar-date-select">
+                                    <option value="Asia/Shanghai">中国标准时间</option>
+                                    <option value="Asia/Hong_Kong">香港时间</option>
+                                    <option value="Asia/Taipei">台北时间</option>
+                                    <option value="Asia/Singapore">新加坡时间</option>
+                                    <option value="UTC">UTC</option>
+                                </select>
+                            </div>
+                            <label class="setting-toggle" for="use-true-solar-time">
+                                <input type="checkbox" id="use-true-solar-time">
+                                <span>启用真太阳时修正</span>
+                            </label>
+                            <div class="form-group hidden" id="longitude-group">
+                                <label for="longitude">出生地经度：</label>
+                                <input type="number" id="longitude" class="ancient-input" min="-180" max="180" step="0.01" placeholder="例如 116.40">
                             </div>
                         </div>
                         
                         <!-- 操作按钮区域 -->
                         <div class="form-actions">
-                            <button id="analyze-btn" class="ancient-btn primary-btn">开始分析</button>
-                            <button id="reset-btn" class="ancient-btn secondary-btn">重置</button>
+                            <button type="button" id="analyze-btn" class="ancient-btn primary-btn">开始分析</button>
+                            <button type="button" id="reset-btn" class="ancient-btn secondary-btn">重置</button>
                         </div>
+                        <div id="form-status" class="inline-status" role="status" aria-live="polite"></div>
                     </div>
                 </div>
                 
@@ -132,10 +158,27 @@
                         <div class="loading-spinner"></div>
                         <span>正在分析，请稍候...</span>
                     </div>
-                    
+                    <div id="chart-summary" class="chart-summary hidden"></div>
+                    <div id="result-actions" class="result-actions hidden">
+                        <button type="button" id="view-toggle" class="ancient-btn secondary-btn">切换简版</button>
+                        <button type="button" id="copy-report" class="ancient-btn secondary-btn">复制</button>
+                        <button type="button" id="share-report" class="ancient-btn secondary-btn">分享</button>
+                        <button type="button" id="print-report" class="ancient-btn secondary-btn">打印</button>
+                    </div>
                     <!-- 分析内容 -->
                     <div id="analysis-content" class="analysis-content"></div>
+                    <p class="responsible-use-notice">传统文化娱乐参考，不构成医疗、投资或人生决策建议。</p>
                 </div>
+
+                <section class="local-history" aria-labelledby="history-title">
+                    <h2 id="history-title" class="section-title">本地报告</h2>
+                    <p class="privacy-note">报告仅保存在当前浏览器，可随时删除或导出。</p>
+                    <div class="history-actions">
+                        <button type="button" id="export-reports" class="ancient-btn secondary-btn">导出</button>
+                        <button type="button" id="clear-reports" class="ancient-btn secondary-btn">全部清除</button>
+                    </div>
+                    <div id="report-history" class="report-history"></div>
+                </section>
                 
             </div>
             <div class="scroll-footer"></div>
@@ -149,4 +192,4 @@
     <!-- 引入阴阳历日期处理工具 -->
     <script src="{{ url_for('static', filename='js/lunar_date_handler.js') }}"></script>
 </body>
-</html> 
+</html>

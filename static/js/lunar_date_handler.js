@@ -577,6 +577,11 @@ document.addEventListener('DOMContentLoaded', () => {
             defaultOption.value = '';
             defaultOption.textContent = '请选择时辰';
             birthTimeSelect.appendChild(defaultOption);
+
+            const unknownOption = document.createElement('option');
+            unknownOption.value = '未知';
+            unknownOption.textContent = '时辰未知';
+            birthTimeSelect.appendChild(unknownOption);
             
             // 时辰的地支（固定的）
             const zhi = ['子', '丑', '寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥'];
@@ -724,4 +729,4 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error("更新阳历日期失败:", error);
         }
     }
-}); 
+});

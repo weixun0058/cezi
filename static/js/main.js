@@ -3,6 +3,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const calculateBtn = document.getElementById('calculateBtn');
     let strokes = [];
     let selectedType = null;
+    let confirmedQuestion = '';
+    const historyKey = 'zhugeshen.divination.history.v1';
+
+    function setStatus(message, type = '') {
+        const status = document.getElementById('suanshiStatus');
+        status.textContent = message;
+        status.dataset.type = type;
+    }
 
     // 修改检查输入函数，移除类型检查
     function checkInputs() {
@@ -28,19 +36,46 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // 修改计算按钮点击事件
-    calculateBtn.addEventListener('click', async function() {
+    calculateBtn.addEventListener('click', function() {
+        const question = document.getElementById('questionSummary').value.trim();
+        if (!question) {
+            setStatus('请先写下本次所问之事', 'error');
+            return;
+        }
+        confirmedQuestion = question;
+        document.getElementById('questionConfirmationText').textContent = question;
+        const repeated = getHistory().some(item => item.question === question && Date.now() - new Date(item.created_at).getTime() < 86400000);
+        document.getElementById('repeatWarning').classList.toggle('hidden', !repeated);
+        document.getElementById('questionConfirmation').classList.remove('hidden');
+        setStatus('请确认问题后再起卦');
+    });
+
+    document.getElementById('cancelQuestionBtn').addEventListener('click', () => {
+        document.getElementById('questionConfirmation').classList.add('hidden');
+        document.getElementById('questionSummary').focus();
+    });
+
+    document.getElementById('confirmQuestionBtn').addEventListener('click', async function() {
+        document.getElementById('questionConfirmation').classList.add('hidden');
+        this.disabled = true;
         strokes = [];
-        for (let input of inputs) {
-            const response = await fetch('/get_strokes', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ character: input.value })
-            });
-            const data = await response.json();
-            strokes.push(data.strokes);
+        setStatus('正在查询笔画…');
+        try {
+            for (const input of inputs) {
+                const response = await fetch('/get_strokes', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ character: input.value })
+                });
+                const data = await response.json();
+                if (!response.ok || !data.strokes) throw new Error(data.error?.message || '笔画查询失败');
+                strokes.push(data.strokes);
+            }
+        } catch (error) {
+            setStatus(error.message || '笔画查询失败，请重试', 'error');
+            return;
+        } finally {
+            this.disabled = false;
         }
 
         // 隐藏输入区域和介绍文本
@@ -51,6 +86,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // 显示求测类型选择
         document.getElementById('qcTypeResult').classList.remove('hidden');
+        setStatus('请选择求测方向');
     });
 
     // 求测类型按钮点击事件
@@ -151,7 +187,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         } catch (error) {
             console.error('显示签号时出错:', error);
-            alert('显示签号时出错，请重试');
+            setStatus('显示签号时出错，请重试', 'error');
         } finally {
             // 重新启用按钮
             this.disabled = false;
@@ -182,8 +218,8 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             
             const data = await response.json();
-            if (!data || data.error) {
-                throw new Error(data.error || '获取卦象信息失败');
+            if (!response.ok || !data || data.error) {
+                throw new Error(data.error?.message || '获取卦象信息失败');
             }
             
             // 保存数据
@@ -218,7 +254,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         } catch (error) {
             console.error('显示卦象信息时出错:', error);
-            alert('显示卦象信息时出错，请重试');
+            setStatus('显示卦象信息时出错，请重试', 'error');
         } finally {
             // 重新启用按钮
             this.disabled = false;
@@ -265,6 +301,17 @@ document.addEventListener('DOMContentLoaded', function() {
             `${typeMap[selectedType]}解签`;
         await typeWriter(document.getElementById('specificInterpretation'), 
             window.guaData[selectedType]);
+        document.querySelectorAll('#interpretationResult .result-actions .ancient-btn').forEach(button => {
+            button.classList.remove('hidden');
+        });
+
+        saveHistory({
+            question: confirmedQuestion,
+            characters: Array.from(inputs).map(input => input.value).join(''),
+            type: selectedType,
+            sign_number: Number(document.getElementById('signNumber').textContent),
+            result: window.guaData
+        });
         
         showButton('restartBtn');
     });
@@ -273,6 +320,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('restartBtn').addEventListener('click', function() {
         // 清空输入
         inputs.forEach(input => input.value = '');
+        document.getElementById('questionSummary').value = '';
         
         // 启用开始测算按钮（但保持禁用状态，直到输入完成）
         calculateBtn.disabled = true;
@@ -315,51 +363,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // 修改 typeWriter 函数
-    async function typeWriter(element, text, speed = 50) {
-        element.textContent = '';
-        for (let i = 0; i < text.length; i++) {
-            element.textContent += text[i];
-            
-            // 获取当前文本容器的下一个按钮
-            const nextButton = element.closest('.result-section').querySelector('.ancient-btn:not(.hidden)');
-            
-            // 检查元素和按钮是否在视口内
-            const elementRect = element.getBoundingClientRect();
-            const buttonRect = nextButton ? nextButton.getBoundingClientRect() : null;
-            
-            // 计算需要检查的底部位置（文本容器或按钮的最底部）
-            const bottomPosition = buttonRect ? 
-                Math.max(elementRect.bottom, buttonRect.bottom) : 
-                elementRect.bottom;
-            
-            const isInViewport = bottomPosition <= window.innerHeight;
-            
-            // 如果底部超出视口，自动滚动
-            if (!isInViewport) {
-                // 计算需要滚动的距离，使底部与视口底部之间留出一定空间
-                const scrollOffset = bottomPosition - window.innerHeight + 50; // 50px 的缓冲空间
-                window.scrollBy({
-                    top: scrollOffset,
-                    behavior: 'smooth'
-                });
-            }
-            
-            await new Promise(resolve => setTimeout(resolve, speed));
-        }
-        
-        // 文本显示完成后，再次检查按钮位置
-        const finalButton = element.closest('.result-section').querySelector('.ancient-btn:not(.hidden)');
-        if (finalButton) {
-            const finalButtonRect = finalButton.getBoundingClientRect();
-            if (finalButtonRect.bottom > window.innerHeight) {
-                const scrollOffset = finalButtonRect.bottom - window.innerHeight + 50;
-                window.scrollBy({
-                    top: scrollOffset,
-                    behavior: 'smooth'
-                });
-            }
-        }
+    async function typeWriter(element, text) {
+        element.textContent = text || '';
+        await new Promise(resolve => window.requestAnimationFrame(resolve));
     }
 
     // 添加一个通用的显示按钮函数
@@ -394,4 +400,77 @@ document.addEventListener('DOMContentLoaded', function() {
             button.style.display = 'block';
         }
     }
-}); 
+
+    function getHistory() {
+        try { return JSON.parse(localStorage.getItem(historyKey) || '[]'); }
+        catch (_error) { return []; }
+    }
+
+    function saveHistory(entry) {
+        const history = getHistory();
+        history.unshift({ id: `${Date.now()}`, created_at: new Date().toISOString(), ...entry });
+        localStorage.setItem(historyKey, JSON.stringify(history.slice(0, 30)));
+        renderHistory();
+    }
+
+    function renderHistory() {
+        const container = document.getElementById('divinationHistory');
+        container.replaceChildren();
+        const history = getHistory();
+        if (!history.length) {
+            container.textContent = '暂无本地记录';
+            return;
+        }
+        history.forEach(item => {
+            const row = document.createElement('div');
+            row.className = 'history-row';
+            const summary = document.createElement('span');
+            summary.textContent = `${item.question} · 第${item.sign_number}签`;
+            const remove = document.createElement('button');
+            remove.type = 'button';
+            remove.textContent = '删除';
+            remove.addEventListener('click', () => {
+                localStorage.setItem(historyKey, JSON.stringify(getHistory().filter(record => record.id !== item.id)));
+                renderHistory();
+            });
+            row.append(summary, remove);
+            container.appendChild(row);
+        });
+    }
+
+    document.getElementById('clearDivinations').addEventListener('click', () => {
+        localStorage.removeItem(historyKey);
+        renderHistory();
+    });
+    document.getElementById('exportDivinations').addEventListener('click', () => {
+        const blob = new Blob([JSON.stringify(getHistory(), null, 2)], { type: 'application/json' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = `诸葛神算-起卦记录-${new Date().toISOString().slice(0, 10)}.json`;
+        link.click();
+        URL.revokeObjectURL(link.href);
+    });
+    document.getElementById('toggleDivinationView').addEventListener('click', event => {
+        const compact = document.getElementById('interpretationResult').classList.toggle('compact-view');
+        event.currentTarget.textContent = compact ? '详版' : '简版';
+    });
+    document.getElementById('copyDivination').addEventListener('click', async () => {
+        await navigator.clipboard.writeText(divinationShareText());
+        setStatus('解签已复制', 'success');
+    });
+    document.getElementById('shareDivination').addEventListener('click', async () => {
+        const text = divinationShareText();
+        if (navigator.share) await navigator.share({ title: '诸葛神算解签', text });
+        else {
+            await navigator.clipboard.writeText(text);
+            setStatus('当前浏览器不支持分享，解签已复制', 'success');
+        }
+    });
+    document.getElementById('printDivination').addEventListener('click', () => window.print());
+
+    function divinationShareText() {
+        if (!window.guaData) return '';
+        return `${confirmedQuestion}\n第${document.getElementById('signNumber').textContent}签\n${window.guaData.sign_text}\n${window.guaData.interpretation1}\n传统文化娱乐参考，不构成决策建议。`;
+    }
+    renderHistory();
+});

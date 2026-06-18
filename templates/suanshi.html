@@ -40,6 +40,8 @@
                     <p class="tou">占卜者,辅人省思、指引前路之术也,非决断命运之所。处世之间,应持平常之心,顺其自然,方能临事不惧,泰然自若。</p>
                 </div>
                 <div class="input-section" id="characterInput">
+                    <label for="questionSummary">所问之事</label>
+                    <textarea id="questionSummary" maxlength="120" rows="3" class="ancient-input" placeholder="用一句话写下本次所问，起卦前会再次确认"></textarea>
                     <h2>请书三字</h2>
                     <div class="character-inputs">
                         <input type="text" maxlength="1" class="char-input" id="char1">
@@ -47,6 +49,15 @@
                         <input type="text" maxlength="1" class="char-input" id="char3">
                     </div>
                     <button id="calculateBtn" disabled class="ancient-btn">开始测算</button>
+                    <div id="suanshiStatus" class="inline-status" role="status" aria-live="polite"></div>
+                </div>
+
+                <div id="questionConfirmation" class="result-section hidden">
+                    <h2>确认所问</h2>
+                    <p id="questionConfirmationText" class="ancient-text"></p>
+                    <p id="repeatWarning" class="repeat-warning hidden">近期已有相同问题记录，反复起卦可能放大焦虑。</p>
+                    <button type="button" id="confirmQuestionBtn" class="ancient-btn">确认并起卦</button>
+                    <button type="button" id="cancelQuestionBtn" class="ancient-btn secondary-btn">返回修改</button>
                 </div>
                 
                 <div class="intro-text">
@@ -112,6 +123,12 @@
                             <p id="specificInterpretation" class="ancient-text"></p>
                         </div>
                     </div>
+                    <div class="result-actions">
+                        <button type="button" id="toggleDivinationView" class="ancient-btn secondary-btn">简版</button>
+                        <button type="button" id="copyDivination" class="ancient-btn secondary-btn">复制</button>
+                        <button type="button" id="shareDivination" class="ancient-btn secondary-btn">分享</button>
+                        <button type="button" id="printDivination" class="ancient-btn secondary-btn">打印</button>
+                    </div>
                     <button id="restartBtn" class="ancient-btn hidden">重新测算</button>
                 </div>
 
@@ -126,10 +143,20 @@
                         <button class="qc-sy-type-btn" data-type="general">泛泛之谈一切随缘</button>
                     </div>
                 </div>
+                <section class="local-history" aria-labelledby="divination-history-title">
+                    <h2 id="divination-history-title">本地起卦记录</h2>
+                    <p class="privacy-note">记录仅保存在当前浏览器。</p>
+                    <div class="history-actions">
+                        <button type="button" id="exportDivinations" class="ancient-btn secondary-btn">导出</button>
+                        <button type="button" id="clearDivinations" class="ancient-btn secondary-btn">全部清除</button>
+                    </div>
+                    <div id="divinationHistory"></div>
+                </section>
+                <p class="responsible-use-notice">传统文化娱乐参考，不构成医疗、投资或人生决策建议。</p>
             </div>
             <div class="scroll-footer"></div>
         </div>
     </div>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
-</html> 
+</html>

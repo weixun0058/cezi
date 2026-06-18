@@ -7,6 +7,15 @@
     --base-font-size: 14px;
 }
 
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
 /* 楷体 */
 @font-face {
     font-family: 'KaiTi';
@@ -44,7 +53,8 @@ body {
 }
 
 .scroll-container {
-    width: 98%;
+    width: 100%;
+    max-width: 100%;
     margin: 0 auto;
     background: var(--background-color);
     border-radius: 5px;
@@ -397,4 +407,9 @@ h2, h3 {
 
 a {
     text-decoration: none;
-} 
+}
+.inline-status { min-height: 1.5rem; margin-top: 10px; text-align: center; }
+.inline-status[data-type="error"] { color: #8f1d1d; }
+.repeat-warning { color: #8f1d1d; }
+.history-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.history-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; margin: 8px 0; }

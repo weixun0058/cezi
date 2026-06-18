@@ -697,3 +697,16 @@
 
 
 
+.huangli-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 16px 0; }
+.huangli-tools .ancient-btn { width: auto; min-width: 64px; }
+.inline-status { min-height: 1.5rem; text-align: center; }
+.inline-status[data-type="error"] { color: #8f1d1d; }
+.inline-status[data-type="success"] { color: #2f6b3c; }
+.huangli-favorites { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+.huangli-favorites button { border: 1px solid rgba(92, 49, 20, 0.35); background: transparent; cursor: pointer; }
+.scenario-badge { margin: 8px; padding: 4px 8px; text-align: center; border: 1px solid currentColor; }
+.scenario-宜 { color: #2f6b3c; }
+.scenario-忌 { color: #8f1d1d; }
+.scenario-未载 { color: #66584b; }
+.compact-view .solar-term-section, .compact-view .shen-sha-section, .compact-view .peng-zu-section { display: none; }
+.responsible-use-notice { color: #66584b; font-size: 0.9rem; text-align: center; }
