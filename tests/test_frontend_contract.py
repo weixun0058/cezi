@@ -31,10 +31,21 @@ def test_huangli_extension_is_collapsed_and_owns_scenario_filter():
     panel = soup.find(id="weekHuangliPanel")
     scenario = soup.find(id="scenarioFilter")
 
-    assert toggle["aria-label"] == "扩展功能"
+    assert toggle["aria-label"] == "九天黄历"
     assert toggle["aria-expanded"] == "false"
     assert "hidden" in panel.get("class", [])
     assert scenario.find_parent(id="weekHuangliPanel") is panel
+    assert scenario["aria-label"] == "择事"
+    assert [option.get_text(strip=True) for option in scenario.find_all("option")] == [
+        "诸事",
+        "婚嫁",
+        "搬迁",
+        "开市",
+        "出行",
+        "签约",
+        "理发",
+    ]
+    assert panel.find("h3") is None
 
     button_labels = {button.get_text(strip=True) for button in soup.find_all("button")}
     assert button_labels.isdisjoint({"收藏", "导出收藏", "清空收藏"})
@@ -46,3 +57,4 @@ def test_huangli_week_data_loads_only_from_extension_interactions():
     assert script.count("fetchAndDisplayNineDaysHuangliData();") == 2
     assert "fetch(`/api/huangli?date=${encodeURIComponent(date)}`)" in script
     assert "HUANGLI_FAVORITES_KEY" not in script
+    assert "status !== '未载'" in script

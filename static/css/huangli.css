@@ -434,18 +434,21 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 12px 4px;
+    padding: 18px 4px 14px;
     border: 0;
     border-top: 1px solid rgba(92, 49, 20, 0.3);
     border-bottom: 1px solid rgba(92, 49, 20, 0.3);
     background: transparent;
-    color: #5c3114;
-    font: 600 1rem 'KaiTi', 'STKaiti', serif;
+    color: #8b0000;
+    font: 500 2rem/1.2 'KaiTi', 'STKaiti', serif;
     cursor: pointer;
 }
 
 .extension-indicator {
     display: inline-block;
+    margin-right: 4px;
+    color: #5c3114;
+    font-size: 1rem;
     transition: transform 0.2s ease;
 }
 
@@ -454,25 +457,56 @@
 }
 
 .extension-toggle:focus-visible {
-    outline: 2px solid #8b4513;
-    outline-offset: 3px;
+    outline: none;
+    box-shadow: inset 3px 0 #8b4513;
 }
 
 .week-huangli-panel {
-    padding-top: 16px;
+    padding-top: 14px;
 }
 
-.week-huangli-header {
+.week-huangli-controls {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 16px;
+    justify-content: flex-end;
     margin-bottom: 16px;
 }
 
-.week-huangli-header h3,
-.week-huangli-header .huangli-tools {
-    margin: 0;
+.scenario-select {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+
+.scenario-select select {
+    min-width: 112px;
+    height: 40px;
+    appearance: none;
+    padding: 6px 32px 6px 12px;
+    border: 0;
+    border-bottom: 1px solid #d4a76a;
+    border-radius: 0;
+    background: rgba(255, 248, 220, 0.35);
+    color: #5c3114;
+    font: 500 1rem 'KaiTi', 'STKaiti', serif;
+    cursor: pointer;
+}
+
+.scenario-select select:focus-visible {
+    outline: 2px solid rgba(139, 69, 19, 0.65);
+    outline-offset: 2px;
+}
+
+.scenario-select select option {
+    background: #fff8dc;
+    color: #5c3114;
+}
+
+.scenario-select-indicator {
+    position: absolute;
+    right: 10px;
+    color: #8b4513;
+    pointer-events: none;
 }
 
 .week-grid {
@@ -743,12 +777,10 @@
 
 
 
-.huangli-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 16px 0; }
 .inline-status { min-height: 1.5rem; text-align: center; }
 .inline-status[data-type="error"] { color: #8f1d1d; }
 .inline-status[data-type="success"] { color: #2f6b3c; }
-.scenario-badge { margin: 8px; padding: 4px 8px; text-align: center; border: 1px solid currentColor; }
+.scenario-mark { margin: 6px 0 2px; text-align: center; font-size: 0.86em; font-weight: 600; }
 .scenario-宜 { color: #2f6b3c; }
 .scenario-忌 { color: #8f1d1d; }
-.scenario-未载 { color: #66584b; }
 .responsible-use-notice { color: #66584b; font-size: 0.9rem; text-align: center; }

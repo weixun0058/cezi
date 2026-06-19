@@ -594,11 +594,14 @@ function displayNineDaysHuangliData(weekData) {
             
             // 组装卡片
             dayCard.appendChild(dateSection);
-            if (dayData.scenario_assessment) {
-                const scenarioBadge = document.createElement('div');
-                scenarioBadge.className = `scenario-badge scenario-${dayData.scenario_assessment.status}`;
-                scenarioBadge.textContent = `${dayData.scenario_assessment.scenario}：${dayData.scenario_assessment.status}`;
-                dayCard.appendChild(scenarioBadge);
+            if (dayData.scenario_assessment && dayData.scenario_assessment.status !== '未载') {
+                const scenarioNames = { '结婚': '婚嫁', '搬家': '搬迁', '开业': '开市' };
+                const scenarioMark = document.createElement('div');
+                scenarioMark.className = `scenario-mark scenario-${dayData.scenario_assessment.status}`;
+                const scenarioName = scenarioNames[dayData.scenario_assessment.scenario]
+                    || dayData.scenario_assessment.scenario;
+                scenarioMark.textContent = `${dayData.scenario_assessment.status}${scenarioName}`;
+                dayCard.appendChild(scenarioMark);
             }
             dayCard.appendChild(suitableUnsuitableSection);
             dayCard.appendChild(shenShaSection);

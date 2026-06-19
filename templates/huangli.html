@@ -215,24 +215,23 @@
                 
                 <div class="week-huangli">
                     <button type="button" id="weekHuangliToggle" class="extension-toggle"
-                            aria-label="扩展功能" aria-expanded="false" aria-controls="weekHuangliPanel">
-                        <span>扩展功能</span>
+                            aria-label="九天黄历" aria-expanded="false" aria-controls="weekHuangliPanel">
+                        <span class="extension-title">九天黄历</span>
                         <span class="extension-indicator" aria-hidden="true">&gt;</span>
                     </button>
                     <div id="weekHuangliPanel" class="week-huangli-panel hidden">
-                        <div class="week-huangli-header">
-                            <h3>九天黄历</h3>
-                            <div class="huangli-tools" aria-label="九天黄历场景筛选">
-                                <label for="scenarioFilter">场景</label>
-                                <select id="scenarioFilter" class="lunar-date-select">
-                                    <option value="">全部宜忌</option>
-                                    <option value="结婚">结婚</option>
-                                    <option value="搬家">搬家</option>
-                                    <option value="开业">开业</option>
+                        <div class="week-huangli-controls">
+                            <div class="scenario-select">
+                                <select id="scenarioFilter" aria-label="择事">
+                                    <option value="">诸事</option>
+                                    <option value="结婚">婚嫁</option>
+                                    <option value="搬家">搬迁</option>
+                                    <option value="开业">开市</option>
                                     <option value="出行">出行</option>
                                     <option value="签约">签约</option>
                                     <option value="理发">理发</option>
                                 </select>
+                                <span class="scenario-select-indicator" aria-hidden="true">⌄</span>
                             </div>
                         </div>
                         <div id="weekHuangliContainer" class="week-container"></div>
