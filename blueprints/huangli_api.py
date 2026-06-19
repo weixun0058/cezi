@@ -33,10 +33,20 @@ def _scenario_result(record, scenario):
     unsuitable = record.get("unsuitable", "")
     suitable_matches = [word for word in keywords if word in suitable]
     unsuitable_matches = [word for word in keywords if word in unsuitable]
-    status = "宜" if suitable_matches else "忌" if unsuitable_matches else "未载"
+    source = "宜忌"
+    if suitable_matches:
+        status = "宜"
+    elif unsuitable_matches:
+        status = "忌"
+    else:
+        peng_zu_bai_ji = record.get("peng_zu_bai_ji", "")
+        unsuitable_matches = [word for word in keywords if f"不{word}" in peng_zu_bai_ji]
+        status = "忌" if unsuitable_matches else "未载"
+        source = "彭祖百忌" if unsuitable_matches else None
     record["scenario_assessment"] = {
         "scenario": scenario,
         "status": status,
+        "source": source,
         "suitable_matches": suitable_matches,
         "unsuitable_matches": unsuitable_matches,
     }

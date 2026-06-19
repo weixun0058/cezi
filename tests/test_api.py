@@ -32,6 +32,33 @@ def test_invalid_date_and_scenario(client):
     assert client.get("/api/huangli?scenario=不存在").status_code == 400
 
 
+def test_haircut_scenario_supports_synonyms_and_pengzu_fallback(app):
+    from blueprints.huangli_api import _scenario_result
+
+    direct = _scenario_result(
+        {"suitable": "祭祀、剃头", "unsuitable": "", "peng_zu_bai_ji": ""}, "理发"
+    )
+    assert direct["scenario_assessment"] == {
+        "scenario": "理发",
+        "status": "宜",
+        "source": "宜忌",
+        "suitable_matches": ["剃头"],
+        "unsuitable_matches": [],
+    }
+
+    fallback = _scenario_result(
+        {
+            "suitable": "祭祀、结网",
+            "unsuitable": "入宅、出行",
+            "peng_zu_bai_ji": "丁不剃头头必生疮，卯不穿井水泉不香",
+        },
+        "理发",
+    )
+    assert fallback["scenario_assessment"]["status"] == "忌"
+    assert fallback["scenario_assessment"]["source"] == "彭祖百忌"
+    assert fallback["scenario_assessment"]["unsuitable_matches"] == ["剃头"]
+
+
 def test_pzbj_explanation(client):
     response = client.get(
         "/api/pzbj_explanation", query_string={"text": "甲不开仓财物耗散，子不问卜自惹祸殃"}

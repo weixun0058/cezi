@@ -39,7 +39,6 @@ def test_huangli_extension_is_collapsed_and_owns_scenario_filter():
     assert scenario["aria-label"] == "择事"
     scenario_buttons = scenario.find_all("button")
     assert [button.get_text(strip=True) for button in scenario_buttons] == [
-        "诸事",
         "婚嫁",
         "搬迁",
         "开市",
