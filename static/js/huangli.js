@@ -145,7 +145,13 @@ document.addEventListener('DOMContentLoaded', function() {
             fetchAndDisplayNineDaysHuangliData();
         }
     });
-    document.getElementById('scenarioFilter').addEventListener('change', () => {
+    const scenarioFilter = document.getElementById('scenarioFilter');
+    scenarioFilter.addEventListener('click', event => {
+        const option = event.target.closest('.scenario-option');
+        if (!option || option.getAttribute('aria-pressed') === 'true') return;
+        scenarioFilter.querySelectorAll('.scenario-option').forEach(button => {
+            button.setAttribute('aria-pressed', String(button === option));
+        });
         fetchAndDisplayNineDaysHuangliData();
     });
     
@@ -249,7 +255,8 @@ function fetchAndDisplayNineDaysHuangliData() {
     console.log('开始获取九天黄历数据');
     const container = document.getElementById('weekHuangliContainer');
     container.innerHTML = '<div class="loading">加载中...</div>';
-    const scenario = document.getElementById('scenarioFilter')?.value || '';
+    const scenario = document.querySelector('#scenarioFilter .scenario-option[aria-pressed="true"]')
+        ?.dataset.scenario || '';
     fetch(`/api/week_huangli?scenario=${encodeURIComponent(scenario)}`)
         .then(response => {
             console.log('九天黄历API响应状态:', response.status);
@@ -600,7 +607,7 @@ function displayNineDaysHuangliData(weekData) {
                 scenarioMark.className = `scenario-mark scenario-${dayData.scenario_assessment.status}`;
                 const scenarioName = scenarioNames[dayData.scenario_assessment.scenario]
                     || dayData.scenario_assessment.scenario;
-                scenarioMark.textContent = `${dayData.scenario_assessment.status}${scenarioName}`;
+                scenarioMark.textContent = `${dayData.scenario_assessment.status} · ${scenarioName}`;
                 dayCard.appendChild(scenarioMark);
             }
             dayCard.appendChild(suitableUnsuitableSection);

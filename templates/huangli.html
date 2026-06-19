@@ -220,19 +220,14 @@
                         <span class="extension-indicator" aria-hidden="true">&gt;</span>
                     </button>
                     <div id="weekHuangliPanel" class="week-huangli-panel hidden">
-                        <div class="week-huangli-controls">
-                            <div class="scenario-select">
-                                <select id="scenarioFilter" aria-label="择事">
-                                    <option value="">诸事</option>
-                                    <option value="结婚">婚嫁</option>
-                                    <option value="搬家">搬迁</option>
-                                    <option value="开业">开市</option>
-                                    <option value="出行">出行</option>
-                                    <option value="签约">签约</option>
-                                    <option value="理发">理发</option>
-                                </select>
-                                <span class="scenario-select-indicator" aria-hidden="true">⌄</span>
-                            </div>
+                        <div id="scenarioFilter" class="scenario-filter" role="group" aria-label="择事">
+                            <button type="button" class="scenario-option" data-scenario="" aria-pressed="true">诸事</button>
+                            <button type="button" class="scenario-option" data-scenario="结婚" aria-pressed="false">婚嫁</button>
+                            <button type="button" class="scenario-option" data-scenario="搬家" aria-pressed="false">搬迁</button>
+                            <button type="button" class="scenario-option" data-scenario="开业" aria-pressed="false">开市</button>
+                            <button type="button" class="scenario-option" data-scenario="出行" aria-pressed="false">出行</button>
+                            <button type="button" class="scenario-option" data-scenario="签约" aria-pressed="false">签约</button>
+                            <button type="button" class="scenario-option" data-scenario="理发" aria-pressed="false">理发</button>
                         </div>
                         <div id="weekHuangliContainer" class="week-container"></div>
                     </div>

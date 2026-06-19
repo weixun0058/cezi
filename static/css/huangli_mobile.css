@@ -479,23 +479,26 @@
 }
 
 .extension-toggle {
+    position: relative;
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     padding: 15px 2px 12px;
     border: 0;
     border-top: 1px solid rgba(92, 49, 20, 0.3);
     border-bottom: 1px solid rgba(92, 49, 20, 0.3);
     background: transparent;
     color: #8b0000;
-    font: 500 1.5rem/1.2 'KaiTi', 'STKaiti', serif;
+    font: 500 2rem/1.2 'YanTi', 'STKaiti', serif;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
     cursor: pointer;
 }
 
 .extension-indicator {
+    position: absolute;
+    right: 6px;
     display: inline-block;
-    margin-right: 2px;
     color: #5c3114;
     font-size: 0.95rem;
     transition: transform 0.2s ease;
@@ -511,50 +514,36 @@
 }
 
 .week-huangli-panel {
-    padding-top: 12px;
+    padding-top: 14px;
 }
 
-.week-huangli-controls {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 12px;
+.scenario-filter {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 4px;
+    margin-bottom: 14px;
 }
 
-.scenario-select {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-}
-
-.scenario-select select {
-    min-width: 104px;
-    height: 38px;
-    appearance: none;
-    padding: 6px 30px 6px 10px;
-    border: 0;
-    border-bottom: 1px solid #d4a76a;
-    border-radius: 0;
-    background: rgba(255, 248, 220, 0.35);
+.scenario-option {
+    min-width: 0;
+    padding: 7px 1px;
+    border: 1px solid #d4a76a;
+    border-radius: 3px;
+    background: rgba(255, 248, 220, 0.7);
     color: #5c3114;
-    font: 500 1rem 'KaiTi', 'STKaiti', serif;
+    font: 500 0.82rem 'KaiTi', 'STKaiti', serif;
     cursor: pointer;
 }
 
-.scenario-select select:focus-visible {
-    outline: 2px solid rgba(139, 69, 19, 0.65);
-    outline-offset: 2px;
+.scenario-option[aria-pressed="true"] {
+    border-color: #8b4513;
+    background: #8b4513;
+    color: #fff;
 }
 
-.scenario-select select option {
-    background: #fff8dc;
-    color: #5c3114;
-}
-
-.scenario-select-indicator {
-    position: absolute;
-    right: 9px;
-    color: #8b4513;
-    pointer-events: none;
+.scenario-option:focus-visible {
+    outline: 2px solid #8b4513;
+    outline-offset: 1px;
 }
 
 .week-grid {
@@ -585,18 +574,24 @@
 }
 
 .scenario-mark {
-    margin: 5px 0 2px;
+    width: fit-content;
+    margin: 6px auto 3px;
+    padding: 4px 8px;
+    border-radius: 3px;
+    color: #fff;
     text-align: center;
-    font-size: 0.82em;
-    font-weight: 600;
+    font-size: 0.88em;
+    font-weight: 700;
+    line-height: 1.2;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.16);
 }
 
 .scenario-宜 {
-    color: #2f6b3c;
+    background: #2f6b3c;
 }
 
 .scenario-忌 {
-    color: #8f1d1d;
+    background: #9b1c1c;
 }
 
 .date-title {

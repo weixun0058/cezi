@@ -35,8 +35,10 @@ def test_huangli_extension_is_collapsed_and_owns_scenario_filter():
     assert toggle["aria-expanded"] == "false"
     assert "hidden" in panel.get("class", [])
     assert scenario.find_parent(id="weekHuangliPanel") is panel
+    assert scenario["role"] == "group"
     assert scenario["aria-label"] == "择事"
-    assert [option.get_text(strip=True) for option in scenario.find_all("option")] == [
+    scenario_buttons = scenario.find_all("button")
+    assert [button.get_text(strip=True) for button in scenario_buttons] == [
         "诸事",
         "婚嫁",
         "搬迁",
@@ -45,6 +47,8 @@ def test_huangli_extension_is_collapsed_and_owns_scenario_filter():
         "签约",
         "理发",
     ]
+    assert scenario_buttons[0]["aria-pressed"] == "true"
+    assert all(button["aria-pressed"] == "false" for button in scenario_buttons[1:])
     assert panel.find("h3") is None
 
     button_labels = {button.get_text(strip=True) for button in soup.find_all("button")}
