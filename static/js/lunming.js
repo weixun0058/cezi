@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
         loading: document.getElementById('loading-container'),
         content: document.getElementById('analysis-content'),
         chart: document.getElementById('chart-summary'),
-        actions: document.getElementById('result-actions'),
         status: document.getElementById('form-status'),
         trueSolar: document.getElementById('use-true-solar-time'),
         longitudeGroup: document.getElementById('longitude-group'),
@@ -17,7 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let activeController = null;
     let fullReport = '';
     let currentChart = null;
-    let detailedView = true;
     let pendingText = '';
     let renderScheduled = false;
 
@@ -52,9 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
             fullReport += pendingText;
             pendingText = '';
         }
-        elements.content.textContent = detailedView || fullReport.length <= 800
-            ? fullReport
-            : `${fullReport.slice(0, 800)}\n……`;
+        elements.content.textContent = fullReport;
     };
 
     const queueText = (text) => {
@@ -147,10 +143,8 @@ document.addEventListener('DOMContentLoaded', () => {
             open.addEventListener('click', () => {
                 fullReport = report.analysis;
                 renderChart(report.chart);
-                detailedView = true;
                 renderText();
                 elements.result.classList.remove('hidden');
-                elements.actions.classList.remove('hidden');
                 elements.result.scrollIntoView({ behavior: 'smooth' });
             });
             const remove = document.createElement('button');
@@ -184,7 +178,6 @@ document.addEventListener('DOMContentLoaded', () => {
         currentChart = null;
         elements.content.textContent = '';
         elements.chart.classList.add('hidden');
-        elements.actions.classList.add('hidden');
         elements.result.classList.remove('hidden');
         elements.loading.classList.remove('hidden');
         elements.analyze.disabled = true;
@@ -202,7 +195,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             elements.loading.classList.add('hidden');
             await readStream(response);
-            elements.actions.classList.remove('hidden');
             saveReport(payload);
             setStatus('分析完成', 'success');
         } catch (error) {
@@ -224,23 +216,6 @@ document.addEventListener('DOMContentLoaded', () => {
         setStatus('');
     });
 
-    document.getElementById('view-toggle').addEventListener('click', event => {
-        detailedView = !detailedView;
-        event.currentTarget.textContent = detailedView ? '切换简版' : '查看详版';
-        renderText();
-    });
-    document.getElementById('copy-report').addEventListener('click', async () => {
-        await navigator.clipboard.writeText(fullReport);
-        setStatus('报告已复制', 'success');
-    });
-    document.getElementById('share-report').addEventListener('click', async () => {
-        if (navigator.share) await navigator.share({ title: '诸葛神算论命报告', text: fullReport });
-        else {
-            await navigator.clipboard.writeText(fullReport);
-            setStatus('当前浏览器不支持分享，报告已复制', 'success');
-        }
-    });
-    document.getElementById('print-report').addEventListener('click', () => window.print());
     document.getElementById('clear-reports').addEventListener('click', () => {
         localStorage.removeItem(REPORT_STORAGE_KEY);
         renderHistory();

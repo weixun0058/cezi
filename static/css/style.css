@@ -418,5 +418,3 @@ a {
 .history-actions, .history-row { display: flex; gap: 8px; justify-content: space-between; margin: 8px 0; }
 .history-row button { border: 0; background: transparent; color: #8f1d1d; cursor: pointer; }
 .privacy-note, .responsible-use-notice { color: #66584b; font-size: 0.9rem; }
-.result-actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
-#interpretationResult.compact-view .interpretation-section:first-child { display: none; }

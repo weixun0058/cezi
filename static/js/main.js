@@ -205,8 +205,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 throw new Error('未找到签号');
             }
             
-            // 先隐藏所有按钮和区域
-            document.querySelectorAll('.ancient-btn').forEach(btn => btn.classList.add('hidden'));
+            // 仅隐藏算事结果流程内的按钮，顶部导航和本地记录操作始终可用
+            document.querySelectorAll('.result-section .ancient-btn').forEach(btn => btn.classList.add('hidden'));
             document.querySelectorAll('.gua-section').forEach(section => section.classList.add('hidden'));
             
             const response = await fetch('/get_gua_info', {
@@ -301,10 +301,6 @@ document.addEventListener('DOMContentLoaded', function() {
             `${typeMap[selectedType]}解签`;
         await typeWriter(document.getElementById('specificInterpretation'), 
             window.guaData[selectedType]);
-        document.querySelectorAll('#interpretationResult .result-actions .ancient-btn').forEach(button => {
-            button.classList.remove('hidden');
-        });
-
         saveHistory({
             question: confirmedQuestion,
             characters: Array.from(inputs).map(input => input.value).join(''),
@@ -331,11 +327,9 @@ document.addEventListener('DOMContentLoaded', function() {
             section.classList.add('hidden');
         });
         
-        // 隐藏所有功能按钮（不隐藏导航按钮）
-        document.querySelectorAll('.ancient-btn:not(.nav-btn)').forEach(btn => {
-            if (btn !== calculateBtn) {
-                btn.classList.add('hidden');
-            }
+        // 只重置算事流程按钮，不影响导航和本地记录操作
+        document.querySelectorAll('.result-section .ancient-btn').forEach(btn => {
+            btn.classList.add('hidden');
         });
         
         // 清空所有内容
@@ -450,27 +444,5 @@ document.addEventListener('DOMContentLoaded', function() {
         link.click();
         URL.revokeObjectURL(link.href);
     });
-    document.getElementById('toggleDivinationView').addEventListener('click', event => {
-        const compact = document.getElementById('interpretationResult').classList.toggle('compact-view');
-        event.currentTarget.textContent = compact ? '详版' : '简版';
-    });
-    document.getElementById('copyDivination').addEventListener('click', async () => {
-        await navigator.clipboard.writeText(divinationShareText());
-        setStatus('解签已复制', 'success');
-    });
-    document.getElementById('shareDivination').addEventListener('click', async () => {
-        const text = divinationShareText();
-        if (navigator.share) await navigator.share({ title: '诸葛神算解签', text });
-        else {
-            await navigator.clipboard.writeText(text);
-            setStatus('当前浏览器不支持分享，解签已复制', 'success');
-        }
-    });
-    document.getElementById('printDivination').addEventListener('click', () => window.print());
-
-    function divinationShareText() {
-        if (!window.guaData) return '';
-        return `${confirmedQuestion}\n第${document.getElementById('signNumber').textContent}签\n${window.guaData.sign_text}\n${window.guaData.interpretation1}\n传统文化娱乐参考，不构成决策建议。`;
-    }
     renderHistory();
 });

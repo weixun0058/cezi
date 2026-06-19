@@ -146,13 +146,6 @@ document.addEventListener('DOMContentLoaded', function() {
         renderHuangliFavorites();
     });
     document.getElementById('exportFavorites').addEventListener('click', exportHuangliFavorites);
-    document.getElementById('toggleHuangliView').addEventListener('click', event => {
-        const compact = document.querySelector('.huangli-container').classList.toggle('compact-view');
-        event.currentTarget.textContent = compact ? '详版' : '简版';
-    });
-    document.getElementById('copyHuangli').addEventListener('click', () => copyOrShareHuangli(false));
-    document.getElementById('shareHuangli').addEventListener('click', () => copyOrShareHuangli(true));
-    document.getElementById('printHuangli').addEventListener('click', () => window.print());
     renderHuangliFavorites();
     
     // 初始加载今天的黄历数据
@@ -678,21 +671,6 @@ function renderHuangliFavorites() {
         });
         container.appendChild(button);
     });
-}
-
-function huangliShareText() {
-    if (!currentHuangliData) return '';
-    return `${currentHuangliData.date} ${currentHuangliData.lunar_date}\n宜：${currentHuangliData.suitable}\n忌：${currentHuangliData.unsuitable}\n传统文化娱乐参考，不构成决策建议。`;
-}
-
-async function copyOrShareHuangli(preferShare) {
-    const text = huangliShareText();
-    if (!text) return;
-    if (preferShare && navigator.share) await navigator.share({ title: '诸葛神算黄历', text });
-    else {
-        await navigator.clipboard.writeText(text);
-        showHuangliStatus(preferShare ? '当前浏览器不支持分享，内容已复制。' : '黄历已复制。', 'success');
-    }
 }
 
 function exportHuangliFavorites() {
