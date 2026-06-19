@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', function() {
     let strokes = [];
     let selectedType = null;
     let confirmedQuestion = '';
-    const historyKey = 'zhugeshen.divination.history.v1';
 
     function setStatus(message, type = '') {
         const status = document.getElementById('suanshiStatus');
@@ -205,7 +204,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 throw new Error('未找到签号');
             }
             
-            // 仅隐藏算事结果流程内的按钮，顶部导航和本地记录操作始终可用
+            // 仅隐藏算事结果流程内的按钮，顶部导航始终可用
             document.querySelectorAll('.result-section .ancient-btn').forEach(btn => btn.classList.add('hidden'));
             document.querySelectorAll('.gua-section').forEach(section => section.classList.add('hidden'));
             
@@ -301,14 +300,6 @@ document.addEventListener('DOMContentLoaded', function() {
             `${typeMap[selectedType]}解签`;
         await typeWriter(document.getElementById('specificInterpretation'), 
             window.guaData[selectedType]);
-        saveHistory({
-            question: confirmedQuestion,
-            characters: Array.from(inputs).map(input => input.value).join(''),
-            type: selectedType,
-            sign_number: Number(document.getElementById('signNumber').textContent),
-            result: window.guaData
-        });
-        
         showButton('restartBtn');
     });
 
@@ -327,7 +318,7 @@ document.addEventListener('DOMContentLoaded', function() {
             section.classList.add('hidden');
         });
         
-        // 只重置算事流程按钮，不影响导航和本地记录操作
+        // 只重置算事流程按钮，不影响导航
         document.querySelectorAll('.result-section .ancient-btn').forEach(btn => {
             btn.classList.add('hidden');
         });
@@ -395,54 +386,4 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    function getHistory() {
-        try { return JSON.parse(localStorage.getItem(historyKey) || '[]'); }
-        catch (_error) { return []; }
-    }
-
-    function saveHistory(entry) {
-        const history = getHistory();
-        history.unshift({ id: `${Date.now()}`, created_at: new Date().toISOString(), ...entry });
-        localStorage.setItem(historyKey, JSON.stringify(history.slice(0, 30)));
-        renderHistory();
-    }
-
-    function renderHistory() {
-        const container = document.getElementById('divinationHistory');
-        container.replaceChildren();
-        const history = getHistory();
-        if (!history.length) {
-            container.textContent = '暂无本地记录';
-            return;
-        }
-        history.forEach(item => {
-            const row = document.createElement('div');
-            row.className = 'history-row';
-            const summary = document.createElement('span');
-            summary.textContent = `${item.question} · 第${item.sign_number}签`;
-            const remove = document.createElement('button');
-            remove.type = 'button';
-            remove.textContent = '删除';
-            remove.addEventListener('click', () => {
-                localStorage.setItem(historyKey, JSON.stringify(getHistory().filter(record => record.id !== item.id)));
-                renderHistory();
-            });
-            row.append(summary, remove);
-            container.appendChild(row);
-        });
-    }
-
-    document.getElementById('clearDivinations').addEventListener('click', () => {
-        localStorage.removeItem(historyKey);
-        renderHistory();
-    });
-    document.getElementById('exportDivinations').addEventListener('click', () => {
-        const blob = new Blob([JSON.stringify(getHistory(), null, 2)], { type: 'application/json' });
-        const link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
-        link.download = `诸葛神算-起卦记录-${new Date().toISOString().slice(0, 10)}.json`;
-        link.click();
-        URL.revokeObjectURL(link.href);
-    });
-    renderHistory();
 });

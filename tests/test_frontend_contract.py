@@ -24,6 +24,16 @@ def test_low_value_result_actions_are_not_rendered():
         assert button_labels.isdisjoint(removed_labels), template_name
 
 
+def test_suanshi_does_not_store_or_render_local_history():
+    markup = (ROOT / "templates" / "suanshi.html").read_text(encoding="utf-8")
+    script = (ROOT / "static" / "js" / "main.js").read_text(encoding="utf-8")
+
+    assert "本地起卦记录" not in markup
+    assert "divinationHistory" not in markup
+    assert "zhugeshen.divination.history" not in script
+    assert "saveHistory(" not in script
+
+
 def test_huangli_extension_is_collapsed_and_owns_scenario_filter():
     markup = (ROOT / "templates" / "huangli.html").read_text(encoding="utf-8")
     soup = BeautifulSoup(markup, "html.parser")

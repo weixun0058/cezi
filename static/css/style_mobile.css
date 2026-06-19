@@ -411,5 +411,3 @@ a {
 .inline-status { min-height: 1.5rem; margin-top: 10px; text-align: center; }
 .inline-status[data-type="error"] { color: #8f1d1d; }
 .repeat-warning { color: #8f1d1d; }
-.history-actions { display: flex; flex-wrap: wrap; gap: 8px; }
-.history-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; margin: 8px 0; }
