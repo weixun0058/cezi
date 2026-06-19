@@ -429,6 +429,52 @@
     margin-top: 30px;
 }
 
+.extension-toggle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 4px;
+    border: 0;
+    border-top: 1px solid rgba(92, 49, 20, 0.3);
+    border-bottom: 1px solid rgba(92, 49, 20, 0.3);
+    background: transparent;
+    color: #5c3114;
+    font: 600 1rem 'KaiTi', 'STKaiti', serif;
+    cursor: pointer;
+}
+
+.extension-indicator {
+    display: inline-block;
+    transition: transform 0.2s ease;
+}
+
+.extension-toggle[aria-expanded="true"] .extension-indicator {
+    transform: rotate(90deg);
+}
+
+.extension-toggle:focus-visible {
+    outline: 2px solid #8b4513;
+    outline-offset: 3px;
+}
+
+.week-huangli-panel {
+    padding-top: 16px;
+}
+
+.week-huangli-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.week-huangli-header h3,
+.week-huangli-header .huangli-tools {
+    margin: 0;
+}
+
 .week-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -698,12 +744,9 @@
 
 
 .huangli-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 16px 0; }
-.huangli-tools .ancient-btn { width: auto; min-width: 64px; }
 .inline-status { min-height: 1.5rem; text-align: center; }
 .inline-status[data-type="error"] { color: #8f1d1d; }
 .inline-status[data-type="success"] { color: #2f6b3c; }
-.huangli-favorites { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
-.huangli-favorites button { border: 1px solid rgba(92, 49, 20, 0.35); background: transparent; cursor: pointer; }
 .scenario-badge { margin: 8px; padding: 4px 8px; text-align: center; border: 1px solid currentColor; }
 .scenario-宜 { color: #2f6b3c; }
 .scenario-忌 { color: #8f1d1d; }

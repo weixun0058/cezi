@@ -478,6 +478,60 @@
     margin-top: 20px;
 }
 
+.extension-toggle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 2px;
+    border: 0;
+    border-top: 1px solid rgba(92, 49, 20, 0.3);
+    border-bottom: 1px solid rgba(92, 49, 20, 0.3);
+    background: transparent;
+    color: #5c3114;
+    font: 600 1rem 'KaiTi', 'STKaiti', serif;
+    cursor: pointer;
+}
+
+.extension-indicator {
+    display: inline-block;
+    transition: transform 0.2s ease;
+}
+
+.extension-toggle[aria-expanded="true"] .extension-indicator {
+    transform: rotate(90deg);
+}
+
+.extension-toggle:focus-visible {
+    outline: 2px solid #8b4513;
+    outline-offset: 3px;
+}
+
+.week-huangli-panel {
+    padding-top: 14px;
+}
+
+.week-huangli-header {
+    display: grid;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.week-huangli-header h3 {
+    margin: 0;
+}
+
+.huangli-tools {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: 8px;
+}
+
+.huangli-tools select {
+    width: 100%;
+}
+
 .week-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);

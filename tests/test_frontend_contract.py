@@ -22,3 +22,27 @@ def test_low_value_result_actions_are_not_rendered():
         soup = BeautifulSoup(markup, "html.parser")
         button_labels = {button.get_text(strip=True) for button in soup.find_all("button")}
         assert button_labels.isdisjoint(removed_labels), template_name
+
+
+def test_huangli_extension_is_collapsed_and_owns_scenario_filter():
+    markup = (ROOT / "templates" / "huangli.html").read_text(encoding="utf-8")
+    soup = BeautifulSoup(markup, "html.parser")
+    toggle = soup.find(id="weekHuangliToggle")
+    panel = soup.find(id="weekHuangliPanel")
+    scenario = soup.find(id="scenarioFilter")
+
+    assert toggle["aria-label"] == "扩展功能"
+    assert toggle["aria-expanded"] == "false"
+    assert "hidden" in panel.get("class", [])
+    assert scenario.find_parent(id="weekHuangliPanel") is panel
+
+    button_labels = {button.get_text(strip=True) for button in soup.find_all("button")}
+    assert button_labels.isdisjoint({"收藏", "导出收藏", "清空收藏"})
+
+
+def test_huangli_week_data_loads_only_from_extension_interactions():
+    script = (ROOT / "static" / "js" / "huangli.js").read_text(encoding="utf-8")
+
+    assert script.count("fetchAndDisplayNineDaysHuangliData();") == 2
+    assert "fetch(`/api/huangli?date=${encodeURIComponent(date)}`)" in script
+    assert "HUANGLI_FAVORITES_KEY" not in script
