@@ -705,12 +705,7 @@
 .setting-toggle { display: flex; gap: 8px; align-items: center; margin: 12px 0; }
 .chart-summary, .analysis-content { white-space: pre-wrap; line-height: 1.8; }
 .chart-summary { border-bottom: 1px solid rgba(92, 49, 20, 0.3); padding: 12px 0; }
-.history-actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
-.responsible-use-notice, .privacy-note { color: #66584b; font-size: 0.9rem; }
-.local-history { margin-top: 24px; }
-.history-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; padding: 8px 0; border-bottom: 1px solid rgba(92, 49, 20, 0.2); }
-.history-open, .history-delete { border: 0; background: transparent; color: inherit; cursor: pointer; text-align: left; }
-.history-delete { color: #8f1d1d; }
+.responsible-use-notice { color: #66584b; font-size: 0.9rem; }
 
 @media (max-width: 480px) {
     .location-fields { grid-template-columns: 1fr; }

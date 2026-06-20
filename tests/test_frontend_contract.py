@@ -55,6 +55,17 @@ def test_suanshi_uses_chunked_typewriter_rendering():
     assert "prefers-reduced-motion: reduce" in script
 
 
+def test_lunming_does_not_store_or_render_local_reports():
+    markup = (ROOT / "templates" / "lunming.html").read_text(encoding="utf-8")
+    script = (ROOT / "static" / "js" / "lunming.js").read_text(encoding="utf-8")
+
+    assert "本地报告" not in markup
+    assert "report-history" not in markup
+    assert "REPORT_STORAGE_KEY" not in script
+    assert "localStorage" not in script
+    assert "saveReport(" not in script
+
+
 def test_huangli_extension_is_collapsed_and_owns_scenario_filter():
     markup = (ROOT / "templates" / "huangli.html").read_text(encoding="utf-8")
     soup = BeautifulSoup(markup, "html.parser")

@@ -1,5 +1,3 @@
-const REPORT_STORAGE_KEY = 'zhugeshen.lunming.reports.v1';
-
 document.addEventListener('DOMContentLoaded', () => {
     const elements = {
         analyze: document.getElementById('analyze-btn'),
@@ -10,8 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
         chart: document.getElementById('chart-summary'),
         status: document.getElementById('form-status'),
         trueSolar: document.getElementById('use-true-solar-time'),
-        longitudeGroup: document.getElementById('longitude-group'),
-        history: document.getElementById('report-history')
+        longitudeGroup: document.getElementById('longitude-group')
     };
     let activeController = null;
     let fullReport = '';
@@ -104,63 +101,6 @@ document.addEventListener('DOMContentLoaded', () => {
         renderText();
     };
 
-    const getReports = () => {
-        try {
-            return JSON.parse(localStorage.getItem(REPORT_STORAGE_KEY) || '[]');
-        } catch (_error) {
-            return [];
-        }
-    };
-
-    const saveReport = (payload) => {
-        if (!fullReport || !currentChart) return;
-        const reports = getReports();
-        reports.unshift({
-            id: `${Date.now()}-${Math.random().toString(16).slice(2)}`,
-            created_at: new Date().toISOString(),
-            title: `${payload.name} ${payload.birth_date}`,
-            chart: currentChart,
-            analysis: fullReport
-        });
-        localStorage.setItem(REPORT_STORAGE_KEY, JSON.stringify(reports.slice(0, 20)));
-        renderHistory();
-    };
-
-    const renderHistory = () => {
-        elements.history.replaceChildren();
-        const reports = getReports();
-        if (!reports.length) {
-            elements.history.textContent = '暂无本地报告';
-            return;
-        }
-        reports.forEach(report => {
-            const row = document.createElement('div');
-            row.className = 'history-row';
-            const open = document.createElement('button');
-            open.type = 'button';
-            open.className = 'history-open';
-            open.textContent = `${report.title} · ${new Date(report.created_at).toLocaleDateString('zh-CN')}`;
-            open.addEventListener('click', () => {
-                fullReport = report.analysis;
-                renderChart(report.chart);
-                renderText();
-                elements.result.classList.remove('hidden');
-                elements.result.scrollIntoView({ behavior: 'smooth' });
-            });
-            const remove = document.createElement('button');
-            remove.type = 'button';
-            remove.className = 'history-delete';
-            remove.setAttribute('aria-label', `删除 ${report.title}`);
-            remove.textContent = '删除';
-            remove.addEventListener('click', () => {
-                localStorage.setItem(REPORT_STORAGE_KEY, JSON.stringify(getReports().filter(item => item.id !== report.id)));
-                renderHistory();
-            });
-            row.append(open, remove);
-            elements.history.appendChild(row);
-        });
-    };
-
     elements.trueSolar.addEventListener('change', () => {
         elements.longitudeGroup.classList.toggle('hidden', !elements.trueSolar.checked);
     });
@@ -195,7 +135,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             elements.loading.classList.add('hidden');
             await readStream(response);
-            saveReport(payload);
             setStatus('分析完成', 'success');
         } catch (error) {
             if (error.name !== 'AbortError') setStatus(error.message || '分析流中断，请重试', 'error');
@@ -216,18 +155,4 @@ document.addEventListener('DOMContentLoaded', () => {
         setStatus('');
     });
 
-    document.getElementById('clear-reports').addEventListener('click', () => {
-        localStorage.removeItem(REPORT_STORAGE_KEY);
-        renderHistory();
-    });
-    document.getElementById('export-reports').addEventListener('click', () => {
-        const blob = new Blob([JSON.stringify(getReports(), null, 2)], { type: 'application/json' });
-        const link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
-        link.download = `诸葛神算-本地报告-${new Date().toISOString().slice(0, 10)}.json`;
-        link.click();
-        URL.revokeObjectURL(link.href);
-    });
-
-    renderHistory();
 });
