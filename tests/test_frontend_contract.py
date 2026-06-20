@@ -46,6 +46,15 @@ def test_suanshi_starts_from_three_characters_without_question_confirmation():
     assert "calculateBtn.addEventListener('click', async function()" in script
 
 
+def test_suanshi_uses_chunked_typewriter_rendering():
+    script = (ROOT / "static" / "js" / "main.js").read_text(encoding="utf-8")
+
+    assert "chunkSize = 3, interval = 45" in script
+    assert "end += chunkSize" in script
+    assert "setTimeout(resolve, interval)" in script
+    assert "prefers-reduced-motion: reduce" in script
+
+
 def test_huangli_extension_is_collapsed_and_owns_scenario_filter():
     markup = (ROOT / "templates" / "huangli.html").read_text(encoding="utf-8")
     soup = BeautifulSoup(markup, "html.parser")

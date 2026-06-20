@@ -326,9 +326,33 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    async function typeWriter(element, text) {
-        element.textContent = text || '';
-        await new Promise(resolve => window.requestAnimationFrame(resolve));
+    async function typeWriter(element, text, chunkSize = 3, interval = 45) {
+        const characters = Array.from(text || '');
+        element.textContent = '';
+
+        if (!characters.length) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            element.textContent = characters.join('');
+            return;
+        }
+
+        for (let end = chunkSize; end < characters.length; end += chunkSize) {
+            element.textContent = characters.slice(0, end).join('');
+
+            if (end % (chunkSize * 6) === 0) {
+                const elementRect = element.getBoundingClientRect();
+                if (elementRect.bottom > window.innerHeight - 80) {
+                    window.scrollBy({
+                        top: Math.min(elementRect.bottom - window.innerHeight + 100, 240),
+                        behavior: 'smooth'
+                    });
+                }
+            }
+
+            await new Promise(resolve => setTimeout(resolve, interval));
+        }
+
+        element.textContent = characters.join('');
     }
 
     // 添加一个通用的显示按钮函数
