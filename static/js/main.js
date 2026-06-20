@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const calculateBtn = document.getElementById('calculateBtn');
     let strokes = [];
     let selectedType = null;
-    let confirmedQuestion = '';
 
     function setStatus(message, type = '') {
         const status = document.getElementById('suanshiStatus');
@@ -35,27 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    calculateBtn.addEventListener('click', function() {
-        const question = document.getElementById('questionSummary').value.trim();
-        if (!question) {
-            setStatus('请先写下本次所问之事', 'error');
-            return;
-        }
-        confirmedQuestion = question;
-        document.getElementById('questionConfirmationText').textContent = question;
-        const repeated = getHistory().some(item => item.question === question && Date.now() - new Date(item.created_at).getTime() < 86400000);
-        document.getElementById('repeatWarning').classList.toggle('hidden', !repeated);
-        document.getElementById('questionConfirmation').classList.remove('hidden');
-        setStatus('请确认问题后再起卦');
-    });
-
-    document.getElementById('cancelQuestionBtn').addEventListener('click', () => {
-        document.getElementById('questionConfirmation').classList.add('hidden');
-        document.getElementById('questionSummary').focus();
-    });
-
-    document.getElementById('confirmQuestionBtn').addEventListener('click', async function() {
-        document.getElementById('questionConfirmation').classList.add('hidden');
+    calculateBtn.addEventListener('click', async function() {
         this.disabled = true;
         strokes = [];
         setStatus('正在查询笔画…');
@@ -307,7 +286,6 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('restartBtn').addEventListener('click', function() {
         // 清空输入
         inputs.forEach(input => input.value = '');
-        document.getElementById('questionSummary').value = '';
         
         // 启用开始测算按钮（但保持禁用状态，直到输入完成）
         calculateBtn.disabled = true;

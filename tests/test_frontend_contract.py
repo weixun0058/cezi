@@ -34,6 +34,18 @@ def test_suanshi_does_not_store_or_render_local_history():
     assert "saveHistory(" not in script
 
 
+def test_suanshi_starts_from_three_characters_without_question_confirmation():
+    markup = (ROOT / "templates" / "suanshi.html").read_text(encoding="utf-8")
+    script = (ROOT / "static" / "js" / "main.js").read_text(encoding="utf-8")
+
+    assert "questionSummary" not in markup
+    assert "questionConfirmation" not in markup
+    assert "repeatWarning" not in markup
+    assert "confirmQuestionBtn" not in script
+    assert "getHistory()" not in script
+    assert "calculateBtn.addEventListener('click', async function()" in script
+
+
 def test_huangli_extension_is_collapsed_and_owns_scenario_filter():
     markup = (ROOT / "templates" / "huangli.html").read_text(encoding="utf-8")
     soup = BeautifulSoup(markup, "html.parser")
