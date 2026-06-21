@@ -1,5 +1,7 @@
 from datetime import datetime
 
+import pytest
+
 from huangli import HuangLi
 
 
@@ -35,3 +37,11 @@ def test_leap_lunar_month_is_preserved(tmp_path):
 def test_week_contains_nine_days(tmp_path):
     records = HuangLi(tmp_path / "huangli.db").get_week_huangli(datetime(2026, 6, 18))
     assert len(records) == 9
+
+
+@pytest.mark.parametrize("date_text", ["1899-12-31", "2101-01-01"])
+def test_rejects_dates_outside_supported_range(tmp_path, date_text):
+    service = HuangLi(tmp_path / "runtime.db")
+
+    with pytest.raises(ValueError, match="1900-01-01"):
+        service.get_daily_huangli(date_text)

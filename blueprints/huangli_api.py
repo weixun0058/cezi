@@ -70,7 +70,10 @@ def get_huangli():
     scenario = _get_scenario()
     if scenario is None:
         return failure("INVALID_SCENARIO", "不支持的场景筛选")
-    record = current_app.extensions["huangli"].get_daily_huangli(date_text)
+    try:
+        record = current_app.extensions["huangli"].get_daily_huangli(date_text)
+    except ValueError:
+        return failure("INVALID_DATE", "日期必须在 1900-01-01 到 2100-12-31 之间")
     if not record:
         return failure("HUANGLI_NOT_FOUND", "无法获取黄历数据", 404)
     return success(_scenario_result(_normalize_huangli(record), scenario))

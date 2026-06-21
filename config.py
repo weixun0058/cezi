@@ -33,10 +33,8 @@ class Config:
     AI_TIMEOUT_SECONDS = float(os.getenv("AI_TIMEOUT_SECONDS", "60"))
     AI_TEMPERATURE = float(os.getenv("AI_TEMPERATURE", "0.7"))
 
-    HUANGLI_DB_PATH = _path_from_env("HUANGLI_DB_PATH", "instance/huangli.db")
-    HANZI_DB_PATH = _path_from_env("HANZI_DB_PATH", "database/kanxi_dict.db")
-    GUA_DATA_PATH = _path_from_env("GUA_DATA_PATH", "database/zhugeshenshuan_jq.xlsx")
-    PZBJ_DATA_PATH = _path_from_env("PZBJ_DATA_PATH", "database/pzbj.json")
+    REFERENCE_DB_PATH = _path_from_env("REFERENCE_DB_PATH", "database/reference.db")
+    RUNTIME_DB_PATH = _path_from_env("RUNTIME_DB_PATH", "instance/runtime.db")
 
 
 class TestConfig(Config):

@@ -1,58 +1,85 @@
 import logging
 import sqlite3
 import time
+from contextlib import contextmanager
 from pathlib import Path
 
 import requests
 from bs4 import BeautifulSoup
-from openpyxl import load_workbook
 
 LOGGER = logging.getLogger(__name__)
-GUA_FIELDS = {
-    "签号": "sign_number",
-    "吉凶": "fortune",
-    "卦属": "gua_type",
-    "签文": "sign_text",
-    "解签一": "interpretation1",
-    "事业": "career",
-    "财运": "wealth",
-    "情感": "love",
-    "健康": "health",
-    "学业": "study",
-    "泛泛": "general",
-}
+GUA_COLUMNS = (
+    "sign_number",
+    "fortune",
+    "gua_type",
+    "sign_text",
+    "interpretation1",
+    "career",
+    "wealth",
+    "love",
+    "health",
+    "study",
+    "general",
+)
+
+
+@contextmanager
+def sqlite_connection(path, *, readonly=False):
+    path = Path(path)
+    if readonly:
+        connection = sqlite3.connect(f"file:{path.resolve().as_posix()}?mode=ro", uri=True)
+    else:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        connection = sqlite3.connect(path, timeout=5)
+        connection.execute("PRAGMA journal_mode=WAL")
+        connection.execute("PRAGMA busy_timeout=5000")
+        connection.execute("PRAGMA foreign_keys=ON")
+    connection.row_factory = sqlite3.Row
+    try:
+        yield connection
+        if not readonly:
+            connection.commit()
+    except Exception:
+        if not readonly:
+            connection.rollback()
+        raise
+    finally:
+        connection.close()
 
 
 class Database:
-    def __init__(
-        self, hanzi_db="database/kanxi_dict.db", gua_data_path="database/zhugeshenshuan_jq.xlsx"
-    ):
-        self.hanzi_db = Path(hanzi_db)
-        self.gua_data_path = Path(gua_data_path)
+    def __init__(self, reference_db="database/reference.db", runtime_db="instance/runtime.db"):
+        self.reference_db = Path(reference_db)
+        self.runtime_db = Path(runtime_db)
         self._stroke_failure_cache = {}
         self._stroke_failure_ttl = 300
+        self._init_runtime_db()
         self.gua_index = self._load_gua_index()
 
+    def _init_runtime_db(self):
+        with sqlite_connection(self.runtime_db) as connection:
+            connection.execute(
+                """
+                CREATE TABLE IF NOT EXISTS stroke_cache (
+                    character TEXT PRIMARY KEY,
+                    kangxi_strokes INTEGER NOT NULL CHECK(kangxi_strokes > 0),
+                    source TEXT NOT NULL,
+                    fetched_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+                )
+                """
+            )
+
     def _load_gua_index(self):
-        workbook = load_workbook(self.gua_data_path, read_only=True, data_only=True)
-        sheet = workbook.active
-        rows = sheet.iter_rows(values_only=True)
-        headers = [str(value).strip() if value is not None else "" for value in next(rows)]
-        index = {}
-        for values in rows:
-            row = dict(zip(headers, values, strict=False))
-            try:
-                sign_number = int(row.get("签号"))
-            except (TypeError, ValueError):
-                continue
-            index[sign_number] = {
-                target: row.get(source) if row.get(source) is not None else ""
-                for source, target in GUA_FIELDS.items()
-            }
-            index[sign_number]["sign_number"] = sign_number
-        workbook.close()
+        with sqlite_connection(self.reference_db, readonly=True) as connection:
+            rows = connection.execute(f"SELECT {', '.join(GUA_COLUMNS)} FROM gua").fetchall()
+        index = {row["sign_number"]: dict(row) for row in rows}
         LOGGER.info("Loaded %d divination records", len(index))
         return index
+
+    def load_pzbj(self):
+        with sqlite_connection(self.reference_db, readonly=True) as connection:
+            rows = connection.execute("SELECT text, explanation FROM pzbj").fetchall()
+        return {row["text"]: row["explanation"] for row in rows}
 
     def get_gua_info(self, sign_number):
         try:
@@ -93,36 +120,54 @@ class Database:
         if not isinstance(character, str) or len(character) != 1:
             return None
 
-        try:
-            with sqlite3.connect(self.hanzi_db) as connection:
-                row = connection.execute(
-                    """
-                    SELECT 简体字总笔画, 繁体字总笔画, 康熙字典笔画
-                    FROM hanzi
-                    WHERE 汉字 = ?
-                    ORDER BY ID
-                    LIMIT 1
-                    """,
-                    (character,),
-                ).fetchone()
-                if row:
-                    for value in (row[2], row[1], row[0]):
-                        if isinstance(value, int) and value > 0:
-                            return value
-        except sqlite3.Error:
-            LOGGER.exception("Local stroke database lookup failed")
-            return None
+        with sqlite_connection(self.reference_db, readonly=True) as connection:
+            row = connection.execute(
+                """
+                SELECT simplified_strokes, traditional_strokes, kangxi_strokes
+                FROM hanzi WHERE character = ?
+                """,
+                (character,),
+            ).fetchone()
+        if row:
+            for value in (
+                row["kangxi_strokes"],
+                row["traditional_strokes"],
+                row["simplified_strokes"],
+            ):
+                if isinstance(value, int) and value > 0:
+                    return value
+
+        with sqlite_connection(self.runtime_db) as connection:
+            row = connection.execute(
+                "SELECT kangxi_strokes FROM stroke_cache WHERE character = ?", (character,)
+            ).fetchone()
+        if row:
+            return row["kangxi_strokes"]
 
         stroke_count = self.get_stroke_count_by_hd(character)
         if not stroke_count or stroke_count < 1:
             return None
 
         try:
-            with sqlite3.connect(self.hanzi_db) as connection:
+            with sqlite_connection(self.runtime_db) as connection:
                 connection.execute(
-                    "INSERT INTO hanzi (汉字, 康熙字典笔画) VALUES (?, ?)",
+                    """
+                    INSERT INTO stroke_cache (character, kangxi_strokes, source)
+                    VALUES (?, ?, 'zdic.net')
+                    ON CONFLICT(character) DO UPDATE SET
+                        kangxi_strokes=excluded.kangxi_strokes,
+                        source=excluded.source,
+                        fetched_at=CURRENT_TIMESTAMP
+                    """,
                     (character, stroke_count),
                 )
         except sqlite3.Error:
             LOGGER.exception("Could not cache a remote stroke count")
         return stroke_count
+
+    def check_ready(self):
+        with sqlite_connection(self.reference_db, readonly=True) as connection:
+            reference_ok = connection.execute("PRAGMA quick_check").fetchone()[0] == "ok"
+        with sqlite_connection(self.runtime_db) as connection:
+            runtime_ok = connection.execute("PRAGMA quick_check").fetchone()[0] == "ok"
+        return reference_ok and runtime_ok

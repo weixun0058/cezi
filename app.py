@@ -1,4 +1,3 @@
-import json
 import logging
 import time
 from pathlib import Path
@@ -24,8 +23,10 @@ def create_app(test_config=None):
     configure_logging(app.config.get("APP_DEBUG", False))
     Path(app.instance_path).mkdir(parents=True, exist_ok=True)
 
-    app.extensions["database"] = Database(app.config["HANZI_DB_PATH"], app.config["GUA_DATA_PATH"])
-    app.extensions["huangli"] = HuangLi(app.config["HUANGLI_DB_PATH"])
+    app.extensions["database"] = Database(
+        app.config["REFERENCE_DB_PATH"], app.config["RUNTIME_DB_PATH"]
+    )
+    app.extensions["huangli"] = HuangLi(app.config["RUNTIME_DB_PATH"])
     app.extensions["lunming"] = LunMing(
         api_key=app.config["AI_API_KEY"],
         base_url=app.config["AI_BASE_URL"],
@@ -34,8 +35,7 @@ def create_app(test_config=None):
         temperature=app.config["AI_TEMPERATURE"],
         default_timezone=app.config["DEFAULT_TIMEZONE"],
     )
-    with open(app.config["PZBJ_DATA_PATH"], encoding="utf-8") as file:
-        app.extensions["pzbj"] = json.load(file)
+    app.extensions["pzbj"] = app.extensions["database"].load_pzbj()
 
     for blueprint in ALL_BLUEPRINTS:
         app.register_blueprint(blueprint)

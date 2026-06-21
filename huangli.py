@@ -1,16 +1,19 @@
 import json
 import logging
-import sqlite3
-from datetime import datetime, timedelta
+from datetime import date, datetime, timedelta
 from pathlib import Path
 
 from lunar_python import Solar
+
+from database import sqlite_connection
 
 LOGGER = logging.getLogger(__name__)
 
 
 class HuangLi:
     ALGORITHM_VERSION = 2
+    MIN_DATE = date(1900, 1, 1)
+    MAX_DATE = date(2100, 12, 31)
     COLUMNS = {
         "date": "TEXT UNIQUE",
         "lunar_date": "TEXT",
@@ -46,7 +49,7 @@ class HuangLi:
 
     def _init_db(self):
         definitions = ", ".join(f"{name} {definition}" for name, definition in self.COLUMNS.items())
-        with sqlite3.connect(self.db_path) as connection:
+        with sqlite_connection(self.db_path) as connection:
             create_table_sql = (
                 "CREATE TABLE IF NOT EXISTS huangli_daily "
                 f"(id INTEGER PRIMARY KEY AUTOINCREMENT, {definitions})"
@@ -59,8 +62,10 @@ class HuangLi:
 
     def get_daily_huangli(self, date=None):
         date = date or datetime.now().strftime("%Y-%m-%d")
-        with sqlite3.connect(self.db_path) as connection:
-            connection.row_factory = sqlite3.Row
+        parsed_date = datetime.strptime(date, "%Y-%m-%d").date()
+        if not self.MIN_DATE <= parsed_date <= self.MAX_DATE:
+            raise ValueError("日期必须在 1900-01-01 到 2100-12-31 之间")
+        with sqlite_connection(self.db_path) as connection:
             row = connection.execute(
                 "SELECT * FROM huangli_daily WHERE date = ? AND cache_version = ?",
                 (date, self.ALGORITHM_VERSION),
@@ -148,7 +153,7 @@ class HuangLi:
         columns = list(self.COLUMNS)
         placeholders = ", ".join("?" for _ in columns)
         updates = ", ".join(f"{name}=excluded.{name}" for name in columns if name != "date")
-        with sqlite3.connect(self.db_path) as connection:
+        with sqlite_connection(self.db_path) as connection:
             connection.execute(
                 f"INSERT INTO huangli_daily ({', '.join(columns)}) VALUES ({placeholders}) "
                 f"ON CONFLICT(date) DO UPDATE SET {updates}",

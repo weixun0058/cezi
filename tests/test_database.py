@@ -1,5 +1,3 @@
-import sqlite3
-
 import requests
 
 from database import Database
@@ -11,22 +9,16 @@ def test_sign_number_never_returns_zero():
     assert 1 <= cale_character_count(1, 1, 1) <= 383
 
 
-def test_failed_remote_stroke_lookup_is_not_persisted(tmp_path, monkeypatch):
-    db_path = tmp_path / "hanzi.db"
-    with sqlite3.connect(db_path) as connection:
-        connection.execute(
-            "CREATE TABLE hanzi (ID INTEGER PRIMARY KEY, 汉字 TEXT, "
-            "简体字总笔画 INTEGER, 繁体字总笔画 INTEGER, 康熙字典笔画 INTEGER)"
-        )
-    database = Database.__new__(Database)
-    database.hanzi_db = db_path
-    database._stroke_failure_cache = {}
-    database._stroke_failure_ttl = 300
+def test_failed_remote_stroke_lookup_is_not_persisted(tmp_path, monkeypatch, reference_db):
+    runtime_db = tmp_path / "runtime.db"
+    database = Database(reference_db, runtime_db)
 
     def fail(*_args, **_kwargs):
         raise requests.Timeout("timeout")
 
     monkeypatch.setattr(requests, "get", fail)
-    assert database.get_stroke_count("龘") is None
-    with sqlite3.connect(db_path) as connection:
-        assert connection.execute("SELECT COUNT(*) FROM hanzi").fetchone()[0] == 0
+    assert database.get_stroke_count("🀄") is None
+    from database import sqlite_connection
+
+    with sqlite_connection(runtime_db) as connection:
+        assert connection.execute("SELECT COUNT(*) FROM stroke_cache").fetchone()[0] == 0
