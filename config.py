@@ -18,6 +18,11 @@ def _path_from_env(name, default):
     return value if value.is_absolute() else BASE_DIR / value
 
 
+def _optional_int(name):
+    value = os.getenv(name)
+    return int(value) if value not in {None, ""} else None
+
+
 class Config:
     SECRET_KEY = os.getenv("SECRET_KEY", "development-only-change-me")
     JSON_AS_ASCII = False
@@ -32,6 +37,10 @@ class Config:
     AI_MODEL = os.getenv("AI_MODEL", "deepseek-chat")
     AI_TIMEOUT_SECONDS = float(os.getenv("AI_TIMEOUT_SECONDS", "60"))
     AI_TEMPERATURE = float(os.getenv("AI_TEMPERATURE", "0.7"))
+    AI_DAILY_LIMIT = int(os.getenv("AI_DAILY_LIMIT", "3"))
+    AI_RATE_LIMIT_PER_MINUTE = int(os.getenv("AI_RATE_LIMIT_PER_MINUTE", "3"))
+    AI_MAX_CONCURRENT = int(os.getenv("AI_MAX_CONCURRENT", "4"))
+    AI_GLOBAL_DAILY_LIMIT = _optional_int("AI_GLOBAL_DAILY_LIMIT")
 
     REFERENCE_DB_PATH = _path_from_env("REFERENCE_DB_PATH", "database/reference.db")
     RUNTIME_DB_PATH = _path_from_env("RUNTIME_DB_PATH", "instance/runtime.db")
@@ -41,3 +50,4 @@ class TestConfig(Config):
     TESTING = True
     SECRET_KEY = "test-secret"
     AI_API_KEY = ""
+    AI_GLOBAL_DAILY_LIMIT = 100

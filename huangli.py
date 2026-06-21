@@ -50,6 +50,7 @@ class HuangLi:
     def _init_db(self):
         definitions = ", ".join(f"{name} {definition}" for name, definition in self.COLUMNS.items())
         with sqlite_connection(self.db_path) as connection:
+            connection.execute("PRAGMA journal_mode=WAL")
             create_table_sql = (
                 "CREATE TABLE IF NOT EXISTS huangli_daily "
                 f"(id INTEGER PRIMARY KEY AUTOINCREMENT, {definitions})"

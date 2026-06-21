@@ -26,6 +26,7 @@ def app(tmp_path, reference_db):
         {
             "TESTING": True,
             "AI_API_KEY": "",
+            "AI_GLOBAL_DAILY_LIMIT": 100,
             "REFERENCE_DB_PATH": reference_db,
             "RUNTIME_DB_PATH": tmp_path / "runtime.db",
         }

@@ -31,7 +31,6 @@ def sqlite_connection(path, *, readonly=False):
     else:
         path.parent.mkdir(parents=True, exist_ok=True)
         connection = sqlite3.connect(path, timeout=5)
-        connection.execute("PRAGMA journal_mode=WAL")
         connection.execute("PRAGMA busy_timeout=5000")
         connection.execute("PRAGMA foreign_keys=ON")
     connection.row_factory = sqlite3.Row
@@ -58,6 +57,7 @@ class Database:
 
     def _init_runtime_db(self):
         with sqlite_connection(self.runtime_db) as connection:
+            connection.execute("PRAGMA journal_mode=WAL")
             connection.execute(
                 """
                 CREATE TABLE IF NOT EXISTS stroke_cache (

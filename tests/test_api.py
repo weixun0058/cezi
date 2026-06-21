@@ -94,7 +94,33 @@ def test_post_stream_and_deprecated_get_headers(app, client):
     assert "测试文本块" in response.get_data(as_text=True)
 
     legacy = client.get("/api/lunming/stream", query_string=payload)
-    assert legacy.headers["Deprecation"] == "true"
+    assert legacy.status_code == 405
+
+
+def test_fourth_ai_request_returns_daily_quota_error(app, client):
+    class FakeService:
+        @staticmethod
+        def build_chart(_payload):
+            return {}
+
+        @staticmethod
+        def analyze_bazi(_payload):
+            return {"chart": {}, "report": {}, "disclaimer": "test"}
+
+    app.extensions["lunming"] = FakeService()
+    payload = {
+        "name": "测试",
+        "birth_date": "1990-01-01",
+        "birth_time": "未知",
+    }
+
+    for _ in range(3):
+        assert client.post("/api/lunming/analyze", json=payload).status_code == 200
+    response = client.post("/api/lunming/analyze", json=payload)
+
+    assert response.status_code == 429
+    assert response.json["error"]["code"] == "AI_DAILY_QUOTA_EXHAUSTED"
+    assert int(response.headers["Retry-After"]) > 0
 
 
 def test_stream_interruption_returns_safe_error_event(app, client):

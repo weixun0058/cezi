@@ -4,6 +4,7 @@ from pathlib import Path
 
 from flask import Flask, g, request
 
+from ai_usage import AIUsagePolicy
 from api_utils import failure, success
 from blueprints import ALL_BLUEPRINTS
 from config import Config
@@ -34,6 +35,15 @@ def create_app(test_config=None):
         timeout=app.config["AI_TIMEOUT_SECONDS"],
         temperature=app.config["AI_TEMPERATURE"],
         default_timezone=app.config["DEFAULT_TIMEZONE"],
+    )
+    app.extensions["ai_usage"] = AIUsagePolicy(
+        runtime_db=app.config["RUNTIME_DB_PATH"],
+        secret_key=app.config["SECRET_KEY"],
+        global_daily_limit=app.config["AI_GLOBAL_DAILY_LIMIT"],
+        daily_limit=app.config["AI_DAILY_LIMIT"],
+        rate_limit=app.config["AI_RATE_LIMIT_PER_MINUTE"],
+        max_concurrent=app.config["AI_MAX_CONCURRENT"],
+        lease_seconds=int(app.config["AI_TIMEOUT_SECONDS"] + 30),
     )
     app.extensions["pzbj"] = app.extensions["database"].load_pzbj()
 
