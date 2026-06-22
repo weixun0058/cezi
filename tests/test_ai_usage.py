@@ -1,5 +1,6 @@
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
+from multiprocessing import get_context
 from zoneinfo import ZoneInfo
 
 import pytest
@@ -7,6 +8,24 @@ import pytest
 from ai_usage import AIUsagePolicy, UsageLimitError
 
 NOW = datetime(2026, 6, 21, 12, 0, tzinfo=ZoneInfo("Asia/Shanghai"))
+
+
+def acquire_in_process(runtime_db, index, start_event, results):
+    policy = AIUsagePolicy(
+        runtime_db=runtime_db,
+        secret_key="test-secret-key-with-enough-length",
+        global_daily_limit=5,
+        daily_limit=3,
+        rate_limit=3,
+        max_concurrent=20,
+        lease_seconds=90,
+    )
+    start_event.wait()
+    try:
+        policy.acquire(f"process-device-{index}", f"10.1.0.{index}", NOW)
+        results.put(True)
+    except UsageLimitError:
+        results.put(False)
 
 
 def make_policy(tmp_path, **overrides):
@@ -64,3 +83,27 @@ def test_global_limit_is_atomic_across_threads(tmp_path):
     assert len(accepted) == 10
     for grant in accepted:
         policy.release(grant.lease_id)
+
+
+def test_global_limit_is_atomic_across_processes(tmp_path):
+    context = get_context("spawn")
+    start_event = context.Event()
+    results = context.Queue()
+    runtime_db = str(tmp_path / "runtime.db")
+    processes = [
+        context.Process(
+            target=acquire_in_process,
+            args=(runtime_db, index, start_event, results),
+        )
+        for index in range(12)
+    ]
+
+    for process in processes:
+        process.start()
+    start_event.set()
+    accepted = [results.get(timeout=30) for _ in processes]
+    for process in processes:
+        process.join(timeout=30)
+        assert process.exitcode == 0
+
+    assert sum(accepted) == 5

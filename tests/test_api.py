@@ -25,6 +25,12 @@ def test_security_headers_and_request_id(client):
     assert len(response.headers["X-Request-ID"]) == 32
 
 
+def test_legacy_get_lunming_stream_is_not_allowed(client):
+    response = client.get("/api/lunming/stream")
+
+    assert response.status_code == 405
+
+
 def test_rejects_invalid_json(client):
     response = client.post("/get_strokes", data="not-json", content_type="application/json")
     assert response.status_code == 400
