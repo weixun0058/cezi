@@ -23,13 +23,33 @@ def _optional_int(name):
     return int(value) if value not in {None, ""} else None
 
 
+def validate_config(config):
+    if config.get("TESTING") or config.get("APP_ENV") != "production":
+        return
+    errors = []
+    secret_key = config.get("SECRET_KEY", "")
+    if secret_key == "development-only-change-me" or len(secret_key) < 32:
+        errors.append("SECRET_KEY must be a unique value of at least 32 characters")
+    if not config.get("AI_API_KEY"):
+        errors.append("AI_API_KEY must be configured")
+    global_limit = config.get("AI_GLOBAL_DAILY_LIMIT")
+    if not isinstance(global_limit, int) or global_limit < 1:
+        errors.append("AI_GLOBAL_DAILY_LIMIT must be a positive integer")
+    if config.get("APP_DEBUG"):
+        errors.append("APP_DEBUG must be disabled")
+    if errors:
+        raise RuntimeError("Invalid production configuration: " + "; ".join(errors))
+
+
 class Config:
+    APP_ENV = os.getenv("APP_ENV", "development")
     SECRET_KEY = os.getenv("SECRET_KEY", "development-only-change-me")
     JSON_AS_ASCII = False
     MAX_CONTENT_LENGTH = int(os.getenv("MAX_CONTENT_LENGTH", 1024 * 1024))
     APP_HOST = os.getenv("APP_HOST", "127.0.0.1")
     APP_PORT = int(os.getenv("APP_PORT", "8000"))
     APP_DEBUG = _as_bool(os.getenv("APP_DEBUG"), False)
+    TRUSTED_PROXY_HOPS = int(os.getenv("TRUSTED_PROXY_HOPS", "0"))
     DEFAULT_TIMEZONE = os.getenv("DEFAULT_TIMEZONE", "Asia/Shanghai")
 
     AI_API_KEY = os.getenv("AI_API_KEY", "")

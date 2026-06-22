@@ -16,10 +16,16 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
+      - run: python -m pip install --upgrade pip
       - run: pip install -r requirements-dev.txt
-      - run: black --check app.py api_utils.py config.py logging_config.py database.py huangli.py lunming.py bazi_service.py bailian.py gunicorn.conf.py blueprints tests
-      - run: ruff check app.py api_utils.py config.py logging_config.py database.py huangli.py lunming.py bazi_service.py bailian.py gunicorn.conf.py blueprints tests
-      - run: pytest --cov=. --cov-report=term-missing
+      - run: black --check app.py api_utils.py config.py logging_config.py database.py huangli.py lunming.py ai_usage.py bazi_service.py bailian.py gunicorn.conf.py blueprints scripts tests
+      - run: ruff check app.py api_utils.py config.py logging_config.py database.py huangli.py lunming.py ai_usage.py bazi_service.py bailian.py gunicorn.conf.py blueprints scripts tests
+      - run: pytest -W error::ResourceWarning --cov=. --cov-report=term-missing
+      - run: pip-audit -r requirements.txt --no-deps --progress-spinner off
+      - name: Verify reference database is reproducible
+        run: |
+          python scripts/build_reference_db.py --output /tmp/reference.db
+          cmp database/reference.db /tmp/reference.db
       - run: node --check static/js/huangli.js
       - run: node --check static/js/lunming.js
       - run: node --check static/js/main.js

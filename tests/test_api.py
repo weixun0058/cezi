@@ -4,6 +4,27 @@ def test_healthcheck(client):
     assert response.json["data"]["status"] == "ok"
 
 
+def test_readiness_requires_ai_configuration(app, client):
+    response = client.get("/readyz")
+
+    assert response.status_code == 503
+    assert response.json["error"]["code"] == "NOT_READY"
+
+    app.config["AI_API_KEY"] = "configured-for-readiness-test"
+    response = client.get("/readyz")
+    assert response.status_code == 200
+    assert response.json["data"]["status"] == "ready"
+
+
+def test_security_headers_and_request_id(client):
+    response = client.get("/healthz")
+
+    assert response.headers["Content-Security-Policy"].startswith("default-src 'self'")
+    assert response.headers["Permissions-Policy"] == "camera=(), microphone=(), geolocation=()"
+    assert response.headers["Cross-Origin-Opener-Policy"] == "same-origin"
+    assert len(response.headers["X-Request-ID"]) == 32
+
+
 def test_rejects_invalid_json(client):
     response = client.post("/get_strokes", data="not-json", content_type="application/json")
     assert response.status_code == 400

@@ -58,16 +58,14 @@ class Database:
     def _init_runtime_db(self):
         with sqlite_connection(self.runtime_db) as connection:
             connection.execute("PRAGMA journal_mode=WAL")
-            connection.execute(
-                """
+            connection.execute("""
                 CREATE TABLE IF NOT EXISTS stroke_cache (
                     character TEXT PRIMARY KEY,
                     kangxi_strokes INTEGER NOT NULL CHECK(kangxi_strokes > 0),
                     source TEXT NOT NULL,
                     fetched_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
                 )
-                """
-            )
+                """)
 
     def _load_gua_index(self):
         with sqlite_connection(self.reference_db, readonly=True) as connection:
