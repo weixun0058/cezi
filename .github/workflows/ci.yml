@@ -25,7 +25,38 @@ jobs:
       - name: Verify reference database is reproducible
         run: |
           python scripts/build_reference_db.py --output /tmp/reference.db
-          cmp database/reference.db /tmp/reference.db
+          python - <<'PY'
+          import sqlite3
+
+          def logical_dump(path):
+              with sqlite3.connect(path) as connection:
+                  return "\n".join(connection.iterdump())
+
+          assert logical_dump("database/reference.db") == logical_dump("/tmp/reference.db")
+          PY
       - run: node --check static/js/huangli.js
       - run: node --check static/js/lunming.js
       - run: node --check static/js/main.js
+      - name: Build and health-check production image
+        run: |
+          docker build --build-arg APP_VERSION=ci -t zhugeshensuan:ci .
+          docker volume create zhugeshensuan-ci-data
+          docker run -d --name zhugeshensuan-ci \
+            --read-only --tmpfs /tmp:rw,noexec,nosuid,size=64m \
+            -v zhugeshensuan-ci-data:/app/instance \
+            -p 127.0.0.1:8000:8000 \
+            -e APP_ENV=production \
+            -e APP_DEBUG=false \
+            -e SECRET_KEY=ci-only-secret-key-at-least-32-characters \
+            -e AI_API_KEY=ci-readiness-placeholder \
+            -e AI_GLOBAL_DAILY_LIMIT=100 \
+            zhugeshensuan:ci
+          for attempt in {1..20}; do
+            if curl --fail --silent http://127.0.0.1:8000/healthz >/dev/null \
+              && curl --fail --silent http://127.0.0.1:8000/readyz >/dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          docker logs zhugeshensuan-ci
+          exit 1

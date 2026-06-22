@@ -9,7 +9,6 @@
 - 黄历：单日详情，以及按需展开的九天比较和场景筛选。
 - 算事：问题确认、重复提醒、三字笔画起卦、分类解签和本地记录。
 - 论命：四柱、生肖、五行、纳音、大运、时辰未知、时区和真太阳时修正。
-- 隐私：论命使用 POST 流传输；起卦记录和报告只保存在浏览器本地。
 
 ## 技术栈
 
@@ -34,9 +33,10 @@ Copy-Item .env.example .env
 ## 验证
 
 ```powershell
-.\.venv\Scripts\python.exe -m black --check app.py api_utils.py config.py logging_config.py database.py huangli.py lunming.py bazi_service.py bailian.py gunicorn.conf.py blueprints tests
-.\.venv\Scripts\python.exe -m ruff check app.py api_utils.py config.py logging_config.py database.py huangli.py lunming.py bazi_service.py bailian.py gunicorn.conf.py blueprints tests
-.\.venv\Scripts\python.exe -m pytest
+.\.venv\Scripts\python.exe -m black --check app.py api_utils.py config.py logging_config.py database.py huangli.py lunming.py ai_usage.py bazi_service.py bailian.py gunicorn.conf.py blueprints scripts tests
+.\.venv\Scripts\python.exe -m ruff check app.py api_utils.py config.py logging_config.py database.py huangli.py lunming.py ai_usage.py bazi_service.py bailian.py gunicorn.conf.py blueprints scripts tests
+.\.venv\Scripts\python.exe -m pytest -W error::ResourceWarning
+.\.venv\Scripts\python.exe -m pip_audit -r requirements.txt --no-deps --progress-spinner off
 node --check static\js\huangli.js
 node --check static\js\lunming.js
 node --check static\js\main.js
@@ -46,7 +46,8 @@ node --check static\js\main.js
 
 - `blueprints/`：HTTP 路由。
 - `database.py`、`huangli.py`、`lunming.py`、`bazi_service.py`：业务服务。
-- `instance/`：运行时数据库和本地备份，不进入版本控制。
+- `database/reference.db`：只读基础数据，由 `scripts/build_reference_db.py` 重复构建。
+- `instance/runtime.db`：黄历缓存、联网笔画缓存和 AI 额度，部署时必须持久化。
 - `日历/`：早期独立 JavaScript 日历实验及其上游测试，不由 Flask 引用，不进入 Docker 镜像；归档或删除需另行确认。
 
 接口细节见 `API文档.md`，部署见 `部署指南.md`。

@@ -20,6 +20,10 @@
 
 返回服务状态和版本，不检查外部模型可用性。
 
+### `GET /readyz`
+
+检查生产必填配置、只读基础库和运行时数据库。未就绪返回 HTTP 503 和错误码 `NOT_READY`。
+
 ## 黄历
 
 ### `GET /api/huangli`
@@ -95,6 +99,13 @@
 - `error`：流式错误。
 - `done`：流结束。
 
-### 旧 GET 流接口
+只支持 POST；`GET /api/lunming/stream` 返回 HTTP 405。
 
-`GET /api/lunming/stream` 暂时兼容，响应包含 `Deprecation: true` 和 `Sunset`。新客户端不得使用 GET 传递个人出生信息。
+## AI 额度与限流
+
+- 每设备每天免费 3 次，按北京时间重置。
+- 每设备和每 IP 每分钟最多 3 次。
+- 每设备并发 1 次，全站并发默认 4 次。
+- 生产环境必须设置 `AI_GLOBAL_DAILY_LIMIT`。
+
+超限统一返回 HTTP 429、稳定错误码和 `Retry-After` 响应头。预留奖励额度扩展点，当前版本未接入广告、支付或会员。

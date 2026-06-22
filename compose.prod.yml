@@ -1,0 +1,47 @@
+name: zhugeshensuan
+
+services:
+  app:
+    image: "${IMAGE_NAME:-zhugeshensuan}:${IMAGE_TAG:-4.1}"
+    build:
+      context: .
+      args:
+        APP_VERSION: "${IMAGE_TAG:-4.1}"
+    environment:
+      APP_ENV: production
+      APP_DEBUG: "false"
+      APP_PORT: "8000"
+      TRUSTED_PROXY_HOPS: "${TRUSTED_PROXY_HOPS:-1}"
+      SECRET_KEY: "${SECRET_KEY:?SECRET_KEY is required}"
+      AI_API_KEY: "${AI_API_KEY:?AI_API_KEY is required}"
+      AI_BASE_URL: "${AI_BASE_URL:-https://api.deepseek.com}"
+      AI_MODEL: "${AI_MODEL:-deepseek-chat}"
+      AI_GLOBAL_DAILY_LIMIT: "${AI_GLOBAL_DAILY_LIMIT:?AI_GLOBAL_DAILY_LIMIT is required}"
+      REFERENCE_DB_PATH: /app/database/reference.db
+      RUNTIME_DB_PATH: /app/instance/runtime.db
+    ports:
+      - "127.0.0.1:${APP_PORT:-8000}:8000"
+    volumes:
+      - runtime-data:/app/instance
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m,mode=1777
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
+    stop_grace_period: 35s
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/readyz', timeout=3)"
+      interval: 30s
+      timeout: 5s
+      start_period: 10s
+      retries: 3
+
+volumes:
+  runtime-data:
