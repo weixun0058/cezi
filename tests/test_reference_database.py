@@ -12,9 +12,9 @@ def test_build_reference_database_contains_all_sources(tmp_path):
 
     counts = build_reference_database(
         output,
-        ROOT / "database" / "kanxi_dict.db",
-        ROOT / "database" / "zhugeshenshuan_jq.xlsx",
-        ROOT / "database" / "pzbj.json",
+        ROOT / "data" / "reference" / "kanxi_dict.db",
+        ROOT / "data" / "reference" / "zhugeshenshuan_jq.xlsx",
+        ROOT / "data" / "reference" / "pzbj.json",
     )
 
     assert counts["hanzi"] >= 18000
@@ -29,9 +29,9 @@ def test_reference_database_build_is_deterministic(tmp_path):
     first = tmp_path / "first.db"
     second = tmp_path / "second.db"
     sources = (
-        ROOT / "database" / "kanxi_dict.db",
-        ROOT / "database" / "zhugeshenshuan_jq.xlsx",
-        ROOT / "database" / "pzbj.json",
+        ROOT / "data" / "reference" / "kanxi_dict.db",
+        ROOT / "data" / "reference" / "zhugeshenshuan_jq.xlsx",
+        ROOT / "data" / "reference" / "pzbj.json",
     )
 
     build_reference_database(first, *sources)

@@ -1,6 +1,6 @@
 import pytest
 
-from bazi_service import BaziInputError, calculate_bazi
+from zhugeshensuan.bazi_service import BaziInputError, calculate_bazi
 
 
 def test_calculates_deterministic_pillars_and_luck_cycles():

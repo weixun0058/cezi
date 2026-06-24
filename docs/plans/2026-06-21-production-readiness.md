@@ -8,7 +8,7 @@
 
 ## 阶段一：数据层
 
-- 创建只读 `database/reference.db`，统一存储汉字笔画、383 条签文和彭祖百忌。
+- 创建只读 `data/reference/reference.db`，统一存储汉字笔画、383 条签文和彭祖百忌。
 - 创建 `instance/runtime.db`，存储黄历缓存、联网笔画缓存和 AI 额度。
 - 增加数据构建脚本，保留 Excel、JSON 等编辑源。
 - 修复所有 SQLite 连接泄漏，配置 WAL、事务和并发超时。

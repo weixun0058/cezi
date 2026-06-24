@@ -2,7 +2,7 @@ from datetime import datetime
 
 import pytest
 
-from huangli import HuangLi
+from zhugeshensuan.huangli import HuangLi
 
 
 def test_cache_hit_does_not_regenerate(tmp_path, monkeypatch):

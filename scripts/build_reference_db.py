@@ -24,12 +24,14 @@ GUA_FIELDS = {
 def _read_hanzi(source):
     connection = sqlite3.connect(source)
     try:
-        rows = connection.execute("""
+        rows = connection.execute(
+            """
             SELECT 汉字, 简体字总笔画, 繁体字总笔画, 康熙字典笔画
             FROM hanzi
             WHERE 汉字 IS NOT NULL AND 汉字 != ''
             ORDER BY 汉字, ID
-            """).fetchall()
+            """
+        ).fetchall()
         unique = {}
         for row in rows:
             unique.setdefault(row[0], row)
@@ -77,7 +79,8 @@ def build_reference_database(output, hanzi_source, gua_source, pzbj_source):
     pzbj = _read_pzbj(pzbj_source)
     connection = sqlite3.connect(temporary)
     try:
-        connection.executescript("""
+        connection.executescript(
+            """
             PRAGMA page_size=4096;
             PRAGMA journal_mode=DELETE;
             PRAGMA synchronous=FULL;
@@ -104,7 +107,8 @@ def build_reference_database(output, hanzi_source, gua_source, pzbj_source):
                 text TEXT PRIMARY KEY,
                 explanation TEXT NOT NULL
             ) WITHOUT ROWID;
-            """)
+            """
+        )
         connection.executemany("INSERT INTO hanzi VALUES (?, ?, ?, ?)", hanzi)
         connection.executemany("INSERT INTO gua VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", gua)
         connection.executemany("INSERT INTO pzbj VALUES (?, ?)", pzbj)
@@ -119,10 +123,10 @@ def build_reference_database(output, hanzi_source, gua_source, pzbj_source):
 
 def main():
     parser = argparse.ArgumentParser(description="Build the production reference database")
-    parser.add_argument("--output", default="database/reference.db")
-    parser.add_argument("--hanzi", default="database/kanxi_dict.db")
-    parser.add_argument("--gua", default="database/zhugeshenshuan_jq.xlsx")
-    parser.add_argument("--pzbj", default="database/pzbj.json")
+    parser.add_argument("--output", default="data/reference/reference.db")
+    parser.add_argument("--hanzi", default="data/reference/kanxi_dict.db")
+    parser.add_argument("--gua", default="data/reference/zhugeshenshuan_jq.xlsx")
+    parser.add_argument("--pzbj", default="data/reference/pzbj.json")
     arguments = parser.parse_args()
     counts = build_reference_database(
         arguments.output, arguments.hanzi, arguments.gua, arguments.pzbj

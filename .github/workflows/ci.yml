@@ -18,8 +18,8 @@ jobs:
           node-version: "22"
       - run: python -m pip install --upgrade pip
       - run: pip install -r requirements-dev.txt
-      - run: black --check app.py api_utils.py config.py logging_config.py database.py huangli.py lunming.py ai_usage.py bazi_service.py bailian.py gunicorn.conf.py blueprints scripts tests
-      - run: ruff check app.py api_utils.py config.py logging_config.py database.py huangli.py lunming.py ai_usage.py bazi_service.py bailian.py gunicorn.conf.py blueprints scripts tests
+      - run: black --check app.py zhugeshensuan deploy/gunicorn.conf.py scripts tests
+      - run: ruff check app.py zhugeshensuan deploy/gunicorn.conf.py scripts tests
       - run: pytest -W error::ResourceWarning --cov=. --cov-report=term-missing
       - run: pip-audit -r requirements.txt --no-deps --progress-spinner off
       - name: Verify reference database is reproducible
@@ -32,14 +32,14 @@ jobs:
               with sqlite3.connect(path) as connection:
                   return "\n".join(connection.iterdump())
 
-          assert logical_dump("database/reference.db") == logical_dump("/tmp/reference.db")
+          assert logical_dump("data/reference/reference.db") == logical_dump("/tmp/reference.db")
           PY
-      - run: node --check static/js/huangli.js
-      - run: node --check static/js/lunming.js
-      - run: node --check static/js/main.js
+      - run: node --check frontend/static/js/huangli.js
+      - run: node --check frontend/static/js/lunming.js
+      - run: node --check frontend/static/js/main.js
       - name: Build and health-check production image
         run: |
-          docker build --build-arg APP_VERSION=ci -t zhugeshensuan:ci .
+          docker build -f deploy/Dockerfile --build-arg APP_VERSION=ci -t zhugeshensuan:ci .
           docker volume create zhugeshensuan-ci-data
           docker run -d --name zhugeshensuan-ci \
             --read-only --tmpfs /tmp:rw,noexec,nosuid,size=64m \

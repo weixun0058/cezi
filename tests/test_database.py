@@ -1,7 +1,7 @@
 import requests
 
-from database import Database
-from utils import cale_character_count
+from zhugeshensuan.database import Database
+from zhugeshensuan.utils import cale_character_count
 
 
 def test_sign_number_never_returns_zero():
@@ -18,7 +18,7 @@ def test_failed_remote_stroke_lookup_is_not_persisted(tmp_path, monkeypatch, ref
 
     monkeypatch.setattr(requests, "get", fail)
     assert database.get_stroke_count("🀄") is None
-    from database import sqlite_connection
+    from zhugeshensuan.database import sqlite_connection
 
     with sqlite_connection(runtime_db) as connection:
         assert connection.execute("SELECT COUNT(*) FROM stroke_cache").fetchone()[0] == 0

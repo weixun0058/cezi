@@ -60,7 +60,7 @@ def test_invalid_date_and_scenario(client):
 
 
 def test_haircut_scenario_supports_synonyms_and_pengzu_fallback(app):
-    from blueprints.huangli_api import _scenario_result
+    from zhugeshensuan.blueprints.huangli_api import _scenario_result
 
     direct = _scenario_result(
         {"suitable": "祭祀、剃头", "unsuitable": "", "peng_zu_bai_ji": ""}, "理发"

@@ -6,7 +6,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def test_divination_result_keeps_global_navigation_available():
-    script = (ROOT / "static" / "js" / "main.js").read_text(encoding="utf-8")
+    script = (ROOT / "frontend" / "static" / "js" / "main.js").read_text(encoding="utf-8")
 
     assert "document.querySelectorAll('.ancient-btn')" not in script
     assert "document.querySelectorAll('.ancient-btn:not(.nav-btn)')" not in script
@@ -18,15 +18,15 @@ def test_low_value_result_actions_are_not_rendered():
     removed_labels = {"简版", "切换简版", "复制", "分享", "打印"}
 
     for template_name in templates:
-        markup = (ROOT / "templates" / template_name).read_text(encoding="utf-8")
+        markup = (ROOT / "frontend" / "templates" / template_name).read_text(encoding="utf-8")
         soup = BeautifulSoup(markup, "html.parser")
         button_labels = {button.get_text(strip=True) for button in soup.find_all("button")}
         assert button_labels.isdisjoint(removed_labels), template_name
 
 
 def test_suanshi_does_not_store_or_render_local_history():
-    markup = (ROOT / "templates" / "suanshi.html").read_text(encoding="utf-8")
-    script = (ROOT / "static" / "js" / "main.js").read_text(encoding="utf-8")
+    markup = (ROOT / "frontend" / "templates" / "suanshi.html").read_text(encoding="utf-8")
+    script = (ROOT / "frontend" / "static" / "js" / "main.js").read_text(encoding="utf-8")
 
     assert "本地起卦记录" not in markup
     assert "divinationHistory" not in markup
@@ -35,8 +35,8 @@ def test_suanshi_does_not_store_or_render_local_history():
 
 
 def test_suanshi_starts_from_three_characters_without_question_confirmation():
-    markup = (ROOT / "templates" / "suanshi.html").read_text(encoding="utf-8")
-    script = (ROOT / "static" / "js" / "main.js").read_text(encoding="utf-8")
+    markup = (ROOT / "frontend" / "templates" / "suanshi.html").read_text(encoding="utf-8")
+    script = (ROOT / "frontend" / "static" / "js" / "main.js").read_text(encoding="utf-8")
 
     assert "questionSummary" not in markup
     assert "questionConfirmation" not in markup
@@ -47,7 +47,7 @@ def test_suanshi_starts_from_three_characters_without_question_confirmation():
 
 
 def test_suanshi_uses_chunked_typewriter_rendering():
-    script = (ROOT / "static" / "js" / "main.js").read_text(encoding="utf-8")
+    script = (ROOT / "frontend" / "static" / "js" / "main.js").read_text(encoding="utf-8")
 
     assert "chunkSize = 3, interval = 45" in script
     assert "end += chunkSize" in script
@@ -56,8 +56,8 @@ def test_suanshi_uses_chunked_typewriter_rendering():
 
 
 def test_lunming_does_not_store_or_render_local_reports():
-    markup = (ROOT / "templates" / "lunming.html").read_text(encoding="utf-8")
-    script = (ROOT / "static" / "js" / "lunming.js").read_text(encoding="utf-8")
+    markup = (ROOT / "frontend" / "templates" / "lunming.html").read_text(encoding="utf-8")
+    script = (ROOT / "frontend" / "static" / "js" / "lunming.js").read_text(encoding="utf-8")
 
     assert "本地报告" not in markup
     assert "report-history" not in markup
@@ -67,7 +67,7 @@ def test_lunming_does_not_store_or_render_local_reports():
 
 
 def test_huangli_extension_is_collapsed_and_owns_scenario_filter():
-    markup = (ROOT / "templates" / "huangli.html").read_text(encoding="utf-8")
+    markup = (ROOT / "frontend" / "templates" / "huangli.html").read_text(encoding="utf-8")
     soup = BeautifulSoup(markup, "html.parser")
     toggle = soup.find(id="weekHuangliToggle")
     panel = soup.find(id="weekHuangliPanel")
@@ -97,7 +97,7 @@ def test_huangli_extension_is_collapsed_and_owns_scenario_filter():
 
 
 def test_huangli_week_data_loads_only_from_extension_interactions():
-    script = (ROOT / "static" / "js" / "huangli.js").read_text(encoding="utf-8")
+    script = (ROOT / "frontend" / "static" / "js" / "huangli.js").read_text(encoding="utf-8")
 
     assert script.count("fetchAndDisplayNineDaysHuangliData();") == 2
     assert "fetch(`/api/huangli?date=${encodeURIComponent(date)}`)" in script

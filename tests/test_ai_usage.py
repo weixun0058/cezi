@@ -5,7 +5,7 @@ from zoneinfo import ZoneInfo
 
 import pytest
 
-from ai_usage import AIUsagePolicy, UsageLimitError
+from zhugeshensuan.ai_usage import AIUsagePolicy, UsageLimitError
 
 NOW = datetime(2026, 6, 21, 12, 0, tzinfo=ZoneInfo("Asia/Shanghai"))
 

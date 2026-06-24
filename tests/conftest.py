@@ -13,9 +13,9 @@ def reference_db(tmp_path_factory):
     output = tmp_path_factory.mktemp("reference") / "reference.db"
     build_reference_database(
         output,
-        ROOT / "database" / "kanxi_dict.db",
-        ROOT / "database" / "zhugeshenshuan_jq.xlsx",
-        ROOT / "database" / "pzbj.json",
+        ROOT / "data" / "reference" / "kanxi_dict.db",
+        ROOT / "data" / "reference" / "zhugeshenshuan_jq.xlsx",
+        ROOT / "data" / "reference" / "pzbj.json",
     )
     return output
 

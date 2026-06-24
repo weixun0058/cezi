@@ -11,5 +11,7 @@ __pycache__/
 .coverage
 htmlcov/
 instance/
-database/huangli.db
+data/reference/huangli.db
+archive/artifacts/*.tar
+archive/artifacts/*.db
 

@@ -1,23 +1,21 @@
-# 诸葛神算 V3
+# 诸葛神算 V4
 
-诸葛神算 V3 是一个传统文化主题的 Flask Web 应用，提供黄历、三字起卦和八字文化解读。黄历与四柱基础数据由确定性历法库计算，语言模型只负责解释结构化结果。
+诸葛神算 V4 是一个可部署的 Flask Web 项目，提供黄历、诸葛神算、论命解读等传统文化娱乐功能。项目已按运行边界整理为后端、前端、数据、部署和归档目录，根目录只保留入口、依赖、配置模板和项目说明。
 
-> 传统文化娱乐参考，不构成医疗、投资或人生决策建议。
+> 本项目内容仅用于传统文化娱乐参考，不构成医疗、投资或人生决策建议。
 
-## 功能
+## 目录结构
 
-- 黄历：单日详情，以及按需展开的九天比较和场景筛选。
-- 算事：问题确认、重复提醒、三字笔画起卦、分类解签和本地记录。
-- 论命：四柱、生肖、五行、纳音、大运、时辰未知、时区和真太阳时修正。
-
-## 技术栈
-
-- Python 3.13、Flask 3、Gunicorn
-- SQLite、openpyxl、pandas
-- lunar-python
-- OpenAI 兼容模型接口
-- HTML、CSS、原生 JavaScript、Server-Sent Events
-- pytest、Black、Ruff、GitHub Actions、Docker
+- `zhugeshensuan/`：Flask 后端包，包含应用工厂、蓝图、业务服务、配置和数据库访问。
+- `frontend/templates/`：Jinja 页面模板。
+- `frontend/static/`：CSS、JavaScript、图片和字体等前端静态资源。
+- `data/reference/`：只读参考数据，`reference.db` 可由 `scripts/build_reference_db.py` 重建。
+- `scripts/`：维护脚本和数据构建脚本。
+- `tests/`：后端、接口、数据和前端契约测试。
+- `deploy/`：Dockerfile、Compose、Gunicorn 和 Nginx 示例配置。
+- `docs/`：当前文档、部署说明、API 文档、计划和商业材料。
+- `archive/`：旧实验、旧文档和历史构建产物，不参与生产运行。
+- `app.py`：兼容入口，保留 `python app.py` 和 `gunicorn app:app` 的使用方式。
 
 ## 本地运行
 
@@ -28,26 +26,34 @@ Copy-Item .env.example .env
 .\.venv\Scripts\python.exe app.py
 ```
 
-默认访问 `http://127.0.0.1:8000`。如需 AI 解读，在 `.env` 中配置新的 `AI_API_KEY`；不要把密钥提交到仓库。
+默认访问 `http://127.0.0.1:8000`。如需 AI 解读，在项目根目录 `.env` 中配置 `AI_API_KEY`；不要提交真实密钥。
 
 ## 验证
 
 ```powershell
-.\.venv\Scripts\python.exe -m black --check app.py api_utils.py config.py logging_config.py database.py huangli.py lunming.py ai_usage.py bazi_service.py bailian.py gunicorn.conf.py blueprints scripts tests
-.\.venv\Scripts\python.exe -m ruff check app.py api_utils.py config.py logging_config.py database.py huangli.py lunming.py ai_usage.py bazi_service.py bailian.py gunicorn.conf.py blueprints scripts tests
+.\.venv\Scripts\python.exe -m black --check app.py zhugeshensuan deploy/gunicorn.conf.py scripts tests
+.\.venv\Scripts\python.exe -m ruff check app.py zhugeshensuan deploy/gunicorn.conf.py scripts tests
 .\.venv\Scripts\python.exe -m pytest -W error::ResourceWarning
-.\.venv\Scripts\python.exe -m pip_audit -r requirements.txt --no-deps --progress-spinner off
-node --check static\js\huangli.js
-node --check static\js\lunming.js
-node --check static\js\main.js
+node --check frontend\static\js\huangli.js
+node --check frontend\static\js\lunming.js
+node --check frontend\static\js\main.js
 ```
 
-## 目录边界
+## 数据重建
 
-- `blueprints/`：HTTP 路由。
-- `database.py`、`huangli.py`、`lunming.py`、`bazi_service.py`：业务服务。
-- `database/reference.db`：只读基础数据，由 `scripts/build_reference_db.py` 重复构建。
-- `instance/runtime.db`：黄历缓存、联网笔画缓存和 AI 额度，部署时必须持久化。
-- `日历/`：早期独立 JavaScript 日历实验及其上游测试，不由 Flask 引用，不进入 Docker 镜像；归档或删除需另行确认。
+```powershell
+.\.venv\Scripts\python.exe scripts\build_reference_db.py
+```
 
-接口细节见 `API文档.md`，部署见 `部署指南.md`。
+该命令会读取 `data/reference/kanxi_dict.db`、`data/reference/zhugeshenshuan_jq.xlsx` 和 `data/reference/pzbj.json`，生成 `data/reference/reference.db`。
+
+## 部署
+
+生产部署资产位于 `deploy/`：
+
+```powershell
+docker build -f deploy/Dockerfile -t zhugeshensuan:local .
+docker compose --env-file .env -f deploy/compose.prod.yml up -d --build
+```
+
+详细服务器部署流程见 [docs/部署指南.md](docs/部署指南.md)，接口说明见 [docs/API文档.md](docs/API文档.md)。
