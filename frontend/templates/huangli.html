@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-Hans">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>诸葛神算 - 传统黄历</title>
+    <title data-i18n="huangli.page_title">诸葛神算 - 传统黄历</title>
     <link rel="stylesheet" media="screen and (min-width: 481px)" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" media="screen and (max-width: 480px)" href="{{ url_for('static', filename='css/style_mobile.css') }}">
     <link rel="stylesheet" media="screen and (min-width: 481px)" href="{{ url_for('static', filename='css/huangli.css') }}">
@@ -15,60 +15,61 @@
         <div class="scroll-container">
             <div class="scroll-header"></div>
             <div class="scroll-content">
-                <h1 class="title">黄历</h1>
-                
+                <h1 class="title" data-i18n="huangli.title_h1">黄历</h1>
+
                 <div class="nav-links">
-                    <a href="/suanshi" class="ancient-btn nav-btn">算事</a>
-                    <a href="/lunming" class="ancient-btn nav-btn">论命</a>
+                    <a href="/{{ current_lang }}/divination" class="ancient-btn nav-btn" data-i18n="common.nav_suanshi">算事</a>
+                    <a href="/{{ current_lang }}/bazi" class="ancient-btn nav-btn" data-i18n="common.nav_lunming">论命</a>
                 </div>
-                
+                <div id="lang-switcher" class="lang-switcher"></div>
+
                 <div class="poetry-section">
                     <div class="poetry-container">
-                        <div class="poem-line" style="animation-delay: 1.0s">日月星辰运行间</div>
-                        <div class="poem-line" style="animation-delay: 0.7s">黄历记载天地理</div>
-                        <div class="poem-line" style="animation-delay: 0.4s">吉凶祸福皆有源</div>
-                        <div class="poem-line" style="animation-delay: 0.1s">顺应时节得安然</div>
+                        <div class="poem-line" data-i18n="poem.huangli.line1" style="animation-delay: 1.0s">日月星辰运行间</div>
+                        <div class="poem-line" data-i18n="poem.huangli.line2" style="animation-delay: 0.7s">黄历记载天地理</div>
+                        <div class="poem-line" data-i18n="poem.huangli.line3" style="animation-delay: 0.4s">吉凶祸福皆有源</div>
+                        <div class="poem-line" data-i18n="poem.huangli.line4" style="animation-delay: 0.1s">顺应时节得安然</div>
                     </div>
                 </div>
                 <div class="divider">
                     <span class="cloud-pattern"></span>
                 </div>
-                
+
                 <div class="date-controls">
                     <!-- 日期导航按钮 -->
                     <div class="date-navigation">
-                        <button id="prevDayBtn" class="btn btn-primary">前一天</button>
-                        <button id="todayBtn" class="btn btn-primary">今天</button>
-                        <button id="nextDayBtn" class="btn btn-primary">后一天</button>
+                        <button id="prevDayBtn" class="btn btn-primary" data-i18n="huangli.prev_day_btn">前一天</button>
+                        <button id="todayBtn" class="btn btn-primary" data-i18n="huangli.today_btn">今天</button>
+                        <button id="nextDayBtn" class="btn btn-primary" data-i18n="huangli.next_day_btn">后一天</button>
                     </div>
-                    
+
                     <!-- 日期选择区域 -->
                     <div class="date-selection-wrapper">
                         <!-- 公历日期选择 -->
                         <div class="date-group">
-                            <div class="date-label">公历</div>
+                            <div class="date-label" data-i18n="huangli.solar_date_label">公历</div>
                             <div class="date-selection-container" id="solar-date-container">
                                 <input type="date" id="datePicker" min="0001-01-01" max="9999-12-31" class="date-picker">
                             </div>
                         </div>
-                        
+
                         <!-- 农历日期选择 -->
                         <div class="date-group">
-                            <div class="date-label">农历</div>
+                            <div class="date-label" data-i18n="huangli.lunar_date_label">农历</div>
                             <div class="date-selection-container" id="lunar-date-container">
                                 <div class="lunar-date-inputs">
                                     <div class="lunar-year-input-container">
-                                        <input type="number" id="lunar-year" class="lunar-date-select" 
+                                        <input type="number" id="lunar-year" class="lunar-date-select"
                                                placeholder="年" min="1900" max="2050" step="1" data-ganzhi="">
                                         <span class="lunar-year-ganzhi" id="year-ganzhi-display"></span>
                                         <div class="year-picker-icon" id="year-picker-icon">▼</div>
                                         <div class="year-dropdown" id="year-dropdown"></div>
                                     </div>
                                     <select id="lunar-month" class="lunar-date-select">
-                                        <option value="">月</option>
+                                        <option value="" data-i18n="huangli.month_placeholder">月</option>
                                     </select>
                                     <select id="lunar-day" class="lunar-date-select">
-                                        <option value="">日</option>
+                                        <option value="" data-i18n="huangli.day_placeholder">日</option>
                                     </select>
                                 </div>
                             </div>
@@ -80,163 +81,165 @@
                 
                 <div class="huangli-container">
                     <div class="huangli-header">
-                        <h3 id="currentDate">加载中...</h3>
-                        <div id="currentTime" class="current-time">加载中...</div>
+                        <h3 id="currentDate" data-i18n="huangli.status.loading">加载中...</h3>
+                        <div id="currentTime" class="current-time" data-i18n="huangli.status.loading">加载中...</div>
                     </div>
-                    
+
                     <div class="huangli-content">
                         <!-- 顶部区域：日期信息和节气节日 -->
                         <div class="huangli-top-row">
                             <!-- 日期信息卡片 -->
                             <div class="info-card date-info">
-                                <h4 class="card-title">日期信息</h4>
+                                <h4 class="card-title" data-i18n="huangli.date_info_title">日期信息</h4>
                                 <div class="info-grid">
                                     <div class="info-item lunar-date">
-                                        <span class="label">农历：</span>
-                                        <span id="lunarDate">加载中...</span>
+                                        <span class="label" data-i18n="huangli.lunar_date_label">农历：</span>
+                                        <span id="lunarDate" data-i18n="huangli.status.loading">加载中...</span>
                                     </div>
                                     <div class="info-item gan-zhi">
-                                        <span class="label">干支：</span>
-                                        <span id="ganZhi">加载中...</span>
+                                        <span class="label" data-i18n="huangli.gan_zhi_label">干支：</span>
+                                        <span id="ganZhi" data-i18n="huangli.status.loading">加载中...</span>
                                     </div>
                                     <div class="info-item gan-zhi-hour">
-                                        <span class="label">时辰：</span>
-                                        <span id="ganZhiHour">加载中...</span>
+                                        <span class="label" data-i18n="huangli.hour_label">时辰：</span>
+                                        <span id="ganZhiHour" data-i18n="huangli.status.loading">加载中...</span>
                                     </div>
                                     <div class="info-item zodiac">
-                                        <span class="label">生肖：</span>
-                                        <span id="zodiac">加载中...</span>
+                                        <span class="label" data-i18n="huangli.zodiac_label">生肖：</span>
+                                        <span id="zodiac" data-i18n="huangli.status.loading">加载中...</span>
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <!-- 节气与节日卡片 -->
                             <div class="info-card solar-term-section" id="solarTermSection">
-                                <h4 class="card-title">节气与节日</h4>
+                                <h4 class="card-title" data-i18n="huangli.festival_title">节气与节日</h4>
                                 <div class="info-grid">
                                     <div class="info-item solar-term">
-                                        <span class="label">节气：</span>
+                                        <span class="label" data-i18n="huangli.solar_term_label">节气：</span>
                                         <div class="solar-term-content">
-                                            <div id="currentSolarTerm"><span id="solarTermName">加载中...</span></div>
+                                            <div id="currentSolarTerm"><span id="solarTermName" data-i18n="huangli.status.loading">加载中...</span></div>
                                         </div>
                                         <div class="adjacent-solar-terms">
-                                            <div id="prevSolarTerm" class="prev-solar-term"><span>加载中...</span></div>
-                                            <div id="nextSolarTerm" class="next-solar-term"><span>加载中...</span></div>
+                                            <div id="prevSolarTerm" class="prev-solar-term"><span data-i18n="huangli.status.loading">加载中...</span></div>
+                                            <div id="nextSolarTerm" class="next-solar-term"><span data-i18n="huangli.status.loading">加载中...</span></div>
                                         </div>
-                                        
+
                                     </div>
                                     <div class="info-item festival">
-                                        <span class="label">节日：</span>
-                                        <div id="festivalList" class="festival-list">
+                                        <span class="label" data-i18n="huangli.festival_label">节日：</span>
+                                        <div id="festivalList" class="festival-list" data-i18n="huangli.status.loading">
                                             加载中...
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- 中部区域：宜忌 -->
                         <div class="huangli-middle-row">
                             <!-- 宜忌卡片 -->
                             <div class="info-card yi-ji-section">
-                                <h4 class="card-title">今日宜忌</h4>
+                                <h4 class="card-title" data-i18n="huangli.today_yi_ji_title">今日宜忌</h4>
                                 <div class="suitable-unsuitable">
                                     <div class="suitable-section">
-                                        <h5 class="yi-background">宜</h5>
-                                        <div id="suitable" class="tag-container">
+                                        <h5 class="yi-background" data-i18n="huangli.yi_label">宜</h5>
+                                        <div id="suitable" class="tag-container" data-i18n="huangli.status.loading">
                                             加载中...
                                         </div>
                                     </div>
                                     <div class="unsuitable-section">
-                                        <h5 class="ji-background">忌</h5>
-                                        <div id="unsuitable" class="tag-container">
+                                        <h5 class="ji-background" data-i18n="huangli.ji_label">忌</h5>
+                                        <div id="unsuitable" class="tag-container" data-i18n="huangli.status.loading">
                                             加载中...
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- 底部区域：神煞信息和彭祖百忌 -->
                         <div class="huangli-bottom-row">
                             <!-- 神煞信息卡片 -->
                             <div class="info-card shen-sha-section">
-                                <h4 class="card-title">神煞信息</h4>
+                                <h4 class="card-title" data-i18n="huangli.shensha_title">神煞信息</h4>
                                 <div class="shen-sha-info">
                                     <div class="shen-sha-row-x">
                                         <div class="shen-sha-item ji-background">
-                                            <span class="label">冲煞：</span>
-                                            <span id="chongSha">加载中...</span>
+                                            <span class="label" data-i18n="huangli.chong_label">冲煞：</span>
+                                            <span id="chongSha" data-i18n="huangli.status.loading">加载中...</span>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="shen-sha-row-j">
                                         <div class="shen-sha-item yi-background">
-                                            <span class="label">喜神：</span>
-                                            <span id="xiShen">加载中...</span>
+                                            <span class="label" data-i18n="huangli.shensha.xishen_label">喜神：</span>
+                                            <span id="xiShen" data-i18n="huangli.status.loading">加载中...</span>
                                         </div>
                                         <div class="shen-sha-item yi-background">
-                                            <span class="label">福神：</span>
-                                            <span id="fuShen">加载中...</span>
+                                            <span class="label" data-i18n="huangli.shensha.fushen_label">福神：</span>
+                                            <span id="fuShen" data-i18n="huangli.status.loading">加载中...</span>
                                         </div>
                                         <div class="shen-sha-item yi-background">
-                                            <span class="label">财神：</span>
-                                            <span id="caiShen">加载中...</span>
+                                            <span class="label" data-i18n="huangli.shensha.caishen_label">财神：</span>
+                                            <span id="caiShen" data-i18n="huangli.status.loading">加载中...</span>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="shen-sha-row ji-xiong-row">
                                         <div class="shen-sha-column-j">
                                             <div class="shen-sha-item yi-background">
-                                                <span class="label">吉神：</span>
-                                                <span id="jiShen">加载中...</span>
+                                                <span class="label" data-i18n="huangli.jishen_label">吉神：</span>
+                                                <span id="jiShen" data-i18n="huangli.status.loading">加载中...</span>
                                             </div>
                                         </div>
                                         <div class="shen-sha-column-x">
                                             <div class="shen-sha-item ji-background">
-                                                <span class="label">凶神：</span>
-                                                <span id="xiongShen">加载中...</span>
+                                                <span class="label" data-i18n="huangli.xiongshen_label">凶神：</span>
+                                                <span id="xiongShen" data-i18n="huangli.status.loading">加载中...</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <!-- 彭祖百忌卡片 -->
                             <div class="info-card peng-zu-section">
-                                <h4 class="card-title">彭祖百忌</h4>
-                                <div id="pengZuBaiJi" class="peng-zu-bai-ji">
+                                <h4 class="card-title" data-i18n="huangli.pengzu_title">彭祖百忌</h4>
+                                <div id="pengZuBaiJi" class="peng-zu-bai-ji" data-i18n="huangli.status.loading">
                                     加载中...
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="week-huangli">
                     <button type="button" id="weekHuangliToggle" class="extension-toggle"
                             aria-label="九天黄历" aria-expanded="false" aria-controls="weekHuangliPanel">
-                        <span class="extension-title">九天黄历</span>
+                        <span class="extension-title" data-i18n="huangli.extension_title">九天黄历</span>
                         <span class="extension-indicator" aria-hidden="true">&gt;</span>
                     </button>
                     <div id="weekHuangliPanel" class="week-huangli-panel hidden">
                         <div id="scenarioFilter" class="scenario-filter" role="group" aria-label="择事">
-                            <button type="button" class="scenario-option" data-scenario="结婚" aria-pressed="true">婚嫁</button>
-                            <button type="button" class="scenario-option" data-scenario="搬家" aria-pressed="false">搬迁</button>
-                            <button type="button" class="scenario-option" data-scenario="开业" aria-pressed="false">开市</button>
-                            <button type="button" class="scenario-option" data-scenario="出行" aria-pressed="false">出行</button>
-                            <button type="button" class="scenario-option" data-scenario="签约" aria-pressed="false">签约</button>
-                            <button type="button" class="scenario-option" data-scenario="理发" aria-pressed="false">理发</button>
+                            <button type="button" class="scenario-option" data-scenario="结婚" aria-pressed="true" data-i18n="huangli.scenario.marry">婚嫁</button>
+                            <button type="button" class="scenario-option" data-scenario="搬家" aria-pressed="false" data-i18n="huangli.scenario.move">搬迁</button>
+                            <button type="button" class="scenario-option" data-scenario="开业" aria-pressed="false" data-i18n="huangli.scenario.business">开市</button>
+                            <button type="button" class="scenario-option" data-scenario="出行" aria-pressed="false" data-i18n="huangli.scenario.travel">出行</button>
+                            <button type="button" class="scenario-option" data-scenario="签约" aria-pressed="false" data-i18n="huangli.scenario.sign">签约</button>
+                            <button type="button" class="scenario-option" data-scenario="理发" aria-pressed="false" data-i18n="huangli.scenario.haircut">理发</button>
                         </div>
                         <div id="weekHuangliContainer" class="week-container"></div>
                     </div>
                 </div>
-                <p class="responsible-use-notice">传统文化娱乐参考，不构成医疗、投资或人生决策建议。</p>
+                <p class="responsible-use-notice" data-i18n="common.disclaimer">传统文化娱乐参考，不构成医疗、投资或人生决策建议。</p>
             </div>
             <div class="scroll-footer"></div>
         </div>
     </div>
     
+    <script src="{{ url_for('static', filename='js/lang/i18n.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/lang/lang_switcher.js') }}"></script>
     <script src="{{ url_for('static', filename='js/huangli.js') }}"></script>
     <script src="{{ url_for('static', filename='js/huangli_lunar_handler.js') }}"></script>
 </body>

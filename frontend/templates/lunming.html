@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-Hans">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>诸葛神算 - 论命</title>
+    <title data-i18n="lunming.page_title">诸葛神算 - 论命</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/lunming.css') }}">
     <link rel="stylesheet" media="screen and (min-width: 481px)" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" media="screen and (max-width: 480px)" href="{{ url_for('static', filename='css/style_mobile.css') }}">
@@ -15,160 +15,164 @@
         <div class="scroll-container">
             <div class="scroll-header"></div>
             <div class="scroll-content">
-                <h1 class="title">论命</h1>
-                
+                <h1 class="title" data-i18n="common.nav_lunming">论命</h1>
+
                 <div class="nav-links">
-                    <a href="/" class="ancient-btn nav-btn">黄历</a>
-                    <a href="/suanshi" class="ancient-btn nav-btn">算事</a>
+                    <a href="/{{ current_lang }}/almanac" class="ancient-btn nav-btn" data-i18n="huangli.title_h1">黄历</a>
+                    <a href="/{{ current_lang }}/divination" class="ancient-btn nav-btn" data-i18n="common.nav_suanshi">算事</a>
                 </div>
-                
+                <div id="lang-switcher" class="lang-switcher"></div>
+
                 <div class="poetry-section">
                     <div class="poetry-container">
-                        <div class="poem-line" style="animation-delay: 0.1s">命由天定亦由人</div>
-                        <div class="poem-line" style="animation-delay: 0.3s">一线生机在己身</div>
-                        <div class="poem-line" style="animation-delay: 0.5s">若问前程如何算</div>
-                        <div class="poem-line" style="animation-delay: 0.7s">且看八字定乾坤</div>
+                        <div class="poem-line" data-i18n="poem.lunming.line1" style="animation-delay: 0.1s">命由天定亦由人</div>
+                        <div class="poem-line" data-i18n="poem.lunming.line2" style="animation-delay: 0.3s">一线生机在己身</div>
+                        <div class="poem-line" data-i18n="poem.lunming.line3" style="animation-delay: 0.5s">若问前程如何算</div>
+                        <div class="poem-line" data-i18n="poem.lunming.line4" style="animation-delay: 0.7s">且看八字定乾坤</div>
                     </div>
                 </div>
                 <div class="divider">
                     <span class="cloud-pattern"></span>
                 </div>
-                
+
                 <div class="intro-text">
-                    <p class="tou">八字命理，源自中国传统文化，通过分析一个人出生时的年、月、日、时四柱天干地支，推测其命运走向。</p>
-                    <p class="tou">本系统结合传统命理学与现代科技，为您提供个性化的命理分析，包括八字命盘、命理特征、大运走势等多方面内容。</p>
-                    <p class="tou">请在下方填写您的基本信息，系统将为您生成详细的命理报告。</p>
+                    <p class="tou" data-i18n="intro.lunming.1">八字命理，源自中国传统文化，通过分析一个人出生时的年、月、日、时四柱天干地支，推测其命运走向。</p>
+                    <p class="tou" data-i18n="intro.lunming.2">本系统结合传统命理学与现代科技，为您提供个性化的命理分析，包括八字命盘、命理特征、大运走势等多方面内容。</p>
+                    <p class="tou" data-i18n="intro.lunming.3">请在下方填写您的基本信息，系统将为您生成详细的命理报告。</p>
                 </div>
-                
+
                 <div class="lunming-form-container">
                     <div class="lunming-form" id="lunming-form">
                         <!-- 基本信息区域 -->
                         <div class="form-section">
-                            <h3 class="section-title">基本信息</h3>
+                            <h3 class="section-title" data-i18n="lunming.basic_info_title">基本信息</h3>
                             <div class="form-group">
-                                <label for="name">姓名：</label>
-                                <input type="text" id="name" class="ancient-input name-input" maxlength="30" autocomplete="name" placeholder="请输入您的姓名">
+                                <label for="name" data-i18n="lunming.name_label">姓名：</label>
+                                <input type="text" id="name" class="ancient-input name-input" maxlength="30" autocomplete="name" placeholder="请输入您的姓名" data-i18n-placeholder="lunming.name_placeholder">
                                 <div class="gender-selection">
                                     <label class="gender-label">
                                         <input type="radio" name="gender" value="男" checked>
-                                        <span class="gender-text">男</span>
+                                        <span class="gender-text" data-i18n="lunming.gender_male">男</span>
                                     </label>
                                     <label class="gender-label">
                                         <input type="radio" name="gender" value="女">
-                                        <span class="gender-text">女</span>
+                                        <span class="gender-text" data-i18n="lunming.gender_female">女</span>
                                     </label>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- 出生日期区域 -->
                         <div class="form-section">
-                            <h3 class="section-title">出生日期</h3>
+                            <h3 class="section-title" data-i18n="lunming.birth_date_label">出生日期</h3>
                             <div class="date-input-container">
                                 <!-- 公历日期输入 -->
                                 <div class="date-group">
-                                    <div class="date-label">公历日期：</div>
+                                    <div class="date-label" data-i18n="lunming.solar_date_label">公历日期：</div>
                                     <div class="date-input-row">
                                         <div class="date-field">
                                             <input type="date" id="birth-date" class="date-picker" min="0001-01-01" max="9999-12-31">
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <!-- 农历日期输入 -->
                                 <div class="date-group">
-                                    <div class="date-label">农历日期：</div>
+                                    <div class="date-label" data-i18n="lunming.lunar_date_label">农历日期：</div>
                                     <div id="lunar-date-container" class="date-input-row">
                                         <div class="date-field lunar-year-field">
                                             <div class="lunar-year-input-container">
-                                                <input type="number" id="lunar-year" class="lunar-date-select lunar-year-input" 
+                                                <input type="number" id="lunar-year" class="lunar-date-select lunar-year-input"
                                                        placeholder="年" min="1900" max="2050" step="1"
-                                                       data-ganzhi="">
+                                                       data-ganzhi="" data-i18n-placeholder="lunming.year_placeholder">
                                                 <span class="lunar-year-ganzhi" id="year-ganzhi-display"></span>
                                                 <div class="year-picker-icon" id="year-picker-icon">▼</div>
                                                 <div class="year-dropdown" id="year-dropdown"></div>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="date-field">
                                             <select id="lunar-month" class="lunar-date-select">
-                                                <option value="">请选择月份</option>
+                                                <option value="" data-i18n="lunming.month_placeholder">请选择月份</option>
                                             </select>
                                         </div>
-                                        
+
                                         <div class="date-field">
                                             <select id="lunar-day" class="lunar-date-select">
-                                                <option value="">请选择日期</option>
+                                                <option value="" data-i18n="lunming.day_placeholder">请选择日期</option>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- 出生时辰区域 -->
                         <div class="form-section">
-                            <h3 class="section-title">出生时辰</h3>
+                            <h3 class="section-title" data-i18n="lunming.birth_time_label">出生时辰</h3>
                             <div class="form-group">
-                                <label for="birth-time">时辰：</label>
+                                <label for="birth-time" data-i18n="lunming.birth_time_form_label">时辰：</label>
                                 <select id="birth-time" class="lunar-date-select time-select">
-                                    <option value="">请选择时辰</option>
-                                    <option value="未知">时辰未知</option>
+                                    <option value="" data-i18n="lunming.hour_select_prompt">请选择时辰</option>
+                                    <option value="未知" data-i18n="lunming.birth_time_unknown">时辰未知</option>
                                 </select>
                             </div>
                         </div>
 
                         <div class="form-section">
-                            <h3 class="section-title">出生地与时间</h3>
+                            <h3 class="section-title" data-i18n="lunming.location_section_title">出生地与时间</h3>
                             <div class="form-group location-fields">
-                                <label for="birth-place">出生地：</label>
-                                <input type="text" id="birth-place" class="ancient-input" maxlength="80" placeholder="选填，仅用于报告备注">
-                                <label for="timezone">时区：</label>
+                                <label for="birth-place" data-i18n="lunming.birth_place_label">出生地：</label>
+                                <input type="text" id="birth-place" class="ancient-input" maxlength="80" placeholder="选填，仅用于报告备注" data-i18n-placeholder="lunming.birth_place_placeholder">
+                                <label for="timezone" data-i18n="lunming.timezone_label">时区：</label>
                                 <select id="timezone" class="lunar-date-select">
-                                    <option value="Asia/Shanghai">中国标准时间</option>
-                                    <option value="Asia/Hong_Kong">香港时间</option>
-                                    <option value="Asia/Taipei">台北时间</option>
-                                    <option value="Asia/Singapore">新加坡时间</option>
-                                    <option value="UTC">UTC</option>
+                                    <option value="Asia/Shanghai" data-i18n="lunming.timezone.china">中国标准时间</option>
+                                    <option value="Asia/Hong_Kong" data-i18n="lunming.timezone.hk">香港时间</option>
+                                    <option value="Asia/Taipei" data-i18n="lunming.timezone.taipei">台北时间</option>
+                                    <option value="Asia/Singapore" data-i18n="lunming.timezone.singapore">新加坡时间</option>
+                                    <option value="UTC" data-i18n="lunming.timezone.utc">UTC</option>
                                 </select>
                             </div>
                             <label class="setting-toggle" for="use-true-solar-time">
                                 <input type="checkbox" id="use-true-solar-time">
-                                <span>启用真太阳时修正</span>
+                                <span data-i18n="lunming.true_solar_time_label">启用真太阳时修正</span>
                             </label>
                             <div class="form-group hidden" id="longitude-group">
-                                <label for="longitude">出生地经度：</label>
-                                <input type="number" id="longitude" class="ancient-input" min="-180" max="180" step="0.01" placeholder="例如 116.40">
+                                <label for="longitude" data-i18n="lunming.longitude_label">出生地经度：</label>
+                                <input type="number" id="longitude" class="ancient-input" min="-180" max="180" step="0.01" placeholder="例如 116.40" data-i18n-placeholder="lunming.longitude_placeholder">
                             </div>
                         </div>
-                        
+
                         <!-- 操作按钮区域 -->
                         <div class="form-actions">
-                            <button type="button" id="analyze-btn" class="ancient-btn primary-btn">开始分析</button>
-                            <button type="button" id="reset-btn" class="ancient-btn secondary-btn">重置</button>
+                            <button type="button" id="analyze-btn" class="ancient-btn primary-btn" data-i18n="lunming.calculate_btn">开始分析</button>
+                            <button type="button" id="reset-btn" class="ancient-btn secondary-btn" data-i18n="lunming.reset_btn">重置</button>
                         </div>
                         <div id="form-status" class="inline-status" role="status" aria-live="polite"></div>
                     </div>
                 </div>
-                
+
                 <!-- 结果区域 -->
                 <div id="result-container" class="result-container hidden">
                     <!-- 加载指示器 -->
                     <div id="loading-container" class="loading-container">
                         <div class="loading-spinner"></div>
-                        <span>正在分析，请稍候...</span>
+                        <span data-i18n="lunming.loading_text">正在分析，请稍候...</span>
                     </div>
                     <div id="chart-summary" class="chart-summary hidden"></div>
                     <!-- 分析内容 -->
                     <div id="analysis-content" class="analysis-content" aria-live="polite"></div>
-                    <p class="responsible-use-notice">传统文化娱乐参考，不构成医疗、投资或人生决策建议。</p>
+                    <p class="responsible-use-notice" data-i18n="common.disclaimer">传统文化娱乐参考，不构成医疗、投资或人生决策建议。</p>
                 </div>
 
             </div>
             <div class="scroll-footer"></div>
         </div>
     </div>
-    
+
+    <!-- 引入 i18n 加载器（必须在业务 JS 之前） -->
+    <script src="{{ url_for('static', filename='js/lang/i18n.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/lang/lang_switcher.js') }}"></script>
     <!-- 引入论命功能的JavaScript文件 -->
     <script src="{{ url_for('static', filename='js/lunming.js') }}"></script>
     <!-- 引入日期输入处理工具 -->

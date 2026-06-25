@@ -13,6 +13,7 @@ from .blueprints import ALL_BLUEPRINTS
 from .config import Config, validate_config
 from .database import Database
 from .huangli import HuangLi
+from .i18n_utils import DEFAULT_LANG, LANGS
 from .logging_config import configure_logging
 from .lunming import LunMing
 
@@ -34,6 +35,28 @@ CSP = "; ".join(
         "frame-ancestors 'self'",
     )
 )
+
+
+def _resolve_request_lang() -> str:
+    """从当前请求解析语言代码。
+
+    解析优先级：
+      1. URL 路径前缀（/zh-hans/..., /zh-hant/...）
+      2. 查询参数 lang（?lang=zh-hant）
+      3. 请求头 X-Lang
+      4. 默认语言 zh-hans
+    """
+    path = request.path
+    for lang in LANGS:
+        if path == f"/{lang}" or path.startswith(f"/{lang}/"):
+            return lang
+    query_lang = request.args.get("lang", "").strip()
+    if query_lang in LANGS:
+        return query_lang
+    header_lang = request.headers.get("X-Lang", "").strip()
+    if header_lang in LANGS:
+        return header_lang
+    return DEFAULT_LANG
 
 
 def create_app(test_config=None):
@@ -77,7 +100,6 @@ def create_app(test_config=None):
         max_concurrent=app.config["AI_MAX_CONCURRENT"],
         lease_seconds=int(app.config["AI_TIMEOUT_SECONDS"] + 30),
     )
-    app.extensions["pzbj"] = app.extensions["database"].load_pzbj()
 
     for blueprint in ALL_BLUEPRINTS:
         app.register_blueprint(blueprint)
@@ -91,6 +113,8 @@ def create_app(test_config=None):
             if REQUEST_ID_PATTERN.fullmatch(supplied_request_id)
             else uuid.uuid4().hex
         )
+        # 解析当前请求语言（URL 路径前缀 > 查询参数 > Header > 默认）
+        g.lang = _resolve_request_lang()
 
     @app.after_request
     def add_security_headers(response):

@@ -4,16 +4,9 @@ import logging
 from openai import OpenAI
 
 from .bazi_service import calculate_bazi
+from .i18n_utils import get_current_lang, get_disclaimer, get_report_section_titles, to_hant_recursive
 
 LOGGER = logging.getLogger(__name__)
-DISCLAIMER = "传统文化娱乐参考，不构成医疗、投资或人生决策建议。"
-REPORT_SECTION_TITLES = {
-    "five_elements": "五行气象",
-    "temperament": "性情禀赋",
-    "career_learning": "事业与学业",
-    "relationships": "人际相处",
-    "luck_cycles": "大运流转",
-}
 
 
 class ModelConfigurationError(RuntimeError):
@@ -49,16 +42,25 @@ class LunMing:
         return self._client
 
     def build_chart(self, payload):
-        return calculate_bazi(payload, self.default_timezone)
+        chart = calculate_bazi(payload, self.default_timezone)
+        # 繁体模式下递归转换 chart 中所有字符串（lunar_python 输出的是简体）
+        return to_hant_recursive(chart)
 
     def generate_prompt(self, payload, chart):
         time_note = "时辰未知，不得推断时柱相关内容。" if chart["time_unknown"] else ""
+        # 根据当前请求语言决定输出语言
+        lang = get_current_lang()
+        if lang == "zh-hant":
+            output_lang_note = "请使用繁体中文输出所有内容。"
+        else:
+            output_lang_note = "请使用简体中文输出所有内容。"
         return (
             "请基于下列由历法程序确定计算的结构化命盘，进行传统文化解读，并只返回 JSON 对象。"
             "不得重新计算或修改四柱；使用可能性表达，不得作确定性的医疗、投资、婚姻、寿命或灾祸结论。"
             "健康内容只能给出一般生活方式建议并提示咨询专业人士。"
             "避免重复罗列命盘基础数据，避免使用 Markdown、星号、标题符号和编号。"
             "语言应平实、具体、易读，每个要点控制在 60 至 120 个汉字。"
+            f"{output_lang_note}"
             "JSON 必须严格采用以下结构："
             '{"summary":"总览文字","keywords":["关键词一","关键词二","关键词三"],'
             '"sections":['
@@ -118,13 +120,14 @@ class LunMing:
 
         keywords = [self._text(item) for item in payload.get("keywords", [])]
         keywords = [item for item in keywords if item][:4]
+        section_titles = get_report_section_titles()
         source_sections = {
             item.get("id"): item
             for item in payload.get("sections", [])
-            if isinstance(item, dict) and item.get("id") in REPORT_SECTION_TITLES
+            if isinstance(item, dict) and item.get("id") in section_titles
         }
         sections = []
-        for section_id, title in REPORT_SECTION_TITLES.items():
+        for section_id, title in section_titles.items():
             source = source_sections.get(section_id, {})
             points = []
             for point in source.get("points", []):
@@ -171,7 +174,7 @@ class LunMing:
         chart = self.build_chart(payload)
         prompt = self.generate_prompt(payload, chart)
         LOGGER.info("Starting bazi interpretation with model %s", self.model)
-        yield {"type": "chart", "chart": chart, "disclaimer": DISCLAIMER}
+        yield {"type": "chart", "chart": chart, "disclaimer": get_disclaimer()}
         report = self._generate_report(prompt)
         yield {
             "type": "report_start",
@@ -190,4 +193,4 @@ class LunMing:
         chart = self.build_chart(payload)
         prompt = self.generate_prompt(payload, chart)
         report = self._generate_report(prompt)
-        return {"chart": chart, "report": report, "disclaimer": DISCLAIMER}
+        return {"chart": chart, "report": report, "disclaimer": get_disclaimer()}

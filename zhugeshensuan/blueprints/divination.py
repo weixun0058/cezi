@@ -48,6 +48,7 @@ def get_gua_info():
         or not 1 <= sign_number <= 383
     ):
         return failure("INVALID_SIGN", "签号必须是 1 到 383 的整数")
+    # g.lang 由 before_request 钩子根据 URL/Header 设置
     result = current_app.extensions["database"].get_gua_info(sign_number)
     if result is None:
         return failure("SIGN_NOT_FOUND", "未找到对应签文", 404)

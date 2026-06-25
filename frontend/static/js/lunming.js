@@ -1,4 +1,7 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+    await i18n.ready();
+    i18n.applyTranslations();
+
     const elements = {
         analyze: document.getElementById('analyze-btn'),
         reset: document.getElementById('reset-btn'),
@@ -37,11 +40,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const validate = (payload) => {
-        if (!payload.name) return '请输入姓名';
-        if (!payload.birth_date) return '请选择出生日期';
-        if (!payload.birth_time) return '请选择出生时辰或“时辰未知”';
-        if (payload.use_true_solar_time && payload.birth_time === '未知') return '时辰未知时不能启用真太阳时';
-        if (payload.use_true_solar_time && payload.longitude === null) return '请输入出生地经度';
+        if (!payload.name) return i18n.t('lunming.validation.name_required');
+        if (!payload.birth_date) return i18n.t('lunming.validation.birth_date_required');
+        if (!payload.birth_time) return i18n.t('lunming.validation.birth_time_required');
+        // 注意：'未知' 为后端返回的时辰默认值，比较时保留硬编码
+        if (payload.use_true_solar_time && payload.birth_time === '未知') return i18n.t('lunming.validation.true_solar_unknown');
+        if (payload.use_true_solar_time && payload.longitude === null) return i18n.t('lunming.validation.longitude_required');
         return '';
     };
 
@@ -49,18 +53,23 @@ document.addEventListener('DOMContentLoaded', () => {
         elements.chart.replaceChildren();
         const heading = createElement('div', 'chart-heading');
         heading.append(
-            createElement('span', 'report-kicker', '命盘纲要'),
-            createElement('h2', 'chart-title', '四柱排盘')
+            createElement('span', 'report-kicker', i18n.t('lunming.report_kicker')),
+            createElement('h2', 'chart-title', i18n.t('lunming.chart_title'))
         );
         elements.chart.append(heading);
 
         const pillarGrid = createElement('div', 'pillar-grid');
-        const pillarLabels = { year: '年柱', month: '月柱', day: '日柱', time: '时柱' };
+        const pillarLabels = {
+            year: i18n.t('lunming.pillar_year'),
+            month: i18n.t('lunming.pillar_month'),
+            day: i18n.t('lunming.pillar_day'),
+            time: i18n.t('lunming.pillar_time')
+        };
         Object.entries(pillarLabels).forEach(([key, label]) => {
             const item = createElement('div', `pillar-item pillar-${key}`);
             item.append(
                 createElement('span', 'pillar-label', label),
-                createElement('strong', 'pillar-value', chart.pillars[key] || '未知')
+                createElement('strong', 'pillar-value', chart.pillars[key] || i18n.t('common.unknown'))
             );
             pillarGrid.append(item);
         });
@@ -68,12 +77,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const facts = createElement('div', 'chart-facts');
         const factData = [
-            ['生肖', chart.zodiac],
-            ['日主', chart.day_master],
-            ['五行', Object.entries(chart.wu_xing_counts).map(([key, value]) => `${key}${value}`).join(' · ')]
+            [i18n.t('lunming.fact_zodiac'), chart.zodiac],
+            [i18n.t('lunming.fact_day_master'), chart.day_master],
+            [i18n.t('lunming.fact_wuxing'), Object.entries(chart.wu_xing_counts).map(([key, value]) => `${key}${value}`).join(' · ')]
         ];
         if (chart.calendar.true_solar_time) {
-            factData.push(['真太阳时', `修正 ${chart.calendar.correction_minutes} 分钟`]);
+            factData.push([i18n.t('lunming.fact_true_solar'), i18n.t('lunming.correction_format', { minutes: chart.calendar.correction_minutes })]);
         }
         factData.forEach(([label, value]) => {
             const fact = createElement('p', 'chart-fact');
@@ -92,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const renderReportStart = (event) => {
         const overview = createElement('section', 'report-overview report-reveal');
         overview.append(
-            createElement('span', 'report-kicker', '命书总览'),
+            createElement('span', 'report-kicker', i18n.t('lunming.overview_kicker')),
             createElement('p', 'report-summary', event.summary)
         );
         if (event.keywords?.length) {
@@ -124,8 +133,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (event.actions?.length) {
             const actions = createElement('section', 'report-actions report-reveal');
             actions.append(
-                createElement('span', 'report-kicker', '行事参考'),
-                createElement('h3', 'report-section-title', '顺势而为，落在日常')
+                createElement('span', 'report-kicker', i18n.t('lunming.action_kicker')),
+                createElement('h3', 'report-section-title', i18n.t('lunming.action_title'))
             );
             const list = createElement('div', 'action-list');
             event.actions.forEach(action => {
@@ -178,7 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (event.type === 'report_section') renderReportSection(event.section);
                 if (event.type === 'report_end') renderReportEnd(event);
                 if (event.type === 'text') renderLegacyText(event.text || '');
-                if (event.type === 'error') throw new Error(event.error || '分析流中断');
+                if (event.type === 'error') throw new Error(event.error || i18n.t('lunming.error.stream_error'));
                 if (event.type?.startsWith('report_')) await new Promise(resolve => setTimeout(resolve, 90));
             }
             if (done) break;
@@ -205,9 +214,9 @@ document.addEventListener('DOMContentLoaded', () => {
         elements.result.classList.remove('hidden');
         elements.loading.classList.remove('hidden');
         elements.analyze.disabled = true;
-        setStatus('正在建立分析连接…');
+        setStatus(i18n.t('lunming.status.calculating'));
         try {
-            const response = await fetch('/api/lunming/stream', {
+            const response = await fetch(i18n.apiUrl('/api/lunming/stream'), {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Accept': 'text/event-stream' },
                 body: JSON.stringify(payload),
@@ -215,13 +224,13 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             if (!response.ok) {
                 const body = await response.json().catch(() => ({}));
-                throw new Error(body.error?.message || '分析请求失败');
+                throw new Error(body.error?.message || i18n.t('lunming.error.request_failed'));
             }
             elements.loading.classList.add('hidden');
             await readStream(response);
-            setStatus('解读完成', 'success');
+            setStatus(i18n.t('lunming.status.done'), 'success');
         } catch (error) {
-            if (error.name !== 'AbortError') setStatus(error.message || '分析流中断，请重试', 'error');
+            if (error.name !== 'AbortError') setStatus(error.message || i18n.t('lunming.status.stream_interrupted'), 'error');
         } finally {
             elements.loading.classList.add('hidden');
             elements.analyze.disabled = false;

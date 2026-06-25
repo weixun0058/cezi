@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (absMonth === 1) {
             result += '正月';
         } else if (absMonth === 12) {
-            result += '腊月';
+            result += i18n.t('calendar.month.la');
         } else if (absMonth === 11) {
             result += '冬月';
         } else if (absMonth === 10) {
@@ -312,10 +312,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     // 初始化阴历日期（从阳历）
-    initLunar();
-    
-    // 确保时辰选项被正确初始化，即使initLunar因为某些原因失败
-    updateBirthTimeOptions();
+    // 时辰选项依赖 i18n 字典，需等字典加载完成后再初始化
+    i18n.onReady(function() {
+        initLunar();
+        // 确保时辰选项被正确初始化，即使initLunar因为某些原因失败
+        updateBirthTimeOptions();
+    });
     
     // 阳历日期变更事件
     birthDateInput.addEventListener('change', function() {
@@ -575,12 +577,12 @@ document.addEventListener('DOMContentLoaded', () => {
             // 添加"请选择时辰"选项
             const defaultOption = document.createElement('option');
             defaultOption.value = '';
-            defaultOption.textContent = '请选择时辰';
+            defaultOption.textContent = i18n.t('lunming.hour_select_prompt');
             birthTimeSelect.appendChild(defaultOption);
 
             const unknownOption = document.createElement('option');
             unknownOption.value = '未知';
-            unknownOption.textContent = '时辰未知';
+            unknownOption.textContent = i18n.t('lunming.birth_time_unknown');
             birthTimeSelect.appendChild(unknownOption);
             
             // 时辰的地支（固定的）
@@ -644,7 +646,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         // 创建选项
                         const option = document.createElement('option');
                         option.value = currentZhi; // 仍然只存储地支作为值
-                        option.textContent = `${currentGan}${currentZhi}时 (${timeRanges[i]})`;
+                        option.textContent = i18n.t('lunming.hour_option_format', { gan: currentGan, zhi: currentZhi, range: timeRanges[i] });
                         
                         // 添加自定义属性以存储完整干支
                         option.dataset.ganzhi = `${currentGan}${currentZhi}`;
@@ -672,24 +674,24 @@ document.addEventListener('DOMContentLoaded', () => {
         // 回退方案：使用固定干支的时辰选项
         function fallbackTimeOptions() {
             const defaultOptions = [
-                { value: '子', text: '子时 (23:00-01:00)' },
-                { value: '丑', text: '丑时 (01:00-03:00)' },
-                { value: '寅', text: '寅时 (03:00-05:00)' },
-                { value: '卯', text: '卯时 (05:00-07:00)' },
-                { value: '辰', text: '辰时 (07:00-09:00)' },
-                { value: '巳', text: '巳时 (09:00-11:00)' },
-                { value: '午', text: '午时 (11:00-13:00)' },
-                { value: '未', text: '未时 (13:00-15:00)' },
-                { value: '申', text: '申时 (15:00-17:00)' },
-                { value: '酉', text: '酉时 (17:00-19:00)' },
-                { value: '戌', text: '戌时 (19:00-21:00)' },
-                { value: '亥', text: '亥时 (21:00-23:00)' }
+                { value: '子', range: '23:00-01:00' },
+                { value: '丑', range: '01:00-03:00' },
+                { value: '寅', range: '03:00-05:00' },
+                { value: '卯', range: '05:00-07:00' },
+                { value: '辰', range: '07:00-09:00' },
+                { value: '巳', range: '09:00-11:00' },
+                { value: '午', range: '11:00-13:00' },
+                { value: '未', range: '13:00-15:00' },
+                { value: '申', range: '15:00-17:00' },
+                { value: '酉', range: '17:00-19:00' },
+                { value: '戌', range: '19:00-21:00' },
+                { value: '亥', range: '21:00-23:00' }
             ];
             
             defaultOptions.forEach(option => {
                 const el = document.createElement('option');
                 el.value = option.value;
-                el.textContent = option.text;
+                el.textContent = i18n.t('lunming.hour_option_format', { gan: '', zhi: option.value, range: option.range });
                 birthTimeSelect.appendChild(el);
             });
         }

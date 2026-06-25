@@ -7,6 +7,8 @@ from pathlib import Path
 import requests
 from bs4 import BeautifulSoup
 
+from .i18n_utils import get_gua_table_name, get_pzbj_table_name
+
 LOGGER = logging.getLogger(__name__)
 GUA_COLUMNS = (
     "sign_number",
@@ -55,7 +57,12 @@ class Database:
         self._stroke_failure_cache = {}
         self._stroke_failure_ttl = 300
         self._init_runtime_db()
-        self.gua_index = self._load_gua_index()
+        # 同时加载简体和繁体签文索引
+        self.gua_index = self._load_gua_index("gua")
+        self.gua_hant_index = self._load_gua_index("gua_hant")
+        # 同时加载简体和繁体彭祖百忌
+        self.pzbj = self._load_pzbj("pzbj")
+        self.pzbj_hant = self._load_pzbj("pzbj_hant")
 
     def _init_runtime_db(self):
         with sqlite_connection(self.runtime_db) as connection:
@@ -71,23 +78,40 @@ class Database:
                 """
             )
 
-    def _load_gua_index(self):
+    def _load_gua_index(self, table_name: str):
+        """加载指定签文表的全部记录到内存索引"""
         with sqlite_connection(self.reference_db, readonly=True) as connection:
-            rows = connection.execute(f"SELECT {', '.join(GUA_COLUMNS)} FROM gua").fetchall()
+            rows = connection.execute(
+                f"SELECT {', '.join(GUA_COLUMNS)} FROM {table_name}"
+            ).fetchall()
         index = {row["sign_number"]: dict(row) for row in rows}
-        LOGGER.info("Loaded %d divination records", len(index))
+        LOGGER.info("Loaded %d records from %s", len(index), table_name)
         return index
 
-    def load_pzbj(self):
+    def _load_pzbj(self, table_name: str):
+        """加载指定彭祖百忌表"""
         with sqlite_connection(self.reference_db, readonly=True) as connection:
-            rows = connection.execute("SELECT text, explanation FROM pzbj").fetchall()
+            rows = connection.execute(
+                f"SELECT text, explanation FROM {table_name}"
+            ).fetchall()
         return {row["text"]: row["explanation"] for row in rows}
 
-    def get_gua_info(self, sign_number):
+    def get_gua_info(self, sign_number, lang: str | None = None):
+        """根据语言返回签文信息。
+
+        Args:
+            sign_number: 签号 1-383
+            lang: 语言代码，None 时使用当前请求语言
+        """
+        index = self.gua_hant_index if get_gua_table_name(lang) == "gua_hant" else self.gua_index
         try:
-            return self.gua_index.get(int(sign_number))
+            return index.get(int(sign_number))
         except (TypeError, ValueError):
             return None
+
+    def get_pzbj(self, lang: str | None = None):
+        """根据语言返回彭祖百忌字典"""
+        return self.pzbj_hant if get_pzbj_table_name(lang) == "pzbj_hant" else self.pzbj
 
     def get_stroke_count_by_hd(self, character):
         """Return a remote stroke count, or None when the lookup is inconclusive."""

@@ -1,6 +1,8 @@
 let weekHuangliLoaded = false;
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
+    await i18n.ready();
+    i18n.applyTranslations();
     console.log('页面加载完成，初始化黄历功能');
     
     // 检查DOM元素是否存在
@@ -177,24 +179,24 @@ function updateCurrentTime() {
     
     // 只在currentTime中显示时辰信息
     const timeElement = document.getElementById('currentTime');
-    timeElement.textContent = `当前时间：${formattedTime} · ${chineseHour}`;
+    timeElement.textContent = i18n.t('huangli.current_time_format', { time: formattedTime, hour: chineseHour });
 }
 
 // 获取中国传统时辰
 function getChineseHour(hour) {
     const chineseHours = [
-        { name: "子时", start: 23, end: 1, desc: "夜半" },
-        { name: "丑时", start: 1, end: 3, desc: "鸡鸣" },
-        { name: "寅时", start: 3, end: 5, desc: "平旦" },
-        { name: "卯时", start: 5, end: 7, desc: "日出" },
-        { name: "辰时", start: 7, end: 9, desc: "食时" },
-        { name: "巳时", start: 9, end: 11, desc: "隅中" },
-        { name: "午时", start: 11, end: 13, desc: "日中" },
-        { name: "未时", start: 13, end: 15, desc: "日昳" },
-        { name: "申时", start: 15, end: 17, desc: "哺时" },
-        { name: "酉时", start: 17, end: 19, desc: "日入" },
-        { name: "戌时", start: 19, end: 21, desc: "黄昏" },
-        { name: "亥时", start: 21, end: 23, desc: "人定" }
+        { name: i18n.t('huangli.hour.zi'), start: 23, end: 1, desc: i18n.t('huangli.hour_desc.zi') },
+        { name: i18n.t('huangli.hour.chou'), start: 1, end: 3, desc: i18n.t('huangli.hour_desc.chou') },
+        { name: i18n.t('huangli.hour.yin'), start: 3, end: 5, desc: i18n.t('huangli.hour_desc.yin') },
+        { name: i18n.t('huangli.hour.mao'), start: 5, end: 7, desc: i18n.t('huangli.hour_desc.mao') },
+        { name: i18n.t('huangli.hour.chen'), start: 7, end: 9, desc: i18n.t('huangli.hour_desc.chen') },
+        { name: i18n.t('huangli.hour.si'), start: 9, end: 11, desc: i18n.t('huangli.hour_desc.si') },
+        { name: i18n.t('huangli.hour.wu'), start: 11, end: 13, desc: i18n.t('huangli.hour_desc.wu') },
+        { name: i18n.t('huangli.hour.wei'), start: 13, end: 15, desc: i18n.t('huangli.hour_desc.wei') },
+        { name: i18n.t('huangli.hour.shen'), start: 15, end: 17, desc: i18n.t('huangli.hour_desc.shen') },
+        { name: i18n.t('huangli.hour.you'), start: 17, end: 19, desc: i18n.t('huangli.hour_desc.you') },
+        { name: i18n.t('huangli.hour.xu'), start: 19, end: 21, desc: i18n.t('huangli.hour_desc.xu') },
+        { name: i18n.t('huangli.hour.hai'), start: 21, end: 23, desc: i18n.t('huangli.hour_desc.hai') }
     ];
     
     for (let i = 0; i < chineseHours.length; i++) {
@@ -212,7 +214,7 @@ function getChineseHour(hour) {
         }
     }
     
-    return "未知时辰";
+    return i18n.t('huangli.unknown_hour');
 }
 
 // 格式化日期为 YYYY-MM-DD
@@ -225,12 +227,12 @@ function formatDate(date) {
 
 // 获取并显示黄历数据
 function fetchAndDisplayHuangliData(date) {
-    showHuangliStatus('正在加载黄历…');
-    fetch(`/api/huangli?date=${encodeURIComponent(date)}`)
+    showHuangliStatus(i18n.t('huangli.status.loading'));
+    fetch(i18n.apiUrl(`/api/huangli?date=${encodeURIComponent(date)}`))
         .then(response => {
             console.log('黄历API响应状态:', response.status);
             if (!response.ok) {
-                throw new Error('网络响应不正常');
+                throw new Error(i18n.t('common.network_error'));
             }
             return response.json();
         })
@@ -240,13 +242,13 @@ function fetchAndDisplayHuangliData(date) {
                 console.log('黄历数据获取成功，开始显示数据');
                 displayHuangliData(data.data);
             } else {
-                console.error('获取黄历数据失败:', data ? data.message : '未知错误');
-                showHuangliStatus(data?.error?.message || '获取黄历数据失败，请稍后再试。', 'error');
+                console.error('获取黄历数据失败:', data ? data.message : i18n.t('common.unknown_error'));
+                showHuangliStatus(data?.error?.message || i18n.t('huangli.status.load_failed_retry'), 'error');
             }
         })
         .catch(error => {
             console.error('获取黄历数据出错:', error);
-            showHuangliStatus('获取黄历数据出错，请稍后再试。', 'error');
+            showHuangliStatus(i18n.t('huangli.status.load_error_retry'), 'error');
         });
 }
 
@@ -254,14 +256,14 @@ function fetchAndDisplayHuangliData(date) {
 function fetchAndDisplayNineDaysHuangliData() {
     console.log('开始获取九天黄历数据');
     const container = document.getElementById('weekHuangliContainer');
-    container.innerHTML = '<div class="loading">加载中...</div>';
+    container.innerHTML = `<div class="loading">${i18n.t('common.loading')}</div>`;
     const scenario = document.querySelector('#scenarioFilter .scenario-option[aria-pressed="true"]')
         ?.dataset.scenario || '';
-    fetch(`/api/week_huangli?scenario=${encodeURIComponent(scenario)}`)
+    fetch(i18n.apiUrl(`/api/week_huangli?scenario=${encodeURIComponent(scenario)}`))
         .then(response => {
             console.log('九天黄历API响应状态:', response.status);
             if (!response.ok) {
-                throw new Error('网络响应不正常');
+                throw new Error(i18n.t('common.network_error'));
             }
             return response.json();
         })
@@ -272,14 +274,14 @@ function fetchAndDisplayNineDaysHuangliData() {
                 displayNineDaysHuangliData(data.data);
             } else {
                 weekHuangliLoaded = false;
-                console.error('获取九天黄历数据失败:', data ? data.message : '未知错误');
-                document.getElementById('weekHuangliContainer').innerHTML = '<div class="error">获取九天黄历数据失败，请稍后再试。</div>';
+                console.error('获取九天黄历数据失败:', data ? data.message : i18n.t('common.unknown_error'));
+                document.getElementById('weekHuangliContainer').innerHTML = `<div class="error">${i18n.t('huangli.status.week_load_failed')}</div>`;
             }
         })
         .catch(error => {
             weekHuangliLoaded = false;
             console.error('获取九天黄历数据出错:', error);
-            document.getElementById('weekHuangliContainer').innerHTML = '<div class="error">获取九天黄历数据出错，请稍后再试。</div>';
+            document.getElementById('weekHuangliContainer').innerHTML = `<div class="error">${i18n.t('huangli.status.week_load_error')}</div>`;
         });
 }
 
@@ -296,22 +298,31 @@ function displayHuangliData(data) {
         const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
         
         const selectedDate = new Date(`${data.date}T00:00:00`);
-        document.getElementById('currentDate').textContent = selectedDate.toLocaleDateString('zh-CN', {
+        // 根据当前 i18n 语言选择日期格式化 locale
+        // zh-hans -> zh-Hans-CN, zh-hant -> zh-Hant-TW, 其他语言用对应 locale
+        var dateFormatLocale = 'zh-Hans-CN';
+        try {
+          var lang = (typeof i18n !== 'undefined' && i18n.getLanguage) ? i18n.getLanguage() : 'zh-hans';
+          if (lang === 'zh-hant') dateFormatLocale = 'zh-Hant-TW';
+          else if (lang === 'en') dateFormatLocale = 'en-US';
+          else if (lang === 'ja') dateFormatLocale = 'ja-JP';
+        } catch (e) { /* 保持默认 */ }
+        document.getElementById('currentDate').textContent = selectedDate.toLocaleDateString(dateFormatLocale, {
             year: 'numeric', month: 'long', day: 'numeric', weekday: 'long'
         });
         
         // 更新日期信息 - 移除对solarDate的引用
-        document.getElementById('lunarDate').textContent = data.lunar_date || '未知';
-        document.getElementById('ganZhi').textContent = `${data.gan_zhi_year || '未知'} ${data.gan_zhi_month || '未知'} ${data.gan_zhi_day || '未知'}`;
-        
+        document.getElementById('lunarDate').textContent = data.lunar_date || i18n.t('common.unknown');
+        document.getElementById('ganZhi').textContent = `${data.gan_zhi_year || i18n.t('common.unknown')} ${data.gan_zhi_month || i18n.t('common.unknown')} ${data.gan_zhi_day || i18n.t('common.unknown')}`;
+
         // 更新时辰信息
         const ganZhiHourElement = document.getElementById('ganZhiHour');
-        ganZhiHourElement.textContent = `所选日期子时：${data.gan_zhi_hour || '未知'}`;
-        
-        document.getElementById('zodiac').textContent = data.zodiac || '未知';
-        
+        ganZhiHourElement.textContent = i18n.t('huangli.selected_date_zi_hour_format', { hour: data.gan_zhi_hour || i18n.t('common.unknown') });
+
+        document.getElementById('zodiac').textContent = data.zodiac || i18n.t('common.unknown');
+
         // 更新节气
-        document.getElementById('solarTermName').textContent = data.solar_term || '无';
+        document.getElementById('solarTermName').textContent = data.solar_term || i18n.t('common.none');
         
         // 详细打印节气相关信息，用于调试
         console.log("节气相关数据:", {
@@ -327,10 +338,10 @@ function displayHuangliData(data) {
         const nextSolarTermElement = document.getElementById('nextSolarTerm');
         
         // 无论是否有数据，都尝试显示，方便调试
-        prevSolarTermElement.innerHTML = `<span>${data.prev_solar_term || '未知'}</span> <small>(${data.prev_solar_term_days || '?'}天前)</small>`;
+        prevSolarTermElement.innerHTML = `<span>${data.prev_solar_term || i18n.t('common.unknown')}</span> <small>(${i18n.t('huangli.days_ago_format', { days: data.prev_solar_term_days || '?' })})</small>`;
         prevSolarTermElement.style.display = 'block';
-        
-        nextSolarTermElement.innerHTML = `<span>${data.next_solar_term || '未知'}</span> <small>(还有${data.next_solar_term_days || '?'}天)</small>`;
+
+        nextSolarTermElement.innerHTML = `<span>${data.next_solar_term || i18n.t('common.unknown')}</span> <small>(${i18n.t('huangli.days_later_format', { days: data.next_solar_term_days || '?' })})</small>`;
         nextSolarTermElement.style.display = 'block';
         
         // 更新节日
@@ -344,7 +355,7 @@ function displayHuangliData(data) {
                 festivalList.appendChild(festivalItem);
             });
         } else {
-            festivalList.textContent = '今日无节日';
+            festivalList.textContent = i18n.t('huangli.no_festival');
         }
         
         // 更新宜忌
@@ -371,7 +382,7 @@ function displayHuangliData(data) {
                 suitableContainer.appendChild(tag);
             });
         } else {
-            suitableContainer.textContent = '无';
+            suitableContainer.textContent = i18n.t('common.none');
         }
         
         const unsuitableContainer = document.getElementById('unsuitable');
@@ -397,19 +408,19 @@ function displayHuangliData(data) {
                 unsuitableContainer.appendChild(tag);
             });
         } else {
-            unsuitableContainer.textContent = '无';
+            unsuitableContainer.textContent = i18n.t('common.none');
         }
         
         // 更新彭祖百忌
-        document.getElementById('pengZuBaiJi').textContent = data.peng_zu_bai_ji || '无';
+        document.getElementById('pengZuBaiJi').textContent = data.peng_zu_bai_ji || i18n.t('common.none');
         
         // 更新神煞信息
         try {
-            document.getElementById('chongSha').textContent = data.chong_sha || '无';
-            document.getElementById('xiShen').textContent = data.xi_shen || '无';
-            document.getElementById('fuShen').textContent = data.fu_shen || '无';
-            document.getElementById('caiShen').textContent = data.cai_shen || '无';
-            
+            document.getElementById('chongSha').textContent = data.chong_sha || i18n.t('common.none');
+            document.getElementById('xiShen').textContent = data.xi_shen || i18n.t('common.none');
+            document.getElementById('fuShen').textContent = data.fu_shen || i18n.t('common.none');
+            document.getElementById('caiShen').textContent = data.cai_shen || i18n.t('common.none');
+
             // 处理吉神
             const jiShenElement = document.getElementById('jiShen');
             if (data.ji_shen) {
@@ -419,9 +430,9 @@ function displayHuangliData(data) {
                     jiShenElement.textContent = data.ji_shen.join('、');
                 }
             } else {
-                jiShenElement.textContent = '无';
+                jiShenElement.textContent = i18n.t('common.none');
             }
-            
+
             // 处理凶神
             const xiongShenElement = document.getElementById('xiongShen');
             if (data.xiong_shen) {
@@ -431,20 +442,20 @@ function displayHuangliData(data) {
                     xiongShenElement.textContent = data.xiong_shen.join('、');
                 }
             } else {
-                xiongShenElement.textContent = '无';
+                xiongShenElement.textContent = i18n.t('common.none');
             }
         } catch (error) {
             console.error('处理神煞信息出错:', error);
-            document.getElementById('chongSha').textContent = '无';
-            document.getElementById('jiShen').textContent = '无';
-            document.getElementById('xiongShen').textContent = '无';
-            document.getElementById('xiShen').textContent = '无';
-            document.getElementById('fuShen').textContent = '无';
-            document.getElementById('caiShen').textContent = '无';
+            document.getElementById('chongSha').textContent = i18n.t('common.none');
+            document.getElementById('jiShen').textContent = i18n.t('common.none');
+            document.getElementById('xiongShen').textContent = i18n.t('common.none');
+            document.getElementById('xiShen').textContent = i18n.t('common.none');
+            document.getElementById('fuShen').textContent = i18n.t('common.none');
+            document.getElementById('caiShen').textContent = i18n.t('common.none');
         }
     } catch (error) {
         console.error('显示黄历数据出错:', error);
-        showHuangliStatus('显示黄历数据出错，请稍后再试。', 'error');
+        showHuangliStatus(i18n.t('huangli.status.show_error_retry'), 'error');
     }
 }
 
@@ -493,13 +504,21 @@ function displayNineDaysHuangliData(weekData) {
             const dateObj = new Date(dayData.date);
             const month = dateObj.getMonth() + 1;
             const day = dateObj.getDate();
-            const weekday = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'][dateObj.getDay()];
-            
+            const weekday = [
+                i18n.t('huangli.weekday.sun'),
+                i18n.t('huangli.weekday.mon'),
+                i18n.t('huangli.weekday.tue'),
+                i18n.t('huangli.weekday.wed'),
+                i18n.t('huangli.weekday.thu'),
+                i18n.t('huangli.weekday.fri'),
+                i18n.t('huangli.weekday.sat')
+            ][dateObj.getDay()];
+
             // 创建日期部分
             const dateSection = document.createElement('div');
             dateSection.className = 'date-section';
             dateSection.innerHTML = `
-                <div class="solar-date">${month}月${day}日 ${weekday}</div>
+                <div class="solar-date">${i18n.t('huangli.date_short_format', { month: month, day: day, weekday: weekday })}</div>
                 <div class="lunar-date">${dayData.lunar_date}</div>
             `;
             
@@ -517,7 +536,7 @@ function displayNineDaysHuangliData(weekData) {
             
             const suitableLabel = document.createElement('div');
             suitableLabel.className = 'label';
-            suitableLabel.textContent = '宜';
+            suitableLabel.textContent = i18n.t('huangli.yi_label');
             
             const suitableContent = document.createElement('div');
             suitableContent.className = 'content';
@@ -532,7 +551,7 @@ function displayNineDaysHuangliData(weekData) {
                 }
             }
             
-            suitableContent.textContent = suitableArray.length > 0 ? suitableArray.join('、') : '无';
+            suitableContent.textContent = suitableArray.length > 0 ? suitableArray.join('、') : i18n.t('common.none');
             
             suitableDiv.appendChild(suitableLabel);
             suitableDiv.appendChild(suitableContent);
@@ -543,7 +562,7 @@ function displayNineDaysHuangliData(weekData) {
             
             const unsuitableLabel = document.createElement('div');
             unsuitableLabel.className = 'label';
-            unsuitableLabel.textContent = '忌';
+            unsuitableLabel.textContent = i18n.t('huangli.ji_label');
             
             const unsuitableContent = document.createElement('div');
             unsuitableContent.className = 'content';
@@ -558,7 +577,7 @@ function displayNineDaysHuangliData(weekData) {
                 }
             }
             
-            unsuitableContent.textContent = unsuitableArray.length > 0 ? unsuitableArray.join('、') : '无';
+            unsuitableContent.textContent = unsuitableArray.length > 0 ? unsuitableArray.join('、') : i18n.t('common.none');
             
             unsuitableDiv.appendChild(unsuitableLabel);
             unsuitableDiv.appendChild(unsuitableContent);
@@ -577,32 +596,37 @@ function displayNineDaysHuangliData(weekData) {
             // 冲煞信息
             let shenShaInfo = '';
             if (dayData.chong_sha) {
-                shenShaInfo += `冲煞: ${dayData.chong_sha}`;
+                shenShaInfo += i18n.t('huangli.shensha.chongsha', { value: dayData.chong_sha });
             }
-            
+
             // 喜神、福神、财神信息
             let otherShenInfo = [];
             if (dayData.xi_shen) {
-                otherShenInfo.push(`喜神: ${dayData.xi_shen}`);
+                otherShenInfo.push(i18n.t('huangli.shensha.xishen', { value: dayData.xi_shen }));
             }
             if (dayData.fu_shen) {
-                otherShenInfo.push(`福神: ${dayData.fu_shen}`);
+                otherShenInfo.push(i18n.t('huangli.shensha.fushen', { value: dayData.fu_shen }));
             }
             if (dayData.cai_shen) {
-                otherShenInfo.push(`财神: ${dayData.cai_shen}`);
+                otherShenInfo.push(i18n.t('huangli.shensha.caishen', { value: dayData.cai_shen }));
             }
-            
+
             if (otherShenInfo.length > 0) {
                 if (shenShaInfo) shenShaInfo += '<br>';
                 shenShaInfo += otherShenInfo.join(' | ');
             }
-            
-            shenShaSection.innerHTML = shenShaInfo || '神煞: 无';
-            
+
+            shenShaSection.innerHTML = shenShaInfo || i18n.t('huangli.shensha.none');
+
             // 组装卡片
             dayCard.appendChild(dateSection);
+            // 注意：scenario_assessment.status 为后端返回的简体值，比较时保留简体硬编码
             if (dayData.scenario_assessment && dayData.scenario_assessment.status !== '未载') {
-                const scenarioNames = { '结婚': '婚嫁', '搬家': '搬迁', '开业': '开市' };
+                const scenarioNames = {
+                    '结婚': i18n.t('scenario_term.marriage'),
+                    '搬家': i18n.t('scenario_term.move'),
+                    '开业': i18n.t('scenario_term.business')
+                };
                 const scenarioMark = document.createElement('div');
                 scenarioMark.className = `scenario-mark scenario-${dayData.scenario_assessment.status}`;
                 const scenarioName = scenarioNames[dayData.scenario_assessment.scenario]
@@ -635,7 +659,7 @@ function displayNineDaysHuangliData(weekData) {
         
     } catch (error) {
         console.error("显示九天黄历数据时出错:", error);
-        showHuangliStatus('显示九天黄历失败，请稍后重试。', 'error');
+        showHuangliStatus(i18n.t('huangli.status.show_week_failed'), 'error');
     }
 }
 

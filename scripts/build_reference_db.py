@@ -4,6 +4,7 @@ import os
 import sqlite3
 from pathlib import Path
 
+from opencc import OpenCC
 from openpyxl import load_workbook
 
 GUA_FIELDS = {
@@ -107,18 +108,57 @@ def build_reference_database(output, hanzi_source, gua_source, pzbj_source):
                 text TEXT PRIMARY KEY,
                 explanation TEXT NOT NULL
             ) WITHOUT ROWID;
+            CREATE TABLE gua_hant (
+                sign_number INTEGER PRIMARY KEY CHECK(sign_number BETWEEN 1 AND 383),
+                fortune TEXT NOT NULL,
+                gua_type TEXT NOT NULL,
+                sign_text TEXT NOT NULL,
+                interpretation1 TEXT NOT NULL,
+                career TEXT NOT NULL,
+                wealth TEXT NOT NULL,
+                love TEXT NOT NULL,
+                health TEXT NOT NULL,
+                study TEXT NOT NULL,
+                general TEXT NOT NULL
+            );
+            CREATE TABLE pzbj_hant (
+                text TEXT PRIMARY KEY,
+                explanation TEXT NOT NULL
+            ) WITHOUT ROWID;
             """
         )
         connection.executemany("INSERT INTO hanzi VALUES (?, ?, ?, ?)", hanzi)
         connection.executemany("INSERT INTO gua VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", gua)
         connection.executemany("INSERT INTO pzbj VALUES (?, ?)", pzbj)
+
+        # 生成繁体表（用 OpenCC s2t 转换）
+        converter = OpenCC('s2t')
+        gua_hant = [
+            (row[0], *[converter.convert(row[i]) for i in range(1, len(row))])
+            for row in gua
+        ]
+        pzbj_hant = [
+            (converter.convert(text), converter.convert(explanation))
+            for text, explanation in pzbj
+        ]
+        connection.executemany(
+            "INSERT INTO gua_hant VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", gua_hant
+        )
+        connection.executemany("INSERT INTO pzbj_hant VALUES (?, ?)", pzbj_hant)
+
         connection.commit()
         connection.execute("VACUUM")
     finally:
         connection.close()
 
     os.replace(temporary, output)
-    return {"hanzi": len(hanzi), "gua": len(gua), "pzbj": len(pzbj)}
+    return {
+        "hanzi": len(hanzi),
+        "gua": len(gua),
+        "pzbj": len(pzbj),
+        "gua_hant": len(gua_hant),
+        "pzbj_hant": len(pzbj_hant),
+    }
 
 
 def main():

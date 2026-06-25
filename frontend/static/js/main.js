@@ -1,4 +1,8 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
+    await i18n.ready();
+    // 应用 HTML 静态文本翻译
+    i18n.applyTranslations();
+
     const inputs = document.querySelectorAll('.char-input');
     const calculateBtn = document.getElementById('calculateBtn');
     let strokes = [];
@@ -37,20 +41,20 @@ document.addEventListener('DOMContentLoaded', function() {
     calculateBtn.addEventListener('click', async function() {
         this.disabled = true;
         strokes = [];
-        setStatus('正在查询笔画…');
+        setStatus(i18n.t('suanshi.status.querying_strokes'));
         try {
             for (const input of inputs) {
-                const response = await fetch('/get_strokes', {
+                const response = await fetch(i18n.apiUrl('/get_strokes'), {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ character: input.value })
                 });
                 const data = await response.json();
-                if (!response.ok || !data.strokes) throw new Error(data.error?.message || '笔画查询失败');
+                if (!response.ok || !data.strokes) throw new Error(data.error?.message || i18n.t('suanshi.status.strokes_error'));
                 strokes.push(data.strokes);
             }
         } catch (error) {
-            setStatus(error.message || '笔画查询失败，请重试', 'error');
+            setStatus(error.message || i18n.t('suanshi.status.strokes_failed'), 'error');
             return;
         } finally {
             this.disabled = false;
@@ -64,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // 显示求测类型选择
         document.getElementById('qcTypeResult').classList.remove('hidden');
-        setStatus('请选择求测方向');
+        setStatus(i18n.t('suanshi.status.select_direction'));
     });
 
     // 求测类型按钮点击事件
@@ -82,15 +86,16 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // 显示笔画数结果
             document.getElementById('strokeResult').classList.remove('hidden');
-            document.getElementById('stroke1').innerHTML = 
+            const strokeUnit = i18n.t('calendar.unit.画');
+            document.getElementById('stroke1').innerHTML =
                 `<span class="char-display">${inputs[0].value}</span>
-                 <span class="stroke-display">${numToChineseUpper(strokes[0])}画</span>`;
-            document.getElementById('stroke2').innerHTML = 
+                 <span class="stroke-display">${numToChineseUpper(strokes[0])}${strokeUnit}</span>`;
+            document.getElementById('stroke2').innerHTML =
                 `<span class="char-display">${inputs[1].value}</span>
-                 <span class="stroke-display">${numToChineseUpper(strokes[1])}画</span>`;
-            document.getElementById('stroke3').innerHTML = 
+                 <span class="stroke-display">${numToChineseUpper(strokes[1])}${strokeUnit}</span>`;
+            document.getElementById('stroke3').innerHTML =
                 `<span class="char-display">${inputs[2].value}</span>
-                 <span class="stroke-display">${numToChineseUpper(strokes[2])}画</span>`;
+                 <span class="stroke-display">${numToChineseUpper(strokes[2])}${strokeUnit}</span>`;
 
             // 添加：确保显示"查看签号"按钮
             const showSignBtn = document.getElementById('showSignBtn');
@@ -105,18 +110,27 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         const chineseUpperDigits = {
-            0: '〇', 1: '一', 2: '二', 3: '三', 4: '四',
-            5: '五', 6: '六', 7: '七', 8: '八', 9: '九'
+            0: i18n.t('calendar.digit.zero_circle'),
+            1: i18n.t('calendar.digit.one'),
+            2: i18n.t('calendar.digit.two'),
+            3: i18n.t('calendar.digit.three'),
+            4: i18n.t('calendar.digit.four'),
+            5: i18n.t('calendar.digit.five'),
+            6: i18n.t('calendar.digit.six'),
+            7: i18n.t('calendar.digit.seven'),
+            8: i18n.t('calendar.digit.eight'),
+            9: i18n.t('calendar.digit.nine')
         };
+        const ten = i18n.t('calendar.digit.ten');
 
         if (num < 10) {
             return chineseUpperDigits[num];
         } else if (num < 20) {
-            return '十' + (num === 10 ? '' : chineseUpperDigits[num % 10]);
+            return ten + (num === 10 ? '' : chineseUpperDigits[num % 10]);
         } else {
             const tens = Math.floor(num / 10);
             const ones = num % 10;
-            return chineseUpperDigits[tens] + '十' + (ones === 0 ? '' : chineseUpperDigits[ones]);
+            return chineseUpperDigits[tens] + ten + (ones === 0 ? '' : chineseUpperDigits[ones]);
         }
     }
 
@@ -126,7 +140,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // 禁用按钮防止重复点击
             this.disabled = true;
             
-            const response = await fetch('/calculate_sign', {
+            const response = await fetch(i18n.apiUrl('/calculate_sign'), {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -136,7 +150,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const data = await response.json();
             
             if (!data || !data.sign_number) {
-                throw new Error('无效的签号数据');
+                throw new Error(i18n.t('suanshi.error.invalid_sign'));
             }
             
             // 更新显示
@@ -165,7 +179,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         } catch (error) {
             console.error('显示签号时出错:', error);
-            setStatus('显示签号时出错，请重试', 'error');
+            setStatus(i18n.t('suanshi.status.show_sign_error'), 'error');
         } finally {
             // 重新启用按钮
             this.disabled = false;
@@ -180,14 +194,14 @@ document.addEventListener('DOMContentLoaded', function() {
             
             const signNumber = document.getElementById('signNumber').textContent;
             if (!signNumber) {
-                throw new Error('未找到签号');
+                throw new Error(i18n.t('suanshi.error.sign_not_found'));
             }
             
             // 仅隐藏算事结果流程内的按钮，顶部导航始终可用
             document.querySelectorAll('.result-section .ancient-btn').forEach(btn => btn.classList.add('hidden'));
             document.querySelectorAll('.gua-section').forEach(section => section.classList.add('hidden'));
             
-            const response = await fetch('/get_gua_info', {
+            const response = await fetch(i18n.apiUrl('/get_gua_info'), {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -197,7 +211,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             const data = await response.json();
             if (!response.ok || !data || data.error) {
-                throw new Error(data.error?.message || '获取卦象信息失败');
+                throw new Error(data.error?.message || i18n.t('suanshi.error.get_gua_failed'));
             }
             
             // 保存数据
@@ -232,7 +246,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         } catch (error) {
             console.error('显示卦象信息时出错:', error);
-            setStatus('显示卦象信息时出错，请重试', 'error');
+            setStatus(i18n.t('suanshi.status.show_gua_error'), 'error');
         } finally {
             // 重新启用按钮
             this.disabled = false;
@@ -267,16 +281,16 @@ document.addEventListener('DOMContentLoaded', function() {
             window.guaData.interpretation1);
         
         const typeMap = {
-            'career': '事业',
-            'wealth': '财运',
-            'love': '情感',
-            'health': '健康',
-            'study': '学业',
-            'general': '泛泛'
+            'career': i18n.t('suanshi.type_career'),
+            'wealth': i18n.t('suanshi.type_wealth'),
+            'love': i18n.t('suanshi.type_love'),
+            'health': i18n.t('suanshi.type_health'),
+            'study': i18n.t('suanshi.type_study'),
+            'general': i18n.t('suanshi.type_general')
         };
-        
-        document.getElementById('specificTitle').textContent = 
-            `${typeMap[selectedType]}解签`;
+
+        document.getElementById('specificTitle').textContent =
+            `${typeMap[selectedType]}${i18n.t('suanshi.interpretation_suffix')}`;
         await typeWriter(document.getElementById('specificInterpretation'), 
             window.guaData[selectedType]);
         showButton('restartBtn');

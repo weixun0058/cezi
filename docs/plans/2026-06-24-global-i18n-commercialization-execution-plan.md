@@ -20,8 +20,8 @@
 执行边界：
 
 1. 不破坏现有 `/huangli`、`/suanshi`、`/lunming` 中文路由。
-2. 英文默认主站与繁体中文第二语言并行推进，英文商业化优先级更高。
-3. “算事”“论命”“黄历”的英文版不是直译，要做产品交互、术语体系、文化表达和风险边界重写。
+2. 英文默认主站与繁体中文第二语言并行推进，英文商业化优先级更高。P1 先做繁体的原因是：技术栈完全复用现有后端、为 P5 英文的 i18n 架构做技术 rehearsal、港澳台及海外华人是低摩擦增量市场。繁体改造经技术分析确认为中等前端工作量，无阻塞性技术风险（详见 `docs/plans/p1-technical-analysis-2026-06-24.md`）。
+3. "算事""论命""黄历"的英文版不是直译，要做产品交互、术语体系、文化表达和风险边界重写。
 4. 商业化代码必须可配置、可关闭、可替换；真实支付上线前必须完成平台政策与主体可行性核验。
 5. 所有涉及预测、命运、健康、投资、法律、心理治疗、重大人生决策的文案，必须明确限定为娱乐、传统文化探索与自我反思参考。
 6. 每个阶段必须更新进度表，并留下测试、截图、文档或人工验收记录。
@@ -140,7 +140,14 @@ For entertainment, cultural exploration, and self-reflection only. Not medical, 
 4. 列出现有页面路由和 API 端点。
 5. 阅读现有模板，判断是否需要抽取共享页面骨架。
 6. 创建 `docs/business/wise-oracle-termbase.md`，字段包含：简体、繁体、英文、使用场景、禁用表达。
-7. 将 P0 状态更新为“待验收”。
+7. 运行 `rg -n "正在|加载|请输入|请选择|失败|成功|未知|错误" frontend/static/js`，列出 main.js / huangli.js / lunming.js 的全部硬编码中文字符串清单，为 P1 方案 A（额外加载 lang 文件）做准备。
+8. 确认 CSP 策略（当前为 `script-src 'self'`），验证方案 A 的 lang-zh-hant.js 外部加载与 CSP 兼容。
+9. 运行 `rg -n "error.*message|message.*=" zhugeshensuan/blueprints`，标记后端 API 错误消息的语言（当前为简体中文），登记为 P4 显性债务：P4 英文后端改造时统一为所有错误增加 `code` 字段，前端按 code 映射多语言消息。
+10. 将 P0 状态更新为“待验收”。
+
+**已验证事项（无需再审计）：**
+
+- DB 笔画查询支持繁体字输入：`hanzi` 表同时存储简繁（18620 条，7456 条有 traditional_strokes），查询优先返回 `kangxi_strokes`，康熙笔画对简繁统一。详见 `docs/plans/p1-technical-analysis-2026-06-24.md` 难点 4。
 
 **验证命令：**
 
@@ -163,7 +170,7 @@ pytest
 **涉及文件：**
 
 - 修改：`zhugeshensuan/blueprints/pages.py`
-- 新建或修改：`frontend/templates/base.html`
+- 新建或修改：`frontend/templates/base.html`（**P1 不提取，留到 P5 英文阶段再做**。P1 繁体模板硬复制简体模板并改文案，保证 HTML 结构骨架与简体一致——class 名、DOM 层级、JS 选择器统一，为 P5 提取 base.html 降低合并成本。）
 - 新建：`frontend/templates/zh_hant/index.html`
 - 新建：`frontend/templates/zh_hant/huangli.html`
 - 新建：`frontend/templates/zh_hant/suanshi.html`
@@ -171,6 +178,7 @@ pytest
 - 修改：`frontend/static/js/huangli.js`
 - 修改：`frontend/static/js/lunming.js`
 - 修改：`frontend/static/js/main.js`
+- 新建：`frontend/static/js/lang-zh-hant.js`（方案 A：繁体页面额外加载的字符串表，与 CSP `script-src 'self'` 兼容）
 - 修改：`frontend/static/css/style.css`
 - 修改：`frontend/static/css/style_mobile.css`
 - 测试：`tests/test_frontend_contract.py`
@@ -187,26 +195,28 @@ pytest
 
 ### 任务 P1.2：创建繁体模板
 
-1. 只有在现有模板明显重复时，才抽取共享 HTML 骨架。
-2. 创建繁体页面副本，文案要调整语气，不做纯机械简繁转换。
-3. 在页脚或结果区域展示繁体免责声明。
-4. 避免大陆互联网式营销语。
-5. 不改动原有简体模板，除非共享布局确实需要。
-6. 运行页面契约测试。
+1. **不提取 base.html**（留到 P5）。P1 直接硬复制简体模板做繁体版。
+2. 繁体模板的 HTML 结构骨架必须与简体一致——class 名、DOM 层级、JS 选择器统一，只改文案。这样 P5 提取 base.html 时简繁两套模板结构统一，合并成本低。
+3. 创建繁体页面副本，文案要调整语气，不做纯机械简繁转换。
+4. 在页脚或结果区域展示繁体免责声明。
+5. 避免大陆互联网式营销语。
+6. 不改动原有简体模板。
+7. 运行页面契约测试。
 
 ### 任务 P1.3：本地化前端交互文案
 
 1. API 响应结构保持不变。
-2. 在前端增加繁体加载、空状态、错误、重试、结果、校验提示。
-3. 不翻译后端错误码。
-4. 如果后续需要后端多语言错误消息，另开任务处理。
+2. **采用方案 A**：繁体页面额外加载 `lang-zh-hant.js` 字符串表，与 CSP `script-src 'self'` 兼容。主 JS 里的硬编码字符串抽取成 `WISE_ORACLE_I18N` 对象属性访问（如 `WISE_ORACLE_I18N.loading`），默认值仍是简体。这样 P5 英文只需新增 `lang-en.js` 覆盖同一对象，架构统一。
+3. 在前端增加繁体加载、空状态、错误、重试、结果、校验提示。
+4. **不翻译后端错误码，不修改后端错误消息**。当前后端 API 错误消息为简体中文，繁体用户会看到简体错误提示——这是已知问题，登记为 P4 显性债务：P4 英文后端改造时统一为所有错误增加 `code` 字段，前端按 code 映射多语言消息。P1 阶段不处理。
 5. 人工测试三个繁体页面的非法输入。
 
 ### 任务 P1.4：补充 canonical 和 hreflang
 
-1. 为简体、繁体、英文目标页面补充 `canonical` 和 `hreflang` 元数据。
-2. 旧路由 `/huangli`、`/suanshi`、`/lunming` 暂不做 301。
-3. 测试页面渲染后包含预期元数据。
+1. **P1 只加简体与繁体之间的 hreflang 互指**（两者都已存在）。英文页面的 hreflang 等到 P5 英文页面上线后再补——否则会出现指向 404 的 hreflang，对 SEO 有害。
+2. 为简体、繁体页面补充 `canonical` 元数据。
+3. 旧路由 `/huangli`、`/suanshi`、`/lunming` 暂不做 301。
+4. 测试页面渲染后包含预期元数据。
 
 **验证命令：**
 

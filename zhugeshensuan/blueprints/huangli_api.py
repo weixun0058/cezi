@@ -94,7 +94,9 @@ def get_pzbj_explanation():
     text = request.args.get("text", "").strip()
     if not text or len(text) > 100:
         return failure("INVALID_TEXT", "彭祖百忌文本不能为空且不能超过 100 字")
-    explanation = current_app.extensions["pzbj"].get(text)
+    # 根据当前请求语言返回对应简繁解释
+    pzbj_dict = current_app.extensions["database"].get_pzbj()
+    explanation = pzbj_dict.get(text)
     if explanation is None:
         return failure("EXPLANATION_NOT_FOUND", "未找到对应解释", 404)
     return success({"text": text, "explanation": explanation})

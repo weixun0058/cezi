@@ -1,0 +1,2401 @@
+{
+  "_meta": {
+    "description": "诸葛神算统一多语言字典",
+    "version": "0.1.0",
+    "updated": "2026-06-24",
+    "language_codes": {
+      "zh-hans": "简体中文（基准）",
+      "zh-hant": "繁体中文（台湾/香港习惯）",
+      "en": "英文（P5 阶段填充）",
+      "ja": "日文（后续阶段填充）"
+    },
+    "naming_convention": "{命名空间}.{功能}.{具体键名}",
+    "special_chars_note": "繁体特殊字处理：干(天干)不变、冲→沖、发(理发)→髮、签(籤签)→籤、历(黄历)→曆、征(特征)→徵、信息→資訊",
+    "usage": "代码通过语义 key 引用，translations 各语言字段提供实际文本。未填充的语言留空字符串。"
+  },
+  "common.loading": {
+    "source": "加载中...",
+    "translations": {
+      "zh-hans": "加载中...",
+      "zh-hant": "載入中...",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "common.none": {
+    "source": "无",
+    "translations": {
+      "zh-hans": "无",
+      "zh-hant": "無",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "common.unknown": {
+    "source": "未知",
+    "translations": {
+      "zh-hans": "未知",
+      "zh-hant": "未知",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "common.disclaimer": {
+    "source": "传统文化娱乐参考，不构成医疗、投资或人生决策建议。",
+    "translations": {
+      "zh-hans": "传统文化娱乐参考，不构成医疗、投资或人生决策建议。",
+      "zh-hant": "傳統文化娛樂參考，不構成醫療、投資或人生決策建議。",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "suanshi.page_title": {
+    "source": "诸葛神算 - 算事",
+    "translations": {
+      "zh-hans": "诸葛神算 - 算事",
+      "zh-hant": "諸葛神算 - 算事",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.page_title": {
+    "source": "诸葛神算 - 论命",
+    "translations": {
+      "zh-hans": "诸葛神算 - 论命",
+      "zh-hant": "諸葛神算 - 論命",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "common.network_error": {
+    "source": "网络响应不正常",
+    "translations": {
+      "zh-hans": "网络响应不正常",
+      "zh-hant": "網路回應不正常",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "common.unknown_error": {
+    "source": "未知错误",
+    "translations": {
+      "zh-hans": "未知错误",
+      "zh-hant": "未知錯誤",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "common.restart": {
+    "source": "重新测算",
+    "translations": {
+      "zh-hans": "重新测算",
+      "zh-hant": "重新測算",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "suanshi.title": {
+    "source": "算事",
+    "translations": {
+      "zh-hans": "算事",
+      "zh-hant": "算事",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "suanshi.input_title": {
+    "source": "请书三字",
+    "translations": {
+      "zh-hans": "请书三字",
+      "zh-hant": "請書三字",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "suanshi.calculate_btn": {
+    "source": "开始测算",
+    "translations": {
+      "zh-hans": "开始测算",
+      "zh-hant": "開始測算",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "suanshi.strokes_title": {
+    "source": "笔画数",
+    "translations": {
+      "zh-hans": "笔画数",
+      "zh-hant": "筆畫數",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "suanshi.show_sign_btn": {
+    "source": "查看签号",
+    "translations": {
+      "zh-hans": "查看签号",
+      "zh-hant": "查看籤號",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "suanshi.sign_number_title": {
+    "source": "所得签号",
+    "translations": {
+      "zh-hans": "所得签号",
+      "zh-hant": "所得籤號",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "suanshi.interpret_btn": {
+    "source": "解卦",
+    "translations": {
+      "zh-hans": "解卦",
+      "zh-hant": "解卦",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "suanshi.sign_text_title": {
+    "source": "签文",
+    "translations": {
+      "zh-hans": "签文",
+      "zh-hant": "籤文",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "suanshi.show_gua_type_btn": {
+    "source": "查看卦属",
+    "translations": {
+      "zh-hans": "查看卦属",
+      "zh-hant": "查看卦屬",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "suanshi.gua_type_title": {
+    "source": "卦属",
+    "translations": {
+      "zh-hans": "卦属",
+      "zh-hant": "卦屬",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "suanshi.show_fortune_btn": {
+    "source": "查看吉凶",
+    "translations": {
+      "zh-hans": "查看吉凶",
+      "zh-hant": "查看吉凶",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "suanshi.fortune_title": {
+    "source": "吉凶",
+    "translations": {
+      "zh-hans": "吉凶",
+      "zh-hant": "吉凶",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "suanshi.show_interpretation_btn": {
+    "source": "查看解签",
+    "translations": {
+      "zh-hans": "查看解签",
+      "zh-hant": "查看解籤",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "suanshi.interpretation_title": {
+    "source": "解签详解",
+    "translations": {
+      "zh-hans": "解签详解",
+      "zh-hant": "解籤詳解",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "suanshi.qc_type_title": {
+    "source": "请选择求测类型",
+    "translations": {
+      "zh-hans": "请选择求测类型",
+      "zh-hant": "請選擇求測類型",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "suanshi.qc_career": {
+    "source": "求事业",
+    "translations": {
+      "zh-hans": "求事业",
+      "zh-hant": "求事業",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "suanshi.qc_wealth": {
+    "source": "求财运",
+    "translations": {
+      "zh-hans": "求财运",
+      "zh-hant": "求財運",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "suanshi.qc_love": {
+    "source": "求情感",
+    "translations": {
+      "zh-hans": "求情感",
+      "zh-hant": "求情感",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "suanshi.qc_health": {
+    "source": "求健康",
+    "translations": {
+      "zh-hans": "求健康",
+      "zh-hant": "求健康",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "suanshi.qc_study": {
+    "source": "求学业",
+    "translations": {
+      "zh-hans": "求学业",
+      "zh-hant": "求學業",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "suanshi.qc_general": {
+    "source": "泛泛之谈一切随缘",
+    "translations": {
+      "zh-hans": "泛泛之谈一切随缘",
+      "zh-hant": "泛泛之談一切隨緣",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "suanshi.status.querying_strokes": {
+    "source": "正在查询笔画…",
+    "translations": {
+      "zh-hans": "正在查询笔画…",
+      "zh-hant": "正在查詢筆畫…",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "suanshi.status.strokes_failed": {
+    "source": "笔画查询失败，请重试",
+    "translations": {
+      "zh-hans": "笔画查询失败，请重试",
+      "zh-hant": "筆畫查詢失敗，請重試",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "suanshi.status.strokes_error": {
+    "source": "笔画查询失败",
+    "translations": {
+      "zh-hans": "笔画查询失败",
+      "zh-hant": "筆畫查詢失敗",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "suanshi.status.select_direction": {
+    "source": "请选择求测方向",
+    "translations": {
+      "zh-hans": "请选择求测方向",
+      "zh-hant": "請選擇求測方向",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "suanshi.status.show_sign_error": {
+    "source": "显示签号时出错，请重试",
+    "translations": {
+      "zh-hans": "显示签号时出错，请重试",
+      "zh-hant": "顯示籤號時出錯，請重試",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "suanshi.status.show_gua_error": {
+    "source": "显示卦象信息时出错，请重试",
+    "translations": {
+      "zh-hans": "显示卦象信息时出错，请重试",
+      "zh-hant": "顯示卦象資訊時出錯，請重試",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "suanshi.error.invalid_sign": {
+    "source": "无效的签号数据",
+    "translations": {
+      "zh-hans": "无效的签号数据",
+      "zh-hant": "無效的籤號資料",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "suanshi.error.sign_not_found": {
+    "source": "未找到签号",
+    "translations": {
+      "zh-hans": "未找到签号",
+      "zh-hant": "未找到籤號",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "suanshi.error.get_gua_failed": {
+    "source": "获取卦象信息失败",
+    "translations": {
+      "zh-hans": "获取卦象信息失败",
+      "zh-hant": "取得卦象資訊失敗",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "suanshi.type_career": {
+    "source": "事业",
+    "translations": {
+      "zh-hans": "事业",
+      "zh-hant": "事業",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "suanshi.type_wealth": {
+    "source": "财运",
+    "translations": {
+      "zh-hans": "财运",
+      "zh-hant": "財運",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "suanshi.type_love": {
+    "source": "情感",
+    "translations": {
+      "zh-hans": "情感",
+      "zh-hant": "情感",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "suanshi.type_health": {
+    "source": "健康",
+    "translations": {
+      "zh-hans": "健康",
+      "zh-hant": "健康",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "suanshi.type_study": {
+    "source": "学业",
+    "translations": {
+      "zh-hans": "学业",
+      "zh-hant": "學業",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "suanshi.type_general": {
+    "source": "泛泛",
+    "translations": {
+      "zh-hans": "泛泛",
+      "zh-hant": "泛泛",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "suanshi.interpretation_suffix": {
+    "source": "解签",
+    "translations": {
+      "zh-hans": "解签",
+      "zh-hant": "解籤",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.title": {
+    "source": "每日黄历",
+    "translations": {
+      "zh-hans": "每日黄历",
+      "zh-hant": "每日黃曆",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.date_label": {
+    "source": "日期",
+    "translations": {
+      "zh-hans": "日期",
+      "zh-hant": "日期",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.lunar_date_label": {
+    "source": "农历：",
+    "translations": {
+      "zh-hans": "农历：",
+      "zh-hant": "農曆：",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.gan_zhi_label": {
+    "source": "干支：",
+    "translations": {
+      "zh-hans": "干支：",
+      "zh-hant": "干支：",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.zodiac_label": {
+    "source": "生肖：",
+    "translations": {
+      "zh-hans": "生肖：",
+      "zh-hant": "生肖：",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.yi_label": {
+    "source": "宜",
+    "translations": {
+      "zh-hans": "宜",
+      "zh-hant": "宜",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.ji_label": {
+    "source": "忌",
+    "translations": {
+      "zh-hans": "忌",
+      "zh-hant": "忌",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.chong_label": {
+    "source": "冲煞：",
+    "translations": {
+      "zh-hans": "冲煞：",
+      "zh-hant": "沖煞：",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.sha_label": {
+    "source": "煞",
+    "translations": {
+      "zh-hans": "煞",
+      "zh-hant": "煞",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.wuxing_label": {
+    "source": "五行",
+    "translations": {
+      "zh-hans": "五行",
+      "zh-hant": "五行",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.pengzu_label": {
+    "source": "彭祖百忌",
+    "translations": {
+      "zh-hans": "彭祖百忌",
+      "zh-hant": "彭祖百忌",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.xingxiu_label": {
+    "source": "星宿",
+    "translations": {
+      "zh-hans": "星宿",
+      "zh-hant": "星宿",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.taishen_label": {
+    "source": "胎神占方",
+    "translations": {
+      "zh-hans": "胎神占方",
+      "zh-hant": "胎神占方",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.jieqi_label": {
+    "source": "节气",
+    "translations": {
+      "zh-hans": "节气",
+      "zh-hant": "節氣",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.current_time_format": {
+    "source": "当前时间：{time} · {hour}",
+    "translations": {
+      "zh-hans": "当前时间：{time} · {hour}",
+      "zh-hant": "目前時間：{time} · {hour}",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.selected_date_zi_hour_format": {
+    "source": "所选日期子时：{hour}",
+    "translations": {
+      "zh-hans": "所选日期子时：{hour}",
+      "zh-hant": "所選日期子時：{hour}",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.no_festival": {
+    "source": "今日无节日",
+    "translations": {
+      "zh-hans": "今日无节日",
+      "zh-hant": "今日無節日",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.status.loading": {
+    "source": "正在加载黄历…",
+    "translations": {
+      "zh-hans": "正在加载黄历…",
+      "zh-hant": "正在載入黃曆…",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.status.load_failed_retry": {
+    "source": "获取黄历数据失败，请稀后再试。",
+    "translations": {
+      "zh-hans": "获取黄历数据失败，请稍后再试。",
+      "zh-hant": "取得黃曆資料失敗，請稍後再試。",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.status.load_error_retry": {
+    "source": "获取黄历数据出错，请稍后再试。",
+    "translations": {
+      "zh-hans": "获取黄历数据出错，请稍后再试。",
+      "zh-hant": "取得黃曆資料出錯，請稍後再試。",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.status.week_load_failed": {
+    "source": "获取九天黄历数据失败，请稍后再试。",
+    "translations": {
+      "zh-hans": "获取九天黄历数据失败，请稍后再试。",
+      "zh-hant": "取得九天黃曆資料失敗，請稍後再試。",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.status.week_load_error": {
+    "source": "获取九天黄历数据出错，请稍后再试。",
+    "translations": {
+      "zh-hans": "获取九天黄历数据出错，请稍后再试。",
+      "zh-hant": "取得九天黃曆資料出錯，請稍後再試。",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.status.show_error_retry": {
+    "source": "显示黄历数据出错，请稍后再试。",
+    "translations": {
+      "zh-hans": "显示黄历数据出错，请稍后再试。",
+      "zh-hant": "顯示黃曆資料出錯，請稍後再試。",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.status.show_week_failed": {
+    "source": "显示九天黄历失败，请稍后重试。",
+    "translations": {
+      "zh-hans": "显示九天黄历失败，请稍后重试。",
+      "zh-hant": "顯示九天黃曆失敗，請稍後重試。",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.days_ago_format": {
+    "source": "({days}天前)",
+    "translations": {
+      "zh-hans": "({days}天前)",
+      "zh-hant": "({days}天前)",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.days_later_format": {
+    "source": "(还有{days}天)",
+    "translations": {
+      "zh-hans": "(还有{days}天)",
+      "zh-hant": "(還有{days}天)",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.shensha.chongsha": {
+    "source": "冲煞: {value}",
+    "translations": {
+      "zh-hans": "冲煞: {value}",
+      "zh-hant": "沖煞: {value}",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.shensha.xishen": {
+    "source": "喜神: {value}",
+    "translations": {
+      "zh-hans": "喜神: {value}",
+      "zh-hant": "喜神: {value}",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.shensha.fushen": {
+    "source": "福神: {value}",
+    "translations": {
+      "zh-hans": "福神: {value}",
+      "zh-hant": "福神: {value}",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.shensha.caishen": {
+    "source": "财神: {value}",
+    "translations": {
+      "zh-hans": "财神: {value}",
+      "zh-hant": "財神: {value}",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.shensha.none": {
+    "source": "神煞: 无",
+    "translations": {
+      "zh-hans": "神煞: 无",
+      "zh-hant": "神煞: 無",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.weekday.sun": {
+    "source": "周日",
+    "translations": {
+      "zh-hans": "周日",
+      "zh-hant": "週日",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.weekday.mon": {
+    "source": "周一",
+    "translations": {
+      "zh-hans": "周一",
+      "zh-hant": "週一",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.weekday.tue": {
+    "source": "周二",
+    "translations": {
+      "zh-hans": "周二",
+      "zh-hant": "週二",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.weekday.wed": {
+    "source": "周三",
+    "translations": {
+      "zh-hans": "周三",
+      "zh-hant": "週三",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.weekday.thu": {
+    "source": "周四",
+    "translations": {
+      "zh-hans": "周四",
+      "zh-hant": "週四",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.weekday.fri": {
+    "source": "周五",
+    "translations": {
+      "zh-hans": "周五",
+      "zh-hant": "週五",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.weekday.sat": {
+    "source": "周六",
+    "translations": {
+      "zh-hans": "周六",
+      "zh-hant": "週六",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.date_short_format": {
+    "source": "{month}月{day}日 {weekday}",
+    "translations": {
+      "zh-hans": "{month}月{day}日 {weekday}",
+      "zh-hant": "{month}月{day}日 {weekday}",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.unknown_hour": {
+    "source": "未知时辰",
+    "translations": {
+      "zh-hans": "未知时辰",
+      "zh-hant": "未知時辰",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.scenario.not_loaded": {
+    "source": "未载",
+    "translations": {
+      "zh-hans": "未载",
+      "zh-hant": "未載",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.hour.zi": {
+    "source": "子时",
+    "translations": {
+      "zh-hans": "子时",
+      "zh-hant": "子時",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.hour.chou": {
+    "source": "丑时",
+    "translations": {
+      "zh-hans": "丑时",
+      "zh-hant": "丑時",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.hour.yin": {
+    "source": "寅时",
+    "translations": {
+      "zh-hans": "寅时",
+      "zh-hant": "寅時",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.hour.mao": {
+    "source": "卯时",
+    "translations": {
+      "zh-hans": "卯时",
+      "zh-hant": "卯時",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.hour.chen": {
+    "source": "辰时",
+    "translations": {
+      "zh-hans": "辰时",
+      "zh-hant": "辰時",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.hour.si": {
+    "source": "巳时",
+    "translations": {
+      "zh-hans": "巳时",
+      "zh-hant": "巳時",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.hour.wu": {
+    "source": "午时",
+    "translations": {
+      "zh-hans": "午时",
+      "zh-hant": "午時",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.hour.wei": {
+    "source": "未时",
+    "translations": {
+      "zh-hans": "未时",
+      "zh-hant": "未時",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.hour.shen": {
+    "source": "申时",
+    "translations": {
+      "zh-hans": "申时",
+      "zh-hant": "申時",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.hour.you": {
+    "source": "酉时",
+    "translations": {
+      "zh-hans": "酉时",
+      "zh-hant": "酉時",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.hour.xu": {
+    "source": "戌时",
+    "translations": {
+      "zh-hans": "戌时",
+      "zh-hant": "戌時",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.hour.hai": {
+    "source": "亥时",
+    "translations": {
+      "zh-hans": "亥时",
+      "zh-hant": "亥時",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.hour_desc.zi": {
+    "source": "夜半",
+    "translations": {
+      "zh-hans": "夜半",
+      "zh-hant": "夜半",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.hour_desc.chou": {
+    "source": "鸡鸣",
+    "translations": {
+      "zh-hans": "鸡鸣",
+      "zh-hant": "雞鳴",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.hour_desc.yin": {
+    "source": "平旦",
+    "translations": {
+      "zh-hans": "平旦",
+      "zh-hant": "平旦",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.hour_desc.mao": {
+    "source": "日出",
+    "translations": {
+      "zh-hans": "日出",
+      "zh-hant": "日出",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.hour_desc.chen": {
+    "source": "食时",
+    "translations": {
+      "zh-hans": "食时",
+      "zh-hant": "食時",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.hour_desc.si": {
+    "source": "禺中",
+    "translations": {
+      "zh-hans": "禺中",
+      "zh-hant": "禺中",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.hour_desc.wu": {
+    "source": "日中",
+    "translations": {
+      "zh-hans": "日中",
+      "zh-hant": "日中",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.hour_desc.wei": {
+    "source": "日昳",
+    "translations": {
+      "zh-hans": "日昳",
+      "zh-hant": "日昳",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.hour_desc.shen": {
+    "source": "哺时",
+    "translations": {
+      "zh-hans": "哺时",
+      "zh-hant": "晡時",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.hour_desc.you": {
+    "source": "日入",
+    "translations": {
+      "zh-hans": "日入",
+      "zh-hant": "日入",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.hour_desc.xu": {
+    "source": "黄昏",
+    "translations": {
+      "zh-hans": "黄昏",
+      "zh-hant": "黃昏",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.hour_desc.hai": {
+    "source": "人定",
+    "translations": {
+      "zh-hans": "人定",
+      "zh-hant": "人定",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.page_title": {
+    "source": "诸葛神算 - 传统黄历",
+    "translations": {
+      "zh-hans": "诸葛神算 - 传统黄历",
+      "zh-hant": "諸葛神算 - 傳統黃曆",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.title_h1": {
+    "source": "黄历",
+    "translations": {
+      "zh-hans": "黄历",
+      "zh-hant": "黃曆",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.solar_date_label": {
+    "source": "公历",
+    "translations": {
+      "zh-hans": "公历",
+      "zh-hant": "公曆",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.prev_day_btn": {
+    "source": "前一天",
+    "translations": {
+      "zh-hans": "前一天",
+      "zh-hant": "前一天",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.today_btn": {
+    "source": "今天",
+    "translations": {
+      "zh-hans": "今天",
+      "zh-hant": "今天",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.next_day_btn": {
+    "source": "后一天",
+    "translations": {
+      "zh-hans": "后一天",
+      "zh-hant": "後一天",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.year_placeholder": {
+    "source": "年",
+    "translations": {
+      "zh-hans": "年",
+      "zh-hant": "年",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.month_placeholder": {
+    "source": "月",
+    "translations": {
+      "zh-hans": "月",
+      "zh-hant": "月",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.day_placeholder": {
+    "source": "日",
+    "translations": {
+      "zh-hans": "日",
+      "zh-hant": "日",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.date_info_title": {
+    "source": "日期信息",
+    "translations": {
+      "zh-hans": "日期信息",
+      "zh-hant": "日期資訊",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.festival_title": {
+    "source": "节气与节日",
+    "translations": {
+      "zh-hans": "节气与节日",
+      "zh-hant": "節氣與節日",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.solar_term_label": {
+    "source": "节气：",
+    "translations": {
+      "zh-hans": "节气：",
+      "zh-hant": "節氣：",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.festival_label": {
+    "source": "节日：",
+    "translations": {
+      "zh-hans": "节日：",
+      "zh-hant": "節日：",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.hour_label": {
+    "source": "时辰：",
+    "translations": {
+      "zh-hans": "时辰：",
+      "zh-hant": "時辰：",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.today_yi_ji_title": {
+    "source": "今日宜忌",
+    "translations": {
+      "zh-hans": "今日宜忌",
+      "zh-hant": "今日宜忌",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.shensha_title": {
+    "source": "神煞信息",
+    "translations": {
+      "zh-hans": "神煞信息",
+      "zh-hant": "神煞資訊",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.pengzu_title": {
+    "source": "彭祖百忌",
+    "translations": {
+      "zh-hans": "彭祖百忌",
+      "zh-hant": "彭祖百忌",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.jishen_label": {
+    "source": "吉神：",
+    "translations": {
+      "zh-hans": "吉神：",
+      "zh-hant": "吉神：",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.xiongshen_label": {
+    "source": "凶神：",
+    "translations": {
+      "zh-hans": "凶神：",
+      "zh-hant": "凶神：",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.shensha.xishen_label": {
+    "source": "喜神：",
+    "translations": {
+      "zh-hans": "喜神：",
+      "zh-hant": "喜神：",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.shensha.fushen_label": {
+    "source": "福神：",
+    "translations": {
+      "zh-hans": "福神：",
+      "zh-hant": "福神：",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.shensha.caishen_label": {
+    "source": "财神：",
+    "translations": {
+      "zh-hans": "财神：",
+      "zh-hant": "財神：",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.extension_title": {
+    "source": "九天黄历",
+    "translations": {
+      "zh-hans": "九天黄历",
+      "zh-hant": "九天黃曆",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.scenario.marry": {
+    "source": "婚嫁",
+    "translations": {
+      "zh-hans": "婚嫁",
+      "zh-hant": "婚嫁",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.scenario.move": {
+    "source": "搬迁",
+    "translations": {
+      "zh-hans": "搬迁",
+      "zh-hant": "搬遷",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.scenario.business": {
+    "source": "开市",
+    "translations": {
+      "zh-hans": "开市",
+      "zh-hant": "開市",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.scenario.travel": {
+    "source": "出行",
+    "translations": {
+      "zh-hans": "出行",
+      "zh-hant": "出行",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.scenario.sign": {
+    "source": "签约",
+    "translations": {
+      "zh-hans": "签约",
+      "zh-hant": "簽約",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "huangli.scenario.haircut": {
+    "source": "理发",
+    "translations": {
+      "zh-hans": "理发",
+      "zh-hant": "理髮",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.title": {
+    "source": "论命",
+    "translations": {
+      "zh-hans": "论命",
+      "zh-hant": "論命",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.gender_label": {
+    "source": "性别",
+    "translations": {
+      "zh-hans": "性别",
+      "zh-hant": "性別",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.gender_male": {
+    "source": "男",
+    "translations": {
+      "zh-hans": "男",
+      "zh-hant": "男",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.gender_female": {
+    "source": "女",
+    "translations": {
+      "zh-hans": "女",
+      "zh-hant": "女",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.birth_date_label": {
+    "source": "出生日期",
+    "translations": {
+      "zh-hans": "出生日期",
+      "zh-hant": "出生日期",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.birth_time_label": {
+    "source": "出生时辰",
+    "translations": {
+      "zh-hans": "出生时辰",
+      "zh-hant": "出生時辰",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.birth_time_unknown": {
+    "source": "时辰未知",
+    "translations": {
+      "zh-hans": "时辰未知",
+      "zh-hant": "時辰未知",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.birth_place_label": {
+    "source": "出生地：",
+    "translations": {
+      "zh-hans": "出生地：",
+      "zh-hant": "出生地：",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.timezone_label": {
+    "source": "时区：",
+    "translations": {
+      "zh-hans": "时区：",
+      "zh-hant": "時區：",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.true_solar_time_label": {
+    "source": "启用真太阳时修正",
+    "translations": {
+      "zh-hans": "启用真太阳时修正",
+      "zh-hant": "啟用真太陽時修正",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.calculate_btn": {
+    "source": "开始分析",
+    "translations": {
+      "zh-hans": "开始分析",
+      "zh-hant": "開始分析",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.bazi_title": {
+    "source": "八字命盘",
+    "translations": {
+      "zh-hans": "八字命盘",
+      "zh-hant": "八字命盤",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.luck_cycles_title": {
+    "source": "大运走势",
+    "translations": {
+      "zh-hans": "大运走势",
+      "zh-hant": "大運走勢",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.wuxing_title": {
+    "source": "五行分布",
+    "translations": {
+      "zh-hans": "五行分布",
+      "zh-hant": "五行分布",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.nayin_title": {
+    "source": "纳音",
+    "translations": {
+      "zh-hans": "纳音",
+      "zh-hant": "納音",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.report_kicker": {
+    "source": "命盘纲要",
+    "translations": {
+      "zh-hans": "命盘纲要",
+      "zh-hant": "命盤綱要",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.chart_title": {
+    "source": "四柱排盘",
+    "translations": {
+      "zh-hans": "四柱排盘",
+      "zh-hant": "四柱排盤",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.pillar_year": {
+    "source": "年柱",
+    "translations": {
+      "zh-hans": "年柱",
+      "zh-hant": "年柱",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.pillar_month": {
+    "source": "月柱",
+    "translations": {
+      "zh-hans": "月柱",
+      "zh-hant": "月柱",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.pillar_day": {
+    "source": "日柱",
+    "translations": {
+      "zh-hans": "日柱",
+      "zh-hant": "日柱",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.pillar_time": {
+    "source": "时柱",
+    "translations": {
+      "zh-hans": "时柱",
+      "zh-hant": "時柱",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.fact_zodiac": {
+    "source": "生肖",
+    "translations": {
+      "zh-hans": "生肖",
+      "zh-hant": "生肖",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.fact_day_master": {
+    "source": "日主",
+    "translations": {
+      "zh-hans": "日主",
+      "zh-hant": "日主",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.fact_wuxing": {
+    "source": "五行",
+    "translations": {
+      "zh-hans": "五行",
+      "zh-hant": "五行",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.fact_true_solar": {
+    "source": "真太阳时",
+    "translations": {
+      "zh-hans": "真太阳时",
+      "zh-hant": "真太陽時",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.correction_format": {
+    "source": "修正 {minutes} 分钟",
+    "translations": {
+      "zh-hans": "修正 {minutes} 分钟",
+      "zh-hant": "修正 {minutes} 分鐘",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.overview_kicker": {
+    "source": "命书总览",
+    "translations": {
+      "zh-hans": "命书总览",
+      "zh-hant": "命書總覽",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.action_kicker": {
+    "source": "行事参考",
+    "translations": {
+      "zh-hans": "行事参考",
+      "zh-hant": "行事參考",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.action_title": {
+    "source": "顺势而为，落在日常",
+    "translations": {
+      "zh-hans": "顺势而为，落在日常",
+      "zh-hant": "順勢而為，落在日常",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.timezone.china": {
+    "source": "中国标准时间",
+    "translations": {
+      "zh-hans": "中国标准时间",
+      "zh-hant": "中國標準時間",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.timezone.hk": {
+    "source": "香港时间",
+    "translations": {
+      "zh-hans": "香港时间",
+      "zh-hant": "香港時間",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.timezone.taipei": {
+    "source": "台北时间",
+    "translations": {
+      "zh-hans": "台北时间",
+      "zh-hant": "台北時間",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.timezone.singapore": {
+    "source": "新加坡时间",
+    "translations": {
+      "zh-hans": "新加坡时间",
+      "zh-hant": "新加坡時間",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.timezone.utc": {
+    "source": "UTC",
+    "translations": {
+      "zh-hans": "UTC",
+      "zh-hant": "UTC",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.status.calculating": {
+    "source": "正在建立分析连接…",
+    "translations": {
+      "zh-hans": "正在建立分析连接…",
+      "zh-hant": "正在建立分析連線…",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.status.done": {
+    "source": "解读完成",
+    "translations": {
+      "zh-hans": "解读完成",
+      "zh-hant": "解讀完成",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.status.stream_interrupted": {
+    "source": "分析流中断，请重试",
+    "translations": {
+      "zh-hans": "分析流中断，请重试",
+      "zh-hant": "分析流中斷，請重試",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.error.stream_error": {
+    "source": "分析流中断",
+    "translations": {
+      "zh-hans": "分析流中断",
+      "zh-hant": "分析流中斷",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.error.request_failed": {
+    "source": "分析请求失败",
+    "translations": {
+      "zh-hans": "分析请求失败",
+      "zh-hant": "分析請求失敗",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.validation.name_required": {
+    "source": "请输入姓名",
+    "translations": {
+      "zh-hans": "请输入姓名",
+      "zh-hant": "請輸入姓名",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.validation.birth_date_required": {
+    "source": "请选择出生日期",
+    "translations": {
+      "zh-hans": "请选择出生日期",
+      "zh-hant": "請選擇出生日期",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.validation.birth_time_required": {
+    "source": "请选择出生时辰或“时辰未知”",
+    "translations": {
+      "zh-hans": "请选择出生时辰或“时辰未知”",
+      "zh-hant": "請選擇出生時辰或「時辰未知」",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.validation.true_solar_unknown": {
+    "source": "时辰未知时不能启用真太阳时",
+    "translations": {
+      "zh-hans": "时辰未知时不能启用真太阳时",
+      "zh-hant": "時辰未知時不能啟用真太陽時",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.validation.longitude_required": {
+    "source": "请输入出生地经度",
+    "translations": {
+      "zh-hans": "请输入出生地经度",
+      "zh-hant": "請輸入出生地經度",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.hour_select_prompt": {
+    "source": "请选择时辰",
+    "translations": {
+      "zh-hans": "请选择时辰",
+      "zh-hant": "請選擇時辰",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.hour_option_format": {
+    "source": "{gan}{zhi}时 ({range})",
+    "translations": {
+      "zh-hans": "{gan}{zhi}时 ({range})",
+      "zh-hant": "{gan}{zhi}時 ({range})",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.basic_info_title": {
+    "source": "基本信息",
+    "translations": {
+      "zh-hans": "基本信息",
+      "zh-hant": "基本資訊",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.location_section_title": {
+    "source": "出生地与时间",
+    "translations": {
+      "zh-hans": "出生地与时间",
+      "zh-hant": "出生地與時間",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.reset_btn": {
+    "source": "重置",
+    "translations": {
+      "zh-hans": "重置",
+      "zh-hant": "重置",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.loading_text": {
+    "source": "正在分析，请稍候...",
+    "translations": {
+      "zh-hans": "正在分析，请稍候...",
+      "zh-hant": "正在分析，請稍候...",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.name_label": {
+    "source": "姓名：",
+    "translations": {
+      "zh-hans": "姓名：",
+      "zh-hant": "姓名：",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.solar_date_label": {
+    "source": "公历日期：",
+    "translations": {
+      "zh-hans": "公历日期：",
+      "zh-hant": "公曆日期：",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.lunar_date_label": {
+    "source": "农历日期：",
+    "translations": {
+      "zh-hans": "农历日期：",
+      "zh-hant": "農曆日期：",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.birth_time_form_label": {
+    "source": "时辰：",
+    "translations": {
+      "zh-hans": "时辰：",
+      "zh-hant": "時辰：",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.longitude_label": {
+    "source": "出生地经度：",
+    "translations": {
+      "zh-hans": "出生地经度：",
+      "zh-hant": "出生地經度：",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.name_placeholder": {
+    "source": "请输入您的姓名",
+    "translations": {
+      "zh-hans": "请输入您的姓名",
+      "zh-hant": "請輸入您的姓名",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.birth_place_placeholder": {
+    "source": "选填，仅用于报告备注",
+    "translations": {
+      "zh-hans": "选填，仅用于报告备注",
+      "zh-hant": "選填，僅用於報告備註",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.longitude_placeholder": {
+    "source": "例如 116.40",
+    "translations": {
+      "zh-hans": "例如 116.40",
+      "zh-hant": "例如 116.40",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.year_placeholder": {
+    "source": "年",
+    "translations": {
+      "zh-hans": "年",
+      "zh-hant": "年",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.month_placeholder": {
+    "source": "请选择月份",
+    "translations": {
+      "zh-hans": "请选择月份",
+      "zh-hant": "請選擇月份",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "lunming.day_placeholder": {
+    "source": "请选择日期",
+    "translations": {
+      "zh-hans": "请选择日期",
+      "zh-hant": "請選擇日期",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "scenario.marriage": {
+    "source": "结婚",
+    "translations": {
+      "zh-hans": "结婚",
+      "zh-hant": "結婚",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "scenario.move": {
+    "source": "搬家",
+    "translations": {
+      "zh-hans": "搬家",
+      "zh-hant": "搬家",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "scenario.business": {
+    "source": "开业",
+    "translations": {
+      "zh-hans": "开业",
+      "zh-hant": "開業",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "scenario.travel": {
+    "source": "出行",
+    "translations": {
+      "zh-hans": "出行",
+      "zh-hant": "出行",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "scenario.contract": {
+    "source": "签约",
+    "translations": {
+      "zh-hans": "签约",
+      "zh-hant": "簽約",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "scenario.haircut": {
+    "source": "理发",
+    "translations": {
+      "zh-hans": "理发",
+      "zh-hant": "理髮",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "scenario_term.marriage": {
+    "source": "婚嫁",
+    "translations": {
+      "zh-hans": "婚嫁",
+      "zh-hant": "婚嫁",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "scenario_term.move": {
+    "source": "搬迁",
+    "translations": {
+      "zh-hans": "搬迁",
+      "zh-hant": "搬遷",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "scenario_term.business": {
+    "source": "开市",
+    "translations": {
+      "zh-hans": "开市",
+      "zh-hant": "開市",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "poem.suanshi.line1": {
+    "source": "远代遗书纸半残",
+    "translations": {
+      "zh-hans": "远代遗书纸半残",
+      "zh-hant": "遠代遺書紙半殘",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "poem.suanshi.line2": {
+    "source": "吉凶变化隐其间",
+    "translations": {
+      "zh-hans": "吉凶变化隐其间",
+      "zh-hant": "吉凶變化隱其間",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "poem.suanshi.line3": {
+    "source": "虔诚默念心所愿",
+    "translations": {
+      "zh-hans": "虔诚默念心所愿",
+      "zh-hant": "虔誠默念心所願",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "poem.suanshi.line4": {
+    "source": "静候天机揭秘玄",
+    "translations": {
+      "zh-hans": "静候天机揭秘玄",
+      "zh-hant": "靜候天機揭祕玄",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "poem.suanshi.line5": {
+    "source": "先贤智慧传千载",
+    "translations": {
+      "zh-hans": "先贤智慧传千载",
+      "zh-hant": "先賢智慧傳千載",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "poem.suanshi.line6": {
+    "source": "后世同好共珍看",
+    "translations": {
+      "zh-hans": "后世同好共珍看",
+      "zh-hant": "後世同好共珍看",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "poem.suanshi.line7": {
+    "source": "莫把灵签当儿戏",
+    "translations": {
+      "zh-hans": "莫把灵签当儿戏",
+      "zh-hant": "莫把靈籤當兒戲",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "poem.suanshi.line8": {
+    "source": "诚心祷告意绵绵",
+    "translations": {
+      "zh-hans": "诚心祷告意绵绵",
+      "zh-hant": "誠心禱告意綿綿",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "poem.huangli.line1": {
+    "source": "日月星辰运行间",
+    "translations": {
+      "zh-hans": "日月星辰运行间",
+      "zh-hant": "日月星辰運行間",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "poem.huangli.line2": {
+    "source": "黄历记载天地理",
+    "translations": {
+      "zh-hans": "黄历记载天地理",
+      "zh-hant": "黃曆記載天地理",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "poem.huangli.line3": {
+    "source": "吉凶祸福皆有源",
+    "translations": {
+      "zh-hans": "吉凶祸福皆有源",
+      "zh-hant": "吉凶禍福皆有源",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "poem.huangli.line4": {
+    "source": "顺应时节得安然",
+    "translations": {
+      "zh-hans": "顺应时节得安然",
+      "zh-hant": "順應時節得安然",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "poem.lunming.line1": {
+    "source": "命由天定亦由人",
+    "translations": {
+      "zh-hans": "命由天定亦由人",
+      "zh-hant": "命由天定亦由人",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "poem.lunming.line2": {
+    "source": "一线生机在己身",
+    "translations": {
+      "zh-hans": "一线生机在己身",
+      "zh-hant": "一線生機在己身",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "poem.lunming.line3": {
+    "source": "若问前程如何算",
+    "translations": {
+      "zh-hans": "若问前程如何算",
+      "zh-hant": "若問前程如何算",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "poem.lunming.line4": {
+    "source": "且看八字定乾坤",
+    "translations": {
+      "zh-hans": "且看八字定乾坤",
+      "zh-hant": "且看八字定乾坤",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "intro.suanshi.1": {
+    "source": "此占卜之法,专为算事而非论命。首当立定所问之事,屏息凝神。待心中自现三字,即为所求之缘索。一事一卜,多卜无益。",
+    "translations": {
+      "zh-hans": "此占卜之法,专为算事而非论命。首当立定所问之事,屏息凝神。待心中自现三字,即为所求之缘索。一事一卜,多卜无益。",
+      "zh-hant": "此占卜之法,專為算事而非論命。首當立定所問之事,屏息凝神。待心中自現三字,即為所求之緣索。一事一卜,多卜無益。",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "intro.suanshi.2": {
+    "source": "若得吉兆,亦不可沾沾自喜,全然依赖;若遇不祥,亦勿忧愁沮丧,放弃努力.人生在世,际遇万千,勿因一时一事而心怀羁绊.",
+    "translations": {
+      "zh-hans": "若得吉兆,亦不可沾沾自喜,全然依赖;若遇不祥,亦勿忧愁沮丧,放弃努力.人生在世,际遇万千,勿因一时一事而心怀羁绊.",
+      "zh-hant": "若得吉兆,亦不可沾沾自喜,全然依賴;若遇不祥,亦勿憂愁沮喪,放棄努力.人生在世,際遇萬千,勿因一時一事而心懷羈絆.",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "intro.suanshi.3": {
+    "source": "占卜者,辅人省思、指引前路之术也,非决断命运之所。处世之间,应持平常之心,顺其自然,方能临事不惧,泰然自若。",
+    "translations": {
+      "zh-hans": "占卜者,辅人省思、指引前路之术也,非决断命运之所。处世之间,应持平常之心,顺其自然,方能临事不惧,泰然自若。",
+      "zh-hant": "占卜者,輔人省思、指引前路之術也,非決斷命運之所。處世之間,應持平常之心,順其自然,方能臨事不懼,泰然自若。",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "intro.suanshi.4": {
+    "source": "想必你能来到这里,估计对自己或未来感到不确定,想通过求签问卜来寻找答案。",
+    "translations": {
+      "zh-hans": "想必你能来到这里,估计对自己或未来感到不确定,想通过求签问卜来寻找答案。",
+      "zh-hant": "想必你能來到這裡,估計對自己或未來感到不確定,想通過求籤問卜來尋找答案。",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "intro.suanshi.5": {
+    "source": "亦或是对未来感到困惑想找到命运的方向。",
+    "translations": {
+      "zh-hans": "亦或是对未来感到困惑想找到命运的方向。",
+      "zh-hant": "亦是對未來感到困惑想找到命運的方向。",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "intro.suanshi.6": {
+    "source": "又或者希望提前知道未来的走向,就可以避免错误的选择,使生活更加顺利。",
+    "translations": {
+      "zh-hans": "又或者希望提前知道未来的走向,就可以避免错误的选择,使生活更加顺利。",
+      "zh-hant": "又或者希望提前知道未來的走向,就可以避免錯誤的選擇,使生活更加順利。",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "intro.suanshi.7": {
+    "source": "也许是在生活的高压状态下,希望得到焦虑获得缓解。",
+    "translations": {
+      "zh-hans": "也许是在生活的高压状态下,希望得到焦虑获得缓解。",
+      "zh-hant": "也許是在生活的高壓狀態下,希望得到焦慮獲得緩解。",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "intro.suanshi.8": {
+    "source": "无论你出于何种目的,希望这古老的求签问卜能为你提供一个参考,帮助你更好地理解自己的处境,做出更明智的选择。",
+    "translations": {
+      "zh-hans": "无论你出于何种目的,希望这古老的求签问卜能为你提供一个参考,帮助你更好地理解自己的处境,做出更明智的选择。",
+      "zh-hant": "無論你出於何種目的,希望這古老的求籤問卜能為你提供一個參考,幫助你更好地理解自己的處境,做出更明智的選擇。",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "intro.suanshi.9": {
+    "source": "诸葛神算,又称诸葛神数,相传为三国时期蜀汉丞相诸葛亮所创。此法通过分析汉字笔画,结合周易卦象,预测人事吉凶。占卜之时,需先静心默想所求之事,勿存杂念。随后凭心而书三字,字可以与所求之事相关,也可没有半点关系。三个字可以有所意涵,也可毫无关联。切勿过多犹豫,随心而动。点击\"开始测算\",便可知晓天机。",
+    "translations": {
+      "zh-hans": "诸葛神算,又称诸葛神数,相传为三国时期蜀汉丞相诸葛亮所创。此法通过分析汉字笔画,结合周易卦象,预测人事吉凶。占卜之时,需先静心默想所求之事,勿存杂念。随后凭心而书三字,字可以与所求之事相关,也可没有半点关系。三个字可以有所意涵,也可毫无关联。切勿过多犹豫,随心而动。点击\"开始测算\",便可知晓天机。",
+      "zh-hant": "諸葛神算,又稱諸葛神數,相傳為三國時期蜀漢丞相諸葛亮所創。此法通過分析漢字筆畫,結合周易卦象,預測人事吉凶。占卜之時,需先靜心默想所求之事,勿存雜念。隨後憑心而書三字,字可以與所求之事相關,也可沒有半點關係。三個字可以有所意涵,也可毫無關聯。切勿過多猶豫,隨心而動。點擊\"開始測算\",便可知曉天機。",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "intro.lunming.1": {
+    "source": "八字命理，源自中国传统文化，通过分析一个人出生时的年、月、日、时四柱天干地支，推测其命运走向。",
+    "translations": {
+      "zh-hans": "八字命理，源自中国传统文化，通过分析一个人出生时的年、月、日、时四柱天干地支，推测其命运走向。",
+      "zh-hant": "八字命理，源自中國傳統文化，通過分析一個人出生時的年、月、日、時四柱天干地支，推測其命運走向。",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "intro.lunming.2": {
+    "source": "本系统结合传统命理学与现代科技，为您提供个性化的命理分析，包括八字命盘、命理特征、大运走势等多方面内容。",
+    "translations": {
+      "zh-hans": "本系统结合传统命理学与现代科技，为您提供个性化的命理分析，包括八字命盘、命理特征、大运走势等多方面内容。",
+      "zh-hant": "本系統結合傳統命理學與現代科技，為您提供個性化的命理分析，包括八字命盤、命理特徵、大運走勢等多方面內容。",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "intro.lunming.3": {
+    "source": "请在下方填写您的基本信息，系统将为您生成详细的命理报告。",
+    "translations": {
+      "zh-hans": "请在下方填写您的基本信息，系统将为您生成详细的命理报告。",
+      "zh-hant": "請在下方填寫您的基本資訊，系統將為您生成詳細的命理報告。",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "calendar.digit.zero": {
+    "source": "零",
+    "translations": {
+      "zh-hans": "零",
+      "zh-hant": "零",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "calendar.digit.one": {
+    "source": "一",
+    "translations": {
+      "zh-hans": "一",
+      "zh-hant": "一",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "calendar.digit.two": {
+    "source": "二",
+    "translations": {
+      "zh-hans": "二",
+      "zh-hant": "二",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "calendar.digit.three": {
+    "source": "三",
+    "translations": {
+      "zh-hans": "三",
+      "zh-hant": "三",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "calendar.digit.four": {
+    "source": "四",
+    "translations": {
+      "zh-hans": "四",
+      "zh-hant": "四",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "calendar.digit.five": {
+    "source": "五",
+    "translations": {
+      "zh-hans": "五",
+      "zh-hant": "五",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "calendar.digit.six": {
+    "source": "六",
+    "translations": {
+      "zh-hans": "六",
+      "zh-hant": "六",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "calendar.digit.seven": {
+    "source": "七",
+    "translations": {
+      "zh-hans": "七",
+      "zh-hant": "七",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "calendar.digit.eight": {
+    "source": "八",
+    "translations": {
+      "zh-hans": "八",
+      "zh-hant": "八",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "calendar.digit.nine": {
+    "source": "九",
+    "translations": {
+      "zh-hans": "九",
+      "zh-hant": "九",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "calendar.digit.ten": {
+    "source": "十",
+    "translations": {
+      "zh-hans": "十",
+      "zh-hant": "十",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "calendar.digit.zero_circle": {
+    "source": "〇",
+    "translations": {
+      "zh-hans": "〇",
+      "zh-hant": "〇",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "calendar.unit.month": {
+    "source": "月",
+    "translations": {
+      "zh-hans": "月",
+      "zh-hant": "月",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "calendar.unit.day": {
+    "source": "日",
+    "translations": {
+      "zh-hans": "日",
+      "zh-hant": "日",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "calendar.day_prefix_chu": {
+    "source": "初",
+    "translations": {
+      "zh-hans": "初",
+      "zh-hant": "初",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "calendar.day_prefix_nian": {
+    "source": "廿",
+    "translations": {
+      "zh-hans": "廿",
+      "zh-hant": "廿",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "calendar.month_prefix_leap": {
+    "source": "闰",
+    "translations": {
+      "zh-hans": "闰",
+      "zh-hant": "閏",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "calendar.month.zheng": {
+    "source": "正月",
+    "translations": {
+      "zh-hans": "正月",
+      "zh-hant": "正月",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "calendar.month.la": {
+    "source": "腊月",
+    "translations": {
+      "zh-hans": "腊月",
+      "zh-hant": "臘月",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "calendar.month.dong": {
+    "source": "冬月",
+    "translations": {
+      "zh-hans": "冬月",
+      "zh-hant": "冬月",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "calendar.month.ten": {
+    "source": "十月",
+    "translations": {
+      "zh-hans": "十月",
+      "zh-hant": "十月",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "calendar.unit.画": {
+    "source": "画",
+    "translations": {
+      "zh-hans": "画",
+      "zh-hant": "畫",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "calendar.decade_suffix": {
+    "source": "年代",
+    "translations": {
+      "zh-hans": "年代",
+      "zh-hant": "年代",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "common.brand": {
+    "source": "诸葛神算",
+    "translations": {
+      "zh-hans": "诸葛神算",
+      "zh-hant": "諸葛神算",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "common.nav_huangli": {
+    "source": "每日黄历",
+    "translations": {
+      "zh-hans": "每日黄历",
+      "zh-hant": "每日黃曆",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "common.nav_lunming": {
+    "source": "论命",
+    "translations": {
+      "zh-hans": "论命",
+      "zh-hant": "論命",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "common.nav_suanshi": {
+    "source": "算事",
+    "translations": {
+      "zh-hans": "算事",
+      "zh-hant": "算事",
+      "en": "",
+      "ja": ""
+    }
+  }
+}
