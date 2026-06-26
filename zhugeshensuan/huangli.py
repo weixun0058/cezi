@@ -6,7 +6,6 @@ from pathlib import Path
 from lunar_python import Solar
 
 from .database import sqlite_connection
-from .i18n_utils import to_hant_if_needed
 
 LOGGER = logging.getLogger(__name__)
 
@@ -68,12 +67,6 @@ class HuangLi:
         if not self.MIN_DATE <= parsed_date <= self.MAX_DATE:
             raise ValueError("日期必须在 1900-01-01 到 2100-12-31 之间")
 
-        # 繁体模式下不读简体缓存，直接生成繁体数据（不持久化）
-        # 避免 cache 按日期存储导致简繁串读
-        from .i18n_utils import get_current_lang
-        if get_current_lang() == "zh-hant":
-            return self._generate_huangli_data(date)
-
         with sqlite_connection(self.db_path) as connection:
             row = connection.execute(
                 "SELECT * FROM huangli_daily WHERE date = ? AND cache_version = ?",
@@ -131,33 +124,25 @@ class HuangLi:
             ]
             record = {
                 "date": date_text,
-                "lunar_date": to_hant_if_needed(f"{lunar.getMonthInChinese()}月{lunar.getDayInChinese()}"),
-                "gan_zhi_year": to_hant_if_needed(f"{lunar.getYearInGanZhi()}年"),
-                "gan_zhi_month": to_hant_if_needed(f"{lunar.getMonthInGanZhi()}月"),
-                "gan_zhi_day": to_hant_if_needed(f"{lunar.getDayInGanZhi()}日"),
-                "gan_zhi_hour": to_hant_if_needed(f"{lunar.getTimeInGanZhi()}时"),
-                "zodiac": to_hant_if_needed(f"{lunar.getYearShengXiao()}年"),
-                "suitable": to_hant_if_needed("、".join(lunar.getDayYi() or []) or "无"),
-                "unsuitable": to_hant_if_needed("、".join(lunar.getDayJi() or []) or "无"),
-                "chong_sha": to_hant_if_needed(f"冲{lunar.getChong()}({lunar.getChongGan()})煞{lunar.getSha()}"),
-                "ji_shen": to_hant_if_needed("、".join(lunar.getDayJiShen() or []) or "无"),
-                "xiong_shen": to_hant_if_needed("、".join(lunar.getDayXiongSha() or []) or "无"),
-                "peng_zu_bai_ji": to_hant_if_needed(f"{lunar.getPengZuGan()}，{lunar.getPengZuZhi()}"),
-                "xi_shen": to_hant_if_needed(f"{lunar.getDayPositionXiDesc()}({lunar.getDayPositionXi()})"),
-                "fu_shen": to_hant_if_needed(f"{lunar.getDayPositionFuDesc()}({lunar.getDayPositionFu()})"),
-                "cai_shen": to_hant_if_needed(f"{lunar.getDayPositionCaiDesc()}({lunar.getDayPositionCai()})"),
-                "solar_term": to_hant_if_needed(solar_term or "无"),
-                "festivals": [
-                    {"name": to_hant_if_needed(f["name"]), "type": to_hant_if_needed(f["type"])}
-                    for f in festivals
-                ],
+                "lunar_date": f"{lunar.getMonthInChinese()}月{lunar.getDayInChinese()}",
+                "gan_zhi_year": f"{lunar.getYearInGanZhi()}年",
+                "gan_zhi_month": f"{lunar.getMonthInGanZhi()}月",
+                "gan_zhi_day": f"{lunar.getDayInGanZhi()}日",
+                "gan_zhi_hour": f"{lunar.getTimeInGanZhi()}时",
+                "zodiac": f"{lunar.getYearShengXiao()}年",
+                "suitable": "、".join(lunar.getDayYi() or []) or "无",
+                "unsuitable": "、".join(lunar.getDayJi() or []) or "无",
+                "chong_sha": f"冲{lunar.getChong()}({lunar.getChongGan()})煞{lunar.getSha()}",
+                "ji_shen": "、".join(lunar.getDayJiShen() or []) or "无",
+                "xiong_shen": "、".join(lunar.getDayXiongSha() or []) or "无",
+                "peng_zu_bai_ji": f"{lunar.getPengZuGan()}，{lunar.getPengZuZhi()}",
+                "xi_shen": f"{lunar.getDayPositionXiDesc()}({lunar.getDayPositionXi()})",
+                "fu_shen": f"{lunar.getDayPositionFuDesc()}({lunar.getDayPositionFu()})",
+                "cai_shen": f"{lunar.getDayPositionCaiDesc()}({lunar.getDayPositionCai()})",
+                "solar_term": solar_term or "无",
+                "festivals": festivals,
             }
             record.update(self._solar_term_data(lunar, date_text, solar_term))
-            # 对节气信息中的文本做繁体转换
-            if "formatted_solar_term_info" in record:
-                record["formatted_solar_term_info"] = to_hant_if_needed(
-                    record["formatted_solar_term_info"]
-                )
             return record
         except (AttributeError, TypeError, ValueError):
             LOGGER.exception("Could not generate huangli data for %s", date_text)

@@ -68,7 +68,9 @@ def test_haircut_scenario_supports_synonyms_and_pengzu_fallback(app):
     assert direct["scenario_assessment"] == {
         "scenario": "理发",
         "status": "宜",
+        "status_code": "suitable",
         "source": "宜忌",
+        "source_code": "yi_ji",
         "suitable_matches": ["剃头"],
         "unsuitable_matches": [],
     }
@@ -82,8 +84,39 @@ def test_haircut_scenario_supports_synonyms_and_pengzu_fallback(app):
         "理发",
     )
     assert fallback["scenario_assessment"]["status"] == "忌"
+    assert fallback["scenario_assessment"]["status_code"] == "unsuitable"
     assert fallback["scenario_assessment"]["source"] == "彭祖百忌"
+    assert fallback["scenario_assessment"]["source_code"] == "pengzu"
     assert fallback["scenario_assessment"]["unsuitable_matches"] == ["剃头"]
+
+
+def test_huangli_api_localizes_dynamic_fields_to_traditional(client):
+    hans = client.get("/api/huangli?date=2026-06-18&lang=zh-hans")
+    hant = client.get("/api/huangli?date=2026-06-18&lang=zh-hant")
+
+    assert hans.status_code == 200
+    assert hant.status_code == 200
+    assert hans.json["data"].keys() == hant.json["data"].keys()
+    data = hant.json["data"]
+    combined = "、".join(
+        str(data.get(field, ""))
+        for field in ("suitable", "unsuitable", "chong_sha", "zodiac", "solar_term")
+    )
+    assert "無" in combined or data["unsuitable"]
+    assert "开" not in combined
+    assert "进" not in combined
+    assert "纳" not in combined
+    assert "财" not in combined
+    assert "冲" not in combined
+
+
+def test_week_huangli_scenario_uses_stable_codes(client):
+    response = client.get("/api/week_huangli?scenario=结婚&lang=zh-hant")
+
+    assert response.status_code == 200
+    assessment = response.json["data"][0]["scenario_assessment"]
+    assert assessment["status_code"] in {"suitable", "unsuitable", "not_loaded"}
+    assert assessment["source_code"] in {"yi_ji", "pengzu", "none"}
 
 
 def test_pzbj_explanation(client):

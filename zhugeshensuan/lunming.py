@@ -4,7 +4,7 @@ import logging
 from openai import OpenAI
 
 from .bazi_service import calculate_bazi
-from .i18n_utils import get_current_lang, get_disclaimer, get_report_section_titles, to_hant_recursive
+from .i18n_utils import get_current_lang, get_disclaimer, get_report_section_titles
 
 LOGGER = logging.getLogger(__name__)
 
@@ -43,8 +43,7 @@ class LunMing:
 
     def build_chart(self, payload):
         chart = calculate_bazi(payload, self.default_timezone)
-        # 繁体模式下递归转换 chart 中所有字符串（lunar_python 输出的是简体）
-        return to_hant_recursive(chart)
+        return chart
 
     def generate_prompt(self, payload, chart):
         time_note = "时辰未知，不得推断时柱相关内容。" if chart["time_unknown"] else ""

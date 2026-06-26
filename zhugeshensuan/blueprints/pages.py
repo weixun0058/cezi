@@ -13,7 +13,7 @@ URL 结构：
 """
 from flask import Blueprint, abort, g, redirect, render_template, request
 
-from ..i18n_utils import DEFAULT_LANG, LANGS, PAGE_TEMPLATES, PAGE_URL_NAMES
+from ..i18n_utils import DEFAULT_LANG, LANGS, PAGE_TEMPLATES, PAGE_URL_NAMES, html_lang_for
 
 pages_bp = Blueprint("pages", __name__)
 
@@ -58,4 +58,4 @@ def lang_page(lang: str):
     g.lang = lang
     g.page = page
     template = PAGE_TEMPLATES[page]
-    return render_template(template, current_lang=lang)
+    return render_template(template, current_lang=lang, html_lang=html_lang_for(lang))

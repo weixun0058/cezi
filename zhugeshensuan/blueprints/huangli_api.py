@@ -4,6 +4,7 @@ from datetime import datetime
 from flask import Blueprint, current_app, request
 
 from ..api_utils import failure, success
+from ..huangli_i18n import localize_huangli_record
 
 huangli_bp = Blueprint("huangli_api", __name__)
 SCENARIOS = {
@@ -17,6 +18,8 @@ SCENARIOS = {
 
 
 def _normalize_huangli(record):
+    record.pop("id", None)
+    record.pop("updated_at", None)
     if isinstance(record.get("festivals"), str):
         try:
             record["festivals"] = json.loads(record["festivals"])
@@ -34,19 +37,26 @@ def _scenario_result(record, scenario):
     suitable_matches = [word for word in keywords if word in suitable]
     unsuitable_matches = [word for word in keywords if word in unsuitable]
     source = "宜忌"
+    source_code = "yi_ji"
     if suitable_matches:
         status = "宜"
+        status_code = "suitable"
     elif unsuitable_matches:
         status = "忌"
+        status_code = "unsuitable"
     else:
         peng_zu_bai_ji = record.get("peng_zu_bai_ji", "")
         unsuitable_matches = [word for word in keywords if f"不{word}" in peng_zu_bai_ji]
         status = "忌" if unsuitable_matches else "未载"
+        status_code = "unsuitable" if unsuitable_matches else "not_loaded"
         source = "彭祖百忌" if unsuitable_matches else None
+        source_code = "pengzu" if unsuitable_matches else "none"
     record["scenario_assessment"] = {
         "scenario": scenario,
         "status": status,
+        "status_code": status_code,
         "source": source,
+        "source_code": source_code,
         "suitable_matches": suitable_matches,
         "unsuitable_matches": unsuitable_matches,
     }
@@ -76,7 +86,8 @@ def get_huangli():
         return failure("INVALID_DATE", "日期必须在 1900-01-01 到 2100-12-31 之间")
     if not record:
         return failure("HUANGLI_NOT_FOUND", "无法获取黄历数据", 404)
-    return success(_scenario_result(_normalize_huangli(record), scenario))
+    data = _scenario_result(_normalize_huangli(dict(record)), scenario)
+    return success(localize_huangli_record(data))
 
 
 @huangli_bp.get("/api/week_huangli")
@@ -85,7 +96,10 @@ def get_week_huangli():
     if scenario is None:
         return failure("INVALID_SCENARIO", "不支持的场景筛选")
     records = current_app.extensions["huangli"].get_week_huangli()
-    data = [_scenario_result(_normalize_huangli(item), scenario) for item in records]
+    data = [
+        localize_huangli_record(_scenario_result(_normalize_huangli(dict(item)), scenario))
+        for item in records
+    ]
     return success(data)
 
 

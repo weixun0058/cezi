@@ -786,6 +786,8 @@
     line-height: 1.2;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16);
 }
-.scenario-宜 { background: #2f6b3c; }
-.scenario-忌 { background: #9b1c1c; }
+.scenario-宜,
+.scenario-suitable { background: #2f6b3c; }
+.scenario-忌,
+.scenario-unsuitable { background: #9b1c1c; }
 .responsible-use-notice { color: #66584b; font-size: 0.9rem; text-align: center; }

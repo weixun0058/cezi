@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-Hans">
+<html lang="{{ html_lang|default('zh-Hans') }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -173,6 +173,7 @@
     <!-- 引入 i18n 加载器（必须在业务 JS 之前） -->
     <script src="{{ url_for('static', filename='js/lang/i18n.js') }}"></script>
     <script src="{{ url_for('static', filename='js/lang/lang_switcher.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/lang/lunar-format.js') }}"></script>
     <!-- 引入论命功能的JavaScript文件 -->
     <script src="{{ url_for('static', filename='js/lunming.js') }}"></script>
     <!-- 引入日期输入处理工具 -->

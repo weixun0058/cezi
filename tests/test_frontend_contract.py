@@ -100,6 +100,49 @@ def test_huangli_week_data_loads_only_from_extension_interactions():
     script = (ROOT / "frontend" / "static" / "js" / "huangli.js").read_text(encoding="utf-8")
 
     assert script.count("fetchAndDisplayNineDaysHuangliData();") == 2
-    assert "fetch(`/api/huangli?date=${encodeURIComponent(date)}`)" in script
+    assert "fetch(i18n.apiUrl(`/api/huangli?date=${encodeURIComponent(date)}`))" in script
     assert "HUANGLI_FAVORITES_KEY" not in script
-    assert "status !== '未载'" in script
+    assert "status_code !== 'not_loaded'" in script
+    assert "scenarioNames" not in script
+
+
+def test_language_prefixed_pages_render_matching_html_lang(client):
+    zh_hans = client.get("/zh-hans/almanac")
+    zh_hant = client.get("/zh-hant/almanac")
+
+    assert zh_hans.status_code == 200
+    assert zh_hant.status_code == 200
+    assert b'<html lang="zh-Hans">' in zh_hans.data
+    assert b'<html lang="zh-Hant">' in zh_hant.data
+
+
+def test_i18n_uses_url_language_prefix_before_local_storage():
+    script = (ROOT / "frontend" / "static" / "js" / "lang" / "i18n.js").read_text(
+        encoding="utf-8"
+    )
+
+    assert "function languageFromPath()" in script
+    assert "URL 语言前缀优先" in script
+    assert "localStorage.setItem(STORAGE_KEY, pathLang)" in script
+
+
+def test_lunar_date_handlers_use_project_formatters_not_lunar_to_string():
+    # 共享模块 lunar-format.js 应承载项目的汉字化逻辑
+    shared = (ROOT / "frontend" / "static" / "js" / "lang" / "lunar-format.js").read_text(encoding="utf-8")
+    assert "calendar.month_prefix_leap" in shared
+    assert "month.toString()" not in shared
+    assert "chineseDigits" not in shared
+
+    # 两个 handler 必须通过 LunarFormat 引用共享模块，不得自行实现汉字化逻辑
+    handlers = (
+        ROOT / "frontend" / "static" / "js" / "huangli_lunar_handler.js",
+        ROOT / "frontend" / "static" / "js" / "lunar_date_handler.js",
+    )
+    for handler in handlers:
+        script = handler.read_text(encoding="utf-8")
+        assert "LunarFormat" in script, f"{handler.name} 必须引用 LunarFormat 共享模块"
+        assert "calendar.month_prefix_leap" not in script, (
+            f"{handler.name} 不应再定义 calendar.month_prefix_leap，已迁移到 lunar-format.js"
+        )
+        assert "month.toString()" not in script
+        assert "chineseDigits" not in script

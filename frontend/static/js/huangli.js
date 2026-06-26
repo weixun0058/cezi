@@ -620,18 +620,12 @@ function displayNineDaysHuangliData(weekData) {
 
             // 组装卡片
             dayCard.appendChild(dateSection);
-            // 注意：scenario_assessment.status 为后端返回的简体值，比较时保留简体硬编码
-            if (dayData.scenario_assessment && dayData.scenario_assessment.status !== '未载') {
-                const scenarioNames = {
-                    '结婚': i18n.t('scenario_term.marriage'),
-                    '搬家': i18n.t('scenario_term.move'),
-                    '开业': i18n.t('scenario_term.business')
-                };
+            const assessment = dayData.scenario_assessment;
+            if (assessment && assessment.status_code && assessment.status_code !== 'not_loaded') {
                 const scenarioMark = document.createElement('div');
-                scenarioMark.className = `scenario-mark scenario-${dayData.scenario_assessment.status}`;
-                const scenarioName = scenarioNames[dayData.scenario_assessment.scenario]
-                    || dayData.scenario_assessment.scenario;
-                scenarioMark.textContent = `${dayData.scenario_assessment.status} · ${scenarioName}`;
+                scenarioMark.className = `scenario-mark scenario-${assessment.status_code}`;
+                const scenarioName = assessment.scenario || i18n.t('common.unknown');
+                scenarioMark.textContent = `${assessment.status || ''} · ${scenarioName}`;
                 dayCard.appendChild(scenarioMark);
             }
             dayCard.appendChild(suitableUnsuitableSection);

@@ -14,4 +14,6 @@ instance/
 data/reference/huangli.db
 archive/artifacts/*.tar
 archive/artifacts/*.db
+# 本地备份目录，不得入库
+windows-tray-backup-*/
 

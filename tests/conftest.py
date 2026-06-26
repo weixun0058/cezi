@@ -1,9 +1,9 @@
 from pathlib import Path
+from shutil import copy2
 
 import pytest
 
 from app import create_app
-from scripts.build_reference_db import build_reference_database
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -11,12 +11,18 @@ ROOT = Path(__file__).resolve().parents[1]
 @pytest.fixture(scope="session")
 def reference_db(tmp_path_factory):
     output = tmp_path_factory.mktemp("reference") / "reference.db"
-    build_reference_database(
-        output,
-        ROOT / "data" / "reference" / "kanxi_dict.db",
-        ROOT / "data" / "reference" / "zhugeshenshuan_jq.xlsx",
-        ROOT / "data" / "reference" / "pzbj.json",
-    )
+    existing = ROOT / "data" / "reference" / "reference.db"
+    if existing.exists():
+        copy2(existing, output)
+    else:
+        from scripts.build_reference_db import build_reference_database
+
+        build_reference_database(
+            output,
+            ROOT / "data" / "reference" / "kanxi_dict.db",
+            ROOT / "data" / "reference" / "zhugeshenshuan_jq.xlsx",
+            ROOT / "data" / "reference" / "pzbj.json",
+        )
     return output
 
 

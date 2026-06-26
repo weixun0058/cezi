@@ -19,19 +19,20 @@
 
 执行边界：
 
-1. 不破坏现有 `/huangli`、`/suanshi`、`/lunming` 中文路由。
+1. 旧入口 `/huangli`、`/suanshi`、`/lunming` 必须有明确兼容策略；当前方案允许 301 到新的简体入口。
 2. 英文默认主站与繁体中文第二语言并行推进，英文商业化优先级更高。P1 先做繁体的原因是：技术栈完全复用现有后端、为 P5 英文的 i18n 架构做技术 rehearsal、港澳台及海外华人是低摩擦增量市场。繁体改造经技术分析确认为中等前端工作量，无阻塞性技术风险（详见 `docs/plans/p1-technical-analysis-2026-06-24.md`）。
 3. "算事""论命""黄历"的英文版不是直译，要做产品交互、术语体系、文化表达和风险边界重写。
 4. 商业化代码必须可配置、可关闭、可替换；真实支付上线前必须完成平台政策与主体可行性核验。
 5. 所有涉及预测、命运、健康、投资、法律、心理治疗、重大人生决策的文案，必须明确限定为娱乐、传统文化探索与自我反思参考。
 6. 每个阶段必须更新进度表，并留下测试、截图、文档或人工验收记录。
+7. OpenCC 只作为离线构建工具使用，用于生成繁体参考数据或构建产物；网站运行时不应依赖 OpenCC 初始化转换器。
 
 ## 1. 总进度追踪表
 
 | 阶段 | 目标 | 状态 | 负责人 | 完成日期 | 验收证据 |
 | --- | --- | --- | --- | --- | --- |
 | P0 | 项目现状审计与术语冻结 | 未开始 | 待定 | 待定 | 审计记录、术语表 |
-| P1 | 繁体中文改造 | 未开始 | 待定 | 待定 | `/zh-Hant/` 核心页面可用 |
+| P1 | 繁体中文改造 | 未开始 | 待定 | 待定 | `/zh-hans/*` 与 `/zh-hant/*` 核心页面可用 |
 | P2 | 英文产品方案定稿 | 未开始 | 待定 | 待定 | 英文信息架构、术语、交互、免责声明定稿 |
 | P3 | 英文数据准备 | 未开始 | 待定 | 待定 | 前 20 条签文样本、内容清单、合规草稿 |
 | P4 | 英文后端改造 | 未开始 | 待定 | 待定 | 英文 API、路由、SEO 元数据测试通过 |
@@ -62,7 +63,7 @@
 
 | 语言 | 页面 | URL | 旧路由策略 |
 | --- | --- | --- | --- |
-| 英文 | 首页 | `/` | 英文主站默认入口 |
+| 英文 | 首页 | `/` | 英文阶段再调整 |
 | 英文 | 黄历 | `/daily-almanac` | 新增，不复用 `/huangli` |
 | 英文 | 算事 | `/ask-oracle` | 新增，不复用 `/suanshi` |
 | 英文 | 论命 | `/birth-chart-reading` | 新增，不复用 `/lunming` |
@@ -73,13 +74,15 @@
 | 英文 | 免责声明 | `/disclaimer` | 新增 |
 | 英文 | 关于 | `/about` | 新增 |
 | 英文 | 联系 | `/contact` | 新增 |
-| 繁體中文 | 首頁 | `/zh-Hant/` | 新增 |
-| 繁體中文 | 黃曆 | `/zh-Hant/huangli` | 新增 |
-| 繁體中文 | 算事 | `/zh-Hant/suanshi` | 新增 |
-| 繁體中文 | 論命 | `/zh-Hant/lunming` | 新增 |
-| 简体中文 | 黄历 | `/huangli` | 保留 |
-| 简体中文 | 算事 | `/suanshi` | 保留 |
-| 简体中文 | 论命 | `/lunming` | 保留 |
+| 简体中文 | 黄历 | `/zh-hans/almanac` | 当前主入口 |
+| 简体中文 | 算事 | `/zh-hans/divination` | 当前主入口 |
+| 简体中文 | 论命 | `/zh-hans/bazi` | 当前主入口 |
+| 繁體中文 | 黃曆 | `/zh-hant/almanac` | 新增 |
+| 繁體中文 | 算事 | `/zh-hant/divination` | 新增 |
+| 繁體中文 | 論命 | `/zh-hant/bazi` | 新增 |
+| 兼容入口 | 黄历 | `/huangli` | 可 301 到 `/zh-hans/almanac` |
+| 兼容入口 | 算事 | `/suanshi` | 可 301 到 `/zh-hans/divination` |
+| 兼容入口 | 论命 | `/lunming` | 可 301 到 `/zh-hans/bazi` |
 
 ### 2.2 英文命名
 
@@ -140,8 +143,8 @@ For entertainment, cultural exploration, and self-reflection only. Not medical, 
 4. 列出现有页面路由和 API 端点。
 5. 阅读现有模板，判断是否需要抽取共享页面骨架。
 6. 创建 `docs/business/wise-oracle-termbase.md`，字段包含：简体、繁体、英文、使用场景、禁用表达。
-7. 运行 `rg -n "正在|加载|请输入|请选择|失败|成功|未知|错误" frontend/static/js`，列出 main.js / huangli.js / lunming.js 的全部硬编码中文字符串清单，为 P1 方案 A（额外加载 lang 文件）做准备。
-8. 确认 CSP 策略（当前为 `script-src 'self'`），验证方案 A 的 lang-zh-hant.js 外部加载与 CSP 兼容。
+7. 运行 `rg -n "正在|加载|请输入|请选择|失败|成功|未知|错误" frontend/static/js`，列出 main.js / huangli.js / lunming.js 的全部硬编码中文字符串清单，为统一字典方案做准备。
+8. 确认 OpenCC 只存在于构建脚本或一次性数据生成脚本中；如果运行时代码导入 OpenCC，需要改为读取已生成的繁体数据或使用项目内静态字典。
 9. 运行 `rg -n "error.*message|message.*=" zhugeshensuan/blueprints`，标记后端 API 错误消息的语言（当前为简体中文），登记为 P4 显性债务：P4 英文后端改造时统一为所有错误增加 `code` 字段，前端按 code 映射多语言消息。
 10. 将 P0 状态更新为“待验收”。
 
@@ -163,22 +166,25 @@ pytest
 
 ## 4. P1 繁体中文改造
 
-**目标：** 完成本项目的“繁体”化改造，让港澳台及海外华人用户可以通过 `/zh-Hant/` 访问核心功能。
+**目标：** 完成本项目的“繁体”化改造，让港澳台及海外华人用户可以通过 `/zh-hant/almanac`、`/zh-hant/divination`、`/zh-hant/bazi` 访问核心功能。
 
 **范围：** 第一轮只做核心页面和核心交互，不做繁体文章系统，不删除简体旧入口。
 
 **涉及文件：**
 
 - 修改：`zhugeshensuan/blueprints/pages.py`
-- 新建或修改：`frontend/templates/base.html`（**P1 不提取，留到 P5 英文阶段再做**。P1 繁体模板硬复制简体模板并改文案，保证 HTML 结构骨架与简体一致——class 名、DOM 层级、JS 选择器统一，为 P5 提取 base.html 降低合并成本。）
-- 新建：`frontend/templates/zh_hant/index.html`
-- 新建：`frontend/templates/zh_hant/huangli.html`
-- 新建：`frontend/templates/zh_hant/suanshi.html`
-- 新建：`frontend/templates/zh_hant/lunming.html`
+- 修改：`frontend/templates/index.html`
+- 修改：`frontend/templates/huangli.html`
+- 修改：`frontend/templates/suanshi.html`
+- 修改：`frontend/templates/lunming.html`
 - 修改：`frontend/static/js/huangli.js`
 - 修改：`frontend/static/js/lunming.js`
 - 修改：`frontend/static/js/main.js`
-- 新建：`frontend/static/js/lang-zh-hant.js`（方案 A：繁体页面额外加载的字符串表，与 CSP `script-src 'self'` 兼容）
+- 新建：`frontend/static/js/lang/dictionary.json`
+- 新建：`frontend/static/js/lang/i18n.js`
+- 新建：`frontend/static/js/lang/lang_switcher.js`
+- 新建或修改：`scripts/build_hant_db.py`
+- 修改：`scripts/build_reference_db.py`
 - 修改：`frontend/static/css/style.css`
 - 修改：`frontend/static/css/style_mobile.css`
 - 测试：`tests/test_frontend_contract.py`
@@ -186,37 +192,36 @@ pytest
 
 ### 任务 P1.1：新增繁体路由
 
-1. 先写测试，断言 `/zh-Hant/`、`/zh-Hant/huangli`、`/zh-Hant/suanshi`、`/zh-Hant/lunming` 返回 HTTP 200。
+1. 先写测试，断言 `/zh-hans/almanac`、`/zh-hans/divination`、`/zh-hans/bazi`、`/zh-hant/almanac`、`/zh-hant/divination`、`/zh-hant/bazi` 返回 HTTP 200。
 2. 运行 `pytest tests/test_frontend_contract.py -q`，确认测试先失败。
 3. 在 `zhugeshensuan/blueprints/pages.py` 添加路由。
-4. 返回独立繁体模板，不直接复用简体模板。
+4. 允许简体和繁体复用同一套模板，但必须通过 `current_lang` 或前端字典渲染对应语言文案。
 5. 再次运行 `pytest tests/test_frontend_contract.py -q`。
 6. 更新 P1 进度日志。
 
-### 任务 P1.2：创建繁体模板
+### 任务 P1.2：调整模板语言渲染
 
-1. **不提取 base.html**（留到 P5）。P1 直接硬复制简体模板做繁体版。
-2. 繁体模板的 HTML 结构骨架必须与简体一致——class 名、DOM 层级、JS 选择器统一，只改文案。这样 P5 提取 base.html 时简繁两套模板结构统一，合并成本低。
-3. 创建繁体页面副本，文案要调整语气，不做纯机械简繁转换。
-4. 在页脚或结果区域展示繁体免责声明。
+1. P1 不强制创建独立繁体模板；可采用同模板 + 语言字典的方式。
+2. 模板里的 class 名、DOM 层级、JS 选择器保持稳定。
+3. `<html lang>` 必须按当前语言渲染：`zh-hans` 对应 `zh-Hans`，`zh-hant` 对应 `zh-Hant`。
+4. 在页脚或结果区域展示对应语言免责声明。
 5. 避免大陆互联网式营销语。
-6. 不改动原有简体模板。
-7. 运行页面契约测试。
+6. 运行页面契约测试。
 
 ### 任务 P1.3：本地化前端交互文案
 
 1. API 响应结构保持不变。
-2. **采用方案 A**：繁体页面额外加载 `lang-zh-hant.js` 字符串表，与 CSP `script-src 'self'` 兼容。主 JS 里的硬编码字符串抽取成 `WISE_ORACLE_I18N` 对象属性访问（如 `WISE_ORACLE_I18N.loading`），默认值仍是简体。这样 P5 英文只需新增 `lang-en.js` 覆盖同一对象，架构统一。
+2. 采用统一字典方案：`dictionary.json` 保存语义 key 与各语言文案，`i18n.js` 提供 `t()`、`applyTranslations()`、`apiUrl()` 等接口，`lang_switcher.js` 负责简繁切换。
 3. 在前端增加繁体加载、空状态、错误、重试、结果、校验提示。
 4. **不翻译后端错误码，不修改后端错误消息**。当前后端 API 错误消息为简体中文，繁体用户会看到简体错误提示——这是已知问题，登记为 P4 显性债务：P4 英文后端改造时统一为所有错误增加 `code` 字段，前端按 code 映射多语言消息。P1 阶段不处理。
 5. 人工测试三个繁体页面的非法输入。
 
-### 任务 P1.4：补充 canonical 和 hreflang
+### 任务 P1.4：取消 P1 的 canonical 和 hreflang 要求
 
-1. **P1 只加简体与繁体之间的 hreflang 互指**（两者都已存在）。英文页面的 hreflang 等到 P5 英文页面上线后再补——否则会出现指向 404 的 hreflang，对 SEO 有害。
-2. 为简体、繁体页面补充 `canonical` 元数据。
-3. 旧路由 `/huangli`、`/suanshi`、`/lunming` 暂不做 301。
-4. 测试页面渲染后包含预期元数据。
+1. P1 阶段不强制实现 canonical 和 hreflang。
+2. canonical / hreflang 留到英文主站和最终 URL 策略稳定后统一处理。
+3. 当前阶段只保证简体、繁体核心页面可访问，且旧入口有明确跳转策略。
+4. 若后续进入 SEO 阶段，再补专门测试页面元数据。
 
 **验证命令：**
 
@@ -226,18 +231,21 @@ pytest tests/test_frontend_contract.py tests/test_api.py -q
 
 **人工验收：**
 
-1. 访问 `/zh-Hant/`。
-2. 访问 `/zh-Hant/huangli`。
-3. 访问 `/zh-Hant/suanshi`。
-4. 访问 `/zh-Hant/lunming`。
-5. 确认移动端无横向溢出。
+1. 访问 `/zh-hans/almanac`。
+2. 访问 `/zh-hans/divination`。
+3. 访问 `/zh-hans/bazi`。
+4. 访问 `/zh-hant/almanac`。
+5. 访问 `/zh-hant/divination`。
+6. 访问 `/zh-hant/bazi`。
+7. 确认移动端无横向溢出。
 
 **验收标准：**
 
-- 繁体路由返回 200。
-- 现有简体路由仍返回 200。
+- 简体与繁体核心路由返回 200。
+- 旧中文入口跳转到当前简体入口，或按最终路由策略保持兼容。
 - 繁体页面可读且无乱码。
 - 没有新增高风险文案。
+- 网站运行时不依赖 OpenCC 初始化转换器。
 - 当前测试通过。
 
 **进度日志：**
@@ -827,7 +835,7 @@ pytest tests/test_sitemap.py tests/test_robots.py tests/test_articles.py -q
 
 1. `docs: add Wise Oracle execution plan`
 2. `docs: add termbase and copy risk review`
-3. `feat: add zh-Hant routes`
+3. `feat: add zh-hans and zh-hant routes`
 4. `feat: add Traditional Chinese templates`
 5. `docs: finalize English product spec`
 6. `data: add English oracle sample content`

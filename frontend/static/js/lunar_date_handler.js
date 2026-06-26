@@ -66,107 +66,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
-    // 汉字数字转换函数
-    const chineseDigits = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十'];
-    
-    /**
-     * 将阿拉伯数字转换为传统汉字表示
-     * @param {number} num - 阿拉伯数字
-     * @return {string} 汉字表示
-     */
-    function numberToChinese(num) {
-        if (num <= 10) {
-            return chineseDigits[num];
-        } else if (num < 20) {
-            return '十' + (num > 10 ? chineseDigits[num - 10] : '');
-        } else if (num < 100) {
-            return chineseDigits[Math.floor(num / 10)] + '十' + (num % 10 > 0 ? chineseDigits[num % 10] : '');
-        }
-        return num.toString();
-    }
-    
-    /**
-     * 将日期数字转换为传统汉字表示（初一、十五、廿九等）
-     * @param {number} day - 日期数字
-     * @return {string} 汉字表示
-     */
-    function dayToChinese(day) {
-        if (day === 1) {
-            return '初一';
-        } else if (day === 2) {
-            return '初二';
-        } else if (day === 3) {
-            return '初三';
-        } else if (day === 4) {
-            return '初四';
-        } else if (day === 5) {
-            return '初五';
-        } else if (day === 6) {
-            return '初六';
-        } else if (day === 7) {
-            return '初七';
-        } else if (day === 8) {
-            return '初八';
-        } else if (day === 9) {
-            return '初九';
-        } else if (day === 10) {
-            return '初十';
-        } else if (day === 11) {
-            return '十一';
-        } else if (day === 12) {
-            return '十二';
-        } else if (day === 13) {
-            return '十三';
-        } else if (day === 14) {
-            return '十四';
-        } else if (day === 15) {
-            return '十五';
-        } else if (day === 16) {
-            return '十六';
-        } else if (day === 17) {
-            return '十七';
-        } else if (day === 18) {
-            return '十八';
-        } else if (day === 19) {
-            return '十九';
-        } else if (day === 20) {
-            return '二十';
-        } else if (day < 30) {
-            return '廿' + chineseDigits[day - 20];
-        } else {
-            return '三十' + (day === 30 ? '' : chineseDigits[day - 30]);
-        }
-    }
-    
-    /**
-     * 将月份转换为传统汉字表示（正月、二月、闰二月等）
-     * @param {number} month - 月份（负数表示闰月）
-     * @return {string} 汉字表示
-     */
-    function monthToChinese(month) {
-        const isLeap = month < 0;
-        const absMonth = Math.abs(month);
-        
-        let result = '';
-        if (isLeap) {
-            result += '闰';
-        }
-        
-        if (absMonth === 1) {
-            result += '正月';
-        } else if (absMonth === 12) {
-            result += i18n.t('calendar.month.la');
-        } else if (absMonth === 11) {
-            result += '冬月';
-        } else if (absMonth === 10) {
-            result += '十月';
-        } else {
-            result += numberToChinese(absMonth) + '月';
-        }
-        
-        return result;
-    }
-    
+    // 数字/月份/日期的汉字化函数与 tr 包装由 LunarFormat 共享模块提供
+    // （frontend/static/js/lang/lunar-format.js），避免与 huangli_lunar_handler.js 重复定义
+    const { localizedLunarMonth, localizedLunarDay, tr } = LunarFormat;
+
     /**
      * 获取中国干支纪年
      */
@@ -516,7 +419,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // 获取两种表示方式
             const monthNumbers = months.map(month => month.getMonth()); // 阿拉伯数字，用于值
-            const monthStrings = months.map(month => month.toString()); // 完整汉字表示，用于显示
+            const monthStrings = months.map(month => localizedLunarMonth(month.getMonth()));
             
         // 填充新选项
             for (let i = 0; i < monthNumbers.length; i++) {
@@ -555,7 +458,7 @@ document.addEventListener('DOMContentLoaded', () => {
             for (let i = 1; i <= dayCount; i++) {
                 const option = document.createElement('option');
                 option.value = i;
-                option.textContent = dayToChinese(i); // 使用汉字表示日期
+                option.textContent = localizedLunarDay(i); // 使用汉字表示日期
                 lunarDaySelect.appendChild(option);
             }
         } catch (error) {
@@ -577,12 +480,12 @@ document.addEventListener('DOMContentLoaded', () => {
             // 添加"请选择时辰"选项
             const defaultOption = document.createElement('option');
             defaultOption.value = '';
-            defaultOption.textContent = i18n.t('lunming.hour_select_prompt');
+            defaultOption.textContent = tr('lunming.hour_select_prompt', '请选择时辰', '請選擇時辰');
             birthTimeSelect.appendChild(defaultOption);
 
             const unknownOption = document.createElement('option');
             unknownOption.value = '未知';
-            unknownOption.textContent = i18n.t('lunming.birth_time_unknown');
+            unknownOption.textContent = tr('lunming.birth_time_unknown', '未知', '未知');
             birthTimeSelect.appendChild(unknownOption);
             
             // 时辰的地支（固定的）
@@ -646,7 +549,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         // 创建选项
                         const option = document.createElement('option');
                         option.value = currentZhi; // 仍然只存储地支作为值
-                        option.textContent = i18n.t('lunming.hour_option_format', { gan: currentGan, zhi: currentZhi, range: timeRanges[i] });
+                        option.textContent = tr('lunming.hour_option_format', '{gan}{zhi}时 ({range})', '{gan}{zhi}時 ({range})', { gan: currentGan, zhi: currentZhi, range: timeRanges[i] });
                         
                         // 添加自定义属性以存储完整干支
                         option.dataset.ganzhi = `${currentGan}${currentZhi}`;
@@ -691,7 +594,7 @@ document.addEventListener('DOMContentLoaded', () => {
             defaultOptions.forEach(option => {
                 const el = document.createElement('option');
                 el.value = option.value;
-                el.textContent = i18n.t('lunming.hour_option_format', { gan: '', zhi: option.value, range: option.range });
+                el.textContent = tr('lunming.hour_option_format', '{gan}{zhi}时 ({range})', '{gan}{zhi}時 ({range})', { gan: '', zhi: option.value, range: option.range });
                 birthTimeSelect.appendChild(el);
             });
         }

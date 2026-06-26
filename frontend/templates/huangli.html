@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-Hans">
+<html lang="{{ html_lang|default('zh-Hans') }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -240,6 +240,7 @@
     
     <script src="{{ url_for('static', filename='js/lang/i18n.js') }}"></script>
     <script src="{{ url_for('static', filename='js/lang/lang_switcher.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/lang/lunar-format.js') }}"></script>
     <script src="{{ url_for('static', filename='js/huangli.js') }}"></script>
     <script src="{{ url_for('static', filename='js/huangli_lunar_handler.js') }}"></script>
 </body>

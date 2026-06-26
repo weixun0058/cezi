@@ -32,25 +32,10 @@ document.addEventListener('DOMContentLoaded', () => {
     
     console.log("初始化阴阳历联动功能");
     
-    // 汉字数字转换函数
-    const chineseDigits = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十'];
-    
-    /**
-     * 将阿拉伯数字转换为传统汉字表示
-     * @param {number} num - 阿拉伯数字
-     * @return {string} 汉字表示
-     */
-    function numberToChinese(num) {
-        if (num <= 10) {
-            return chineseDigits[num];
-        } else if (num < 20) {
-            return '十' + (num > 10 ? chineseDigits[num - 10] : '');
-        } else if (num < 100) {
-            return chineseDigits[Math.floor(num / 10)] + '十' + (num % 10 > 0 ? chineseDigits[num % 10] : '');
-        }
-        return num.toString();
-    }
-    
+    // 数字/月份/日期的汉字化函数由 LunarFormat 共享模块提供
+    // （frontend/static/js/lang/lunar-format.js），避免与 lunar_date_handler.js 重复定义
+    const { localizedLunarMonth, localizedLunarDay } = LunarFormat;
+
     /**
      * 获取中国干支纪年
      */
@@ -295,7 +280,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // 获取两种表示方式
             const monthNumbers = months.map(month => month.getMonth()); // 阿拉伯数字，用于值
-            const monthStrings = months.map(month => month.toString()); // 完整汉字表示，用于显示
+            const monthStrings = months.map(month => localizedLunarMonth(month.getMonth()));
             
             // 填充新选项
             for (let i = 0; i < monthNumbers.length; i++) {
@@ -334,31 +319,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const option = document.createElement('option');
                 option.value = i;
                 
-                // 获取日期的汉字表示
-                let dayText;
-                if (i === 1) {
-                    dayText = '初一';
-                } else if (i === 2) {
-                    dayText = '初二';
-                } else if (i === 3) {
-                    dayText = '初三';
-                } else if (i === 10) {
-                    dayText = '初十';
-                } else if (i === 20) {
-                    dayText = '二十';
-                } else if (i === 30) {
-                    dayText = '三十';
-                } else if (i < 10) {
-                    dayText = '初' + chineseDigits[i];
-                } else if (i < 20) {
-                    dayText = '十' + chineseDigits[i - 10];
-                } else if (i < 30) {
-                    dayText = '廿' + chineseDigits[i - 20];
-                } else {
-                    dayText = '三十' + chineseDigits[i - 30];
-                }
-                
-                option.textContent = dayText;
+                option.textContent = localizedLunarDay(i);
                 lunarDaySelect.appendChild(option);
             }
             

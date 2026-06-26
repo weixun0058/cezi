@@ -44,15 +44,36 @@
   let currentLang = 'zh-hans';
   const fallbackLang = 'zh-hans';
   const STORAGE_KEY = 'i18n_lang';
+  const supportedLangs = ['zh-hans', 'zh-hant'];
 
-  // 从 localStorage 读取用户上次选择的语言
-  // 兼容历史值：zh-cn -> zh-hans, zh-tw -> zh-hant
+  function normalizeLang(lang) {
+    if (lang === 'zh-cn') return 'zh-hans';
+    if (lang === 'zh-tw') return 'zh-hant';
+    return supportedLangs.indexOf(lang) >= 0 ? lang : '';
+  }
+
+  function languageFromPath() {
+    var path = location.pathname || '';
+    for (var i = 0; i < supportedLangs.length; i++) {
+      var prefix = '/' + supportedLangs[i];
+      if (path === prefix || path.indexOf(prefix + '/') === 0) {
+        return supportedLangs[i];
+      }
+    }
+    return '';
+  }
+
+  // URL 语言前缀优先；无前缀时读取用户上次选择的语言。
+  const pathLang = languageFromPath();
+  if (pathLang) {
+    currentLang = pathLang;
+  }
   try {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored) {
-      if (stored === 'zh-cn') currentLang = 'zh-hans';
-      else if (stored === 'zh-tw') currentLang = 'zh-hant';
-      else currentLang = stored;
+    if (pathLang) {
+      localStorage.setItem(STORAGE_KEY, pathLang);
+    } else {
+      const stored = normalizeLang(localStorage.getItem(STORAGE_KEY));
+      if (stored) currentLang = stored;
     }
   } catch (e) {
     // localStorage 不可用，保持默认 zh-hans
