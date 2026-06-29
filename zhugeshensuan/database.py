@@ -1,4 +1,5 @@
 import logging
+import re
 import sqlite3
 import time
 from contextlib import contextmanager
@@ -114,7 +115,13 @@ class Database:
         return self.pzbj_hant if get_pzbj_table_name(lang) == "pzbj_hant" else self.pzbj
 
     def get_stroke_count_by_hd(self, character):
-        """Return a remote stroke count, or None when the lookup is inconclusive."""
+        """Return a remote stroke count, or None when the lookup is inconclusive.
+
+        适配 zdic.net 改版后的页面结构。提取顺序：
+        1. 新版结构：`<span class="meta-badge">总笔画</span><span class="meta-value">N</span>`
+        2. 正则兜底：`总笔画</span>...<span class="meta-value...">N</span>`
+        3. 旧版结构（已失效，保留以防回滚）：`div.kxzd span.res_d a` / `td.z_bs2 p`
+        """
         cached_until = self._stroke_failure_cache.get(character, 0)
         if cached_until > time.monotonic():
             return None
@@ -129,6 +136,24 @@ class Database:
             response.encoding = "utf-8"
             soup = BeautifulSoup(response.text, "html.parser")
 
+            # 1. 新版结构：找文本为"总笔画"的 meta-badge，取其后的 meta-value
+            badge = soup.find("span", class_="meta-badge", string="总笔画")
+            if badge:
+                value_node = badge.find_next_sibling(
+                    "span", class_=lambda c: c and "meta-value" in c.split()
+                )
+                if value_node:
+                    return int(value_node.get_text(strip=True))
+
+            # 2. 正则兜底：从原始 HTML 提取，防止 BeautifulSoup 解析差异
+            match = re.search(
+                r"总笔画</span>\s*<span[^>]*class=\"[^\"]*meta-value[^\"]*\"[^>]*>\s*(\d+)\s*</span>",
+                response.text,
+            )
+            if match:
+                return int(match.group(1))
+
+            # 3. 旧版结构兜底（zdic.net 若回滚则仍可用）
             kx_path = soup.select("div.kxzd span.res_d a")
             if kx_path:
                 return int(kx_path[-1].get_text(strip=True))
@@ -136,6 +161,8 @@ class Database:
             for node in soup.select("td.z_bs2 p"):
                 if "总笔画" in node.get_text():
                     return int(node.get_text().split()[-1])
+
+            LOGGER.warning("zdic.net page structure unrecognized for character: %s", character)
         except (requests.RequestException, TypeError, ValueError) as exc:
             LOGGER.warning("Remote stroke lookup failed for one character: %s", type(exc).__name__)
 

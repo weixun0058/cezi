@@ -112,6 +112,15 @@
       "ja": ""
     }
   },
+  "suanshi.error.three_chars_required": {
+    "source": "请输入三个汉字",
+    "translations": {
+      "zh-hans": "请输入三个汉字",
+      "zh-hant": "請輸入三個漢字",
+      "en": "",
+      "ja": ""
+    }
+  },
   "suanshi.calculate_btn": {
     "source": "开始测算",
     "translations": {
@@ -149,10 +158,10 @@
     }
   },
   "suanshi.interpret_btn": {
-    "source": "解卦",
+    "source": "查看签文",
     "translations": {
-      "zh-hans": "解卦",
-      "zh-hant": "解卦",
+      "zh-hans": "查看签文",
+      "zh-hant": "查看籤文",
       "en": "",
       "ja": ""
     }
@@ -162,42 +171,6 @@
     "translations": {
       "zh-hans": "签文",
       "zh-hant": "籤文",
-      "en": "",
-      "ja": ""
-    }
-  },
-  "suanshi.show_gua_type_btn": {
-    "source": "查看卦属",
-    "translations": {
-      "zh-hans": "查看卦属",
-      "zh-hant": "查看卦屬",
-      "en": "",
-      "ja": ""
-    }
-  },
-  "suanshi.gua_type_title": {
-    "source": "卦属",
-    "translations": {
-      "zh-hans": "卦属",
-      "zh-hant": "卦屬",
-      "en": "",
-      "ja": ""
-    }
-  },
-  "suanshi.show_fortune_btn": {
-    "source": "查看吉凶",
-    "translations": {
-      "zh-hans": "查看吉凶",
-      "zh-hant": "查看吉凶",
-      "en": "",
-      "ja": ""
-    }
-  },
-  "suanshi.fortune_title": {
-    "source": "吉凶",
-    "translations": {
-      "zh-hans": "吉凶",
-      "zh-hant": "吉凶",
       "en": "",
       "ja": ""
     }

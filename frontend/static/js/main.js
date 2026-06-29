@@ -14,11 +14,9 @@ document.addEventListener('DOMContentLoaded', async function() {
         status.dataset.type = type;
     }
 
-    // 修改检查输入函数，移除类型检查
+    // 检查输入：仅校验是否三个字都填了，不再控制按钮 disabled 状态
     function checkInputs() {
-        const allFilled = Array.from(inputs).every(input => 
-            input.value.length === 1);
-        calculateBtn.disabled = !allFilled;
+        return Array.from(inputs).every(input => input.value.length === 1);
     }
 
     // 输入框自动跳转
@@ -39,6 +37,12 @@ document.addEventListener('DOMContentLoaded', async function() {
     });
 
     calculateBtn.addEventListener('click', async function() {
+        // 校验：必须输入三个汉字
+        if (!checkInputs()) {
+            setStatus(i18n.t('suanshi.error.three_chars_required'), 'error');
+            return;
+        }
+
         this.disabled = true;
         strokes = [];
         setStatus(i18n.t('suanshi.status.querying_strokes'));
@@ -66,40 +70,52 @@ document.addEventListener('DOMContentLoaded', async function() {
             element.classList.add('hidden');
         });
 
-        // 显示求测类型选择
-        document.getElementById('qcTypeResult').classList.remove('hidden');
-        setStatus(i18n.t('suanshi.status.select_direction'));
+        // 直接显示笔画数结果 + 查看签号按钮（新流程：跳过"请选择求测类型"）
+        const strokeUnit = i18n.t('calendar.unit.画');
+        document.getElementById('stroke1').innerHTML =
+            `<span class="char-display">${inputs[0].value}</span>
+             <span class="stroke-display">${numToChineseUpper(strokes[0])}${strokeUnit}</span>`;
+        document.getElementById('stroke2').innerHTML =
+            `<span class="char-display">${inputs[1].value}</span>
+             <span class="stroke-display">${numToChineseUpper(strokes[1])}${strokeUnit}</span>`;
+        document.getElementById('stroke3').innerHTML =
+            `<span class="char-display">${inputs[2].value}</span>
+             <span class="stroke-display">${numToChineseUpper(strokes[2])}${strokeUnit}</span>`;
+        document.getElementById('strokeResult').classList.remove('hidden');
+        document.getElementById('showSignBtn').classList.remove('hidden');
+        setStatus('');
     });
 
-    // 求测类型按钮点击事件
+    // 求测类型按钮点击事件（新流程：在解签详解之后，显示对应分项解签）
     document.querySelectorAll('.qc-type-btn, .qc-sy-type-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', async function() {
             // 移除其他按钮的选中状态
-            document.querySelectorAll('.qc-type-btn, .qc-sy-type-btn').forEach(b => 
+            document.querySelectorAll('.qc-type-btn, .qc-sy-type-btn').forEach(b =>
                 b.classList.remove('selected'));
             // 添加当前按钮的选中状态
             this.classList.add('selected');
             selectedType = this.dataset.type;
-            
-            // 隐藏求测类型区域
-            document.getElementById('qcTypeResult').classList.add('hidden');
-            
-            // 显示笔画数结果
-            document.getElementById('strokeResult').classList.remove('hidden');
-            const strokeUnit = i18n.t('calendar.unit.画');
-            document.getElementById('stroke1').innerHTML =
-                `<span class="char-display">${inputs[0].value}</span>
-                 <span class="stroke-display">${numToChineseUpper(strokes[0])}${strokeUnit}</span>`;
-            document.getElementById('stroke2').innerHTML =
-                `<span class="char-display">${inputs[1].value}</span>
-                 <span class="stroke-display">${numToChineseUpper(strokes[1])}${strokeUnit}</span>`;
-            document.getElementById('stroke3').innerHTML =
-                `<span class="char-display">${inputs[2].value}</span>
-                 <span class="stroke-display">${numToChineseUpper(strokes[2])}${strokeUnit}</span>`;
 
-            // 添加：确保显示"查看签号"按钮
-            const showSignBtn = document.getElementById('showSignBtn');
-            showSignBtn.classList.remove('hidden');
+            // 显示具体分项解签区域
+            const specificSection = document.getElementById('specificSection');
+            specificSection.classList.remove('hidden');
+
+            const typeMap = {
+                'career': i18n.t('suanshi.type_career'),
+                'wealth': i18n.t('suanshi.type_wealth'),
+                'love': i18n.t('suanshi.type_love'),
+                'health': i18n.t('suanshi.type_health'),
+                'study': i18n.t('suanshi.type_study'),
+                'general': i18n.t('suanshi.type_general')
+            };
+
+            document.getElementById('specificTitle').textContent =
+                `${typeMap[selectedType]}${i18n.t('suanshi.interpretation_suffix')}`;
+            await typeWriter(document.getElementById('specificInterpretation'),
+                window.guaData[selectedType]);
+
+            // 显示重新测算按钮
+            showButton('restartBtn');
         });
     });
 
@@ -227,13 +243,13 @@ document.addEventListener('DOMContentLoaded', async function() {
             
             // 逐字显示签文
             await typeWriter(document.getElementById('signText'), data.sign_text);
-            
-            // 确保下一个按钮可见
-            const nextButton = document.getElementById('showGuaTypeBtn');
+
+            // 签文显示完毕后直接进入"查看解签"按钮（已去除卦属/吉凶两步）
+            const nextButton = document.getElementById('showInterpretationBtn');
             if (nextButton) {
                 nextButton.classList.remove('hidden');
                 nextButton.style.display = 'block';
-                
+
                 // 检查按钮可见性
                 await new Promise(resolve => setTimeout(resolve, 100));
                 const buttonRect = nextButton.getBoundingClientRect();
@@ -253,82 +269,70 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
     });
 
-    // 显示卦属
-    document.getElementById('showGuaTypeBtn').addEventListener('click', async function() {
-        this.classList.add('hidden');
-        document.getElementById('guaTypeSection').classList.remove('hidden');
-        
-        await typeWriter(document.getElementById('guaType'), window.guaData.gua_type);
-        showButton('showFortuneBtn');
-    });
-
-    // 显示吉凶
-    document.getElementById('showFortuneBtn').addEventListener('click', async function() {
-        this.classList.add('hidden');
-        document.getElementById('fortuneSection').classList.remove('hidden');
-        
-        await typeWriter(document.getElementById('fortune'), window.guaData.fortune);
-        showButton('showInterpretationBtn');
-    });
-
     // 修改显示解签部分的代码
     document.getElementById('showInterpretationBtn').addEventListener('click', async function() {
         this.classList.add('hidden');
         document.getElementById('guaResult').classList.add('hidden');
         document.getElementById('interpretationResult').classList.remove('hidden');
-        
-        await typeWriter(document.getElementById('interpretation1'), 
-            window.guaData.interpretation1);
-        
-        const typeMap = {
-            'career': i18n.t('suanshi.type_career'),
-            'wealth': i18n.t('suanshi.type_wealth'),
-            'love': i18n.t('suanshi.type_love'),
-            'health': i18n.t('suanshi.type_health'),
-            'study': i18n.t('suanshi.type_study'),
-            'general': i18n.t('suanshi.type_general')
-        };
 
-        document.getElementById('specificTitle').textContent =
-            `${typeMap[selectedType]}${i18n.t('suanshi.interpretation_suffix')}`;
-        await typeWriter(document.getElementById('specificInterpretation'), 
-            window.guaData[selectedType]);
-        showButton('restartBtn');
+        // 新流程：只显示解签详解 + 求测类型选择，具体分项等用户选类型后再显示
+        // （qcTypeSection 和 specificSection 的 hidden 状态由 restart 和类型按钮控制）
+
+        await typeWriter(document.getElementById('interpretation1'),
+            window.guaData.interpretation1);
+
+        // 解签详解显示完毕后，显示求测类型选择
+        document.getElementById('qcTypeSection').classList.remove('hidden');
+
+        // 滚动到求测类型选择区域
+        await new Promise(resolve => setTimeout(resolve, 100));
+        const qcSection = document.getElementById('qcTypeSection');
+        const qcRect = qcSection.getBoundingClientRect();
+        if (qcRect.bottom > window.innerHeight) {
+            window.scrollTo({
+                top: window.scrollY + qcRect.bottom - window.innerHeight + 50,
+                behavior: 'smooth'
+            });
+        }
     });
 
     // 重新开始
     document.getElementById('restartBtn').addEventListener('click', function() {
         // 清空输入
         inputs.forEach(input => input.value = '');
-        
-        // 启用开始测算按钮（但保持禁用状态，直到输入完成）
-        calculateBtn.disabled = true;
+
+        // 开始测算按钮恢复可点击状态（新流程：不再 disabled，由点击时校验）
+        calculateBtn.disabled = false;
         calculateBtn.classList.remove('hidden');
-        
+
         // 隐藏所有结果区域
         document.querySelectorAll('.result-section').forEach(section => {
             section.classList.add('hidden');
         });
-        
+
         // 只重置算事流程按钮，不影响导航
         document.querySelectorAll('.result-section .ancient-btn').forEach(btn => {
             btn.classList.add('hidden');
         });
-        
+
         // 清空所有内容
         document.getElementById('signText').textContent = '';
-        document.getElementById('guaType').textContent = '';
-        document.getElementById('fortune').textContent = '';
         document.getElementById('interpretation1').textContent = '';
         document.getElementById('specificInterpretation').textContent = '';
-        
-        // 重置所有section为隐藏状态
-        document.getElementById('guaTypeSection').classList.add('hidden');
-        document.getElementById('fortuneSection').classList.add('hidden');
+
+        // 重置所有 interpretation-section 为隐藏状态（包括 qcTypeSection 和 specificSection）
         document.querySelectorAll('.interpretation-section').forEach(section => {
             section.classList.add('hidden');
         });
-        
+
+        // 重置求测类型按钮选中状态
+        document.querySelectorAll('.qc-type-btn, .qc-sy-type-btn').forEach(b =>
+            b.classList.remove('selected'));
+        selectedType = null;
+
+        // 清空状态提示
+        setStatus('');
+
         // 显示输入区域和介绍文本
         document.getElementById('characterInput').classList.remove('hidden');
         document.querySelectorAll('.intro-text').forEach(element => {
@@ -340,7 +344,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         });
     });
 
-    async function typeWriter(element, text, chunkSize = 3, interval = 45) {
+    async function typeWriter(element, text, chunkSize = 1, interval = 50) {
         const characters = Array.from(text || '');
         element.textContent = '';
 

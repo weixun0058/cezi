@@ -46,7 +46,7 @@
                         <input type="text" maxlength="1" class="char-input" id="char2">
                         <input type="text" maxlength="1" class="char-input" id="char3">
                     </div>
-                    <button id="calculateBtn" disabled class="ancient-btn" data-i18n="suanshi.calculate_btn">开始测算</button>
+                    <button id="calculateBtn" class="ancient-btn" data-i18n="suanshi.calculate_btn">开始测算</button>
                 </div>
 
                 <div class="intro-text">
@@ -73,7 +73,7 @@
                 <div class="result-section hidden" id="signResult">
                     <h3 data-i18n="suanshi.sign_number_title">所得签号</h3>
                     <div class="sign-number" id="signNumber"></div>
-                    <button id="showGuaBtn" class="ancient-btn" data-i18n="suanshi.interpret_btn">解卦</button>
+                    <button id="showGuaBtn" class="ancient-btn" data-i18n="suanshi.interpret_btn">查看签文</button>
                 </div>
 
                 <div class="result-section hidden" id="guaResult">
@@ -81,20 +81,6 @@
                         <div class="gua-section">
                             <h3 data-i18n="suanshi.sign_text_title">签文</h3>
                             <p id="signText" class="ancient-text"></p>
-                        </div>
-
-                        <button id="showGuaTypeBtn" class="ancient-btn hidden" data-i18n="suanshi.show_gua_type_btn">查看卦属</button>
-
-                        <div id="guaTypeSection" class="gua-section hidden">
-                            <h3 data-i18n="suanshi.gua_type_title">卦属</h3>
-                            <p id="guaType" class="ancient-text"></p>
-                        </div>
-
-                        <button id="showFortuneBtn" class="ancient-btn hidden" data-i18n="suanshi.show_fortune_btn">查看吉凶</button>
-
-                        <div id="fortuneSection" class="gua-section hidden">
-                            <h3 data-i18n="suanshi.fortune_title">吉凶</h3>
-                            <p id="fortune" class="ancient-text"></p>
                         </div>
 
                         <button id="showInterpretationBtn" class="ancient-btn hidden" data-i18n="suanshi.show_interpretation_btn">查看解签</button>
@@ -107,24 +93,23 @@
                             <h3 data-i18n="suanshi.interpretation_title">解签详解</h3>
                             <p id="interpretation1" class="ancient-text"></p>
                         </div>
-                        <div class="interpretation-section">
+                        <div class="interpretation-section hidden" id="qcTypeSection">
+                            <h3 data-i18n="suanshi.qc_type_title">请选择求测类型</h3>
+                            <div class="qc-type-buttons">
+                                <button class="qc-type-btn" data-type="career" data-i18n="suanshi.qc_career">求事业</button>
+                                <button class="qc-type-btn" data-type="wealth" data-i18n="suanshi.qc_wealth">求财运</button>
+                                <button class="qc-type-btn" data-type="love" data-i18n="suanshi.qc_love">求情感</button>
+                                <button class="qc-type-btn" data-type="health" data-i18n="suanshi.qc_health">求健康</button>
+                                <button class="qc-type-btn" data-type="study" data-i18n="suanshi.qc_study">求学业</button>
+                                <button class="qc-sy-type-btn" data-type="general" data-i18n="suanshi.qc_general">泛泛之谈一切随缘</button>
+                            </div>
+                        </div>
+                        <div class="interpretation-section hidden" id="specificSection">
                             <h3 id="specificTitle"></h3>
                             <p id="specificInterpretation" class="ancient-text"></p>
                         </div>
                     </div>
                     <button id="restartBtn" class="ancient-btn hidden" data-i18n="common.restart">重新测算</button>
-                </div>
-
-                <div class="result-section hidden" id="qcTypeResult">
-                    <h3 data-i18n="suanshi.qc_type_title">请选择求测类型</h3>
-                    <div class="qc-type-buttons">
-                        <button class="qc-type-btn" data-type="career" data-i18n="suanshi.qc_career">求事业</button>
-                        <button class="qc-type-btn" data-type="wealth" data-i18n="suanshi.qc_wealth">求财运</button>
-                        <button class="qc-type-btn" data-type="love" data-i18n="suanshi.qc_love">求情感</button>
-                        <button class="qc-type-btn" data-type="health" data-i18n="suanshi.qc_health">求健康</button>
-                        <button class="qc-type-btn" data-type="study" data-i18n="suanshi.qc_study">求学业</button>
-                        <button class="qc-sy-type-btn" data-type="general" data-i18n="suanshi.qc_general">泛泛之谈一切随缘</button>
-                    </div>
                 </div>
             </div>
             <div class="scroll-footer"></div>

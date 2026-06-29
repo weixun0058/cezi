@@ -92,7 +92,7 @@ def build_reference_database(output, hanzi_source, gua_source, pzbj_source):
                 kangxi_strokes INTEGER
             ) WITHOUT ROWID;
             CREATE TABLE gua (
-                sign_number INTEGER PRIMARY KEY CHECK(sign_number BETWEEN 1 AND 383),
+                sign_number INTEGER PRIMARY KEY CHECK(sign_number BETWEEN 1 AND 384),
                 fortune TEXT NOT NULL,
                 gua_type TEXT NOT NULL,
                 sign_text TEXT NOT NULL,
@@ -109,7 +109,7 @@ def build_reference_database(output, hanzi_source, gua_source, pzbj_source):
                 explanation TEXT NOT NULL
             ) WITHOUT ROWID;
             CREATE TABLE gua_hant (
-                sign_number INTEGER PRIMARY KEY CHECK(sign_number BETWEEN 1 AND 383),
+                sign_number INTEGER PRIMARY KEY CHECK(sign_number BETWEEN 1 AND 384),
                 fortune TEXT NOT NULL,
                 gua_type TEXT NOT NULL,
                 sign_text TEXT NOT NULL,

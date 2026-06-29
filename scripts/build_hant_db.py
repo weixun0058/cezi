@@ -34,7 +34,7 @@ def build_hant_tables(db_path: Path) -> dict:
         conn.execute(
             """
             CREATE TABLE IF NOT EXISTS gua_hant (
-                sign_number INTEGER PRIMARY KEY CHECK(sign_number BETWEEN 1 AND 383),
+                sign_number INTEGER PRIMARY KEY CHECK(sign_number BETWEEN 1 AND 384),
                 fortune TEXT NOT NULL,
                 gua_type TEXT NOT NULL,
                 sign_text TEXT NOT NULL,

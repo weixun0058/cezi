@@ -17,3 +17,16 @@ archive/artifacts/*.db
 # 本地备份目录，不得入库
 windows-tray-backup-*/
 
+# Office 临时锁文件
+~$*
+
+# 数据备份文件
+*.bak
+*.bak.*
+
+# 运行时输出目录
+outputs/
+
+# 临时探索性 notebook
+scripts/test.ipynb
+

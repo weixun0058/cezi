@@ -1,3 +1,18 @@
+> **⚠️ 已废止文档（2026-06-30）**
+>
+> 本文档已废止，仅保留作历史参考。其内容与当前 W0 定稿文档（D13-D17 硬约束）全面冲突，**不得作为执行依据**。
+>
+> 主要冲突项：
+> - 自由提问输入模式（已取消，改为 Three Words + Three Numbers）
+> - New Age / cosmic energy 包装（与文化表达指南冲突）
+> - Ask the Oracle 付费 Guidance / Future 3-Month Forecast（与 D17 interpretation 定位冲突）
+> - Daoist Auspicious Calendar（产品规格禁用，仅解释文章谨慎使用）
+> - 文本提问法哈希映射（已废止，改为 A=1..Z=26 字母求和 + stroke_digit）
+>
+> 当前执行依据：`docs/business/wise-oracle-english-product-spec.md` 等 W0 定稿文档。
+
+---
+
 # "Wise Oracle" 东方命理海外独立站出海落地全景指南与实操手册
 > **域名资产**：`getwiseoracle.com`
 > **版本**：v1.0 (2026年6月)

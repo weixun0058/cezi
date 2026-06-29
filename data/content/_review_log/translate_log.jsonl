@@ -1,0 +1,367 @@
+{"timestamp": "2026-06-28T01:32:27.108421", "model": "deepseek-v4-flash", "source_count": 1, "output_count": 1, "source_sign_numbers": [1], "output_sign_numbers": [1]}
+{"timestamp": "2026-06-28T01:34:31.750639", "model": "deepseek-v4-flash", "source_count": 1, "output_count": 1, "source_sign_numbers": [1], "output_sign_numbers": [1]}
+{"timestamp": "2026-06-28T01:47:05.803836", "model": "deepseek-v4-flash", "source_count": 24, "output_count": 24, "source_sign_numbers": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24], "output_sign_numbers": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]}
+{"timestamp": "2026-06-28T02:54:49.237260", "model": "deepseek-v4-flash", "source_count": 4, "output_count": 4, "source_sign_numbers": [1, 2, 3, 4], "output_sign_numbers": [1, 2, 3, 4]}
+{"timestamp": "2026-06-28T03:01:49.184514", "model": "deepseek-v4-flash", "source_count": 4, "output_count": 4, "source_sign_numbers": [5, 6, 7, 8], "output_sign_numbers": [5, 6, 7, 8]}
+{"timestamp": "2026-06-28T03:07:17.789970", "model": "deepseek-v4-flash", "source_count": 4, "output_count": 4, "source_sign_numbers": [1, 2, 3, 4], "output_sign_numbers": [1, 2, 3, 4], "replaced_sign_numbers": [], "total_after_merge": 4}
+{"timestamp": "2026-06-28T03:08:17.723187", "model": "deepseek-v4-flash", "source_count": 4, "output_count": 4, "source_sign_numbers": [5, 6, 7, 8], "output_sign_numbers": [5, 6, 7, 8], "replaced_sign_numbers": [], "total_after_merge": 8}
+{"timestamp": "2026-06-28T15:38:06.647422", "model": "deepseek-v4-flash", "source_count": 4, "output_count": 4, "source_sign_numbers": [5, 6, 7, 8], "output_sign_numbers": [5, 6, 7, 8], "replaced_sign_numbers": [5, 6, 7, 8], "total_after_merge": 8}
+{"timestamp": "2026-06-28T15:47:19.635970", "model": "deepseek-v4-flash", "source_count": 4, "output_count": 4, "source_sign_numbers": [5, 6, 7, 8], "output_sign_numbers": [5, 6, 7, 8], "replaced_sign_numbers": [5, 6, 7, 8], "total_after_merge": 8}
+{"timestamp": "2026-06-28T16:05:23.871450", "model": "deepseek-v4-flash", "source_count": 4, "output_count": 4, "source_sign_numbers": [5, 6, 7, 8], "output_sign_numbers": [5, 6, 7, 8], "replaced_sign_numbers": [5, 6, 7, 8], "total_after_merge": 8}
+{"timestamp": "2026-06-28T17:07:18.074761", "model": "deepseek-v4-flash", "source_count": 4, "output_count": 4, "source_sign_numbers": [9, 10, 11, 12], "output_sign_numbers": [9, 10, 11, 12], "replaced_sign_numbers": [], "total_after_merge": 12}
+{"timestamp": "2026-06-28T17:30:48.566788", "model": "deepseek-v4-flash", "source_count": 40, "output_count": 40, "source_sign_numbers": [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60], "output_sign_numbers": [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60], "replaced_sign_numbers": [], "total_after_merge": 52}
+{"timestamp": "2026-06-29T00:46:11.567633", "level": "sign", "sign_number": 37, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T00:46:11.568410", "level": "sign", "sign_number": 38, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T00:46:11.569282", "level": "sign", "sign_number": 39, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T00:46:11.569902", "level": "sign", "sign_number": 40, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T00:47:43.510584", "level": "sign", "sign_number": 41, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T00:47:43.511296", "level": "sign", "sign_number": 42, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T00:47:43.511837", "level": "sign", "sign_number": 43, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T00:47:43.512323", "level": "sign", "sign_number": 44, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T00:47:43.522756", "model": "deepseek-v4-flash", "source_count": 8, "output_count": 8, "source_sign_numbers": [37, 38, 39, 40, 41, 42, 43, 44], "output_sign_numbers": [37, 38, 39, 40, 41, 42, 43, 44], "replaced_sign_numbers": [], "total_after_merge": 60}
+{"timestamp": "2026-06-29T00:52:51.293674", "level": "sign", "sign_number": 61, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T00:52:51.294382", "level": "sign", "sign_number": 62, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T00:52:51.294897", "level": "sign", "sign_number": 63, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T00:52:51.295570", "level": "sign", "sign_number": 64, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T00:54:04.152196", "level": "sign", "sign_number": 65, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T00:54:04.152901", "level": "sign", "sign_number": 66, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T00:54:04.153803", "level": "sign", "sign_number": 67, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T00:54:04.154388", "level": "sign", "sign_number": 68, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T00:55:24.489938", "level": "sign", "sign_number": 69, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T00:55:24.490637", "level": "sign", "sign_number": 70, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T00:55:24.491432", "level": "sign", "sign_number": 71, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T00:55:24.491937", "level": "sign", "sign_number": 72, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T00:56:22.735872", "level": "sign", "sign_number": 73, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T00:56:22.736732", "level": "sign", "sign_number": 74, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T00:56:22.737278", "level": "sign", "sign_number": 75, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T00:56:22.737895", "level": "sign", "sign_number": 76, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T00:57:27.654169", "level": "sign", "sign_number": 77, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T00:57:27.655193", "level": "sign", "sign_number": 78, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T00:57:27.655925", "level": "sign", "sign_number": 79, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T00:57:27.656587", "level": "sign", "sign_number": 80, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T00:58:45.529973", "level": "sign", "sign_number": 81, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T00:58:45.530684", "level": "sign", "sign_number": 82, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T00:58:45.531106", "level": "sign", "sign_number": 83, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T00:58:45.531604", "level": "sign", "sign_number": 84, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T00:58:45.544785", "model": "deepseek-v4-flash", "source_count": 24, "output_count": 24, "source_sign_numbers": [61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84], "output_sign_numbers": [61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84], "replaced_sign_numbers": [], "total_after_merge": 84}
+{"timestamp": "2026-06-29T01:01:21.985995", "level": "sign", "sign_number": 85, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:01:21.986997", "level": "sign", "sign_number": 86, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:01:21.988002", "level": "sign", "sign_number": 87, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:01:21.988786", "level": "sign", "sign_number": 88, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:02:41.383144", "level": "sign", "sign_number": 89, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:02:41.383875", "level": "sign", "sign_number": 90, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:02:41.384450", "level": "sign", "sign_number": 91, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:02:41.385048", "level": "sign", "sign_number": 92, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:03:44.964983", "level": "sign", "sign_number": 93, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:03:44.965846", "level": "sign", "sign_number": 94, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:03:44.966913", "level": "sign", "sign_number": 95, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:03:44.967545", "level": "sign", "sign_number": 96, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:04:55.380347", "level": "sign", "sign_number": 97, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:04:55.381072", "level": "sign", "sign_number": 98, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:04:55.381507", "level": "sign", "sign_number": 99, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:04:55.382012", "level": "sign", "sign_number": 100, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:06:01.952893", "level": "sign", "sign_number": 101, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:06:01.953889", "level": "sign", "sign_number": 102, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:06:01.954751", "level": "sign", "sign_number": 103, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:06:01.955554", "level": "sign", "sign_number": 104, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:06:54.604358", "level": "sign", "sign_number": 105, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:06:54.605153", "level": "sign", "sign_number": 106, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:06:54.606034", "level": "sign", "sign_number": 107, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:06:54.606717", "level": "sign", "sign_number": 108, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:06:54.627103", "model": "deepseek-v4-flash", "source_count": 24, "output_count": 24, "source_sign_numbers": [85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108], "output_sign_numbers": [85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108], "replaced_sign_numbers": [], "total_after_merge": 108}
+{"timestamp": "2026-06-29T01:24:34.702052", "level": "sign", "sign_number": 109, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:24:34.703635", "level": "sign", "sign_number": 110, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:24:34.704766", "level": "sign", "sign_number": 111, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:24:34.705803", "level": "sign", "sign_number": 112, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:26:08.539251", "level": "sign", "sign_number": 113, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:26:08.540510", "level": "sign", "sign_number": 114, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:26:08.543112", "level": "sign", "sign_number": 115, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:26:08.545127", "level": "sign", "sign_number": 116, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:27:14.820210", "level": "sign", "sign_number": 117, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:27:14.821549", "level": "sign", "sign_number": 118, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:27:14.822867", "level": "sign", "sign_number": 119, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:27:14.823868", "level": "sign", "sign_number": 120, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:28:11.300006", "level": "sign", "sign_number": 121, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:28:11.301145", "level": "sign", "sign_number": 122, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:28:11.302193", "level": "sign", "sign_number": 123, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:28:11.303182", "level": "sign", "sign_number": 124, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:29:15.343213", "level": "sign", "sign_number": 125, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:29:15.343856", "level": "sign", "sign_number": 126, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:29:15.344756", "level": "sign", "sign_number": 127, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:29:15.345415", "level": "sign", "sign_number": 128, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:29:40.498676", "level": "sign", "sign_number": 129, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:29:40.499631", "level": "sign", "sign_number": 130, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:29:40.500612", "level": "sign", "sign_number": 131, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:29:40.501279", "level": "sign", "sign_number": 132, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:30:56.154181", "level": "sign", "sign_number": 133, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:30:56.156072", "level": "sign", "sign_number": 134, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:30:56.157663", "level": "sign", "sign_number": 135, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:30:56.159026", "level": "sign", "sign_number": 136, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:32:01.495420", "level": "sign", "sign_number": 137, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:32:01.496378", "level": "sign", "sign_number": 138, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:32:01.497506", "level": "sign", "sign_number": 139, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:32:01.498359", "level": "sign", "sign_number": 140, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:32:58.291058", "level": "sign", "sign_number": 141, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:32:58.292407", "level": "sign", "sign_number": 142, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:32:58.293206", "level": "sign", "sign_number": 143, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:32:58.294060", "level": "sign", "sign_number": 144, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:34:10.665338", "level": "sign", "sign_number": 145, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:34:10.668146", "level": "sign", "sign_number": 146, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:34:10.670316", "level": "sign", "sign_number": 147, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:34:10.671991", "level": "sign", "sign_number": 148, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:35:37.402911", "level": "sign", "sign_number": 149, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:35:37.404265", "level": "sign", "sign_number": 150, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:35:37.405292", "level": "sign", "sign_number": 151, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:35:37.406276", "level": "sign", "sign_number": 152, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:38:07.486249", "level": "sign", "sign_number": 153, "status": "failed", "detail": "无法解析返回内容为 JSON：[\n  {\n    \"sign_number\": 153,\n    \"fortune\": \"Very Favorable\",\n    \"gua_type\": \"Dui Palace, Cui transforming into Pi\",\n    \"sign_text\": \"Matters seem fitting, yet caution is required.\\nBefore acting, ..."}
+{"timestamp": "2026-06-29T01:38:07.487513", "level": "sign", "sign_number": 154, "status": "failed", "detail": "无法解析返回内容为 JSON：[\n  {\n    \"sign_number\": 153,\n    \"fortune\": \"Very Favorable\",\n    \"gua_type\": \"Dui Palace, Cui transforming into Pi\",\n    \"sign_text\": \"Matters seem fitting, yet caution is required.\\nBefore acting, ..."}
+{"timestamp": "2026-06-29T01:38:07.488589", "level": "sign", "sign_number": 155, "status": "failed", "detail": "无法解析返回内容为 JSON：[\n  {\n    \"sign_number\": 153,\n    \"fortune\": \"Very Favorable\",\n    \"gua_type\": \"Dui Palace, Cui transforming into Pi\",\n    \"sign_text\": \"Matters seem fitting, yet caution is required.\\nBefore acting, ..."}
+{"timestamp": "2026-06-29T01:38:07.489931", "level": "sign", "sign_number": 156, "status": "failed", "detail": "无法解析返回内容为 JSON：[\n  {\n    \"sign_number\": 153,\n    \"fortune\": \"Very Favorable\",\n    \"gua_type\": \"Dui Palace, Cui transforming into Pi\",\n    \"sign_text\": \"Matters seem fitting, yet caution is required.\\nBefore acting, ..."}
+{"timestamp": "2026-06-29T01:39:08.025345", "level": "sign", "sign_number": 157, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:39:08.026850", "level": "sign", "sign_number": 158, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:39:08.028514", "level": "sign", "sign_number": 159, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:39:08.029547", "level": "sign", "sign_number": 160, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:40:34.311764", "level": "sign", "sign_number": 161, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:40:34.313307", "level": "sign", "sign_number": 162, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:40:34.314530", "level": "sign", "sign_number": 163, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:40:34.315604", "level": "sign", "sign_number": 164, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:41:48.500788", "level": "sign", "sign_number": 165, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:41:48.501541", "level": "sign", "sign_number": 166, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:41:48.502402", "level": "sign", "sign_number": 167, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:41:48.503143", "level": "sign", "sign_number": 168, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:43:03.504368", "level": "sign", "sign_number": 169, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:43:03.506414", "level": "sign", "sign_number": 170, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:43:03.508016", "level": "sign", "sign_number": 171, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:43:03.509306", "level": "sign", "sign_number": 172, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:44:26.075509", "level": "sign", "sign_number": 173, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:44:26.077311", "level": "sign", "sign_number": 174, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:44:26.079038", "level": "sign", "sign_number": 175, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:44:26.080871", "level": "sign", "sign_number": 176, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:45:51.758675", "level": "sign", "sign_number": 177, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:45:51.760123", "level": "sign", "sign_number": 178, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:45:51.761933", "level": "sign", "sign_number": 179, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:45:51.763544", "level": "sign", "sign_number": 180, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:47:13.048099", "level": "sign", "sign_number": 181, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:47:13.051084", "level": "sign", "sign_number": 182, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:47:13.053527", "level": "sign", "sign_number": 183, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:47:13.055986", "level": "sign", "sign_number": 184, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:48:35.496022", "level": "sign", "sign_number": 185, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:48:35.498273", "level": "sign", "sign_number": 186, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:48:35.500223", "level": "sign", "sign_number": 187, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:48:35.502207", "level": "sign", "sign_number": 188, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:49:29.833320", "level": "sign", "sign_number": 189, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:49:29.841706", "level": "sign", "sign_number": 190, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:49:29.844084", "level": "sign", "sign_number": 191, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:49:29.845778", "level": "sign", "sign_number": 192, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:50:13.605286", "level": "sign", "sign_number": 193, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:50:13.608183", "level": "sign", "sign_number": 194, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:50:13.610919", "level": "sign", "sign_number": 195, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:50:13.614104", "level": "sign", "sign_number": 196, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:51:05.658392", "level": "sign", "sign_number": 197, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:51:05.663370", "level": "sign", "sign_number": 198, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:51:05.670252", "level": "sign", "sign_number": 199, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:51:05.685172", "level": "sign", "sign_number": 200, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:52:28.321596", "level": "sign", "sign_number": 201, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:52:28.323214", "level": "sign", "sign_number": 202, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:52:28.324756", "level": "sign", "sign_number": 203, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:52:28.326106", "level": "sign", "sign_number": 204, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:54:33.583680", "level": "sign", "sign_number": 205, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:54:33.586173", "level": "sign", "sign_number": 206, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:54:33.588738", "level": "sign", "sign_number": 207, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:54:33.590568", "level": "sign", "sign_number": 208, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:55:55.083277", "level": "sign", "sign_number": 209, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:55:55.085686", "level": "sign", "sign_number": 210, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:55:55.087879", "level": "sign", "sign_number": 211, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:55:55.090425", "level": "sign", "sign_number": 212, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:56:14.861002", "level": "sign", "sign_number": 213, "status": "failed", "detail": "IncompleteRead(0 bytes read)"}
+{"timestamp": "2026-06-29T01:56:14.862535", "level": "sign", "sign_number": 214, "status": "failed", "detail": "IncompleteRead(0 bytes read)"}
+{"timestamp": "2026-06-29T01:56:14.863749", "level": "sign", "sign_number": 215, "status": "failed", "detail": "IncompleteRead(0 bytes read)"}
+{"timestamp": "2026-06-29T01:56:14.865034", "level": "sign", "sign_number": 216, "status": "failed", "detail": "IncompleteRead(0 bytes read)"}
+{"timestamp": "2026-06-29T01:56:41.829723", "level": "sign", "sign_number": 217, "status": "failed", "detail": "IncompleteRead(0 bytes read)"}
+{"timestamp": "2026-06-29T01:56:41.831411", "level": "sign", "sign_number": 218, "status": "failed", "detail": "IncompleteRead(0 bytes read)"}
+{"timestamp": "2026-06-29T01:56:41.832905", "level": "sign", "sign_number": 219, "status": "failed", "detail": "IncompleteRead(0 bytes read)"}
+{"timestamp": "2026-06-29T01:56:41.834214", "level": "sign", "sign_number": 220, "status": "failed", "detail": "IncompleteRead(0 bytes read)"}
+{"timestamp": "2026-06-29T01:57:45.292932", "level": "sign", "sign_number": 221, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:57:45.295543", "level": "sign", "sign_number": 222, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:57:45.297896", "level": "sign", "sign_number": 223, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:57:45.303026", "level": "sign", "sign_number": 224, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:59:04.857175", "level": "sign", "sign_number": 225, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:59:04.862204", "level": "sign", "sign_number": 226, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:59:04.866336", "level": "sign", "sign_number": 227, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T01:59:04.871188", "level": "sign", "sign_number": 228, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:00:06.551633", "level": "sign", "sign_number": 229, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:00:06.556121", "level": "sign", "sign_number": 230, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:00:06.560002", "level": "sign", "sign_number": 231, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:00:06.564004", "level": "sign", "sign_number": 232, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:00:47.861946", "level": "sign", "sign_number": 233, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:00:47.865994", "level": "sign", "sign_number": 234, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:00:47.870196", "level": "sign", "sign_number": 235, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:00:47.873663", "level": "sign", "sign_number": 236, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:00:48.159803", "model": "deepseek-v4-flash", "source_count": 116, "output_count": 116, "source_sign_numbers": [109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236], "output_sign_numbers": [109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236], "replaced_sign_numbers": [], "total_after_merge": 224}
+{"timestamp": "2026-06-29T02:04:38.883562", "level": "sign", "sign_number": 237, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:04:38.884461", "level": "sign", "sign_number": 238, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:04:38.885061", "level": "sign", "sign_number": 239, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:04:38.886297", "level": "sign", "sign_number": 240, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:06:02.350076", "level": "sign", "sign_number": 241, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:06:02.350889", "level": "sign", "sign_number": 242, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:06:02.351527", "level": "sign", "sign_number": 243, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:06:02.352071", "level": "sign", "sign_number": 244, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:07:00.546960", "level": "sign", "sign_number": 245, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:07:00.547945", "level": "sign", "sign_number": 246, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:07:00.548682", "level": "sign", "sign_number": 247, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:07:00.549372", "level": "sign", "sign_number": 248, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:08:11.347666", "level": "sign", "sign_number": 249, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:08:11.349071", "level": "sign", "sign_number": 250, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:08:11.350730", "level": "sign", "sign_number": 251, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:08:11.352026", "level": "sign", "sign_number": 252, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:09:02.688377", "level": "sign", "sign_number": 253, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:09:02.689464", "level": "sign", "sign_number": 254, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:09:02.690734", "level": "sign", "sign_number": 255, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:09:02.691585", "level": "sign", "sign_number": 256, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:10:00.574353", "level": "sign", "sign_number": 257, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:10:00.575242", "level": "sign", "sign_number": 258, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:10:00.576003", "level": "sign", "sign_number": 259, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:10:00.576785", "level": "sign", "sign_number": 260, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:11:11.393587", "level": "sign", "sign_number": 261, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:11:11.394442", "level": "sign", "sign_number": 262, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:11:11.395129", "level": "sign", "sign_number": 263, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:11:11.395979", "level": "sign", "sign_number": 264, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:12:10.726482", "level": "sign", "sign_number": 265, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:12:10.727568", "level": "sign", "sign_number": 266, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:12:10.728766", "level": "sign", "sign_number": 267, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:12:10.729540", "level": "sign", "sign_number": 268, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:12:55.918886", "level": "sign", "sign_number": 269, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:12:55.919569", "level": "sign", "sign_number": 270, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:12:55.920094", "level": "sign", "sign_number": 271, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:12:55.920650", "level": "sign", "sign_number": 272, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:13:57.582979", "level": "sign", "sign_number": 273, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:13:57.583784", "level": "sign", "sign_number": 274, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:13:57.584511", "level": "sign", "sign_number": 275, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:13:57.585349", "level": "sign", "sign_number": 276, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:14:45.929277", "level": "sign", "sign_number": 277, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:14:45.930423", "level": "sign", "sign_number": 278, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:14:45.931288", "level": "sign", "sign_number": 279, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:14:45.932064", "level": "sign", "sign_number": 280, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:15:53.121995", "level": "sign", "sign_number": 281, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:15:53.123001", "level": "sign", "sign_number": 282, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:15:53.123783", "level": "sign", "sign_number": 283, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:15:53.124779", "level": "sign", "sign_number": 284, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:17:02.438836", "level": "sign", "sign_number": 285, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:17:02.440330", "level": "sign", "sign_number": 286, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:17:02.441502", "level": "sign", "sign_number": 287, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:17:02.442982", "level": "sign", "sign_number": 288, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:18:18.800505", "level": "sign", "sign_number": 289, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:18:18.801543", "level": "sign", "sign_number": 290, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:18:18.802276", "level": "sign", "sign_number": 291, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:18:18.803078", "level": "sign", "sign_number": 292, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:19:08.370745", "level": "sign", "sign_number": 293, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:19:08.372021", "level": "sign", "sign_number": 294, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:19:08.372988", "level": "sign", "sign_number": 295, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:19:08.373898", "level": "sign", "sign_number": 296, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:20:16.594766", "level": "sign", "sign_number": 297, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:20:16.595825", "level": "sign", "sign_number": 298, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:20:16.596632", "level": "sign", "sign_number": 299, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:20:16.597520", "level": "sign", "sign_number": 300, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:21:12.731787", "level": "sign", "sign_number": 301, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:21:12.733119", "level": "sign", "sign_number": 302, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:21:12.733962", "level": "sign", "sign_number": 303, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:21:12.734871", "level": "sign", "sign_number": 304, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:22:25.168547", "level": "sign", "sign_number": 305, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:22:25.173013", "level": "sign", "sign_number": 306, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:22:25.178097", "level": "sign", "sign_number": 307, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:22:25.183497", "level": "sign", "sign_number": 308, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:23:23.977793", "level": "sign", "sign_number": 309, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:23:23.978714", "level": "sign", "sign_number": 310, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:23:23.979702", "level": "sign", "sign_number": 311, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:23:23.980488", "level": "sign", "sign_number": 312, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:24:18.006072", "level": "sign", "sign_number": 313, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:24:18.008043", "level": "sign", "sign_number": 314, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:24:18.009648", "level": "sign", "sign_number": 315, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:24:18.011417", "level": "sign", "sign_number": 316, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:25:19.449433", "level": "sign", "sign_number": 317, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:25:19.450274", "level": "sign", "sign_number": 318, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:25:19.450936", "level": "sign", "sign_number": 319, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:25:19.451764", "level": "sign", "sign_number": 320, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:26:34.709511", "level": "sign", "sign_number": 321, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:26:34.710444", "level": "sign", "sign_number": 322, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:26:34.711131", "level": "sign", "sign_number": 323, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:26:34.711876", "level": "sign", "sign_number": 324, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:27:47.214178", "level": "sign", "sign_number": 325, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:27:47.215594", "level": "sign", "sign_number": 326, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:27:47.216795", "level": "sign", "sign_number": 327, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:27:47.217740", "level": "sign", "sign_number": 328, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:29:45.745879", "level": "sign", "sign_number": 329, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:29:45.746864", "level": "sign", "sign_number": 330, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:29:45.748146", "level": "sign", "sign_number": 331, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:29:45.749101", "level": "sign", "sign_number": 332, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:30:56.450850", "level": "sign", "sign_number": 333, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:30:56.452380", "level": "sign", "sign_number": 334, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:30:56.453550", "level": "sign", "sign_number": 335, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:30:56.454706", "level": "sign", "sign_number": 336, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:32:00.551174", "level": "sign", "sign_number": 337, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:32:00.552172", "level": "sign", "sign_number": 338, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:32:00.552961", "level": "sign", "sign_number": 339, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:32:00.553747", "level": "sign", "sign_number": 340, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:32:45.303482", "level": "sign", "sign_number": 341, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:32:45.304343", "level": "sign", "sign_number": 342, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:32:45.305035", "level": "sign", "sign_number": 343, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:32:45.305717", "level": "sign", "sign_number": 344, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:34:04.297338", "level": "sign", "sign_number": 345, "status": "failed", "detail": "无法解析返回内容为 JSON：[\n  {\n    \"sign_number\": 345,\n    \"fortune\": \"Moderately Favorable\",\n    \"gua_type\": \"Kan Palace, Ming Yi transforming into Feng\",\n    \"sign_text\": \"Who says the homeland lacks flavor? Drifting on lak..."}
+{"timestamp": "2026-06-29T02:34:04.299013", "level": "sign", "sign_number": 346, "status": "failed", "detail": "无法解析返回内容为 JSON：[\n  {\n    \"sign_number\": 345,\n    \"fortune\": \"Moderately Favorable\",\n    \"gua_type\": \"Kan Palace, Ming Yi transforming into Feng\",\n    \"sign_text\": \"Who says the homeland lacks flavor? Drifting on lak..."}
+{"timestamp": "2026-06-29T02:34:04.299952", "level": "sign", "sign_number": 347, "status": "failed", "detail": "无法解析返回内容为 JSON：[\n  {\n    \"sign_number\": 345,\n    \"fortune\": \"Moderately Favorable\",\n    \"gua_type\": \"Kan Palace, Ming Yi transforming into Feng\",\n    \"sign_text\": \"Who says the homeland lacks flavor? Drifting on lak..."}
+{"timestamp": "2026-06-29T02:34:04.300976", "level": "sign", "sign_number": 348, "status": "failed", "detail": "无法解析返回内容为 JSON：[\n  {\n    \"sign_number\": 345,\n    \"fortune\": \"Moderately Favorable\",\n    \"gua_type\": \"Kan Palace, Ming Yi transforming into Feng\",\n    \"sign_text\": \"Who says the homeland lacks flavor? Drifting on lak..."}
+{"timestamp": "2026-06-29T02:35:15.368478", "level": "sign", "sign_number": 349, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:35:15.369550", "level": "sign", "sign_number": 350, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:35:15.370333", "level": "sign", "sign_number": 351, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:35:15.371167", "level": "sign", "sign_number": 352, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:36:04.917855", "level": "sign", "sign_number": 353, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:36:04.918688", "level": "sign", "sign_number": 354, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:36:04.919393", "level": "sign", "sign_number": 355, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:36:04.920018", "level": "sign", "sign_number": 356, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:37:09.321567", "level": "sign", "sign_number": 357, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:37:09.322507", "level": "sign", "sign_number": 358, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:37:09.323298", "level": "sign", "sign_number": 359, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:37:09.323960", "level": "sign", "sign_number": 360, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:38:01.008870", "level": "sign", "sign_number": 361, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:38:01.010169", "level": "sign", "sign_number": 362, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:38:01.011219", "level": "sign", "sign_number": 363, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:38:01.011871", "level": "sign", "sign_number": 364, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:38:01.082148", "model": "deepseek-v4-flash", "source_count": 124, "output_count": 124, "source_sign_numbers": [237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287, 288, 289, 290, 291, 292, 293, 294, 295, 296, 297, 298, 299, 300, 301, 302, 303, 304, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316, 317, 318, 319, 320, 321, 322, 323, 324, 325, 326, 327, 328, 329, 330, 331, 332, 333, 334, 335, 336, 337, 338, 339, 340, 341, 342, 343, 344, 349, 350, 351, 352, 353, 354, 355, 356, 357, 358, 359, 360, 361, 362, 363, 364], "output_sign_numbers": [237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287, 288, 289, 290, 291, 292, 293, 294, 295, 296, 297, 298, 299, 300, 301, 302, 303, 304, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316, 317, 318, 319, 320, 321, 322, 323, 324, 325, 326, 327, 328, 329, 330, 331, 332, 333, 334, 335, 336, 337, 338, 339, 340, 341, 342, 343, 344, 349, 350, 351, 352, 353, 354, 355, 356, 357, 358, 359, 360, 361, 362, 363, 364], "replaced_sign_numbers": [], "total_after_merge": 348}
+{"timestamp": "2026-06-29T02:45:44.962536", "level": "sign", "sign_number": 365, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:45:44.963207", "level": "sign", "sign_number": 366, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:45:44.963705", "level": "sign", "sign_number": 367, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:45:44.964140", "level": "sign", "sign_number": 368, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:46:44.221523", "level": "sign", "sign_number": 369, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:46:44.222273", "level": "sign", "sign_number": 370, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:46:44.222846", "level": "sign", "sign_number": 371, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:46:44.223433", "level": "sign", "sign_number": 372, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:47:26.881906", "level": "sign", "sign_number": 373, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:47:26.882808", "level": "sign", "sign_number": 374, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:47:26.883433", "level": "sign", "sign_number": 375, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:47:26.884140", "level": "sign", "sign_number": 376, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:48:25.466318", "level": "sign", "sign_number": 377, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:48:25.467257", "level": "sign", "sign_number": 378, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:48:25.467968", "level": "sign", "sign_number": 379, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:48:25.468651", "level": "sign", "sign_number": 380, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:49:26.461074", "level": "sign", "sign_number": 381, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:49:26.461947", "level": "sign", "sign_number": 382, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:49:26.462584", "level": "sign", "sign_number": 383, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:49:26.463195", "level": "sign", "sign_number": 384, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:49:26.549645", "model": "deepseek-v4-flash", "source_count": 20, "output_count": 20, "source_sign_numbers": [365, 366, 367, 368, 369, 370, 371, 372, 373, 374, 375, 376, 377, 378, 379, 380, 381, 382, 383, 384], "output_sign_numbers": [365, 366, 367, 368, 369, 370, 371, 372, 373, 374, 375, 376, 377, 378, 379, 380, 381, 382, 383, 384], "replaced_sign_numbers": [], "total_after_merge": 368}
+{"timestamp": "2026-06-29T02:55:42.944628", "level": "sign", "sign_number": 153, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:55:42.945588", "level": "sign", "sign_number": 154, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:55:42.946321", "level": "sign", "sign_number": 155, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:55:42.947040", "level": "sign", "sign_number": 156, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:56:48.609088", "level": "sign", "sign_number": 213, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:56:48.609832", "level": "sign", "sign_number": 214, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:56:48.610661", "level": "sign", "sign_number": 215, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:56:48.611313", "level": "sign", "sign_number": 216, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:57:52.940601", "level": "sign", "sign_number": 217, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:57:52.941940", "level": "sign", "sign_number": 218, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:57:52.942983", "level": "sign", "sign_number": 219, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:57:52.943969", "level": "sign", "sign_number": 220, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:58:54.509898", "level": "sign", "sign_number": 345, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:58:54.514086", "level": "sign", "sign_number": 346, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:58:54.516884", "level": "sign", "sign_number": 347, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:58:54.519479", "level": "sign", "sign_number": 348, "status": "success", "detail": ""}
+{"timestamp": "2026-06-29T02:58:55.618323", "model": "deepseek-v4-flash", "source_count": 16, "output_count": 16, "source_sign_numbers": [153, 154, 155, 156, 213, 214, 215, 216, 217, 218, 219, 220, 345, 346, 347, 348], "output_sign_numbers": [153, 154, 155, 156, 213, 214, 215, 216, 217, 218, 219, 220, 345, 346, 347, 348], "replaced_sign_numbers": [], "total_after_merge": 384}
