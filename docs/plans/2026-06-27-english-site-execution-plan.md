@@ -18,6 +18,7 @@
 | 0.6 | 2026-06-30 | 助手 | 取消自由提问模式，改为 Three Words + Three Numbers：D4 更新为三词字符长度 mod 10 映射；W0.2/W4.1/W4.2/W4.3/W7.4 重写（payload mode 改 words、字段契约统一为 9 字段、三数字范围 0-999→0-9）；W2.1 字段结构对齐 GUA_COLUMNS 11 字段；W2.7 测试改为 9 字段校验；新增引导语；W4 目标行"文本"改"三词" |
 | 0.7 | 2026-06-30 | 助手 | 算法定稿（依据 scripts/derive_original_oracle_signs.py）：D4 三词改为 A=1..Z=26 字母求和 + stroke_digit（mod 10 余 0 取 1）+ compose_three_character_number（复用源书函数）；W4.2 三数字改回 0-999 + 九位种子 compose_english_three_number_seed（英文专用）；W4.1/W4.2/W4.3 标注复用脚本函数；W0.2/W7.4 新增 UI 变换动画与折叠项；示例 LOVE/WORK/FATE→Sign #88 |
 | 0.8 | 2026-06-30 | 助手 | W0 审查反馈修正：D11 确认保留完整入口（W0 阻塞解除）；D8 暂停（Deep Reading 付费产品暂时冻结，待用户深度思考）；代码现状更新（W0 五份文档已起草）；W0 涉及文件补充 AI Prompt 边界文档；产品规格补充 W0.1 逐页定义、引导语拆分（公共前半句+两套模式文案）、Three Numbers UI 动画（314|159|265→Sign #33）、全零错误码 ORACLE_NUMBERS_ALL_ZERO、三词页面输入约束；AI Prompt 边界文档删除 Ask the Oracle 敏感词检测（仅保留 Birth Chart Reading）；文化表达指南神煞改为音译+解释、命理改为 life patterns；Wise_Oracle_Outbound_Plan.md 标记已废止 |
+| 0.9 | 2026-06-30 | 助手 | W0 视为通过（用户授权按文档落实代码）；W1 完成：W1.1 术语表草稿+抽取脚本（纠正命名空间注释错误 sx=生肖/ss=十神/ps=方位/bg=八卦）；W1.2 错误码策略定稿（21 现有 code + 5 英文新增 + CONTENT_NOT_FOUND）；W2.2-W2.6 暂停（用户将用其他 Agent 更新后台数据）；W5 暂停（黄历上线范围待核实）；W8 暂停（D3 未定，Deep Reading 冻结）；进入 W3 |
 
 > 变更规则：任何对本计划的修改（增删任务、调整顺序、状态变更）都追加一行修订记录，并在第 7 节变更日志写明细节。任务状态变更不记修订记录，只更新任务内的进度日志。
 
@@ -107,15 +108,15 @@
 
 | 工作包 | 名称 | 原总纲映射 | 前置 | 状态 |
 | --- | --- | --- | --- | --- |
-| W0 | 英文产品边界冻结 | E0 / P2.1-P2.5、P2.8 | D1、D2、D11 | 进行中（五份文档已起草+审查反馈修正，待用户二审；黄历上线范围待用户核实） |
-| W1 | 英文术语体系 | E1 / P2.6、P2.7 | W0、D6 | 未开始 |
-| W2 | 英文内容数据 | E2 / P3.1-P3.7 | W0、W1、D5、D6、D7 | 进行中（W2.1 已超额完成 384/384，其余子任务未开始） |
-| W3 | 英文路由骨架 | E3 / P4.1、P4.1a、P4.2 | W0、D2、D12 | 未开始 |
+| W0 | 英文产品边界冻结 | E0 / P2.1-P2.5、P2.8 | D1、D2、D11 | 已完成（用户授权按文档落实代码，视为通过；黄历上线范围待用户核实，Deep Reading 冻结） |
+| W1 | 英文术语体系 | E1 / P2.6、P2.7 | W0、D6 | 已完成（W1.1 术语表草稿+脚本完成，W1.2 错误码策略定稿） |
+| W2 | 英文内容数据 | E2 / P3.1-P3.7 | W0、W1、D5、D6、D7 | 进行中（W2.1 已超额完成 384/384；W2.2-W2.6 暂停，用户将用其他 Agent 更新后台数据） |
+| W3 | 英文路由骨架 | E3 / P4.1、P4.1a、P4.2 | W0、D2、D12 | 进行中 |
 | W4 | Ask the Oracle 后端 | E4 / P4.3-P4.5 | W0、W2、D4、D12 | 未开始 |
-| W5 | Daily Almanac 后端 | E5 / P4.6、P4.6a | W0、W2、D6、D7、D12 | 未开始 |
+| W5 | Daily Almanac 后端 | E5 / P4.6、P4.6a | W0、W2、D6、D7、D12 | 暂停（黄历上线范围待用户核实） |
 | W6 | Birth Chart Reading 后端 | E6 / P4.7、P4.8 | W0、W2、D11、D12 | 未开始 |
 | W7 | 英文前端 | E7 / P5.1-P5.8 | W3、W4、W5、W6 | 未开始 |
-| W8 | SEO / 合规 / 商业化预埋 | E8 / P7 部分 + P6 部分 | W2、W7、D3、D8、D9、D10 | 未开始 |
+| W8 | SEO / 合规 / 商业化预埋 | E8 / P7 部分 + P6 部分 | W2、W7、D3、D8、D9、D10 | 暂停（D3 未定，Deep Reading 冻结） |
 
 状态枚举：未开始 / 进行中 / 阻塞 / 待验收 / 已完成
 
@@ -231,6 +232,8 @@
 
 | 日期 | 负责人 | 改动 | 证据 | 下一步 |
 | --- | --- | --- | --- | --- |
+| 2026-06-30 | 助手 | W1.1 完成：编写 `scripts/extract_lunar_en_candidates.py`，从 lunar.js 抽取 chs 799 条/en 500 条/29 命名空间，生成 `docs/business/huangli-english-termbase-draft.md`（50KB）。纠正执行计划命名空间注释错误（sx=生肖非十神，ss=十神，ps=方位非彭祖百忌，bg=八卦）。标识 6 个 en 完全缺失命名空间（d/ds/h/m/od/ss）+ sn 缺 137 条 | `scripts/extract_lunar_en_candidates.py`、`docs/business/huangli-english-termbase-draft.md` | 待人工审校定稿（用户将用其他 Agent 更新数据） |
+| 2026-06-30 | 助手 | W1.2 完成：基于代码扫描（22 处 failure 调用、21 个唯一 code、前端零 code 消费）定稿错误码策略 `docs/business/wise-oracle-error-code-strategy.md`。定义现有 21 code + 英文版新增 5 code（INVALID_INPUT/INVALID_ORACLE_MODE/ORACLE_WORDS_INSUFFICIENT/INVALID_ORACLE_NUMBER/ORACLE_NUMBERS_ALL_ZERO）+ CONTENT_NOT_FOUND。SSE 流错误保持字符串格式（按语言切换）。W3.2 将产出 error_codes.py 引用本文档 | `docs/business/wise-oracle-error-code-strategy.md` | W3.2 实施 error_codes.py |
 
 ---
 
