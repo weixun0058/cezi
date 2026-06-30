@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Wise Oracle{% endblock %}</title>
     <meta name="description" content="{% block meta_description %}Draw an oracle sign, read the daily Chinese almanac, and reflect on your birth chart through traditional Chinese cultural wisdom.{% endblock %}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="canonical" href="{% block canonical %}{{ request.base_url }}{% endblock %}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/wise_oracle.css') }}">
 </head>
 <body>
     <header class="en-header">
@@ -43,6 +44,7 @@
         </div>
     </footer>
 
+    <script src="{{ url_for('static', filename='js/wise_oracle_common.js') }}"></script>
     {% block scripts %}{% endblock %}
 </body>
 </html>

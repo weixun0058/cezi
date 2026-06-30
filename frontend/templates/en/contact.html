@@ -1,20 +1,56 @@
 {% extends "en/base.html" %}
 
 {% block title %}Contact — Wise Oracle{% endblock %}
-{% block meta_description %}Get in touch with the Wise Oracle team.{% endblock %}
+{% block meta_description %}Contact Wise Oracle for questions, feedback, privacy inquiries, or support.{% endblock %}
 
 {% block content %}
-<section class="en-contact">
+<section class="en-legal">
     <h1>Contact</h1>
 
-    <div class="en-contact-placeholder">
-        <p><em>Contact form will be implemented in W8.</em></p>
-        <p>For inquiries, please reach out:</p>
-        <ul>
-            <li>General questions: <em>contact form coming soon</em></li>
-            <li>Privacy inquiries: <em>privacy@wise-oracle.example</em> (placeholder)</li>
-            <li>Support: <em>support@wise-oracle.example</em> (placeholder)</li>
-        </ul>
+    <p>
+        We welcome your questions, feedback, and inquiries. Since Wise Oracle does not require
+        accounts, please reach out through one of the channels below.
+    </p>
+
+    <div class="en-legal-contact">
+        <h2>General Inquiries</h2>
+        <p>
+            For questions about the service, feature requests, or general feedback, please email:
+            <br><strong>contact@wise-oracle.example</strong>
+        </p>
     </div>
+
+    <div class="en-legal-contact">
+        <h2>Privacy Inquiries</h2>
+        <p>
+            For privacy or data-related questions, please email:
+            <br><strong>privacy@wise-oracle.example</strong>
+        </p>
+        <p>
+            See our <a href="/privacy">Privacy Policy</a> for details on how we handle data.
+        </p>
+    </div>
+
+    <div class="en-legal-contact">
+        <h2>Support</h2>
+        <p>
+            If you encounter an error or need help using a tool, please describe what happened,
+            which tool you were using, and the approximate time. Screenshots are helpful if you
+            can include them.
+        </p>
+    </div>
+
+    <h2>Response Time</h2>
+    <p>
+        This is a small project maintained in good faith. We aim to respond within a few business
+        days, though response times may vary.
+    </p>
+
+    <h2>Before You Write</h2>
+    <ul>
+        <li>For questions about what the service is and isn't, see our <a href="/about">About</a> and <a href="/disclaimer">Disclaimer</a> pages.</li>
+        <li>For rules of use, see our <a href="/terms">Terms of Service</a>.</li>
+        <li>Remember that all readings are for entertainment and cultural self-reflection, not professional advice.</li>
+    </ul>
 </section>
 {% endblock %}

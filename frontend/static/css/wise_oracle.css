@@ -1,0 +1,640 @@
+/* ============================================================
+   Wise Oracle 英文站样式（W7.1/W7.2）
+   设计方向：东方文化、克制、清晰、可信
+   避免：紫色渐变、装饰光球、过暗神秘风
+   独立于中文 style.css（中英两套布局，W7.2 已知技术债）
+   ============================================================ */
+
+:root {
+    --wo-bg: #faf7f2;
+    --wo-surface: #ffffff;
+    --wo-surface-alt: #f4ede1;
+    --wo-text: #2c2420;
+    --wo-text-soft: #6b5d52;
+    --wo-border: #e3d9c8;
+    --wo-accent: #8a3324;
+    --wo-accent-soft: #b85a48;
+    --wo-ink: #3a2e25;
+    --wo-gold: #b08d3e;
+    --wo-success: #4a6b3a;
+    --wo-error: #a23b2a;
+    --wo-radius: 6px;
+    --wo-shadow: 0 1px 3px rgba(60, 45, 35, 0.08);
+    --wo-shadow-lift: 0 4px 16px rgba(60, 45, 35, 0.12);
+    --wo-max-width: 1080px;
+    --wo-font-serif: Georgia, "Times New Roman", "Songti SC", serif;
+    --wo-font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--wo-font-sans);
+    background: var(--wo-bg);
+    color: var(--wo-text);
+    line-height: 1.65;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--wo-font-serif);
+    color: var(--wo-ink);
+    line-height: 1.3;
+    font-weight: 600;
+}
+
+h1 { font-size: 2.2rem; margin: 0 0 0.5em; }
+h2 { font-size: 1.6rem; margin: 1.5em 0 0.6em; }
+h3 { font-size: 1.25rem; margin: 1.2em 0 0.5em; }
+
+p { margin: 0 0 1em; }
+
+a {
+    color: var(--wo-accent);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s ease;
+}
+a:hover { border-bottom-color: var(--wo-accent); }
+
+/* ============================================================
+   页眉导航
+   ============================================================ */
+
+.en-header {
+    background: var(--wo-surface);
+    border-bottom: 1px solid var(--wo-border);
+    box-shadow: var(--wo-shadow);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.en-nav {
+    max-width: var(--wo-max-width);
+    margin: 0 auto;
+    padding: 0.9rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.en-brand {
+    font-family: var(--wo-font-serif);
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--wo-ink);
+    border-bottom: none;
+    letter-spacing: 0.02em;
+}
+.en-brand:hover { color: var(--wo-accent); }
+
+.en-nav-links {
+    display: flex;
+    gap: 1.4rem;
+    flex-wrap: wrap;
+}
+
+.en-nav-links a {
+    color: var(--wo-text-soft);
+    font-size: 0.95rem;
+    border-bottom: none;
+    padding: 0.2rem 0;
+}
+.en-nav-links a:hover { color: var(--wo-accent); }
+
+/* ============================================================
+   主区域
+   ============================================================ */
+
+.en-main {
+    max-width: var(--wo-max-width);
+    margin: 0 auto;
+    padding: 2.5rem 1.25rem 4rem;
+}
+
+/* ============================================================
+   首页英雄区与工具卡片
+   ============================================================ */
+
+.en-hero {
+    text-align: center;
+    padding: 2rem 0 3rem;
+}
+
+.en-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 0.3em;
+    letter-spacing: -0.01em;
+}
+
+.en-tagline {
+    font-family: var(--wo-font-serif);
+    font-size: 1.25rem;
+    color: var(--wo-text-soft);
+    font-style: italic;
+    margin-bottom: 1.2em;
+}
+
+.en-intro {
+    max-width: 640px;
+    margin: 0 auto;
+    color: var(--wo-text-soft);
+}
+
+.en-tools { margin-top: 1rem; }
+
+.en-tools h2 {
+    text-align: center;
+    margin-bottom: 1.5em;
+}
+
+.en-tool-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.en-tool-card {
+    background: var(--wo-surface);
+    border: 1px solid var(--wo-border);
+    border-radius: var(--wo-radius);
+    padding: 1.8rem 1.5rem;
+    box-shadow: var(--wo-shadow);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+    display: flex;
+    flex-direction: column;
+}
+.en-tool-card:hover {
+    box-shadow: var(--wo-shadow-lift);
+    transform: translateY(-2px);
+}
+
+.en-tool-card h3 { margin-top: 0; }
+.en-tool-card h3 a { color: var(--wo-ink); border-bottom: none; }
+.en-tool-card h3 a:hover { color: var(--wo-accent); }
+.en-tool-card p { color: var(--wo-text-soft); flex-grow: 1; }
+
+.en-btn {
+    display: inline-block;
+    background: var(--wo-accent);
+    color: #fff;
+    padding: 0.6rem 1.3rem;
+    border-radius: var(--wo-radius);
+    border: none;
+    font-size: 0.95rem;
+    font-family: var(--wo-font-sans);
+    cursor: pointer;
+    text-align: center;
+    border-bottom: none;
+    transition: background 0.15s ease;
+    align-self: flex-start;
+}
+.en-btn:hover { background: var(--wo-accent-soft); border-bottom: none; color: #fff; }
+.en-btn:disabled { background: var(--wo-text-soft); cursor: not-allowed; opacity: 0.7; }
+
+.en-btn-secondary {
+    background: transparent;
+    color: var(--wo-accent);
+    border: 1px solid var(--wo-accent);
+}
+.en-btn-secondary:hover { background: var(--wo-surface-alt); color: var(--wo-accent); }
+
+.en-articles-preview {
+    margin-top: 3rem;
+    text-align: center;
+}
+
+/* ============================================================
+   表单通用
+   ============================================================ */
+
+.en-form {
+    max-width: 560px;
+    margin: 1.5rem 0;
+}
+
+.en-field {
+    margin-bottom: 1.1rem;
+}
+
+.en-field label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.35rem;
+    color: var(--wo-ink);
+}
+
+.en-field input[type="text"],
+.en-field input[type="number"],
+.en-field input[type="date"],
+.en-field input[type="time"],
+.en-field select {
+    width: 100%;
+    padding: 0.6rem 0.7rem;
+    border: 1px solid var(--wo-border);
+    border-radius: var(--wo-radius);
+    font-size: 1rem;
+    font-family: var(--wo-font-sans);
+    background: var(--wo-surface);
+    color: var(--wo-text);
+    transition: border-color 0.15s ease;
+}
+.en-field input:focus,
+.en-field select:focus {
+    outline: none;
+    border-color: var(--wo-accent-soft);
+    box-shadow: 0 0 0 3px rgba(138, 51, 36, 0.1);
+}
+
+.en-field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.en-checkbox-field {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.en-checkbox-field input { width: auto; }
+
+.en-mode-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--wo-border);
+}
+
+.en-mode-tab {
+    background: none;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    font-family: var(--wo-font-sans);
+    color: var(--wo-text-soft);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: color 0.15s ease, border-color 0.15s ease;
+}
+.en-mode-tab.is-active {
+    color: var(--wo-accent);
+    border-bottom-color: var(--wo-accent);
+}
+
+.en-form-status {
+    min-height: 1.4em;
+    margin: 0.8rem 0;
+    font-size: 0.95rem;
+}
+.en-form-status[data-type="error"] { color: var(--wo-error); }
+.en-form-status[data-type="success"] { color: var(--wo-success); }
+
+/* ============================================================
+   Ask the Oracle
+   ============================================================ */
+
+.en-oracle-intro {
+    font-family: var(--wo-font-serif);
+    font-size: 1.15rem;
+    color: var(--wo-text-soft);
+    font-style: italic;
+    max-width: 620px;
+}
+
+.en-oracle-mode-panel { display: none; }
+.en-oracle-mode-panel.is-active { display: block; }
+
+.en-words-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.8rem;
+}
+
+.en-numbers-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.8rem;
+}
+
+.en-oracle-transform {
+    margin: 1.5rem 0;
+    padding: 1rem 1.2rem;
+    background: var(--wo-surface-alt);
+    border-left: 3px solid var(--wo-gold);
+    border-radius: 0 var(--wo-radius) var(--wo-radius) 0;
+    font-family: var(--wo-font-serif);
+}
+.en-transform-step {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin: 0.3rem 0;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+.en-transform-step.is-visible { opacity: 1; }
+.en-transform-word { font-weight: 600; color: var(--wo-ink); min-width: 4em; }
+.en-transform-arrow { color: var(--wo-text-soft); }
+.en-transform-sum { color: var(--wo-gold); font-weight: 600; }
+.en-transform-digit { color: var(--wo-accent); font-weight: 600; }
+
+.en-oracle-explanation {
+    margin: 2rem 0;
+    padding: 1rem 1.2rem;
+    background: var(--wo-surface-alt);
+    border-radius: var(--wo-radius);
+    font-size: 0.95rem;
+    color: var(--wo-text-soft);
+}
+.en-oracle-explanation summary {
+    cursor: pointer;
+    font-weight: 500;
+    color: var(--wo-ink);
+}
+
+.en-oracle-result { display: none; margin-top: 2rem; }
+.en-oracle-result.is-visible { display: block; }
+
+.en-sign-number {
+    font-family: var(--wo-font-serif);
+    font-size: 1.1rem;
+    color: var(--wo-text-soft);
+    margin-bottom: 0.5rem;
+}
+
+.en-sign-text {
+    font-family: var(--wo-font-serif);
+    font-size: 1.35rem;
+    line-height: 1.5;
+    color: var(--wo-ink);
+    padding: 1rem 1.2rem;
+    background: var(--wo-surface-alt);
+    border-left: 3px solid var(--wo-accent);
+    border-radius: 0 var(--wo-radius) var(--wo-radius) 0;
+    margin-bottom: 1.5rem;
+}
+
+.en-sign-section {
+    margin-bottom: 1.3rem;
+}
+.en-sign-section h3 {
+    font-size: 1.1rem;
+    color: var(--wo-accent);
+    margin-bottom: 0.4rem;
+}
+.en-sign-section p {
+    color: var(--wo-text);
+    margin-bottom: 0;
+}
+
+.en-responsible-use {
+    margin-top: 2rem;
+    padding: 1rem 1.2rem;
+    background: var(--wo-surface);
+    border: 1px solid var(--wo-border);
+    border-radius: var(--wo-radius);
+    font-size: 0.9rem;
+    color: var(--wo-text-soft);
+}
+
+/* ============================================================
+   Birth Chart
+   ============================================================ */
+
+.en-birth-chart-intro {
+    font-family: var(--wo-font-serif);
+    font-size: 1.15rem;
+    color: var(--wo-text-soft);
+    font-style: italic;
+    max-width: 620px;
+}
+
+.en-birth-chart-boundary {
+    margin: 2rem 0;
+    padding: 1.2rem 1.4rem;
+    background: var(--wo-surface-alt);
+    border-radius: var(--wo-radius);
+}
+.en-birth-chart-boundary ul { margin: 0.5rem 0 0; padding-left: 1.2rem; }
+.en-birth-chart-boundary li { margin-bottom: 0.4rem; }
+
+.en-bc-loading {
+    display: none;
+    margin: 1.5rem 0;
+    color: var(--wo-text-soft);
+    font-style: italic;
+}
+.en-bc-loading.is-visible { display: block; }
+
+.en-bc-result { display: none; margin-top: 2rem; }
+.en-bc-result.is-visible { display: block; }
+
+.en-bc-pillars {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+}
+.en-bc-pillar {
+    background: var(--wo-surface);
+    border: 1px solid var(--wo-border);
+    border-radius: var(--wo-radius);
+    padding: 0.8rem;
+    text-align: center;
+}
+.en-bc-pillar-label {
+    font-size: 0.85rem;
+    color: var(--wo-text-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.3rem;
+}
+.en-bc-pillar-value {
+    font-family: var(--wo-font-serif);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--wo-ink);
+}
+
+.en-bc-facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+}
+.en-bc-fact {
+    background: var(--wo-surface-alt);
+    border-radius: var(--wo-radius);
+    padding: 0.7rem 0.9rem;
+}
+.en-bc-fact-label { font-size: 0.85rem; color: var(--wo-text-soft); }
+.en-bc-fact-value { font-weight: 600; color: var(--wo-ink); }
+
+.en-bc-section { margin-bottom: 1.5rem; }
+.en-bc-section h3 { color: var(--wo-accent); margin-bottom: 0.5rem; }
+
+.en-bc-reflection {
+    background: var(--wo-surface);
+    border: 1px solid var(--wo-border);
+    border-radius: var(--wo-radius);
+    padding: 1rem 1.2rem;
+    margin-bottom: 0.8rem;
+}
+.en-bc-reflection-label {
+    font-weight: 600;
+    color: var(--wo-accent);
+    margin-bottom: 0.3rem;
+}
+
+.en-bc-cautions {
+    list-style: disc;
+    padding-left: 1.3rem;
+}
+.en-bc-cautions li { margin-bottom: 0.4rem; color: var(--wo-text); }
+
+/* ============================================================
+   Daily Almanac
+   ============================================================ */
+
+.en-almanac-intro {
+    font-family: var(--wo-font-serif);
+    font-size: 1.15rem;
+    color: var(--wo-text-soft);
+    font-style: italic;
+}
+
+.en-almanac-placeholder {
+    margin: 2rem 0;
+    padding: 1.8rem 1.5rem;
+    background: var(--wo-surface);
+    border: 1px solid var(--wo-border);
+    border-radius: var(--wo-radius);
+    text-align: center;
+}
+.en-almanac-placeholder p { color: var(--wo-text-soft); }
+
+.en-almanac-legend {
+    margin-top: 2rem;
+}
+.en-almanac-legend ul { padding-left: 1.2rem; }
+.en-almanac-legend li { margin-bottom: 0.4rem; }
+
+/* ============================================================
+   合规页
+   ============================================================ */
+
+.en-legal { max-width: 720px; }
+.en-legal-updated {
+    color: var(--wo-text-soft);
+    font-size: 0.9rem;
+    font-style: italic;
+    margin-bottom: 1.5rem;
+}
+.en-legal h2 { font-size: 1.3rem; margin-top: 1.8rem; }
+.en-legal ul { padding-left: 1.2rem; }
+.en-legal li { margin-bottom: 0.4rem; }
+.en-legal-contact {
+    background: var(--wo-surface-alt);
+    border-radius: var(--wo-radius);
+    padding: 1rem 1.2rem;
+    margin-top: 1.5rem;
+}
+
+/* ============================================================
+   Articles
+   ============================================================ */
+
+.en-articles-intro {
+    font-family: var(--wo-font-serif);
+    font-size: 1.15rem;
+    color: var(--wo-text-soft);
+    font-style: italic;
+}
+.en-articles-placeholder {
+    margin: 2rem 0;
+    padding: 1.8rem 1.5rem;
+    background: var(--wo-surface);
+    border: 1px solid var(--wo-border);
+    border-radius: var(--wo-radius);
+    text-align: center;
+    color: var(--wo-text-soft);
+}
+
+/* ============================================================
+   页脚
+   ============================================================ */
+
+.en-footer {
+    background: var(--wo-surface);
+    border-top: 1px solid var(--wo-border);
+    margin-top: 4rem;
+}
+
+.en-footer-content {
+    max-width: var(--wo-max-width);
+    margin: 0 auto;
+    padding: 2rem 1.25rem;
+    text-align: center;
+}
+
+.en-footer-nav {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+.en-footer-nav a {
+    color: var(--wo-text-soft);
+    font-size: 0.9rem;
+    border-bottom: none;
+}
+.en-footer-nav a:hover { color: var(--wo-accent); }
+
+.en-responsible-use {
+    font-size: 0.88rem;
+    color: var(--wo-text-soft);
+    font-style: italic;
+    max-width: 560px;
+    margin: 0 auto 0.8rem;
+}
+
+.en-copyright {
+    font-size: 0.85rem;
+    color: var(--wo-text-soft);
+}
+
+/* ============================================================
+   工具类
+   ============================================================ */
+
+.hidden { display: none !important; }
+
+.is-visible { opacity: 1; }
+
+/* ============================================================
+   响应式
+   ============================================================ */
+
+@media (max-width: 640px) {
+    h1 { font-size: 1.8rem; }
+    .en-hero h1 { font-size: 2.2rem; }
+    .en-nav { padding: 0.7rem 1rem; }
+    .en-nav-links { gap: 1rem; font-size: 0.9rem; }
+    .en-main { padding: 1.5rem 1rem 3rem; }
+    .en-field-row { grid-template-columns: 1fr; }
+    .en-words-row, .en-numbers-row { gap: 0.5rem; }
+    .en-bc-pillars { grid-template-columns: repeat(2, 1fr); }
+}

@@ -8,21 +8,80 @@
     <h1>Ask the Oracle</h1>
     <p class="en-oracle-intro">
         Hold one question quietly in mind. Do not type it. Take a slow breath,
-        then enter the first three words that come to you.
+        then offer the first three words or three numbers that come to you.
     </p>
 
-    <div class="en-oracle-placeholder">
-        <p><em>Three Words / Three Numbers input form will be implemented in W7.</em></p>
-        <p>Algorithm: <a href="/articles/how-oracle-signs-work">How oracle signs are formed</a></p>
+    <div class="en-mode-tabs" role="tablist">
+        <button type="button" class="en-mode-tab is-active" data-mode="words" role="tab" aria-selected="true">Three Words</button>
+        <button type="button" class="en-mode-tab" data-mode="numbers" role="tab" aria-selected="false">Three Numbers</button>
     </div>
 
+    <form class="en-form" id="oracle-form" novalidate>
+        <!-- Three Words 模式 -->
+        <div class="en-oracle-mode-panel is-active" data-panel="words">
+            <div class="en-words-row">
+                <div class="en-field">
+                    <label for="word-1">First word</label>
+                    <input type="text" id="word-1" maxlength="30" autocomplete="off" placeholder="e.g. love">
+                </div>
+                <div class="en-field">
+                    <label for="word-2">Second word</label>
+                    <input type="text" id="word-2" maxlength="30" autocomplete="off" placeholder="e.g. work">
+                </div>
+                <div class="en-field">
+                    <label for="word-3">Third word</label>
+                    <input type="text" id="word-3" maxlength="30" autocomplete="off" placeholder="e.g. fate">
+                </div>
+            </div>
+        </div>
+
+        <!-- Three Numbers 模式 -->
+        <div class="en-oracle-mode-panel" data-panel="numbers">
+            <div class="en-numbers-row">
+                <div class="en-field">
+                    <label for="num-1">First number</label>
+                    <input type="number" id="num-1" min="0" max="999" step="1" inputmode="numeric" placeholder="0–999">
+                </div>
+                <div class="en-field">
+                    <label for="num-2">Second number</label>
+                    <input type="number" id="num-2" min="0" max="999" step="1" inputmode="numeric" placeholder="0–999">
+                </div>
+                <div class="en-field">
+                    <label for="num-3">Third number</label>
+                    <input type="number" id="num-3" min="0" max="999" step="1" inputmode="numeric" placeholder="0–999">
+                </div>
+            </div>
+        </div>
+
+        <p class="en-form-status" id="oracle-status" role="status" aria-live="polite"></p>
+
+        <button type="submit" class="en-btn" id="oracle-submit">Draw a Sign</button>
+    </form>
+
+    <!-- 变换动画区（仅 Three Words 模式，提交后显示） -->
+    <div class="en-oracle-transform" id="oracle-transform" hidden></div>
+
+    <!-- 结果区 -->
+    <div class="en-oracle-result" id="oracle-result" aria-live="polite"></div>
+
+    <!-- 折叠项：数字如何形成（输入前不展示公式，故默认折叠） -->
     <details class="en-oracle-explanation">
         <summary>How were these numbers formed?</summary>
         <p>
-            Each word is converted to a number using A=1, B=2, ..., Z=26. The letter sums
-            are reduced to single digits, then composed into a three-digit number that maps
-            to one of 384 oracle signs.
+            For <strong>Three Words</strong>: each word is converted to a number using
+            A=1, B=2, …, Z=26. The letter sums are reduced to single digits
+            (a sum ending in 0 becomes 1), then composed into a three-digit number
+            that maps to one of 384 oracle signs.
+        </p>
+        <p>
+            For <strong>Three Numbers</strong>: the three numbers (each 0–999) are
+            combined into a single seed, which is then mapped to one of 384 signs.
+            All three numbers cannot be zero.
         </p>
     </details>
 </section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/ask_oracle_en.js') }}"></script>
 {% endblock %}

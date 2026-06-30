@@ -7,14 +7,10 @@
 <section class="en-birth-chart">
     <h1>Birth Chart Reading</h1>
     <p class="en-birth-chart-intro">
-        Explore your BaZi birth chart as a cultural framework for self-reflection.
-        Not destiny prediction.
+        Explore your BaZi (Four Pillars) birth chart as a cultural framework for
+        self-reflection. This is a mirror for examining your own patterns — not a
+        destiny reading or life prediction.
     </p>
-
-    <div class="en-birth-chart-placeholder">
-        <p><em>Birth chart input form and AI interpretation will be implemented in W6.</em></p>
-        <p>Position: BaZi-inspired cultural self-reflection. Not fate guarantee, life prediction, or destiny reading.</p>
-    </div>
 
     <section class="en-birth-chart-boundary">
         <h2>What this is — and isn't</h2>
@@ -24,5 +20,58 @@
             <li><strong>AI interpretation</strong>: positioned as cultural self-reflection prompts, not advice or predictions.</li>
         </ul>
     </section>
+
+    <form class="en-form" id="birth-chart-form" novalidate>
+        <p class="en-form-status en-bc-privacy-note" data-type="">
+            Your birth details are processed only to generate this reading and are not stored.
+        </p>
+
+        <div class="en-field">
+            <label for="bc-name">Name (or a nickname)</label>
+            <input type="text" id="bc-name" maxlength="30" autocomplete="off" required>
+        </div>
+
+        <div class="en-field-row">
+            <div class="en-field">
+                <label>Gender</label>
+                <div class="en-checkbox-field">
+                    <label><input type="radio" name="bc-gender" value="male" checked> Male</label>
+                    <label><input type="radio" name="bc-gender" value="female"> Female</label>
+                </div>
+            </div>
+            <div class="en-field">
+                <label for="bc-timezone">Timezone (optional)</label>
+                <input type="text" id="bc-timezone" placeholder="e.g. Asia/Shanghai" autocomplete="off">
+            </div>
+        </div>
+
+        <div class="en-field-row">
+            <div class="en-field">
+                <label for="bc-date">Birth date</label>
+                <input type="date" id="bc-date" required>
+            </div>
+            <div class="en-field">
+                <label for="bc-time">Birth time</label>
+                <input type="time" id="bc-time">
+            </div>
+        </div>
+
+        <div class="en-field en-checkbox-field">
+            <input type="checkbox" id="bc-time-unknown">
+            <label for="bc-time-unknown" style="margin-bottom:0;">I don't know my birth time</label>
+        </div>
+
+        <p class="en-form-status" id="bc-status" role="status" aria-live="polite"></p>
+
+        <button type="submit" class="en-btn" id="bc-submit">Generate Chart</button>
+    </form>
+
+    <p class="en-bc-loading" id="bc-loading">Reading the chart and reflecting…</p>
+
+    <div class="en-bc-result" id="bc-result" aria-live="polite"></div>
 </section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/birth_chart_en.js') }}"></script>
 {% endblock %}

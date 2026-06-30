@@ -1,42 +1,45 @@
 {% extends "en/base.html" %}
 
 {% block title %}About — Wise Oracle{% endblock %}
-{% block meta_description %}The story and mission behind Wise Oracle.{% endblock %}
+{% block meta_description %}Wise Oracle offers traditional Chinese oracle signs, almanac references, and BaZi birth chart reflections for cultural self-examination.{% endblock %}
 
 {% block content %}
-<section class="en-about">
+<section class="en-legal">
     <h1>About Wise Oracle</h1>
 
-    <div class="en-about-content">
-        <h2>Our Mission</h2>
-        <p>
-            Wise Oracle brings traditional Chinese cultural wisdom — oracle signs, daily
-            almanac, and BaZi birth chart — to English-speaking audiences as a tool for
-            self-reflection, not fortune telling.
-        </p>
+    <p>
+        Wise Oracle is a cultural website offering three tools for self-reflection, drawn from
+        traditional Chinese wisdom: oracle signs, the daily Chinese almanac, and BaZi (Four
+        Pillars) birth chart readings.
+    </p>
 
-        <h2>What we believe</h2>
-        <p>
-            These traditions are mirrors for self-examination, not predictions of fate.
-            We present them with cultural authenticity while being clear about their
-            entertainment and reflective purpose.
-        </p>
+    <h2>Our Position</h2>
+    <p>
+        We present these traditions as cultural frameworks for self-examination — a mirror, not a
+        map. Wise Oracle is not fortune telling, destiny reading, or life prediction. The aim is to
+        offer a quiet moment to sit with a question and reflect on your own patterns.
+    </p>
 
-        <h2>Algorithm and AI</h2>
-        <p>
-            Oracle signs are drawn using the traditional Zhuge Oracle method: three inputs
-            are transformed into a number that maps to one of 384 signs. Birth chart
-            readings use AI as a cultural interpretation layer, not as a predictor.
-        </p>
+    <h2>The Three Tools</h2>
+    <ul>
+        <li><strong><a href="/ask-oracle">Ask the Oracle</a></strong>: draw one of 384 Zhuge Oracle signs using three words or three numbers you offer. Each sign carries a traditional verse and interpretations across career, wealth, relationships, health, study, and general outlook.</li>
+        <li><strong><a href="/daily-almanac">Daily Chinese Almanac</a></strong>: today's favorable and unfavorable activities, lunar date, solar term, and zodiac — a traditional guide to the rhythms of the day.</li>
+        <li><strong><a href="/birth-chart-reading">Birth Chart Reading</a></strong>: explore your BaZi birth chart as a cultural framework for self-reflection, with AI-generated reflection prompts positioned as one perspective among many.</li>
+    </ul>
 
-        <h2>Cultural positioning</h2>
-        <p>
-            This is not New Age, cosmic energy, or manifestation. It is traditional Chinese
-            cultural practice presented honestly for those curious about its reflective
-            possibilities.
-        </p>
+    <h2>Responsible Use</h2>
+    <p>
+        All readings are for entertainment, cultural exploration, and self-reflection only. They
+        are not medical, legal, financial, psychological, or life-critical advice. Different
+        traditions offer different interpretations; consider this one perspective among many.
+    </p>
+    <p>
+        For more, see our <a href="/disclaimer">Disclaimer</a> and <a href="/terms">Terms of Service</a>.
+    </p>
+
+    <h2>Contact</h2>
+    <div class="en-legal-contact">
+        <p>We welcome your questions and feedback. Please visit the <a href="/contact">Contact page</a>.</p>
     </div>
-
-    <p><a href="/ask-oracle" class="en-btn">Try Ask the Oracle</a></p>
 </section>
 {% endblock %}
