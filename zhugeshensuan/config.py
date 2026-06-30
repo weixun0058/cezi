@@ -64,6 +64,9 @@ class Config:
 
     REFERENCE_DB_PATH = _path_from_env("REFERENCE_DB_PATH", "data/reference/reference.db")
     RUNTIME_DB_PATH = _path_from_env("RUNTIME_DB_PATH", "instance/runtime.db")
+    ENGLISH_SIGNS_PATH = _path_from_env(
+        "ENGLISH_SIGNS_PATH", "data/content/oracle_signs_en.json"
+    )
 
 
 class TestConfig(Config):

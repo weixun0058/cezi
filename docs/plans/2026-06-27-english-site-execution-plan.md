@@ -20,6 +20,7 @@
 | 0.8 | 2026-06-30 | 助手 | W0 审查反馈修正：D11 确认保留完整入口（W0 阻塞解除）；D8 暂停（Deep Reading 付费产品暂时冻结，待用户深度思考）；代码现状更新（W0 五份文档已起草）；W0 涉及文件补充 AI Prompt 边界文档；产品规格补充 W0.1 逐页定义、引导语拆分（公共前半句+两套模式文案）、Three Numbers UI 动画（314|159|265→Sign #33）、全零错误码 ORACLE_NUMBERS_ALL_ZERO、三词页面输入约束；AI Prompt 边界文档删除 Ask the Oracle 敏感词检测（仅保留 Birth Chart Reading）；文化表达指南神煞改为音译+解释、命理改为 life patterns；Wise_Oracle_Outbound_Plan.md 标记已废止 |
 | 0.9 | 2026-06-30 | 助手 | W0 视为通过（用户授权按文档落实代码）；W1 完成：W1.1 术语表草稿+抽取脚本（纠正命名空间注释错误 sx=生肖/ss=十神/ps=方位/bg=八卦）；W1.2 错误码策略定稿（21 现有 code + 5 英文新增 + CONTENT_NOT_FOUND）；W2.2-W2.6 暂停（用户将用其他 Agent 更新后台数据）；W5 暂停（黄历上线范围待核实）；W8 暂停（D3 未定，Deep Reading 冻结）；进入 W3 |
 | 0.10 | 2026-06-30 | 助手 | W3 完成：W3.2 error_codes.py（27 个 code 常量 + 中英文消息映射 + DEFAULT_HTTP_STATUS + failure_with_code()）；W3.1+W3.3 pages_en.py（11 条英文路由，pages_en_bp 放 ALL_BLUEPRINTS 第一位优先匹配 `/`）；pages.py 删除 `/`→`/zh-hans/almanac` 的 301（`/` 释放给英文首页），保留 `/huangli`/`/suanshi`/`/lunming` 301 兼容；11 个英文模板（base.html + 10 个页面）；test_client 验证 9 条英文路由 200 + 3 条旧中文路由 301 + 中文页面正常 |
+| 0.11 | 2026-06-30 | 助手 | W4 完成：oracle_algorithm.py（纯函数：stroke_digit/compose_three_character_number/reduce_to_start_index/compose_english_three_number_seed/word_to_letter_sum/word_to_stroke_digit/three_words_to_start_index/word_transform）；oracle_english.py（load_english_signs 加载到内存 + _sanitize_record 剔除 fortune/gua_type + CJK 残留/空字段 fallback + ask_with_words/ask_with_numbers）；blueprints/oracle_en_api.py（POST /api/en/oracle/ask，words/numbers 双模式，错误码 INVALID_JSON/INVALID_ORACLE_MODE/ORACLE_WORDS_INSUFFICIENT/INVALID_ORACLE_NUMBER/ORACLE_NUMBERS_ALL_ZERO/CONTENT_NOT_FOUND）；config.py 加 ENGLISH_SIGNS_PATH；app.py 启动期加载 english_signs 到 extensions（无缝切换）；测试 76 项全过（含 LOVE/WORK/FATE→Sign #88、314/159/265→Sign #33、D14 字段剔除、CJK fallback、空字段 fallback、384 全覆盖） |
 
 > 变更规则：任何对本计划的修改（增删任务、调整顺序、状态变更）都追加一行修订记录，并在第 7 节变更日志写明细节。任务状态变更不记修订记录，只更新任务内的进度日志。
 
@@ -53,6 +54,16 @@
 | 英文蓝图注册（`pages_en_bp` 放 ALL_BLUEPRINTS 第一位优先匹配 `/`） | `zhugeshensuan/blueprints/__init__.py` | 已实现 |
 | 英文占位模板（base.html + 10 个页面） | `frontend/templates/en/*.html` | 已实现（W7 做完整前端） |
 
+### 已完成（W4 Ask the Oracle 后端）
+
+| 能力 | 代码位置 | 状态 |
+| --- | --- | --- |
+| 签号算法纯函数（源书方法 + 英文三词 + 英文三数字 + 变换过程） | `zhugeshensuan/oracle_algorithm.py` | 已实现 |
+| 英文签文服务（内存加载 + 剔除 fortune/gua_type + CJK/空字段 fallback） | `zhugeshensuan/oracle_english.py` | 已实现 |
+| 英文算事 API（POST /api/en/oracle/ask，words/numbers 双模式） | `zhugeshensuan/blueprints/oracle_en_api.py` | 已实现 |
+| 英文签文路径配置（ENGLISH_SIGNS_PATH，可 env 覆盖） | `zhugeshensuan/config.py` | 已实现 |
+| 启动期加载英文签文到 extensions（无缝切换） | `zhugeshensuan/app.py` | 已实现 |
+
 ### 已超前完成（W2 部分）
 
 | 能力 | 代码位置 | 状态 |
@@ -65,14 +76,13 @@
 
 | 能力 | 预期位置 | 状态 |
 | --- | --- | --- |
-| 英文算事服务 | `zhugeshensuan/oracle_english.py` | 不存在 |
 | 英文黄历适配 | `zhugeshensuan/huangli_english.py` | 不存在 |
 | 英文内容加载 | `zhugeshensuan/content.py` | 不存在 |
 | SEO 模块 | `zhugeshensuan/seo.py`、`blueprints/seo.py` | 不存在 |
 | 商业化模块 | `zhugeshensuan/commerce*.py`、`blueprints/commerce_api.py` | 不存在 |
 | 英文黄历术语/场景数据 | `data/content/huangli_terms_en.json`、`huangli_scenarios_en.json` | 不存在 |
 | 英文合规页草稿 | `data/content/legal/*_en.md` | 不存在 |
-| 英文相关测试 | `tests/test_english_*.py` | 不存在 |
+| 英文相关测试 | `tests/test_english_*.py` | 不存在（已有 `tests/test_oracle_english.py`） |
 
 ### 已有相关文档
 
@@ -119,9 +129,9 @@
 | W1 | 英文术语体系 | E1 / P2.6、P2.7 | W0、D6 | 已完成（W1.1 术语表草稿+脚本完成，W1.2 错误码策略定稿） |
 | W2 | 英文内容数据 | E2 / P3.1-P3.7 | W0、W1、D5、D6、D7 | 进行中（W2.1 已超额完成 384/384；W2.2-W2.6 暂停，用户将用其他 Agent 更新后台数据） |
 | W3 | 英文路由骨架 | E3 / P4.1、P4.1a、P4.2 | W0、D2、D12 | 已完成（11 条英文路由 + 错误码模块 + 11 个英文模板，test_client 全部通过） |
-| W4 | Ask the Oracle 后端 | E4 / P4.3-P4.5 | W0、W2、D4、D12 | 进行中 |
+| W4 | Ask the Oracle 后端 | E4 / P4.3-P4.5 | W0、W2、D4、D12 | 已完成（oracle_algorithm.py + oracle_english.py + oracle_en_api.py + 76 项测试全过） |
 | W5 | Daily Almanac 后端 | E5 / P4.6、P4.6a | W0、W2、D6、D7、D12 | 暂停（黄历上线范围待用户核实） |
-| W6 | Birth Chart Reading 后端 | E6 / P4.7、P4.8 | W0、W2、D11、D12 | 未开始 |
+| W6 | Birth Chart Reading 后端 | E6 / P4.7、P4.8 | W0、W2、D11、D12 | 进行中 |
 | W7 | 英文前端 | E7 / P5.1-P5.8 | W3、W4、W5、W6 | 未开始 |
 | W8 | SEO / 合规 / 商业化预埋 | E8 / P7 部分 + P6 部分 | W2、W7、D3、D8、D9、D10 | 暂停（D3 未定，Deep Reading 冻结） |
 
@@ -446,6 +456,7 @@ pytest tests/test_english_routes.py tests/test_api_error_codes.py -q
 
 | 日期 | 负责人 | 改动 | 证据 | 下一步 |
 | --- | --- | --- | --- | --- |
+| 2026-06-30 | 助手 | W4 完成：oracle_algorithm.py（纯函数算法模块，复用 derive_original_oracle_signs.py 的 stroke_digit/compose_three_character_number/reduce_to_start_index，新增 word_to_letter_sum/word_to_stroke_digit/three_words_to_start_index/word_transform）；oracle_english.py（load_english_signs 内存加载 + _sanitize_record 剔除 fortune/gua_type + CJK/空字段 fallback + ask_with_words/ask_with_numbers）；blueprints/oracle_en_api.py（POST /api/en/oracle/ask 双模式）；config.py 加 ENGLISH_SIGNS_PATH；app.py 启动期加载 english_signs 到 extensions（无缝切换） | pytest tests/test_oracle_english.py 76 passed；含 LOVE/WORK/FATE→Sign #88、314/159/265→Sign #33、D14 字段剔除、CJK fallback、空字段 fallback、384 全覆盖、模式不互收、错误码全验证 | W6 Birth Chart Reading 后端 |
 
 ---
 
