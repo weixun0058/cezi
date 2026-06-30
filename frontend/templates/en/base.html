@@ -20,6 +20,7 @@
                 <a href="/about">About</a>
                 <a href="/contact">Contact</a>
             </div>
+            <div id="lang-switcher" class="lang-switcher" aria-label="Language"></div>
         </nav>
     </header>
 
@@ -45,6 +46,7 @@
     </footer>
 
     <script src="{{ url_for('static', filename='js/wise_oracle_common.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/lang/lang_switcher.js') }}"></script>
     {% block scripts %}{% endblock %}
 </body>
 </html>

@@ -97,6 +97,13 @@ def test_base_html_has_canonical(client):
     assert 'rel="canonical"' in body
 
 
+def test_base_html_has_three_language_switcher(client):
+    """英文布局提供 EN/简/繁共享语言切换器。"""
+    body = _raw(client, "/")
+    assert 'id="lang-switcher"' in body
+    assert "js/lang/lang_switcher.js" in body
+
+
 def test_base_html_has_responsible_use_footer(client):
     """页脚含 responsible-use 免责声明。"""
     body = _body(client, "/")

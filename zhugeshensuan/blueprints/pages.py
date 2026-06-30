@@ -23,6 +23,20 @@ def _redirect_to_default(page: str = "almanac"):
     return redirect(f"/{DEFAULT_LANG}/{page}", code=301)
 
 
+@pages_bp.get("/<lang>")
+def lang_index(lang: str):
+    """简体/繁体中文首页。"""
+    if lang not in LANGS:
+        abort(404)
+    g.lang = lang
+    g.page = "index"
+    return render_template(
+        "index.html",
+        current_lang=lang,
+        html_lang=html_lang_for(lang),
+    )
+
+
 @pages_bp.get("/huangli")
 def old_huangli():
     return _redirect_to_default("almanac")

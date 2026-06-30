@@ -116,6 +116,27 @@ def test_language_prefixed_pages_render_matching_html_lang(client):
     assert b'<html lang="zh-Hant">' in zh_hant.data
 
 
+def test_language_prefixed_homepages_render_matching_html_lang(client):
+    zh_hans = client.get("/zh-hans")
+    zh_hant = client.get("/zh-hant")
+
+    assert zh_hans.status_code == 200
+    assert zh_hant.status_code == 200
+    assert b'<html lang="zh-Hans">' in zh_hans.data
+    assert b'<html lang="zh-Hant">' in zh_hant.data
+
+
+def test_shared_language_switcher_supports_english_and_page_mapping():
+    script = (
+        ROOT / "frontend" / "static" / "js" / "lang" / "lang_switcher.js"
+    ).read_text(encoding="utf-8")
+
+    assert "{ code: 'en', label: 'EN' }" in script
+    assert "'/ask-oracle': 'divination'" in script
+    assert "'/daily-almanac': 'almanac'" in script
+    assert "'/birth-chart-reading': 'bazi'" in script
+
+
 def test_i18n_uses_url_language_prefix_before_local_storage():
     script = (ROOT / "frontend" / "static" / "js" / "lang" / "i18n.js").read_text(
         encoding="utf-8"
