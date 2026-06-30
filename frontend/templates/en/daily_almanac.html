@@ -1,0 +1,28 @@
+{% extends "en/base.html" %}
+
+{% block title %}Daily Chinese Almanac — Favorable Activities & Solar Terms{% endblock %}
+{% block meta_description %}Today's Chinese almanac: favorable and unfavorable activities, lunar date, solar term, and zodiac.{% endblock %}
+
+{% block content %}
+<section class="en-almanac">
+    <h1>Daily Chinese Almanac</h1>
+    <p class="en-almanac-intro">
+        Today's favorable and unfavorable activities, lunar date, solar term, and zodiac.
+    </p>
+
+    <div class="en-almanac-placeholder">
+        <p><em>Almanac data will be loaded in W5. The almanac launch scope is pending user verification.</em></p>
+    </div>
+
+    <section class="en-almanac-legend">
+        <h2>Labels</h2>
+        <ul>
+            <li><strong>Favorable Activities</strong> — traditionally suitable activities for today</li>
+            <li><strong>Unfavorable Activities</strong> — traditionally unsuitable activities for today</li>
+            <li><strong>Lunar Date</strong> — date in the traditional Chinese lunar calendar</li>
+            <li><strong>Solar Term</strong> — current solar term in the traditional Chinese calendar</li>
+            <li><strong>Chinese Zodiac</strong> — zodiac animal for the year</li>
+        </ul>
+    </section>
+</section>
+{% endblock %}

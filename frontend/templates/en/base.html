@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="{{ html_lang|default('en') }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Wise Oracle{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}Draw an oracle sign, read the daily Chinese almanac, and reflect on your birth chart through traditional Chinese cultural wisdom.{% endblock %}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header class="en-header">
+        <nav class="en-nav">
+            <a href="/" class="en-brand">Wise Oracle</a>
+            <div class="en-nav-links">
+                <a href="/ask-oracle">Ask the Oracle</a>
+                <a href="/daily-almanac">Daily Almanac</a>
+                <a href="/birth-chart-reading">Birth Chart</a>
+                <a href="/articles">Articles</a>
+                <a href="/about">About</a>
+                <a href="/contact">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="en-main">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="en-footer">
+        <div class="en-footer-content">
+            <nav class="en-footer-nav">
+                <a href="/privacy">Privacy</a>
+                <a href="/terms">Terms</a>
+                <a href="/disclaimer">Disclaimer</a>
+                <a href="/about">About</a>
+                <a href="/contact">Contact</a>
+            </nav>
+            <p class="en-responsible-use">
+                For entertainment, cultural exploration, and self-reflection only.
+                Not medical, legal, financial, psychological, or life-critical advice.
+            </p>
+            <p class="en-copyright">&copy; 2026 Wise Oracle. All rights reserved.</p>
+        </div>
+    </footer>
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>

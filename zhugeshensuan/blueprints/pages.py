@@ -1,7 +1,7 @@
 """页面路由（含语言前缀与 SEO 友好 URL）。
 
-URL 结构：
-  /                         → 301 → /zh-hans/almanac
+URL 结构（D2 已确认：/ 作为英文首页，由 pages_en.py 处理）：
+  /                         → 英文首页（由 pages_en_bp 处理，不在本蓝图）
   /huangli                  → 301 → /zh-hans/almanac
   /suanshi                  → 301 → /zh-hans/divination
   /lunming                  → 301 → /zh-hans/bazi
@@ -21,11 +21,6 @@ pages_bp = Blueprint("pages", __name__)
 def _redirect_to_default(page: str = "almanac"):
     """301 重定向到默认语言的对应页面"""
     return redirect(f"/{DEFAULT_LANG}/{page}", code=301)
-
-
-@pages_bp.get("/")
-def index_redirect():
-    return _redirect_to_default("almanac")
 
 
 @pages_bp.get("/huangli")

@@ -19,6 +19,7 @@
 | 0.7 | 2026-06-30 | 助手 | 算法定稿（依据 scripts/derive_original_oracle_signs.py）：D4 三词改为 A=1..Z=26 字母求和 + stroke_digit（mod 10 余 0 取 1）+ compose_three_character_number（复用源书函数）；W4.2 三数字改回 0-999 + 九位种子 compose_english_three_number_seed（英文专用）；W4.1/W4.2/W4.3 标注复用脚本函数；W0.2/W7.4 新增 UI 变换动画与折叠项；示例 LOVE/WORK/FATE→Sign #88 |
 | 0.8 | 2026-06-30 | 助手 | W0 审查反馈修正：D11 确认保留完整入口（W0 阻塞解除）；D8 暂停（Deep Reading 付费产品暂时冻结，待用户深度思考）；代码现状更新（W0 五份文档已起草）；W0 涉及文件补充 AI Prompt 边界文档；产品规格补充 W0.1 逐页定义、引导语拆分（公共前半句+两套模式文案）、Three Numbers UI 动画（314|159|265→Sign #33）、全零错误码 ORACLE_NUMBERS_ALL_ZERO、三词页面输入约束；AI Prompt 边界文档删除 Ask the Oracle 敏感词检测（仅保留 Birth Chart Reading）；文化表达指南神煞改为音译+解释、命理改为 life patterns；Wise_Oracle_Outbound_Plan.md 标记已废止 |
 | 0.9 | 2026-06-30 | 助手 | W0 视为通过（用户授权按文档落实代码）；W1 完成：W1.1 术语表草稿+抽取脚本（纠正命名空间注释错误 sx=生肖/ss=十神/ps=方位/bg=八卦）；W1.2 错误码策略定稿（21 现有 code + 5 英文新增 + CONTENT_NOT_FOUND）；W2.2-W2.6 暂停（用户将用其他 Agent 更新后台数据）；W5 暂停（黄历上线范围待核实）；W8 暂停（D3 未定，Deep Reading 冻结）；进入 W3 |
+| 0.10 | 2026-06-30 | 助手 | W3 完成：W3.2 error_codes.py（27 个 code 常量 + 中英文消息映射 + DEFAULT_HTTP_STATUS + failure_with_code()）；W3.1+W3.3 pages_en.py（11 条英文路由，pages_en_bp 放 ALL_BLUEPRINTS 第一位优先匹配 `/`）；pages.py 删除 `/`→`/zh-hans/almanac` 的 301（`/` 释放给英文首页），保留 `/huangli`/`/suanshi`/`/lunming` 301 兼容；11 个英文模板（base.html + 10 个页面）；test_client 验证 9 条英文路由 200 + 3 条旧中文路由 301 + 中文页面正常 |
 
 > 变更规则：任何对本计划的修改（增删任务、调整顺序、状态变更）都追加一行修订记录，并在第 7 节变更日志写明细节。任务状态变更不记修订记录，只更新任务内的进度日志。
 
@@ -33,7 +34,7 @@
 | 能力 | 代码位置 | 状态 |
 | --- | --- | --- |
 | 简繁路由 `/<lang>/almanac\|divination\|bazi` | `zhugeshensuan/blueprints/pages.py` | 已实现 |
-| 旧入口 301 兼容 `/`、`/huangli`、`/suanshi`、`/lunming` | `pages.py` | 已实现 |
+| 旧入口 301 兼容 `/huangli`、`/suanshi`、`/lunming` | `pages.py` | 已实现（`/` 已释放给英文首页） |
 | 模板 `<html lang>` 按语言渲染 | `frontend/templates/*.html` | 已实现 |
 | 前端字典 `dictionary.json` + `i18n.js` + `lang_switcher.js` | `frontend/static/js/lang/` | 已实现 |
 | 黄历动态数据繁体化 | `zhugeshensuan/huangli_i18n.py` | 已实现 |
@@ -42,6 +43,15 @@
 | 卦属/吉凶从前端删除（基于考据硬约束） | `suanshi.html`、`index.html`、`main.js`、`dictionary.json` | 已实施（2026-06-28，4.5 节） |
 | 打字机逐字显现动画 | `main.js` 的 `typeWriter` | 已实现（chunkSize=1, interval=50） |
 | API 错误码 `code` 字段 | `api_utils.py` 的 `failure()` | 已实现（17 个稳定 code） |
+
+### 已完成（W3 英文路由骨架与错误码基础）
+
+| 能力 | 代码位置 | 状态 |
+| --- | --- | --- |
+| 错误码模块（27 个 code + 中英文消息 + HTTP status + `failure_with_code()`） | `zhugeshensuan/error_codes.py` | 已实现 |
+| 英文页面路由（`/`、`/ask-oracle`、`/daily-almanac`、`/birth-chart-reading`、`/articles`、`/articles/<slug>`、`/privacy`、`/terms`、`/disclaimer`、`/about`、`/contact`） | `zhugeshensuan/blueprints/pages_en.py` | 已实现（11 条路由，占位模板） |
+| 英文蓝图注册（`pages_en_bp` 放 ALL_BLUEPRINTS 第一位优先匹配 `/`） | `zhugeshensuan/blueprints/__init__.py` | 已实现 |
+| 英文占位模板（base.html + 10 个页面） | `frontend/templates/en/*.html` | 已实现（W7 做完整前端） |
 
 ### 已超前完成（W2 部分）
 
@@ -55,9 +65,6 @@
 
 | 能力 | 预期位置 | 状态 |
 | --- | --- | --- |
-| 英文路由 `/`、`/ask-oracle`、`/daily-almanac`、`/birth-chart-reading` | `pages.py` | 未实现 |
-| 英文模板 | `frontend/templates/en/*.html`、`base.html` | 目录不存在 |
-| 错误码模块 | `zhugeshensuan/error_codes.py` | 不存在 |
 | 英文算事服务 | `zhugeshensuan/oracle_english.py` | 不存在 |
 | 英文黄历适配 | `zhugeshensuan/huangli_english.py` | 不存在 |
 | 英文内容加载 | `zhugeshensuan/content.py` | 不存在 |
@@ -111,8 +118,8 @@
 | W0 | 英文产品边界冻结 | E0 / P2.1-P2.5、P2.8 | D1、D2、D11 | 已完成（用户授权按文档落实代码，视为通过；黄历上线范围待用户核实，Deep Reading 冻结） |
 | W1 | 英文术语体系 | E1 / P2.6、P2.7 | W0、D6 | 已完成（W1.1 术语表草稿+脚本完成，W1.2 错误码策略定稿） |
 | W2 | 英文内容数据 | E2 / P3.1-P3.7 | W0、W1、D5、D6、D7 | 进行中（W2.1 已超额完成 384/384；W2.2-W2.6 暂停，用户将用其他 Agent 更新后台数据） |
-| W3 | 英文路由骨架 | E3 / P4.1、P4.1a、P4.2 | W0、D2、D12 | 进行中 |
-| W4 | Ask the Oracle 后端 | E4 / P4.3-P4.5 | W0、W2、D4、D12 | 未开始 |
+| W3 | 英文路由骨架 | E3 / P4.1、P4.1a、P4.2 | W0、D2、D12 | 已完成（11 条英文路由 + 错误码模块 + 11 个英文模板，test_client 全部通过） |
+| W4 | Ask the Oracle 后端 | E4 / P4.3-P4.5 | W0、W2、D4、D12 | 进行中 |
 | W5 | Daily Almanac 后端 | E5 / P4.6、P4.6a | W0、W2、D6、D7、D12 | 暂停（黄历上线范围待用户核实） |
 | W6 | Birth Chart Reading 后端 | E6 / P4.7、P4.8 | W0、W2、D11、D12 | 未开始 |
 | W7 | 英文前端 | E7 / P5.1-P5.8 | W3、W4、W5、W6 | 未开始 |
@@ -386,6 +393,7 @@ pytest tests/test_english_routes.py tests/test_api_error_codes.py -q
 
 | 日期 | 负责人 | 改动 | 证据 | 下一步 |
 | --- | --- | --- | --- | --- |
+| 2026-06-30 | 助手 | W3 完成：W3.2 error_codes.py（27 个 code + MESSAGES_ZH/MESSAGES_EN/DEFAULT_HTTP_STATUS + get_message/get_http_status/failure_with_code）；W3.1+W3.3 pages_en.py（11 条英文路由 + `_render_en` 统一注入 `current_lang='en'`/`html_lang='en'`）；pages.py 删除 `index_redirect`（`/` 释放给英文首页）；blueprints/__init__.py 注册 pages_en_bp 并放第一位；11 个英文模板（base.html + 10 个页面） | test_client 验证：9 条英文路由 200 + 3 条旧中文路由 301 + `/zh-hans/almanac` 200；预存在测试 `test_suanshi_uses_chunked_typewriter_rendering` 失败与 W3 无关 | W4 Ask the Oracle 后端 |
 
 ---
 

@@ -1,0 +1,28 @@
+{% extends "en/base.html" %}
+
+{% block title %}Ask the Oracle — Free Chinese Oracle Sign Reading{% endblock %}
+{% block meta_description %}Hold a question in mind and draw a Zhuge Oracle sign for cultural reflection. Not fortune telling — a mirror for self-examination.{% endblock %}
+
+{% block content %}
+<section class="en-oracle">
+    <h1>Ask the Oracle</h1>
+    <p class="en-oracle-intro">
+        Hold one question quietly in mind. Do not type it. Take a slow breath,
+        then enter the first three words that come to you.
+    </p>
+
+    <div class="en-oracle-placeholder">
+        <p><em>Three Words / Three Numbers input form will be implemented in W7.</em></p>
+        <p>Algorithm: <a href="/articles/how-oracle-signs-work">How oracle signs are formed</a></p>
+    </div>
+
+    <details class="en-oracle-explanation">
+        <summary>How were these numbers formed?</summary>
+        <p>
+            Each word is converted to a number using A=1, B=2, ..., Z=26. The letter sums
+            are reduced to single digits, then composed into a three-digit number that maps
+            to one of 384 oracle signs.
+        </p>
+    </details>
+</section>
+{% endblock %}

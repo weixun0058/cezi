@@ -1,0 +1,42 @@
+{% extends "en/base.html" %}
+
+{% block title %}Wise Oracle — Chinese Cultural Divination & Almanac{% endblock %}
+{% block meta_description %}Draw an oracle sign, read the daily Chinese almanac, and reflect on your birth chart through traditional Chinese cultural wisdom.{% endblock %}
+
+{% block content %}
+<section class="en-hero">
+    <h1>Wise Oracle</h1>
+    <p class="en-tagline">Traditional Chinese cultural wisdom for self-reflection.</p>
+    <p class="en-intro">
+        Draw an oracle sign, read the daily Chinese almanac, and explore your birth chart
+        through the lens of traditional Chinese culture. Not fortune telling — a mirror
+        for self-examination.
+    </p>
+</section>
+
+<section class="en-tools">
+    <h2>Three Tools for Reflection</h2>
+    <div class="en-tool-cards">
+        <div class="en-tool-card">
+            <h3><a href="/ask-oracle">Ask the Oracle</a></h3>
+            <p>Hold a question in mind and draw a Zhuge Oracle sign for cultural reflection.</p>
+            <a href="/ask-oracle" class="en-btn">Draw a Sign</a>
+        </div>
+        <div class="en-tool-card">
+            <h3><a href="/daily-almanac">Daily Chinese Almanac</a></h3>
+            <p>Today's favorable and unfavorable activities, lunar date, solar term, and zodiac.</p>
+            <a href="/daily-almanac" class="en-btn">View Almanac</a>
+        </div>
+        <div class="en-tool-card">
+            <h3><a href="/birth-chart-reading">Birth Chart Reading</a></h3>
+            <p>Explore your BaZi birth chart as a cultural framework for self-reflection.</p>
+            <a href="/birth-chart-reading" class="en-btn">Generate Chart</a>
+        </div>
+    </div>
+</section>
+
+<section class="en-articles-preview">
+    <h2>Latest Articles</h2>
+    <p><a href="/articles">Browse all articles →</a></p>
+</section>
+{% endblock %}
