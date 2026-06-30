@@ -16,6 +16,7 @@ from .huangli import HuangLi
 from .i18n_utils import DEFAULT_LANG, LANGS
 from .logging_config import configure_logging
 from .lunming import LunMing
+from .birth_chart_english import BirthChartEnglish
 from .oracle_english import load_english_signs_safe
 
 LOGGER = logging.getLogger(__name__)
@@ -105,6 +106,12 @@ def create_app(test_config=None):
     # 用户用其他 Agent 更新 JSON 文件后，重启服务器即生效（无缝切换）
     app.extensions["english_signs"] = load_english_signs_safe(
         app.config["ENGLISH_SIGNS_PATH"]
+    )
+    # 英文 Birth Chart Reading 服务（W6）
+    # 复用 lunming 实例的 OpenAI client（配置统一，避免重复创建）
+    app.extensions["birth_chart_en"] = BirthChartEnglish(
+        app.extensions["lunming"],
+        default_timezone=app.config["DEFAULT_TIMEZONE"],
     )
 
     for blueprint in ALL_BLUEPRINTS:

@@ -346,11 +346,13 @@ class BirthChartEnglish:
     def analyze_stream(self, payload: dict) -> Iterator[dict]:
         """SSE 流式分析。
 
-        事件序列：
+        事件序列（不含终止帧，由 API 层补 done）：
         - {type: "chart", chart_summary:..., element_balance:..., limitations:...}
         - {type: "report", chart_summary:..., element_balance:..., reflection_points:..., cautions:...}
         - {type: "responsible_use", responsible_use:...}
-        - {type: "done", done: true}
+
+        终止帧 {type: "done", done: true} 由 ``birth_chart_en_api`` 在正常完成
+        或异常分支后统一补发，避免重复 done。与 ``lunming.analyze_bazi_stream`` 对齐。
         """
         chart_data = self.build_chart_summary(payload)
         raw_chart = chart_data.pop("_raw_chart", {})
@@ -371,7 +373,6 @@ class BirthChartEnglish:
             "cautions": report["cautions"],
         }
         yield {"type": "responsible_use", "responsible_use": RESPONSIBLE_USE_TEXT}
-        yield {"type": "done", "done": True}
 
     @staticmethod
     def _element_balance_note(chart_data: dict) -> str:

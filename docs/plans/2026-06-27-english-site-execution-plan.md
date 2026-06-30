@@ -21,6 +21,7 @@
 | 0.9 | 2026-06-30 | 助手 | W0 视为通过（用户授权按文档落实代码）；W1 完成：W1.1 术语表草稿+抽取脚本（纠正命名空间注释错误 sx=生肖/ss=十神/ps=方位/bg=八卦）；W1.2 错误码策略定稿（21 现有 code + 5 英文新增 + CONTENT_NOT_FOUND）；W2.2-W2.6 暂停（用户将用其他 Agent 更新后台数据）；W5 暂停（黄历上线范围待核实）；W8 暂停（D3 未定，Deep Reading 冻结）；进入 W3 |
 | 0.10 | 2026-06-30 | 助手 | W3 完成：W3.2 error_codes.py（27 个 code 常量 + 中英文消息映射 + DEFAULT_HTTP_STATUS + failure_with_code()）；W3.1+W3.3 pages_en.py（11 条英文路由，pages_en_bp 放 ALL_BLUEPRINTS 第一位优先匹配 `/`）；pages.py 删除 `/`→`/zh-hans/almanac` 的 301（`/` 释放给英文首页），保留 `/huangli`/`/suanshi`/`/lunming` 301 兼容；11 个英文模板（base.html + 10 个页面）；test_client 验证 9 条英文路由 200 + 3 条旧中文路由 301 + 中文页面正常 |
 | 0.11 | 2026-06-30 | 助手 | W4 完成：oracle_algorithm.py（纯函数：stroke_digit/compose_three_character_number/reduce_to_start_index/compose_english_three_number_seed/word_to_letter_sum/word_to_stroke_digit/three_words_to_start_index/word_transform）；oracle_english.py（load_english_signs 加载到内存 + _sanitize_record 剔除 fortune/gua_type + CJK 残留/空字段 fallback + ask_with_words/ask_with_numbers）；blueprints/oracle_en_api.py（POST /api/en/oracle/ask，words/numbers 双模式，错误码 INVALID_JSON/INVALID_ORACLE_MODE/ORACLE_WORDS_INSUFFICIENT/INVALID_ORACLE_NUMBER/ORACLE_NUMBERS_ALL_ZERO/CONTENT_NOT_FOUND）；config.py 加 ENGLISH_SIGNS_PATH；app.py 启动期加载 english_signs 到 extensions（无缝切换）；测试 76 项全过（含 LOVE/WORK/FATE→Sign #88、314/159/265→Sign #33、D14 字段剔除、CJK fallback、空字段 fallback、384 全覆盖） |
+| 0.12 | 2026-06-30 | 助手 | W6 完成：birth_chart_english.py（BirthChartEnglish 服务 + ZODIAC_EN/GAN_EN/ZHI_EN/ELEMENT_EN 映射表 + build_english_prompt 引用 W0.3 边界 + _parse_ai_report + analyze/analyze_stream/build_chart_summary）；birth_chart_en_api.py（POST /analyze + POST /stream）；app.py 注入 birth_chart_en 扩展（复用 lunming 的 OpenAI client）；blueprints/__init__.py 注册蓝图；测试 59 项全过。**两项设计修正：** (1) stream 端点改用 POST（原计划写 GET，与中文 lunming_api.py 一致便于传 JSON body，W7.6 同步更新）；(2) done 帧归属 API 层统一补发（服务层 analyze_stream 只产 chart/report/responsible_use，避免重复 done，与 lunming.analyze_bazi_stream 对齐）。W6.1 文章加载（content.py/seo.py）划归 W8（暂停） |
 
 > 变更规则：任何对本计划的修改（增删任务、调整顺序、状态变更）都追加一行修订记录，并在第 7 节变更日志写明细节。任务状态变更不记修订记录，只更新任务内的进度日志。
 
@@ -503,14 +504,17 @@ pytest tests/test_english_routes.py tests/test_api_error_codes.py -q
 
 **目标：** 英文论命输入边界、报告结构、AI prompt 边界。
 
-**代码现状：** 无英文论命模块；`tests/test_birth_chart_english.py` 不存在。
+**代码现状：** `zhugeshensuan/birth_chart_english.py` 已实现（BirthChartEnglish 服务 + 映射表 + prompt + 解析）；`zhugeshensuan/blueprints/birth_chart_en_api.py` 已实现（POST /api/en/birth-chart/analyze + POST /api/en/birth-chart/stream）；`app.py` 注入 `birth_chart_en` 扩展（复用 lunming 的 OpenAI client）；`tests/test_birth_chart_english.py` 59 项测试全过。W6.1 文章加载归属 W8（已暂停），不在本轮范围。
 
 **前置：** W0（含 W0.3 AI prompt 边界文档）、W2、D11、D12
 
 **涉及文件：**
-- 新建：`zhugeshensuan/content.py`（文章加载，与 W8 共用）
-- 新建：`zhugeshensuan/seo.py`
+- 新建：`zhugeshensuan/birth_chart_english.py`（BirthChartEnglish 服务、映射表、build_english_prompt、_parse_ai_report）
+- 新建：`zhugeshensuan/blueprints/birth_chart_en_api.py`（analyze + stream API）
+- 修改：`zhugeshensuan/app.py`（注入 birth_chart_en 扩展）
+- 修改：`zhugeshensuan/blueprints/__init__.py`（注册 birth_chart_en_api_bp）
 - 测试：`tests/test_birth_chart_english.py`
+- 待建（W8 解冻后）：`zhugeshensuan/content.py`（文章加载，与 W8 共用）、`zhugeshensuan/seo.py`
 
 **子任务：**
 
@@ -533,6 +537,14 @@ pytest tests/test_english_routes.py tests/test_api_error_codes.py -q
 
 | 日期 | 负责人 | 改动 | 证据 | 下一步 |
 | --- | --- | --- | --- | --- |
+| 2026-06-30 | 助手 | W6.1 文章加载（content.py/seo.py）划归 W8，本轮不实施 | W8 暂停（D3 文章系统格式未定） | W8 解冻后再实施 |
+| 2026-06-30 | 助手 | W6.2 Birth Chart English 服务模块：birth_chart_english.py（ZODIAC_EN/GAN_EN/ZHI_EN/ELEMENT_EN/GENDER_ZH 映射表 + pillar_to_english + normalize_gender + normalize_payload + build_english_chart_summary + build_english_prompt 引用 W0.3 边界 + _parse_ai_report + BirthChartEnglish.analyze/analyze_stream/build_chart_summary）；responsible_use 文案内嵌；AI prompt 禁医疗/法律/财务/心理/生育/死亡/灾难/确定性未来/吉凶分级/卦属 | 提交 3d8b9dc（WIP 检查点） | API 蓝图 + 注入 + 测试 |
+| 2026-06-30 | 助手 | W6.3 API 蓝图 birth_chart_en_api.py：POST /api/en/birth-chart/analyze（同步）+ POST /api/en/birth-chart/stream（SSE）；payload 校验（name 1-30 字符、birth_date 必填、birth_time 字符串或 null、birth_time_unknown 布尔）；usage 配额 acquire/release；错误码 INVALID_BIRTH_DATA/MODEL_NOT_CONFIGURED/ANALYSIS_FAILED + AI 用量 429；SSE 事件序列 chart→report→responsible_use→done | 验证脚本确认路由注册 + 空载荷 400 + 非 JSON 400 + 合法无 key 503 + stream 200 SSE chart 英文化 | 注入 + 测试 |
+| 2026-06-30 | 助手 | W6.3 app.py 注入 birth_chart_en 扩展（复用 lunming 实例的 OpenAI client，配置统一）；blueprints/__init__.py 注册 birth_chart_en_api_bp | app.extensions["birth_chart_en"] 可用 | 测试 |
+| 2026-06-30 | 助手 | W6.4 测试 test_birth_chart_english.py（59 项）：映射表完整性 + 四柱英文化 + 性别归一化 + payload 归一化 + 英文基础盘摘要 + AI prompt 红线 + AI 报告解析（合法/代码栅栏/非法/不完整/cautions str+dict/上限 4） + 服务层 mock AI（responsible_use/chart_summary dict/reflection_points/no fortune-gua_type/stream 事件序列/chart 英文/invalid birth raises/json_object+stream） + API 契约无 key 路径（missing_name/empty_name/too_long/missing_date/invalid_time_type/invalid_time_unknown/non_json/invalid_date/valid_no_key 503/stream_*） + API 契约 mock AI 完整路径（analyze_full_success/stream_full_success） | `pytest tests/test_birth_chart_english.py` 59 passed in 2.41s | 提交 |
+| 2026-06-30 | 助手 | 设计修正：stream 端点用 POST 而非 GET（与中文 lunming_api.py 一致，便于传 JSON body）；done 帧归属 API 层统一补发（服务层 analyze_stream 只产 chart/report/responsible_use，避免重复 done，与 lunming.analyze_bazi_stream 对齐） | 见变更日志 0.12 | — |
+
+**W6 完成状态：** 已完成（W6.1 划归 W8 暂停）。Birth Chart Reading 英文后端可投入 W7 前端对接。
 
 ---
 
@@ -588,7 +600,7 @@ pytest tests/test_english_routes.py tests/test_api_error_codes.py -q
 1. 复用现有论命必要交互；文案用 birth chart insight、self-reflection。
 2. 输入隐私提示可见；AI 生成/加载状态明确。
 3. 出生时间未知用 checkbox/toggle，不要求选"未知"中文值。
-4. 调用 `POST /api/en/birth-chart/analyze` 和 SSE `GET /api/en/birth-chart/stream`，不直接把中文 SSE 文案暴露给英文页面。
+4. 调用 `POST /api/en/birth-chart/analyze` 和 SSE `POST /api/en/birth-chart/stream`（注：stream 用 POST 而非 GET，与中文 lunming_api.py 一致便于传 JSON body，详见变更日志 0.12），不直接把中文 SSE 文案暴露给英文页面。
 5. 契约测试：不出现 `fate guarantee`、`accurate prediction`、`pay to change your destiny`。
 
 #### W7.7 合规页
@@ -744,3 +756,7 @@ pytest tests/test_sitemap.py tests/test_robots.py tests/test_articles.py tests/t
 | 2026-06-27 | Codex | W2.5 产出方式改为脚本提取 6tail 英文候选+单次 AI 审核（不循环） | 6tail 已有成熟英文版本，无需反复折腾 |
 | 2026-06-27 | Codex | W2 涉及文件补充：scripts/translate_and_review.py、prompts/translator_system_prompt.md、prompts/reviewer_system_prompt.md、.env.example | 支撑双 AI 方案的文件清单 |
 | 2026-06-27 | Codex | W2.0 增补翻译批次策略（批量优先+分批兜底+整体审核+差异提取+仅异议循环+人工兜底）；W2.1 产出方式引用该策略 | 避免逐句翻译破坏上下文一致性 |
+| 2026-06-30 | 助手 | W6.2 stream 端点从 `GET /api/en/birth-chart/stream` 改为 `POST`；W7.6 同步更新 | GET 不便传 birth chart JSON body（body 非标准、query param 暴露出生数据）；与中文 `lunming_api.py` 的 POST stream 一致 |
+| 2026-06-30 | 助手 | W6.2 done 帧归属设计：服务层 `analyze_stream` 只产 chart/report/responsible_use 内容事件，终止帧 `done` 由 API 层（`birth_chart_en_api.stream`）统一补发（正常完成 + 异常分支） | 避免 service 与 API 层都补 done 导致重复；与 `lunming.analyze_bazi_stream` 对齐 |
+| 2026-06-30 | 助手 | W6.1 文章加载（content.py/seo.py）从 W6 划归 W8 | W8 暂停（D3 文章系统格式未定）；W6 聚焦 Birth Chart Reading 后端 |
+| 2026-06-30 | 助手 | W6 涉及文件更新：移除 content.py/seo.py（划归 W8），新增 birth_chart_english.py、birth_chart_en_api.py、app.py、blueprints/__init__.py | 与实际代码现状一致 |
