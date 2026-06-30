@@ -1,0 +1,847 @@
+{
+  "_meta": {
+    "source": "huangli_activities_curated.json (activities) + lunar.js I18n (other namespaces)",
+    "generated_by": "scripts/build_huangli_terms_en.py",
+    "policy": "activities 为人工审校定稿（39 类别+19 剔除+馀事勿取特殊），其他命名空间为 6tail 候选词经 term_overrides 覆盖（天干阴阳五行、六十甲子阴阳五行+生肖组合），神煞按 D6 音译+解释运行时 fallback，缺失命名空间 translation_missing",
+    "activities_source": "data/content/huangli_activities_curated.json",
+    "term_overrides_source": "data/content/huangli_activities_curated.json (term_overrides 区块)",
+    "other_namespaces_source": "frontend/static/js/lunar.js I18n messages (6tail)",
+    "applied_overrides": [
+      "stems 覆盖为阴阳五行（10 条）",
+      "sexagenary 派生为阴阳五行+生肖组合（60 条）",
+      "moon_phases 人工审校覆盖（16 条）",
+      "rokuyo 人工审校覆盖（6 条）",
+      "twenty_eight_mansions 人工审校覆盖（28 条）",
+      "divination_directions 人工审校覆盖（17 条）",
+      "festivals 人工审校覆盖（23 条）",
+      "misc 人工审校覆盖（12 条）",
+      "solar_terms 人工审校覆盖（24 条）",
+      "western_zodiac 人工审校覆盖（12 条）",
+      "nayin 人工审校覆盖（29 条）"
+    ],
+    "gods_policy": "D6：神煞音译+解释，本表 gods 留空，运行时由 huangli_english.py fallback",
+    "missing_namespaces": [
+      "d (农历日)",
+      "m (农历月)",
+      "h (候/72物候)",
+      "ss (十神)",
+      "ds (十二长生)",
+      "od (孟仲季)"
+    ],
+    "other_namespaces_stats": {
+      "zodiac": 12,
+      "solar_terms": 24,
+      "directions": 14,
+      "elements": 7,
+      "stems": 10,
+      "branches": 12,
+      "sexagenary": 60,
+      "nayin": 29,
+      "trigrams": 8,
+      "weekdays": 7,
+      "seasons": 4,
+      "twelve_duty": 12,
+      "festivals": 23,
+      "numbers": 13,
+      "divination_directions": 17,
+      "twenty_eight_mansions": 28,
+      "animals": 21,
+      "western_zodiac": 12,
+      "rokuyo": 6,
+      "misc": 12,
+      "moon_phases": 16
+    }
+  },
+  "activity_categories": {
+    "honoring_ancestors": {
+      "label": "Honoring Ancestors",
+      "sources": [
+        "祭祀"
+      ],
+      "status": "approved"
+    },
+    "prayer_reflection": {
+      "label": "Prayer & Worship",
+      "sources": [
+        "祈福",
+        "焚香"
+      ],
+      "status": "approved"
+    },
+    "blessing_ceremony": {
+      "label": "Blessing Ceremony",
+      "sources": [
+        "开光"
+      ],
+      "status": "approved"
+    },
+    "wedding": {
+      "label": "Wedding",
+      "sources": [
+        "嫁娶"
+      ],
+      "status": "approved"
+    },
+    "engagement": {
+      "label": "Engagement",
+      "sources": [
+        "订婚",
+        "纳采",
+        "问名",
+        "订盟"
+      ],
+      "status": "approved"
+    },
+    "family_social_visits": {
+      "label": "Family & Social Visits",
+      "sources": [
+        "归宁",
+        "会亲友",
+        "会友"
+      ],
+      "status": "approved"
+    },
+    "home_setup": {
+      "label": "Home Setup",
+      "sources": [
+        "安床",
+        "合帐"
+      ],
+      "status": "approved"
+    },
+    "coming_of_age": {
+      "label": "Coming-of-Age Ceremony",
+      "sources": [
+        "冠笄"
+      ],
+      "status": "approved"
+    },
+    "personal_grooming": {
+      "label": "Personal Care",
+      "sources": [
+        "挽面",
+        "开容",
+        "理发",
+        "剃头",
+        "整手足甲"
+      ],
+      "status": "approved"
+    },
+    "funeral_burial": {
+      "label": "Funeral & Burial",
+      "sources": [
+        "安葬",
+        "成服",
+        "除服",
+        "合寿木",
+        "入殓",
+        "移柩",
+        "行丧"
+      ],
+      "status": "approved"
+    },
+    "grave_memorial": {
+      "label": "Grave & Memorial Work",
+      "sources": [
+        "修坟",
+        "启钻",
+        "破土",
+        "立碑",
+        "开生坟"
+      ],
+      "status": "approved"
+    },
+    "moving_home": {
+      "label": "Moving Home",
+      "sources": [
+        "入宅",
+        "移徙"
+      ],
+      "status": "approved"
+    },
+    "groundbreaking": {
+      "label": "Groundbreaking",
+      "sources": [
+        "起基",
+        "动土",
+        "起基动土"
+      ],
+      "status": "approved"
+    },
+    "construction_renovation": {
+      "label": "Construction & Renovation",
+      "sources": [
+        "安门",
+        "修造",
+        "补垣",
+        "作灶",
+        "穿屏扇架",
+        "造仓",
+        "造屋",
+        "修门",
+        "修饰垣墙",
+        "盖屋",
+        "造仓库"
+      ],
+      "status": "approved"
+    },
+    "structural_construction": {
+      "label": "Structural Construction",
+      "sources": [
+        "上梁",
+        "竖柱",
+        "伐木做梁",
+        "开柱眼",
+        "盖屋合脊",
+        "合脊",
+        "定磉",
+        "作梁",
+        "架马",
+        "归岫"
+      ],
+      "status": "approved"
+    },
+    "demolition": {
+      "label": "Demolition",
+      "sources": [
+        "拆卸",
+        "破屋",
+        "坏垣",
+        "破屋坏垣"
+      ],
+      "status": "approved"
+    },
+    "water_utility": {
+      "label": "Water & Sanitation Work",
+      "sources": [
+        "开井开池",
+        "作陂放水",
+        "开厕",
+        "作厕",
+        "开池",
+        "开渠",
+        "掘井",
+        "放水"
+      ],
+      "status": "approved"
+    },
+    "infrastructure": {
+      "label": "Infrastructure Work",
+      "sources": [
+        "平治道涂",
+        "造桥",
+        "筑堤"
+      ],
+      "status": "approved"
+    },
+    "house_cleaning": {
+      "label": "House Cleaning",
+      "sources": [
+        "扫舍"
+      ],
+      "status": "approved"
+    },
+    "forestry_timber": {
+      "label": "Forestry & Timber Work",
+      "sources": [
+        "伐木"
+      ],
+      "status": "approved"
+    },
+    "business_opening": {
+      "label": "Business Opening",
+      "sources": [
+        "开市",
+        "挂匾"
+      ],
+      "status": "approved"
+    },
+    "financial_matters": {
+      "label": "Financial Matters",
+      "sources": [
+        "纳财",
+        "求财"
+      ],
+      "status": "approved"
+    },
+    "business_operations": {
+      "label": "Business Operations",
+      "sources": [
+        "开仓",
+        "出货财"
+      ],
+      "status": "approved"
+    },
+    "major_purchases": {
+      "label": "Major Purchases",
+      "sources": [
+        "买车",
+        "置产"
+      ],
+      "status": "approved"
+    },
+    "hiring": {
+      "label": "Hiring",
+      "sources": [
+        "雇佣"
+      ],
+      "status": "approved"
+    },
+    "machinery_installation": {
+      "label": "Tool & Equipment Setup",
+      "sources": [
+        "安机械",
+        "安碓磑",
+        "安机"
+      ],
+      "status": "approved"
+    },
+    "trade_contracts": {
+      "label": "Trade & Contracts",
+      "sources": [
+        "立券交易",
+        "交易",
+        "立券"
+      ],
+      "status": "approved"
+    },
+    "crafts_manufacturing": {
+      "label": "Arts, Crafts & Manufacturing",
+      "sources": [
+        "雕刻",
+        "裁衣",
+        "造车器",
+        "经络",
+        "酝酿",
+        "作染",
+        "鼓铸",
+        "造船"
+      ],
+      "status": "approved"
+    },
+    "farming_harvest": {
+      "label": "Farming & Harvest",
+      "sources": [
+        "割蜜",
+        "栽种"
+      ],
+      "status": "approved"
+    },
+    "fishing": {
+      "label": "Fishing",
+      "sources": [
+        "取渔",
+        "结网"
+      ],
+      "status": "approved"
+    },
+    "livestock_farm": {
+      "label": "Livestock & Farm Work",
+      "sources": [
+        "造畜稠",
+        "牧养",
+        "纳畜",
+        "教牛马"
+      ],
+      "status": "approved"
+    },
+    "hunting_trapping": {
+      "label": "Hunting & Trapping",
+      "sources": [
+        "捕捉",
+        "畋猎"
+      ],
+      "status": "approved"
+    },
+    "education_skills": {
+      "label": "Education & Skill Building",
+      "sources": [
+        "习艺",
+        "入学"
+      ],
+      "status": "approved"
+    },
+    "visiting_sick": {
+      "label": "Visiting the Sick",
+      "sources": [
+        "探病"
+      ],
+      "status": "approved"
+    },
+    "travel": {
+      "label": "Travel",
+      "sources": [
+        "乘船",
+        "渡水",
+        "出行"
+      ],
+      "status": "approved"
+    },
+    "new_position": {
+      "label": "Starting a New Position",
+      "sources": [
+        "赴任"
+      ],
+      "status": "approved"
+    },
+    "medical_care": {
+      "label": "Medical Care",
+      "sources": [
+        "针灸",
+        "求医",
+        "治病",
+        "求医疗病"
+      ],
+      "status": "approved"
+    },
+    "legal_matters": {
+      "label": "Legal Matters",
+      "sources": [
+        "词讼"
+      ],
+      "status": "approved"
+    },
+    "avoid_major_undertakings": {
+      "label": "Avoid Major Undertakings",
+      "sources": [
+        "诸事不宜"
+      ],
+      "status": "approved"
+    }
+  },
+  "excluded_activities": {
+    "求嗣": "sensitive_reproductive_claim",
+    "塑绘": "religious_icon_making",
+    "齐醮": "taoist_ritual",
+    "斋醮": "taoist_ritual",
+    "沐浴": "overly_trivial",
+    "酬神": "folk_religion_ritual",
+    "造庙": "low_frequency_religious",
+    "祀灶": "kitchen_god_belief",
+    "谢土": "earth_deity_ritual",
+    "出火": "ambiguous_ritual",
+    "纳婿": "traditional_marriage_system",
+    "进人口": "historically_complex",
+    "普渡": "no_western_equivalent",
+    "安香": "deity_ritual",
+    "解除": "culturally_obscure",
+    "塞穴": "obscure_ancient_maintenance",
+    "见贵": "feudal_hierarchy_concept",
+    "分居": "inappropriate_recommendation",
+    "断蚁": "overly_trivial_obscure"
+  },
+  "special_rules": {
+    "馀事勿取": {
+      "type": "routine_only",
+      "label": "Avoid Additional Activities",
+      "description": "Traditional guidance suggests keeping plans simple and avoiding additional major undertakings."
+    }
+  },
+  "display_wording": {
+    "favored": "Traditionally Favored",
+    "avoided": "Traditionally Avoided",
+    "mixed": "Mixed Traditional Indications",
+    "forbidden_prefixes": [
+      "You should",
+      "You must not",
+      "Lucky Activities",
+      "Bad Activities"
+    ],
+    "footer_disclaimer": "These indications reflect traditional Chinese almanac customs and are provided for cultural reference, not as practical, medical, legal, or financial advice."
+  },
+  "conflict_rules": {
+    "same_category_in_both_sides": "move to Mixed Traditional Indications",
+    "same_category_multiple_words_same_side": "display once",
+    "matching_rule": "scenario judgment must match original Chinese words, not merged categories"
+  },
+  "zodiac": {
+    "鼠": "Rat",
+    "牛": "Ox",
+    "虎": "Tiger",
+    "兔": "Rabbit",
+    "龙": "Dragon",
+    "蛇": "Snake",
+    "马": "Horse",
+    "羊": "Goat",
+    "猴": "Monkey",
+    "鸡": "Rooster",
+    "狗": "Dog",
+    "猪": "Pig"
+  },
+  "solar_terms": {
+    "冬至": "Winter Solstice",
+    "小寒": "Lesser Cold",
+    "大寒": "Great Cold",
+    "立春": "Beginning of Spring",
+    "雨水": "Rain Water",
+    "惊蛰": "Awakening from Hibernation",
+    "春分": "Spring Equinox",
+    "清明": "Fresh Green",
+    "谷雨": "Grain Rain",
+    "立夏": "Beginning of Summer",
+    "小满": "Lesser Fullness",
+    "芒种": "Grain in Ear",
+    "夏至": "Summer Solstice",
+    "小暑": "Lesser Heat",
+    "大暑": "Greater Heat",
+    "立秋": "Beginning of Autumn",
+    "处暑": "End of Heat",
+    "白露": "White Dew",
+    "秋分": "Autumnal Equinox",
+    "寒露": "Cold Dew",
+    "霜降": "First Frost",
+    "立冬": "Beginning of Winter",
+    "小雪": "Light Snow",
+    "大雪": "Heavy Snow"
+  },
+  "directions": {
+    "中": "Center",
+    "东": "East",
+    "南": "South",
+    "西": "West",
+    "北": "North",
+    "中宫": "Center",
+    "正东": "East",
+    "正南": "South",
+    "正西": "West",
+    "正北": "North",
+    "东北": "Northeast",
+    "东南": "Southeast",
+    "西北": "Northwest",
+    "西南": "Southwest"
+  },
+  "elements": {
+    "金": "Metal",
+    "木": "Wood",
+    "水": "Water",
+    "火": "Fire",
+    "土": "Earth",
+    "日": "Sun",
+    "月": "Moon"
+  },
+  "stems": {
+    "甲": "Yang Wood",
+    "乙": "Yin Wood",
+    "丙": "Yang Fire",
+    "丁": "Yin Fire",
+    "戊": "Yang Earth",
+    "己": "Yin Earth",
+    "庚": "Yang Metal",
+    "辛": "Yin Metal",
+    "壬": "Yang Water",
+    "癸": "Yin Water"
+  },
+  "branches": {
+    "子": "Zi",
+    "丑": "Chou",
+    "寅": "Yin",
+    "卯": "Mao",
+    "辰": "Chen",
+    "巳": "Si",
+    "午": "Wu",
+    "未": "Wei",
+    "申": "Shen",
+    "酉": "You",
+    "戌": "Xu",
+    "亥": "Hai"
+  },
+  "sexagenary": {
+    "甲子": "Yang Wood Rat",
+    "乙丑": "Yin Wood Ox",
+    "丙寅": "Yang Fire Tiger",
+    "丁卯": "Yin Fire Rabbit",
+    "戊辰": "Yang Earth Dragon",
+    "己巳": "Yin Earth Snake",
+    "庚午": "Yang Metal Horse",
+    "辛未": "Yin Metal Goat",
+    "壬申": "Yang Water Monkey",
+    "癸酉": "Yin Water Rooster",
+    "甲戌": "Yang Wood Dog",
+    "乙亥": "Yin Wood Pig",
+    "丙子": "Yang Fire Rat",
+    "丁丑": "Yin Fire Ox",
+    "戊寅": "Yang Earth Tiger",
+    "己卯": "Yin Earth Rabbit",
+    "庚辰": "Yang Metal Dragon",
+    "辛巳": "Yin Metal Snake",
+    "壬午": "Yang Water Horse",
+    "癸未": "Yin Water Goat",
+    "甲申": "Yang Wood Monkey",
+    "乙酉": "Yin Wood Rooster",
+    "丙戌": "Yang Fire Dog",
+    "丁亥": "Yin Fire Pig",
+    "戊子": "Yang Earth Rat",
+    "己丑": "Yin Earth Ox",
+    "庚寅": "Yang Metal Tiger",
+    "辛卯": "Yin Metal Rabbit",
+    "壬辰": "Yang Water Dragon",
+    "癸巳": "Yin Water Snake",
+    "甲午": "Yang Wood Horse",
+    "乙未": "Yin Wood Goat",
+    "丙申": "Yang Fire Monkey",
+    "丁酉": "Yin Fire Rooster",
+    "戊戌": "Yang Earth Dog",
+    "己亥": "Yin Earth Pig",
+    "庚子": "Yang Metal Rat",
+    "辛丑": "Yin Metal Ox",
+    "壬寅": "Yang Water Tiger",
+    "癸卯": "Yin Water Rabbit",
+    "甲辰": "Yang Wood Dragon",
+    "乙巳": "Yin Wood Snake",
+    "丙午": "Yang Fire Horse",
+    "丁未": "Yin Fire Goat",
+    "戊申": "Yang Earth Monkey",
+    "己酉": "Yin Earth Rooster",
+    "庚戌": "Yang Metal Dog",
+    "辛亥": "Yin Metal Pig",
+    "壬子": "Yang Water Rat",
+    "癸丑": "Yin Water Ox",
+    "甲寅": "Yang Wood Tiger",
+    "乙卯": "Yin Wood Rabbit",
+    "丙辰": "Yang Fire Dragon",
+    "丁巳": "Yin Fire Snake",
+    "戊午": "Yang Earth Horse",
+    "己未": "Yin Earth Goat",
+    "庚申": "Yang Metal Monkey",
+    "辛酉": "Yin Metal Rooster",
+    "壬戌": "Yang Water Dog",
+    "癸亥": "Yin Water Pig"
+  },
+  "nayin": {
+    "海中": "Metal in the Sea",
+    "剑锋": "Sword Edge Metal",
+    "白蜡": "White Wax Metal",
+    "沙中": "Sand Metal",
+    "金箔": "Gold Foil Metal",
+    "钗钏": "Hairpin Metal",
+    "大林": "Forest Wood",
+    "杨柳": "Willow Wood",
+    "松柏": "Pine & Cypress Wood",
+    "平地": "Plain Wood",
+    "桑柘": "Mulberry Wood",
+    "石榴": "Pomegranate Wood",
+    "涧下": "Valley Stream Water",
+    "大溪": "Great Stream Water",
+    "长流": "Flowing Water",
+    "天河": "Heavenly River Water",
+    "泉中": "Spring Water",
+    "大海": "Ocean Water",
+    "霹雳": "Thunderbolt Fire",
+    "炉中": "Furnace Fire",
+    "覆灯": "Covered Lamp Fire",
+    "山头": "Hilltop Fire",
+    "山下": "Mountain Foot Fire",
+    "天上": "Heavenly Fire",
+    "壁上": "Wall Earth",
+    "城头": "City Wall Earth",
+    "路旁": "Roadside Earth",
+    "大驿": "Courier Post Earth",
+    "屋上": "Roof Earth"
+  },
+  "trigrams": {
+    "乾": "Qian",
+    "坤": "Kun",
+    "震": "Zhen",
+    "巽": "Xun",
+    "坎": "Kan",
+    "离": "Li",
+    "艮": "Gen",
+    "兑": "Dui"
+  },
+  "weekdays": {
+    "日": "Sunday",
+    "一": "Monday",
+    "二": "Tuesday",
+    "三": "Wednesday",
+    "四": "Thursday",
+    "五": "Friday",
+    "六": "Saturday"
+  },
+  "seasons": {
+    "春": "Spring",
+    "夏": "Summer",
+    "秋": "Autumn",
+    "冬": "Winter"
+  },
+  "twelve_duty": {
+    "建": "Build",
+    "除": "Remove",
+    "满": "Full",
+    "平": "Flat",
+    "定": "Stable",
+    "执": "Hold",
+    "破": "Break",
+    "危": "Danger",
+    "成": "Complete",
+    "收": "Collect",
+    "开": "Open",
+    "闭": "Close"
+  },
+  "festivals": {
+    "除夕": "Chinese New Year's Eve",
+    "春节": "Lunar New Year",
+    "元宵节": "Lantern Festival",
+    "端午节": "Dragon Boat Festival",
+    "七夕节": "Chinese Valentine's Day",
+    "中秋节": "Mid-Autumn Festival",
+    "腊八节": "Laba Festival",
+    "元旦节": "New Year's Day",
+    "情人节": "Valentine's Day",
+    "妇女节": "Women's Day",
+    "消费者权益日": "Consumer Rights Day",
+    "植树节": "Arbor Day",
+    "劳动节": "International Worker's Day",
+    "儿童节": "Children's Day",
+    "青年节": "Youth Day",
+    "愚人节": "April Fools' Day",
+    "建军节": "Army Day",
+    "教师节": "Teachers' Day",
+    "国庆节": "National Day",
+    "万圣节前夜": "Halloween Eve",
+    "万圣节": "Halloween",
+    "平安夜": "Christmas Eve",
+    "圣诞节": "Christmas Day"
+  },
+  "numbers": {
+    "〇": "0",
+    "一": "1",
+    "二": "2",
+    "三": "3",
+    "四": "4",
+    "五": "5",
+    "六": "6",
+    "七": "7",
+    "八": "8",
+    "九": "9",
+    "十": "10",
+    "十一": "11",
+    "十二": "12"
+  },
+  "divination_directions": {
+    "占": "Divination",
+    "户": "Inner Door",
+    "灶": "Stove",
+    "碓": "Rice Pounder",
+    "栖": "Roost",
+    "窗": "Window",
+    "房": "Room",
+    "床": "Bed",
+    "炉": "Brazier",
+    "磨": "Mill",
+    "厨": "Kitchen",
+    "厕": "Toilet",
+    "仓": "Granary",
+    "仓库": "Storehouse",
+    "大门": "Main Gate",
+    "门": "Door",
+    "堂": "Hall"
+  },
+  "twenty_eight_mansions": {
+    "角": "Horn",
+    "亢": "Neck",
+    "氐": "Root",
+    "房": "House",
+    "心": "Heart",
+    "尾": "Tail",
+    "箕": "Winnowing Basket",
+    "斗": "Dipper",
+    "牛": "Ox",
+    "女": "Woman",
+    "虚": "Emptiness",
+    "危": "Rooftop",
+    "室": "Room",
+    "壁": "Wall",
+    "奎": "Legs",
+    "娄": "Bond",
+    "胃": "Stomach",
+    "昴": "Hairy Head",
+    "毕": "Net",
+    "觜": "Turtle Beak",
+    "参": "Three Stars",
+    "井": "Well",
+    "鬼": "Ghost",
+    "柳": "Willow",
+    "星": "Star",
+    "张": "Spread",
+    "翼": "Wings",
+    "轸": "Cross-bar"
+  },
+  "animals": {
+    "龙": "Dragon",
+    "牛": "Ox",
+    "狗": "Dog",
+    "羊": "Goat",
+    "兔": "Rabbit",
+    "鼠": "Rat",
+    "鸡": "Rooster",
+    "马": "Horse",
+    "虎": "Tiger",
+    "猪": "Pig",
+    "猴": "Monkey",
+    "蛇": "Snake",
+    "狐": "Fox",
+    "燕": "Swallow",
+    "豹": "Leopard",
+    "猿": "Ape",
+    "蚓": "Earthworm",
+    "鹿": "Deer",
+    "乌": "Crow",
+    "狼": "Wolf",
+    "蝠": "Bat"
+  },
+  "western_zodiac": {
+    "白羊": "Aries",
+    "金牛": "Taurus",
+    "双子": "Gemini",
+    "巨蟹": "Cancer",
+    "狮子": "Leo",
+    "处女": "Virgo",
+    "天秤": "Libra",
+    "天蝎": "Scorpio",
+    "射手": "Sagittarius",
+    "摩羯": "Capricorn",
+    "水瓶": "Aquarius",
+    "双鱼": "Pisces"
+  },
+  "rokuyo": {
+    "先胜": "Morning Victory",
+    "先负": "Morning Defeat",
+    "友引": "Pulling Friends",
+    "佛灭": "Buddha's Death",
+    "大安": "Great Peace",
+    "赤口": "Red Mouth"
+  },
+  "misc": {
+    "无": "None",
+    "吉": "Good luck",
+    "凶": "Bad luck",
+    "阴": "Yin",
+    "阳": "Yang",
+    "白": "White",
+    "黑": "Black",
+    "碧": "Cyan",
+    "绿": "Green",
+    "黄": "Yellow",
+    "赤": "Red",
+    "紫": "Purple"
+  },
+  "moon_phases": {
+    "朔": "New Moon",
+    "蛾眉新": "Waxing Crescent",
+    "蛾眉": "Waxing Crescent",
+    "夕": "Waxing Crescent",
+    "上弦": "First Quarter",
+    "九夜": "Waxing Gibbous",
+    "宵": "Waxing Gibbous",
+    "渐盈凸": "Waxing Gibbous",
+    "小望": "Waxing Gibbous",
+    "望": "Full Moon",
+    "渐亏凸": "Waning Gibbous",
+    "下弦": "Last Quarter",
+    "蛾眉残": "Waning Crescent",
+    "残": "Waning Crescent",
+    "晓": "Waning Crescent",
+    "晦": "Dark Moon"
+  },
+  "gods": {}
+}

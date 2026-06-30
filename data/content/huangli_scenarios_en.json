@@ -1,0 +1,39 @@
+{
+  "_meta": {
+    "description": "英文黄历首发场景定义。场景判断必须匹配原始中文词，不能直接匹配合并后的类别。",
+    "policy": "例如 Personal Grooming 类别包含挽面/开容/理发/剃头/整手足甲，但 haircut 场景只匹配理发/剃头，不匹配整个类别。",
+    "status": "approved"
+  },
+  "scenarios": {
+    "wedding": {
+      "label": "Wedding",
+      "match_words": ["嫁娶"],
+      "category": "wedding"
+    },
+    "moving": {
+      "label": "Moving Home",
+      "match_words": ["入宅", "移徙"],
+      "category": "moving_home"
+    },
+    "business_opening": {
+      "label": "Business Opening",
+      "match_words": ["开市", "挂匾"],
+      "category": "business_opening"
+    },
+    "travel": {
+      "label": "Travel",
+      "match_words": ["出行", "乘船", "渡水"],
+      "category": "travel"
+    },
+    "signing": {
+      "label": "Signing Contracts",
+      "match_words": ["立券", "立券交易"],
+      "category": "trade_contracts"
+    },
+    "haircut": {
+      "label": "Haircut",
+      "match_words": ["理发", "剃头"],
+      "category": "personal_grooming"
+    }
+  }
+}
