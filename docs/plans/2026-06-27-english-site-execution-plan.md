@@ -464,6 +464,10 @@ pytest tests/test_english_routes.py tests/test_api_error_codes.py -q
 
 ### W5：Daily Almanac 后端
 
+**完成状态（2026-07-01）：** 已完成。英文词表、20 个常见神煞审校、转换服务、
+`GET /api/en/daily-almanac`、`GET /api/en/week-almanac`、英文页面接入和 2026
+全年无中文泄漏扫描均已通过；未审校术语默认隐藏并仅在 `debug=1` 时进入 `_missing`。
+
 **目标：** 英文黄历适配与 API。
 
 **代码现状：** `huangli_english.py` 不存在；`tests/test_huangli_english.py` 不存在。

@@ -1,35 +1,106 @@
 {% extends "en/base.html" %}
 
 {% block title %}Daily Chinese Almanac — Favorable Activities & Solar Terms{% endblock %}
-{% block meta_description %}Today's Chinese almanac: favorable and unfavorable activities, lunar date, solar term, and zodiac.{% endblock %}
+{% block meta_description %}Explore the daily Chinese almanac: traditional activity indications, lunar date, solar terms, zodiac, directions, and cultural context.{% endblock %}
 
 {% block content %}
-<section class="en-almanac">
-    <h1>Daily Chinese Almanac</h1>
-    <p class="en-almanac-intro">
-        A traditional guide to the rhythms of the day — favorable and unfavorable activities,
-        the lunar date, the current solar term, and the zodiac of the year.
-    </p>
-
-    <div class="en-almanac-placeholder">
-        <p><strong>Coming soon.</strong></p>
-        <p>The daily almanac is being prepared. Please check back later.</p>
-        <p>In the meantime, you can <a href="/ask-oracle">draw an oracle sign</a> or explore a <a href="/birth-chart-reading">birth chart reading</a>.</p>
+<section class="en-almanac" data-almanac-app>
+    <div class="en-almanac-hero">
+        <p class="en-eyebrow">Traditional calendar, clearly explained</p>
+        <h1>Daily Chinese Almanac</h1>
+        <p class="en-almanac-intro">
+            Explore traditional indications for the day as cultural context—not as rules,
+            guarantees, or professional advice.
+        </p>
     </div>
 
-    <section class="en-almanac-legend">
-        <h2>What you'll find here</h2>
-        <ul>
-            <li><strong>Favorable Activities</strong> — traditionally suitable activities for the day</li>
-            <li><strong>Unfavorable Activities</strong> — traditionally unsuitable activities for the day</li>
-            <li><strong>Lunar Date</strong> — the date in the traditional Chinese lunar calendar</li>
-            <li><strong>Solar Term</strong> — the current solar term in the traditional Chinese calendar</li>
-            <li><strong>Chinese Zodiac</strong> — the zodiac animal of the year</li>
-        </ul>
-        <p>
-            As with all content on Wise Oracle, the almanac is offered for cultural exploration
-            and self-reflection — not as a rulebook for how to live your day.
-        </p>
-    </section>
+    <form class="en-almanac-controls" data-almanac-form>
+        <label>
+            Date
+            <input type="date" name="date" data-almanac-date required>
+        </label>
+        <label>
+            Focus
+            <select name="scenario" data-almanac-scenario>
+                <option value="">General overview</option>
+                <option value="wedding">Wedding</option>
+                <option value="moving">Moving Home</option>
+                <option value="business_opening">Business Opening</option>
+                <option value="travel">Travel</option>
+                <option value="signing">Signing Contracts</option>
+                <option value="haircut">Haircut</option>
+            </select>
+        </label>
+        <button type="submit" class="en-btn">View Almanac</button>
+    </form>
+
+    <div class="en-almanac-status" data-almanac-status aria-live="polite">
+        Loading the almanac…
+    </div>
+
+    <div class="en-almanac-results" data-almanac-results hidden>
+        <section class="en-almanac-summary">
+            <div>
+                <span class="en-summary-label">Selected date</span>
+                <strong data-field="date">—</strong>
+            </div>
+            <div>
+                <span class="en-summary-label">Lunar date</span>
+                <strong data-field="lunar-date">—</strong>
+            </div>
+            <div>
+                <span class="en-summary-label">Zodiac</span>
+                <strong data-field="zodiac">—</strong>
+            </div>
+            <div>
+                <span class="en-summary-label">Solar term</span>
+                <strong data-field="solar-term">—</strong>
+            </div>
+        </section>
+
+        <section class="en-scenario-card" data-scenario-card hidden>
+            <span class="en-summary-label">Selected focus</span>
+            <h2 data-field="scenario-label">—</h2>
+            <p data-field="scenario-status">—</p>
+        </section>
+
+        <div class="en-almanac-grid">
+            <section class="en-almanac-card en-almanac-card-favorable">
+                <h2>Traditionally Favored</h2>
+                <ul data-list="favorable"></ul>
+            </section>
+            <section class="en-almanac-card en-almanac-card-avoided">
+                <h2>Traditionally Avoided</h2>
+                <ul data-list="unfavorable"></ul>
+            </section>
+            <section class="en-almanac-card">
+                <h2>Mixed Indications</h2>
+                <ul data-list="mixed"></ul>
+            </section>
+            <section class="en-almanac-card">
+                <h2>Traditional Spirits</h2>
+                <div data-list="spirits"></div>
+            </section>
+            <section class="en-almanac-card">
+                <h2>Directions</h2>
+                <dl data-list="directions"></dl>
+            </section>
+            <section class="en-almanac-card">
+                <h2>Conflict &amp; Clash</h2>
+                <dl data-list="clash"></dl>
+            </section>
+        </div>
+
+        <section class="en-almanac-context">
+            <h2>How to read this page</h2>
+            <p data-field="peng-zu">—</p>
+            <p data-field="responsible-use">—</p>
+            <p data-field="footer-disclaimer">—</p>
+        </section>
+    </div>
 </section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/daily_almanac.js') }}"></script>
 {% endblock %}

@@ -177,10 +177,15 @@ def test_ask_oracle_does_not_contain_old_fields_or_text(client, forbidden):
 # ============================================================
 
 
-def test_daily_almanac_has_coming_soon(client):
-    """黄历后端暂停（W5），页面优雅降级显示 Coming soon。"""
+def test_daily_almanac_is_connected_to_english_api(client):
+    """英文黄历页已接通日期、场景控件和页面脚本。"""
     body = _body(client, "/daily-almanac")
-    assert "Coming soon" in body
+    raw = _raw(client, "/daily-almanac")
+    assert "Coming soon" not in body
+    assert 'data-almanac-form' in raw
+    assert 'data-almanac-date' in raw
+    assert 'data-almanac-scenario' in raw
+    assert "/static/js/daily_almanac.js" in raw
 
 
 def test_daily_almanac_does_not_contain_yellow_calendar(client):

@@ -253,7 +253,7 @@
   "term_overrides": {
     "_meta": {
       "description": "人工审校对非 activities 命名空间的展示覆盖。脚本读取后覆盖 6tail 候选词。",
-      "policy": "天干用阴阳五行；六十甲子派生为'阴阳五行+生肖'组合；地支保留音译作数据层；月相映射西方8月相；六曜意译；二十八宿与占方名词人工审校覆盖；节日删除建党节并修复拼写/文化误译；杂项碧色改 Cyan；节气立X 统一为 Beginning of X；西方星座摩羯改 Capricorn；纳音完整字面译法（前缀含义+五行材质）",
+      "policy": "天干用阴阳五行；六十甲子派生为'阴阳五行+生肖'组合；地支保留音译作数据层；月相映射西方8月相；六曜意译；二十八宿与占方名词人工审校覆盖；节日删除建党节并修复拼写/文化误译；杂项碧色改 Cyan；节气立X 统一为 Beginning of X；西方星座摩羯改 Capricorn；纳音完整字面译法（前缀含义+五行材质）；神煞方案 C 小批审校（2026 全年 top 20 常见神煞含 name/pinyin/explanation，其余运行时隐藏+missing）",
       "stems_rationale": "天干本质是阴阳五行属性，音译 Jia/Yi 对西方人无意义；Yang Wood 直接传达本质且为英语八字圈标准译法，无计算损失（可反推五行+阴阳）",
       "sexagenary_derivation": "天干阴阳五行（来自 stems 覆盖）+ 地支生肖（branch_to_zodiac + zodiac 命名空间）",
       "review_date": "2026-07-01"
@@ -468,6 +468,28 @@
       "路旁": "Roadside Earth",
       "大驿": "Courier Post Earth",
       "屋上": "Roof Earth"
+    },
+    "gods": {
+      "天恩": {"name": "Heavenly Grace", "pinyin": "Tiān Ēn", "explanation": "Auspicious spirit of heavenly favor and blessing"},
+      "五虚": {"name": "Five Voids", "pinyin": "Wǔ Xū", "explanation": "Inauspicious spirit of emptiness; unfavorable for substantial commitments"},
+      "不将": {"name": "No Clash", "pinyin": "Bù Jiāng", "explanation": "Auspicious spirit indicating absence of conflict; favorable for unions"},
+      "鸣吠": {"name": "Crowing & Barking", "pinyin": "Míng Fèi", "explanation": "Auspicious spirit associated with vitality; favorable for construction"},
+      "母仓": {"name": "Mother Granary", "pinyin": "Mǔ Cāng", "explanation": "Auspicious spirit of nurturing abundance; favorable for storage and provision"},
+      "四相": {"name": "Four Aspects", "pinyin": "Sì Xiàng", "explanation": "Auspicious spirit of balanced conditions; favorable for new endeavors"},
+      "鸣吠对": {"name": "Crowing & Barking Pair", "pinyin": "Míng Fèi Duì", "explanation": "Auspicious spirit complementing vitality; favorable for renovations"},
+      "五合": {"name": "Five Harmonies", "pinyin": "Wǔ Hé", "explanation": "Auspicious spirit of harmonious union; favorable for partnerships"},
+      "重日": {"name": "Repeated Day", "pinyin": "Chóng Rì", "explanation": "Inauspicious spirit of duplication; caution against repeated setbacks"},
+      "三合": {"name": "Three Harmonies", "pinyin": "Sān Hé", "explanation": "Auspicious spirit of tri-fold harmony; favorable for alliances and unions"},
+      "五离": {"name": "Five Separations", "pinyin": "Wǔ Lí", "explanation": "Inauspicious spirit of disunion; unfavorable for unions and partnerships"},
+      "除神": {"name": "Removing Spirit", "pinyin": "Chú Shén", "explanation": "Auspicious spirit of cleansing; favorable for clearing away the old"},
+      "月空": {"name": "Lunar Void", "pinyin": "Yuè Kōng", "explanation": "Auspicious spirit of open lunar potential; favorable for planning"},
+      "月德合": {"name": "Lunar Virtue Combination", "pinyin": "Yuè Dé Hé", "explanation": "Auspicious spirit combining lunar virtue; favorable for virtuous undertakings"},
+      "月德": {"name": "Lunar Virtue", "pinyin": "Yuè Dé", "explanation": "Auspicious spirit of lunar blessing; favorable for benevolent activities"},
+      "复日": {"name": "Returning Day", "pinyin": "Fù Rì", "explanation": "Inauspicious spirit of recurrence; caution against matters reopening"},
+      "月恩": {"name": "Lunar Grace", "pinyin": "Yuè Ēn", "explanation": "Auspicious spirit of lunar favor; favorable for seeking support"},
+      "王日": {"name": "Sovereign Day", "pinyin": "Wáng Rì", "explanation": "Auspicious spirit of authority; favorable for official matters"},
+      "阳德": {"name": "Yang Virtue", "pinyin": "Yáng Dé", "explanation": "Auspicious spirit of yang blessing; favorable for outward endeavors"},
+      "普护": {"name": "Universal Protection", "pinyin": "Pǔ Hù", "explanation": "Auspicious spirit of encompassing safeguard; favorable for seeking shelter"}
     }
   }
 }

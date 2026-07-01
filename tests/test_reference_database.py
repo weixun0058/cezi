@@ -19,8 +19,8 @@ def test_packaged_reference_database_contains_runtime_tables():
 
     with closing(sqlite3.connect(database)) as connection:
         assert connection.execute("PRAGMA quick_check").fetchone()[0] == "ok"
-        assert connection.execute("SELECT COUNT(*) FROM gua").fetchone()[0] == 383
-        assert connection.execute("SELECT COUNT(*) FROM gua_hant").fetchone()[0] == 383
+        assert connection.execute("SELECT COUNT(*) FROM gua").fetchone()[0] == 384
+        assert connection.execute("SELECT COUNT(*) FROM gua_hant").fetchone()[0] == 384
         assert connection.execute("SELECT COUNT(*) FROM pzbj").fetchone()[0] == 120
         assert connection.execute("SELECT COUNT(*) FROM pzbj_hant").fetchone()[0] == 120
 
@@ -37,11 +37,11 @@ def test_build_reference_database_contains_all_sources(tmp_path):
     )
 
     assert counts["hanzi"] >= 18000
-    assert counts["gua"] == 383
+    assert counts["gua"] == 384
     assert counts["pzbj"] == 120
     with closing(sqlite3.connect(output)) as connection:
         assert connection.execute("PRAGMA quick_check").fetchone()[0] == "ok"
-        assert connection.execute("SELECT COUNT(*) FROM gua").fetchone()[0] == 383
+        assert connection.execute("SELECT COUNT(*) FROM gua").fetchone()[0] == 384
 
 
 def test_reference_database_build_is_deterministic(tmp_path):

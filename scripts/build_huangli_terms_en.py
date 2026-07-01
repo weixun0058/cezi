@@ -183,13 +183,14 @@ def apply_term_overrides(other_terms: dict, overrides: dict) -> tuple[dict, list
                 f"sexagenary 派生为阴阳五行+生肖组合（{len(new_sexagenary)} 条）"
             )
 
-    # 3. 其他命名空间直接覆盖（moon_phases/rokuyo/twenty_eight_mansions/divination_directions 等）
+    # 3. 其他命名空间直接覆盖（moon_phases/rokuyo/twenty_eight_mansions/divination_directions/gods 等）
     # stems 已在上方处理（并参与 sexagenary 派生），_meta/branch_to_zodiac 为辅助映射，均跳过
+    # 允许新增 override-only 命名空间（如 gods：无 lunar.js 候选词，仅由 term_overrides 提供）
     AUX_KEYS = {"_meta", "branch_to_zodiac"}
     for key, val in overrides.items():
         if key in AUX_KEYS or key == "stems":
             continue
-        if isinstance(val, dict) and key in updated:
+        if isinstance(val, dict):
             updated[key] = dict(val)
             applied_log.append(f"{key} 人工审校覆盖（{len(val)} 条）")
 
@@ -235,14 +236,17 @@ def main() -> None:
             "policy": (
                 "activities 为人工审校定稿（39 类别+19 剔除+馀事勿取特殊），"
                 "其他命名空间为 6tail 候选词经 term_overrides 覆盖"
-                "（天干阴阳五行、六十甲子阴阳五行+生肖组合），"
-                "神煞按 D6 音译+解释运行时 fallback，缺失命名空间 translation_missing"
+                "（天干阴阳五行、六十甲子阴阳五行+生肖组合、神煞方案 C 小批审校），"
+                "未审核神煞运行时隐藏并记录 translation_missing，缺失命名空间 translation_missing"
             ),
             "activities_source": "data/content/huangli_activities_curated.json",
             "term_overrides_source": "data/content/huangli_activities_curated.json (term_overrides 区块)",
             "other_namespaces_source": "frontend/static/js/lunar.js I18n messages (6tail)",
             "applied_overrides": applied_log,
-            "gods_policy": "D6：神煞音译+解释，本表 gods 留空，运行时由 huangli_english.py fallback",
+            "gods_policy": (
+                "D6 方案 C：20 个常见神煞使用人工审校英文名、拼音和解释；"
+                "其余神煞运行时隐藏并记录 translation_missing"
+            ),
             "missing_namespaces": [
                 "d (农历日)", "m (农历月)", "h (候/72物候)",
                 "ss (十神)", "ds (十二长生)", "od (孟仲季)",
@@ -255,10 +259,8 @@ def main() -> None:
         "special_rules": curate["special_rules"],
         "display_wording": curate["display_wording"],
         "conflict_rules": curate["conflict_rules"],
-        # 其他命名空间（从 lunar.js 抽取的候选词）
+        # 其他命名空间（从 lunar.js 抽取的候选词 + term_overrides 覆盖/新增）
         **other_terms,
-        # 神煞占位：D6 音译+解释，运行时 fallback
-        "gods": {},
     }
 
     OUTPUT_JSON.parent.mkdir(parents=True, exist_ok=True)
@@ -277,7 +279,8 @@ def main() -> None:
     print(f"\n其他命名空间：")
     for json_key, count in other_stats.items():
         print(f"  {json_key}: {count} 条")
-    print(f"\ngods（神煞）：0 条（D6 音译+解释，运行时 fallback）")
+    gods_count = other_stats.get("gods", 0)
+    print(f"\ngods（神煞）：{gods_count} 条（D6 方案 C 小批审校）")
 
 
 if __name__ == "__main__":

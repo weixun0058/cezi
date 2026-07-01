@@ -638,3 +638,165 @@ a:hover { border-bottom-color: var(--wo-accent); }
     .en-words-row, .en-numbers-row { gap: 0.5rem; }
     .en-bc-pillars { grid-template-columns: repeat(2, 1fr); }
 }
+.en-almanac {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.en-almanac-hero {
+    max-width: 760px;
+    margin-bottom: 2rem;
+}
+
+.en-eyebrow,
+.en-summary-label {
+    color: #8b6635;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.en-almanac-controls {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr) max-content;
+    gap: 1rem;
+    align-items: end;
+    width: 100%;
+    max-width: 100%;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #ded3c2;
+    border-radius: 14px;
+    background: #fffdf8;
+}
+
+.en-almanac-controls label {
+    display: grid;
+    gap: 0.45rem;
+    font-weight: 650;
+}
+
+.en-almanac-controls input,
+.en-almanac-controls select {
+    min-width: 0;
+    width: 100%;
+    min-height: 44px;
+    padding: 0.65rem 0.75rem;
+    border: 1px solid #b9ad9b;
+    border-radius: 8px;
+    background: white;
+    color: #2d2924;
+}
+
+.en-almanac-controls .en-btn {
+    white-space: nowrap;
+}
+
+.en-almanac-status {
+    min-height: 1.5rem;
+    margin: 1rem 0;
+    color: #62594d;
+}
+
+.en-almanac-status.is-error {
+    padding: 0.85rem 1rem;
+    border-left: 4px solid #a23c32;
+    background: #fff3f0;
+    color: #7c271f;
+}
+
+.en-almanac-summary {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1px;
+    overflow: hidden;
+    margin-bottom: 1.25rem;
+    border: 1px solid #ded3c2;
+    border-radius: 14px;
+    background: #ded3c2;
+}
+
+.en-almanac-summary > div {
+    display: grid;
+    gap: 0.35rem;
+    padding: 1rem;
+    background: #fffdf8;
+}
+
+.en-scenario-card,
+.en-almanac-context {
+    padding: 1.25rem;
+    margin-bottom: 1.25rem;
+    border-radius: 14px;
+    background: #f2eadc;
+}
+
+.en-scenario-card h2 {
+    margin: 0.25rem 0;
+}
+
+.en-almanac-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+}
+
+.en-almanac-card {
+    padding: 1.25rem;
+    border: 1px solid #ded3c2;
+    border-radius: 14px;
+    background: #fff;
+}
+
+.en-almanac-card-favorable {
+    border-top: 4px solid #477a56;
+}
+
+.en-almanac-card-avoided {
+    border-top: 4px solid #a85a4c;
+}
+
+.en-almanac-card h2 {
+    margin-top: 0;
+    font-size: 1.2rem;
+}
+
+.en-almanac-card h3 {
+    margin: 1rem 0 0.35rem;
+    font-size: 1rem;
+}
+
+.en-almanac-card ul {
+    margin: 0;
+    padding-left: 1.2rem;
+}
+
+.en-almanac-card dl {
+    display: grid;
+    grid-template-columns: minmax(120px, 0.8fr) 1.2fr;
+    gap: 0.55rem 1rem;
+    margin: 0;
+}
+
+.en-almanac-card dt {
+    font-weight: 700;
+}
+
+.en-almanac-card dd {
+    margin: 0;
+}
+
+.en-spirit {
+    margin: 0.4rem 0;
+    color: #50483e;
+}
+
+@media (max-width: 760px) {
+    .en-almanac-controls,
+    .en-almanac-summary,
+    .en-almanac-grid {
+        grid-template-columns: 1fr;
+    }
+}

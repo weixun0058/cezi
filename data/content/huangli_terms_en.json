@@ -2,7 +2,7 @@
   "_meta": {
     "source": "huangli_activities_curated.json (activities) + lunar.js I18n (other namespaces)",
     "generated_by": "scripts/build_huangli_terms_en.py",
-    "policy": "activities 为人工审校定稿（39 类别+19 剔除+馀事勿取特殊），其他命名空间为 6tail 候选词经 term_overrides 覆盖（天干阴阳五行、六十甲子阴阳五行+生肖组合），神煞按 D6 音译+解释运行时 fallback，缺失命名空间 translation_missing",
+    "policy": "activities 为人工审校定稿（39 类别+19 剔除+馀事勿取特殊），其他命名空间为 6tail 候选词经 term_overrides 覆盖（天干阴阳五行、六十甲子阴阳五行+生肖组合、神煞方案 C 小批审校），未审核神煞运行时隐藏并记录 translation_missing，缺失命名空间 translation_missing",
     "activities_source": "data/content/huangli_activities_curated.json",
     "term_overrides_source": "data/content/huangli_activities_curated.json (term_overrides 区块)",
     "other_namespaces_source": "frontend/static/js/lunar.js I18n messages (6tail)",
@@ -17,9 +17,10 @@
       "misc 人工审校覆盖（12 条）",
       "solar_terms 人工审校覆盖（24 条）",
       "western_zodiac 人工审校覆盖（12 条）",
-      "nayin 人工审校覆盖（29 条）"
+      "nayin 人工审校覆盖（29 条）",
+      "gods 人工审校覆盖（20 条）"
     ],
-    "gods_policy": "D6：神煞音译+解释，本表 gods 留空，运行时由 huangli_english.py fallback",
+    "gods_policy": "D6 方案 C：20 个常见神煞使用人工审校英文名、拼音和解释；其余神煞运行时隐藏并记录 translation_missing",
     "missing_namespaces": [
       "d (农历日)",
       "m (农历月)",
@@ -49,7 +50,8 @@
       "western_zodiac": 12,
       "rokuyo": 6,
       "misc": 12,
-      "moon_phases": 16
+      "moon_phases": 16,
+      "gods": 20
     }
   },
   "activity_categories": {
@@ -843,5 +845,106 @@
     "晓": "Waning Crescent",
     "晦": "Dark Moon"
   },
-  "gods": {}
+  "gods": {
+    "天恩": {
+      "name": "Heavenly Grace",
+      "pinyin": "Tiān Ēn",
+      "explanation": "Auspicious spirit of heavenly favor and blessing"
+    },
+    "五虚": {
+      "name": "Five Voids",
+      "pinyin": "Wǔ Xū",
+      "explanation": "Inauspicious spirit of emptiness; unfavorable for substantial commitments"
+    },
+    "不将": {
+      "name": "No Clash",
+      "pinyin": "Bù Jiāng",
+      "explanation": "Auspicious spirit indicating absence of conflict; favorable for unions"
+    },
+    "鸣吠": {
+      "name": "Crowing & Barking",
+      "pinyin": "Míng Fèi",
+      "explanation": "Auspicious spirit associated with vitality; favorable for construction"
+    },
+    "母仓": {
+      "name": "Mother Granary",
+      "pinyin": "Mǔ Cāng",
+      "explanation": "Auspicious spirit of nurturing abundance; favorable for storage and provision"
+    },
+    "四相": {
+      "name": "Four Aspects",
+      "pinyin": "Sì Xiàng",
+      "explanation": "Auspicious spirit of balanced conditions; favorable for new endeavors"
+    },
+    "鸣吠对": {
+      "name": "Crowing & Barking Pair",
+      "pinyin": "Míng Fèi Duì",
+      "explanation": "Auspicious spirit complementing vitality; favorable for renovations"
+    },
+    "五合": {
+      "name": "Five Harmonies",
+      "pinyin": "Wǔ Hé",
+      "explanation": "Auspicious spirit of harmonious union; favorable for partnerships"
+    },
+    "重日": {
+      "name": "Repeated Day",
+      "pinyin": "Chóng Rì",
+      "explanation": "Inauspicious spirit of duplication; caution against repeated setbacks"
+    },
+    "三合": {
+      "name": "Three Harmonies",
+      "pinyin": "Sān Hé",
+      "explanation": "Auspicious spirit of tri-fold harmony; favorable for alliances and unions"
+    },
+    "五离": {
+      "name": "Five Separations",
+      "pinyin": "Wǔ Lí",
+      "explanation": "Inauspicious spirit of disunion; unfavorable for unions and partnerships"
+    },
+    "除神": {
+      "name": "Removing Spirit",
+      "pinyin": "Chú Shén",
+      "explanation": "Auspicious spirit of cleansing; favorable for clearing away the old"
+    },
+    "月空": {
+      "name": "Lunar Void",
+      "pinyin": "Yuè Kōng",
+      "explanation": "Auspicious spirit of open lunar potential; favorable for planning"
+    },
+    "月德合": {
+      "name": "Lunar Virtue Combination",
+      "pinyin": "Yuè Dé Hé",
+      "explanation": "Auspicious spirit combining lunar virtue; favorable for virtuous undertakings"
+    },
+    "月德": {
+      "name": "Lunar Virtue",
+      "pinyin": "Yuè Dé",
+      "explanation": "Auspicious spirit of lunar blessing; favorable for benevolent activities"
+    },
+    "复日": {
+      "name": "Returning Day",
+      "pinyin": "Fù Rì",
+      "explanation": "Inauspicious spirit of recurrence; caution against matters reopening"
+    },
+    "月恩": {
+      "name": "Lunar Grace",
+      "pinyin": "Yuè Ēn",
+      "explanation": "Auspicious spirit of lunar favor; favorable for seeking support"
+    },
+    "王日": {
+      "name": "Sovereign Day",
+      "pinyin": "Wáng Rì",
+      "explanation": "Auspicious spirit of authority; favorable for official matters"
+    },
+    "阳德": {
+      "name": "Yang Virtue",
+      "pinyin": "Yáng Dé",
+      "explanation": "Auspicious spirit of yang blessing; favorable for outward endeavors"
+    },
+    "普护": {
+      "name": "Universal Protection",
+      "pinyin": "Pǔ Hù",
+      "explanation": "Auspicious spirit of encompassing safeguard; favorable for seeking shelter"
+    }
+  }
 }

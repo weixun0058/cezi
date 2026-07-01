@@ -344,7 +344,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         });
     });
 
-    async function typeWriter(element, text, chunkSize = 1, interval = 50) {
+    async function typeWriter(element, text, chunkSize = 3, interval = 45) {
         const characters = Array.from(text || '');
         element.textContent = '';
 

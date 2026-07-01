@@ -67,6 +67,12 @@ class Config:
     ENGLISH_SIGNS_PATH = _path_from_env(
         "ENGLISH_SIGNS_PATH", "data/content/oracle_signs_en.json"
     )
+    HUANGLI_TERMS_EN_PATH = _path_from_env(
+        "HUANGLI_TERMS_EN_PATH", "data/content/huangli_terms_en.json"
+    )
+    HUANGLI_SCENARIOS_EN_PATH = _path_from_env(
+        "HUANGLI_SCENARIOS_EN_PATH", "data/content/huangli_scenarios_en.json"
+    )
 
 
 class TestConfig(Config):
