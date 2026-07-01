@@ -109,8 +109,13 @@
      */
     function setStatus(statusEl, message, type) {
         if (!statusEl) return;
-        statusEl.textContent = message || '';
+        const statusType = type || '';
+        const statusMessage = message || '';
+        statusEl.textContent = statusType === 'error' && statusMessage
+            ? `Error: ${statusMessage}`
+            : statusMessage;
         statusEl.dataset.type = type || '';
+        statusEl.setAttribute('role', statusType === 'error' ? 'alert' : 'status');
     }
 
     /**

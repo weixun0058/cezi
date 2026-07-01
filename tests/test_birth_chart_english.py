@@ -9,12 +9,14 @@
 
 依据：docs/plans/2026-06-27-english-site-execution-plan.md W6.1-W6.5
       docs/business/wise-oracle-ai-prompt-boundaries.md（W0.3 红线）
-      D14（加载时剔除 fortune/gua_type）、D16（不展示吉凶/卦属）、D17（interpretation 非 prediction）
+      D14（加载时剔除 fortune/gua_type）、D16（不展示吉凶/卦属）、
+      D17（interpretation 非 prediction）
 """
 
 from __future__ import annotations
 
 import json
+import re
 from types import SimpleNamespace
 
 import pytest
@@ -36,7 +38,6 @@ from zhugeshensuan.birth_chart_english import (
 )
 from zhugeshensuan.lunming import LunMing
 
-
 # ============================================================
 # 测试用 AI 报告（mock 返回）
 # ============================================================
@@ -45,9 +46,18 @@ REPORT_EN = {
     "chart_summary": "This chart presents a cultural pattern of steady accumulation.",
     "element_balance": "Metal and Fire are prominent, inviting reflection on focus.",
     "reflection_points": [
-        {"label": "Career", "text": "For career, this pattern suggests considering long-term foundations."},
-        {"label": "Relationships", "text": "In relationships, this pattern invites reflection on clear communication."},
-        {"label": "Personal Growth", "text": "This pattern is traditionally associated with patient self-development."},
+        {
+            "label": "Career",
+            "text": "For career, this pattern suggests considering long-term foundations.",
+        },
+        {
+            "label": "Relationships",
+            "text": "In relationships, this pattern invites reflection on clear communication.",
+        },
+        {
+            "label": "Personal Growth",
+            "text": "This pattern is traditionally associated with patient self-development.",
+        },
     ],
     "cautions": [
         "This pattern invites reflection on patience rather than expecting quick results.",
@@ -154,20 +164,24 @@ class TestNormalizePayload:
         assert result["gender"] == "男"
 
     def test_birth_time_unknown_clears_time(self):
-        result = _normalize_payload({
-            "gender": "female",
-            "birth_date": "1990-01-01",
-            "birth_time": "14:30",
-            "birth_time_unknown": True,
-        })
+        result = _normalize_payload(
+            {
+                "gender": "female",
+                "birth_date": "1990-01-01",
+                "birth_time": "14:30",
+                "birth_time_unknown": True,
+            }
+        )
         assert result["birth_time"] == ""
 
     def test_birth_time_preserved_when_known(self):
-        result = _normalize_payload({
-            "gender": "female",
-            "birth_date": "1990-01-01",
-            "birth_time": "14:30",
-        })
+        result = _normalize_payload(
+            {
+                "gender": "female",
+                "birth_date": "1990-01-01",
+                "birth_time": "14:30",
+            }
+        )
         assert result["birth_time"] == "14:30"
 
 
@@ -214,6 +228,15 @@ class TestBuildEnglishChartSummary:
         assert summary["time_unknown"] is True
         assert summary["time_pillar"] is None
         assert len(result["limitations"]) > 0  # 含未知时辰提示
+        assert result["limitations"] == [
+            "Birth time is unknown, so the time pillar and dependent details are omitted."
+        ]
+        assert not re.search(r"[\u4e00-\u9fff]", result["chart_summary"]["lunar_date"])
+        assert not re.search(r"[\u4e00-\u9fff]", result["limitations"][0])
+
+    def test_lunar_date_is_english(self):
+        result = build_english_chart_summary(self.PAYLOAD)
+        assert result["chart_summary"]["lunar_date"] == ("Lunar Year 1990, Month 4, Day 7")
 
     def test_element_balance_english_keys(self):
         result = build_english_chart_summary(self.PAYLOAD)
@@ -239,14 +262,18 @@ class TestBuildEnglishPrompt:
     """英文 AI prompt 构建。"""
 
     def test_contains_red_lines(self):
-        prompt = build_english_prompt({"pillars": {"year": "庚午"}}, {"name": "Alex", "gender": "male"})
+        prompt = build_english_prompt(
+            {"pillars": {"year": "庚午"}}, {"name": "Alex", "gender": "male"}
+        )
         low = prompt.lower()
         assert "red line" in low
         assert "medical" in low
         assert "fortune grades" in low or "hexagram" in low
 
     def test_contains_chart_data(self):
-        prompt = build_english_prompt({"pillars": {"year": "庚午"}}, {"name": "Alex", "gender": "male"})
+        prompt = build_english_prompt(
+            {"pillars": {"year": "庚午"}}, {"name": "Alex", "gender": "male"}
+        )
         assert "庚午" in prompt  # 中文命盘数据保留
         assert "Alex" in prompt
 
@@ -301,41 +328,49 @@ class TestParseAiReport:
             _parse_ai_report(json.dumps(incomplete))
 
     def test_parse_caution_as_string(self):
-        raw = json.dumps({
-            "chart_summary": "Overview",
-            "reflection_points": [{"label": "Career", "text": "Reflect on career."}],
-            "cautions": ["Caution one", "Caution two"],
-        })
+        raw = json.dumps(
+            {
+                "chart_summary": "Overview",
+                "reflection_points": [{"label": "Career", "text": "Reflect on career."}],
+                "cautions": ["Caution one", "Caution two"],
+            }
+        )
         result = _parse_ai_report(raw)
         assert result["cautions"] == ["Caution one", "Caution two"]
 
     def test_parse_caution_as_dict_with_text(self):
-        raw = json.dumps({
-            "chart_summary": "Overview",
-            "reflection_points": [{"label": "Career", "text": "Reflect."}],
-            "cautions": [{"text": "Dict caution"}],
-        })
+        raw = json.dumps(
+            {
+                "chart_summary": "Overview",
+                "reflection_points": [{"label": "Career", "text": "Reflect."}],
+                "cautions": [{"text": "Dict caution"}],
+            }
+        )
         result = _parse_ai_report(raw)
         assert result["cautions"] == ["Dict caution"]
 
     def test_parse_limits_reflection_points_to_four(self):
-        raw = json.dumps({
-            "chart_summary": "Overview",
-            "reflection_points": [{"label": f"L{i}", "text": f"T{i}"} for i in range(6)],
-            "cautions": [],
-        })
+        raw = json.dumps(
+            {
+                "chart_summary": "Overview",
+                "reflection_points": [{"label": f"L{i}", "text": f"T{i}"} for i in range(6)],
+                "cautions": [],
+            }
+        )
         result = _parse_ai_report(raw)
         assert len(result["reflection_points"]) == 4
 
     def test_parse_empty_reflection_text_skipped(self):
-        raw = json.dumps({
-            "chart_summary": "Overview",
-            "reflection_points": [
-                {"label": "Keep", "text": "Valid"},
-                {"label": "Skip", "text": ""},
-            ],
-            "cautions": [],
-        })
+        raw = json.dumps(
+            {
+                "chart_summary": "Overview",
+                "reflection_points": [
+                    {"label": "Keep", "text": "Valid"},
+                    {"label": "Skip", "text": ""},
+                ],
+                "cautions": [],
+            }
+        )
         result = _parse_ai_report(raw)
         assert len(result["reflection_points"]) == 1
         assert result["reflection_points"][0]["label"] == "Keep"
@@ -404,11 +439,13 @@ class TestBirthChartEnglishService:
 
     def test_analyze_invalid_birth_data_raises(self):
         with pytest.raises(BaziInputError):
-            _make_service().analyze({
-                "name": "Alex",
-                "gender": "male",
-                "birth_date": "not-a-date",
-            })
+            _make_service().analyze(
+                {
+                    "name": "Alex",
+                    "gender": "male",
+                    "birth_date": "not-a-date",
+                }
+            )
 
     def test_ai_client_uses_json_object_response_format(self):
         """验证 AI 调用要求 json_object 响应格式且流式。"""
@@ -432,54 +469,72 @@ class TestBirthChartEnApiContract:
     """
 
     def test_analyze_missing_name(self, client):
-        r = client.post("/api/en/birth-chart/analyze", json={
-            "birth_date": "1990-05-01",
-            "gender": "male",
-        })
+        r = client.post(
+            "/api/en/birth-chart/analyze",
+            json={
+                "birth_date": "1990-05-01",
+                "gender": "male",
+            },
+        )
         assert r.status_code == 400
         assert r.get_json()["error"]["code"] == "INVALID_BIRTH_DATA"
 
     def test_analyze_empty_name(self, client):
-        r = client.post("/api/en/birth-chart/analyze", json={
-            "name": "   ",
-            "birth_date": "1990-05-01",
-            "gender": "male",
-        })
+        r = client.post(
+            "/api/en/birth-chart/analyze",
+            json={
+                "name": "   ",
+                "birth_date": "1990-05-01",
+                "gender": "male",
+            },
+        )
         assert r.status_code == 400
         assert r.get_json()["error"]["code"] == "INVALID_BIRTH_DATA"
 
     def test_analyze_name_too_long(self, client):
-        r = client.post("/api/en/birth-chart/analyze", json={
-            "name": "x" * 31,
-            "birth_date": "1990-05-01",
-            "gender": "male",
-        })
+        r = client.post(
+            "/api/en/birth-chart/analyze",
+            json={
+                "name": "x" * 31,
+                "birth_date": "1990-05-01",
+                "gender": "male",
+            },
+        )
         assert r.status_code == 400
 
     def test_analyze_missing_birth_date(self, client):
-        r = client.post("/api/en/birth-chart/analyze", json={
-            "name": "Alex",
-            "gender": "male",
-        })
+        r = client.post(
+            "/api/en/birth-chart/analyze",
+            json={
+                "name": "Alex",
+                "gender": "male",
+            },
+        )
         assert r.status_code == 400
         assert r.get_json()["error"]["code"] == "INVALID_BIRTH_DATA"
 
     def test_analyze_invalid_birth_time_type(self, client):
-        r = client.post("/api/en/birth-chart/analyze", json={
-            "name": "Alex",
-            "birth_date": "1990-05-01",
-            "gender": "male",
-            "birth_time": 123,  # 非字符串
-        })
+        r = client.post(
+            "/api/en/birth-chart/analyze",
+            json={
+                "name": "Alex",
+                "birth_date": "1990-05-01",
+                "gender": "male",
+                "birth_time": 123,  # 非字符串
+            },
+        )
         assert r.status_code == 400
 
     def test_analyze_invalid_birth_time_unknown_type(self, client):
-        r = client.post("/api/en/birth-chart/analyze", json={
-            "name": "Alex",
-            "birth_date": "1990-05-01",
-            "gender": "male",
-            "birth_time_unknown": "yes",  # 非布尔
-        })
+        r = client.post(
+            "/api/en/birth-chart/analyze",
+            json={
+                "name": "Alex",
+                "birth_date": "1990-05-01",
+                "gender": "male",
+                "birth_time_unknown": "yes",  # 非布尔
+            },
+        )
         assert r.status_code == 400
 
     def test_analyze_non_json_body(self, client):
@@ -493,32 +548,41 @@ class TestBirthChartEnApiContract:
 
     def test_analyze_invalid_birth_date(self, client):
         """非法日期格式 → 400（bazi_service 抛 BaziInputError）。"""
-        r = client.post("/api/en/birth-chart/analyze", json={
-            "name": "Alex",
-            "birth_date": "not-a-date",
-            "gender": "male",
-        })
+        r = client.post(
+            "/api/en/birth-chart/analyze",
+            json={
+                "name": "Alex",
+                "birth_date": "not-a-date",
+                "gender": "male",
+            },
+        )
         assert r.status_code == 400
         assert r.get_json()["error"]["code"] == "INVALID_BIRTH_DATA"
 
     def test_analyze_valid_payload_no_key(self, client):
         """合法载荷但无 AI key → 503 MODEL_NOT_CONFIGURED。"""
-        r = client.post("/api/en/birth-chart/analyze", json={
-            "name": "Alex",
-            "birth_date": "1990-05-01",
-            "birth_time": "14:30",
-            "gender": "male",
-        })
+        r = client.post(
+            "/api/en/birth-chart/analyze",
+            json={
+                "name": "Alex",
+                "birth_date": "1990-05-01",
+                "birth_time": "14:30",
+                "gender": "male",
+            },
+        )
         assert r.status_code == 503
         assert r.get_json()["error"]["code"] == "MODEL_NOT_CONFIGURED"
 
     def test_stream_valid_payload_no_key(self, client):
         """stream 合法载荷无 key → 200 SSE，含 chart/error/done。"""
-        r = client.post("/api/en/birth-chart/stream", json={
-            "name": "Alex",
-            "birth_date": "1990-05-01",
-            "gender": "female",
-        })
+        r = client.post(
+            "/api/en/birth-chart/stream",
+            json={
+                "name": "Alex",
+                "birth_date": "1990-05-01",
+                "gender": "female",
+            },
+        )
         assert r.status_code == 200
         assert "text/event-stream" in r.headers["Content-Type"]
         text = r.data.decode("utf-8")
@@ -527,19 +591,25 @@ class TestBirthChartEnApiContract:
         assert '"type": "done"' in text  # 终止帧
 
     def test_stream_missing_name(self, client):
-        r = client.post("/api/en/birth-chart/stream", json={
-            "birth_date": "1990-05-01",
-        })
+        r = client.post(
+            "/api/en/birth-chart/stream",
+            json={
+                "birth_date": "1990-05-01",
+            },
+        )
         assert r.status_code == 400
         assert r.get_json()["error"]["code"] == "INVALID_BIRTH_DATA"
 
     def test_stream_chart_event_english(self, client):
         """stream 的 chart 事件应为英文化基础盘。"""
-        r = client.post("/api/en/birth-chart/stream", json={
-            "name": "Alex",
-            "birth_date": "1990-05-01",
-            "gender": "male",
-        })
+        r = client.post(
+            "/api/en/birth-chart/stream",
+            json={
+                "name": "Alex",
+                "birth_date": "1990-05-01",
+                "gender": "male",
+            },
+        )
         text = r.data.decode("utf-8")
         assert "Horse" in text  # 英文生肖
         assert "Geng-Wu" in text  # 英文四柱
@@ -547,11 +617,14 @@ class TestBirthChartEnApiContract:
 
     def test_stream_no_fortune_no_gua_type(self, client):
         """D14/D16：流内容不含 fortune/gua_type。"""
-        r = client.post("/api/en/birth-chart/stream", json={
-            "name": "Alex",
-            "birth_date": "1990-05-01",
-            "gender": "male",
-        })
+        r = client.post(
+            "/api/en/birth-chart/stream",
+            json={
+                "name": "Alex",
+                "birth_date": "1990-05-01",
+                "gender": "male",
+            },
+        )
         text = r.data.decode("utf-8").lower()
         assert "fortune" not in text
         assert "gua_type" not in text
@@ -566,12 +639,15 @@ class TestBirthChartEnApiWithMockAi:
         monkeypatch.setattr(
             service, "_generate_report", lambda prompt: _parse_ai_report(json.dumps(REPORT_EN))
         )
-        r = client.post("/api/en/birth-chart/analyze", json={
-            "name": "Alex",
-            "birth_date": "1990-05-01",
-            "birth_time": "14:30",
-            "gender": "male",
-        })
+        r = client.post(
+            "/api/en/birth-chart/analyze",
+            json={
+                "name": "Alex",
+                "birth_date": "1990-05-01",
+                "birth_time": "14:30",
+                "gender": "male",
+            },
+        )
         assert r.status_code == 200
         data = r.get_json()["data"]
         assert "chart_summary" in data
@@ -592,12 +668,15 @@ class TestBirthChartEnApiWithMockAi:
         monkeypatch.setattr(
             service, "_generate_report", lambda prompt: _parse_ai_report(json.dumps(REPORT_EN))
         )
-        r = client.post("/api/en/birth-chart/stream", json={
-            "name": "Alex",
-            "birth_date": "1990-05-01",
-            "birth_time": "14:30",
-            "gender": "male",
-        })
+        r = client.post(
+            "/api/en/birth-chart/stream",
+            json={
+                "name": "Alex",
+                "birth_date": "1990-05-01",
+                "birth_time": "14:30",
+                "gender": "male",
+            },
+        )
         assert r.status_code == 200
         text = r.data.decode("utf-8")
         assert '"type": "chart"' in text

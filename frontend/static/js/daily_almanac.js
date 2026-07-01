@@ -115,6 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const loadAlmanac = async () => {
         status.textContent = 'Loading the almanac…';
         status.classList.remove('is-error');
+        status.setAttribute('role', 'status');
         results.hidden = true;
 
         const params = new URLSearchParams({ date: dateInput.value });
@@ -132,8 +133,9 @@ document.addEventListener('DOMContentLoaded', () => {
             status.textContent = '';
             results.hidden = false;
         } catch (error) {
-            status.textContent = error.message || 'The almanac could not be loaded.';
+            status.textContent = `Error: ${error.message || 'The almanac could not be loaded.'}`;
             status.classList.add('is-error');
+            status.setAttribute('role', 'alert');
         }
     };
 

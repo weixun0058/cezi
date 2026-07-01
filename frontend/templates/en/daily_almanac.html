@@ -15,13 +15,13 @@
     </div>
 
     <form class="en-almanac-controls" data-almanac-form>
-        <label>
+        <label for="almanac-date">
             Date
-            <input type="date" name="date" data-almanac-date required>
+            <input type="date" id="almanac-date" name="date" data-almanac-date required>
         </label>
-        <label>
+        <label for="almanac-scenario">
             Focus
-            <select name="scenario" data-almanac-scenario>
+            <select id="almanac-scenario" name="scenario" data-almanac-scenario>
                 <option value="">General overview</option>
                 <option value="wedding">Wedding</option>
                 <option value="moving">Moving Home</option>
@@ -34,7 +34,7 @@
         <button type="submit" class="en-btn">View Almanac</button>
     </form>
 
-    <div class="en-almanac-status" data-almanac-status aria-live="polite">
+    <div class="en-almanac-status" data-almanac-status role="status" aria-live="polite">
         Loading the almanac…
     </div>
 

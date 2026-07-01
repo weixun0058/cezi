@@ -12,13 +12,13 @@
     </p>
 
     <div class="en-mode-tabs" role="tablist">
-        <button type="button" class="en-mode-tab is-active" data-mode="words" role="tab" aria-selected="true">Three Words</button>
-        <button type="button" class="en-mode-tab" data-mode="numbers" role="tab" aria-selected="false">Three Numbers</button>
+        <button type="button" id="oracle-tab-words" class="en-mode-tab is-active" data-mode="words" role="tab" aria-selected="true" aria-controls="oracle-panel-words" tabindex="0">Three Words</button>
+        <button type="button" id="oracle-tab-numbers" class="en-mode-tab" data-mode="numbers" role="tab" aria-selected="false" aria-controls="oracle-panel-numbers" tabindex="-1">Three Numbers</button>
     </div>
 
     <form class="en-form" id="oracle-form" novalidate>
         <!-- Three Words 模式 -->
-        <div class="en-oracle-mode-panel is-active" data-panel="words">
+        <div class="en-oracle-mode-panel is-active" id="oracle-panel-words" data-panel="words" role="tabpanel" aria-labelledby="oracle-tab-words">
             <div class="en-words-row">
                 <div class="en-field">
                     <label for="word-1">First word</label>
@@ -36,7 +36,7 @@
         </div>
 
         <!-- Three Numbers 模式 -->
-        <div class="en-oracle-mode-panel" data-panel="numbers">
+        <div class="en-oracle-mode-panel" id="oracle-panel-numbers" data-panel="numbers" role="tabpanel" aria-labelledby="oracle-tab-numbers" hidden>
             <div class="en-numbers-row">
                 <div class="en-field">
                     <label for="num-1">First number</label>

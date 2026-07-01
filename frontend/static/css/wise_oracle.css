@@ -28,6 +28,28 @@
 
 * { box-sizing: border-box; }
 
+.en-skip-link {
+    position: fixed;
+    top: 0.5rem;
+    left: 0.5rem;
+    z-index: 1000;
+    padding: 0.65rem 0.9rem;
+    border-radius: var(--wo-radius);
+    background: var(--wo-ink);
+    color: #fff;
+    transform: translateY(-150%);
+}
+.en-skip-link:focus { transform: translateY(0); }
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+input:focus-visible,
+select:focus-visible {
+    outline: 3px solid #2f6f9f;
+    outline-offset: 3px;
+}
+
 html, body {
     margin: 0;
     padding: 0;
@@ -185,7 +207,10 @@ a:hover { border-bottom-color: var(--wo-accent); }
 .en-tool-card p { color: var(--wo-text-soft); flex-grow: 1; }
 
 .en-btn {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
     background: var(--wo-accent);
     color: #fff;
     padding: 0.6rem 1.3rem;
@@ -251,9 +276,19 @@ a:hover { border-bottom-color: var(--wo-accent); }
 }
 .en-field input:focus,
 .en-field select:focus {
-    outline: none;
     border-color: var(--wo-accent-soft);
     box-shadow: 0 0 0 3px rgba(138, 51, 36, 0.1);
+}
+
+.en-fieldset {
+    min-width: 0;
+    padding: 0;
+    border: 0;
+}
+.en-fieldset legend {
+    margin-bottom: 0.35rem;
+    font-weight: 500;
+    color: var(--wo-ink);
 }
 
 .en-field-row {
@@ -268,6 +303,11 @@ a:hover { border-bottom-color: var(--wo-accent); }
     gap: 0.5rem;
 }
 .en-checkbox-field input { width: auto; }
+.en-checkbox-field label {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+}
 
 .en-mode-tabs {
     display: flex;
@@ -284,6 +324,7 @@ a:hover { border-bottom-color: var(--wo-accent); }
     font-family: var(--wo-font-sans);
     color: var(--wo-text-soft);
     cursor: pointer;
+    min-height: 44px;
     border-bottom: 2px solid transparent;
     margin-bottom: -1px;
     transition: color 0.15s ease, border-color 0.15s ease;
@@ -635,7 +676,7 @@ a:hover { border-bottom-color: var(--wo-accent); }
     .en-nav-links { gap: 1rem; font-size: 0.9rem; }
     .en-main { padding: 1.5rem 1rem 3rem; }
     .en-field-row { grid-template-columns: 1fr; }
-    .en-words-row, .en-numbers-row { gap: 0.5rem; }
+    .en-words-row, .en-numbers-row { grid-template-columns: 1fr; gap: 0.5rem; }
     .en-bc-pillars { grid-template-columns: repeat(2, 1fr); }
 }
 .en-almanac {

@@ -644,6 +644,13 @@ pytest tests/test_frontend_contract.py tests/test_english_frontend_contract.py t
 
 ---
 
+**W7.8 / W7.9 完成状态（2026-07-01）：** 已完成全英文站 1440px/390px
+响应式、控件语义、键盘操作、六场景、出生时间未知和 API 失败验收；修复 Birth Chart
+中文泄漏。验收证据见 `docs/reviews/2026-07-01-w7-8-w7-9-english-site-acceptance.md`。
+另发现英文签文正文仍存在 D16/健康建议边界风险，已转为 W2 内容重审事项。
+
+---
+
 ### W8：SEO / 合规 / 商业化预埋
 
 **目标：** sitemap、robots、文章系统、赞助/付费墙/广告位占位（默认关闭）。

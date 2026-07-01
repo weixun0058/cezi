@@ -33,20 +33,36 @@ document.addEventListener('DOMContentLoaded', () => {
     // 模式切换
     // ============================================================
 
-    els.tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
+    function activateTab(tab, moveFocus = false) {
             const mode = tab.dataset.mode;
-            if (mode === currentMode) return;
             currentMode = mode;
             els.tabs.forEach(t => {
                 const active = t === tab;
                 t.classList.toggle('is-active', active);
                 t.setAttribute('aria-selected', active ? 'true' : 'false');
+                t.tabIndex = active ? 0 : -1;
             });
             els.panels.forEach(p => {
-                p.classList.toggle('is-active', p.dataset.panel === mode);
+                const active = p.dataset.panel === mode;
+                p.classList.toggle('is-active', active);
+                p.hidden = !active;
             });
             WO.setStatus(els.status, '');
+            if (moveFocus) tab.focus();
+    }
+
+    els.tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => activateTab(tab));
+        tab.addEventListener('keydown', event => {
+            const keys = ['ArrowLeft', 'ArrowRight', 'Home', 'End'];
+            if (!keys.includes(event.key)) return;
+            event.preventDefault();
+            let nextIndex = index;
+            if (event.key === 'ArrowLeft') nextIndex = (index - 1 + els.tabs.length) % els.tabs.length;
+            if (event.key === 'ArrowRight') nextIndex = (index + 1) % els.tabs.length;
+            if (event.key === 'Home') nextIndex = 0;
+            if (event.key === 'End') nextIndex = els.tabs.length - 1;
+            activateTab(els.tabs[nextIndex], true);
         });
     });
 

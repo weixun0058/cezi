@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/wise_oracle.css') }}">
 </head>
 <body>
+    <a class="en-skip-link" href="#main-content">Skip to main content</a>
     <header class="en-header">
         <nav class="en-nav">
             <a href="/" class="en-brand">Wise Oracle</a>
@@ -24,7 +25,7 @@
         </nav>
     </header>
 
-    <main class="en-main">
+    <main class="en-main" id="main-content" tabindex="-1">
         {% block content %}{% endblock %}
     </main>
 

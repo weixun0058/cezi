@@ -17,8 +17,12 @@
 from __future__ import annotations
 
 import re
+from pathlib import Path
 
 import pytest
+from bs4 import BeautifulSoup
+
+ROOT = Path(__file__).resolve().parents[1]
 
 
 def _normalize_ws(text: str) -> str:
@@ -111,6 +115,12 @@ def test_base_html_has_responsible_use_footer(client):
     assert "not medical" in body.lower()
 
 
+def test_base_html_has_keyboard_skip_link(client):
+    body = _raw(client, "/")
+    assert 'href="#main-content"' in body
+    assert 'id="main-content"' in body
+
+
 # ============================================================
 # W7.3 首页
 # ============================================================
@@ -156,6 +166,16 @@ def test_ask_oracle_loads_page_js(client):
     assert "ask_oracle_en.js" in body
 
 
+def test_ask_oracle_tabs_have_accessible_relationships(client):
+    soup = BeautifulSoup(_raw(client, "/ask-oracle"), "html.parser")
+    tabs = soup.select('[role="tab"]')
+    panels = soup.select('[role="tabpanel"]')
+    assert len(tabs) == 2
+    assert len(panels) == 2
+    assert {tab["aria-controls"] for tab in tabs} == {panel["id"] for panel in panels}
+    assert {panel["aria-labelledby"] for panel in panels} == {tab["id"] for tab in tabs}
+
+
 def test_ask_oracle_has_guidance_text(client):
     """含引导语 Hold one question quietly in mind。"""
     body = _body(client, "/ask-oracle")
@@ -182,9 +202,9 @@ def test_daily_almanac_is_connected_to_english_api(client):
     body = _body(client, "/daily-almanac")
     raw = _raw(client, "/daily-almanac")
     assert "Coming soon" not in body
-    assert 'data-almanac-form' in raw
-    assert 'data-almanac-date' in raw
-    assert 'data-almanac-scenario' in raw
+    assert "data-almanac-form" in raw
+    assert "data-almanac-date" in raw
+    assert "data-almanac-scenario" in raw
     assert "/static/js/daily_almanac.js" in raw
 
 
@@ -204,6 +224,13 @@ def test_birth_chart_has_time_unknown_checkbox(client):
     body = _raw(client, "/birth-chart-reading")
     assert 'type="checkbox"' in body
     assert "don't know my birth time" in _body(client, "/birth-chart-reading").lower()
+
+
+def test_birth_chart_gender_is_grouped_with_legend(client):
+    soup = BeautifulSoup(_raw(client, "/birth-chart-reading"), "html.parser")
+    fieldset = soup.find("fieldset")
+    assert fieldset is not None
+    assert fieldset.find("legend").get_text(strip=True) == "Gender"
 
 
 def test_birth_chart_has_generate_button(client):
@@ -239,9 +266,7 @@ def test_birth_chart_has_responsible_positioning(client):
 def test_birth_chart_does_not_contain_forbidden_phrases(client, forbidden):
     """W7.6 契约：不出现 fate guarantee / accurate prediction / pay to change your destiny。"""
     body = _body(client, "/birth-chart-reading")
-    assert forbidden not in body.lower(), (
-        f"birth-chart-reading contains forbidden '{forbidden}'"
-    )
+    assert forbidden not in body.lower(), f"birth-chart-reading contains forbidden '{forbidden}'"
 
 
 # ============================================================
@@ -290,3 +315,27 @@ def test_contact_page_has_real_content(client):
     assert "Contact" in body
     assert "@" in body  # 邮箱
     assert "/privacy" in body  # 引用隐私政策
+
+
+@pytest.mark.parametrize(
+    "path",
+    ["/ask-oracle", "/daily-almanac", "/birth-chart-reading"],
+)
+def test_tool_form_controls_have_accessible_labels(client, path):
+    soup = BeautifulSoup(_raw(client, path), "html.parser")
+    for control in soup.select("input, select"):
+        control_id = control.get("id")
+        explicit = control_id and soup.find("label", attrs={"for": control_id})
+        implicit = control.find_parent("label")
+        assert explicit or implicit, f"{path}: unlabeled control {control}"
+
+
+def test_w78_focus_and_mobile_contracts_are_present():
+    css = (ROOT / "frontend/static/css/wise_oracle.css").read_text(encoding="utf-8")
+    oracle_js = (ROOT / "frontend/static/js/ask_oracle_en.js").read_text(encoding="utf-8")
+
+    assert ":focus-visible" in css
+    assert ".en-skip-link:focus" in css
+    assert ".en-words-row, .en-numbers-row { grid-template-columns: 1fr" in css
+    assert "ArrowLeft" in oracle_js
+    assert "ArrowRight" in oracle_js

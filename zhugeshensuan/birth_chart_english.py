@@ -22,54 +22,134 @@ from __future__ import annotations
 
 import json
 import logging
-from typing import Any, Iterator, Optional
+import re
+from collections.abc import Iterator
+from typing import Any
 
-from .bazi_service import BaziInputError, calculate_bazi
-from .lunming import ModelConfigurationError
+from .bazi_service import calculate_bazi
 
 LOGGER = logging.getLogger(__name__)
 
 # 固定免责声明（W0.3 第 1.5 节）
 RESPONSIBLE_USE_TEXT = (
     "This reading is for entertainment, cultural exploration, and self-reflection only. "
-    "Different traditions offer different interpretations; consider this one perspective among many. "
+    "Different traditions offer different interpretations; consider this one perspective "
+    "among many. "
     "Not medical, legal, financial, psychological, or life-critical advice."
 )
 
 # 生肖中文 → 英文
 ZODIAC_EN: dict[str, str] = {
-    "鼠": "Rat", "牛": "Ox", "虎": "Tiger", "兔": "Rabbit",
-    "龙": "Dragon", "蛇": "Snake", "马": "Horse", "羊": "Goat",
-    "猴": "Monkey", "鸡": "Rooster", "狗": "Dog", "猪": "Pig",
+    "鼠": "Rat",
+    "牛": "Ox",
+    "虎": "Tiger",
+    "兔": "Rabbit",
+    "龙": "Dragon",
+    "蛇": "Snake",
+    "马": "Horse",
+    "羊": "Goat",
+    "猴": "Monkey",
+    "鸡": "Rooster",
+    "狗": "Dog",
+    "猪": "Pig",
 }
 
 # 天干中文 → 英文（拼音）
 GAN_EN: dict[str, str] = {
-    "甲": "Jia", "乙": "Yi", "丙": "Bing", "丁": "Ding", "戊": "Wu",
-    "己": "Ji", "庚": "Geng", "辛": "Xin", "壬": "Ren", "癸": "Gui",
+    "甲": "Jia",
+    "乙": "Yi",
+    "丙": "Bing",
+    "丁": "Ding",
+    "戊": "Wu",
+    "己": "Ji",
+    "庚": "Geng",
+    "辛": "Xin",
+    "壬": "Ren",
+    "癸": "Gui",
 }
 
 # 地支中文 → 英文（拼音）
 ZHI_EN: dict[str, str] = {
-    "子": "Zi", "丑": "Chou", "寅": "Yin", "卯": "Mao", "辰": "Chen",
-    "巳": "Si", "午": "Wu", "未": "Wei", "申": "Shen", "酉": "You",
-    "戌": "Xu", "亥": "Hai",
+    "子": "Zi",
+    "丑": "Chou",
+    "寅": "Yin",
+    "卯": "Mao",
+    "辰": "Chen",
+    "巳": "Si",
+    "午": "Wu",
+    "未": "Wei",
+    "申": "Shen",
+    "酉": "You",
+    "戌": "Xu",
+    "亥": "Hai",
 }
 
 # 五行中文 → 英文
 ELEMENT_EN: dict[str, str] = {
-    "金": "Metal", "木": "Wood", "水": "Water", "火": "Fire", "土": "Earth",
+    "金": "Metal",
+    "木": "Wood",
+    "水": "Water",
+    "火": "Fire",
+    "土": "Earth",
 }
 
 # 英文性别 → 中文（bazi_service 要求中文）
 GENDER_ZH: dict[str, str] = {
-    "male": "男", "female": "女",
+    "male": "男",
+    "female": "女",
     # 兼容中文直接传入
-    "男": "男", "女": "女",
+    "男": "男",
+    "女": "女",
 }
 
+CHINESE_DIGIT_EN = {
+    "〇": "0",
+    "零": "0",
+    "一": "1",
+    "二": "2",
+    "三": "3",
+    "四": "4",
+    "五": "5",
+    "六": "6",
+    "七": "7",
+    "八": "8",
+    "九": "9",
+}
+LUNAR_DATE_RE = re.compile(r"(?P<year>.+?)年(?P<leap>闰?)(?P<month>.+?)月(?P<day>.+)$")
 
-def _pillar_to_english(pillar: Optional[str]) -> Optional[str]:
+
+def _chinese_calendar_number(value: str) -> int | None:
+    value = value.removeprefix("初")
+    if value in CHINESE_DIGIT_EN:
+        return int(CHINESE_DIGIT_EN[value])
+    if value == "十":
+        return 10
+    if value.startswith("十"):
+        tail = CHINESE_DIGIT_EN.get(value[1:])
+        return 10 + int(tail) if tail else None
+    if value.startswith("廿"):
+        tail = CHINESE_DIGIT_EN.get(value[1:], "0")
+        return 20 + int(tail)
+    if value.startswith("三十"):
+        tail = CHINESE_DIGIT_EN.get(value[2:], "0")
+        return 30 + int(tail)
+    return None
+
+
+def _lunar_date_to_english(value: str) -> str | None:
+    match = LUNAR_DATE_RE.fullmatch(value or "")
+    if not match:
+        return None
+    year_digits = "".join(CHINESE_DIGIT_EN.get(char, "") for char in match["year"])
+    month = _chinese_calendar_number(match["month"])
+    day = _chinese_calendar_number(match["day"])
+    if len(year_digits) != 4 or month is None or day is None:
+        return None
+    leap = "Leap " if match["leap"] else ""
+    return f"Lunar Year {year_digits}, {leap}Month {month}, Day {day}"
+
+
+def _pillar_to_english(pillar: str | None) -> str | None:
     """四柱中文 → 英文。如 "甲子" → "Jia-Zi"。"""
     if not pillar or len(pillar) != 2:
         return None
@@ -77,14 +157,14 @@ def _pillar_to_english(pillar: Optional[str]) -> Optional[str]:
     return f"{GAN_EN.get(gan, gan)}-{ZHI_EN.get(zhi, zhi)}"
 
 
-def _gan_to_english(gan: Optional[str]) -> Optional[str]:
+def _gan_to_english(gan: str | None) -> str | None:
     """天干中文 → 英文。"""
     if not gan or len(gan) != 1:
         return None
     return GAN_EN.get(gan, gan)
 
 
-def _wu_xing_to_english(value: Optional[str]) -> Optional[str]:
+def _wu_xing_to_english(value: str | None) -> str | None:
     """五行组合中文 → 英文。如 "金木" → "Metal-Wood"。"""
     if not value:
         return None
@@ -129,15 +209,8 @@ def build_english_chart_summary(payload: dict, default_timezone: str = "Asia/Sha
         "time": _pillar_to_english(pillars_zh.get("time")),
     }
 
-    wu_xing_zh = chart["wu_xing"]
-    wu_xing_en = {
-        key: _wu_xing_to_english(value) for key, value in wu_xing_zh.items()
-    }
-
     counts_zh = chart["wu_xing_counts"]
-    element_balance = {
-        ELEMENT_EN.get(elem, elem): count for elem, count in counts_zh.items()
-    }
+    element_balance = {ELEMENT_EN.get(elem, elem): count for elem, count in counts_zh.items()}
 
     zodiac_zh = chart.get("zodiac", "")
     zodiac_en = ZODIAC_EN.get(zodiac_zh, zodiac_zh)
@@ -153,11 +226,15 @@ def build_english_chart_summary(payload: dict, default_timezone: str = "Asia/Sha
             "time_pillar": pillars_en["time"],
             "day_master": day_master_en,
             "zodiac": zodiac_en,
-            "lunar_date": chart.get("calendar", {}).get("lunar_date", ""),
+            "lunar_date": _lunar_date_to_english(chart.get("calendar", {}).get("lunar_date", "")),
             "time_unknown": chart.get("time_unknown", False),
         },
         "element_balance": element_balance,
-        "limitations": chart.get("limitations", []),
+        "limitations": (
+            ["Birth time is unknown, so the time pillar and dependent details are omitted."]
+            if chart.get("time_unknown", False)
+            else []
+        ),
         # 保留中文基础盘供 AI prompt 使用（不暴露给前端）
         "_raw_chart": chart,
     }
@@ -183,23 +260,24 @@ def build_english_prompt(chart_data: dict, payload: dict) -> str:
         "You are a cultural interpreter for traditional Chinese BaZi (Four Pillars) astrology. "
         "Your role is to offer cultural self-reflection prompts, NOT predictions or advice.\n\n"
         "RED LINES (must follow strictly):\n"
-        "- Do NOT output medical, legal, financial, psychological, fertility, death, or disaster statements.\n"
+        "- Do NOT output medical, legal, financial, psychological, fertility, death, "
+        "or disaster statements.\n"
         "- Do NOT use 'will' for life predictions.\n"
         "- Do NOT assign fortune grades or hexagram types.\n"
         "- Use 'traditionally suggests' / 'invites reflection on' / 'one cultural reading is'.\n"
         "- Keep each point concise (40-80 words).\n\n"
         "Return ONLY a JSON object with this exact structure:\n"
         "{\n"
-        "  \"chart_summary\": \"One-paragraph cultural overview of the chart (60-120 words)\",\n"
-        "  \"element_balance\": \"Brief note on the five-element pattern (40-80 words)\",\n"
-        "  \"reflection_points\": [\n"
-        "    {\"label\": \"Career\", \"text\": \"...\"},\n"
-        "    {\"label\": \"Relationships\", \"text\": \"...\"},\n"
-        "    {\"label\": \"Personal Growth\", \"text\": \"...\"}\n"
+        '  "chart_summary": "One-paragraph cultural overview of the chart (60-120 words)",\n'
+        '  "element_balance": "Brief note on the five-element pattern (40-80 words)",\n'
+        '  "reflection_points": [\n'
+        '    {"label": "Career", "text": "..."},\n'
+        '    {"label": "Relationships", "text": "..."},\n'
+        '    {"label": "Personal Growth", "text": "..."}\n'
         "  ],\n"
-        "  \"cautions\": [\n"
-        "    \"Cultural caution 1 (not prediction)\",\n"
-        "    \"Cultural caution 2\"\n"
+        '  "cautions": [\n'
+        '    "Cultural caution 1 (not prediction)",\n'
+        '    "Cultural caution 2"\n'
         "  ]\n"
         "}\n\n"
         "reflection_points must have 2-4 items with labels like Career, Relationships, "
@@ -241,7 +319,11 @@ def _parse_ai_report(raw_response: str) -> dict:
 
     cautions = []
     for item in payload.get("cautions", []):
-        caution_text = _clean(item) if isinstance(item, str) else _clean(item.get("text")) if isinstance(item, dict) else ""
+        caution_text = (
+            _clean(item)
+            if isinstance(item, str)
+            else _clean(item.get("text")) if isinstance(item, dict) else ""
+        )
         if caution_text:
             cautions.append(caution_text)
 
@@ -326,7 +408,8 @@ class BirthChartEnglish:
     def analyze(self, payload: dict) -> dict:
         """完整分析：基础盘 + AI 报告。
 
-        输出：{chart_summary, element_balance, reflection_points, cautions, responsible_use, limitations}
+        输出：chart_summary、element_balance、reflection_points、cautions、
+        responsible_use、limitations
         异常：BaziInputError / ModelConfigurationError / ValueError
         """
         chart_data = self.build_chart_summary(payload)
@@ -348,7 +431,7 @@ class BirthChartEnglish:
 
         事件序列（不含终止帧，由 API 层补 done）：
         - {type: "chart", chart_summary:..., element_balance:..., limitations:...}
-        - {type: "report", chart_summary:..., element_balance:..., reflection_points:..., cautions:...}
+        - report：chart_summary、element_balance、reflection_points、cautions
         - {type: "responsible_use", responsible_use:...}
 
         终止帧 {type: "done", done: true} 由 ``birth_chart_en_api`` 在正常完成
