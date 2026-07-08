@@ -62,18 +62,18 @@
 
 ## 字段翻译规范
 
+**重要**：英文版仅输出 9 字段，**不翻译 fortune / gua_type**（这两项是后世层累造作，非诸葛神算原貌，不展示）。
+
 | 字段 | 中文 | 英文翻译要求 |
 |---|---|---|
-| fortune | 吉凶分类（如"上上签"） | 译为分级标签：Supremely Favorable / Very Favorable / Moderately Favorable / Mixed / Moderately Unfavorable / Unfavorable |
-| gua_type | 卦宫类型 | 保留拼音 + 英文解释，如 "Qian Palace, Qian transforming into Da You" |
-| sign_text | 签文诗 | 诗意翻译，保留意象，4-6 行英文 |
+| sign_text | 签文诗 | 诗意翻译，保留意象，**必须 4 行**（用 \n 分隔），不可合并为散文 |
 | interpretation1 | 解曰 | 简洁解读，2-3 句英文 |
 | career | 事业 | 反思性建议，避免确定性预测 |
 | wealth | 财运 | 反思性建议，强调审慎而非承诺 |
 | love | 爱情 | 反思性建议，避免"注定遇到"等表达 |
 | health | 健康 | **不输出医疗建议**，改为"general well-being reflection" |
 | study | 学业 | 反思性建议，强调努力而非结果保证 |
-| general | 总论 | 整体反思，含 responsible-use 提示 |
+| general | 总论 | 整体反思，末尾附 responsible-use 提示（三选一） |
 
 ## 完整性要求（严格遵守）
 
@@ -131,22 +131,20 @@
 
 ## 输出格式
 
-返回严格的 JSON 数组，每个元素对应一条签文，字段名与输入相同，值为英文翻译：
+返回严格的 JSON 数组，每个元素对应一条签文，**仅 9 字段**（不含 fortune / gua_type）：
 
 ```json
 [
   {
     "sign_number": 1,
-    "fortune": "Supremely Favorable",
-    "gua_type": "Qian Palace, Qian transforming into Da You",
-    "sign_text": "...",
+    "sign_text": "第1行\n第2行\n第3行\n第4行",
     "interpretation1": "...",
     "career": "...",
     "wealth": "...",
     "love": "...",
     "health": "...",
     "study": "...",
-    "general": "..."
+    "general": "...（末尾附 responsible-use 提示）"
   }
 ]
 ```

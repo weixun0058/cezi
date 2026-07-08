@@ -365,3 +365,16 @@
 {"timestamp": "2026-06-29T02:58:54.516884", "level": "sign", "sign_number": 347, "status": "success", "detail": ""}
 {"timestamp": "2026-06-29T02:58:54.519479", "level": "sign", "sign_number": 348, "status": "success", "detail": ""}
 {"timestamp": "2026-06-29T02:58:55.618323", "model": "deepseek-v4-flash", "source_count": 16, "output_count": 16, "source_sign_numbers": [153, 154, 155, 156, 213, 214, 215, 216, 217, 218, 219, 220, 345, 346, 347, 348], "output_sign_numbers": [153, 154, 155, 156, 213, 214, 215, 216, 217, 218, 219, 220, 345, 346, 347, 348], "replaced_sign_numbers": [], "total_after_merge": 384}
+{"timestamp": "2026-07-05T20:07:06.611431", "level": "sign", "sign_number": 96, "status": "success", "detail": ""}
+{"timestamp": "2026-07-05T20:07:06.612285", "level": "sign", "sign_number": 142, "status": "success", "detail": ""}
+{"timestamp": "2026-07-05T20:07:45.168489", "level": "sign", "sign_number": 146, "status": "success", "detail": ""}
+{"timestamp": "2026-07-05T20:07:45.169252", "level": "sign", "sign_number": 260, "status": "success", "detail": ""}
+{"timestamp": "2026-07-05T20:08:16.415143", "level": "sign", "sign_number": 332, "status": "success", "detail": ""}
+{"timestamp": "2026-07-05T20:08:16.457259", "model": "deepseek-v4-flash", "source_count": 5, "output_count": 5, "source_sign_numbers": [96, 142, 146, 260, 332], "output_sign_numbers": [96, 142, 146, 260, 332], "replaced_sign_numbers": [96, 142, 146, 260, 332], "total_after_merge": 384}
+{"timestamp": "2026-07-07T22:24:13.416917", "level": "sign", "sign_number": 96, "status": "success", "detail": ""}
+{"timestamp": "2026-07-07T22:24:36.377435", "level": "sign", "sign_number": 146, "status": "success", "detail": ""}
+{"timestamp": "2026-07-07T22:25:00.980556", "level": "sign", "sign_number": 260, "status": "success", "detail": ""}
+{"timestamp": "2026-07-07T22:25:55.784254", "level": "sign", "sign_number": 332, "status": "success", "detail": ""}
+{"timestamp": "2026-07-07T22:25:55.840541", "model": "deepseek-v4-flash", "source_count": 4, "output_count": 4, "source_sign_numbers": [96, 146, 260, 332], "output_sign_numbers": [96, 146, 260, 332], "replaced_sign_numbers": [96, 146, 260, 332], "total_after_merge": 384}
+{"timestamp": "2026-07-07T22:42:16.186204", "model": "deepseek-v4-flash", "source_count": 1, "output_count": 1, "source_sign_numbers": [142], "output_sign_numbers": [142], "replaced_sign_numbers": [142], "total_after_merge": 384}
+{"timestamp": "2026-07-07T22:42:16.199400", "level": "sign", "sign_number": 142, "status": "success", "detail": ""}

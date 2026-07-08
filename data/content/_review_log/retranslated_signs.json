@@ -1,0 +1,41 @@
+{
+  "description": "补译签记录：因中文签文考据修正后需重新翻译的签",
+  "last_updated": "2026-07-07",
+  "status_definition": {
+    "retranslated": "已重译（未经 Gemini 审查 + 大模型综合评定）",
+    "gemini_reviewed": "Gemini 审查结果已拿到，等待大模型综合评定",
+    "completed": "经过 Gemini 审查 + 大模型综合评定 + 修改 en.json，已定稿"
+  },
+  "retranslated_signs": [
+    {
+      "sign_number": 96,
+      "reason": "中文修正：乡聚首 → 他乡聚首（B类异文）",
+      "status": "retranslated",
+      "note": "故乡↔异乡反转。2026-07-07 重译：从 qwen2.5 现代白话风格统一为 DeepSeek 散文风。待 Gemini 审查 + 大模型综合评定"
+    },
+    {
+      "sign_number": 142,
+      "reason": "中文修正：出战时 → 出战征，获馈 → 获丑（B类异文）",
+      "status": "completed",
+      "note": "时机→征伐；获赏→俘获反转。2026-07-07：通过 reprocess_single_sign.py 完整复检 + Gemini 审查 + 大模型综合评定，已定稿。评定记录见 adjudication_sign_142.md"
+    },
+    {
+      "sign_number": 146,
+      "reason": "中文修正：花开春又离 → 花开春又逢（A类异文）",
+      "status": "retranslated",
+      "note": "离去↔重逢反转。2026-07-07 重译：从 qwen2.5 现代白话风格统一为 DeepSeek 散文风。待 Gemini 审查 + 大模型综合评定"
+    },
+    {
+      "sign_number": 260,
+      "reason": "中文修正（已撤销重译）：保留'免'字",
+      "status": "retranslated",
+      "note": "用户2026-07-05决定保留原文'轮回不能免，永落深坑堑'。2026-07-07 重译：从 qwen2.5 现代白话风格统一为 DeepSeek 散文风。待 Gemini 审查 + 大模型综合评定"
+    },
+    {
+      "sign_number": 332,
+      "reason": "中文修正：时边多艰 → 时变多艰（B类异文）",
+      "status": "retranslated",
+      "note": "边患→变局产生歧义。2026-07-07 重译：从 qwen2.5 现代白话风格统一为 DeepSeek 散文风。待 Gemini 审查 + 大模型综合评定"
+    }
+  ]
+}

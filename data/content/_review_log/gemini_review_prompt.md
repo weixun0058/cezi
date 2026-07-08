@@ -1,7 +1,7 @@
 # 翻译质量审核任务
 
 请审核以下诸葛神算签文的中英翻译质量。
-共 48 条签文，按签号排列。
+共 24 条签文，按签号排列。
 
 ## 审核要求
 
@@ -11,20 +11,8 @@
 4. 对 Critical 和 High 问题给出具体修改建议
 5. 最后给出整体总结：24 条翻译的总体质量、共性问题、优先修改项
 
-## 吉凶等级对照（审核参考）
-
-- 上上签 → Supremely Favorable
-- 上签 → Very Favorable
-- 中上签 → Moderately Favorable
-- 中签 → Neutral
-- 中下签 → Moderately Unfavorable
-- 下签 → Unfavorable
-- 下下签 → Supremely Unfavorable
-
 ## 字段说明
 
-- `fortune`：吉凶等级
-- `gua_type`：卦属
 - `sign_text`：签文
 - `interpretation1`：整体解读
 - `career`：事业
@@ -36,1105 +24,817 @@
 
 ---
 
-## 第 13 签
-
-⚠️ **缺少英文翻译**
+## 第 141 签
 
 ### 中文原文
 ```json
 {
-  "sign_number": 13,
-  "fortune": "中签",
-  "gua_type": "乾宫 乾变同人",
-  "sign_text": "得意宜逢妇，前程去有缘，利名终有望，三五月团圆。",
-  "interpretation1": "此签坤宫乾变同人，乾为天，同人于野，主刚健中见合作之机。签文‘得意宜逢妇’，‘妇’非专指女性，乃喻柔顺辅助之力，如《易》坤卦‘地道也，妻道也’，暗示当前事态须借他人之助，不可独行。‘前程去有缘’指前路已有机缘牵引，非强求可得。‘利名终有望’言名利虽非速至，但终有结果。‘三五月团圆’以月相盈亏喻时机，三、五月或指农历三月、五月，或指三至五个月后，届时事可圆满。乾卦主健行，同人主协同，故总论宜主动结缘，借力成事，静待时机，忌急躁冒进。",
-  "career": "签文‘得意宜逢妇’喻事业中须借助女性贵人、或柔和协作之力，方得‘得意’。‘前程去有缘’暗示当前岗位或项目已有潜在机遇，但需主动出击，非守株待兔。‘三五月团圆’指秋季前后（农历三、五月对应春夏之交或中秋）或三至五个月内，有晋升、项目落地之象。乾卦刚健，同人卦协同，宜承担需要跨部门协调、对外联络的职务，忌独揽大权、忽视团队。吉在合作，凶在孤傲。",
-  "wealth": "签文‘利名终有望’主财运终有收获，但非速至。‘得意宜逢妇’提示偏财或合作财运与女性、柔性资源相关（如文化、教育、服务行业）。‘三五月团圆’指农历三月、五月或数月后，有进账之机。乾卦主‘元亨利贞’，利守成，不宜高风险投机。同人卦主共享，宜与人合伙，忌独吞利润。正财稳中有升，偏财宜待时。理财宜稳健储蓄，忌贪求快利。",
-  "love": "签文‘得意宜逢妇’直指感情中女性角色关键：单身者易遇温柔知性女子，或通过女性长辈介绍得缘；已有伴侣者，‘妇’喻对方或家庭中女性成员（如母亲、岳母）助力关系发展。‘三五月团圆’主农历三月、五月或数月后感情升温，关系明朗化。乾卦刚健，同人卦和同，宜主动表达、多为对方付出，忌冷战、固执己见。‘前程去有缘’暗示缘分非刻意安排，随缘顺时方吉。",
-  "health": "签文‘三五月团圆’对应月相盈亏，提示关注与月亮周期相关的身体节律，如女性生理期、气血循环。乾卦主头、肺、大肠，同人卦主眼、心。‘得意宜逢妇’‘妇’属坤，坤为腹，注意消化系统。养生宜调和阴阳，作息随四季而动，农历三月、五月前后尤需规律饮食、避免过劳。原有小恙者，此时易康复，但不宜擅自停药。运动宜柔和如太极、散步。",
-  "study": "签文‘利名终有望’主学业努力终有回报，但需经历‘三五月’（约三至五个月）的积累期。‘得意宜逢妇’提示学习上得女性师长、同学帮助，或适合文史、艺术等偏柔科目。乾卦主自强不息，同人卦主切磋交流，宜加入学习小组、多做讨论。考试运中等，稳扎稳打可过关，忌临时抱佛脚。农历三月、五月前后有重要测验或成果显现。",
-  "general": "此签整体为中签，吉中有待时之意。核心意象：‘得意宜逢妇’——借力成事，勿单打独斗；‘三五月团圆’——耐心等待，时机在数月后。关键行动：①主动寻求合作，尤其留意女性贵人；②事业、财运守成为主，不冒进；③感情、健康顺应自然节律。心态提醒：乾卦九三‘君子终日乾乾，夕惕若厉’，虽暂未圆满，但勤勉谨慎，同人相亲，终可‘利名有望’。忌焦急抱怨，宜静待花开。"
+  "sign_number": 141,
+  "sign_text": "暗中防霹雳，猜虑浑无实，转眼黑云收，拥出扶桑日。",
+  "interpretation1": "所耽忧之事均属子虚乌有，很快就能真相大白。",
+  "career": "你当下的事业运势像走在薄雾笼罩的山路上，看似平静却需要留心脚下松动的碎石。那些让你心神不宁的隐患，或许更多是内心投射的虚影。你反复推敲的困境，可能正随着时局流转自然消解。\n\n此刻需要保持清醒的觉察而非焦虑的戒备。把紧绷的神经放松三分，像站在高处的瞭望者，既不过度纠结眼前的云翳，也不盲目期待天光大亮。你积蓄的能量正在等一个合适的契机，如同黎明前最后那段幽暗，最深的黑里往往藏着破晓的开关。\n\n未来三个月会有拨云见日的转机，但这份转机不是等来的恩赐，而是你持续深耕后自然裂开的光缝。注意那些曾被忽略的细微线索，某些看似不相关的人事或许暗藏联结的伏笔。不必急于求成，保持匀速前行的节奏，时机成熟时自会看见转角的开阔。",
+  "wealth": "此刻的你像在雷雨将至的暗夜里行路，心里总绷着根弦防备突如其来的变故。那些翻来覆去的盘算其实没多少依据，不过是自己吓自己。你现在的忧思就像雷声大雨点小的云团，虚张声势却遮不住真正的天光。别被这种不确定感困在原地，只要再往前走几步，那些压在心口的迷雾自然会被风吹散。当你的脚步逐渐稳下来，手里攒着的那点积蓄会像初春的太阳一样，慢慢融化寒冬的冰层。记住别被短期的阴霾蒙住眼，把注意力放在真正能撬动转机的支点上，那些现在看着不起眼的积累，会在某个清晨突然镀上金边。",
+  "love": "这枚签文为你勾勒出一段心境起伏的历程。此刻你或许正被某种隐忧笼罩着，像在寂静里绷紧神经防备未知的惊雷，但那些翻涌的猜忌与疑虑，其实大半是虚妄的幻影。你内心承受的沉重感并非源于真实存在的危机，而是被自己编织的迷雾困住了视线。\n\n不过天地自有转圜的节奏。你很快就会看见那些盘桓在头顶的阴翳，如同被无形的手轻轻拨开。当你的情绪不再被虚妄的想象牵制时，属于你的光芒会穿透云层重新显影——那是种更清醒的温暖，是穿过自我设限后获得的通透感。这并非命运突然施舍的恩典，而是你始终拥有却暂时被遮蔽的生命力。\n\n在情感运势的流转中，你需要警惕的不是外界的风雨，而是内心过度防御的惯性。试着让紧绷的神经松弛些，那些以为会击垮你的惊雷，最终可能只是助你破除执念的鼓点。当你的视线不再被焦虑扭曲，自然会看见云开雾散后的清明天地。",
+  "health": "你的健康运势像山间雾霭笼罩的溪流，表面看似暗涌浮动，实则底下藏着清透的生机。此刻需要警惕的不是外界的风雨，而是内心摇晃的灯盏——那些反复翻涌的猜疑和不安，如同攥在掌心的沙粒，越是用力反而越容易流逝。\n\n身体是座会呼吸的庙宇，此刻正经历檐角风铃的震颤。不必为偶然的杂音困住脚步，也别在未破晓的时辰里数算星辰。那些令你辗转反侧的隐忧，多半是月光投在纱窗上的虚影。当迷雾散尽时你会发现，真正需要修缮的不过是廊柱上细微的裂痕。\n\n黎明前的黑暗最考验守夜人的耐心。保持对身体的敏锐觉察，但别让草木皆兵的警觉变成束缚手脚的绳索。就像候鸟不会因为暂时的逆风折断翅膀，你只需顺着生命本身的韵律调整呼吸，待天光倾泻时，连最顽固的阴翳都会在晨光里消融无形。",
+  "study": "抽到这支签的你，此刻的学业路上或许正经历某种隐忧的笼罩。那些在深夜反复啃噬你内心的焦灼感，像被风吹散的蒲公英种子，看似声势浩大却未必能真正扎根。你或许总在提防着某个突如其来的挫败，但这份警觉背后藏着过度紧绷的弦——就像深夜守候暴雷的人，最后发现不过是远处车灯划破天际。\n\n但别急着把这份沉重装进行囊，你该知道阴翳终将被揉碎在掌心。当晦暗的云层开始松动剥落时，你积攒的每份努力都会成为裂开缝隙的光源。那些看似停滞的积累期，恰如种子在泥土里伸展根系的沉默，待到破土那日，你会发现自己比想象中更能承接阳光的重量。此刻最需要做的，是松开掐住命运咽喉的手指，让呼吸重新流淌在笔尖与书页之间。",
+  "general": "这签文映照的是你当下心境与未来运势的微妙流转。你此刻或许正被某种无形的焦虑笼罩，像走在薄雾弥漫的山路上，总担心下一步会踩空。那些反复揣测的忧虑其实并无根基，只是你内心不安的投影在干扰判断。需要提醒自己：多数困扰并非来自现实困境，而是内心杂念堆叠出的假象。\n\n这种状态下，你容易过度防御，如同总在提防看不见的雷声。但须知过度戒备反而会蒙蔽双眼，让你错判真正的机遇与风险。建议暂时放下反复推演的思绪，像静候潮水退去般等待迷雾散开——那些遮蔽视野的乌云终会消散，届时你将看清真正值得把握的方向。\n\n未来运势的关键在于\"收\"与\"拥\"的转化。当杂念沉淀后，你会获得更清明的决断力，如同云开雾散后自然能望见日出。这段时间适合储备能量而非贸然行动，保持柔韧姿态应对变化，那些曾困扰你的猜疑会在事实显现时自然消解。记住此刻的困顿恰是黎明前的必要暗色，维持内心的笃定比追逐外界的答案更重要。"
+}
+```
+
+### 英文翻译
+```json
+{
+  "sign_number": 141,
+  "sign_text": "Guard against thunder in the dark, / Suspicion and worry leave no mark. / In a blink the black clouds clear, / Ushering forth the sun on Fusang's arc.",
+  "interpretation1": "This reading warns of hidden dangers and baseless suspicions, but assures that the dark clouds will soon clear, revealing the sun. Though obstacles and disputes may arise, a turning point is near if you stay alert and let go of unnecessary worries.",
+  "career": "The 'thunder in the dark' suggests hidden conflicts at work—office politics, project setbacks, or contract disputes. Be thorough with documents and avoid hasty promises. 'Suspicion and worry leave no mark' reminds you not to be swayed by rumors or your own misjudgments; stay calm and refrain from taking the lead in disputes. The shift to Li hexagram indicates that recognition will come after the clouds clear. Focus on deep professional skills, and postpone major career moves until the internal situation clarifies. Avoid aligning with factions or spreading unverified concerns.",
+  "wealth": "The line about baseless suspicion is especially relevant for finances. The hexagram suggests tied-up funds—investments stuck, payments delayed—which may breed anxiety. Instead of chasing rumors, stay composed. 'Guard against thunder in the dark' points to sudden financial losses: traps, guarantees, or theft. The transformed Li hexagram shows outward brightness but inner emptiness; avoid quick profits. Stable savings are advisable. Do not enter partnerships, act as a guarantor, or fall for high-interest schemes.",
+  "love": "The hexagram points to quarrels and suspicion. Baseless jealousy ('suspicion and worry leave no mark') can erode trust. Hidden grievances may explode over a minor issue. Yet 'black clouds clear' offers hope: with open talk, misunderstandings dissolve, and feelings can renew like the sun. For singles, don't let gossip or self-doubt keep you from a good match. For couples, avoid late-night arguments or snooping into privacy; instead, share a daylight outing to brighten the bond.",
+  "health": "'Thunder in the dark' signals a risk of acute illness—possibly heart, liver, or inflammation due to fire and thunder energies. Wind-related issues like migraines or vertigo may also arise. Prevention is key: checkups, seasonal care. 'Suspicion and worry' points to stress affecting digestion and heart yin. The clearing clouds mean that even if illness comes suddenly, recovery can be swift. Morning sun exposure, stretching, and sleeping before midnight help. Watch for facial flushing, palpitations, or sudden spasms.",
+  "study": "Learning requires persistent effort, like biting through a tough object. The 'thunder' warns of unfamiliar exam questions due to neglected details. 'Suspicion and worry' are the student's enemy—anxiety over performance or guessing the test content wastes energy. The shift to Li hexagram brings clarity and literary flair; thorough preparation and composure will open the mind. Use mind maps, focus on liberal arts and classic problem types, and wear bright clothes on exam day. Avoid late-night cramming or comparing progress with others.",
+  "general": "This sign depicts a journey from dark night to dawn. Though you face pressing 'black clouds' and startling 'thunder,' this is not a dead end; the 'suspicions' are mostly self-created. The pain of 'biting through' is necessary to clear obstacles. The transformation to Li hexagram signals that a turning point is near. Three key actions: first, guard against hidden risks by being thorough—when uncertain, act slowly; second, stop baseless doubts, keep a clear mind, and adapt to the moment; third, hold the light of hope—when distressed, remember the sun will emerge. The clouds cannot last forever; patience and clarity are your vessels to cross the difficulty. Reflect on how this resonates with your current situation."
 }
 ```
 
 ---
 
-## 第 14 签
-
-⚠️ **缺少英文翻译**
+## 第 142 签
 
 ### 中文原文
 ```json
 {
-  "sign_number": 14,
-  "fortune": "下下签",
-  "gua_type": "艮宫 睽变大有",
-  "sign_text": "鼎沸起风波，孤舟要渡河，巧中却藏拙，人事转蹉跎。",
-  "interpretation1": "签文以“鼎沸起风波”喻局势骤变，危机四伏，如鼎中水沸，热气蒸腾，令人措手不及。“孤舟要渡河”则言孤立无援，强行推进恐有倾覆之险。后两句“巧中却藏拙，人事转蹉跎”警示：看似机巧的计策实则隐含疏漏，若执意妄动，终致时光空耗，事与愿违。卦属艮宫，艮为山，主阻隔；睽为乖离，离心不合；变大有（火天大有），上离下乾，暗喻光明终将显现，但需经历乖离之困。此签虽为下下，却藏转机——当前宜静不宜动，守拙待时，不可强求。全签核心在于“戒急躁、防巧诈、循自然”，待风波平息、孤舟靠岸，方见明朗。",
-  "career": "签文“鼎沸起风波”喻事业环境动荡，易突发变故，如项目中止、人事冲突或竞争激化。“孤舟要渡河”显示你正孤军奋战，缺乏支撑，切忌贸然扩张或跳槽。艮卦主止，事业上宜暂停新计划，稳固现有基础，避免卷入是非。睽卦主乖离，谨防与合作方意见不合或遭人算计。“巧中却藏拙”提醒：看似高效的手段可能埋下隐患，应回归务实，多做少说。当下时机不利进取，宜韬光养晦，利用空闲梳理流程、积累资源。待卦变大有（丰收），约半年后方可伺机而动。忌：主动争功、投资新领域、与人冲突。",
-  "wealth": "鼎沸风波主财路不稳，易有意外破耗，如投资亏损、合作破裂或政策变动。孤舟渡河喻正财单薄，偏财难求，切忌投机或参与高杠杆项目。艮为止，宜守财而非求财，暂缓大额支出。睽卦凸显财务纠纷，需仔细审查合同，防止账目不清。签文“巧中藏拙”点破：贪图捷径或听信“内部消息”反致损失。财运谷底期间，应聚焦储蓄，减少应酬开支。待大有卦显（约秋冬之际），可考虑稳健理财，如国债、定期。忌：借贷、担保、跟风投资。养生角度，财损伤神，需保持心态平和。",
-  "love": "“鼎沸风波”喻感情世界骤起波澜，争吵或第三者介入，关系紧张如沸鼎。“孤舟要渡河”显孤独感加剧，伴侣间沟通不畅，恐有分离之兆。艮卦主阻，当前宜冷处理，不可冲动决策。睽变大有，先离后合：若单身，此时易遇不合之人，巧言藏拙，需警惕表面热情；若稳定，则忌翻旧账或计较对错，应给彼此空间。下下签非绝路，而是提醒“巧中藏拙”——你自认为的包容可能只是逃避，真诚袒露脆弱反能软化矛盾。建议暂停争执，共做平淡之事（如散步、做饭），以时间换转机。忌：冷战、协议分手、急于确定关系。",
-  "health": "签文“鼎沸风波”对应心脑血管系统，易因情绪波动引发血压升高、心悸或失眠。“孤舟渡河”喻气血运行受阻，需防头晕、乏力或消化紊乱。艮卦属土，通脾胃，风波扰动则中焦不运，宜食清淡易消化之物，忌油腻生冷。睽卦主火水未济，肾水不济心火，易生烦躁，需调节作息，早睡养阴。下下签提示：健康危机多由“心乱”起，养生先养心，每日静坐片刻，戒怒戒忧。“巧中藏拙”警示：勿迷信保健品或偏方，徒增负担。建议日常散步、太极拳，疏通经络。信号：持续胸闷、胃胀需及时检查。",
-  "study": "鼎沸风波喻学业环境嘈杂，或心绪不宁，难以专注。“孤舟要渡河”显孤立无援，复习中缺乏良师益友相助，易生挫败感。艮卦主止，学习进度受阻，不可强行赶工，应调整计划。睽变大有：当前成绩虽不理想，但坚持终有收获。“巧中藏拙”警告：投机取巧（如押题、抄袭）反露底细，当脚踏实地。利文科、历史等需沉淀的科目，不利数理急求速成。考试运欠佳，忌临场冲动改答案。建议：每日清晨朗读诗文以定心，午后复习错题集，避免熬夜。忌：与人攀比进度、考后对答案。",
-  "general": "此签下下，然卦变大有，绝处逢生。核心要义：风波起时勿登船，孤舟停泊待风平。忌心浮气躁、忌巧计投机，宜守拙、宜静观、宜反省。行动建议：1）立即停止所有风险性决策，收缩活动范围；2）排查人际与财务中隐藏的“死角”，提前化解矛盾；3）每日留半小时独处，复盘过往得失，从蹉跎中汲取教训。心态上，当学艮山之沉稳，坚信睽散则大有光明。记住：今日的“拙”是明日的“巧”，不争一时长短，方得长久安宁。"
+  "sign_number": 142,
+  "sign_text": "利在中邦出战征，一番获丑在王庭，凤衔丹诏归阳畔，得享佳名四海荣。",
+  "interpretation1": "此签今人问卜，不易作作妥贴解述，大意为立功异邦，归享盛名。",
+  "career": "你的事业运势正处在一个需要主动把握的转折点上。此时你需要像战士般拿出魄力在核心领域深耕突破，尤其要重视与权威、上层力量的联结——你的努力会在关键场合被看见，并转化为实质性的助力。但要警惕过犹不及的陷阱，若过分追求短期成果，可能会错失更深远的发展机会。\n\n未来可能会迎来重要的认可或晋升契机，这需要你保持足够的定力。获得成功后切忌锋芒毕露，把根基扎稳比表面的荣光更重要。记住真正的成就不是外在的掌声，而是你持续积累的价值厚度。即使暂时未达预期也不必焦虑，此刻的积累都在为将来的质变积蓄能量。保持清醒的自我认知，在机遇与挑战中找到平衡点，事业格局自会逐步打开。",
+  "wealth": "这签文给你的财运指了条暗涌的路——它不是天上掉下的金元宝，而是需要你主动攥在手里的活水。此刻的财运像藏在沙里的金粒，得先弯下腰在熟悉的地界细细筛。别急着往远处张望，身边看似平常的合作、搁置已久的资源里或许正泛着光。但记住，\"出战\"不是莽撞，得先摸清规则——那些能拍板的人、能定调子的场合，可能藏着关键的钥匙。最近若有贵人递来的消息，哪怕听着像老调重弹也别轻易拂了面子，那丹诏般的机遇往往裹在朴素的信封里。等浪潮真正托起你时，别被名声晃了眼，水能载舟亦能覆舟，越是四海传名越要把根基往深里扎，免得成了水上漂的浮萍。",
+  "love": "你心中藏着的那份渴望，正像蛰伏的种子等待破土而出的时机。签文里说的\"出战时\"不是要你横冲直撞，而是在提醒你：最珍贵的机会往往藏在看似平凡的日常里。当你愿意放下患得患失的犹豫，用真诚的态度去面对自己的心意时，那些原本遥不可及的东西会像春日融雪般自然流淌到面前。\n\n有人在意的目光会落在你身上，这份注视或许会让你既欣喜又惶恐。但你要知道，\"获馈\"从来不是天上掉下的礼物，而是你日复一日用真心浇灌出的果实。就像黎明前总要经历最深的夜，感情里最动人的默契，往往诞生于彼此都愿意卸下防备的瞬间。\n\n未来会有个转折点像凤凰衔着诏书般降临，这时候切忌被突如其来的美好冲昏头脑。越是靠近温暖的光源，越要记得保持清醒的脚步。有些缘分需要你既像火焰般热烈追逐，又要像流水般懂得迂回守候。当你的名字被越来越多人提起时，记得留一片纯粹给最初的心动——这才是四海传扬的佳名里，最值得珍藏的本真。",
+  "health": "你此刻的健康运势如同暗流涌动的江河，表面看似平静实则需要谨慎把控方向。签文里的\"利在中邦\"暗示着要把注意力收回到身体内部，像整理战备般调理五脏六腑的平衡，那些潜伏的疲惫或小病痛如同边疆隐患，需及时整顿不可放任。\n\n\"获馈在王庭\"恰似身体发出的警报信号，那些容易被忽视的酸胀、困倦就像宫墙内的密报，都在提醒你要建立更严谨的健康防线。但不必惊慌，这恰是转机的前兆，只要像处理重要国事般认真对待每个身体征兆，反而能抓住调养的关键时机。\n\n后两句昭示着生机正在酝酿，就像春回大地前必有料峭寒风。现阶段需要像凤凰择枝般精准调整作息与饮食结构，把身体这座城池的防御工事修筑牢固。待到阴阳调和之时，自然能收获由内而外的康泰之气，如同丹诏传遍四海，但这份福泽需要你主动耕耘方能真正兑现。\n\n记住此刻既是挑战也是机遇，身体如同待修缮的宫殿，既要警惕年久失修的隐患，更要看到重整旗鼓后的焕然新生。保持如临深渊的审慎，辅以破茧重生的信念，方能让健康根基愈发稳固。",
+  "study": "此刻你正站在人生关键的赛场上，这场较量需要你全神贯注地投入。就像种子必须深埋土壤才能破土而出，你更需要沉下心积累能量。眼前看似重复的日常里，藏着蜕变的密码——专注在每一个知识点的咀嚼，每个解题步骤的打磨，这些不起眼的积累终将汇聚成破局的洪流。\n\n命运对你露出了善意的端倪，但别急着伸手接住天上的果实。真正值得珍藏的收获，永远来自亲手播种的土壤。当考验真正降临时，你要像打磨利剑般锤炼自己的思维，那些看似枯燥的练习会化作穿透迷雾的锋芒。记住，荣耀的冠冕往往在最后一刻才会显现轮廓，现在最要紧的是握紧手中的笔，在时光的沙漏里刻下扎实的印记。\n\n命运的转轮开始加速转动时，别被突如其来的机遇晃了眼。越是靠近成功的门槛，越要稳住心性。那些看似唾手可得的捷径，可能正是暗藏陷阱的虚影。保持清醒的判断，用你日积月累的实力说话，这才是最可靠的通行证。当所有人都在仰望星空时，你要记得把双脚深深扎进知识的沃土。",
+  "general": "这签文透着一股\"破茧而出\"的气象。你当下正站在人生某个关键的转折点上，就像黎明前最后的夜色，需要你凝聚心力主动破局。那些困守已久的格局会出现裂痕，但要抓住机会需有孤注一掷的勇气——不是鲁莽的冒险，而是看准时机的精准发力。过程中或许会遭遇意料之外的阻力，就像春笋顶开冻土必然要承受重压，但这份压力恰恰会成为突破的助力。\n\n中期会迎来重要转折，就像溪流突然汇入江河，原本单薄的力量将获得体系支撑。此时要警惕两种极端：既不能因初获成就而故步自封，也不必因暂时的瓶颈怀疑方向。某个看似平常的机缘，可能会成为改变轨迹的关键支点，需要保持敏锐的觉察。\n\n最终的收获会超出预期，但这份荣耀是把双刃剑。就像盛夏的果实过于丰硕容易压弯枝头，名利双收时更要守住本心。建议在上升期就开始培养\"得之坦然\"的心境，毕竟潮水退去时，真正能支撑你走远的，从来不是虚名浮利，而是这一路淬炼出的真本事。"
+}
+```
+
+### 英文翻译
+```json
+{
+  "sign_number": 142,
+  "sign_text": "Favorable to campaign in the central realm,\nOnce capture the enemy at the royal court.\nThe phoenix carries a crimson edict back to the sunny shore,\nEnjoy a glorious name that spreads across the four seas.",
+  "interpretation1": "For modern divination, this sign is not easy to interpret literally. In essence, it suggests achieving merit in foreign lands and returning to enjoy widespread fame.",
+  "career": "Your career is at a turning point that requires active seizing. Like a warrior, you need to show courage and delve deeply into your core field—especially by connecting with authority and higher powers. Your efforts may be noticed in key settings and transformed into substantial support. But beware of overreaching; if you pursue short-term results too aggressively, you may miss deeper opportunities. In the future, you may receive important recognition or promotion opportunities, which require you to maintain composure. After achieving success, avoid showing off—solidifying your foundation is more important than surface glory. Remember, true achievement is not external applause but the value you accumulate steadily. Even if things don't meet expectations for now, don't worry—this accumulation is storing energy for a future transformation. Keep a clear self-awareness, find balance between opportunity and challenge, and your career landscape will gradually open up.",
+  "wealth": "This sign points to an undercurrent of wealth—not a golden nugget falling from the sky, but living water that you must actively grasp. Your current wealth is like gold dust hidden in sand—you need to bend down and sift through familiar ground. Don't rush far away; the resources and partnerships right beside you may hold the glint. But remember, 'campaigning' is not recklessness—first understand the rules. The people who make decisions and set the tone may hold the key. If a benefactor brings you news, even if it sounds familiar, don't dismiss it easily; the crimson-edict-like opportunity often comes wrapped in a plain envelope. When the tide truly lifts you, don't be dazzled by fame—water can carry a boat or capsize it. The more your name spreads, the deeper you must root yourself, lest you become drifting duckweed.",
+  "love": "The longing in your heart is like a dormant seed waiting to sprout. The sign's 'campaign' does not mean charging recklessly, but reminds you that the most precious opportunities often hide in ordinary daily life. When you let go of anxious hesitation and face your feelings with sincerity, things that once seemed distant will flow naturally to you like spring snowmelt. Someone's gaze may fall upon you—this attention may bring both joy and fear. But know that 'receiving gifts' is never a gift from heaven; it is the fruit of your daily sincere care. Just as dawn must pass through the darkest night, the most touching understanding in love is born when both parties are willing to drop their defenses. A turning point may arrive like a phoenix bearing a decree. When it comes, don't be swept away by sudden sweetness. The closer you are to the warm light, the more you must keep a clear step. Some fates require you to pursue passionately like a flame, yet wait with patience like flowing water. As your name is spoken by more people, keep a piece of purity for your original heartbeat—this is the most precious essence of the glorious name that spreads far and wide.",
+  "health": "Your health energy right now is like a river with hidden currents—calm on the surface but requiring careful steering. The sign's 'favorable in the central realm' suggests turning attention inward to regulate the balance of your internal organs, like preparing for battle. Latent fatigue or minor ailments are like border troubles—they need timely correction, not neglect. 'Capture the enemy at the royal court' is like your body's alarm signal—those easily ignored aches and drowsiness are like secret reports from within the palace, reminding you to build a stricter health defense. But don't panic; this is a precursor to change. If you treat every bodily sign as seriously as handling state affairs, you may seize the key moment for adjustment. The last two lines indicate a revitalizing force brewing, like the cold wind before spring. Now, like a phoenix choosing a branch, you need to precisely adjust your routine and diet, strengthening the fortress of your body. When yin and yang harmonize, you will naturally harvest a radiance of well-being from within. But this blessing requires your active cultivation to truly manifest. Remember, this is both a challenge and an opportunity. Your body is like a temple awaiting repair—guard against long-neglected issues, but also see the rebirth after renovation. Maintain careful prudence and a belief in transformation to strengthen your health foundation.",
+  "study": "You are standing on a crucial competitive field. This contest requires full focus. Just as a seed must be buried deep to sprout, you need to sink down and accumulate energy. In the seemingly repetitive daily grind lies the secret of transformation—focus on chewing every piece of knowledge, polishing every step of problem-solving. These small accumulations will eventually gather into a torrent that breaks through barriers. Fate shows you a kind sign, but don't rush to reach for its fruit. The truly valuable harvest always comes from the soil you plant with your own hands. When the real test comes, sharpen your thinking like a sword—those seemingly boring exercises will become the edge that cuts through the fog. Remember, the crown of glory often reveals its shape only at the last moment. The most important thing now is to hold your pen firmly, carving solid marks in the hourglass of time. When the wheel of fate accelerates, don't be dazzled by sudden opportunities. The closer you are to success, the more you must stabilize your mind. Those seemingly easy shortcuts may be traps. Keep clear judgment and rely on your accumulated strength—this is the most reliable passport. While everyone gazes at the stars, you must plant your feet deep in the soil of knowledge.",
+  "general": "This sign exudes a 'breaking out of the cocoon' atmosphere. You are standing at a critical turning point in life, like the final darkness before dawn. You need to gather your will and actively break through. The long-stagnant patterns will crack, but seizing the opportunity requires the courage to go all in—not reckless risk, but precise timing. You may encounter unexpected resistance, like a bamboo shoot pushing through frozen ground, but this pressure will become the force for breakthrough. Medium term, you will reach an important transition, like a stream merging into a river—your previously thin power will gain systemic support. At this point, guard against two extremes: don't become complacent with initial success, nor doubt your direction due to temporary bottlenecks. A seemingly ordinary opportunity may become the key fulcrum that changes your trajectory—stay perceptive. The final harvest will exceed expectations, but this glory is a double-edged sword. Like summer fruit that can bend branches, when fame and fortune come, you must guard your original heart. It is advisable to cultivate a 'take it as it comes' mindset during the ascent. After all, when the tide recedes, what truly sustains you is not empty fame, but the real skill tempered along the way. Consider this an invitation to self-reflection, not a prediction."
 }
 ```
 
 ---
 
-## 第 15 签
-
-⚠️ **缺少英文翻译**
+## 第 143 签
 
 ### 中文原文
 ```json
 {
-  "sign_number": 15,
-  "fortune": "中下签",
-  "gua_type": "兑宫 咸厘革",
-  "sign_text": "意在闲中信未来，故人千里自徘徊，天边雁足传消息，一点梅花春色回。",
-  "interpretation1": "签文以“闲中信未来”起笔，喻心悬未定之事，如空庭候燕，音书沉滞。次句“故人千里自徘徊”，千里之外，独步踟蹰，暗合兑宫咸卦之感而难通、厘革之变而未成之象。第三句“天边雁足传消息”陡转，鸿雁传书，远方将携音讯而来，恰应兑为口舌、为传言之象。末句“一点梅花春色回”，梅花破寒报春，虽仅一点，却昭示生机暗涌。全签由困顿转希望，中下之局，非凶无路，而是机遇隐于缓中。咸卦主感应，厘革主渐变，提醒勿因焦躁而妄动，当以静待动，以柔克刚。整体寓意：事有迟滞，但转机已在酝酿，借“一点”之微，可窥全貌。",
-  "career": "签文“雁足传消息”喻事业上将迎来远方或意外的讯息，可能是外调、合作或offer，但“闲中信未来”提示此刻宜守不宜攻，主动出击恐成空。兑卦主口舌，咸卦主感通，事业适合沟通协调类岗位，如公关、谈判、中介。时机在冬末春初，需提前储备人脉与资料。忌：冒进签约、跳槽、公开竞争。宜：暗中布局、静候佳音、借故人（旧同事）之援。",
-  "wealth": "“故人千里自徘徊”暗指偏财迟滞，旧有投资或合作项目进展缓慢，不宜增资扩股。“一点梅花春色回”则寓意小财可期，如小额回报、年终奖金或礼物。正财平稳，偏财需待来年立春前后。兑为金，利金银饰品、金属行业，但中下签主耗损，理财以储蓄为本，忌高风险投机。",
-  "love": "“故人千里自徘徊”直指旧情未了或异地恋，彼此有牵挂却难相见。咸卦为感，暗示心有所动，但厘革之象需时间磨合。单身者，春天或有故人重逢、旧缘再续之机；已有伴侣者，宜借“雁足”传书增进沟通，忌冷战或翻旧账。梅花一点，贵在真诚微小举动，胜过盛大表白。",
-  "health": "兑为肺、为口喉，签文“闲中信未来”对应气机不畅，易生郁结。“梅花春色回”提示需防季节性过敏、皮肤敏感（梅花属木，主风）。养生宜疏肝理气，可饮花茶、适度运动如散步、八段锦。忌过劳和熬夜，注意呼吸系统小病反复，及时调养。",
-  "study": "“雁足传消息”主考试、论文等成果将姗姗来迟，但终有回响。咸卦为感，利于需要理解、感悟的科目如文学、哲学；“梅花一点”喻灵感如火花，适合创意写作。学业状态前期迷茫，后期突破。复习宜分阶段，忌贪多求快。考试运：小考利，大考需耐心，分数可能比预期略低但仍有惊喜。",
-  "general": "此签核心在“等”与“变”。闲中等信，看似被动，实则积蓄；故人徘徊，非徒耗光阴，乃机缘之伏笔。雁足传书，是远方的馈赠；梅花一点，是寒冬的春信。行动建议：①保持与外界的微弱联系，不闭塞亦不躁进；②聚焦1-2件小事做到极致，如梅花之一点，可破全局；③信任时间，春色终回，但非凭空而至。心态上，可怀“闲中信未来”的淡然，亦需“天边雁足”的笃定。"
+  "sign_number": 143,
+  "sign_text": "堪叹外边忧，更嗟门里闹，意绪更牵缠，心神亦颠倒。",
+  "interpretation1": "不吉之兆，得此签者处于公私纷繁，困扰重重之境。",
+  "career": "你的事业运势此时正经历一场内外交困的动荡期。外界的压力像一层雾笼罩着你，无论市场风向还是人际关系都暗藏变数，让你不得不打起十二分精神应对；而内部的暗涌更让人疲惫，或许是团队配合的裂痕，或许是自我定位的摇摆，原本该稳固的根基反而成了消耗能量的漩涡。\n\n这种拉扯感让你像站在摇晃的独木桥上，既要防着脚下打滑，又得提防四面吹来的冷风。头脑里反复盘算的利弊得失越来越像纠缠的线团，明明知道该快刀斩乱麻，偏偏每个决定都牵扯出更多顾虑。这种状态下容易陷入\"越想理清越混乱\"的循环，甚至可能做出违背初衷的选择。\n\n但这样的困局恰恰在提醒你：该停下来重新校准方向了。就像被狂风掀翻的船只要先稳住舵轮，你现在最需要的不是对抗风浪，而是先调整自己的重心。把那些牵扯你精力的干扰项逐个剥离，找到真正支撑事业发展的核心支点——或许是需要加固专业壁垒，或许是该重建信任关系。当内外两股压力不再撕扯而是形成制衡，混乱自会显露出转机。",
+  "wealth": "这签文里外透着一股烦闷气。你眼下财运的走势，像被两股力量撕扯着——外头看似有麻烦在逼近，里头又有嘈杂的声音搅得你不得安宁。这内外夹击的境况，让你像捧着漏水的碗接雨水，既忧心外界的风吹草动，又烦闷自己人之间的磕碰。\n\n钱财的流动正卡在某个混沌的关口。你或许会感觉，明明该抓住的机遇总在指缝间溜走，该理顺的账目却像缠作一团的丝线。但这份混乱未必是坏事，恰似暴雨前翻涌的云层，动荡里藏着重新洗牌的契机。现在最忌心浮气躁，得学那老船夫在风浪里稳舵，先把自家门户里的是非理清爽，外头的惊涛骇浪自会现出航道。\n\n记住，财路从来不是笔直大道。眼下这团乱麻，恰恰是逼着你把散落的珠子重新串成链。该舍的旧账别攥着，该斩的纠葛莫迟疑，待你把这满屋子的喧嚣收拾停当，外头的风雨反而能化作滋养财源的甘露。",
+  "love": "你现在的处境像是站在十字路口的风暴中央。外头刮着让人喘不过气的风，身边的事总像绳索般缠着你；而心里又像煮开的沸水，矛盾的声音此起彼伏。这种内外交困的状态，让你连呼吸都带着犹豫的重量。\n\n但这样的混沌里藏着转机。当你觉得思绪像乱线团找不到头绪时，恰恰是在提醒你该先松开紧攥的手。暂时别急着理清所有结，给自己留段空白的时间，就像暴雨后浑浊的河水总要沉淀泥沙。那些理还乱的牵绊，其实在帮你筛选真正重要的事。\n\n最近或许该像退潮时的礁石，让汹涌的浪头自己退去。少做决定，多观察内心真实的回响。你心底其实早有个指南针，只是被外界的喧嚣盖住了指针转动的声响。等这些嘈杂暂时安静下来，你会突然看清哪条路是自己真正想走的。",
+  "health": "此刻的你像是站在内外交困的漩涡中央。外界的压力像风沙般不断侵蚀你的防护，而内心的焦灼又如同暗火在胸腔深处闷烧。这种内外夹击的拉扯，或许正让你感到呼吸沉重、四肢倦怠，连入眠都变得支离破碎。\n\n但你要知道，身体向来是诚实的信使。它此刻的疲惫不是惩罚，而是提醒你该重新校准生活的天平。那些被忽略的休息信号、压抑的情绪潮汐，都在等待你轻轻揭开表层，用温柔的觉知去抚平褶皱。试着把对外界纷扰的警觉，分一半给内心跳动的节奏——当你能听见血液流淌的声音，能觉察呼吸起伏的频率，那些颠倒错乱自会找到归位的契机。\n\n不必急于斩断所有烦忧，只需在昼夜交替时留一方静土给自己。让紧绷的神经学会松绑，让透支的能量缓慢回填。乌云压境时，记得你始终握着拨开缝隙的钥匙。",
+  "study": "你现在的学业就像被内外两股力量拉扯着。外头的压力像看不见的围墙压着你，自己心里又像有两股声音在打架。那些原本该理顺的知识点总在脑子里打转，该专注的时候思绪反而飘得更远，就像明明想走直线却总被风吹歪脚步。\n\n这其实是老天在提醒你：当环境太嘈杂的时候，更要守住心里的那盏灯。别被别人的节奏带着跑，也别急着和心里的焦虑对抗。试着把乱麻似的念头抽成单线，今天只解决一道坎，明天只翻一座山。有时候慢下来理清头绪，反而比蒙头猛冲更快找到出路。\n\n记住，你现在经历的混沌不是终点，而是重新校准方向的契机。就像暴风雨前翻涌的云层，等这阵子过去，天空会露出更清晰的航线。",
+  "general": "这签文像是提醒你，最近的生活像被一团乱麻缠住了手脚。外头的人情世故总让你觉得疲惫，可回到家关上门，那些说不清道不明的琐碎反而更让人心浮气躁。你的思绪像被风吹散的蒲公英，东飘西荡找不到落脚点，连带着整个人都像踩在棉花上，晃晃悠悠的使不上劲。\n\n但换个角度想，这种混沌未必是坏事。就像暴雨前的乌云翻滚，看起来压抑，其实正在酝酿新的生机。眼下你需要的或许不是急着斩断所有烦恼，而是给自己点时间，像整理抽屉那样把心事一件件摊开晾晒。外界的喧嚣和内心的躁动，说到底都是镜子里的倒影——当你不再急着和它们较劲，水波自然就平静了。记得留个气口给自己喘息的余地，有些纠缠会像春雪般不知不觉消融的。"
+}
+```
+
+### 英文翻译
+```json
+{
+  "sign_number": 143,
+  "sign_text": "Sigh for worries outside, / Lament for turmoil within the door. / Thoughts become tangled, / Mind and spirit overturned.",
+  "interpretation1": "This sign points to trouble both outside and inside—external pressure and inner conflict intertwine, leaving you disoriented. The hexagram shift from Biting Through to Innocence warns of unexpected setbacks but also suggests that by refraining from reckless actions and returning to simplicity, you can eventually cut through the chaos.",
+  "career": "'Worries outside' suggests industry turbulence or office politics; 'turmoil within the door' hints at team friction or gossip. The hexagram indicates obstacles at every turn, so this is a time to defend rather than attack. Energy peaks in late autumn, but do not push for change. Stay low-key, listen more, and resolve interpersonal issues gently. Avoid competing for credit, switching jobs, or confronting colleagues. If a decision is unavoidable, double-check details to prevent oversight.",
+  "wealth": "The 'turmoil within the door' signals disputes over family expenses or unclear partnership accounts; 'worries outside' reflect a risky investment environment. The hexagrams warn against speculation. Positive wealth is barely stable; speculative gains are absent. Preserve your main income, avoid unfamiliar high-return fields, and do not co-sign or partner. Clear your accounts and cut unnecessary social expenses. The Xun wood element favors long-term savings in culture or education. Don't let emotional spending or gambling impulses take over.",
+  "love": "'Thoughts tangled, mind overturned' describes emotional chaos. Singles may fall into ambiguous relationships or one-sided attachments. Couples face repeated quarrels and old grudges resurfacing. The Innocence hexagram advises against major relationship decisions made in this state. Focus on calming yourself first. Singles should postpone seeking new connections; partners should avoid sensitive topics, show care through actions, and refrain from dredging up the past or cold wars. Gentle communication like wind can ease tension.",
+  "health": "'Mind and spirit overturned' directly affects the heart, nervous system, and sleep—expect insomnia, palpitations, and poor concentration. 'Worries outside' indicates liver qi stagnation (Xun wood), leading to headaches, dry eyes, and low mood. 'Turmoil within the door' reflects spleen-stomach disharmony. The hexagrams warn against random treatments. Dietary focus: liver-soothing greens and light porridge. Maintain a regular schedule, nap at noon, and practice slow exercises like walking or tai chi. Watch for persistent fatigue, unexplained weight loss, or worsening palpitations—rest is crucial.",
+  "study": "The message of tangle and distraction is severe for studies: concentration breaks easily due to external or domestic noise. The hexagram makes learning feel like chewing on a hard bone—especially for subjects requiring memory. The shift to Innocence predicts exam irregularities. Break study into short, frequent sessions; use notes and diagrams. Favor liberal arts subjects; avoid heavy math or logic. Arrive early for exams and prepare all materials. Do not panic over small mistakes; follow the flow of innocence.",
+  "general": "This sign reveals a period of internal and external torment, like wind tangled in thorns. Yet an unfavorable sign is a wake-up call, not a dead end. The key is to gather your spirit and set things right from within. Three actions: first, close the door and suspend non-essential decisions—first find the root of 'turmoil inside' (family or emotions) and address it; second, assume a defensive posture toward external worries—do not act recklessly, wait for the fog to lift; third, anchor yourself with one or two simple daily habits (morning meditation, step counting) to discipline a scattered mind. The wind will pass, the sky will clear—this is a fine practice ground for the heart. Reflect on how this resonates with your current situation."
 }
 ```
 
 ---
 
-## 第 16 签
-
-⚠️ **缺少英文翻译**
+## 第 144 签
 
 ### 中文原文
 ```json
 {
-  "sign_number": 16,
-  "fortune": "中上签",
-  "gua_type": "离宫 同人变乾",
-  "sign_text": "心和同，事知同，门外好施功，交加事有终。",
-  "interpretation1": "签文‘心和同，事知同’直指本卦‘同人’之精髓——内心与外事须和谐一致，方能成事。‘心和’指心念纯正、目标统一，‘事知同’则强调对事理有共识，不存歧见。离宫属火，同人卦象为火天大有之始，变乾则如烈火燎原，势不可挡。‘门外好施功’喻在外部环境（非内耗）中积极作为，宜向外拓展、主动沟通。‘交加事有终’意为即便事务错综复杂、交替而来，只要秉持‘和同’之道，终能圆满收束。此签整体寓意：中上之吉，成事关键在于人和与心齐，切忌独断专行或内部分歧。",
-  "career": "签文‘门外好施功’明示事业之机在对外开拓：宜争取跨部门合作、外部项目或市场拓展，而非固守内部事务。‘心和同’提醒团队协作至关重要，需主动与上下级、平级达成共识，避免意见冲突。‘事知同’则暗示需对目标有统一认知，可提前召开协调会统一思路。离宫主火，行动力强，宜趁热打铁，但变乾有刚健过刚之虞，忌急躁冒进、独揽功劳。时机上，春夏之交或午、未月尤为有利。",
-  "wealth": "‘交加事有终’预示财运虽有多项来源交错（如主业、副业、投资并行），但终能稳定收成。‘门外好施功’主正财偏财均来自外部开拓，宜主动联系客户、拓宽渠道，有利与外单位合作生财。离宫属火，火为财星，但火性易散，理财需守成。忌：贪多嚼不烂、同时投入过多项目。偏财以短期合作、信息差获利为佳，避免长线重仓。",
-  "love": "‘心和同’是感情经营的关键：双方须心意相通、志趣相投，若有分歧需及时沟通达成一致，不可冷战。‘事知同’指对关系未来有共同规划，避免各怀心思。单身者‘门外好施功’，宜通过外出社交、工作场合结识良缘，网络交友亦利行动。已有伴侣者，‘交加事有终’暗示感情中虽有琐事摩擦或外部干扰，但若能理解包容，终能修成正果。",
-  "health": "离宫属心、小肠与目，‘心和同’强调心气平和，避免情绪波动引发心悸、失眠。‘交加事有终’提示注意劳累过度导致免疫力下降，尤其是交替性工作压力。养生建议：宜静心养神，多呼吸新鲜空气（门外好施功），适当散步或户外运动。饮食清淡，少食辛辣焦燥之物。",
-  "study": "‘事知同’指学习需理解核心原理，融会贯通而非死记硬背。‘心和同’强调心态专注，心无旁骛。‘门外好施功’利实践类学科（如实验、实习、调研），也利参与课外竞赛或社团活动提升综合能力。考试运中上，但‘交加事’暗示可能多科并行或复习内容交错，需合理安排时间，避免顾此失彼。",
-  "general": "此签以‘和同’为纲，强调内外一致、团结协作。关键行动：①主动向外拓展，勿困守一隅；②与人交往先求共识，避免无谓争执；③事虽繁杂，保持耐心终有成果。心态上，如离火之光明，以热忱待人，以刚健行事，但需防火过旺而伤及自身。中上之签，吉在人和，重在践行。"
+  "sign_number": 144,
+  "sign_text": "一重水一重山，风波道坦然，壶中别有天。",
+  "interpretation1": "如问机构内之事，则虽风波重重，终能安然，问家务事，因妇女高妙，亦安。",
+  "career": "你当下的事业路像在翻山渡河，表面看是层层关卡叠着走不完的弯道。但那些障碍其实是筛选器——拦得住急躁冒进的，却困不住真正沉淀过的人。风波藏在坦途里，不是要吓退你，而是要逼你学会边赶路边磨刀的本事。别被眼前的大动静晃了心神，该钻的岩缝就缩骨钻过去，该涉的险滩就卸下包袱蹚过去。\n\n壶中天是道暗门。你每天重复的流程里藏着破局的密码，寻常事务中能炼出别人抢不走的绝活。记住，外头风浪越凶，越要把手头那亩三分地种成自留地。别人在浪尖上翻船的时候，你壶里攒着的本事就是浮木。现在要的不是突围，是把自己活成个不透水的闷葫芦——任他东西南北风，你自守着那点火星子慢慢烧。等烧透了，壶盖掀开时冒出来的光，够照亮半座山。",
+  "wealth": "你此刻的财运像趟过山水交叠的漫长路途。山是困阻，水是暗藏的消耗，眼前每一步都带着磕绊的重量。但越是颠簸处，反而藏着命数的暗示——风波未必是坏事，你脚下那条路原本就刻着要你亲身碾碎的砂石。坦荡不是没有坎坷，而是泥沙俱下时，你依然能看清自己的方向。\n\n壶中天地最是微妙。有人捧着金玉当瓦罐，有人守着粗陶却漏了里头的琼浆。你该去晃晃自己的壶，听那声响是空荡还是沉甸甸的闷响。别急着伸手够远处的金山银海，先把壶盖掀开条缝，闻闻里头酝酿的气味。或许最该守住的财路，早就蜷在你手边等着被焐热。",
+  "love": "你心里惦记的这段缘分啊，像山重水复总也望不到头，其实眼前的路早就铺在脚下了。那些让你心慌的浪头打过来，不过是把水底的泥沙卷得更清亮些。别看外头风雨飘摇，你怀里揣着的那盏酒壶里，早酿着另一片朗朗晴空。\n\n人和人的牵绊就像山涧水，看着是被石头拦住了道，实则绕着绕着就淌出新的河床。别急着伸手去抓浪花，越是攥得紧，越容易从指缝里漏了真心。且让该来的风波替你筛一筛，等水波晃累了，自然能照见壶中那片别人瞧不见的月亮。",
+  "health": "你的健康运势如同山水连绵的旅途，前方虽有高低起伏的坎途，但你的身心根基里藏着化解风波的韧性。遇到暂时的困顿不必慌乱，那只是生命自然代谢的涟漪，要相信身体里自有一方天地能平衡外界的波动。此刻最需静心倾听内在的节奏，像护住壶中清泉般滋养元气，别让外界的喧嚣打乱你本真的呼吸。看似被山环水绕的境遇里，其实藏着自我调和的契机——把那些翻涌的浪涛化作润泽生命的甘露，便是破局之道。",
+  "study": "你此刻的学业之路像在翻越连绵的山脉、跨越曲折的流水。看似层层叠叠的阻碍，其实每一步都在磨砺你的筋骨，埋藏着积累的契机。途中或许会遇到暗涌的风浪，但真正需要稳住的是你的心——只要不因焦虑而自乱阵脚，那些震荡反而会沉淀成你的底气。\n\n你手里握着的不是困境，而是一只看似平凡却暗藏天地的壶。它提醒你：别只顾着向外张望路径的崎岖，该回头看看自己内在的储备。那些被忽视的学识积累、被低估的思维韧性，都可能在某个转角处突然亮起来，替你劈开一条意想不到的通途。\n\n保持行走的姿态，但别把力气全耗在对抗外界的风浪上。有时候放慢脚步整理行囊，比横冲直撞更重要。你真正要征服的从来不是外界的山水，而是心里那座总觉得自己不够高的山。",
+  "general": "这签文像在说你面前的路途会有层层叠叠的屏障，像是山连着水，水又绕回山。但你心里其实早就明白，真正困扰你的未必是这些外界的关卡，反而是自己如何把颠簸的浪头踩成脚下的船桨。那些看似过不去的险滩暗礁，其实都是老天给你磨脚底的茧子，好让你走更远的路时不至于疼。\n\n别总盯着远处模糊的峰峦看，倒该看看手边这个\"壸\"——可能就是你现有的生活圈子，或是某个被你忽略的角落。里面藏着能撑起另一片天空的支点，像茶叶在壶肚里舒展，滚水冲下去反而激出香气。眼下你觉得被困住的地方，换个角度就是能生根发芽的土壤。记住啊，过关斩将的刀，有时候就藏在装茶汤的壶嘴上。"
+}
+```
+
+### 英文翻译
+```json
+{
+  "sign_number": 144,
+  "sign_text": "Mountain after mountain, river after river, / Amidst wind and waves, the path lies calm. / Beyond the vase, there is another sky.",
+  "interpretation1": "This reading describes repeated obstacles ahead, yet a calm heart can turn danger into safety. The 'vase' symbolizes an inner sanctuary—a hidden retreat where you can find peace and renewal. Though external conditions are rough, inner composure will guide you through.",
+  "career": "'Mountain after mountain, river after river' points to a rugged career path—possible position changes, blocked projects. The transformation from Great Possession to Li suggests former glory is fading; adjust your mindset. 'Calm amidst waves' means staying calm when office storms hit; avoid taking sides. 'Another sky in the vase' advises retreating to internal responsibilities—deepen expertise in a specialized area. Take on behind-the-scenes roles like planning or technical support; do not rashly change jobs or fight for the spotlight. The fire element of Li may make you impulsive—guard against sharp words with colleagues, especially superiors. Watch for shifts around summer and autumn.",
+  "wealth": "The repeated mountains and rivers indicate many delays in wealth flow—unstable salary, poor speculative gains. 'Calm amidst waves' warns that risky investments may lead to loss; staying content prevents major damage. The transformation from abundance to Li means outward brightness but easy dissipation; the 'vase' suggests traditional saving and reducing consumption. Focus on core salary, avoid excessive spending, and consider family assets like home repairs or long-term deposits. Do not speculate in stocks or join partnerships. Li fire favors culture and energy sectors, but take profits quickly and don't linger.",
+  "love": "'Mountain after mountain, river after river' symbolizes emotional barriers—distance, family opposition, or deep misunderstandings. 'Calm amidst waves' encourages open communication without suspicion. 'Another sky in the vase' suggests temporarily withdrawing to build inner strength and attractiveness. Singles: the destined partner is hidden; do not force it. Partners: give each other space, avoid bringing up the past or pressing too hard. Li's fire can stir passion and impulsive words—be careful not to hurt your partner. Spending quiet time at home or handling chores together can dissolve hidden currents.",
+  "health": "The repeated mountains and rivers imply energy depletion from rushing. 'Calm amidst waves' warns that mental unrest may cause uprising of deficient fire. The double fire hexagram affects the heart, small intestine, and eyes; 'another sky in the vase' explicitly advises retreat and rest, conserving essence and calming spirit. Sleep early to settle the mind, drink cooling teas, and rest at noon to nourish yin. Watch for insomnia, mouth ulcers, blood pressure fluctuations. Fire overcomes metal—protect the lungs. Avoid smoking, alcohol, and staying up late. Extra care in autumn.",
+  "study": "Learning feels like traversing mountains and rivers—numerous difficulties, slow progress. 'Calm amidst waves' encourages a peaceful mind; anxiety disrupts clarity. 'Another sky in the vase' implies that focused, quiet study can reveal true interest. The transformation favors liberal arts and reasoning over math and mechanics. Exam luck is average; you may feel restless. Simulate exam conditions and review mistakes. For humanities, read classic texts deeply; for sciences, avoid getting stuck on a single problem. Group discussion can break the vase's limits.",
+  "general": "This sign shows mountains, rivers, and storms outside, but 'another sky within the vase' is the key—turn inward, transform the mind to change the situation. Three suggestions: first, when blocked, step back—not to escape, but to recharge; second, simplify life and goals, delete excess desires—tidy your room, reduce social distractions; third, reserve a period of solitude daily—sit quietly or read to nourish the inner vase. The hexagram shift from great abundance to Li warns of decline after peak—accept the moderately unfavorable as a warning to safeguard yourself. Stay calm and embrace a different horizon. Use this as a cultural perspective to inform your own judgment."
 }
 ```
 
 ---
 
-## 第 17 签
-
-⚠️ **缺少英文翻译**
+## 第 145 签
 
 ### 中文原文
 ```json
 {
-  "sign_number": 17,
-  "fortune": "上签",
-  "gua_type": "乾宫 乾变小畜",
-  "sign_text": "欲行还止，徘徊不已，藏玉怀珠，寸心千里。",
-  "interpretation1": "此签为乾宫乾变小畜之卦，乾天刚健而小畜蓄势未发，正应签文'欲行还止，徘徊不已'之象。乾德本主动，然变入小畜，喻示虽有千里之志，却因时运未至而需暂缓步伐。'藏玉怀珠'者，身怀美质而不自炫，如宝玉在匣、明珠藏渊，才华内敛而待时而动。'寸心千里'，言心意虽远，但行动踟蹰，非力不足，乃势未成也。全签核心在于'藏'与'待'——当如小畜卦象，以柔蓄刚，以静制动。上签之吉，不在急进，而在持守；不在一时得失，而在长远根基。劝君敛志沉心，养锐待机，则明珠终有耀世之时。",
-  "career": "签文'欲行还止'喻事业当前宜守不宜攻，尤其不可冒进。'藏玉怀珠'暗示您身具专业才能或核心资源，却未到施展的最佳窗口期。乾变小畜，事业上宜专注内修：完善方案、积累人脉、打磨技能。吉兆在主贵人暗中助力或旧有关系重启，但需您主动联络方有回响。忌与上级强辩、争夺项目主导权；利从事幕后策划、技术攻关、资源整合类工作。时机约在秋末冬初，届时'寸心千里'可渐成现实。",
-  "wealth": "签文'藏玉怀珠'直指正财偏财皆有蓄积之象，但'欲行还止'告诫不可急求变现。此签财运属潜龙在渊型，现有资产或投资如珠玉藏匣，短期难见爆发，但根基扎实。小畜卦象主小有积蓄，宜稳健理财，可增持国债、黄金或保本基金，忌高风险杠杆。'徘徊不已'提示避免因他人推荐而冲动决策，尤其慎防合作投资中的口头承诺。若经营实体，利收缩规模、清库存、回笼现金。",
-  "love": "签文'欲行还止，徘徊不已'，情感中正处暧昧或犹豫阶段。'藏玉怀珠'喻心有所属却未表露，或自身优点未充分展现给对方。乾变小畜，感情需缓慢升温，不可急于确定关系。单身者宜通过共同爱好或工作接触逐步渗透，忌送礼表白过于隆重；有伴侣者则需避免因小事猜疑，当如'寸心千里'般多关怀对方长远需求。上签预示若有耐心，入秋后关系可望明朗，但需你主动递出一句温和话头。",
-  "health": "签文'欲行还止'对应身体气血运行不畅，或关节、筋膜有滞涩感。'藏玉怀珠'喻脏腑功能不彰，尤需关注脾胃与肝胆的疏泄。小畜卦象主风在天上，应防季节交替时的感冒、过敏及皮肤问题。宜晨起练习八段锦或太极，促进气机流转；饮食上多食山药、莲子等平补之品，忌暴饮暴食。'寸心千里'提示勿因思虑过重影响睡眠，睡前可听舒缓音乐或艾灸足三里。",
-  "study": "签文'藏玉怀珠'喻学业根基扎实，却因'欲行还止'而效率波动，常有想冲刺又松劲的反复。'寸心千里'指向宏阔知识架构，利理论性、规划性强的学科，如历史、哲学、管理学。乾变小畜，备考者需制定分阶段计划，每完成一档目标即给予小奖励。考试运中上，但临场易因犹豫改错答案，宜遵循第一直觉。下半年学习状态渐入佳境，可组学习小组或寻求导师点拨。",
-  "general": "此签大旨为'藏器待时'，整体运势如春蚕作茧，内中蕴藏锦绣。关键行动有三：一曰收心，凡事务求稳重，戒除急躁冒进之念；二曰蓄力，利用当前平稳期精进专业技能，复盘既往得失；三曰明志，勿因短暂徘徊而忘'寸心千里'之初心。心态上宜效仿乾天自强与小畜和柔，刚柔并济。上签之吉在于厚积薄发，请信任自身才华，待秋风起时自现锋芒。"
+  "sign_number": 145,
+  "sign_text": "遇险不须忧，风波何足忌，若遇草头人，咫尺青云路。",
+  "interpretation1": "吉祥，化险为夷，若遇贵人，将可发迹。（贵人或可注意姓名有草字头者）。",
+  "career": "此刻你眼前看似蒙着一层薄雾，前路仿佛被暗礁环绕。但签文提醒你，真正阻碍你的并非外界风浪，而是内心对未知的犹疑。\"草头人\"未必是姓氏带草之人，更像是某种打破僵局的契机——或许是某次偶然的交谈，某个被忽视的细节，甚至是自己未曾察觉的潜能。当你放下对\"危险\"的预判性恐惧，那些曾令你止步的漩涡，反而会成为推舟前行的暗涌。\n\n事业路上最锋利的刀刃往往藏在柔软的绸缎里。保持对人际关系的敏锐而不刻意，像水渗透石缝般自然流动。青云路不在远方，而在你此刻调整呼吸时胸腔起伏的节奏里。真正的转机，往往出现在你停止计算风险，开始信任生命自有安排的那个瞬间。",
+  "wealth": "这签文落在财运上，是让你把心先沉下来。你眼前或许正摸着黑走一段险路，但那些坎儿不是要困住你的，倒像是老天爷在试你的胆量。遇着风浪别急着躲，浪头越猛的地方，底下往往藏着鱼群。\n\n\"草头人\"未必是姓名带草字头的贵人，更像你身边某个不起眼的关系，或许是你瞧不上眼的营生门道，或是平时没当回事的人脉。这机缘裹着层粗布衣裳，得你亲手掀开才能见真章。记住，有时候财路不往高处求，反而在脚下泥巴地里冒芽。\n\n青云路离你不远，但别光抬头看天，容易摔跟头。现在要做的不是算计得失，是像庄稼人那样弯下腰，该松土松土，该下种下种。钱这玩意儿认死理——你越盯着它跑，它越溜得快；你把该干的干瓷实了，它反倒自己往你兜里钻。最近要是遇着拿不准的事，别急着拍板，先把手头能攥住的小利攥牢了，大鱼的影子自然会在水底下浮出来。",
+  "love": "你心里悬着的那块石头其实不用一直攥着不放。风浪看着汹涌，但咬咬牙扛过去，会发现它们不过是在虚张声势——真正能绊住你的，从来都是自己心里那点犹疑。这段路上会遇见些看似平凡的人，他们或许像野草般不起眼，却藏着能托住你脚踝的韧劲。别急着往天上够，你念着的那片云彩啊，可能就挂在离你半步远的树梢上。\n\n要是真被风迷了眼，记得伸手摸摸身边，那些带着泥土气的温度往往比飘在空中的承诺更实在。路从来不是一个人趟出来的，你愿意分半盏灯给人照亮，转角处自然会有光落回你肩上。",
+  "health": "这签文里藏着些有意思的暗示呢。关于你关心的健康方向，可以说你现在或许正经历某种隐形的波动，就像站在浪尖上却感觉不到摇晃——那些让你隐隐不安的状况，未必真能困住你。关键是别被表面的动荡唬住，你内在的韧性其实比你想象中更强大。\n\n注意身边带着植物气息的人事物，不一定是名字带草字头的，可能是个喜欢侍弄花草的邻居，或是总穿绿色衣裳的朋友。他们身上带着某种疗愈的能量，或许能给你提供意想不到的视角。别急着抗拒那些看似微小的改变，某个转折点可能就藏在最日常的对话里。\n\n最近特别要留心身体发出的那些轻如羽毛的信号，可能像午后突然的困倦，或是手指尖偶尔的麻痒。这不是要你草木皆兵，而是学会用更细腻的方式和自己对话。保持稳定的节奏比追求剧烈调整更重要，就像山涧不会因为落石就改变流向。真正的转机往往在你放松紧绷的神经后，才会悄悄显露出痕迹。",
+  "study": "你眼前遇到的阻碍不过是虚张声势的纸老虎，别急着慌神。学业路上偶尔触礁的浪头掀不翻大船，沉住气把稳舵盘就行。最近要留心身边带草木气息的人——可能是姓氏里藏着草字头的师长，也可能是像春草般坚韧的同窗。他们或许会为你推开某扇关键的门，但别干等着天上掉梯子，自己得先垫起脚尖够一够。保持住现在稳扎稳打的节奏，那些看似绕不过去的坎，过两个月回头再看，不过是你登高时踩过的碎石块罢了。",
+  "general": "你抽到的这支签暗藏着一股\"险中求稳\"的生机。眼前的困顿不过是层薄雾，看似阻隔视线，实则遮不住脚下路。不必纠结于风浪的形态，真正要警惕的是自己应对风浪时的心态。那些让你心焦的阻碍，细看之下或许正是托举你向上的阶梯。\n\n特别要注意那些看似平常的相遇——某个姓氏带草字头的人，或是某个气质如春草般坚韧的普通人。他们带来的不是惊天动地的转折，而是像春雨润土般悄然改变你的处境。你与机遇的距离，其实比想象的更近，只是需要卸下防备去感知。\n\n此刻最忌讳两种状态：一是被暂时的困局蒙住心智，错失近在咫尺的转机；二是过分执着于既定路线，反而看不见岔路尽头的豁然开朗。保持如草木般的柔韧，风来时顺势而伏，雨过后自然挺立，这才是通往高处最踏实的路径。"
+}
+```
+
+### 英文翻译
+```json
+{
+  "sign_number": 145,
+  "sign_text": "When danger comes, there's no need to fret;\nWhat are winds and waves to cause regret?\nIf you meet one whose name bears the grass crown,\nThe azure path to success is close at hand.",
+  "interpretation1": "The first line, 'When danger comes, there's no need to fret; What are winds and waves to cause regret?' encourages an open-minded perspective: even if obstacles and disturbances arise, they are not worth worrying about. The second line, 'If you meet one whose name bears the grass crown, The azure path to success is close at hand,' reveals the key—'the grass crown person,' referring to someone whose surname includes the grass radical (e.g., Su, Cai, Dong), or a simple, down-to-earth person. It suggests that opportunities are hidden in ordinary places. The hexagram shifts from Da You (Great Possession) to Da Xu (Great Accumulation), indicating a transition from abundance to preservation. In the Qian Palace, the energy is vigorous but requires temporarily sheathing one's edge and accumulating virtue. When the 'grass crown person' appears, the path to success is near. This is a moderately favorable sign, with both good and bad aspects; the core lies in 'meeting'—not passive waiting, but remaining perceptive amid storms and recognizing true opportunity in the ordinary.",
+  "career": "Career encounters 'danger'—such as project bottlenecks or colleague conflicts. The sign says 'no need to fret,' indicating the situation will eventually turn around. Da You transforming into Da Xu suggests now is the time to restrain competitive impulses and avoid confrontation. 'Meeting the grass crown person' hints at a workplace benefactor, perhaps a colleague's support or a superior's recognition, especially beneficial for those connected to grassroots or rural industries. Qian Palace urges active improvement of professional skills, like technical research or process optimization. Avoid frequently considering leaving due to temporary disturbances or vying for credit. 'The azure path' does not come out of nowhere; precise effort during the dormant period is needed. Pay attention to those with grass-radical surnames or backgrounds in gardening, agriculture—their guidance may help you break through promotion barriers, likely around late autumn and early winter.",
+  "wealth": "Wealth resembles the 'winds and waves'—short-term fluctuations are inevitable, such as investment losses or delayed payments, but 'what are they to cause regret?' indicates no need to panic. Da You to Da Xu suggests a shift from expansion to conservation. 'Meeting the grass crown person' implies a benefactor bringing wealth opportunities, perhaps from earth-related industries (real estate, planting, forestry) or guidance from a simple elder. Regular income is stable; speculative gains are unfavorable. Recommended actions: organize accounts, allocate to stable assets, and cooperate with those whose names feature the grass radical. Avoid: chasing market trends, credit overextension. The azure path is not about sudden riches but a leap after steady accumulation—patience will bring clarity.",
+  "love": "Emotional relationships may show 'danger' signs like arguments or growing distance. The sign comforts 'no need to fret'—the bond is not broken. Qian Palace's Da You to Da Xu indicates passion is settling, a good time to nurture warmth. 'Grass crown person' can be interpreted in two ways: a fateful encounter in gardens or countryside, or a mediator; or a partner whose genuine simplicity reveals true love in plainness. For singles, expand social circles and pay attention to those who feel familiar from the start. For couples, avoid digging up the past or harsh words; engage in gardening or morning walks to cultivate tranquility. 'Azure path close at hand' is not love at first sight but a clear road ahead discovered after mutual growth.",
+  "health": "The sign uses 'danger' and 'waves' metaphorically for minor ailments or emotional fluctuations. Qian Palace is vigorous, but Da You to Da Xu warns against overexertion. 'Waves' relate to liver-gallbladder qi stagnation; 'grass crown' relates to spleen-stomach function (wood and earth elements). 'Azure path' suggests wellness requires upward and warm energy—exercise in the morning (wood energy rising), and consume yam, poria, and other earth-nourishing foods. Watch for liver fire disturbing the heart, causing insomnia or dry mouth—no need to worry excessively; cultivate the mind. Qian hexagram governs the head; Da Xu's mountain suggests rest and avoiding high-risk activities.",
+  "study": "Study encounters 'danger' like exam setbacks or learning plateaus. 'No need to fret' boosts confidence—the storm will pass. 'Grass crown person' hints at mentor guidance or peer help, especially beneficial for liberal arts or biology. Qian Palace's Da Xu requires accumulation: make long-term study plans, avoid cramming or distraction. Guidance from those with grass-radical names or studying in a quiet green place may spark inspiration and improve exam luck. 'Azure path' represents success, but not by luck—like Da Xu, daily accumulation of knowledge leads to progress.",
+  "general": "The essence of this sign is 'no worry, no regret, skillfully meet the grass crown.' In summary: storms are steps, not roadblocks; benefactors are bridges to the azure path. Three key actions: First, stay calm in adversity—composure attracts opportunity. Second, notice those with grass-radical names or simple nature; actively connect, and you may receive crucial guidance. Third, emulate Da Xu: temporarily conceal your edge, cultivate inner skills, and avoid rashness. Mentally, do not doubt because it is a moderate sign—fortune and misfortune turn on a thought. The azure path is not far away but lies in the wisdom of recognizing people and timing right under your feet. Reflect on how this resonates with your current situation."
 }
 ```
 
 ---
 
-## 第 18 签
-
-⚠️ **缺少英文翻译**
+## 第 146 签
 
 ### 中文原文
 ```json
 {
-  "sign_number": 18,
-  "fortune": "中签",
-  "gua_type": "乾宫 乾变夬",
-  "sign_text": "心戚戚，口啾啾，一番思虑一番忧，说了休时又不休。",
-  "interpretation1": "签文以“心戚戚，口啾啾”开篇，描绘内心愁苦、口中叹息之象，如同一人独坐空庭，百般思虑却理不出头绪。“一番思虑一番忧”直指忧思循环，越思越忧；“说了休时又不休”则点明心结难解，欲罢不能。卦变乾为天、夬为决断：乾主动健，夬主果决，然此签却显犹豫反复，是乾健受困之兆。中签之象，吉凶各半：吉在乾元亨通，事尚有转机；凶在夬卦之“扬于王庭”，若决断不当，反生更多纷扰。核心寓意是提醒求签者：心绪不宁时，勿贸然行事，需静中求定，待忧思稍解，再以乾之刚健，行夬之决断。",
-  "career": "签文“心戚戚，口啾啾”映射职场中因竞争或言语冲突导致的焦虑不安，如项目推进受阻、同事间暗生嫌隙。“一番思虑一番忧”警示若反复权衡利弊，反易错失良机；“说了休时又不休”则暗示欲辞难辞、欲进难进之困局，尤利合约洽谈、岗位变动等需决断之事。乾卦主自强不息，宜放低姿态、深耕专业，忌与人争辩高下。时机在冬季前后，可待小概率转机出现后再行动。",
-  "wealth": "“心戚戚”如财路不稳，虽有乾之刚健，却乏夬之果断，主正财平稳，偏财难求。“口啾啾”象征投资信息杂乱，易听信传言导致亏损；“说了休时又不休”预示旧债或旧账难以清结，理财宜守不宜攻。乾变夬为决裂之象，须警惕合同纠纷或合作中止，利金属、机械行业，但求厚积薄发，忌贪快财。建议每月强制储蓄，勿透支信用。",
-  "love": "“心戚戚”喻感情中患得患失，一方猜疑、一方叹息；“口啾啾”如无谓争吵或解释不清，易生隔阂。“一番思虑一番忧”指向单身者因过往经历而犹豫不前，暧昧关系恐陷入拉锯；“说了休时又不休”则暗示分手难断、纠缠反复。乾变夬主决绝，但中签需缓图：宜主动沟通而非冷战，忌翻旧账或冲动分手。稳定关系可借共同兴趣重燃热情。",
-  "health": "签文“心戚戚”对应心气郁结，易引发心悸、失眠或多思伤脾；“口啾啾”如肺气不畅，或有咽喉不适、频繁叹气之象。“一番思虑一番忧”提示肝郁气滞，应关注消化系统及情绪调节。乾卦属金，对应肺与大肠，夬卦主决断，宜果断放下包袱。养生建议：晨起深呼吸（金气肃降），酉时按揉太渊穴；饮食清淡，忌辛辣；傍晚散步疏解郁气。",
-  "study": "“心戚戚，口啾啾”描摹备考学子心浮气躁、暗自焦虑之态，尤易在考试前夜辗转难眠。“一番思虑一番忧”暗示复习进度混乱，旧知识点未巩固又添新忧；“说了休时又不休”指学习计划难坚持，常半途而废。乾变夬有利于需要速记或演讲的科目（如文科、辩论），但不利需要长期钻研的理科。建议：分段复习、每25分钟休息一次；考场提前踩点以安定心神。",
-  "general": "此签整体呈现“忧思过度，进退维谷”之象，关键在转忧为断、化戚为健。行动建议：1. 停止反复思虑，用纸笔写下每个抉择的利弊，强行推动决策；2. 减少社交中的言语纷争，尤其避免涉及他人隐私的议论；3. 选择清晨（乾时）进行重要工作或谈话。心态上要明白“说了休时又不休”本是心魔，夬卦五爻曰“苋陆夬夬，中行无咎”——哪怕决断稍显急躁，坚持中正之道亦能免过。凡事留三分余地，静待冬去春来。"
+  "sign_number": 146,
+  "sign_text": "船棹中流急，花开春又逢，事宁心不静，惹起许多疑。",
+  "interpretation1": "心情纷乱，办事虑深，时运犹待新春，旅外慎防不测，婚姻出现暗礁。",
+  "career": "这签文里藏着一股湍急的暗流。你现在的事业像被推到了河心，手里攥着桨却总觉得划得吃力——明明已经拼尽全力，方向却总被浪头推着走。表面上看起来事情似乎稳住了，但心里的焦灼像野草一样疯长，甚至开始怀疑自己是不是漏看了什么，或是身边藏着没察觉的阻碍。\n\n但这份躁动未必是坏事。就像早春的花开得越艳，越容易让人忽略即将到来的换季，眼下你或许正卡在某个关键的转折口。那些反复啃咬心神的疑虑，其实是身体比理智更早嗅到了变化的信号。不必强求立刻把所有线头都理顺，有时候在漩涡里缓一缓手，反而能看清哪道水纹底下藏着真正的礁石。记住，急流里稳住船的不是蛮力，是懂得顺着水势调整角度的巧劲。",
+  "wealth": "你当前的财运像湍急水流中的船，表面看似在奋力前行，但暗里要留神浪头下潜藏的礁石。当下或许有看似不错的机会冒头，但这些机遇像早春的花，开得急败得也快，需要你沉住气分辨哪些是虚晃的假象，哪些是能结出果实的枝芽。\n\n此刻的困境不在于外界如何动荡，而是你心里那杆秤总在摇摆。明明该收手观望的时候，偏偏被旁人煽动得蠢蠢欲动；真该果断出手时，又会被过往的磕绊绊住脚步。这种反复犹疑最耗财气，就像攥着满把沙砾，攥得越紧漏得越快。\n\n倒不如把算盘珠子暂时拨回原点，像老匠人擦亮蒙尘的铜镜那样，先把自己的判断力打磨清晰。钱财往来最忌被情绪牵着走，当你学会把焦虑拧成审视风险的准绳，把急躁锻造成等待时机的耐心，迷雾自会散开让你看见该走的路。",
+  "love": "这签文里的暗流在说：你此刻正被一股无形的力量推着走，像站在湍急的漩涡中央。看似在用力划桨掌控方向，但水的流向总在和你较劲，手心攥着的船桨渐渐发烫，提醒着某些坚持未必能抵得过天时流转。\n\n花开春离是种温柔的警告——你捧着的那份期待像枝头初绽的桃李，美得让人想永远停驻。但春风总要往北吹，花瓣总要零落成泥。不是你的守候不够虔诚，是命运在教人学会与无常共处。那些你以为能攥紧的，恰恰需要摊开手掌任其舒展。\n\n最锋利的是最后两句。当外界的风浪暂时平息，内心的潮水反而涨得更高。你给自己造了座透明的迷宫，每个转角都映着猜忌的影子，连呼吸都带着回响。这不是命运的刁难，是心在借外界动荡显形。若能把对着外界的探照灯转回来，或许会发现迷雾里闪烁的，是自己未愈合的旧伤口。\n\n不必急着斩断疑虑，它们像水草缠着船桨，越是挣扎越难脱身。试着在动荡里找到自己的锚点——不是某个具体的人或事，而是你心底最澄澈的那片海。当潮水退去时，搁浅的贝壳里藏着的，或许正是你寻了许久的答案。",
+  "health": "你现在的健康状态像湍流中奋力划动的船桨，看似在努力维持平衡，实则暗藏一股紧绷的力道。表面或许能应付日常的消耗，但身体深处正发出需要缓下节奏的警示。春花开得绚烂却匆匆凋落，暗示某些看似好转的迹象可能只是短暂喘息，若忽略根基的养护，容易陷入反复波动的循环。\n\n你内心对健康的焦虑像水面下的暗涌，即便外在暂时安稳，仍会泛起层层疑虑。这种不安或许源自对身体信号的过度解读，也可能指向尚未被正视的隐忧。要警惕这种心神不定的状态，它可能形成消耗精力的漩涡，反而拖累本可稳定的根基。\n\n此刻需要你像观察四季更替般，用清醒而接纳的态度看待身体的起伏。不必执着于即刻的答案，而是建立与自我对话的耐心。建议在维持现有节奏时，刻意留出滋养元气的空隙，像给翻腾的河水拓宽河床。当疑虑升起时，与其反复揣测，不如将这份觉察转化为更落地的行动——或许是调整某个生活细节，或许是寻求专业指引的锚点。记住，动荡的水流终会沉淀出澄明，关键在于你能否在颠簸中稳住自己的舵。",
+  "study": "这枚签文给你的学业之路蒙上了一层雾影。你现在似乎站在激流中央的船上，手握着桨却总觉得水流湍急难以掌控——可能正面临知识积累的关键期，既不能松懈又难寻着力点。枝头绽放的花朵刚让你尝到春意，转眼却要面对季节的轮转，暗示着某些阶段性成果或许无法长久停留，需要及时将优势转化为更深厚的根基。\n\n表面风平浪静的时刻，你内心反而容易生出细密的涟漪。那些看似稳定的学习状态里，可能藏着对自我能力的反复推敲，对知识框架的隐约不安。这种思虑本是求学路上必经的锤炼，但若任其肆意生长，反而会让清晰的判断力蒙尘。\n\n不必苛责自己的多虑，但需要警惕被疑虑绊住脚步。当船桨划破水面时，与其盯着漩涡担忧方向，不如在每次摆渡中校准手腕的力度。花开花落本是天地规律，重要的是在盛放时汲取养分，在飘零时沉淀生机。此刻的困惑，或许正是突破瓶颈前的必要蓄力。",
+  "general": "此刻你的处境像一艘逆流而上的船，周遭的暗涌推着你不得不加速前行。表面看生活仿佛春花开尽前的片刻绚烂，实则花期将逝的凉意已悄然蔓延。明明许多事暂时安稳落地，可你的心总像被风吹皱的湖面，涟漪一圈圈荡开，总担心平静下藏着未解的谜题。\n\n这恰似站在十字路口望见远处的迷雾，既渴望看清前路，又害怕看清后的真相。你的敏锐与谨慎原是铠甲，当下却成了束缚脚步的锁链。与其反复揣测每个选择的代价，不如在迷雾中先稳住呼吸，让直觉沉淀下来。当水面浑浊时，静待泥沙落定反而能映出真实的倒影。\n\n不妨把疑虑当作磨刀石，把犹疑当作试金石。眼下最需要的不是立即破除所有迷障，而是学会与这份不安共处——像老船夫熟悉了急流的节奏，终会在颠簸里找到自己的平衡。"
+}
+```
+
+### 英文翻译
+```json
+{
+  "sign_number": 146,
+  "sign_text": "The boat races through the midstream rapids,\nFlowers bloom as spring returns once more.\nMatters settle, yet the heart finds no stillness,\nStirring up a cloud of doubts and questions.",
+  "interpretation1": "Your mind is unsettled, and your affairs require deep thought. The season of fortune still awaits the new spring. Travelers should be cautious of the unexpected. Marriage may face hidden reefs.",
+  "career": "This oracle reveals a hidden undercurrent of turbulence. Your career feels like being pushed into the middle of the river, oar in hand yet struggling against the current—despite giving your all, the direction is pulled by the waves. On the surface, things seem stable, but inner anxiety grows like wild grass, making you wonder if you have overlooked something or if unseen obstacles surround you. Yet this restlessness may not be ill. Just as early spring blossoms are brightest just before the season turns, you may be at a critical turning point. The doubts gnawing at your heart are signals your body senses before your mind does. Do not force all threads to be straightened; sometimes pausing in the whirlpool lets you see where the real danger lies. Remember, in rapids, the boat is steadied not by brute force but by the skill of adjusting to the current.",
+  "wealth": "Your current financial prospects resemble a boat in swift waters—seemingly pressing forward, yet hidden rocks lurk beneath. Opportunities may appear tempting but fade quickly like early spring flowers. You must discern illusions from fruitful branches. The trouble lies not in external turmoil but in the wavering balance within your heart. When you should hold back, you are swayed by others; when decisive action is needed, past setbacks hold you back. This hesitation drains your wealth like sand slipping through a tight fist. Instead, step back and polish your judgment like an old craftsman cleaning a tarnished mirror. Do not let emotions steer your finances. Turn anxiety into a rope for assessing risk, and impatience into patience for waiting. The fog will clear to show the path forward.",
+  "love": "The undercurrent in this oracle speaks of invisible forces pushing you, as if standing in a whirlpool. You seem to paddle hard, but the water fights you, and the oar grows hot in your hands, reminding you that certain persistence may not prevail against the seasons. The spring blossoms leaving is a gentle warning: the expectation you hold is as beautiful as early peach blooms, but the spring breeze will blow north, and petals will fall. Your devotion is not lacking, but fate teaches coexistence with impermanence. What you think you can hold tightly actually needs an open hand. The sharpest part is the last lines: when external storms calm, inner tides rise higher. You have built a transparent labyrinth where every corner reflects suspicion, and even your breath echoes. This is not fate's torment but your heart manifesting through external disturbances. If you turn the spotlight inward, you may find that the mist hides unhealed old wounds. Do not rush to cut off doubts; they cling like seaweed. The more you struggle, the tighter they hold. Try to find your anchor in the turbulence—not a specific person or thing, but the clearest sea within you. When the tide recedes, what lies hidden in the stranded shells may be the answer you have sought.",
+  "health": "Your current health is like a boat rowing desperately in a swift current—seeming to maintain balance, yet hiding a tense strain. On the surface, you manage daily demands, but deep down, your body signals a need to slow down. Spring blossoms fade quickly, suggesting that seemingly improving signs may be brief respites. If you neglect the foundation, you may fall into cycles of fluctuation. Your inner anxiety about health is like an undercurrent; even when things are externally stable, ripples of doubt arise. This unease may come from overinterpreting bodily signals or pointing to unaddressed hidden worries. Beware of this restless state; it can form a vortex that drains energy and undermines stability. At this moment, observe your body's rhythms like the changing seasons—with clarity and acceptance. Do not cling to immediate answers; instead, build patience for inner dialogue. While maintaining your current pace, deliberately create space to nourish vitality, like widening a riverbed for a turbulent current. When doubts arise, transform that awareness into practical actions—adjust a routine detail or seek professional guidance. Remember, turbulent waters eventually settle clear; the key is to steady your helm amidst the rocking.",
+  "study": "This oracle casts a shadow over your academic journey. You seem to stand on a boat in midstream, oar in hand yet struggling to control the rapids—perhaps facing a critical period of knowledge accumulation where you can neither relax nor find a foothold. The blooming flowers just gave you a taste of spring, but soon the season will turn, hinting that some interim achievements may not last. You need to transform advantages into deeper foundations. On the surface, all seems calm, but your mind ripples with fine wrinkles. Beneath seemingly stable study conditions, you may be reexamining your abilities and questioning your knowledge framework. Such reflection is normal in learning, but if allowed to grow unchecked, it may cloud clear judgment. Do not blame yourself for overthinking, but be wary of being tripped by doubt. When the oar cuts the water, instead of staring at the whirlpool worrying about direction, calibrate the force of your wrist with each stroke. Blossoms and withering are natural laws; what matters is to absorb nourishment when in bloom and settle vitality when fading. The present confusion may be the necessary accumulation before a breakthrough.",
+  "general": "Your current situation feels like a boat struggling upstream, with undercurrents pushing you to accelerate. On the surface, life seems as brilliant as the last bloom before spring ends, but the chill of the approaching wither has already spread. Many things have temporarily settled, yet your heart is like a wind-rippled lake, rippling outward, fearing that hidden puzzles lie beneath the calm. This is like standing at a crossroads gazing into distant mist—eager to see the path yet afraid of the truth. Your keenness and caution are armor, but now they become shackles on your steps. Instead of repeatedly weighing every choice, steady your breath in the fog and let intuition settle. When the water is muddy, waiting for the sediment to settle reveals the true reflection. Treat doubts as a whetstone and hesitation as a touchstone. What you need now is not to dispel all confusion immediately, but to learn to coexist with this unease—like an old boatman who, familiar with the rapid's rhythm, finds balance amidst the rocking. Consider this an invitation to self-reflection, not a prediction."
 }
 ```
 
 ---
 
-## 第 19 签
-
-⚠️ **缺少英文翻译**
+## 第 147 签
 
 ### 中文原文
 ```json
 {
-  "sign_number": 19,
-  "fortune": "上上签",
-  "gua_type": "艮宫 履变讼",
-  "sign_text": "不远不近，似易似难，等闲一事，云中笑看。",
-  "interpretation1": "签文“不远不近，似易似难”描绘一种若即若离、看似简单实则暗藏玄机的状态。“等闲一事”指眼前之事看似平常，却非表面那般轻易；“云中笑看”则喻居高远望、超然物外之态。此签出自艮宫履变讼：艮为山，主静止、稳固；履为行走，象征实践行动；变讼则暗示过程中或有争议波折。整体寓意：上上之兆，事虽需耐心周旋，但若保持从容豁达之心，以全局视角审时度势，终能云开见日。宜珍惜当下福缘，不可因小事动摇心境。",
-  "career": "签文“不远不近”喻事业正处于关键过渡期，机遇恰在眼前却未至最佳时机。艮卦象山，主根基稳固，宜深耕现有岗位，不宜轻举妄动；“云中笑看”提示以高层视角审视全局，主动把握秋季前后可能出现的重要项目或考核。履变讼，暗示需防范同事间的竞争或合约细节纠纷，宜提前备好材料、保持低调。忌：急于求成、越级汇报、与权威正面冲突。",
-  "wealth": "财运主正财平稳，“似易似难”反映偏财看似唾手可得，实则暗藏陷阱，尤应警惕熟人合作或短线投机。艮为山，利不动产、仓储、土属行业投资，但需量力而行，不可杠杆扩张。“云中笑看”劝诫看淡短期涨跌，以长期持有为佳。忌：轻信房产中介、参与担保借贷、盲目跟风新兴领域。",
-  "love": "感情呈“不远不近”之态：单身者身边或有缘人，但关系暧昧未明，宜以“云中笑看”之心慢火细熬，待对方主动；伴侣间需注意因琐事引发口角（履变讼），建议多创造共同外出游历机会（艮为山对应稳定陪伴）。忌：急于确认关系、翻旧账、在公共场合指责对方。",
-  "health": "艮卦对应脾胃、肌肉，履卦主足部、关节。签文“似易似难”警示小症状易被忽视，如腹胀、肩背僵硬、膝盖酸痛。养生宜侧重温补脾土，少食生冷；运动以慢跑、登山、太极等平地活动为佳，避免高强度跳跃。建议每年秋季做一次全面体检，尤其关注消化与骨密度。",
-  "study": "学业状态表面“似易似难”，实则根基尚浅需夯实。艮为山，利钻研需要耐心积累的学科（如数学、哲学、历史）；“云中笑看”提示考试时保持冷静，尤其适合发挥临场应变能力。近期考试运中等偏上，但需提前踩点考场、备齐工具，避免因疏忽丢分。宜请教学长而非硬啃难题。",
-  "general": "此签整体吉兆，核心在于“云中笑看”的从容心态。当前所遇之事不必过分计较一时得失，正如远山近水各有时节。关键行动：①保持现有生活工作节奏，不因外界评价打乱步伐；②遇事多从长远角度考量，可写决策清单辅助判断；③主动与经验长者或行业前辈交流，借力破局。记住：等闲之事最易误人，不妨退一步笑看风云。"
+  "sign_number": 147,
+  "sign_text": "可蓄可储，片玉寸珠，停停稳稳，前遇良图。",
+  "interpretation1": "不可浪费，遇良机时始能大展鸿图。",
+  "career": "你脚下踩着的路是块稳稳当当的基石，但别急着往上猛冲。眼下要像老农人守着粮仓那样，把每一粒种子都码齐整了。那些看似零碎的小机会，其实都是嵌在棋盘上的玉石子儿，你得弯下腰一颗颗拾起来攒着。\n\n别被旁人追风逐月的热闹晃了眼，你自有自己的时间刻度。现在每一步都得像是给老座钟上发条，咔哒咔哒走得准，走得实。有些门现在推不开，不是锁头锈了，是时辰没到钥匙孔里透光。\n\n等走到前面岔路口，你会看见画着蓝图的界碑。那时候甭慌着扑上去，先拍拍衣襟上的尘土，把这一路攒的家当都抖落出来晒晒。该往哪边拐，自然会在日头底下亮堂堂地显出来。\n\n记着，这会儿最怕的就是心急火燎地掏家底。你腰包里那些碎银子，得等秤杆子摆平了再往外拿。稳得住的人，才能等到货真价实的买卖上门。",
+  "wealth": "这签文里藏着你财运的密码。可蓄可储说的是你手头攒得住东西，像水缸接雨似的，一滴一滴慢慢蓄满。这阶段钱要收着用，但别抠得太紧，留些余地给未来的活水。\n\n片玉寸珠讲的是你现在手里攒的每笔小钱都带着光，看着不起眼，攒多了就是整块的宝玉。那些零碎进账别嫌弃，它们像种子，等时候到了能长成大树。\n\n停停稳稳这四个字是让你别急着追风。现在适合像老树扎根那样稳稳守着，哪怕步子慢点，但踩下去的脚印都是实的。前头说的良图不是天上掉馅饼，是你稳扎稳打走到某个路口时，自然能看见的好门道。\n\n记住，这签文像把钥匙，既要你耐心打磨钥匙齿，也要等对的那个锁眼出现。现在按捺住性子打磨，将来遇到锁眼时，轻轻一转就开了。",
+  "love": "你此刻的际遇像在收拾一个藏宝匣，每一块碎玉、每一颗细珠都值得收进囊中。眼下看似零碎的积累，其实都在为未来某个重要时刻蓄力。那些细碎的付出和隐忍，都是命运在教你学会收敛锋芒的功课。\n\n脚下的路要像踩着青石板一样稳当，别急着跑起来。现在走的每一步都像在给未来铺路，看似重复的动作里藏着命运的刻度。前方转角处有扇虚掩的门，等你的准备足够周全时，自然会看见门后的天地。\n\n最近要当心被短期的诱惑晃了眼，像守着窖藏老酒的师傅，得耐得住寂寞才能等来醇香。你心里惦记的某些期待，可能需要再添几把柴火才能烧旺。记住，真正的转机往往藏在看似平常的坚持里，就像春雨润物，悄然间就能让整片土地苏醒过来。",
+  "health": "你的健康运势正像一块温润的玉石被捧在手心，需要细细滋养方能焕发光彩。当下适合把身体当作珍贵的容器，慢慢积累内在的能量。日常的节奏像沙漏般均匀流淌，别让急切的念头打乱呼吸的韵律。\n\n那些看似零碎的健康细节，比如睡眠的深浅、饮食的节奏、情绪的涟漪，都是串起生命力的珍珠链。现在正是调理根基的好时机，像园丁整理沃土般理顺身体的脉络。前方会遇见更契合的养生契机，但此刻的沉稳铺垫才是打开那扇门的关键钥匙。\n\n若有些旧日损耗也不必焦心，就像修补古瓷需要耐心，身体的自愈力会在平静中悄然生长。偶尔的停滞恰是蓄力的前奏，别用蛮劲打破这份酝酿。待到元气充盈时，自然会有更清晰的路径在脚下铺展。",
+  "study": "这枚签文暗含着你学业路上需把握的微妙平衡。你手头积攒的知识和才能就像碎玉散珠，看似零散却藏着珍贵价值。此刻不宜急切追寻突破，倒要像整理珍宝般将那些零碎积累梳理成体系。稳扎稳打的状态看似平淡，实则是为迎接重要转折做的铺垫。当积累到某个临界点时，自会有契合你特质的机遇在前方浮现。这段时期要警惕两种极端：既不能放任资源闲置荒废，也不可急功近利强行拼凑。保持从容的节奏，让量变自然催生质变，方能在适当时机将散落的珠玉串成完整的璎珞。",
+  "general": "这枚签文落在你身上，讲的是「沉淀」与「机缘」的平衡之道。可蓄可储，是说当下正是积攒力量的时候——不论是智慧、经验还是物质基础，都要像收集碎玉细珠般，把零散的机会一点点聚拢起来。停停稳稳，是提醒你保持一种不慌不忙的清醒，别被浮躁的念头打乱节奏，就像往瓶子里倒水，急躁了反而容易洒出来。\n\n前遇良图这四个字藏着转折，暗示你现在的积累会在某个节点派上用场。但要注意的是，这个「良图」未必是突如其来的惊喜，更像是你此前埋下的伏笔自然生长出的结果。就像春天播的种子不会在第二天就开花，但到了时节总会抽芽。你此刻需要做的，是把眼光放得更宽些，既不被眼前的得失困住，也不过分期待遥远的结果，专注在能握住的每一步。\n\n这签里藏着柔韧的智慧：太用力攥紧砂砾会从指缝流走，完全摊开手掌又会被风吹散。现在或许需要克制急切的念头，用更平缓的节奏去铺路，让该沉淀的沉淀，该发生的自然会发生。"
+}
+```
+
+### 英文翻译
+```json
+{
+  "sign_number": 147,
+  "sign_text": "Store and save, store and keep;\nA chip of jade, a tiny pearl.\nSteady and sure, tranquil and deep,\nAhead a fine plan begins to unfurl.",
+  "interpretation1": "The four lines all depict the image of gathering strength in readiness. 'Store and save' directly indicates that now is the time to consolidate and accumulate, like filling a granary—not the moment for conquest. 'A chip of jade, a tiny pearl' uses small treasures as a metaphor: though gains seem trivial, they are precious; cherish every bit of progress. 'Steady and sure, tranquil and deep' describes a calm, unhurried pace, cautioning against impatience. 'Ahead a fine plan begins to unfurl' implies that opportunity lies ahead, but it cannot be forced. The hexagram originates from Zhen Palace (thunder), which can be startling; Sui hexagram advises following the current; the transformation to Wu Wang (Innocence) warns against rash action—heavenly thunder strikes those who act against the time. Thus, though the sign is moderately unfavorable, it contains hidden fortune: misfortune lies in insufficient current strength; fortune lies in the ability to accumulate and wait. Overall, one should emulate the wise merchant who conceals his wealth, waiting quietly for movement, not despising small gains, nor rushing ahead because a fine plan is in sight.",
+  "career": "The phrase 'steady and sure, tranquil and deep' is the key for your career now. Zhen Palace's Sui transforming into Wu Wang indicates a changing environment; following the current avoids harm. In the workplace, this is not a time to stand out—you may face resistance or project changes. 'A chip of jade, a tiny pearl' suggests contributions are small; for now, focus on groundwork like improving processes, organizing data, refining skills—these seemingly trivial tasks are stepping stones for future promotion. Timing: 'A fine plan ahead' often emerges around late autumn or early winter; wait for clear signals from superiors or clients before acting. Recommended: stay committed, document case studies, maintain collaboration with colleagues. Avoid: bypassing hierarchy, changing jobs hastily, competing for empty prestige. If facing a selection process, accumulate achievements half a year in advance—don't cram at the last minute.",
+  "wealth": "'Store and save' sets the tone for wealth. 'A chip of jade, a tiny pearl' indicates scattered income—mainly slow accumulation from regular earnings, speculative gains unlikely. Zhen Palace implies movement, but Wu Wang forbids improper pursuit—speculation or leverage are strongly discouraged. Current reserves are insufficient; save regularly like ants gathering grain. Favor small purchases of physical assets like gold or silver. In business, focus on loyal customers and thin margins, not expanding into new areas. 'A fine plan ahead' is not windfall but a natural opportunity after accumulation—like having enough for a down payment when a discount appears. Financial mindset: don't be tempted by others' sudden wealth; holding to 'steady and sure' will bring clarity.",
+  "love": "The imagery here is gentle and subtle. 'A chip of jade, a tiny pearl' compares love to small fragments—not dazzling but genuine. Singles should not envy passionate romances; long-standing friendships nearby may grow into good relationships. 'Steady and sure' advises not to rush into confessions; build trust first, and timing will naturally bring things together. For couples, express feelings through daily acts—like organizing old belongings (store and save), exchanging small gifts. Avoid arguing over past issues. Zhen Palace's Wu Wang warns against baseless suspicion; emotional stability itself is fortune. If the relationship is cold, temporarily step back to accumulate warmth—do not force intensity; a turning point lies ahead.",
+  "health": "The phrase 'steady and sure, tranquil and deep' directly points to health—do not rush. Zhen hexagram corresponds to the liver and nervous system; Sui to Wu Wang, where metal (heaven) restrains wood (thunder), may cause liver qi stagnation, headaches, poor sleep. 'A chip of jade, a tiny pearl' symbolizes minor ailments like dental issues or joint aches—not serious but bothersome; treat them promptly to accumulate overall well-being. Diet: eat slowly, have small frequent meals. Exercise: gentle routines like tai chi or eight brocades; avoid intense exertion. 'A fine plan ahead' hints at recovery timing; chronic conditions, after a period of proper care, may encounter a good prescription or doctor—provided you persist in 'storing and saving' efforts without giving up halfway.",
+  "study": "Studies are exactly like 'store and save'—knowledge requires piece-by-piece accumulation. 'A chip of jade, a tiny pearl' means every formula, every word is a treasure; never neglect the basics. 'Steady and sure' discourages cramming; develop a long-term plan—like memorizing twenty pearls daily, over time forming a string of jade. Zhen Palace encourages active thinking, but Wu Wang warns against empty speculation—practice more, work on fundamental problems, avoid obsessing over obscure details. Exam luck: 'a fine plan ahead' means performance relies on prior accumulation; questions will look familiar, but careful review is needed to avoid careless errors. Favor liberal arts memorization and basic math/science; avoid abruptly changing majors.",
+  "general": "This sign centers on 'holding' and 'waiting.' A chip of jade, a tiny pearl, though small, is the foundation of life; steady and sure, though slow, is the way to far destinations. First, do one small thing daily—like keeping accounts, reading for half an hour, taking a walk—to cultivate the habit of 'storing and saving.' Second, when facing indecision, adopt the principle of 'holding' to conserve energy. Third, regularly observe inner greed and fear—both are illusions; innocence (Wu Wang) is needed to encounter the fine plan. Mentally, emulate a connoisseur appreciating a tiny pearl—cherish what you have, and blessings will gather on their own. Use this as a cultural perspective to inform your own judgment."
 }
 ```
 
 ---
 
-## 第 20 签
-
-⚠️ **缺少英文翻译**
+## 第 148 签
 
 ### 中文原文
 ```json
 {
-  "sign_number": 20,
-  "fortune": "中上签",
-  "gua_type": "艮宫 履变乾",
-  "sign_text": "桃李谢春风，西飞又复东，家中无意绪，船在浪涛中。",
-  "interpretation1": "签诗首句“桃李谢春风”，以桃李花期已过、春风消歇之象，喻美好时光转瞬即逝，机缘已失，或昔日顺境不再。次句“西飞又复东”，如飞鸟往来无定，奔波劳碌，反复无常，处境飘摇，难有安稳。第三句“家中无意绪”，直指内心纷乱，思虑不周，亦暗示家庭或内部缺乏条理，计划难行。末句“船在浪涛中”最为警策，一叶孤舟在汹涌波涛间颠簸，喻人生正处动荡险境，稍有不慎便有倾覆之虞。\n\n卦属艮宫，主静守；原卦履，上乾下兑，有履虎尾之危，强调小心慎行；变卦乾，纯阳刚健，但由履之谨慎过渡至乾之健行，提示唯有先安度风浪，才能复归稳健。艮为止、为山，变乾为天，如山立而行健，先静后动，先守后成。\n\n此签整体意象虽有起伏跌宕，然吉凶中上，意味着虽临波涛，终不改平稳收束之势。须持心如岸，以静制动，不急躁、不盲动，方能过险得安。得此签者，当悟花谢有时、风浪有尽，宜先修内务、戒纷扰，待云开雾散。",
-  "career": "签文“桃李谢春风”喻事业已过高速发展期，此前倚仗的机遇或人脉渐衰，此时不宜再恋旧枝。“西飞又复东”主频繁奔波、变动不居，可能正陷于多项目并行、岗位调动或职场人际拉锯，易劳而少功。“船在浪涛中”直指当下事业如履薄冰，外部环境或内部架构暗藏动荡。艮宫履变乾，履卦警示小心行事，变乾卦则终可刚健，先以低调守势，再图舒展。宜：固守现有岗位，梳理内部流程，精进核心业务，不争功、不树敌，以稳取胜。忌：主动揽责高风险项目、跳槽转行、公开与上级或同僚冲突。待“浪涛”稍平，自会有伸展余地。",
-  "wealth": "“家中无意绪”显财务规划欠条理，收支或略有混乱，宜先理清账目。“船在浪涛中”喻财路如行波涛，时起时落，大额进出尤需谨慎。此签财运走势偏于起伏，但吉凶中上，不致大损，只是不可冒进。原卦履，涉财如履虎尾，变卦乾则健行，提示先保守后入佳境。正财尚稳，偏财与投资则风险较高，宜敬而远之。利土属、不动产或与基础民生相关行业，不利投机、合伙或陌生领域。具体而言：宜节省开支，赎回高风险理财产品，将资金转为稳健储蓄或实体资产；忌借贷扩张、跟风炒股、签署不熟悉的法律文件。待风浪过后，自然云开见月。",
-  "love": "“桃李谢春风”暗指一段如花美眷的时光已然飘逝，单身者或正感怀旧情不再，有伴者恐已过蜜月之期。“西飞又复东”喻双方心绪飘忽，或聚少离多，沟通不畅，易生误会。“家中无意绪”更点出情感关系缺乏明晰方向，彼此都可能心乱如麻，家庭氛围沉闷。艮宫主止，履变乾则动，建议暂时停下相互指责的脚步，先求内心的安定。单身者：不必焦躁寻觅，先调理自身情绪，缘分尚需静候。有伴者：宜暂停争辩，共同处置家务琐事以重建默契，忌翻旧账、冷处理、轻言分离。等浪涛过去，船自平稳。",
-  "health": "“船在浪涛中”直接对应人身如舟，颠簸于浊浪之间，提示近期体质不稳，易受外邪侵扰，或内在脏腑功能失衡。艮宫属土，对应脾胃；履卦兑为口、为毁折，变乾金，金主肺、大肠。综合来看，需重点防范消化系统与呼吸系统问题。签文“桃李谢春风”暗示肝木过旺而伤及脾土（木克土），或有肝郁气滞、脾胃虚弱的征兆。宜：饮食规律，忌生冷油腻；适当散步或拉伸，疏泄肝气；早睡早起，避免熬夜伤阴。“家中无意绪”亦提醒注意情志致病，宜静心养性，减少无谓思虑。需警惕食欲不振、反酸胀气或反复感冒等信号，及时调养。",
-  "study": "“家中无意绪”直指学习状态——心思散乱，如一团乱麻，难以专注。易受外界干扰，或自身缺乏系统计划，导致效率低下。“西飞又复东”喻学习方法摇摆不定，东一榔头西一棒，看似忙碌实则收效甚微。“船在浪涛中”则提醒备考或升学阶段正逢波动，心理压力大，容易因一时成绩起伏而自我怀疑。艮宫主静而履变乾，建议暂时停下杂乱脚步，重新整理大纲与作息。考试运中平，利文科或需要逻辑梳理的科目，不利突击、临阵变策。具体而言：宜将大目标分解为每日小任务，固定学习环境；忌开夜车、盲目刷题或与同学攀比进度。待内心沉静，思路自会如风平浪止。",
-  "general": "此签核心意象为“船在浪涛中”，身处动荡，险象环生，然终有归岸之时。中上签的吉意不在于一帆风顺，而在于有惊无险、因祸得福。结合卦象，履变乾，先历虎尾之险，后成健行之功，故一切行事宜以“稳”为先。关键行动建议：其一，暂停重大决策，如签约、跳槽、投资等，待时机明朗（可观察天气转晴、个人心境澄明为信号）；其二，即刻整理内务，无论是家中账目、情感积怨还是学业计划，先梳理事，再前行；其三，收敛锋芒，外出注意安全，言行低调，避免与人冲突。心态上，牢记“桃李谢春风”的启示，花落自有花开日，风浪终有平息时，不必焦虑一时得失，守得心定便是晴天。"
+  "sign_number": 148,
+  "sign_text": "小子早趋庭，青云久问程，贵人来助力，花谢子还成。",
+  "interpretation1": "早给子女适切教导，可望使其得到贵人相助，并实现愿望。",
+  "career": "你目前的事业运势像一棵正在积蓄养分的幼苗。早年积累的根基正在默默滋养你的成长，但这份力量需要时间来显化成果。当前的迷茫与停滞感恰似黎明前的黑暗，是必经的蛰伏阶段。\n\n贵人的出现不会以你期待的形式到来，可能表现为某个看似平常的机会，或是某段被忽视的人际关系。真正能助你的机缘往往藏在日常琐碎里，需要你以更开放的心态去感知。此刻的等待不是被动消耗，而是整理羽翼的关键期——你之前所有的努力都会在某个节点突然串联成完整的拼图。\n\n花谢的意象不是失败，而是生命周期的必然转换。你曾付出的心血看似零落成泥，实则在酝酿更结实的果实。这个阶段的智慧在于：不执着于即时的回报，学会用播种者的眼光看待耕耘。当别人追逐昙花般的速成时，你正默默培育着经得起风雨的根基。保持这份定力，属于你的季节终将到来。",
+  "wealth": "这签文里藏着你财运的起伏脉络。早春播种的种子，根须在你看不见的土里默默伸展。你早年可能就打下了不错的基础，就像灶台里的火星，看着微弱却藏着燎原的潜力。但这些年总像站在半山腰望云海，明明高处近在眼前，脚下却找不到登顶的石阶。\n\n会有人托你一把的。不是天上掉馅饼的运气，是那些能照见你价值的人，像磁石一样自然被吸引过来。但要记得贵人给的从来不是现成的果实，而是帮你打开另一扇门的钥匙。就像桃树开花时蜜蜂帮忙传粉，真正结果还要靠树干里积蓄的汁液。\n\n别被眼前的得失困住。有些投资像候鸟迁徙，要飞过千山万水才能到达温暖的南方。现在看着像凋谢的花瓣，其实是种子正在果壳里悄悄饱满。你只需要把网撒向深水区，等潮水自然把收获推上岸。钱财的流转自有它的节气，急不得也怨不得，把该做的功夫做扎实了，剩下的交给时间发酵。",
+  "love": "这签文给你的暗示像一株在暗处生长的藤蔓，看似柔弱却暗藏韧劲。你心底有股未熄灭的火苗，是早年积累的执念在发芽。有人生的岔路你徘徊许久，像被雾蒙住眼睛的旅人，但命运的推手即将掀开这道帘幕。别怕那些看似凋零的际遇，花瓣零落时泥土里埋着种子的呼吸。未来三个月内会有双看透你困局的眼睛出现，或许是旧相识的新面目，也可能是陌生人的无心提点。你要做的只是把紧绷的弦松一松，让机缘顺着你真实的心意流淌。感情里那些未说出口的辗转，会化作更沉静的养分，等时候到了自然会结成能捧在手心的果实。",
+  "health": "这签文里藏着你身体底子的微妙暗示。你早年积累的生命力像春日抽芽的枝桠，根基里带着些旧年月的痕迹，需要留心那些潜藏在日常节奏里的细微消耗。眼下运势像将雨未雨的天色，看似平静却藏着转机——身边人的关心或专业建议会是你重要的支撑，但要警惕过度依赖外力的心态。当身体呈现\"花谢\"般疲惫状态时，恰恰是提醒你该重新调整生命节奏的契机，这过程或许像等待果实成熟需要耐心，但最终会找到属于自己的健康平衡点。记住，此刻的觉察与主动调整，远比等待所谓的\"贵人\"更重要。",
+  "study": "你学业路上像一棵需要时间生长的树苗。早年打下的根基正在默默积蓄力量，那些看似普通的学习积累其实在悄悄铺垫未来的高度。别被眼前的缓慢迷惑，你的知识土壤正在深层扎根，未来某个时刻会突然发现曾经的积累已经托着你向上伸展。\n\n当前阶段要像海绵一样吸收养分，但别急着开花。真正的突破往往藏在看似平淡的坚持里，那些反复练习的知识点，那些暂时没理解的概念，都会在某次顿悟时串联成网。保持这种细水长流的节奏，就像等待晨雾里渐渐清晰的远山。\n\n留意身边愿意点拨你的人，他们可能以意想不到的方式出现。但记住，贵人相助的前提是你已经铺好了路基。先把自己该做的做到位，该准备的准备充分，当机会来敲门时，你自然能稳稳接住。即使遇到瓶颈期也别焦虑，这是成长必经的沉淀过程，就像种子破土前总要经历黑暗。坚持下去，当积累足够时，那些暂时凋零的努力都会结出新的果实。",
+  "general": "这枚签文像一面镜子，照见你脚下延伸的路。早年你已背负行囊踏上征途，就像晨曦里赶路的旅人，那些在心底埋藏已久的抱负，始终如同天边若即若离的云霞。这条路或许比想象中更漫长，你时常在暮色里数着深浅不一的脚印，但别忘记云层里总藏着微光。\n\n途中会有某双手在适当的时候托住你的行囊，但不必刻意张望寻找，那阵清风可能就藏在某个转角处。当枝头褪去浮华时，你会发现那些飘落的花瓣早已化作土壤里的养分，悄然滋养着即将破土的果实。此刻需要像老农般从容，既要勤恳松土，也要学会等待雨露浸润的时辰。\n\n不必被「早」字困住脚步，也不必被「久」字消磨心志，你走过的每段路都在悄悄编织命运的经纬。当季风吹过荒原时，记得你播下的种子正在看不见的地底舒展根系。"
+}
+```
+
+### 英文翻译
+```json
+{
+  "sign_number": 148,
+  "sign_text": "A youth early learned at the courtly gate;\nLong has the azure path been his quest.\nA benefactor arrives to aid his fate;\nFlowers fade, yet seeds form—the harvest is blessed.",
+  "interpretation1": "The sign 'A youth early learned at the courtly gate; Long has the azure path been his quest. A benefactor arrives to aid his fate; Flowers fade, yet seeds form—the harvest is blessed.' uses the image of a child receiving instruction and embarking on a distant journey to symbolize the path of striving. 'Youth early learned' alludes to Confucius's story of Kong Li hurrying through the court, indicating a good foundation from early education or family tradition. 'Long has the azure path been his quest' speaks of high aspirations that require long travel. 'A benefactor arrives to aid his fate' is the turning point: Ding hexagram (Fire over Wind) symbolizes cooking and nurturing, renewing the old; transformed into Lu (Fire over Mountain) implies seeking success through movement—the benefactor appears during the journey, helping break through bottlenecks. 'Flowers fade, yet seeds form' uses the metaphor of petals falling but fruit forming—apparent decline conceals fruition; gains and losses follow their own timing. Li Palace belongs to fire, symbolizing brightness and culture; the Ding-Lu shift indicates first stabilizing like a tripod, then moving boldly like a traveler. Overall, this sign suggests that long effort will bear fruit, but success does not come quickly—it requires change, and the benefactor's guidance is key. Moderately favorable fortune means difficulty first, then gain; after patience, the moon shines through the clouds.",
+  "career": "Career luck matches 'Long has the azure path been his quest'—high ambitions not achieved overnight. Li Palace's Ding hexagram encourages renewal; Lu hexagram seeks success through movement—your career development should find opportunities amid change. Early 'courtly learning' has laid the foundation for today's journey. 'Benefactor arrives' clearly indicates that at key moments, mentors, seniors, or partners will offer help—especially favorable for department changes, overseas postings, entrepreneurship, or cross-field collaboration. Timing: 'flowers fade, seeds form' suggests results from the latter half of the year to year-end; avoid impatience. Specific actions: volunteer for projects requiring innovation or expansion; avoid clinging to old systems or rejecting new fields. Lu hexagram reminds: if an opportunity requires travel or relocation, seize it decisively. In teamwork, emulate Ding's harmonizing virtue to unite people; do not boast of your own merits. For exams or selections, the benefactor may be among the evaluators.",
+  "wealth": "Wealth luck is captured by 'Flowers fade, yet seeds form'—fading flowers represent initial investment or temporary loss; seed formation indicates real gain in the end. Li Palace belongs to fire; fire overcomes metal for wealth. Ding to Lu suggests wealth arises from movement and travel. Regular income is stable; speculative gains require benefactor guidance. 'Benefactor arrives' indicates cooperative wealth or investment information through connections, but careful discernment is needed. Specific sources favor culture, education, catering (Ding's cooking symbolism), tourism or cross-border trade (Lu's travel). Financial management: earlier stages should accumulate like a tripod—focus on preservation, avoid aggressive speculation. During 'flower fade' periods, paper losses may appear, but do not panic-sell. When the benefactor appears and timing matures, you may moderately increase investment—especially in autumn. Avoid: seeking shortcuts, trusting strangers' high-interest promises.",
+  "love": "Emotionally, 'youth early learned at the courtly gate' suggests some people are deeply influenced by family, carrying elders' expectations in relationships. 'Long has the azure path been his quest' indicates a long, cautious pursuit of love—possibly still in secret crush or long-distance status. Moderately favorable sign with benefactor help: singles may meet the right person through friend introductions or social activities (Lu's travel imagery)—the person may be mature and steady like a tripod. For couples, 'flowers fade, yet seeds form' reminds that passion may settle over time but becomes more stable; minor friction (flowers fading) may deepen understanding and bear fruit of mutual commitment. Activities together like planning trips or further studies are beneficial. Avoid: bringing up old grievances, stubbornness. Li Palace favors bright, open communication—prevent misunderstandings from creating distance.",
+  "health": "Health: Li Palace belongs to fire; Ding to Lu—fire above, movement below; guard against heart fire hyperactivity and mental unrest. 'Youth early learned' indicates a solid foundation in youth, but 'long quest' suggests prolonged exertion that may deplete energy. 'Flowers fade' warns of lowered immunity or recurrence of old ailments with season changes—especially heart, blood vessels, and eyes (Li for eyes). 'Seeds form' means proper care will restore health. Wellness should combine stillness and motion: Ding hexagram favors calm practices like meditation and dietary therapy to nourish yin and reduce fire; Lu hexagram encourages moderate walking to soothe liver qi. Specifics: in spring and summer, eat light, moistening foods; in autumn and winter, keep warm and prevent colds. Avoid: staying up late, overwork. If experiencing insomnia or dizziness, adjust schedule promptly—no major illness is indicated.",
+  "study": "Academic luck aligns with 'youth early learned at the courtly gate'—those with a solid foundation will find it easier to succeed. 'Long has the azure path been his quest' clearly points to a long academic journey—further study, graduate school, studying abroad, etc. Li Palace is the hexagram of culture; Ding to Lu suggests learning should shift from solid basics (Ding) to practical application (Lu). Rote memorization is less effective; combine study with internships, travel, project research. Benefactors may appear among teachers or classmates. Exam luck: preparation should be like Ding—slow simmering, steady accumulation; performance during exams should be like Lu—calm and composed, avoid nervousness. Favorable subjects: liberal arts, arts, cultural studies (Li fire, culture). For science/engineering, strengthen logical deduction. 'Flowers fade, yet seeds form' reminds: even if a test result is not ideal, it reveals weak points and helps final improvement. Set long-term plans; avoid shortcuts.",
+  "general": "This sign summarizes that striving leads to achievement; the key lies in 'flowers fade, yet seeds form'—in life's ups and downs, where seeming decline occurs, new life is being nurtured. The hexagram shift from Ding to Lu advises moving from accumulation to action—do not fear change. Key action suggestions: First, actively seek advice from seniors or cross-industry experts; the benefactor is not far away—you need to take the first step. Second, relax about short-term gains and losses, especially material or reputational—stepping back reveals the bigger picture. Third, maintain the humble attitude of 'learning at the courtly gate'—learning never ends. Mentally, embody fire's brightness and integrity, and Lu's adaptability. Moderately favorable fortune is not a gift from heaven but the result of persistent effort; when conditions are right, success follows naturally. Consider this an invitation to self-reflection, not a prediction."
 }
 ```
 
 ---
 
-## 第 21 签
-
-⚠️ **缺少英文翻译**
+## 第 149 签
 
 ### 中文原文
 ```json
 {
-  "sign_number": 21,
-  "fortune": "上上签",
-  "gua_type": "离宫 同人厘革",
-  "sign_text": "一水远一水，一山旋一山，水穷山尽处，名利不为难。",
-  "interpretation1": "此签上上，卦属离宫同人厘革。离为火，主光明、依附；同人主同心协力，革主变革更新。签文‘一水远一水，一山旋一山’，描绘重重山水阻隔，象征人生旅途中的反复与曲折。‘水穷山尽处，名利不为难’则点明：当行至绝境、看似无路之时，反而触底反弹，名利自然降临。整体寓示：当前困境并非终点，而是转机的前奏。需如离火般保持光明心态，借同人之力，顺势变革，终能柳暗花明。上上签虽吉，亦需戒骄戒躁，珍惜机缘，不可恃势妄为。",
-  "career": "签文‘水穷山尽处’喻事业当前或遇瓶颈，但此乃转折之兆。离宫同人卦主合作、口碑，革卦主改换赛道或方法。宜主动与同事、上司沟通，争取联合项目；亦需审视现有岗位，若有转型机会（如内部调岗、行业交叉），应果断把握。‘名利不为难’预示业绩或晋升有望，尤其利于需长途出差、跨地域协作的岗位。忌单打独斗、固守旧模式。",
-  "wealth": "签文‘一水一山’喻财源流动但多有波折，正财需经积累方见增长。‘水穷山尽’指看似财路枯竭时，反有偏财机遇，如投资回弹、合作分红、政策补贴等。同人卦利与人合伙，厘革卦宜调整理财结构（如赎回低效产品、重配基金）。上上签主财利不愁，但需避免冲动消费或高风险投机，宜先储蓄后行动。",
-  "love": "‘一水远一水’喻感情经历试探与磨合，‘一山旋一山’指关系中的小矛盾反复出现。但‘水穷山尽’象喻误会解开、感情升华。单身者：同人卦利社交，可在共同学习、旅行等活动中遇缘；厘革卦提示主动改变形象或心态。有伴者：经历分歧后感情更坚，宜开诚布公沟通旧事，忌翻旧账。上上签主姻缘和合，但需珍惜当下。",
-  "health": "签文山水意象对应身心流转。离为火，主心、目，需防心火亢盛（如失眠、眼干）。‘水穷山尽’象喻气血循环有阻滞，尤需关注颈椎、腰腿（山代表骨骼）。建议增加柔缓运动（太极、瑜伽），多饮水，食用润肺食品（如山梨、银耳）。上上签主整体健康无忧，但不可因小恙疏忽。",
-  "study": "‘一水一山’喻学业需攻克难关，如跨科知识整合、复杂课题梳理。离宫同人主合作学习，厘革主方法改良——可尝试小组讨论、错题复盘、模拟测试。‘水穷山尽处’指考前易感压力，但成绩反超预期。尤利需要记忆与理解的科目（如历史、地理）。考试运佳，但需提前踩点、备齐工具，忌临时抱佛脚。",
-  "general": "此签核心在‘困境中转机’，整体运势先抑后扬。行动建议：一、保持耐心，主动沟通，借团队之力破局；二、检视当前瓶颈，灵活调整策略，不拘泥于旧法；三、名利虽可期，但需以德配位，感恩贵人相助。心态上，如离火般明亮而不灼人，随缘而进，自然水到渠成。"
+  "sign_number": 149,
+  "sign_text": "一心两事，一事两心，新花枯树，直待交春。",
+  "interpretation1": "得此签者有心意不专，操之过急之毛病，未改之前难有成就。",
+  "career": "你当下在事业上可能正面临某种内在的拉扯感。心里似乎有两种不同的声音在较劲，或许是新旧方向的矛盾，或许是理想与现实的碰撞。就像手里同时攥着两颗种子，但土壤的养分暂时只够滋养其中一颗。这种状态下，你容易既想抓住新机会的萌芽，又放不下已经扎根的旧根基。\n\n这种摇摆不是坏事，它恰恰说明你正在经历突破前的蛰伏期。就像早春的枝头，看似枯败的老枝里其实藏着待放的新芽。现在需要你暂时沉住气，把分散的精力收回来，仔细分辨哪条路更接近你真正想抵达的方向。不要急着在寒冬里强行催开花朵，等到时机自然成熟时，你积蓄的能量会帮你把模糊的选项变得清晰透亮。",
+  "wealth": "这个签文暗示你当下在钱财的流转上正面临一段微妙的拉扯期。前两句的\"分心\"暗示你可能被两种不同的利益方向牵扯着精力，或是内心对某个投资选择存着摇摆不定的疑虑。就像同时想抓住两条顺流而下的船，反而容易在浪潮中失去重心。中间两句的枯荣对照，其实在提醒你现有的财富格局正处于新旧交替的阶段——既有的渠道可能像冬天的老树般暂时沉寂，但新的机遇已如待放的花苞般酝酿着生机。最后的\"交春\"不是单纯等待季节轮转，而是需要你主动调整呼吸节奏，在冷静观察中重新校准自己的财务步伐。此刻最忌讳的就是盲目追逐表面热闹的财路，更要警惕被短期的波动打乱阵脚。不妨把这段时间当作整理钱袋子的契机，把分散的力量慢慢收束到更有根基的领域，等到东风真正吹来时，自然能稳稳接住属于自己的时运。",
+  "love": "你此刻的心像被两股力量撕扯着，既渴望抓住新生的萌芽，又放不下早已荒芜的过往。那些反复掂量的犹豫，像潮湿的雾气裹住你的脚步——明明看得见前方有光，却总觉得身后的影子在拽你的衣角。感情里最怕的不是决绝的选择，而是徘徊时被自己消耗掉的那份勇气。但你要相信，枯枝里藏着春天的密码，当你的心跳和季节的脉搏终于同频，冰雪裂开的脆响会告诉你：所有悬而未决的疼，都是为了把破茧的力气攒得更足些。",
+  "health": "你现在的健康状态像是站在冬春交界的路口，心里悬着两股劲儿在拉扯。表面看是精力分散，其实这股矛盾里藏着转机——就像老树根下悄悄冒出的新芽，需要你沉下心感受身体细微的变化。别急着在寒冬里强求花开，也别放任枯枝消耗元气，把向外张望的焦虑收回来，先理顺呼吸的节奏。等到内在季节自然流转时，那些看似停滞的部分会跟着大地回暖的韵律重新生长。这段时间不妨把养护当作静候春天的仪式，让身体自己找到破土的时机。",
+  "study": "你现在的学业像被两股力量拽着走，心里装着不同的目标，却迟迟找不到那条清晰的线。那些刚冒头的想法像嫩芽般鲜活，但旧有的根基却像枯枝般难以支撑。这种拉扯感可能会让你在多个方向间徘徊，或是被过去的习惯绊住脚步。\n\n不过别急着焦虑，这恰恰是重新校准自己的时机。试着把那些零散的念头收拢起来，像整理抽屉里的碎纸片一样，把真正重要的东西挑出来放在最上层。暂时看不到结果也不必灰心，有些成长就像埋在地下的种子，总要等土壤温度合适了才会破土。眼下需要的是稳住呼吸，把散落的能量慢慢聚成一道光，等到时机成熟，自然能照出一条属于自己的路。",
+  "general": "你现在的心境像被两根绳子同时拉扯着，既想抓住新冒出的嫩芽，又放不下角落里干枯的老枝。那些看似矛盾的念头正在暗中较劲，像冬末的泥土里同时埋着冻僵的根和待发的芽。别急着掰开这种混沌的状态，眼下正是新旧交替的节点，就像雪水渗入土地需要时间，你内心的冲突也会在沉淀中自然分层。当春雷惊破冰面时，你会发现那些纠缠的线头原来都是同一匹布上的经纬。此刻要做的不是选择哪条路，而是先把自己站成能承接雨露的姿势。"
+}
+```
+
+### 英文翻译
+```json
+{
+  "sign_number": 149,
+  "sign_text": "One mind on two things, one thing with two minds;\nNew blossoms on withered trees,\nWait till spring intertwines.",
+  "interpretation1": "The sign 'one mind on two things, one thing with two minds' points directly to the harm of a distracted heart: intending two tasks at once, yet each task harbors two thoughts, energy scattered, leading to loss in both. 'New blossoms on withered trees' is a particularly striking image: a tree without vitality suddenly adorned with flowers, seeming prosperous but rootless ornamentation, symbolizing an insubstantial situation with damaged foundations. 'Wait till spring intertwines' hints at a turning point—only when spring energy stirs and heaven and earth meet can recovery be hoped for. The hexagram comes from the Zhen Palace, transforming from Da Guo (Great Exceeding) to Heng (Constancy). Da Guo signifies the peril of a ridgepole bending, a lake overwhelming a tree—an extraordinary difficulty; transforming into Heng, thunder and wind together, suggests the way of perseverance. This unfavorable sign clarifies that troubles stem from a lack of focus and external strength with internal weakness, vainly pursuing glamour leading to downfall. The remedy is to gather the mind, adhere to one purpose, and quietly wait for winter to pass and spring to arrive, that a withered branch may yet sprout.",
+  "career": "Your career aligns with the 'one mind on two things' image. Your thoughts are diverted, multitasking drains energy, and success is elusive. What you pursue seems like opportunity (new blossoms) but lacks foundation (withered trees). There is a risk of major projects being abandoned halfway or partnerships turning sour. The Zhen Palace suggests upheaval; Da Guo transforming into Heng warns against frequent job changes or hasty entrepreneurship. Stability is key. 'Wait till spring intertwines' indicates a turnaround likely in spring or after prolonged patience. Focus on one main direction and cultivate it deeply. Avoid taking on multiple significant tasks or competing with colleagues. Recently, it is favorable to streamline internal affairs and consolidate your base, not to expand or bid externally.",
+  "wealth": "Your wealth appears illusory under 'new blossoms on withered trees'—income may seem to come but could be a mirage, or receivables may be delayed. 'One thing with two minds' points to hesitation in investment decisions, leading to misjudgment and a high-starting-low-ending pattern. The Da Guo hexagram suggests funds being trapped; the Heng hexagram emphasizes consistent financial management, avoiding speculative paths. Regular income is maintainable, but windfall gains are strongly discouraged, especially following trends in speculation. Manage your finances like conserving resources in winter: reduce unnecessary expenses, postpone partnerships, expansion, or property purchases. A turn may come in spring; after careful planning next year, you can make small trials.",
+  "love": "In relationships, 'one mind on two things' easily creates rifts—either a divided heart or neglecting your partner due to busyness. 'One thing with two minds' indicates restlessness and mutual suspicion when together. 'New blossoms on withered trees' most warns of romance: reigniting an old flame on a ruined foundation, or a new relationship appearing brief and insubstantial. This unfavorable sign points to a rough romantic path. Do not force commitments or sudden changes now. Singles should lie low; those in relationships should avoid rehashing old grievances and accusations. 'Wait till spring intertwines' means that after a harsh winter and settled emotions, rebuilding trust is possible. The Zhen Palace's Heng hexagram advises constancy; if both are willing to weather the storm, peace may eventually return.",
+  "health": "'New blossoms on withered trees' directly indicates strength on the outside but weakness within—vital energy is quietly depleted. The surface seems fine, but organs are already deficient. 'One mind on two things' overstrains the spirit, easily causing insomnia, palpitations, and mental unrest. The Zhen hexagram corresponds to the liver; Da Guo's lake over trees suggests possible liver qi stagnation and neurasthenia. Health preservation should prioritize calming the mind, reducing worry and delusion. Diet should be warm and nourishing, avoiding raw, cold, or rich foods. 'Wait till spring intertwines' follows the seasons: in winter, store essence and conserve energy; when spring yang stirs, you can borrow gentle winds to smooth qi and harmonize ying and wei. Be especially vigilant against overwork and emotional depression triggering old ailments.",
+  "study": "Your studies suffer from 'one mind on two things': too many subjects or extracurricular distractions cause a shaky foundation, like flowers on a withered tree. 'One thing with two minds' means your attention wanders during lectures and study, reducing efficiency. The Zhen Palace's Heng hexagram emphasizes perseverance—there are no shortcuts in academics. Avoid last-minute cramming and gambling on exams. Exam luck may not improve until 'spring intertwines' (e.g., spring examinations or long-term accumulation). Resolve to set aside miscellaneous studies, focus on weak fundamentals, and make a detailed plan with daily effort. Liberal arts benefit from steady accumulation; avoid aiming too high. For sciences, return to textbooks and avoid chasing difficult problems.",
+  "general": "This sign summarizes the principle that distraction leads to failure. A withered tree meets spring by staying content in obscurity. Key actions: First, cut off stray thoughts, choose one core task, and devote full attention—avoid greed for more. Second, assess the situation; retreat and introspect to avoid unforeseen disasters. Third, cultivate yourself and wait for fate: use winter to dive into reading, nourish your spirit, and build your foundation. Come spring, you will accumulate and burst forth. In mindset, remember: an unfavorable sign does not fix your destiny; it warns to cultivate your heart. A withered tree can sprout again through single-minded perseverance. If you still look left and right, even spring cannot save you. Reflect on how this resonates with your current situation."
 }
 ```
 
 ---
 
-## 第 22 签
-
-⚠️ **缺少英文翻译**
+## 第 150 签
 
 ### 中文原文
 ```json
 {
-  "sign_number": 22,
-  "fortune": "下下签",
-  "gua_type": "巽宫 无妄变否",
-  "sign_text": "事相扶，在半途，翻覆终可免，风波一点无。",
-  "interpretation1": "签文‘事相扶’喻示此事本有助力，或得他人扶持，初始尚可。然‘在半途’点明中途易生变数，计划可能中断或转向。‘翻覆终可免’暗示虽有小波折，但若能及时调整、持守正道，可避大祸。‘风波一点无’乃警示之语：看似无风无浪处，暗藏隐忧，需防微杜渐。卦属巽宫无妄变否，无妄主不妄为、顺天时，变否主闭塞不通。整体寓意外力相助却易成阻碍，半途变卦是常态，唯有戒慎恐惧、见机而止，方能化险为夷。此签虽下下，然结局并非绝路，重在提醒勿存侥幸、步步为营。",
-  "career": "签文‘事相扶’表事业上可能有贵人引荐或团队协作，但‘在半途’预示项目或晋升易中途受阻，如计划被搁置、合作方变卦。‘翻覆终可免’指若主动沟通、修改方案，可避免失败。宜提前预设备选方案，忌一意孤行。属巽卦，宜顺势而为，不可强推。秋冬之交需特别谨慎，忌签署长期合约。",
-  "wealth": "财运‘风波一点无’看似平静，实则暗流涌动。‘事相扶’主合作求财，但‘在半途’提示投资或合伙项目可能中途生变，收益延期。正财较稳，偏财忌投机。巽卦变否，主财路暂时堵塞，宜守成、减少开支，忌借贷或担保。可关注低风险理财，忌追逐短期暴利。",
-  "love": "感情方面，‘事相扶’主双方原本互相扶持，但‘在半途’暗示关系易因外界干扰或沟通不畅出现裂痕，如家庭反对、异地等。‘翻覆终可免’指若能坦诚相待、不翻旧账，可化解矛盾。巽卦入不深，变否主隔阂，宜主动约谈、重燃初心。单身者缘分易半途而废，不宜急于确立关系。",
-  "health": "‘风波一点无’指表面健康无虞，但‘翻覆’暗指体内气血或有反复。巽属风，对应肝胆、筋骨，需防旧疾复发或季节性过敏。‘半途’强调调理不可中断，宜规律作息、适度拉伸。忌熬夜、暴饮暴食。卦象否塞，注意情绪郁结，可练习深呼吸或太极。",
-  "study": "学业上‘事相扶’指得师长或同学辅助，但‘在半途’预示学习进度易卡顿，如某一科目理解困难、考试延期。‘翻覆终可免’鼓励查漏补缺、反复钻研，可过关。巽卦利文科、语言类，忌半途而废。考试运中等，需提前熟悉考场，忌临时抱佛脚。",
-  "general": "此签核心在‘半途’二字，凡事皆有变数，但非无解。关键行动：一、凡事先做最坏打算，预留退路；二、遇挫折时暂停反思，勿强行推进；三、珍惜身边相助之人，但莫过度依赖。心态上宜效仿巽风之柔顺，以退为进。下下签非绝路，翻覆可免，风波终无，稳字当头即可。"
+  "sign_number": 150,
+  "sign_text": "大事恐难图；残花不再鲜。",
+  "interpretation1": "时机已逝，时光已老，欲图大事，已不可能。",
+  "career": "你当下心里想着的那个重要目标，可能正卡在进退两难的泥潭里。像被迷雾笼罩的山路，远方的轮廓忽明忽暗，现在还不是能看清全貌的时机。过去支撑你前行的某些力量，或许像褪了色的绸缎，表面虽还完整，内里的经纬却已松软。这时候不宜强行突破，倒像是整理旧书柜，要把蒙尘的册页重新分类，那些看似无用的边角料里，或许藏着新火种的引信。\n\n事业运势像被风吹散的蒲公英，飘荡却不坠落。有人觉得是困局，其实是在等新的土壤。你手里攥着的筹码可能需要重新称重，某些坚持或许该换成迂回，就像老木匠不会死磕断锯，而是转身打磨新凿子。未来三个月要像候鸟感知季风，不必急着振翅，先校准方向。那些被现实磨损的棱角，恰是通向另一条路的垫脚石。记住枯枝里总藏着芽点，只是需要换个角度才能看见。",
+  "wealth": "此刻的财运像踩在松软的沙地上，每一步都得小心试探着走。你心里盘算的大规划或许正遇上暗流，不是不能向前，但需要把步子收得更稳些——好比原本想摘高处的果子，现在得先检查脚下的梯子是否牢靠。\n\n手头现有的机会可能正褪去最初的光泽，就像被风霜磨旧的门环。但这恰恰提醒你换个角度擦拭，也许能发现铜绿下藏着的纹路。不妨把目光转向曾经忽略的边角，那些看似细碎的零散处，反而可能连成新的路径。\n\n别急着把全部筹码押在某处风口，现在更适合像老匠人修补瓷器那样，用耐心把现有的资源细细粘合。当你把根基夯实了，某个意想不到的豁口或许会透进新的天光。记住，枯枝里往往藏着来年的新芽，关键是要学会用不同的眼光去发现。",
+  "love": "你心里牵挂的那件事，此刻像捧着一盏快要燃尽的烛火，微弱的光晕里藏着不安。表面上看，前路似乎被浓雾笼罩，那些用力攥在手里的期待，或许正经历着不可逆转的褪色。但你要明白，有些枯萎是土壤在积蓄养分，有些止步是命运在为你腾出转身的空隙。旧日的执念若已成褪色的花瓣，放手让它们化作春泥，反而能滋养出新的根系。真正属于你的机缘，从来不需要用破碎的坚持去交换。",
+  "health": "你现在的身体状态像被风吹皱的水面，表面的波纹容易让人误以为暗流汹涌。要看清这股动荡不是来自外界，而是需要你静下来听听自己的呼吸声。有些东西正在无声地消耗你的元气，可能你自己都没觉察到持续紧绷的那根弦。不必急着与疲惫对抗，允许自己像潮水退去后的沙滩，把压在心底的砂砾慢慢筛出来。重要的不是马上修补什么，而是学会用更柔和的节奏去承载自己。那些暂时停滞的力气，会在你真正接纳现状后，重新找到流动的方向。",
+  "study": "这枚签文给你的学业之路蒙上一层雾气。此刻你心中那个需要长久投入才能实现的目标，可能正卡在某种难以突破的瓶颈里——就像你反复擦拭一块锈住的铜锁，明明知道里面有重要东西，却迟迟找不到开锁的契机。这种停滞不是因为你不够努力，更像是某种时机尚未成熟，或是你还没触碰到真正关键的发力点。\n\n残花意象提醒着：或许你正在用过去奏效的方式应对现在的困局，就像试图给凋谢的花枝浇水让它重新绽放。这时候更需要你暂时放下执念，像考古学家清理文物那样，轻轻拂去覆盖在问题表面的浮尘，重新观察那些被惯性思维掩盖的可能性。真正的转机往往藏在某个你尚未留意的角落，可能是一本冷门参考书里的某个观点，或是某个师长无意间点拨的思考角度。\n\n不必苛责自己当下的迷茫，每个求索者都会经历这样的迷雾期。重要的是保持思维的弹性，给自己留出试错的空间。就像酿酒需要等待时间的转化，你积蓄的能量终会在某个意想不到的时刻，以你未曾预料的方式迸发出来。",
+  "general": "这枚签文暗示你当下所求之事正处在微妙的转折期。\"大事恐难图\"不是说你的目标永远无法实现，而是提醒你当前的能量场还不够支撑起宏大的愿景，就像播种后需要经历蛰伏才能破土。此时不宜执着于强行推进，反而要像溪水绕过礁石那样调整行进路线。\n\n\"残花不再鲜\"并非断言美好事物已经消逝，而是暗示你内心对某些旧日执念的眷恋正在阻碍新生命的萌芽。就像秋叶飘零是为了让枝头腾出空间迎接新芽，有些看似美好的表象需要放手才能迎来真正的生机。不必惋惜镜中花的凋谢，你的庭院里或许正悄悄生长着更契合当下季节的植株。\n\n建议你暂时收起攻城略地的锋芒，像整理书房那样重新梳理自己的目标清单。把那些沾染了时光尘埃的旧计划轻轻拂拭，或许会发现有些执念早已完成了它们的使命。给生活留些空白页，新的篇章往往在最不经意的留白处悄然落笔。"
+}
+```
+
+### 英文翻译
+```json
+{
+  "sign_number": 150,
+  "sign_text": "Great matters may be hard to achieve;\nWithered blossoms bloom no more.",
+  "interpretation1": "The sign says: 'Great matters may be hard to achieve; withered blossoms bloom no more'—just ten characters, yet fully depicting a scene of desolation. 'Withered blossoms' is the core image: flowers fade, color and fragrance vanish, vitality exhausted, symbolizing decline and lost opportunities. 'Bloom no more' is a definitive statement: this decay cannot be reversed; past splendor cannot return. 'Great matters may be hard to achieve' is a direct warning: for major goals or critical turning points, forcing at this time may be futile and even invite greater trouble. The hexagram comes from the Dui Palace; Kun (Exhaustion) changes into Song (Conflict). Kun is a lake without water, a dragon stranded in a shallow pool, indicating depletion of internal and external resources and no room to maneuver; Song, heaven and water in opposition, signifies disputes. Taken together, this sign reveals that current fortune has entered a low tide; forcing will lead to deeper entanglements and difficulties. Yet an unfavorable sign is not a verdict of hopelessness—it is a reminder that the time is not right. It is wise to fold your wings, stay low, and nurture yourself. When withered branches fall, new sprouts will arise.",
+  "career": "'Great matters may be hard to achieve' directly applies to your career: avoid seeking expansion, launching new projects, or vying for high positions now, lest they fail midway. 'Withered blossoms bloom no more' suggests that your current position or business has shown fatigue; forcing innovation is like pulling up seedlings to help them grow. The Kun hexagram represents depleted resources; Song refers to disputes and gossip. In the workplace, you may face obstacles and conflicts. Adopt a defensive posture: secure your existing responsibilities and avoid becoming a focal point of tension. Specifically, avoid factional infighting, arguing with superiors, or trusting grand blueprints. Instead, stay low, complete your routine tasks well, organize past oversights, and train internal skills to await a turn in the situation. At this time, 'seeking no merit but no fault' is the best strategy.",
+  "wealth": "'Withered blossoms bloom no more' clearly indicates that financial sources are withering. Income may shrink, and investments may turn out to be illusions. Dui Palace symbolizes breakage and sudden loss; Song hexagram warns of lawsuits over money. Be especially wary of partnership disputes and loan guarantees. Avoid risk investments, especially those promising high returns. 'Great matters may be hard to achieve' also cautions against large expenditures or business expansion. Financial management should focus on preservation: carefully calculate daily expenses, collect outstanding debts, and gradually build reserves. Do not hope for windfall gains; focus on steady income. If you have debts to collect, proceed legally and avoid acting on impulse.",
+  "love": "'Withered blossoms bloom no more' is poignant for emotions: it signifies that a relationship or marriage is like a flower past its prime, freshness faded, possibly facing a breakup. If you cling to an old flame, it may be a 'withered blossom' difficult to revive; forcing a reunion will only bring repeated pain. Dui Palace governs speech and communication; Song hexagram indicates arguments. In relationships, easily escalate into conflicts over trivial matters and harsh words. Singles are unlikely to meet a true match now; fleeting encounters are more common. In interactions, avoid bringing up old grievances, blaming your partner, or making hasty decisions when emotions run high. Give each other space and calmly reflect on your patterns of interaction. Replace passionate romance with mutual respect for now. Endure the cold winter to appreciate the warmth of spring.",
+  "health": "'Withered blossoms bloom no more' draws an analogy to the body: vitality depleted, complexion lusterless. The Dui hexagram corresponds to the lungs and oral cavity; Kun represents stagnation of qi. Be alert for chronic issues in the respiratory system, throat, and mouth. Song hexagram brings worry, easily leading to insomnia, headaches, and depression. The key to health preservation is 'moistening': eat more white, lung-nourishing foods like pears and lily bulb; follow natural rhythms—wake at mao hour (5-7am) to breathe in rising qi. Avoid overexertion and late nights; treat minor ailments promptly lest they accumulate into a 'withered blossom' state. Calming the mind and steering clear of anxiety are the essence of this sign's health advice.",
+  "study": "'Great matters may be hard to achieve' applies to your studies: major exams or academic goals may be difficult to reach. Forcing a high target could lead to failure. 'Withered blossoms bloom no more' warns that old knowledge has become stale; unless you renew your foundation, grades will not improve. Kun transforming into Song indicates mental blockages and conflicts with teachers or peers over ideas. Avoid shortcuts, guessing exam questions, or gambling. Return to textbook fundamentals and repair weak areas: for math, review basic formulas; for language arts, revisit classical texts. When taking exams, read questions carefully to avoid careless mistakes. For now, set aside grandiose ambitions, work diligently, and wait for your season to bloom again.",
+  "general": "This sign uses the withered blossom as a mirror, reflecting the reality of a low period in fortune. Its essence is not to predict good or bad but to teach you to recognize the season and stay in your place. Now, great matters are hard to achieve; forcing them will only bring conflict. Hence two core actions: first, defend—withdraw your front lines, pause expansion, focus on internal stability and nourishing your energy, preserving limited resources. Second, endure—Kun hexagram warns of troubles from the mouth; Song arises from speech. Absolutely refrain from disputes; tolerate temporary stillness for calm seas. In mindset, hold the philosophy that 'no flower blooms for a hundred days.' Decay is not the end but one phase in a cycle. Remember: the Dui Palace's lake may be dry, but it still harbors roots of rain. Your forbearance and accumulation now are precisely to build vitality for new shoots to break through the soil tomorrow. Reflect on how this resonates with your current situation."
 }
 ```
 
 ---
 
-## 第 23 签
-
-⚠️ **缺少英文翻译**
+## 第 151 签
 
 ### 中文原文
 ```json
 {
-  "sign_number": 23,
-  "fortune": "中上签",
-  "gua_type": "巽宫 无妄变噬嗑",
-  "sign_text": "喜喜喜，春风生桃李，不用强忧煎，明月人千里。",
-  "interpretation1": "签文开篇以三重“喜”字叠用，强调吉庆之气浓郁，非偶然，乃天道酬勤之兆。“春风生桃李”取春日盛景，桃李并开，寓意生机萌动、良缘新始、人才汇聚，如和风拂过，自然成华。“不用强忧煎”为点睛劝语，告诫求签者勿以人为焦虑催逼事态发展，当知天时未至，强求反损。末句“明月人千里”化用望月怀人之意，皓月当空，纵有千里之隔，心念可通，预兆虽暂处分隔或有距离感，终能达成精神共鸣、团圆或通达。卦属巽宫，由无妄变噬嗑。无妄卦辞云“不利有攸往”，强调真实无妄、顺应时势，不可妄求；变卦噬嗑，象口中有物，咬合乃通，主以耐心磨合化解阻碍。整体寓意：眼前纵有忧煎之事，实为虚惊，佳期如春风桃李，按律而至，须以明月心境守候，不急不躁，自见转机。",
-  "career": "“春风生桃李”喻事业遇栽培、育成之机，若从事教育、培训、人才管理或创意领域，尤易得门生后辈拥戴，或下属得力之助。“不用强忧煎”直指职场焦虑，提示升迁、项目落地不宜拔苗助长，乾象刚健，但无妄卦戒妄动，变噬嗑则需咬合细节，宜静待上级授命或时机成熟。明月人千里，暗示远方有助力或异地派遣之喜，如外驻、跨部门协作可期，但需共赏一月的耐心。宜：主动承担传承性工作（如带新人、整理流程），联络旧识疏通关节；忌：越级邀功、在方案未熟时强行提交、与同事争抢风头。时机多在春末秋初，方位利东南。",
-  "wealth": "签文“喜喜喜，春风生桃李”主正财随事兴而增，桃李成蹊，喻财源非暴发，乃口碑、人脉累积所得。无妄卦警告不妄取，噬嗑卦为咬合交易，故偏财运薄，不宜投机炒作，尤其避免合伙中因分利不清生讼。明月人千里，利远方财，如异地客户、互联网经营或外贸，可借现代通讯维系。宜：深耕教育、文化、园艺、中介等土属性或流动性的行业，制定长期理财计划，按“不用强忧煎”心态，勿因短期波动忙乱操作；忌：借贷扩张、跟风购买高波理财产品。特别提示，噬嗑口中有物，口中食须细嚼，任何合同条款当逐字审校。",
-  "love": "此签于感情最为贴切。“喜喜喜”连珠，正照桃花当令；“春风生桃李”喻良缘如春华自发，单身者易遇品貌端正、性情温和的对象，可能在学习、文旅或文艺活动中结识，不必刻意强求。“明月人千里”道出异地相思或心灵默契之态，若处异地恋，签劝“不用强忧煎”，千里共月亦是相守，频繁质疑反伤情分。无妄变噬嗑，噬嗑以咬合喻磨合，关系需耐心包容，慢慢调整步伐，忌翻旧账、紧逼承诺。已有伴侣者，宜共同设定成长目标，如一起进修或存钱置业，让感情如桃李结实，自然瓜熟蒂落。",
-  "health": "巽宫无妄变噬嗑，巽为风，对应肝木，主情绪与气机。“春风生桃李”是春令，肝气当令易郁，若强愁忧煎，则木郁化火，出现失眠、头痛、眼涩。噬嗑卦象口中有物，提示消化系统、牙齿咬合问题，需细嚼慢咽，注意饮食温热适中。明月人千里，以静制动，建议借月色练吐纳、站桩或夜间散步，调和肝阳。特别留意，无妄卦有“无妄之疾”的隐喻，倘若身体微小不适，勿过度疑虑，保持定期检查即可。总体养生以“松”字诀为主，春少酸多甘，暑夏避烦。",
-  "study": "“春风生桃李”乃师承之象，表明学业遇良师点拨或得同窗互助，如春风化雨，成绩将有明显起色。“不用强忧煎”劝考生莫因一两次模考失利便自我折磨，学习如桃李生长，自有周期，强灌反伤慧根。明月人千里，暗指可借远程教学、线上资源突破地域限制，留学生或异地入学者虽离家，心与家人如月同辉，能得安慰。变卦噬嗑为咬合，警示背书勿囫囵吞枣，宜反复揣摩难点，将碎片知识整合成体系。利文科、历史、哲学及需要整合力的科目，考场需提前适应环境，忌熬夜硬记。",
-  "general": "此签中上之吉，主大喜在前，惟不可“强忧煎”自设障碍。春风桃李已兆生机，明月人千里终能团圆或通达。总体而言，卦示从无妄之顺守到噬嗑之磨合，先稳后进，步步为营。关键行动建议：一，执守本分，不可妄求捷径，尤其忌在时机未熟时强行干预；二，善用远距沟通工具，维系异地人脉或合作，明月之象可转为实际助力；三，培养缓释压力的日常仪式，如望月静坐、写简记，将“忧煎”转化为冷静观察。心态上，默念“喜喜喜”，保持对未来的喜悦期待，即使眼下似隔千里，清风明月总相随。"
+  "sign_number": 151,
+  "sign_text": "莫道事无讹，其中进退多，桂轮圆又缺，光彩更揩磨。",
+  "interpretation1": "好事多磨。",
+  "career": "这签文落在你的事业上，像一盏悬在迷雾里的灯，照得出路却也映得见暗角。表面风平浪静的事，底下藏着需要你反复掂量的进退——不是好坏分明的岔路，更像是踩着潮水涨退的滩涂，往前两步退一步才是常态。别急着把眼前的光景当作定局，月圆月缺的循环里藏着警示：此刻的圆满可能正酝酿缺口，而暂时的残缺反而在催着你打磨锋芒。那些看似停滞的时光，其实是命运在等你的手掌把钝刃焐热了，再重新开刃。\n\n遇着卡顿别硬闯，该收手时就收手，但退不是认输，是给锋芒淬火的机会；该发力时也别犹豫，别让反复思量困住手脚。事业的路从来不是单行道，绕点弯道、磨点耐心，反倒能把脚下的茧磨成铠甲。记住，最亮的光都是从反复擦拭里透出来的。",
+  "wealth": "这枚签文给你的财运启示是：当下的局面像被薄雾笼罩的山路，表面看似清晰，但真正迈步时仍需辨明虚实。你可能会遇到看似稳妥的机会，但内里藏着需要反复权衡的沟壑——过于急躁的投入可能踩空，过分保守的等待又会错失转机。就像反复打磨的玉石，现在需要你保持清醒的观察力，在进退之间找到最恰当的发力点。\n\n那些你以为已经稳固的收益渠道，最近可能需要重新审视细节处的裂纹。不必为暂时出现的阻滞感到焦虑，这种波动恰恰是让你调整策略的契机。记住真正的财运往往藏在两次尝试的间隙里，当你学会在热闹与冷清之间自如切换节奏时，自然能找到属于自己的生财韵律。此刻最重要的是保持手掌的力度——既不能攥得太紧让机会溜走，也不可摊得太开让福气漏尽。",
+  "love": "你的情感之路正处在需要沉淀的阶段。表面上看似风平浪静的事情，背后藏着需要你用心分辨的暗涌。此刻的犹豫反复是必然的，就像手心手背翻覆时总会有片刻迟疑——这种挣扎恰恰证明你对待感情足够认真，不是轻率做决定的人。\n\n关系中存在的缺口不必急着填补，残缺本身会映照出真正需要磨合的部分。那些看似不够圆满的棱角，反而是让感情质地变得更温润的契机。你可能会经历几次进退之间的试探，就像反复擦拭镜面，最初越擦越模糊，但最终会透出更清明的光亮。\n\n现在最需要的是给自己留出沉淀的空间，不必刻意追求圆满或逃避裂痕。当你学会把期待值放得松软些，把审视的目光放得温和些，那些进退维谷的处境反而会成为滋养关系的土壤。记住：所有需要反复擦拭的情感，最终都会在时光里显出它本真的成色。",
+  "health": "你最近的健康运势像月亮阴晴圆缺的规律，表面看似平稳，实则藏着需要警惕的暗涌。身体会通过微小的信号提醒你注意，可能偶尔有反复的疲惫感或隐痛，但这些恰恰是身体在给你调整的机会。\n\n别急着用\"没事\"敷衍自己，有些小问题需要你放慢脚步去观察。该休息的时候要果断停下，该调理时也别嫌麻烦，就像擦拭蒙尘的镜子，越用心呵护越能恢复本来的光彩。这段时间特别要避免硬撑，当身体出现进退两难的状况时，宁可暂时退一步养护，也别盲目向前消耗元气。\n\n记住此刻的波动不是终点，而是让你学会与身体对话的契机。把每次不适都当作重新校准生活节奏的提示，经过这番打磨，反而能收获更持久的健康状态。",
+  "study": "眼下你的学业路途像踩在溪涧的石块上，每一步都得掂量深浅。别急着断定眼前的路是否平坦，那些看似停滞的时光，反而是调整呼吸的好时机。你或许会遇到需要反复校准方向的时候，就像画圆规时总得转几圈才能找到中心点，这时候的犹疑其实是必要的沉淀。\n\n别被暂时的困顿蒙住眼睛，你正在经历像玉石被反复抛光的阶段。有些知识点看似残缺不全，实则藏着让你更通透的契机。要当心的是，别让浮躁催着你做决定，就像急着摘未熟的果子只会尝到酸涩。把节奏放慢些，让那些看似矛盾的选择在时间里自然显影。\n\n你现在的积累像沙漏里的流沙，看似细碎却在默默成型。那些绕过的弯路终会变成你独有的路径图，而此刻的磨砺恰是日后发光的底气。保持住这种温火慢炖的状态，让困惑与领悟在碰撞中淬炼出真正的锋芒。",
+  "general": "你眼下的处境像溪水遇到礁石，看似平静却暗藏曲折。表面上的顺利未必能照进现实，每一步都需在权衡中谨慎迈出。别急着把暂时的安稳当作终点，前方仍有需要反复调试的弯道。\n\n事情的发展就像潮汐自有涨落，此刻的阻滞或许正酝酿着新的转机。你需要的不是强求结果，而是在进退之间把握平衡的艺术。那些看似被消耗的精力，实则在打磨你的韧性——如同璞玉必经雕琢才能焕发光华。\n\n当遇到卡顿不必焦躁，这恰是提醒你重新校准方向的信号。保持手掌松紧适度的力道，既不被困境困住脚步，也不因急切而错判节奏。你积累的每分经验都在为未来的通达铺路，待时机成熟时，自会显现柳暗花明的豁然。"
+}
+```
+
+### 英文翻译
+```json
+{
+  "sign_number": 151,
+  "sign_text": "Do not say things are without flaw;\nAmidst it, advances and retreats are many.\nThe cassia wheel rounds then wanes;\nIts luster must be polished again.",
+  "interpretation1": "The sign opens with 'Do not say things are without flaw,' cautioning against complacency that all is well. It hints at hidden troubles or slander beneath a calm surface. The second line, 'Amidst it, advances and retreats are many,' speaks plainly of a dilemma: you are caught between advancing and retreating, like walking by a marsh with danger ahead and pursuit behind. The third line, 'The cassia wheel rounds then wanes,' uses the moon as metaphor: the cassia wheel is a poetic name for the moon, symbolizing fullness and brightness, yet it rounds then wanes—affairs repeat unpredictably, success seems near but suddenly slips away, and timing shifts, leading to gain then loss. The final line, 'Its luster must be polished again,' concludes: the moon's brilliance needs repeated rubbing and polishing to endure; so too must human affairs undergo refinement to regain radiance. The hexagram belongs to the Dui Palace; Xian (Influence) transforms into Cui (Gathering). Xian is a lake over a mountain, symbolizing mutual influence; Cui is a lake over the earth, gathering. From influence to gathering, there is selection and refinement. Dui hexagram represents joy and danger—lake water may dry up, so do not forget worries amid temporary joy. Cui hexagram represents gathering like an assembly of elites, but also implies that dregs sink with the pure—discernment is needed. This moderately unfavorable sign has a mostly ominous tone, yet within the ominous lies opportunity: the moon wanes and will wax again; polishing brings luster. Do not abandon yourself. The core meaning: affairs are full of twists and false appearances. Caution in speech and repeated verification are essential, like a craftsman polishing a mirror tirelessly. Only then can you refine your mind amid advances and retreats, waiting for the moon to become full again.",
+  "career": "'Do not say things are without flaw' reflects your workplace: there may be unnoticed errors or false words from others. Do not trust superficial harmony. The 'advances and retreats are many' image puts you in a dilemma: advancing means increased project risk; retreating loses all ground. You may hesitate amid job changes or responsibility shifts. 'The cassia wheel rounds then wanes' indicates that opportunities are like the moon, appearing and disappearing. Promotions or raises may be uncertain; beware of failing at the last moment. 'Its luster must be polished again' shows the way: sink your heart into polishing professional skills, like wiping dust from the moon, to wait for the right moment. The Dui Palace's transformation from Xian to Cui suggests that you should leverage team strength but choose reliable colleagues, guarding against gossip and conflicts. Favorable actions: stabilize your current role, check past work item by item, and volunteer for long-term pragmatic projects. Avoid: impulsive job changes, entering unfamiliar fields, or competing for credit. If you seek change, wait until autumn when the moon is bright.",
+  "wealth": "The sign says 'Do not say things are without flaw'—in finances, guard against accounting errors, false documents, or investment scams. Do not ignore small gains without careful scrutiny. 'Advances and retreats are many' hints at cash flow issues or indecision in investments, often struggling with whether to spend or save. 'The cassia wheel rounds then wanes' directly points to financial cycles of gain and loss: unexpected money comes and goes easily; do not speculate. 'Its luster must be polished again' indicates that wealth must be built through diligent accumulation, like wiping a mirror to seek light—steady effort is the true path. The hexagram from Xian to Cui suggests that wealth comes from first building broad connections, but Cui also indicates that gathering will later disperse. Dui Palace represents lake water; wealth is like flowing water, gathering and scattering unpredictably. Favorable: focus on regular income, conservative management, gradually pay down debts, and clear old accounts. Avoid: high-risk investments, unvetted partnerships, or guaranteeing others' loans. If windfall opportunities arise, investigate repeatedly; better to pass than to rush.",
+  "love": "On the path of love, 'Do not say things are without flaw' warns against believing sweet words blindly. There may be hidden truths or misunderstandings between you and your partner. 'Advances and retreats are many' describes emotional tug-of-war: cold wars, uncertainty about staying or leaving, leaving you torn. 'The cassia wheel rounds then wanes' directly likens romantic seas to the moon—fullness is easily broken; old feelings may recur, but new ones may not last. 'Its luster must be polished again' enlightens the way of relating: emotional bonds require patient cultivation, like protecting the moon. Only through polishing does a gentle luster emerge. The Xian hexagram governs attraction between man and woman; initial meetings may be delightful. Cui hexagram means gathering—easy to gather, easy to part. Treasure the moments together. Singles: when you meet someone, take time to observe; do not give your all at first sight. Those in relationships: communicate calmly, avoid dredging up the past or testing with suspicion. Sometimes retreat and observe your true feelings before making hasty decisions.",
+  "health": "'Do not say things are without flaw' corresponds to the body: do not dismiss minor discomforts as nothing. Hidden ailments can accumulate into major problems. 'Advances and retreats are many' reflects a bumpy recovery—symptoms come and go, progress fluctuates. 'The cassia wheel rounds then wanes' especially points to menstrual irregularities in women, or emotions fluctuating with the moon, and physical energy cycles. 'Its luster must be polished again' emphasizes that the body needs long-term nurturing, like the moon regaining brightness—not achieved in a day. Dui hexagram governs the mouth and lungs; Cui hexagram signifies accumulation. Guard against phlegm-dampness, heat-dampness buildup. Xian to Cui: influence then gathering—nurture by unblocking rather than blocking. Recent concerns: throat and lung discomfort, skin sensitivity, gastrointestinal imbalance. Regimen: light, moist diet; avoid spicy, rich foods. Align sleep with the rising and setting of the sun; do not overwork or stay up late. Exercise gently, like walking or tai chi, aiming to gently remove stagnation from the body.",
+  "study": "On your academic path, 'Do not say things are without flaw' warns you: do not think you know everything perfectly—subtle errors abound. Beware of overestimating yourself. 'Advances and retreats are many' indicates learning bottlenecks, difficulty with tough problems, and fluctuating grades that leave you disoriented. 'The cassia wheel rounds then wanes' points to periodic ups and downs; exam performance is especially unpredictable, and be careful of losing marks due to carelessness. 'Its luster must be polished again' makes clear there are no shortcuts to knowledge—like the moon needing polishing, you must repeatedly ponder, review the old, and learn the new. Dui hexagram favors oral expression; Cui hexagram favors gathering. Liberal arts, discussion-based learning, and study groups can yield results. Exam fortune: prepare early; adjust your schedule to be consistent like the moon. When taking tests, double-check your answers and avoid rushing to submit. Favorable: set daily tasks, organize a mistake notebook, consult teachers frequently. Avoid: last-minute cramming, focusing on only one subject while neglecting basics.",
+  "general": "This sign is moderately unfavorable, indicating many twists and false appearances, yet the moon wanes and will wax again; polishing brings luster—it is not a dead end. The essence of the whole sign lies in the words 'advances and retreats' and 'polish.' Teach yourself to be in a dilemma without rushing forward or forcing. Use retreat as advance; let time and patience refine your mind. The Dui Palace's Xian to Cui: joy and gathering, gathering and refining. Hence, verify everything repeatedly to guard against deception from words. When facing a difficult decision, you may temporarily step back and observe quietly, waiting for the moon to turn full before taking action. Three key actions: First, examine carefully—whether documents, accounts, or interpersonal promises, do not let old feelings exempt inspection. Second, accept repetition—like the moon's phases, fluctuations in career, finances, and emotions are normal. Respond to all changes with constancy. Third, actively polish—see difficulties as grindstones that bring out your luster. The more setbacks, the more diligent; blessings will gather. In mindset, emulate the moon: when full, shine far and wide; when waning, cultivate your essence in darkness. Do not lose heart due to a temporary dimness. Consider this an invitation to self-reflection, not a prediction."
 }
 ```
 
 ---
 
-## 第 24 签
-
-⚠️ **缺少英文翻译**
+## 第 152 签
 
 ### 中文原文
 ```json
 {
-  "sign_number": 24,
-  "fortune": "中下签",
-  "gua_type": "离宫 同人变家人",
-  "sign_text": "意孜孜，心戚戚，要平安，防出入。",
-  "interpretation1": "此签为中下之兆，签文曰：“意孜孜，心戚戚，要平安，防出入。”首句“意孜孜”状若心绪不宁、急切难安，如热锅之蚁；“心戚戚”则直指忧思郁结、愁云满面，此二句描绘了求签者当下内心焦灼之态。后两句“要平安，防出入”乃神明警示：欲得安稳，须谨慎内外门户。卦属离宫同人变家人，离为火，主明丽却易燎原；同人本主同心协力，然变卦为家人，火归内宅，暗示外患虽缓，内忧暗生。整签寓意：外在看似平静，实则内部潜伏矛盾与危机，若轻率出入、言行不谨，恐招是非祸端。宜收敛心神，守住本分，先将家中或内部事务理清，方可避凶趋吉。",
-  "career": "事业方面，“意孜孜”暗指职场中急功近利之心，易因急躁而忽略细节；“防出入”如警钟，提示谨防岗位调动、跳槽决策或新项目的贸然介入。当前宜守不宜攻，如同人卦变家人，需专注现有团队协作，避免与同事发生口角或越级汇报。若涉竞聘或谈判，务必反复核查方案，恐有小人作祟。时机未至，强求反损，建议沉淀三个月，待春末夏初再图进取。",
-  "wealth": "财运以“心戚戚”喻示财务紧张或投资焦虑，正财尚稳，偏财多虚。离为火，火性虚而不实，此签宜守财不宜投机，尤其防“出入”——即资金外流，如借贷、担保、不必要社交开销。家人卦提示家庭账户需统一规划，避免因私心动用共同资产。若从事属木、火行业（餐饮、文化），可小幅回暖，但整体宜储蓄备荒。",
-  "love": "感情中“意孜孜”为渴望亲密却患得患失，“心戚戚”则显猜忌与不安。离宫变家人，主情感归位：有伴者需警惕误会争执，或因父母介入生波折，宜主动沟通、少翻旧账，防“出入”即防第三者的介入言语。单身者不宜急于求成，当前缘分如蒙雾之火，看似明亮实则难抓，秋后或有良机。建议以朋友身份多相处，忌贸然表白。",
-  "health": "健康方面，“心戚戚”直指心绪不宁影响脏腑，离卦应心与小肠，易有心悸、失眠或消化紊乱。防出入者，一防外邪伤身（如风寒、意外磕碰），二防饮食出入不节。养生宜静心降火，多饮温水，少食辛辣；每日卯时散步十五分钟，可调畅气血。若已有不适，莫讳疾忌医。",
-  "study": "学业上“意孜孜”为急于求成，“心戚戚”则是复习焦虑的写照。同人变家人，提示切忌闭门造车，应与同学组队研习，但防“出入”即避免频繁外出分心或参与无益社交。考试运中平，理科易疏忽细节，文科发挥稳定。考前一周建议默诵签文自省，以稳心态为主。",
-  "general": "此签以离火入宅喻内忧外患之局，核心在于“收心守静，严控出入”。当下不宜远行、变更、投资或大动干戈，反宜整理家务、复盘旧事、休养精神。行动上：一、每日记录言行，防口舌之误；二、检查门户安全（家中及电子账户）；三、暂缓所有外出计划。心态上，需明白急则生变，静则明生。待冬至过后，阳气渐长，自可迎来转机。"
+  "sign_number": 152,
+  "sign_text": "莫叹事迟留，休言不到头，长竿终入手，一钓上金钩。",
+  "interpretation1": "有耐心、恒心，最后终能如愿。",
+  "career": "这签里藏着你事业路上最深的伏笔。此刻或许正卡在进退之间，看似停滞的局势其实暗涌着转机。别被表面的拖延蒙了眼，那些你以为错过的时机、落空的期待，不过是老天在给机遇淬火。手里攥着的\"长竿\"不是寻常工具，是你这些年攒下的本事和心性。等时候到了，竿子往水里一探，钓上来的不是小鱼小虾，是能改变你命数的金疙瘩。但切记，金钩咬饵的瞬间最考验定力，太早收竿会吓跑机缘，太晚收线又会脱钩。眼下要做的不是四处撒网，而是守着你的水域静静沉淀，该是你的那条鱼，迟早会游过来。",
+  "wealth": "这签文里藏着一股暗涌的力道，像深潭下蛰伏的鱼群。你最近总觉着钱途像被薄雾笼着，是不是？别急着拨开这层雾——它其实在护着你慢慢积攒底气。那些看似停滞的账目，困在瓶颈里的计划，不过是时间在替你筛掉轻浮的机缘。\n\n竿子握在手里沉甸甸的时候，别被这份重量唬住。你现在要做的不是甩竿，是稳住呼吸看清暗流走向。金钩咬饵的时机往往在人心焦时突然闪现，你前面积攒的每分耐性，都会化作收线时的那股寸劲。\n\n别被\"终\"字骗了，这不是说非要熬到山穷水尽。真正的转机可能就藏在某个被你看轻的日常里，像水底反射的碎金，晃眼间就咬住了命定的钩。记住，水面越是平静无波，底下越是藏着成群的机缘。",
+  "love": "你心里或许正悬着某种期待，像是守着平静的湖面等一条迟迟不咬钩的鱼。这签在说，别急着埋怨事情卡在半路，也别提前断言“注定没结果”——那些看似停滞的、拖延的时刻，恰恰是在替你攒够分量。就像收竿前总要屏住呼吸的等待，你手里攥着的长竿终会等到属于它的时机。但这份收获不是天上掉下的金钩，它认的是你沉住气的韧劲，信的是你熬过焦躁后依然稳稳握着竿子的手。此刻的煎熬会悄悄转化成底气，等到时机咬钩的刹那，你才会懂：原来所有的迟疑，不过是命运在等你把步子踩得更扎实些。",
+  "health": "你此刻或许正为健康问题感到迷茫，像是站在迷雾里张望方向。但那些看似停滞的现状，其实藏着生命的韧性——身体比你想象得更擅长自我修复，只是需要给它足够的信任与时间。\n\n别被暂时的困顿蒙住眼睛，那些反复尝试却收效甚微的方法，未必是路走错了，更像是黎明前的暗夜在考验你的耐心。就像春雨润物总无声息，健康的转机往往在无声处悄然生长。\n\n要握紧那份不轻言放弃的执着，但也要学会和身体温柔对话。该放慢时就从容驻足，该发力时便精准出招，这种收放之间的智慧，终会让你找到属于自己的疗愈节奏。\n\n记住：你与健康的博弈从来不是场速决战，而是需要与时光结盟的持久战。当身心真正达成和解那天，那些积攒的坚持都会化作破茧的底气。",
+  "study": "这签文里藏着一股\"沉住气\"的力道。眼下你或许正经历着看似停滞的积累期，就像水潭表面平静但底下暗流涌动。别被表象的缓慢困住，那些被时光沉淀的功夫，最终都会凝结成你手里实实在在的底气。现在需要的不是急着甩竿，而是校准心性——当你的心力与实力真正咬合成一股韧劲时，原本以为遥不可及的目标，会在某个恰到好处的时机突然咬钩。但切记金钩虽贵，钓竿太躁反而容易惊走机缘，保持住这份从容的节奏感，便是最好的修行。",
+  "general": "抽到这个签，是在告诉你眼下不必因进展缓慢而焦躁。事情虽像被风吹散的柳絮般飘摇不定，但根基始终扎在土里生长。你可能觉得前路被雾气笼罩，看不清终点，其实只需稳住脚步，脚下的路自会显现。那些看似停滞的时光，恰是命运在暗中校准方向。\n\n手中的长竿不是突然出现的馈赠，而是你过往积累的具象化。当它真正被握紧的瞬间，需要的不仅是等待的耐力，更要保持目光的清澈——过分盯着水面波纹的人，往往错过鱼群游动的轨迹。金钩咬饵的时刻固然关键，但真正决定收获的，是抛竿前反复调试角度的耐心。\n\n这签文藏着两重深意：若你此刻正想放弃，它劝你再续三寸坚持；若你已准备周全，它提醒你收线时机将临。世间事最忌讳的就是在黎明前松开了攥紧的绳索，又或是在艳阳高照时仍不敢扬帆。你的运势正处在将明未明的临界点，最宜戒骄戒躁，像老匠人打磨玉石般，既珍惜光阴流逝的分量，又不被时间本身困住手脚。"
+}
+```
+
+### 英文翻译
+```json
+{
+  "sign_number": 152,
+  "sign_text": "Do not sigh that matters delay;\nDo not say they will never reach their end.\nThe long rod will finally be in hand;\nWith one cast, a golden hook brings the catch.",
+  "interpretation1": "This sign uses fishing as a metaphor, with four lines seamlessly connected, fully expressing the principle of holding fast and waiting for the right time. The first line, 'Do not sigh that matters delay,' directly urges not to lament over current hindrances. The word 'delay' points to things being stalled, reflecting the Kan hexagram's image of danger and pitfalls. The second line, 'Do not say they will never reach their end,' follows from the first, warning against giving up—'never reach their end' is a sign of Kun (Exhaustion), yet within exhaustion there is success—the so-called 'fulfill one's mission through adversity.' The third line, 'The long rod will finally be in hand': the 'long rod' symbolizes a tool for enduring purpose, an unfulfilled ambition; 'finally in hand' means the time is ripe, tools ready. Kan water flows upward, movement in learning from hardship—at last there is a grip. The final line, 'With one cast, a golden hook brings the catch': 'golden hook' is a precious item, implying that what is sought is no ordinary thing. Caught with one cast—it is the success after extreme difficulty, a noble result from danger. The hexagram transforms from Kan to Kun. Kan is water, representing danger and pitfalls; Kun is a lake without water, representing exhaustion. Yet the judgment of Kun says: 'Exhaustion but not losing what makes one prosper—only the gentleman can do this.' Remaining upright amid danger leads to eventual success. This sign tells you: current delays are not the end; they are a period of brewing by heaven. The long rod is in your hand, just one cast away—then the golden scale appears.",
+  "career": "The line 'The long rod will finally be in hand' implies that career tools are ready—professional skills, network, and resources have matured, but the timing has not yet arrived. 'Do not sigh that matters delay' directly states that progress is sluggish like being underwater, easily causing anxiety. This sign indicates that career is first hindered and then successful, similar to Kan transforming into Kun. Initially, there are undercurrents of competition and heavy responsibilities; persistence and waiting are needed. Favorable fields: water conservancy, shipping, finance, strategic planning. Roles tend toward behind-the-scenes planning, risk management, long-term projects. The timing is favorable in winter or when encountering a turn amid obstacles. However, do not act prematurely; first observe the water like a fisher. 'With one cast, a golden hook brings the catch' suggests that success comes from a single critical move. After thorough preparation, aim for a core target and decisively strike, such as a competitive application, proposal, or key negotiation. Avoid: rushing into frequent job changes due to impatience, taking risks without backup, or complaining about unrecognized talent and contending with superiors.",
+  "wealth": "The 'golden hook' directly indicates valuable wealth, while the 'long rod' implies a proper way to generate wealth, not gained by luck. The sign says 'Do not sigh that matters delay'—wealth has a delayed onset; regular income is primary, windfall gains are difficult. Early investments have long payback periods, like hoarding or skill investment. Patience is needed, like deep Kan water. The Kan hexagram represents water; wealth like flowing water, coming and going invisibly. Kun hexagram indicates a temporary blockage in wealth flow; it is better to defend than to attack. 'With one cast, a golden hook brings the catch' implies that key opportunities are few, such as being introduced to a project by a supportive person or a repeat large order from an old client. Seize them precisely; do not be greedy for more. Conservative financial management is advisable, like regular savings or gold preservation. Avoid high-leverage speculation, as Kan peril may entrap you. Industries like water transport, shipping, and intellectual property are favorable for increasing income. Avoid: impatience due to delays, blindly starting side businesses, or trusting get-rich-quick schemes, which may cause the golden hook to slip away.",
+  "love": "'Do not sigh that matters delay' directly applies to love: relationships often face postponement—singles may not have met their match, or couples may be stuck in a rut. Kan transforming into Kun: emotional seas are choppy; you may feel lonely. Yet 'Do not say they will never reach their end' is a turning point. 'The long rod will finally be in hand' suggests that your emotional capacity is gradually maturing, or you may meet a steady and reliable person. 'With one cast, a golden hook brings the catch' signals that a good destiny, though late, will arrive. You need to cast your line actively, like waiting quietly by the water. Singles: consider meeting like-minded people through interest groups or further education; do not settle due to pressure. For those in a relationship: a current estrangement like the Kun hexagram's dry lake needs joint cultivation of 'living water.' Avoid reopening old wounds or demanding promises; imitate the fisher's patience, overcome rigidity with gentleness, and wait for the atmosphere to warm before discussing long-term plans. Confessions or proposals are better made near water or in early spring or winter, which are more auspicious.",
+  "health": "The Kan hexagram governs the kidneys, bladder, and ears; the Kun hexagram's third line says 'stuck by stones, trapped on thorns,' hinting at urinary system issues or chronic strain. The sign's line 'Do not sigh that matters delay' directly corresponds to slow recovery; do not worry, which would further drain your energy. The 'long rod' symbolizes the spine's support; the 'golden hook' may refer to trace elements in the body. Pay attention to soreness in the lower back and knees, tinnitus, and bone density. Health preservation: rest quietly like fishing, practice gentle exercises such as tai chi and baduanjin, and unblock the bladder meridian. Diet: appropriately consume black-colored foods (like black beans, black sesame) to correspond to Kan water, but avoid cold-dampness. Warning signs: frequent urination at night, unexplained fatigue, swelling in the lower limbs. Adjust your routine promptly; do not stay up late depleting kidney essence. Especially during the three winter months, conserve your energy well.",
+  "study": "'The long rod will finally be in hand' likens academic effort to making a fishing rod—it requires selecting materials and long polishing; do not give up halfway. Kan represents wisdom water, conducive to immersive thinking, but Kan transforming into Kun means you may encounter bottlenecks like difficult problems or poor memory. 'Do not sigh that matters delay' advises not to be discouraged by slow progress. 'With one cast, a golden hook brings the catch' foretells that exam performance will finally achieve a splash—especially favorable for final exams, thesis defenses, and qualification tests. Study methods should be 'precision fishing': target weak subjects for breakthroughs, avoid spreading energy too thin. Exam luck is slightly better in winter and spring; before exams, familiarize yourself with the environment to stabilize your mind. Social sciences, philosophy, and hydraulic engineering are likely to yield results. Avoid: comparing progress with others, belittling yourself, or cramming without system.",
+  "general": "The overall meaning of this sign: perseverance is valuable. Do not lose your composure due to temporary difficulties. Kan water nurtures wisdom, Kun hexagram tempers the mind—both prepare you for the great success of the 'golden hook.' Key actions: First, take inventory of your 'long rod'—existing resources and expertise—and quietly wait for the best moment to act. Second, in all matters, be like a fisher reading the currents: avoid underwater rocks (interpersonal relationships, industry shifts) and cast your hook only after the wind and waves settle. Third, after obtaining the 'golden hook,' cherish it; do not fish insatiably, or the bait and hook will be lost. In mindset, often recite the words 'do not sigh' and 'do not say.' Respond to the world with flexibility and resilience, like water that does not contend yet wears through stone. Consider this an invitation to self-reflection, not a prediction."
 }
 ```
 
 ---
 
-## 第 25 签
-
-⚠️ **缺少英文翻译**
+## 第 153 签
 
 ### 中文原文
 ```json
 {
-  "sign_number": 25,
-  "fortune": "下下签",
-  "gua_type": "乾宫 姤变大过",
-  "sign_text": "见不见，也防人背面，遇不遇，到底无凭据。",
-  "interpretation1": "签文首句“见不见，也防人背面”喻世事看似明朗实则暗藏隐忧，“背面”直指小人暗算、背后是非；次句“遇不遇，到底无凭据”言机遇看似来临却终难把握，如镜花水月般虚浮无根。此签得于乾宫姤变大过：姤卦主邂逅与不期而遇，变大过则喻事物过度而失衡，有“栋桡”之危。乾为天，主刚健，但姤为一阴始生，大过上兑下巽，泽灭木，水淹舟覆之象。整体寓意：当前处境看似有所见、有所遇，实则隐患潜伏，外似平稳而内藏危机。所托非人、所谋不实者居多，须慎之又慎，不可轻信表面现象。卦象警告：若执意冒进，则如过河沉船，悔之无及。宜静守待时，修身养晦，方有转机。",
-  "career": "签文“见不见”“遇不遇”直指事业上表面机会与实质成果的错位。姤变大过，职场易遇合作者背后掣肘，或项目中途生变。目前看似有晋升或合作之机，但“到底无凭据”提示此类机会根基不稳，协议或承诺可能落空。宜：深耕现有岗位，打磨核心技能，暂勿轻信他人牵线或跳槽邀约；忌：与同事争功、参与派系斗争、草率签署长期合同。乾卦健行需配以谨慎，建议以退为进，待秋季过后再做定夺。",
-  "wealth": "姤变大过，财运如泽水漫舟，看似波涛汹涌却暗藏覆没之险。“防人背面”主理财需警惕合作方失信、合同陷阱或亲友借贷纠纷。“无凭据”更暗示投机类收益虚实难辨，偏财不可取。正财可守，但需严控开支，勿因短期诱惑扩大杠杆。宜：清账追款、暂缓投资、增持现金储备；忌：担保借贷、涉足高风险领域、囤货压仓。卦象大过，土木相关行业尤需谨慎，防止工程烂尾或库存积压。",
-  "love": "签文以“见不见”喻感情中真相难明，“背面”主隐藏的猜忌或第三方介入。姤卦主邂逅，变大过，则一段看似美好的相遇可能因过度付出或期待落空而失衡。单身者易遇短暂缘分，但“到底无凭据”提示对方态度模糊，不宜急于确定关系。有伴者需防范旧事重提或误会累积，大过卦象如泽灭木，感情有倾覆之虞。宜：坦诚沟通但避免追问过往，多共同参与户外活动以化解阴霾；忌：翻旧账、财务纠缠、冷战。",
-  "health": "姤变大过，泽灭木之象，对应肝肾、筋骨与水液代谢。签文“防人背面”可引申为身体隐疾不显，如潜在淤堵或慢性疲劳。当前健康状态表面尚可，实则“无凭据”指免疫系统或内分泌易失调。宜：调养肝气（多吃绿色蔬果、少熬夜）、温和运动（太极、散步），忌：暴饮暴食、过度耗神。若已有基础病症，需定期复查，防微杜渐。大过卦提醒注意胸胁胀满或水湿停滞之兆。",
-  "study": "签文“见不见”对应学习瓶颈：明明看过的内容却记不牢，似懂非懂；“遇不遇”指考试时遇题似曾相识却答非所问。姤变大过，学业易因分心或方法过当而失衡。乾宫主勤勉，然变卦示警：不宜贪多求全。宜：专攻一两门薄弱科目，采用错题本与思维导图，耐心夯实基础；忌：临时突击、熬夜刷题、轻信押题套路。考试运偏稳但易有意外失误，建议提前到考场适应环境。",
-  "general": "此签下下，核心警示是“虚”与“诈”：所见非真，所遇非实，人事皆易落空。整体运势如雾中行船，需降低期待、收束行动。关键建议：一、近期重大决策暂缓，尤其涉及合作、签约、远行之事；二、优先处理人际关系中的隐忧，主动疏通而非回避；三、每日静坐片刻，省察自身言行是否招致误会。卦象大过虽凶，然“过涉灭顶”之极亦为生机所伏，持中守正，耐心待时，冬去春来可期。"
+  "sign_number": 153,
+  "sign_text": "事称应有忌，未为恐先踬，欲往且迟迟，还须借势力。",
+  "interpretation1": "不必操之过急，须仰人相助，或有所成。",
+  "career": "你最近在事业上遇到的情况有些像站在迷雾里看路。表面看着方向清晰，但脚下可能藏着绊脚的石头。现在不宜急着跨步，越是用力冲刺越容易踩空，反而需要把步子放慢些，多看看周围的地势。\n\n你心里想推进的事情，其实背后牵着些看不见的牵绊。就像要搬动重物却找不到支点，这时候得先找能搭把手的人。别觉得开口求助是示弱，那些愿意伸手的恰恰是你命里的贵人。可能是一句提醒，可能是个引荐的机会，这些外力才是解开困局的关键。\n\n眼下最忌自己闷头硬扛，你骨子里的倔强反而会成为阻碍。与其焦虑停滞不前，不如把这当作盘整的契机。把原本急着要做的事缓一缓，就像泡茶要等水温合适，等外力自然汇聚时再掀盖子，茶香才会出来。这段时间该照常做事就照常做，但别强求结果，种子埋进土里总要等春雨来催。",
+  "wealth": "你最近在钱财上的动向要当心了。看似顺当的路子底下埋着暗钉，眼前的机会可能暗藏你暂时看不清的沟坎。若硬要往前冲，反而容易踩空摔跤。现在最要紧的是把步子放慢些，别急着伸手去够那些明晃晃的诱惑。你需要像藤蔓攀附老树那样，找到能帮你稳住根基的支撑——或许是可信的伙伴，或许是能指点迷津的贵人。钱财这潭水深得很，光靠孤勇容易呛水，得学会借别人的竹篙探路。记住，该是你的财星不会跑，眼下越是心急火燎，越容易错过真正该抓住的机缘。",
+  "love": "这签里藏着一股悬而未决的劲头。你心里那个想靠近的人或事，像被薄雾笼着，明明能望见轮廓，却总差一步才能真切地触碰。此时若冒失伸手，反而会惊散那团雾气，不如先让掌心在袖子里攒住温度。\n\n你或许察觉到了某种微妙的失衡，就像走夜路时鞋跟总被杂草勾缠。那些看不见的阻力未必来自外界，倒像是命运在提醒你——该暂时按捺住急切的手，让脚步慢下来。这不是退缩，而是让心底翻涌的念头沉淀出更清晰的形状。\n\n需要借的那股\"势\"，不一定是求人相助，更像是在等某个契机与你的决心自然相融。就像河水知道什么时候该绕开礁石，什么时候能积蓄足够的力量漫过浅滩。你只需保持敏锐的触角，让那些经过你生命的风，吹散犹豫时沾在衣襟上的尘埃。记住，不是说你必须停下脚步，而是得学会让力量生长在合适的地方。",
+  "health": "你现在的身体状况像站在薄冰边缘试探，心里总隐隐觉着哪里不对劲，却又说不分明。有些事表面上看着顺当，但骨子里藏着暗流，比如明明按时吃饭却总觉得肠胃发沉，或是睡了整夜却像没沾过枕头。这种违和感不是空穴来风，它像根细线勒在你手腕上，不疼，但时刻提醒你该解开。\n\n别急着下猛药，你现在最忌用蛮力。好比有人爬山崴了脚，偏要咬牙继续冲顶，结果把轻伤拖成顽疾。该停下来看路的时候，硬撑反而要坏事。你身体里有些微妙的天平正在摇晃，与其赌气似地跟它较劲，不如把脚步放慢些，像老茶客品茶那样，一口口咂摸出身体真正的需求。\n\n要借的那股\"势力\"就藏在日常褶皱里。可能是清晨七点照在枕头上的阳光，可能是厨房里飘着的枸杞香，更可能是体检单上某个被你忽略的数字。把这些零散的线头捡起来，交给懂行的人帮你织成网，那网兜住的不止是健康隐患，更是往后十年从容行走的底气。",
+  "study": "这枚签文折射出你此刻的求学之路如同山间行走，需保持清醒的机警。你心中所求或许正面临着看似合理的陷阱——某些选择表面光鲜却暗藏滞涩，那些急切想抓住的机遇里可能埋着未显形的荆棘。此刻不宜莽撞发力，就像溪流绕过礁石时总会放缓流速，你需要用更深的思虑来审视前路。\n\n焦虑如同薄雾笼罩在脚边，并非源于实力不足，而是因你背负着对完美的苛求。与其被\"可能跌倒\"的念头困住步伐，不妨先加固行囊——那些未完成的准备、尚需打磨的根基，恰是支撑你跨越沟壑的基石。记住真正的阻碍往往不是山峦本身，而是登山者内心的犹疑。\n\n不妨把目光投向更广阔的天地，你需要的不仅是独自攀援的勇气，更需要学会辨认山径上的前人足迹。师长点拨如指路星辰，同窗互助似借力藤蔓，这些外力并非示弱的表现，而是智者攀登的智慧。当云雾散尽时，你会发现自己早已站在更高的峰峦回望来路。",
+  "general": "你当下所求的运势像在暗流涌动的河岸边行走。看似脚下有路，但若贸然踩实，可能会触到水底滑石。那些你认定\"本该如此\"的事，未必如表面呈现的稳妥，暗处藏着需要警惕的变数。\n\n现在不是凭一腔热血就能成事的时候，若独自埋头向前，容易在没防备的关口被绊住。就像晨雾未散时赶路，步子太快反而容易迷途。你需要暂时收住急切的心思，把行动放缓些，让事情在时间里自然沉淀出更清晰的轮廓。\n\n但停滞不等于放弃。留心观察周围的环境，某些原本忽视的助力正潜在暗处。或许是某个人不经意透露的讯息，或许是某个被你错估的契机，需要你主动伸手去联结。记住此刻的踌躇不是软弱，恰是积蓄力量的必要过程。"
+}
+```
+
+### 英文翻译
+```json
+{
+  "sign_number": 153,
+  "sign_text": "Matters may seem fitting, yet caution is due,\nTake no hasty step, lest you fall before you.\nDesiring to go, still linger and wait,\nRely on the strength of allies and fate.",
+  "interpretation1": "The four lines of this oracle advance layer by layer, revealing the path to success and the way to avoid harm. The first line indicates that although things may seem favorable, hidden taboos require respect. The second warns against rash action. The third advises to measure the situation and wait for the right moment. The fourth points to relying on external help. The hexagram shifts from Cui (Gathering) to Pi (Obstruction), signifying that gathering can turn into blockage if not handled with care.",
+  "career": "\"Rely on the strength of allies\" points directly to the key in the workplace: a single tree does not make a forest. The hexagram suggests teamwork is essential; avoid isolation. The line \"still linger and wait\" implies that promotions, job changes, or new projects should not be rushed. The late summer to early autumn, when Metal energy rises (Dui Palace belongs to Metal), may be a favorable period. Proactively integrate into core circles, leverage senior colleagues or cross-departmental resources—especially beneficial for collaborative and coordinating roles. Avoid going solo, being overly competitive, or becoming arrogant from minor successes, which could breach team harmony (\"caution is due\"). If considering a change, wait for referrals or resources to be in place.",
+  "wealth": "The line \"matters may seem fitting, yet caution is due\" hints that wealth opportunities may conceal pitfalls. Cui originally signifies wealth accumulation, but the change to Pi warns of potential dispersal. Regular income is stable; speculative gains are illusory—better to defend than to attack. \"Rely on the strength of allies\" suggests cooperative wealth-seeking is the smooth path; leverage others' channels, wisdom, or capital. Industries related to Metal and Water (Dui as Lake) may be suitable, such as finance, trade, and consulting. Timing-wise, \"linger and wait\" demands careful deliberation on investments; avoid following trends or trusting sweet talk. For daily finances, prioritize stable savings and moderate spending to guard against unexpected losses.",
+  "love": "\"Still linger and wait\" mirrors the heart: do not rush in emotional matters. The hexagram shift from Gathering to Separation indicates that relationships may turn from warm to distant. \"Caution is due\" reminds you to avoid landmines and not take your partner's efforts for granted. For singles, potential partners may appear among old acquaintances or work circles; use common interests or intermediaries—avoid abrupt confessions. For those in relationships, \"rely on the strength of allies\" could mean using anniversaries, elder mediation, or shared goals to bridge gaps. Avoid revisiting old grievances or speaking harshly. If surface harmony hides underlying currents, patience—not demanding promises—is needed.",
+  "health": "The image of \"fall before you\" warns against falls and injuries. The hexagram shift from Gathering to Obstruction suggests issues with circulation, metabolism, and joints. Dui as Lake belongs to Metal, corresponding to lungs, trachea, and skin. The changing hexagram Pi (Obstruction) indicates stagnant qi and phlegm. The first line's \"caution\" advises dietary restraint: avoid spicy, greasy foods to reduce lung-stomach burden. For recuperation, \"linger and wait\" translates to slow movement—tai chi, yoga—avoid vigorous exertion. Emotionally, Pi signifies depression; guard against excessive worry. Use music and social connection (\"rely on strength\") to release emotions. Specific areas to watch: throat discomfort, muscle strains, and seasonal transitions.",
+  "study": "The line \"linger and wait\" suits the path of learning: avoid haste. Cui as Gathering represents knowledge accumulation; Pi suggests potential bottlenecks. The first line warns against using tricks—weak foundations lead to setbacks. \"Rely on the strength of allies\" favors group discussion and teacher guidance; avoid studying in isolation. Exam luck: prepare thoroughly and advance slowly; cramming is ineffective. Be careful not to become careless after an initially good start. Advantageous for liberal arts and interdisciplinary learning; for logic subjects like math, use diagrams or examples. The autumn-winter period, when Metal and Water generate each other, may enhance comprehension.",
+  "general": "This is a Moderately Favorable sign—good fortune with hidden obstacles. The key lies in balancing \"relying on allies\" with \"avoiding haste.\" Though the power of gathering is present, the danger of blockage has already emerged. Action requires three principles: first, prepare in advance—do not wait for opportunities to come; lay out connections and resources early. Second, when facing difficulties, neither retreat nor act rashly—replace impatience with calm deliberation. Third, remain humble and introspective, especially when things go well, thus turning gathering into lasting smoothness. In mindset, view small setbacks as warnings, not failures; go with the flow and rely on strength, and eventually the clouds will part. Reflect on how this resonates with your current situation."
 }
 ```
 
 ---
 
-## 第 26 签
-
-⚠️ **缺少英文翻译**
+## 第 154 签
 
 ### 中文原文
 ```json
 {
-  "sign_number": 26,
-  "fortune": "上上签",
-  "gua_type": "乾宫 遁变咸",
-  "sign_text": "一番桃李一番春，谁识当初气象新，林下水边寻活计，见山了了称心意。",
-  "interpretation1": "签文以‘一番桃李一番春’起兴，喻示光阴流转中万物自有其荣枯更迭。‘谁识当初气象新’则暗含追忆与反省——昔日之新气象，今人未必记得，正如乾宫‘遁变咸’卦象：遁为退藏，咸为感应，提示需在隐退与感知之间寻得平衡。‘林下水边寻活计’指点谋生之道宜近自然、择清幽之地，或从事与水木相关行业。‘见山了了称心意’则预示目标清晰可见，心愿可遂。全签以桃李、春、林水、山为意象，勾勒一幅先藏后发、终得称心的图景。吉在上上，但卦变提醒：当珍惜当下气象，勿恃才傲物，方能长久如意。",
-  "career": "签文‘林下水边寻活计’喻示事业宜从事与自然、文化、教育、水利、园艺或休闲产业相关的领域，‘水边’亦主流动性或涉外岗位。‘一番桃李一番春’暗示周期性机遇，每至春季或新一轮项目启动时，当主动请缨。乾卦主健行，遁卦又寓谦退，故宜在专业积累后逐步展现锋芒，忌急于求成。‘见山了了’谓职业规划清晰，尤利晋升、竞聘或创业初期。若当前岗位偏静态，可考虑调岗或向外发展。",
-  "wealth": "‘一番桃李一番春’主财富随周期起伏，春种秋收，不宜急功近利。‘林下水边寻活计’偏财宜从绿色产业、水产、旅游或知识服务中得，正财则需深耕主业。‘见山了了’提示理财目标应明确，可做长期稳健投资（如不动产、基金），忌投机高风险项目。咸卦有感应之意，贵人运或信息差可带来偏财，但需‘寻’而非等。上上签财运虽旺，仍宜守正，勿贪快钱。",
-  "love": "‘一番桃李一番春’喻感情如季节焕新，单身者遇良缘之象，尤其春天或自然环境中结识；‘谁识当初气象新’提醒勿忘初心，避免因平淡而忽略对方付出。‘林下水边’暗示相处宜亲近自然、多户外活动，可增进默契。‘见山了了’则主心意相通，矛盾易解。若已有伴侣，咸卦感应强，宜多沟通、共商未来；若冷战，主动破冰可获和好。上上签提示珍惜当下缘分，戒骄纵。",
-  "health": "乾宫遁变咸，乾为头、肺，遁为退，咸为少阴之象。签文‘一番桃李一番春’主季节交替时需注意呼吸系统与皮肤过敏问题。‘林下水边’对应肾脏与泌尿系统，宜多饮水、适当活动（如散步、太极），忌久坐。‘见山了了’主目明，但用眼过度需调节。整体养生宜顺应自然节律，早睡早起，饮食清淡，春季尤需防花粉之扰。无需过虑，若出现小恙，及时休息即可。",
-  "study": "签文‘一番桃李一番春’喻学习状态如春苗滋生，领悟力强，考试运佳，尤其春季或学期初段。‘谁识当初气象新’提醒温故知新，莫忽视基础。‘林下水边寻活计’建议选择环境清幽之处学习，或选择与林、水（如生物、地理、环境）相关专业。‘见山了了’谓目标明确，钻研难题可豁然开朗。乾卦主主动进取，咸卦利直觉，宜多结合实践与感悟，文科优于理科。",
-  "general": "此签为上上大吉之兆，核心在于‘寻’与‘见’：主动寻机，清晰见果。行动建议：①事业和财富上抓住春季窗口期，积极展示，但勿忘谦退之道；②感情与健康回归自然，少焦虑多行动；③学习应脚踏实地，基础巩固后自见成效。心态上，坤卦遁变咸提醒：繁华易逝，保持本心，方能持续称意。莫效‘谁识当初’之叹，而应珍惜当下每一番春意。"
+  "sign_number": 154,
+  "sign_text": "足不安，舆不安，两两事相得，忧来却又欢。",
+  "interpretation1": "塞翁失马，焉知非福，有时这样也不对，那样也不对，合在一起却带来好运。",
+  "career": "你此刻的运势像踩在晃动的木板上，脚下发虚，手头的事情也像摇晃的车轮总难稳住方向。看似矛盾的力量在暗中较劲，但仔细看会发现它们其实互为支撑——就像走钢丝的人必须左右摇摆才能保持平衡。\n\n这时候最忌讳慌不择路。你面临的困境本身暗藏转机，那些令你焦虑的波动，恰恰是事物重新校准的征兆。当心被表面混乱迷惑，不妨退后半步观察，会发现看似冲突的两种力量正在帮你扫清旧格局。记住：水面越是激荡，沉淀杂质的速度就越快。\n\n近期遇到看似矛盾的机遇要特别留意，不必急着分辨好坏。就像暴雨前翻腾的云层，等这场动荡过去，你会看清哪些是真正值得抓住的根基。保持这份清醒的摇摆，比盲目追求稳定更能带你走向开阔处。",
+  "wealth": "这签文里藏着一股流动的气韵。你的财运像被风吹皱的湖面，看似波动却自有章法。\"足不安\"是说你现在踩着的根基带着三分摇晃，就像站在涨潮的浅滩，既不能贸然涉水，也不必急于退却。\"舆不安\"暗示你原本依赖的谋生手段正经历微妙调整，这种变化不是崩塌，而是器物用久后自然的磨合。\n\n两股力量在暗中较劲又相互成就，像太极图里的阴阳鱼，看似对立实则共生。你最近的进财门路或许会出现此消彼长的状况，但不必执着于某个方向的得失。要特别留意那些看似矛盾却互为补充的机会，比如主业与副业的平衡，投资与储蓄的配比，短期收益与长期布局的考量。\n\n最妙在\"忧来却又欢\"的转折。眼前令你焦虑的财务波动，换个角度就是重新洗牌的契机。就像雨季过后草木会更葱郁，这段时间的财务震荡反而能冲刷出更清晰的财富脉络。记住水无常形，财路也不必拘泥于固定模式，保持三分警觉七分从容，自能在动荡中把握住暗涌的生机。",
+  "love": "这签文讲的是你此刻心绪像踩在摇晃的船板上，脚下总不踏实。有股力量推着你往前走，却又感觉被什么拽着不能完全迈开步子。你心里那杆秤在来回晃荡，既盼着抓住什么，又害怕失去另一些东西。\n\n但仔细看这签文的机锋藏在\"两两相得\"里——看似矛盾的两股力量其实在互相成就。就像暗流交汇处会翻涌出新的生机，你眼前的困顿其实是命运在给你织一张更结实的网。那些让你不安的裂痕，最终会变成透进光的缝隙。\n\n不必急着给眼下的是非下结论。你此刻的焦虑是必经的淬炼，等这阵风过了回头再看，会发现当初以为绕不过的坎，不过是通向更高处的台阶。且让该来的来，该去的去，命运的伏笔往往藏在最意想不到的转折里。",
+  "health": "你现在的健康状态像踩在起伏的沙地上，脚下总带着点虚浮的摇晃。身体和外界环境之间似乎总隔着层薄雾，有时候明明觉得该稳住了，又会被风吹得偏斜两步。但别被这种飘摇感困住——那些看似相互拉扯的力量，其实暗藏着微妙的平衡。就像山间两股相反的溪流，碰撞后反而能冲开淤堵的石块。\n\n要留心身体传递的细小信号，它们可能是解开困局的钥匙。暂时的疲惫或不适，或许正提醒你需要调整节奏，在\"守\"与\"放\"之间找到新的支点。别急着用蛮力对抗这种波动，试着像观察潮汐般接纳它的规律。阴云里藏着转晴的契机，当烦忧漫到喉咙时，记得低头看看——鞋尖指着的方向，或许正铺着条被落叶盖住的小径。\n\n保持这份清醒的觉察，让身体里对抗的力量慢慢融成滋养的活水。该收紧时收紧，该松手时松手，你会摸到属于自己的生命韵律。",
+  "study": "这签里裹着你的学业路像踩着初春的薄冰，脚下总带着三分晃悠。你看那\"足不安舆不安\"，像是心里揣着两个秤砣——既怕走快了摔跟头，又嫌走慢了赶不上趟。两股力道拧巴着较劲，倒像是阴阳鱼咬尾转圈圈。可别小看这\"两两事相得\"的玄机，你正愁着的那道坎，转过弯说不定就成了垫脚石。\n\n眼下这节骨眼儿，别被浮云遮了眼。你觉着书卷重得像山，笔头沉得像铅，可这\"忧来却又欢\"的机锋正藏在字缝里。就像竹笋顶破冻土，过程虽苦，破土那刻的痛快才最解乏。别急着拿尺子量眼前这三寸光景，把步子踩实了，该翻的山自然矮下去。记住啊，学问这事最忌单脚跳，要像老农插秧，退步原来是向前。",
+  "general": "这签文里藏着一股矛盾又纠缠的流动感。你此刻的状态像两股力量在拉扯——脚步悬着不敢落地，脚下的车辙也摇晃不稳，明明相互牵连的事物却偏偏要碰撞出矛盾。这种不安不是单纯的困境，更像一种提醒：你心里早有预感某些事需要重新平衡。\n\n表面看是\"忧\"，但仔细听，这\"不安\"里藏着转机。两件事的冲突反而会催生出新的默契，就像乌云背后总藏着晴光的轮廓。你当下需要的不是急着站稳脚跟，而是允许自己在这种混沌中观察：看似对立的选择或许能意外互补，暂时的动荡反而能筛出更真实的方向。\n\n别抗拒这种摇晃感。真正的问题或许不在于如何躲避风浪，而在于你能否在摇摆中调整呼吸，找到自己最舒适的节奏。记住，欢欣常在最紧绷的时刻突然透出一线光——保持柔软，让矛盾自然发酵，答案会从你与生活的摩擦中浮现。"
+}
+```
+
+### 英文翻译
+```json
+{
+  "sign_number": 154,
+  "sign_text": "The foot is unsteady, the cart is unsteady,\nTwo matters come together,\nWorry comes, yet turns to joy.",
+  "interpretation1": "The first two images depict a difficult journey—bumpy path, unsteady vehicle—symbolizing a predicament where you are caught between a rock and a hard place. This reflects the Kun hexagram's treacherous waters. The line \"two matters come together\" marks a sudden turn: yin and yang align, host and guest cooperate, as the hexagram shifts from Kun (Distress) to Cui (Gathering)—from danger within to gathering above ground. \"Worry comes, yet turns to joy\" directly states the outcome: first anxiety, then happiness. This sign's favorability lies not in constant smoothness, but in finding a chance for alignment amidst unease, transforming hardship into gathering. Act with calm, await the moment of convergence, and joy will come.",
+  "career": "\"The foot is unsteady\" points to instability at the start of a career or during transition—frequent adjustments or multi-directional constraints. Cui as Gathering, with Dui as communication, suggests the breakthrough lies in collaboration. \"Two matters come together\" indicates that going it alone is difficult; leverage teamwork or cross-departmental cooperation, ensure alignment between superiors and subordinates. \"Worry comes, yet turns to joy\" foretells tangible results after pressure; a turning point may appear in late autumn or early winter. Proactively integrate into the group, take on projects requiring multi-party coordination; avoid going it alone or frequent job changes. This sign favors collaborative roles; display your talents at social events or appraisals.",
+  "wealth": "\"Unsteady foot\" suggests fluctuating regular income—salary or business revenue may be erratic. \"Unsteady cart\" indicates investments floating like a boat on waves, lacking solidity. Dui as Metal, Cui as Gathering, means pooling collective funds can succeed. \"Two matters come together\" clearly points to cooperative wealth-seeking; individual speculation leads to loss. Protect regular income, avoid speculative gains; partnership or team bonuses are more reliable. \"Worry turns to joy\" is a pattern of loss before gain—early liquidity issues may arise, but proper negotiation can resolve them. Favor conservative savings, avoid expanding on credit; spring to summer may stabilize, consider earth-related cooperative industries.",
+  "love": "\"Unsteady foot\" mirrors a lack of security in feelings—long-distance longing or difficulty connecting. \"Unsteady cart\" symbolizes external interference—family pressure or reality shaking the relationship. Cui's gathering brings scattered ones together. \"Two matters come together\" emphasizes mutual effort: open communication and conquering trivialities together. \"Worry turns to joy\" reveals that after twists, tenderness deepens—first misunderstandings then harmony. For singles, attending gatherings may bring a destined encounter—initial nervousness then affection. For couples, avoid fighting over old issues; take a trip or do chores together to gather warmth in the ordinary.",
+  "health": "\"Unsteady foot\" corresponds to the lower body: ankles and knees prone to fatigue or circulation issues—guard against sprains. \"Unsteady cart\" relates to the spine; Kun's Water governs kidneys, Cui's Earth governs spleen and stomach—watch for imbalances. Minor ailments may occur—poor sleep, low energy—but nothing serious. \"Two matters come together\" suggests body-mind harmony: balance movement and stillness to dispel worry. Recommended: gentle morning walks, soft warm diet; avoid prolonged sitting in damp cold. If feeling heavy, massage Zusanli and Yongquan points. Stay calm, extra caution during season changes.",
+  "study": "\"Unsteady foot\" indicates shaky academic foundation—distractions causing gaps. \"Unsteady cart\" reflects fluctuating grades, causing unease. Dui as mouth, Cui as gathering—this sign favors group discussion and peer teaching. \"Two matters come together\" means methods must align with subjects; find a balance between liberal arts and sciences. \"Worry turns to joy\" suggests exams with initial difficulty, but eventual clarity. During review, collaborate with classmates; avoid rote memorization alone. Memorization subjects may be easier, science requires repeated practice. Keep a stable routine; anxiety will dissolve.",
+  "general": "This sign moves from distress to gathering, first worry then joy. \"Unsteady foot, unsteady cart\" is the normal starting state—do not panic over minor setbacks. \"Two matters come together\" is the key: seek the right people and actions, borrow strength. Action advice: first, when stuck, pause decisions until more information is gathered. Second, actively build cooperative ties—a single thread cannot make a cord. Third, maintain a joyful heart even in worry—Dui's joy can turn conflict into harmony. In mindset, know that unease is the very source of joy; after treading on thin ice, the broad road appears. Consider this an invitation to self-reflection, not a prediction."
 }
 ```
 
 ---
 
-## 第 27 签
-
-⚠️ **缺少英文翻译**
+## 第 155 签
 
 ### 中文原文
 ```json
 {
-  "sign_number": 27,
-  "fortune": "中上签",
-  "gua_type": "艮宫 艮变剥",
-  "sign_text": "莫怪我见错，心性自成痾，偏僻不通心，真人却不魔。",
-  "interpretation1": "此签以心性修持为镜，映照人生诸事之困。签文首句“莫怪我见错”，非推诿之辞，乃警醒之语：外境之迷，源于内观之偏。次句“心性自成痾”直指病根——执念、偏见、刚愎，皆自筑藩篱，使真智隐没。“偏僻不通心”描绘艮卦止而不通之象，如立危岩之上，只知固守一隅，不知迂回通达。末句“真人却不魔”是转机所在，真人喻本心澄明之境，心若虚静，魔障自消。卦属艮宫变剥，艮为山，剥为剥落，象喻外在阻碍实由内心滞碍感召，须如高山剥去浮土，方露磐石之基。全签意在劝人破执开怀，勿苛责外缘，反求诸己，则中道可通，吉兆自临。",
-  "career": "事业之困，多起于心念偏僻。签文“偏僻不通心”直指职场人际与决策之弊：固执己见、不通权变，或对同事领导心存偏见，易致孤立无援。艮卦止象，提示此时不宜强行推进，宜暂缓脚步，反观自身是否刚愎自用。变卦剥，暗示旧有模式正渐剥落，若仍守“我见”不放，恐失转圜之机。宜采取“真人却不魔”之心境，放下成见，主动倾听，尤其在意见分歧时先自省三日。利从事协调、顾问、技术深耕类岗位，不利投机取巧或权力争斗。忌：当众驳斥上级、背后议论同僚；宜：以柔克刚，借团队之力破局。",
-  "wealth": "财运之起伏，系于一心之宽窄。签文“心性自成痾”喻示贪念、急功之心正是破财之根。艮为山，止也，主财路宜稳不宜险，若抱“我见”而投偏门，恐如入魔道。变剥卦，财帛有剥蚀之象，须防因性格执拗错失合作良机，或轻信他人而招损。“真人却不魔”提醒，心如止水方能辨识真伪。正财运平顺，宜守主业，深耕细作；偏财不宜强求，投资忌跟风。利土属、地产、仓储、古董鉴定等稳定行业。忌：虚荣消费、为人担保、借贷投机。宜：量入为出，定期复盘账目，将余钱存为不动产或稳健理财。",
-  "love": "情感路上，心障即情障。签文首句“莫怪我见错”暗示关系中易生误解，总觉对方错处，实则是“心性自成痾”之固执在作祟。艮卦止而不前，变剥则情意易疏，若一味执着自己是对的，便成“偏僻不通心”，让感情日渐剥蚀。单身者，此签主因标准过于偏狭、心中生魔而错过良缘，需放低预设，先修心性，良人自现。有伴者，须警惕冷暴力或翻旧账的倾向，“真人却不魔”教导以本真坦诚相待，莫让执念幻化心魔。忌：考验对方、计较过往；宜：郊游散心，借自然清气（艮象）化开郁结。",
-  "health": "身病多由心病起，签文“心性自成痾”正合医理。艮卦主脾胃、肌肉、关节停滞，变剥则气血有损，多因思虑过度、情志偏执所致。若长期紧张、钻牛角尖，易现肝郁气滞、消化紊乱、失眠头痛等状。养生首重调心，依“真人却不魔”之理，放下我执，使气机顺畅。饮食宜黄色谷物（小米、南瓜）健脾，晨起缓步登山或站桩以应艮止之德，助气血归元。警惕：情绪低落引发的暴饮暴食或厌食，以及久坐不动导致的代谢滞缓。宜习静坐、书法等定静功夫，使心神归位。",
-  "study": "学业精进之碍，不在外而在内。签文“偏僻不通心”直指学习中的偏科、钻牛角尖、闭门造车。艮卦象山，学如积土，变剥则警示死记硬背的知识终将剥落。“我见错”提醒勿固执错误方法，当以“真人却不魔”的澄明心态反思。利文科、哲学、心理学等需内省之学科，不利纯技术速成。备考者，考场易因紧张而发挥失常，宜提前熟悉考场、静心吐纳。忌：熬夜强记、与同学攀比进度；宜：以教为学，向人复述讲解，破我见之障。",
-  "general": "此签核心在一“心”字，心偏则万事皆阻，心正则魔障自消。总纲有三：其一，遇事先反观自身，勿责外境，破“我见”之错；其二，执念为万病之源，须以艮止之德暂缓步履，待心平气和再行决断；其三，“真人却不魔”是根本化解之道，以赤子真心应世，无须刻意求吉，吉自随行。关键行动：每日静省十分钟，记录情绪执念；重要决策前，必寻三位不同观点者讨论；若觉滞碍，暂离旧境，投身山野（应艮卦）以通郁气。心态上，切记世路本通，何苦心自为痾。"
+  "sign_number": 155,
+  "sign_text": "鼎折足，车脱辐，有贵人，重整续。",
+  "interpretation1": "所问诸事于开始非常不顺，命中有贵人相助，事情得以重整。",
+  "career": "你当下的事业根基正经历一次裂痕般的考验，就像原本稳固的鼎被抽去了支撑的脚。有些计划可能像车轮突然卡壳，原本顺畅的运转被意外打断。但别急着用蛮力去修补，这恰恰是命运在提醒你——那些看似崩塌的结构里，藏着重新校准的契机。\n\n会有某股力量悄然靠近，或许是某位前辈的提醒，或是合作方递来的橄榄枝。这不是要你立刻抓住救命稻草，而是需要你像修复古董瓷器般，耐着性子把碎片拼回更稳固的形态。过程中要警惕\"将就\"的诱惑，表面的完整远不如内在的严丝合缝来得重要。\n\n未来三个月像在迷雾里摸索开关，每一步都可能触发新的启示。重点不是恢复原状，而是重新定义什么是\"原状\"。当你学会用裂痕透进来的光照明前路时，会发现某些失去反而是必要的留白。记得把这次震荡当作校准重心的契机，而不是需要战胜的敌人。",
+  "wealth": "你现在的财运像一只歪了脚的鼎，原本稳固的局面被打破了，根基有点摇晃。又像是车轮的辐条突然松脱，原本顺当的路子卡住了，钱途暂时被绊住了脚。不过别慌，这签里藏着转机——有双看不见的手在暗处托着你，或许是老交情或许是新机缘，总有人会帮你扶正倾斜的秤杆。接下来要像整理乱麻线团那样，把散落的环节重新串起来，该补的窟窿别躲，该换的法子别犟。这段路走稳了，钱财的气脉才能重新续上。记住，现在不是看天吃饭的时候，你得亲手把裂开的缝一道道抹平了。",
+  "love": "你抽到的这枚签，映照出你当下正经历某种根基动摇的阶段。鼎足断裂的意象，暗示原本支撑你的某些信念或关系正承受着无形的压力，就像老树被蛀空了树心，表面完整却难抵风雨。车轴脱节的状态，是前路卡顿的隐喻——那些你曾笃定能携手并进的人，此刻或许正与你步调错位，如同琴弦松了音准，弹不出和谐的调子。\n\n但签文里的贵人不是救世主，更像是面照见自己的铜镜。你内心深处的坚韧就是那根隐形的绳索，能把散落的车轮重新捆扎。暂时停下不是失败，恰是留白处能听见心跳的声音。那些裂痕终将成为滋养新芽的缝隙，当月光穿过破碎的窗棂，照亮的或许是你从未看清的自己。不必执着修补旧鼎，陶土在窑火中碎裂时，正是重塑器物的契机。",
+  "health": "这枚签文透露着你的健康运势正经历一段调整期。\"鼎折足\"暗示着原本支撑你的根基出现了动摇，可能是长期积累的疲惫或某个被忽视的隐忧开始显现征兆。就像久用的器物突然断裂，提醒你要重新审视身体发出的细微信号。\n\n\"车脱辐\"折射出你身心运转的某个环节暂时失去了协调性。或许是作息节奏被打乱，或许是情绪压力干扰了内在平衡，导致原本顺畅的状态出现了卡顿。此时不必强行加速前行，反而需要缓下脚步检查\"车轮\"的咬合点。\n\n值得留意的是\"有贵人\"的转机——这未必指向具体的人，更可能是生活中出现的某个契机：也许是偶然发现的养生方法，也许是旁人一句点醒的关怀，甚至是你自己突然开窍的觉悟。这些都会成为你重新校准健康轨迹的助力。\n\n最后的\"重整续\"是充满希望的指引。它提示着通过系统性的调整与修复，你完全有能力重建更稳固的健康模式。重点不在于追求立竿见影的改变，而要像修复古器般带着耐心与细致，逐步恢复机能的和谐运转。这段调整期恰是让你学会与身体对话的珍贵契机。",
+  "study": "你最近在学业上可能会遇到一些根基性的阻碍，就像原本稳固的器物突然缺失支撑，某些环节出现断层感。先前推进的计划或许会出现暂时性的停滞，像是车轮突然卡顿的瞬间，原本顺畅的节奏被打乱。但这种中断恰恰在提醒你：需要重新检视知识架构的完整性，某些基础层面的补强比强行赶路更重要。\n\n此时不必焦虑于表象的停滞，冥冥中会有指引者为你点破迷障。或许是师长点拨你调整学习方法，或许是同伴不经意间触发你的新思路。关键要抓住这些契机，用更清醒的头脑重新梳理学习路径。这段看似波折的经历，最终会成为你构建更坚实知识体系的转机——就像断裂处新生出的骨痂，往往比原先更加强韧。保持开放接纳的心态，这场自我重整终将转化为突破瓶颈的阶梯。",
+  "general": "你此刻的运势像被风雨冲刷过的老屋，根基有些摇晃，原本的计划如同散了架的车轮，一时难以顺畅前行。那些看似稳固的支撑点或许会突然松脱，让你不得不停下脚步。但别慌，这恰恰是老天在提醒你——该修整的、该卸下的，都是虚浮的累赘。暗处有双眼睛正默默看着你，也许是旧相识，也许是偶然相遇的过客，他们会在你踉跄时伸手扶一把，给你递来修补裂痕的契机。你要做的，不是强撑体面继续赶路，而是蹲下来把断掉的榫卯重新对准，把松动的螺丝一颗颗拧紧。这个过程或许狼狈，但挺过去后，你会发现原本笨重的行囊轻了许多，脚下的路反而比从前更扎实敞亮。"
+}
+```
+
+### 英文翻译
+```json
+{
+  "sign_number": 155,
+  "sign_text": "The tripod breaks its leg, the cart loses its spoke,\nA supportive person comes, to mend and restore.",
+  "interpretation1": "The first image comes from the Ding hexagram's fourth line: the tripod's leg breaks, spilling the delicacies—symbolizing damaged foundations and sudden failure. \"The cart loses its spoke\" means the wheel disintegrates, halting the journey midway. Both depict a critical situation with sudden collapse. But the next line turns: \"A supportive person comes, to mend and restore,\" indicating that despite the heavy setback, external help arrives to salvage the situation. The sign is in Li Palace, transforming from Ding to Gu. Ding above fire below wind, a vessel for transformation; now the leg breaks, rendering it useless. Gu hexagram means \"rectifying decay.\" Li represents civilization and reliance, so the supportive person is likely a wise superior or resourceful aide. Core message: crisis is not the end; borrow external strength to repair the foundation—do not force things alone.",
+  "career": "\"Tripod breaks its leg\" directly points to damaged career foundations—sudden project halt, job loss, or collapse of achievements. \"Cart loses its spoke\" indicates interrupted plans, such as broken partnerships or resource depletion. Yet the \"supportive person\" suggests a savior in danger—an old acquaintance, superior, or industry peer can help restore the old business. Li Palace governs documents and public affairs; Gu hexagram favors rectification and innovation. Career trend: initial severe tests; retreat to consolidate, await the helper's appearance. Timing likely in autumn or winter (when Li fire declines and Gu's decay accumulates) or when old cases resurface. Specific direction: rely on stable platforms, repair existing business—avoid expanding territory. Proactivity: contact old friends, report difficulties to superiors to gain understanding; avoid blind job-hopping, blaming others, or arguing with colleagues. Specific actions: audit old files, fix rule loopholes, make humble appeals in public.",
+  "wealth": "\"Tripod breaks its leg\" is a sign of financial loss—instability in wealth foundations, perhaps due to heavy project investment. \"Cart loses its spoke\" suggests interrupted capital flow—investment stuck, accounts receivable hard to collect. The sign indicates blocked income. However, \"mend and restore\" with a helper's guidance can find repair paths. Li Palace represents fire—empty, easily scattered; Gu hexagram means accumulated defects must be cleared. Wealth trend: initial loss, then stabilization with support. Primary income: regular earnings, with helper's aid in compensation or new position. Speculative income: cooperation or debt recovery may be possible, but avoid new investments, especially high-leverage or quick-money schemes. Financial management: consolidate assets, cut expenses, chase old debts. Favorable for metal-related, data-repair industries. Avoid: opening new stores, expanding loans, guaranteeing for others. Specific actions: immediately check accounts, suspend large expenditures, seek advice from honest elders.",
+  "love": "The tripod's broken leg symbolizes a shaken emotional foundation—financial or trust issues causing relationship danger. The lost spoke means a severed love path—cold war, separation, delayed marriage. Li Palace belongs to fire—easily agitated; Gu hexagram indicates accumulated grievances. Thankfully, the \"supportive person\" appears—a friend, family, or matchmaker may mediate, offering a chance to \"mend and restore.\" Advice by stage: singles, don't force—let a trusted elder recommend or rekindle an old flame. Those in ambiguous situations may face misunderstandings; a third party can bridge. Stable relationships guard against picking old wounds; face practical challenges together. Couples in crisis: avoid intense accusations, postpone separation decisions, use family gatherings to ease tension. Interaction: show care through practical support (e.g., sharing financial burdens) rather than emotional outbursts; avoid bringing up the past, demanding location updates, or financial sanctions.",
+  "health": "\"Tripod\" symbolizes the abdominal region; a broken leg leads to poor digestion, weak spleen and stomach. \"Lost spoke\" indicates weak support in the skeleton—watch for lumbar, knee, and foot issues. Li Palace belongs to fire—guard against heart fire causing insomnia, red eyes. The changing hexagram Gu (accumulated defects) warns of chronic illness recurrence or hidden symptoms. Direction for health: rest and strengthen the root; eat soft, warm, easily digestible foods (like yam porridge); avoid cold, raw foods, or overeating. Prioritize the noon and midnight sleeps to nourish heart and kidneys. Exercise: gentle movements like eight brocades or walking; avoid intense exertion. Warning signs: recurrent stomach distension, heel pain, heart palpitations, hot flashes, low-grade fever. If already ill, seek medical consultation without delay. The overall principle is \"mend and restore\" the body, possibly with a helper's guidance to the right doctor or method.",
+  "study": "\"Tripod breaks its leg\" suggests a weak academic foundation or a major setback—exam failure, thesis rejection. \"Cart loses its spoke\" indicates interruption of study progress—illness or distractions. Gu hexagram points to accumulated flaws; self-examination needed. Fortunately, the \"supportive person\" refers to a good teacher or friend who helps regroup. Learning state: initial frustration; stop charging forward, return to basics. Specific methods: liberal arts benefit from reviewing and filling gaps; science requires clarifying formula derivations. Exam luck: unfavorable—avoid challenging high-difficulty tests hastily; use mock exams to gauge level; arrive early to steady nerves. Favor quiet night study and group mutual checks. Avoid all-night cramming, blind comparison with peers, or solitary seclusion. \"Mend and restore\" means revise plans and proceed step by step.",
+  "general": "This sign teaches how to navigate danger by knowing when to pivot. With the images of broken tripod and cart, it emphasizes the severity of the crisis, but the line about a helper points to vitality. The key word is \"restoration.\" Action advice: first, upon upheaval, stop aggressive moves, secure basic resources (e.g., protect assets, stabilize family emotions). Second, be open to help—do not be ashamed of weakness; the helper may be an old friend, former subordinate, or someone you respect. Third, while awaiting aid, introspect and identify weaknesses (the meaning of Gu hexagram). In mindset, maintain Li's clarity—do not let darkness blind your inner eye; trust that extremes reverse. Avoid blaming fate, acting alone, or hesitating. Restoration is not returning to the old state, but rebirth after refinement. Use this as a cultural perspective to inform your own judgment."
 }
 ```
 
 ---
 
-## 第 28 签
-
-⚠️ **缺少英文翻译**
+## 第 156 签
 
 ### 中文原文
 ```json
 {
-  "sign_number": 28,
-  "fortune": "上上签",
-  "gua_type": "坎宫 丰变明夷",
-  "sign_text": "禄马交驰，男儿得志时，行程早办，荣归乐期颐。",
-  "interpretation1": "签文“禄马交驰”四字，意象鲜活：禄为官禄俸给，马为远行驰骋，二者交驰，喻示功名利禄与行动机遇并至，如快马加鞭，不可稍缓。“男儿得志时”点明此时正是施展抱负之机，无论男女，皆主志向可伸。“行程早办”则强调勿失良机，凡事须提前筹备，及早动身，方能抢占先机。“荣归乐期颐”画出一幅圆满晚景：衣锦还乡，安享高寿，期颐即百岁，既表成功，亦寓福寿绵长。卦属坎宫，丰变明夷。坎为水，虽有险陷之象，然丰卦雷火交辉，本主盛大丰盈，变卦明夷则暗含“明入地中”，提醒盛时当思退步，光明不可尽露。此签上上之吉，在于动中得福，早行早获，最终归于安乐。核心寓意：时机已至，当机立断，早做准备则晚年荣显无忧。",
-  "career": "“禄马交驰”直指事业正逢快速晋升期，禄为职位俸禄，马为外勤、变动、竞争之象，交驰则主多重机遇叠加，如调岗、升迁、新项目并至。“男儿得志时”宜主动展现才能，尤利于需要出差、外派、竞聘或公开述职的场合。丰卦本象盛大，明夷变卦却暗示勿贪恋当前风光，需早做后续规划，正如“行程早办”所示：若得晋升，应立刻制定新岗位的适应策略；若欲跳槽，须在机会浮现时果断投递。忌拖延观望，忌与同事争功而失人和，忌目标过高忽略细节。宜在夏秋之交重点发力，把握需要快速决策的业务，可一鸣惊人。",
-  "wealth": "签中“禄马”不仅喻官，也喻财，禄为稳定正财，马为奔波生财，交驰则主正财丰厚且偏财机会频现，如奖金、提成、投资收益同步而来。“行程早办”提示财运宜动不宜静，外出洽谈、考察市场、拓展新渠道皆易获利。丰卦主丰盈，但变明夷告诫见好当收，切勿因眼前暴利而过度投机。具体财源上，正财因职务提升而涨，偏财可关注交通、物流、贸易类短期投资，但需提前设好止盈点。忌：盲目扩张店铺或企业规模，贪求捷径而涉灰色地带。宜：将三成盈余转为稳健积蓄，为“荣归”积累养老资本。",
-  "love": "“男儿得志时”非独指男性，乃言主动一方将有突破。单身者“禄马交驰”象征桃花随社交活跃而绽，或在出差、进修途中遇有缘人，此缘来势较快，宜大胆表达，莫因矜持错过。“行程早办”暗示若已暧昧，应尽早明确关系，如约见家长或提出正式交往，拖延易生变。有伴者，“荣归乐期颐”预示关系趋向稳定，可规划订婚、结婚或共同创业，晚年相伴之象。丰变明夷提醒，感情盛时易生骄纵，忌翻旧账、比付出，宜常怀感恩，共同筹备长远目标，如购房、旅行等，让热情沉淀为温情。",
-  "health": "签中“禄马交驰”隐喻气血运行旺盛，但马不停蹄则易耗，需防过劳透支。“荣归乐期颐”指向长寿，然明夷卦寓光明内敛，提醒须节养精力，不可仗着体健而纵欲熬夜。坎宫主肾、耳、泌尿系统，丰卦火盛恐扰心神，故宜调节作息，戌时（19-21点）前结束应酬，多做太极、散步等缓运动以防心火过亢。“行程早办”在此指健康规划宜早，当下即应建立体检习惯，定期监测血压、血脂，饮食减油减盐，以防水肿或肾负担。若常感头晕耳鸣，是身体催促休息的信号，不可忽视。",
-  "study": "“禄马交驰”喻学业迎来黄金期，考试运佳，尤利文科、面试、答辩等需临场发挥的场合，如马奔般思路敏捷。“男儿得志时”鼓励学子以信心迎考，但“行程早办”郑重提醒：不可临时抱佛脚，须提前制定复习计划，知识点早做梳理，模拟演练宜在前半月完成。丰变明夷，初始似难（坎宫），实则渐进光明，故偏科者应优先攻克薄弱环节，忌自满于擅长科目。考场宜提前踩点，备齐文具，避免突发干扰。若有效仿“荣归”之心，可将目标院校照片置于案头激励自己，但需戒骄戒躁，稳扎稳打。",
-  "general": "此签如一幅功成身退的画卷，关键在于“早”与“动”。整体运势上，禄马交驰催促果断行动，荣归期颐则保证结局圆满。行动建议有三：第一，未来三月内，凡有出外、变动、新计划，请立刻着手，勿待万事俱备；第二，将长期目标拆解为阶段任务，如财富分储蓄与投资，事业分主业与拓展，提前布局；第三，心态上常思明夷卦义，得意时留三分谦逊，为晚年种福。忌散漫拖延，忌贪多求全。记住，马蹄声疾，春光不等人，早办行程者方得乐境。"
+  "sign_number": 156,
+  "sign_text": "参详言语，波涛扬沸，事久无伤，时间不利。",
+  "interpretation1": "得此签者，恐有诉讼，或与人订约始终无法谈拢，亦或与人长时间有口舌之辩。",
+  "career": "这枚签文像一壶刚沸的水，看似喧腾动荡，但火候未到不可强求。眼下你的事业运势正处在暗流涌动的阶段，\"参详言语\"暗示你需要更审慎地倾听环境中的讯息，那些看似无心的闲谈可能藏着关键的线索。当前面临的挑战如同\"波涛扬沸\"，表面动荡实则暗藏转机，但需要你像冲浪者般保持平衡，不可被表象的混乱带偏方向。\n\n\"事久无伤\"这个卦象很妙，它说破了一个职场真理——很多当下的困境其实是时间设下的迷局。你现在经历的波折就像酿酒过程中的发酵，看似停滞实则酝酿。而\"时间不利\"并非否定你的努力，是在提醒要调整节奏，就像农人不会在寒冬播种，此刻更适合深耕而非收获。建议把注意力放在夯实根基上，那些看似迂回的积累，终会在某个黎明破土而出。记住，真正的转机往往诞生在看似平淡的坚持里。",
+  "wealth": "你眼下所处的财路环境有些像被搅动的水面，看似热闹却暗藏漩涡。身边的信息和人言像涨潮般涌来，但这些声音未必能成为你可靠的指南针——它们或许裹挟着虚浮的泡沫，也可能混杂着泥沙。此时需要像站在礁石上的渔人，任浪头拍打却保持清醒，不被表面的喧哗迷了眼。\n\n这段时期的钱财流动会呈现出忽高忽低的态势，就像潮汐进退般难以捉摸。若强行逆流而行容易被卷入暗流，但若完全随波逐流又会失去方向。关键在于用清醒的头脑辨别哪些是转瞬即逝的浪花，哪些是真正值得托付的航道。不必为眼前的起伏过分焦虑，就像再汹涌的浪潮最终都会归于平静。\n\n时间是你的隐形盟友，虽然当下看起来像慢行的沙漏，但正是这种沉淀期在悄悄积蓄力量。暂时不宜大刀阔斧地开辟新局，更适合像修补渔网的匠人那样，把现有的根基扎得更牢靠些。等到风浪渐息时，那些在动荡中打磨出的判断力，会化作你重新启航时最可靠的罗盘。",
+  "love": "你此刻的处境像被浪头反复拍打的礁石，表面看是暗涌不断的风暴，但深处藏着定力。那些激烈的言语争执或内心挣扎，不过是人生必经的泡沫，暂时浮在浪潮上翻腾，却终将被时间沉淀。\n\n当下需要把躁动的情绪收进陶罐里封存，别急着揭开盖子让灼热的水汽烫伤自己。有些答案需要等温度降下来才能显现形状，有些裂痕要在岁月里慢慢析出结晶。别被眼前的漩涡卷走判断力，你真正该握紧的是内心的锚。\n\n时机现在像被云雾遮住的山路，强行攀爬容易踏空。不妨先坐在石阶上晾干被浪打湿的衣角，等晨雾散尽时，山涧自会显出一条被阳光晒暖的路。记住潮水退去后，沙滩上留下的不只是破碎的贝壳，还有被海浪打磨圆润的卵石。",
+  "health": "你此刻的健康运势像潮水般暗藏涌动，看似风平浪静的表象下需要更敏锐的觉察。生活中某些长期存在的习惯或隐而未发的状况，正如同海底的暗流在缓慢积蓄力量。此时并非大刀阔斧改变的良机，但恰是需要你像打磨璞玉般耐心调整细节——当身体发出细微信号时，切忌视而不见或强行压制。\n\n你的体质根基如同老树盘根般稳固，只是某些枝桠需要更精细的修剪。日常的节奏需如溪水绕石般保持灵活，既不过分紧绷也不放任懈怠。当下最忌随波逐流地模仿他人的养生方式，更要像品鉴老茶般沉下心来，在呼吸吐纳间找到与自己身心最契合的韵律。\n\n记住生命力的修复如同草木生长般自有其周期，有些困惑需要交给时间来沉淀答案。你内在的修复力比想象中强大，只需保持这份清醒的觉知，在适当的时候自然会迎来云开雾散的转机。",
+  "study": "你现在的学业之路像被风吹皱的水面，看似动荡却暗藏方向。身边或许充斥着各种建议和声音，要像筛沙子一样挑出真正有用的信息，别让杂音搅乱你的节奏。脚下的路会经历几段颠簸期，就像突然涨潮的海浪拍打礁石，但别被眼前的浪花吓退。这股波动不是要掀翻你，而是提醒你调整呼吸稳住重心。有些问题当下看起来像死结，其实只是需要交给时间去慢慢泡开。就像煮一锅老汤，火候不到的时候总觉得滋味不够，但文火慢炖才能熬出真味。这段时间更适合把力气花在打地基上，别急着追求立竿见影的结果。那些看似停滞不前的积累，会在合适的时机突然连成通路。现在要做的，是像老农照看庄稼那样，该松土时松土，该间苗时间苗，收成的事交给季节流转。记住风浪里藏着修正航向的机会，迷茫时不妨回头看看自己已经绕过了多少暗礁。",
+  "general": "你此刻或许正被周遭的声音牵动情绪，外界的纷扰如同暗流涌动，看似汹涌却难触核心。眼下环境中的震荡与焦灼，需要你以更冷静的视角去过滤杂音，那些表象的躁动未必能真正动摇根基。事态发展或许会经历漫长迂回，但最终不会造成根本性的损伤。要警惕的是在时运不济的阶段强行发力，如同逆水行舟徒增消耗。保持观察者的清醒，把当前的阻滞看作沉淀的契机，待潮水退去时自会显现真正该走的路。此时最珍贵的不是对抗浪涛，而是学会在风浪里稳住自己的节奏。"
+}
+```
+
+### 英文翻译
+```json
+{
+  "sign_number": 156,
+  "sign_text": "Scrutinize every word, waves boil and rise,\nThough matters linger, no harm underlies,\nBut the timing is adverse—wait and be wise.",
+  "interpretation1": "The first line directly warns of tongue trouble: Dui is the mouth and destruction; Cui gathers many voices; Bi requires careful selection of companions. \"Waves boil and rise\" depicts a boiling cauldron—an environment of agitation and conflict, as Dui Palace's lake waters surge when gathering stirs contradictions. \"Though matters linger, no harm underlies\" is a turn: the shift from Cui to Bi suggests that turmoil eventually leads to closeness; if you hold firm, time will heal—no fundamental damage. \"Timing is adverse\" tells you that now is not the time to advance. Overall, this is an unfavorable sign, but the word \"no harm\" already contains the remedy: speak carefully, be patient, choose your people—these will help you avoid sharp edges and turn danger into safety.",
+  "career": "\"Waves boil and rise\" portrays a workplace as turbulent as boiling water—factional strife or project upheaval unsettling you. The career trend is one of turmoil and gossip; Dui Palace indicates destruction; Cui to Bi suggests team gathering may breed discord. Hence, it is wise to keep a low profile; avoid stealing credit or shifting blame. Timing is unfavorable for job changes or volunteering for high-profile tasks; summer especially requires vigilance against personnel storms. Recommended: focus on written, back-end, or technical work; reduce public statements; diligently document to prevent verbal misunderstandings. Avoid: joining factional fights, speaking bluntly in meetings, proposing changes without prior groundwork. If you must speak, let \"scrutinize every word\" guide you—think thrice. In the long run, \"no harm underlies\"—once the storm passes, stability returns, and you can plan your next move.",
+  "wealth": "\"Waves boil and rise\" signals turbulent wealth. Dui is destruction; Cui gathers then scatters; Bi suggests depending on others to minimize loss. The trend is dissipative—losses likely from quarrels, contract disputes, or broken partnerships. Regular income can be maintained with caution; speculative gains are not advisable. Those in earth or metal industries may be slightly more stable. Financially, \"scrutinize every word\" reminds you to read contracts and partnership terms carefully, avoid oral promises. Avoid: lending, guaranteeing, or high-risk expansion. Recommended: clear accounts, gather funds, build an emergency reserve—even reduce spending temporarily while waiting for the turning point hinted by \"no harm.\" Perhaps the lunar autumn and winter will bring some relief.",
+  "love": "\"Scrutinize every word\" directly addresses the core of emotional communication. Dui is the mouth; Cui to Bi shows that intimate relationships are easily stirred by outsiders or old matters blown out of proportion. Emotional state: prone to quarrels and misunderstandings. \"Waves boil and rise\" depicts intense emotions; forceful arguing worsens them. Singles: this is not a good time for confessions or defining relationships—you may encounter someone ambiguous in speech. Couples: avoid revisiting old grievances, cold wars, or dragging relatives/friends into judgment. Better to postpone sensitive topics and express care through actions rather than words. \"No harm underlies\" suggests that if conflict is not escalated, time will heal wounds. Thus, the relationship approach is to wait quietly for the boiling water to cool.",
+  "health": "\"Waves boil and rise\" reflects internal fire rising. Dui corresponds to mouth, throat, lungs; Cui gathers qi stagnation; Bi indicates water-dampness not transforming. Prone to mouth ulcers, pharyngitis, cough, or emotional issues like insomnia and anxiety. Recuperation focus: nourish yin, reduce fire, soothe liver and regulate qi. Diet: light foods like lily bulb, lotus seed, white fungus; avoid spicy, strong tea, coffee. Sleep: ensure rest during the noon and midnight hours; avoid staying up late, which stokes fire. Warning signs: recurrent mouth sores, night sweats, heart palpitations, irritability—these are the \"timing adverse\" manifestations. Patience is key; with time (\"no harm\"), symptoms may ease after the season changes.",
+  "study": "\"Waves boil and rise\" describes a mind in turmoil, difficult to settle—reflecting a state easily disturbed by external distractions, poor concentration. Dui as mouth favors language and recitation subjects, which may become weak spots. The shift from Cui to Bi suggests that studying alone without friends leads to ignorance, but choosing friends for discussion must avoid wasting time. Learning methods: favor quiet activities like writing or memorizing; avoid excessive group discussion or mutual quizzing. Exam luck: \"timing adverse\"—risk of inadequate review or nervous performance, especially detrimental to oral exams and interviews. Recommended: visit the exam site in advance, do repeated mock tests; use \"scrutinize every word\" to remind yourself to read questions carefully. Avoid taking shortcuts. In the long run, a solid foundation ensures \"no harm\"—steady accumulation will eventually break through.",
+  "general": "This sign's core is: \"What can be done when timing is adverse?\" The hexagram shows a boiling cauldron; forcing the lid open will invite scalding steam. Overall summary: now is the time to defend rather than attack, to be still rather than active. In all areas, speech is the trigger for waves. Key action advice: First, for the coming months, be extremely cautious with major decisions; ask yourself before each statement, 'Is this word worth scrutinizing?' and keep screenshots for protection. Second, lower your profile, actively reduce social engagements, invest energy in internal consolidation or learning. Third, if facing criticism or hardship, remember 'no harm underlies'—respond with silence and patience, waiting for the boiling water to cool. In mindset, view this situation as a crucible for refining; once the fire has passed, you will gather true knowledge and bond with kindred spirits. Reflect on how this resonates with your current situation."
 }
 ```
 
 ---
 
-## 第 29 签
-
-⚠️ **缺少英文翻译**
+## 第 157 签
 
 ### 中文原文
 ```json
 {
-  "sign_number": 29,
-  "fortune": "中上签",
-  "gua_type": "巽宫 巽变小畜",
-  "sign_text": "了却心头事，三生夙有缘，香开十里桂，移步入天边。",
-  "interpretation1": "签文“了却心头事”喻心中郁结之事终得消解，如风过竹林，尘垢尽扫；巽卦为风，主顺入，象征困境已破，心境豁然。次句“三生夙有缘”点明际遇非偶然，乃宿世善因所结，恰合巽卦柔顺之德，遇事多逢善缘助力。“香开十里桂”以秋桂远馨为象，桂花高洁，香透九霄，主声名流布、成就昭彰；变卦小畜为风天小畜，风行天上，待雨而施，寓示积累已至，将有小成。“移步入天边”则指引向更开阔之境，或远行、或高就，巽为进退，小畜主蓄力，劝人顺势徐图，勿躁进。总观此签，先释重负，后因缘际会，终致誉满远行，乃中上之吉，贵在信缘守正。",
-  "career": "事业正应“了却心头事”，悬而未决之项目或纠葛终可收尾，身心舒展。签中“香开十里桂”喻业绩彰显，如桂香远播，利竞争性、展示型岗位，易得赏识；巽为风，主传播，尤利文案、外交、市场类职。“移步入天边”有调派异地、跨界发展之象，小畜卦示积储已足，可迎挑战。时在秋令，宜主动请缨重要任务，勿拘旧地，但巽变小畜忌锋芒过露，当以柔克刚，借力三生夙缘之贵人。忌：争功冒进、仓促决断。",
-  "wealth": "财运随“了却心头事”而轻，前期缠缚之账务或压力化解。签中“三生夙有缘”主财非强求，多与故旧、长期经营相关，或得馈赠、遗产之喜。“香开十里桂”喻正财稳升，如桂花不争春而芳，宜守主业，侧重品质与口碑，利香料、文化、装饰行业。“移步入天边”鼓励拓展外部市场，小畜卦劝蓄力忌散，勿为高利所诱，秋时或有小获。忌：短线投机、与人合伙争利。宜：定存、研发、长线布局。",
-  "love": "签文“了却心头事”一扫前尘纠葛，旧伤得愈，心扉重启。“三生夙有缘”极显宿缘深厚，单身者易遇恍如故人之侣，有伴者情感升华，如桂馥弥笃。“香开十里桂”兆关系清雅而备受祝福，婚恋可期。“移步入天边”或示异地之恋，或携手迁居远行。巽为顺，小畜劝相敬如宾，宜温柔告白、共植花木以增缘；忌翻查旧账、强求承诺。保持清风拂面之恬淡，佳缘自至。",
-  "health": "一身轻松应“了却心头事”，心结开解，神思得养。签中“香开十里桂”对应肺金，桂花化痰止咳，宜秋日润肺，啜饮桂蜜，登高纳清气。巽为风木，主肝胆，小畜示精蓄气，勿过耗。移步入天边，倡缓步远足以调气血。需惕思虑伤脾，饮食宜淡，可食山药、百合。忌：熬夜生恼，贪凉伤风。秋冬之交尤当护颈避邪。",
-  "study": "学业如“了却心头事”，考前焦虑、失手阴影尽散。“三生夙有缘”暗示某些科目因缘契合，学来事半功倍，易得名师指点。“香开十里桂”直指科名之喜，利文科、艺术、传媒，秋试多吉。“移步入天边”利游学深造、择远校。巽变小畜，风主入而小畜积，读书忌浮泛，须专注一隅厚积薄发。宜：系统梳理，借桂花清芬助记忆；忌：临时强记，投机猜题。",
-  "general": "此签总在破执结缘，香远步高。心头事既了，当信三生善缘不空，秋桂之芳即努力之回响，移步天边即眼界之拓。关键行动：其一，即刻了清旧务，不使羁绊心神；其二，珍视人缘物缘，柔巽以待，聚沙成塔；其三，勇于“移步”，不恋栈暖，远方有景。心态上，学十里桂花不争春艳，自有幽香透层云。中上之签，非坐致之福，乃善缘与躬行之果，勉之。"
+  "sign_number": 157,
+  "sign_text": "贵客自相亲，功名唾手成，获金须积德，仰望太阳升。",
+  "interpretation1": "得此签者注定显达，但需注意积德，否则将很快失去一切。",
+  "career": "这签里藏着条暗路给你走——贵人会自己贴上来帮你，但你别太飘。功名看着像白捡的便宜，实则得看准时机一把攥住，攥太紧反而漏风。金银堆里得先铺层善意的垫子，否则硌得慌。太阳升起来的时候别急着收割，先蹲下来看看影子往哪边斜，那是老天爷给你画的导航线。现在手气旺得像刚开封的汽水，但别忘了气泡散尽前得仰脖子喝干净。遇着好事别当理所应当，踩着台阶往上爬的时候，记得回头看看自己脚印正不正。",
+  "wealth": "这签文里藏着你财运的明暗脉络。贵人来往时，机遇看似随手可摘，但那些轻易得来的钱财，反而要更小心捧住。别让钱财的流动冲淡了你心里那把秤，厚道处世才是守住财库的根基。未来的财路就像清晨等日头，虽暂时朦胧，但暖光终究会漫过山脊。眼下若遇见顺风顺水，记得留三分清醒；若暂时困顿，也不必焦躁，你攒下的善缘会慢慢结成网，托住该属于你的那份。",
+  "love": "你抽到的这支签里藏着些温润的暗示。遇到的人或许会像春日的风，看似自然拂过，实则暗含机缘。若你愿意用真诚的底色接纳相遇，那些原本若有似无的联结可能会在某个转角沉淀出重量。旁人的助力固然能托起你片刻，但真正要握住的其实是自己心里那盏不灭的灯——它既照得见前路的坦途，也照得见脚下可能松动的碎石。\n\n唾手可得的机缘有时反而是温柔的考验，就像捧着一汪清水，越是急着攥紧，反而从指缝漏得越快。若此刻感受到命运的眷顾，不妨把这份轻盈化作滋养根基的养分，而非飘在云端的气球。而关于收获，它更像是在你每日行走时悄悄撒下的种子，行得稳当坦荡，土壤里自然会长出果实。\n\n抬头望见的那轮朝阳，既是希望也是提醒。别让光芒刺得睁不开眼，反而错过了脚下正在破土的绿芽。所有向上的力量都带着曲折的纹路，若此刻还未见霞光漫天，或许只是时辰未到，云层背后酝酿着更绵长的晴朗。",
+  "health": "签文里藏着你的身体密码——\"贵客\"说的是你内在的生命力，它正悄悄酝酿着与你的默契。那些看似偶然的精力回升，其实是日复一日善待自己的回响。当下这具躯壳像新抽芽的枝桠，只要顺着自然节律生长，根基会越扎越稳。\n\n\"唾手可得的功名\"是提醒，别让急切的追逐透支了元气。就像春天急着开尽所有花，反而容易过早凋零。该慢就慢，该停就停，把气力匀在更长的岁月里。所谓\"积德\"，是每天给身体存些滋养的零钱，可能是早睡一刻钟，可能是放下焦虑的深呼吸。\n\n\"太阳升起\"不是让你追逐刺目的强光，是教你看清生命的晨昏线。此刻的困倦或许是身体在调整时差，暂时的低潮恰是黎明前的蓄力。别用蛮力撕开云雾，学会在朦胧中倾听心跳的韵律，等那束光自然穿透云层，照亮你与生俱来的健康底色。",
+  "study": "这签对你当下的学业之路讲得很透。贵客自相亲说的是你最近会遇上些机缘，但这些机会不是天上掉下来的，是你过去攒下的种子在发芽。唾手可得的功名要当心，别被表面的顺遂蒙了眼，真正的学问像暗河，水面平静底下暗流涌动。要守得住心性，别急着显山露水，该沉下去打磨的功夫别省。积德这两个字最要紧，考场上的德就是你的底子扎不扎实，别贪捷径，该背的书该解的题都得像老农犁地般一寸寸啃过去。至于太阳升起，是提醒你熬过这段晦暗期，别被眼前的迷雾困住，你求的东西正在晨光里等着，但得等到鸡鸣三遍才能见分晓。",
+  "general": "你最近会遇到一股向上的力量推着你走，就像忽然有人帮你掀开了蒙在眼前的布帘。身边可能会出现能点拨你的贵人，但要注意这份机缘不是天上掉馅饼，你得自己伸手接住才行。那些看似容易到手的机会，背后需要你长久积累的善意和分寸感做支撑，就像老树扎根越深枝叶才越繁茂。眼下或许会觉得事情顺利得不可思议，但别急着飘，要把这份顺遂当作存进福气银行的积蓄，而不是可以挥霍的横财。后半段路还藏着需要你躬身耕耘的坡道，记得保持黎明前仰望东方的那种沉静心态，该来的光芒自然会从云层后透出来。"
+}
+```
+
+### 英文翻译
+```json
+{
+  "sign_number": 157,
+  "sign_text": "A noble guest draws near of their own accord, / Fame and rank come as easy as spitting. / Gain gold, but accumulate virtue first; / Look up to the rising sun above.",
+  "interpretation1": "Though the surface words seem favorable, this sign harbors deep caution. 'A noble guest draws near' suggests benefactors may come to you unbidden, yet 'as easy as spitting' hints at a dismissive attitude—the very cause of its unfavorable nature. What comes too easily often lacks a firm foundation; gained swiftly, it may be lost just as fast. 'Gain gold, but accumulate virtue' is the key: without virtue to bear the weight, riches become a curse. The final line 'Look up to the rising sun' means success requires humble waiting, not hasty display.",
+  "career": "The guest drawing near suggests unexpected support in career, perhaps from an elder or superior. 'Fame and rank as easy as spitting' hints that evaluations or competitions may seem effortlessly won. Yet the hexagram warns that reforming is easy, but maintaining is hard. If you rely entirely on others without solid skills, the position may be hard to keep. After gaining, accumulate virtue—share credit and build goodwill. 'Look up to the sun' means prospects are bright but require patience; avoid jumping jobs or forcing issues. Deepen your abilities to turn help into lasting strength.",
+  "wealth": "'Gain gold, but accumulate virtue' is the key for wealth. The Ding hexagram relates to cooking, Heng to endurance: your main income may come from food, service, or cultural fields. Occasional windfalls may appear, but fire overcomes metal—gains may be accompanied by losses. As an unfavorable sign, beware of pride and extravagance after receiving money. Set aside part for charity; virtue accumulates fortune. 'Look up to the sun' favors long-term investments, but now is not the time for expansion. Avoid speculation, get-rich-quick schemes, and boasting that invites envy.",
+  "love": "The noble guest drawing near indicates that romantic opportunities may come through introductions or someone taking the initiative. But fire rises easily while endurance is hard: initial passion may fade. Single people should observe slowly and not give their heart too hastily. For couples, 'fame as easy as spitting' may signal a stable phase, but 'accumulate virtue' means nurturing warmth and tolerance, not counting costs. 'Look up to the sun' reminds both to focus on the long term, not daily squabbles. Avoid rushed relationships and valuing appearance over character.",
+  "health": "The Li palace governs the heart and eyes. Ding transforming into Heng: wood and fire fan each other, tending to deficiency fire rising. Guard against insomnia, red eyes, mouth sores, and palpitations. 'Gain gold but accumulate virtue' hints that lung qi (the 'metal') also needs care; don't overexert for fame. 'Look up to the sun' suggests morning sun exposure and rising with the sun; avoid staying up late. Eat lightly—the Ding hexagram is a cooking vessel—avoid overeating or spicy, fried foods. Accumulating virtue broadens the mind; a broad mind prevents illness. Nurturing virtue is the first step to health.",
+  "study": "'Fame as easy as spitting' indicates exam or advancement results may come readily, especially in interviews or recommendations. The Li palace Ding hexagram suggests breaking old methods; you may gain sudden insight from a good teacher. But the transforming Heng hexagram reminds that learning requires persistence. Easy success may be luck; if you become complacent, you will fail later. The guest drawing near means helpful teachers or friends may approach; receive them humbly. 'Look up to the sun'—set high goals but study steadily. Favorable for liberal arts, arts, and food-related subjects.",
+  "general": "This sign hides danger within apparent good fortune. The key is 'accumulate virtue' to turn the unfavorable sign into a warning. You may receive help, but don't rely on it; gain fame, but don't be proud; acquire wealth, but don't indulge. 'Look up to the rising sun' is a mindset: remain humble like a seedling facing the sun, persistent effort over time. Actions: 1. Whenever things go smoothly, examine whether your virtue matches your position; 2. Actively give back to those who helped you, share gains; 3. Make long-term plans, using the spirit of Heng to turn easy gains into solid achievements. Always remember: what comes too easily may be the start of downfall."
 }
 ```
 
 ---
 
-## 第 30 签
-
-⚠️ **缺少英文翻译**
+## 第 158 签
 
 ### 中文原文
 ```json
 {
-  "sign_number": 30,
-  "fortune": "中下签",
-  "gua_type": "离宫 未济变解",
-  "sign_text": "缘黄阁白了头，毕竟成何济，不如趁此精神，犹好买些真气。",
-  "interpretation1": "签文“缘黄阁白了头”以“黄阁”喻指官署、功名之场，“白了头”言毕生精力耗于追逐，青丝成雪而所获几何；“毕竟成何济”一问惊心，直指所有外求终如逝水，未济卦火水未济，事未成之象正应此茫昧困顿。转句“不如趁此精神，犹好买些真气”道出转身之机，“真气”乃内在元神、返璞归真之修养，卦变雷水解，解除桎梏之象，示人放下执念即得舒解。此签核心：外求荣华是一场空梦，精神内守方为真途。",
-  "career": "仕途之“黄阁”既指高位，亦指职场虚名。此签事业主易生身心俱疲、进取无功之困，尤其若执著于职位升迁、头衔光环，恐如签中“白了头”却“成何济”。时机上，当前不宜强求变动，反利收摄、沉淀。离宫火主文明，未济初爻曰“濡其尾，无攸利”，冒进必有失；变解卦震雷动于坎水之上，解脱在转念间。宜转投务实岗位，深耕一技，忌与人攀比虚名、内卷消耗。可借此时机培养真气——即专业硬实力与心性涵养，待解卦动时，自会出现新方向。",
-  "wealth": "财之“黄阁”暗喻投机暴富之妄想，白了头即耗尽家资而终无成。签文明示“不如趁此精神，犹好买些真气”，财运上绝非冒险博财之机，而为守成保本之时。财源宜走正财薪俸、细水长流，忌偏财投资、孤注一掷。未济卦火在水上，不相为用，财路阻滞不通；变解卦而出险，提示宜处理积压财务问题以求解脱。具体宜盘点收支、减少不必要物欲，以精神内敛替代向外索取，反能蓄积真正财富底蕴。",
-  "love": "感情世界中，“缘黄阁白了头”喻为执念空待，“毕竟成何济”道尽单方面付出终无回响之伤。未济卦阴阳失位，主关系可能处于胶着、错位或单恋；变解卦雷动雨降，有消解误会、释放执念之象。单身者宜放下对特定对象或理想模板的执念，先养自身“真气”，待精神圆融自会吸引善缘。有伴者忌强求改变对方，宜以“买些真气”的谦退姿态给彼此空间，不翻旧账、不争对错，关系反而可脱僵化而获新生。",
-  "health": "未济卦离火炎上、坎水下润，火水不交，对应心肾失济、水火不调之象；变解卦震木疏土、坎水得运，提示解脱郁结之法在“买些真气”——即培补元气。签文“白了头”暗示过早衰老、精力透支，养生当以节欲守神为要。饮食宜清淡滋阴，忌膏粱厚味助火；作息须顺四时，尤重子午觉养心肾。需警惕的信号：虚火上炎致失眠烦躁、精气亏耗致腰膝酸软。运动可选八段锦、静坐调息，引火归元。",
-  "study": "学业征途若如“黄阁”之逐，恐陷于为功名分数所困，“白了头”指耗尽心神而不得要领。此签于学业，暗示当重“真气”而非表面成绩。未济卦火水不交，初爻有“濡尾”之吝，提醒不可贪多求快、浅尝辄止；解卦雷动而出险，宜集中突破难点。科目上，离火利文科稍显优势，坎水数理则需静心沉潜。考试运平平，忌抱佛脚、猜题押宝。“买些真气”即养学习定力、返求基础，根基固则疑难自解。",
-  "general": "总观此签，外求之路已露“白了头”之疲，不如转身“买些真气”，将向外驰逐转为向内安养。关键行动：一，每日留出片刻独处，静心反思所求是否真需；二，清理生活冗余，退出消耗性竞争，把精力投入自我精进；三，遇事勿执“非得不可”，反以“解”卦心态松手，转机常在不强求处。心态上，铭记“毕竟成何济”的清醒，以中下签为警钟而非绝路，真气一足，自有云开月明。"
+  "sign_number": 158,
+  "sign_text": "平地起波澜，所求事日难，笑谈终有忌，同心事觉欢。",
+  "interpretation1": "目前机运欠佳，须与知心友朋共事，庶几无患。",
+  "career": "你眼下的事业路像原本平静的湖面突然起了漩涡。那些原本以为触手可及的目标，最近似乎被蒙上了层薄雾，每一步都比预想中多出些磕绊。这种阻力未必来自外界，倒像是命运在提醒你该换个角度审视自己的脚步。\n\n不过要留心，有些表面轻松的氛围里藏着隐形的刺。越是看似无关痛痒的玩笑话，越可能成为日后绊脚的碎石。这时候与其独自硬扛，不如看看身边有没有能交心的人。当你能找到那个真正与你呼吸同频的伙伴，迷雾里自然会出现引路的微光。\n\n这签文像面镜子，照出你此刻需要完成的修行：既不能对困难视而不见，也不必被暂时的阻滞吓退。保持清醒的觉察，但别让这份清醒变成束缚手脚的绳索。记住，所有看似突兀的波澜，都是在教你重新校准前进的节奏。",
+  "wealth": "你眼下财运像原本平静的水面突然起了漩涡，看似稳定的局面藏着暗涌。想抓的机会会像攥在手心的沙子，越是用力越难留住，这种时候别急着强求，得耐着性子等水波平息。\n\n身边看似热闹的场合里藏着虚虚实实的声音，旁人的玩笑话或许裹着试探的意味，这时候宁可少说多听，别轻易把底牌晾在明面上。但若遇到能掏心窝子的伙伴，反而能在乱局里辟出条新路子——别孤身扛事，把后背交给信得过的人，这种信任能化开不少困局。\n\n钱财往来看似迷雾重重，其实只需记住：别被表面的浪头打乱阵脚，把眼光放长些，该退的时候退半步，该稳的时候像秤砣一样沉住气。风浪里藏着转机，端看你能不能从湍流里摸准那根救命绳。",
+  "love": "你最近的情感运势像原本平静的水面下暗流涌动，某些你渴望的联结可能在悄然经历考验。表面看似稳定的关系或许正面临外界的无形压力，如同平白刮起一阵风搅动了湖水，原本顺遂的节奏会变得需要更用心的把握。\n\n那些藏在轻松玩笑里的试探，那些不经意的言语交流，反而容易成为微妙矛盾的触发点。这时候更需要你保持敏锐的觉察，既不必草木皆兵地紧张，也不能完全放任自流。就像站在摇晃的独木舟上，慌张失措容易落水，刻意对抗晃动反而失衡，唯有专注脚下，随着波浪调整重心才能稳住船身。\n\n但这段经历终究会带给你珍贵的启示——当你找到能与你真正同频共振的伙伴，当你们愿意把后背交给彼此共同面对风浪，那些曾让你辗转反侧的困扰，会化作相视一笑的默契。这世上最坚韧的绳索，往往是用真诚与信任反复搓捻而成的。",
+  "health": "你近期的健康运势像水面突然被石子打破平静，有些隐忧会悄无声息地浮现。身体或许正发出细微的信号，需要你暂时放缓脚步，把注意力从外界的奔忙转向内在的感知。那些被忽略的疲惫感、不规律的作息，可能正在编织一张无形的网，虽不致命却会拖慢你前行的节奏。\n\n此时不必慌乱，但需警惕\"自以为无恙\"的侥幸。日常里多一分自我觉察，少一分逞强硬撑，如同在薄冰上行走时保持清醒的平衡。健康终究是长期累积的功课，与其追逐速效的修补，不如回归最朴素的规律——让饮食、作息、情绪都找到自己的节拍。\n\n值得庆幸的是，你并非孤立无援。当内心的焦虑与身体的疲惫形成闭环时，不妨主动打破沉默。无论是寻求专业建议还是亲友的陪伴，那些被分担的重量都会转化成滋养生命的力量。记住，真正的健康不是永不疲惫的刚强，而是懂得在恰当的时候，对自己说一句温柔的\"暂停\"。",
+  "study": "你在学业路上会遇到些意料之外的波折，就像原本平静的湖面突然掀起浪花。那些原本觉得稳当的规划可能渐渐显出阻碍，需要你付出比想象中更坚韧的耐心。此时要警惕过于乐观的自我安慰，表面的轻松里藏着需要严肃对待的关卡。但若你能找到志同道合的伙伴，把孤军奋战转化成协力破局，那些滞涩感会逐渐消散，甚至能在共同突破的过程中发现新的光亮。不必被暂时的困顿模糊视线，这恰恰是磨砺你调整节奏、重新校准方向的契机。",
+  "general": "你眼下遇到的局面像平静水面突然被搅动，看似稳固的根基下藏着难以预测的暗流。那些原本以为十拿九稳的事情，似乎越用力越像握紧沙子，指缝里不断流失。这种阻力未必是外界故意为难，更像是某种因果循环到了需要清算的阶段，旧日埋下的伏线正在浮出水面。\n\n你与人谈笑风生的样子里藏着分寸，有些话明明到了嘴边却要转个弯咽回去。这不是虚伪，而是你本能地察觉到了某个微妙的平衡点——既不能戳破那层纸，又不能让对方觉得生疏。这种走钢丝般的交际反而让你在某些关键时刻获得了意想不到的助力。\n\n真正的转机藏在\"同心\"二字里，但不是泛泛之交的抱团取暖。那个能与你共享秘密计划的人，那个愿意把后背交给你的人，会在某个不经意的时刻出现。当你们把各自零散的优势像拼图般嵌合时，原本棘手的事情会突然呈现出清晰的脉络。这种契合不需要刻意经营，倒像是命运早就备好的伏笔，只等你们同时伸手揭开。"
+}
+```
+
+### 英文翻译
+```json
+{
+  "sign_number": 158,
+  "sign_text": "Waves rise on level ground, / What you seek grows hard day by day. / In laughter and talk lies hidden peril; / With united hearts, matters bring joy.",
+  "interpretation1": "This sign speaks of unexpected upheaval amid stability, and a turning point within difficulty. 'Waves rise on level ground' suggests sudden turmoil from a calm state. The original hexagram Guai (䷪) has Lake over Heaven—water bursting forth, just like waves on flat land. The transforming Da Zhuang has Thunder over Heaven—thunder moving across the sky, showing even greater agitation. 'What you seek grows hard day by day' corresponds to Guai's themes of rupture and difficulty; matters become increasingly obstructed. 'In laughter and talk lies hidden peril' points to the Lake trigram as speech and Thunder as movement: carelessness in words can cause trouble. 'With united hearts, matters bring joy' is the bright spot: if people work together selflessly, strength can be built and danger turned to safety. The overall message: face sudden changes with restraint, caution in speech, gentleness overcoming rigidity, and unity overcoming adversity.",
+  "career": "'Waves rise on level ground' warns of sudden workplace changes—personnel reshuffles, project obstacles—especially from negligence. Heaven's strength is present, but Guai to Da Zhuang indicates rupture; promotions or new opportunities may face difficulties. Avoid rushing forward. The Lake trigram warns about careless talk; be discreet in office, avoid gossip or bragging, as rivalry may arise. Da Zhuang suggests unity—'with united hearts, matters bring joy'. Use Kun's thick virtue to cooperate, listen more, speak less, be humble. Suitable for stable, coordinating roles (administration, logistics, finance). Avoid seizing power alone or open competition. Late summer to early autumn may see a turnaround, but only after a 'united heart' pattern forms.",
+  "wealth": "'Waves rise on level ground' hints at sudden expenses or investment traps, making 'what you seek grow hard'. Guai is about hasty decisions; Da Zhuang looks strong but may waste resources. Stay calm. Windfall luck is poor; suspend any investments or speculation. Especially avoid acting on tips from 'laughter and talk'—the Lake trigram points to hearsay danger. Regular income is relatively stable; Kun earth favors holding steady—salary, savings, land or property returns—but avoid expansion. Focus on thrift, patch financial leaks, and wait for the waves to subside. For partnerships, choose trustworthy people; unity benefits both, division harms both.",
+  "love": "Emotions are like 'waves rising on level ground'—arguments may erupt over trifles in seemingly stable relationships. 'What you seek grows hard' reflects difficulty in achieving harmony. Guai's Lake trigram is speech, Da Zhuang's Thunder is anger—'in laughter and talk lies hidden peril' means casual jokes or old grievances can easily wound, with quarrels starting from words. If single, pursuing your crush may meet repeated rejections; hold back, don't pester. For couples, control your temper, avoid bringing up the past or saying harsh words. The turning point is 'with united hearts, matters bring joy'—when both drop egos and communicate sincerely, the relationship warms. Kun's yielding way is the key: listen more, argue less; spending quiet time together can dissolve the waves.",
+  "health": "'Waves on level ground' corresponds to the body: watch for sudden discomfort or recurring issues. Kun earth governs the spleen and stomach; Guai to Da Zhuang with thunder movement suggests digestive problems, bloating, dietary indiscretions, and also accidental falls or sprains. 'Laughter and talk with hidden peril' hints at emotional upset; the Lake trigram for mouth and Thunder for anger mean verbal disputes can cause liver qi stagnation. Nurture calmness, don't let small things anger you. Follow Kun's quietude: regular routine, light diet, avoid overeating or overwork. Gentle exercise like walking or meditation helps move qi. If you feel tired or insomniac, that's a 'wave' precursor—rest promptly, don't let it become illness.",
+  "study": "Under 'what you seek grows hard day by day', academic pressure is mounting; subjects seem tough. Avoid impatience. 'Laughter and talk with hidden peril' reminds you to mind your words when discussing with classmates—conflicts may disrupt focus. Kun governs thought and stillness; Guai to Da Zhuang tends toward agitation. Now you must avoid aiming too high or rote memorizing; return to basics and accumulate steadily. Exam luck is poor; you may lose points due to carelessness or misunderstanding—read questions carefully and simulate beforehand. Favorable for liberal arts and subjects requiring quiet comprehension; unfavorable for quick-response, competitive tests. The turning point is 'with united hearts'—study groups and mutual explanation can work wonders; collective wisdom helps break through bottlenecks.",
+  "general": "This sign's summary: Waves suddenly rise, what you seek grows hard, speech invites trouble, unity brings joy. It means life is full of hidden variables; follow Kun's flexibility, Guai's caution, and Da Zhuang's inner strength. Three key actions: 1. Guard your tongue—careless words may cause harm; 2. Unite with others—find like-minded partners to weather the storm, avoid going it alone; 3. Wait quietly—do not act rashly while waves are still rough, especially avoid forcing a breakthrough. Mindset: do not be disheartened by the moderately unfavorable sign; the final 'joy' is the turning point. If you maintain integrity and outer gentleness with inner strength, you can turn the roaring waves into a gentle stream."
 }
 ```
 
 ---
 
-## 第 31 签
-
-⚠️ **缺少英文翻译**
+## 第 159 签
 
 ### 中文原文
 ```json
 {
-  "sign_number": 31,
-  "fortune": "中下签",
-  "gua_type": "乾宫 姤变乾",
-  "sign_text": "离别间，虽不易，同伴行，犹不滞，早早起程，免他失意。",
-  "interpretation1": "签文“离别间，虽不易”点明当下正处于变动、分离的关口，或为环境转换、人事更迭，难免心生踌躇。“同伴行，犹不滞”则化危为机，意指若有志同道合者相伴，便不会停滞不前，反能相互扶持过渡。“早早起程，免他失意”更劝人主动把握时机，速作决断，莫因拖延而生遗憾。卦属乾宫，姤变乾。姤者，遇也，如风行天下，偶遇之象；变而为乾，天行健，君子以自强不息。此象揭示：困局由偶然际遇引发，终须以刚健精神化解。签诗意象如旅人携伴起程，深寓“动”中求安之理。孤身难支，合众则行远；犹豫则滞，疾行则通。中下签并非绝路，而是警示莫陷溺于离愁别绪，迅速振作、勤于行动，方免陷入他人失望或自我困顿的境地。总体而言，此签指出：当下宜借同伴之力，早早踏上新程，以勤补拙、以动破滞，自能渡过离别之涩，迎来乾健之机。",
-  "career": "签中“离别间”喻事业正在转岗、离职或项目交接的节点，虽有不舍与不易，却是蜕变的契机。“同伴行”提示不宜孤军奋战，宜找可靠同事或行业伙伴共同推进，尤利于团队协作型任务。“早早起程”更劝莫在观望中错失良机，若已想定方向，当机立断付诸行动。姤变乾，姤为邂逅，乾为健行，占事业主机遇偶然而至，需以果断阳刚之气承接。具体时机多在秋末冬初，乾金当令之时。宜主动争取外派、开拓新领域，或借团队之力攻克难关；忌沉溺旧境、反复纠结去留，或独揽重担致进度停滞。面试或述职场合，宜速战速决，避免拖延给人迟疑印象。",
-  "wealth": "“离别间”映照财务上的断舍离，或需结束某项投资、清减债务，虽痛却利长远。“同伴行”明示合作得财之机，合伙经营、共投项目易有所获；“犹不滞”更言若有他人相助，资金流转便不滞涩。“早早起程”劝理财决策宜早，莫待行情生变。姤变乾，姤为风行天下，利短期机遇；乾为天，主正财稳守。因此财运宜正财为主，偏财为辅，尤利与土、金属性行业（如地产、器械）相关的合作。宜及时结算旧账、开启定额储蓄计划；忌盲目扩张、轻信陌生高利诱惑。守成之中带进取，如早早规划周期性理账，可免后顾之忧。",
-  "love": "“离别间”直指情感上的疏离或短暂分离，如争吵冷战、远距离，甚至分手边缘，心绪难平。“同伴行”则暗示若有亲友从中调和，或双方愿意并肩沟通，便不致停滞僵局。“早早起程”劝莫彼此消耗，若情义尚在，宜主动破冰，携手重新出发。姤变乾，姤主不期而遇，乾主刚决，故旧情复燃或新缘乍现皆有可能。单身者宜出席友人聚会，同伴介绍可成契机；关系中者忌翻旧账、消极对峙，宜共定短期目标（如旅行）以重燃默契。失恋者“免他失意”亦指自我振作，莫因一人辜负春光。早做整理，心路方通。",
-  "health": "“离别间”象应身体旧疾渐去，或需与不良习惯告别，初期调适不易，却利后续康宁。“同伴行”劝莫独撑，宜寻医友、家人督促或结伴锻炼，可防半途而滞。“早早起程”强调预防为先，若感微恙，速作调理，莫拖成患。姤变乾，姤卦巽下乾上，风行天下，易感风邪、筋骨酸胀；变乾纯阳，主头首、肺部，故需防头痛、失眠及气喘反复。养生宜早睡早起，晨起漫步，饮食少辛辣多滋润。警惕疲劳预警信号，莫因事务繁忙而压缩休息，早做体检规划。以“伴”为药，心情开朗，胜过独虑。",
-  "study": "“离别间”喻学业正越瓶颈，或从旧方法、旧环境中抽身，虽有挣扎却是升级前兆。“同伴行”利结成学习小组，彼此讲解、共克难题，较自学更易突破。“早早起程”劝莫临时抱佛脚，预习复习均宜提早，笨鸟先飞可免考试失意。姤变乾，姤卦象传有“后以施命诰四方”，乾卦自强不息，主思辨、逻辑之科占优。故考试运宜数理、申论等需积累的科目，忌投机猜题。宜每日提早半小时诵读，结伴模拟面试；忌独自钻牛角尖。投稿、竞试等事宜及早递交，名次多在中等偏上，稳中求进。",
-  "general": "此签核心在“动”与“伴”。离别虽苦，却是新程之始；滞涩全因独行，结伴则可破困。行事三要：其一，速断速行，遇事勿拖延瞻顾，早早起步即占先机；其二，善借外力，无论事业、健康或情感，坦诚求援，同伴携行可化解半数坎坷；其三，持守乾健心态，中下签非定局，以勤勉刚毅回应，纵使开局艰难，亦能渐渐转圜。所谓“免他失意”，更多是免自己内心失落。把目光投向远方，轻装早早出发，路上自有同行者与意外风景。"
+  "sign_number": 159,
+  "sign_text": "狂风吹起墨云飞，月在天心遮不得，闲时无事暂相关，到底依然无克剥。",
+  "interpretation1": "所问之事或人，如天心之月，皎洁无垢，非黑云所能遮掩。",
+  "career": "这签文给你的提示是：你的事业像一阵狂风掀开遮蔽月光的乌云，看似动荡不安，但核心方向始终明亮清晰。外界或许有杂音干扰，有人试图掩盖你的光芒，但你的根基是稳固的，就像月亮终究会穿透云层。这段时期需要你像旁观者一样保持清醒，暂时不必纠结于无关紧要的枝节。记住那些看似无关的积累，其实都在暗中为你铺路。最后的结果会证明，你真正该守护的东西不会被损耗，反而会像被擦拭过的镜面，照出更通透的光。此刻需要的是像墨迹被风吹散般的洒脱——放下对细节的执着，专注在核心价值的沉淀上。",
+  "wealth": "这签文里藏着你财运起伏的命门。狂风卷墨云，乍看像突发的麻烦要打乱你的布局，但月亮始终在云层后头稳稳挂着——那些表面慌乱的风浪，终究撼不动你根基里的稳妥气数。\n\n眼下要警惕的是\"闲时无事\"这四个字。越是风平浪静的时候，越容易松懈了该守的底线。别人看是安稳日子，你倒要当心暗处滋生的枝蔓，就像墨汁浸透的云团，看着唬人，其实只要不主动伸手搅和，污渍就沾不到你衣角。\n\n最终那句\"无克剥\"才是真章。你命里的财路像山涧溪流，中途或许会被碎石划破水面，但奔涌的方向从没改过。记住别被眼前漩涡迷了眼，该绕道时绕道，该蓄力时蓄力，溪水终究要归大海的。",
+  "love": "这签文里藏着你情感的某种本质规律。外面看似有狂风卷着乌云翻涌，那些浮动的情绪、外界的纷扰像墨汁泼洒在云层里，可你心底那轮澄明的月亮始终悬在正中央——它既不会被遮蔽，也不会被谁轻易撼动。暂时的动荡或许会让你在某个闲暇时刻与外界产生牵扯，但最终你会发现，那些表面的波澜只是浮光掠影，你内心最珍贵的东西始终完整如初。就像云层再厚重也遮不住月亮本体的清辉，外界的干扰终究无法真正侵蚀你情感的根基。此刻需要的是像月亮般保持自身运行的轨迹，风浪过后自会照见本心。",
+  "health": "你的健康运势如同夜空中忽起的风云，看似暗流涌动，实则藏着转机。外界的压力像突然刮起的狂风，或许会让你的身体暂时感到疲惫困顿，但内心始终有股清明的力量在护持，就像乌云永远遮不住当空皓月。当下要警惕那些看似无关紧要的疏忽，日常的疲惫感或许在提醒你需要更周全地照顾自己。无需过分忧虑那些若隐若现的隐患，只要保持规律作息和心态平和，那些浮动的暗影终究会像流云般自然消散。记住你的根基其实比想象中稳固，只要不被一时的波动扰乱了节奏，身体自会找到平衡的支点。",
+  "study": "你此刻的学业运势像一阵突如其来的风暴，表面看似混乱无序，实则暗藏转机。那些困扰你的障碍如同被大风吹散的浓云，虽然暂时遮蔽了前路，但月亮始终悬在天心——你内心坚定的方向不会被长久掩盖。这段路途中会有短暂的迷茫期，看似无关的积累与沉淀会像暗流般托住你的脚步。即便经历过摇晃与试探，最终你会在反复的自我校准中发现：真正属于你的学识根基不会被外界轻易动摇。保持清醒的觉察，当风浪渐息时，你会看清自己早已站在更高的山岗。",
+  "general": "这签文中的气象变化，实则暗藏着你当下心境的写照。看似狂风卷墨云，外界的纷扰与突发状况难免搅动你的思绪，但\"月在天心\"的意象却暗示着你的核心目标与内在清明并不会被混乱遮蔽——动荡只是短暂的迷雾，而非永恒的困境。\n\n\"闲时相关\"恰如命运抛给你的试探：表面上风平浪静的日子，往往藏着需要你谨慎留意的蛛丝马迹。这不是要你时刻紧绷，而是提醒你在安稳时也要保持三分警醒，就像船行静水仍需握紧舵盘。至于\"无克剥\"的结局，实则在说这场命运的风暴终会与你达成微妙的平衡——那些看似要伤害你的冲击，最终都会化作拂过山岗的阵风，带不走你根基分毫。\n\n此刻你需要像观天象的旅人：既不为乌云压顶而惊慌失措，也不因月光破云就松懈驻足。保持住这份动静皆宜的定力，当外界的喧嚣渐息时，自会看清脚下最踏实的路径。命运的考验向来带着两面性，这场风雨未尝不是为你冲刷出更清晰的视野。"
+}
+```
+
+### 英文翻译
+```json
+{
+  "sign_number": 159,
+  "sign_text": "Fierce wind blows ink-black clouds flying; / The moon at the sky's heart cannot be hidden. / In idle hours, nothing matters; / In the end, no harm or loss.",
+  "interpretation1": "The first line 'Fierce wind blows ink-black clouds flying' depicts sudden upheaval, slander, or external shocks that obscure clarity like black clouds. The second line 'The moon at the sky's heart cannot be hidden' means the moon's true brightness can never be obscured despite temporary clouds—symbolizing that the right path and one's true heart remain unshaken, and core matters are hard to erode. The third line 'In idle hours, nothing matters' suggests that unrelated people or events may briefly become entangled, but only temporarily. The last line 'In the end, no harm or loss' reveals it was all a false alarm. The hexagrams: Gen Palace, Lu (treading carefully, like stepping on a tiger's tail) transforms into Kui (opposition). Lu suggests caution brings good fortune; Kui means separation but 'if you lose a horse, don't chase it—it will return'. This shows that although actions may cause disagreement or misunderstanding, the right path prevails and the disturbance subsides. Overall, this unfavorable sign contains a turning point: when encountering obstacles, quietly guard your true heart; do not lose your composure because of the clouds. The moon in the sky will eventually shine bright.",
+  "career": "The 'ink clouds obscuring the moon' indicates workplace gossip, slander, or changes that cloud your prospects. However, 'the moon at the sky's heart cannot be hidden' hints that your core abilities and position are hard to shake; your light remains. The timing does not favor aggressive competition; you may postpone major decisions such as public bids or promotions, as Lu advises careful action. The moon in the sky favors focusing on your current duties and refining your skills; when the clouds disperse, your brightness will show. Advised: maintain integrity, speak little, improve professionally; avoid factional disputes. Avoid: arguing publicly, taking sides hastily, or moving based on rumors.",
+  "wealth": "'Ink clouds flying' symbolizes temporary obstruction in wealth—investments may be frozen, cash flow tight, or unexpected expenses arise. But 'the moon cannot be hidden' means your fundamental assets are safe; regular income stays stable, no real loss. The hexagram Lu transforming into Kui includes 'lose a horse, don't chase it—it will return', implying losses may be recovered. Windfall luck is poor; avoid high-risk speculation. Financial approach: defend rather than attack, postpone expansion, consolidate savings, and pay close attention to contract details to avoid disputes. When the moon breaks through clouds, your financial path will clear.",
+  "love": "Fierce wind and ink clouds foretell misunderstandings or external interference in love—like baseless rumors—that may cloud the relationship. 'The moon at the heart of the sky' represents true affection, which is bright and cannot be veiled by passing clouds. 'In idle hours, nothing matters' means unrelated matters may temporarily involve you, but 'in the end, no harm or loss'—the foundation of your relationship remains intact. For singles: you may encounter insincere interest; stay calm and don't be blinded by passion. Wait for the moon to shine; the right person will come naturally. For couples: communicate without suspicion; the storm is brief. Hold your hearts like the moon, and distance can be dissolved. Avoid: bringing up old grievances or arguing from anger.",
+  "health": "The ink clouds obscuring the moon, with fierce wind (wood) and clouds (dampness), may lead to liver qi stagnation and spleen dampness—associated with emotional stress, insomnia, or digestive issues. However, 'the moon at the heart of the sky' indicates your vital energy is intact; though minor ailments exist, proper qi remains. Health approach: soothe the liver and regulate qi; take walks, eat light and dampness-dispelling foods; follow the moon's rhythm—sleep early, rise early. Watch for: anxiety, headaches, or loss of appetite; don't let stagnation become disease. Keep a clear mind like the moon breaking through clouds.",
+  "study": "'Fierce wind and ink clouds flying' suggests academic distractions—external disturbances, competitive pressure, or a noisy environment—that unsettle your mind. 'The moon at the heart of the sky cannot be hidden' shows your true wisdom and knowledge are not obscured by temporary difficulties. 'In idle hours, nothing matters' reminds you that irrelevant things may briefly disturb you, but 'in the end, no harm or loss'—your final results remain unaffected. Study method: close your doors and read quietly; eliminate stray thoughts. Exam luck is unsettled at first but settles later; visit the venue in advance, prepare well, and avoid last-minute panic. Favorable for consolidating your own field, not for seeking breadth too quickly.",
+  "general": "This sign indicates a false alarm: though fierce wind and ink clouds may block, the moon at the sky's heart remains unharmed. Overall warning: do not act rashly on temporary disturbances; instead, follow Lu's caution and Kui's harmony. Key actions: 1. Stay righteous—believe the moon's light will break the darkness; 2. Respond with stillness—when idle matters temporarily arise, cool them down, don't escalate; 3. Wait for the right moment—after clouds disperse, there will be room for maneuvering. Mindset: always remember the moon at the sky's heart; be open and calm, and no harm will come."
 }
 ```
 
 ---
 
-## 第 32 签
-
-⚠️ **缺少英文翻译**
+## 第 160 签
 
 ### 中文原文
 ```json
 {
-  "sign_number": 32,
-  "fortune": "中上签",
-  "gua_type": "兑宫 兑变履",
-  "sign_text": "乐之极矣忧将至，巽兑分明吉与凶，未能光大终幽暗，日落西山返照中。",
-  "interpretation1": "签文“乐之极矣忧将至”化用《易经》“乐极则悲”之理，直指兑宫本为喜悦之卦，然兑为口舌、为毁折，欢愉至极易生骄矜，故忧患暗伏。“巽兑分明吉与凶”，兑为泽，巽为风为入，兑卦变履，互见离、巽，履卦上乾下兑，喻行事如履虎尾，吉凶仅在进退一念。签以“巽兑”明示柔顺则吉，刚躁则凶。“未能光大终幽暗”言人不自省、德不昭彰，终陷迷途，如日落西山。“日落西山返照中”实为回光之象，黄昏虽绚烂却短暂，警醒盛时须虑衰，得意莫忘形。卦变自兑宫至履，由纯悦而入践行，寓意悦而有节，动合规矩方保长久。此签中上，吉处在于有明照之机，凶处在于光景不长，需守中持正，戒满戒盈。",
-  "career": "签中“日落西山返照中”喻事业虽有短暂上升或成果突现，却如晚霞易逝，须抓紧时机。“巽兑分明吉与凶”指兑为口舌是非，巽为顺入，职场宜以柔克刚，避开口舌之争。兑宫变履，事业动向主宜在协作、服务、沟通类岗位发挥，尤利公关、教育、艺术行业。当前若遇晋升或项目收官，切忌因小成而张扬，当如履薄冰，谦逊待人。宜主动梳理流程、完善细节，忌居功自傲、急进扩张。兑本为秋，时机多在秋季，但秋尽冬来，须预作退路，防盛极转衰。",
-  "wealth": "“乐极忧至”直指财运不宜贪恋，暴利之后恐有骤失。“日落西山返照”暗示偏财有短暂机会，如投资、副业或意外之财，但如回光一现，旋即暗淡。兑卦主金，财源宜从金属、金融、娱乐相关行业入手，但履卦“履虎尾”警告不可冒进投机。理财当以守成为主，宜将现有资产配置于稳健渠道，忌过度扩张信用或高杠杆。巽为风，信息财需仔细辨别真伪，切忌盲从传言。吉凶分明，小利可图，大利勿求，见好即收方为明智。",
-  "love": "签文“未能光大终幽暗”喻感情若沉溺短暂欢愉，不培根本，关系易趋黯淡。兑为少女，为悦，爱情初时甜蜜，但乐极则忧至，争吵、猜疑随之而来。履卦强调责任与界限，单身者遇此签主暧昧易生，但难长久，需明确心意，宜主动表达却不可轻浮；已有伴侣者，忌翻旧账、强求对方改变，宜共同规划未来，如以礼相待，恩爱才能光大。日落返照，象征老夫老妻重温旧情，亦是修复良机，但需防回光后更深的落寞，日常关怀方是正途。",
-  "health": "兑为口、为肺，履卦上乾亦为金，火金交克，签文“日落西山”暗指阳气渐衰，当注重呼吸系统、肺部保养。兑卦变履，步履需谨慎，防关节或足部劳损。“乐极忧至”提醒勿因精力尚可而过度消耗，熬夜狂欢、饮食不节最易致虚火上升。养生宜早卧早起，多食白色润肺之物，如梨、银耳；运动宜温和，如散步、太极，忌大汗淋漓。巽为风，需防范季节转换时的外感，秋冬季尤须保暖护颈背，以防旧疾复发。",
-  "study": "签文“未能光大终幽暗”告诫学而不思、浅尝辄止终难有成。兑为言说，巽为入，宜学语言、文学、艺术类科目，口试、面试有利。“日落西山返照”暗喻考前冲刺或突击学习可收一时之效，但根基不稳，考试成绩易波动，尤需警惕“粗心”致失分。宜制定规律学习计划，忌临时抱佛脚。卦变履，实践出真知，参加实习、竞赛、辩论可光大所学，切忌闭门造车。吉处在于悟性尚佳，凶在浮躁易忘，戒骄戒怠方得始终。",
-  "general": "此签核心在“持盈保泰”四字。盛时念衰，乐时思忧，方能避“忧将至”之局。“巽兑分明吉与凶”提示一切成败系于选择，柔逊则吉，强亢则凶。行动上，一宜收敛锋芒，功成不居，将荣誉归团队或时机；二宜及早规划退路，勿待日落西山才追悔；三宜凡事留白，话不说满、钱不赚尽、情不耗尽。心态上当学兑之悦而中节，履之礼而慎行，以幽暗为镜，照见返照之光，虽短暂却可温暖当下，涵养谦光，自致光大。"
+  "sign_number": 160,
+  "sign_text": "人倚楼，许多愁，澹然进步，事始无忧。",
+  "interpretation1": "独处深思，总觉不悦，若能眼光放远，自然无忧。",
+  "career": "你此刻像独自站在高楼远眺的人，心里堆着沉甸甸的石头。眼前的路被云雾笼罩，看不清该往哪里落脚，那些悬而未决的焦虑在暗处啃噬着你的信心。但仔细看，云层里其实透出微光——这签在提醒你，越是看不清方向的时候，越要把步子放得轻些。别急着拨开迷雾，也别被焦虑催着乱闯，像清晨的露珠滑过荷叶那样，顺着自己的节奏慢慢浸润土地。\n\n你或许正站在事业的十字路口，表面看是停滞不前，其实是在积蓄力量。那些让你辗转反侧的困扰，恰恰是命运在帮你筛选真正值得投入的方向。接下来的路，需要卸下\"必须立刻成功\"的包袱，把每件小事当作铺路的石子，而非登天的阶梯。当你的呼吸和脚步同频时，那些盘踞在眉间的愁绪，会自己解开绳结。记住，此刻的平静不是认命，而是让湍急的河流沉淀泥沙的智慧。",
+  "wealth": "你现在的财运像黄昏独坐楼头的人，心里压着沉甸甸的石头。那些飘忽不定的烦忧，其实是提醒你该用更通透的眼光看待得失。别急着伸手去抓流水般的财富，先停下脚步让心静下来。\n\n眼前看似停滞的困局，恰是命运给你铺的缓坡道。把焦躁化成细水长流的盘算，像初春融雪浸润土地那样，让每个微小的积累都扎扎实实。当你看淡得失的执念时，反而会发现暗处藏着转机。\n\n要记得财富从来不是靠蛮力拽住的，它更像是循着你的心性生长。现在最需要做的，是卸下心头重担，把急躁的火焰调成温火。等内心真正澄澈了，那些原本模糊的路径自会显影，这时候再迈步，才不会被乱石绊倒。",
+  "love": "你此刻像独自倚在空寂高楼上的人，四周的风景被浓雾笼罩，心里压着许多说不清的重量。那些愁绪或许来自对前路的犹疑，或是对某些牵绊的执念，它们像风里飘摇的铃铛，总在某个瞬间突然响起。\n\n但签文要你留意\"澹然\"二字。这不是让你抛下所有情绪，而是像捧着一盏微烫的茶，既感知温度，又允许它慢慢冷却。你的困惑里藏着转机，只是需要把目光从远处收回来，先看清脚下这一步该落在哪里。\n\n所谓\"事始无忧\"，不是说从此没有风浪，而是当你学会在动荡里稳住重心，那些原本让你焦虑的未知，会渐渐显露出新的路径。现在要做的不是急着驱散迷雾，而是在迷雾里种下自己的灯。",
+  "health": "此刻的你像站在高楼边缘的人，肩上压着看不见的疲惫。或许身体正发出微弱的信号，提醒你有些东西需要被重新梳理。那种凝滞感不是终点，而是转折前的伏笔——就像潮水退去后沙滩会显露贝壳，你需要的不是用力挣脱，而是让呼吸找到自己的节奏。\n\n暗涌的愁绪恰似身体的晴雨表，它在告诉你：有些执念需要松绑，有些节奏需要放慢。不必急于驱赶这种沉重感，就像春雨浸润土地自有它的道理。试着用旁观者的视角看看这些堆积的焦虑，它们或许正在为你推开另一扇门。\n\n健康的答案往往藏在动静之间。当脚步放轻时，心跳声反而听得更真切；当眉头舒展时，气血自然会在经络里找到归途。不必执着于立竿见影的改变，就像种子破土前要在黑暗里积蓄力量。你此刻的觉察本身，就是最珍贵的药引。",
+  "study": "你此刻像站在高处看风景的人，心里堆积的迷雾远比眼前的路更重。那些压在心口的焦虑并非凭空而来，它们像反复翻阅的旧书页，每一道褶皱里都藏着对结果的执着。但真正要破开困局的，恰恰是放下对\"楼\"的依赖——那座你给自己搭建的、用得失心砌成的瞭望塔。\n\n往前挪的步子不必太响，像溪水漫过青石般自然就好。当你不再反复确认脚下是否踩对了砖，那些困扰你的杂音反而会沉淀下去。学业这件事，最怕的不是走错方向，而是站在原地用想象把困难捏成庞然大物。把\"必须如何\"的锁链解开，专注在每天能握住的刻度上，那些你以为跨不过的沟壑，走着走着就成了身后的风景。",
+  "general": "你此时的心境像独自倚在高楼远望的人，眼前似乎蒙着一层薄雾，许多事情在心头纠缠。但别让这种迷茫困住你的脚步，那些看似模糊的界限其实是命运留给你的余地。现在需要像退潮后的沙滩一样，用清醒的平静代替焦虑的揣测。不必急着用蛮力破开眼前的局，当你的呼吸节奏与生活本身的起伏逐渐合拍时，那些困扰自会显露出原本的路径。记住此刻的停顿不是停滞，恰是天地在帮你校准方向。"
+}
+```
+
+### 英文翻译
+```json
+{
+  "sign_number": 160,
+  "sign_text": "One leans on the tower, burdened with sorrow. / With calm and steady steps, / Matters first become free of worry.",
+  "interpretation1": "The sign paints a picture of a solitary figure leaning on a railing, lost in anxious thoughts. 'Leaning on the tower' suggests being stuck—no way forward, hard to retreat. The Xun palace governs wind; wind entering the tower brings cold, meaning the path is blocked and the heart is adrift. 'Sorrow' is the theme; the hexagram Shi Ke is like something stuck in the mouth—grief stuck in the chest, hard to swallow or spit out. This unfavorable sign warns of present difficulty; do not act rashly. But the next lines turn: 'With calm and steady steps, matters first become free of worry.' The transformation to Jin means the sun rises above the earth, light ascending—indicating that after biting through obstacles (Shi Ke), dawn appears. Overall: the city of sorrow is not a permanent prison; with a tranquil heart to dissolve inner knots and gradual steps to overcome external resistance, guarding integrity will lead to peace.",
+  "career": "Your career feels like leaning on a precarious tower, looking around in confusion. 'Burdened with sorrow' indicates workplace stagnation—bottlenecks, transfer troubles, interpersonal friction. Xun means entering; Shi Ke relates to prison and disputes; be wary of office gossip, contract disputes, or policy changes. Guard your words, avoid factions. Jin signifies advancement, but it transforms from Shi Ke, so you must first bite through current obstacles—like tackling a tough project or resolving old conflicts—before promotion comes. Timing favors autumn-winter transition; suitable for roles in documentation, planning, data—work requiring patient effort. Advised: clarify responsibilities, solve problems one by one, proactively report progress. Avoid: bypassing hierarchy, rushing to change jobs, or clashing with superiors.",
+  "wealth": "Leaning on the tower brings worry; wealth stars are dim. The sign hints that financial channels are blocked, income slow, or anxiety causes leakage. Shi Ke is like biting something; finances may be frozen, trapped, or unexpectedly lost, especially due to disputes. Jin shows the sun rising, so wealth may warm up, but only with 'calm and steady steps': take short-term gains lightly, focus on preservation and steady accumulation. Regular income stable; avoid windfalls. Investments favor long-term projects related to education, culture, forestry; avoid speculation, guarantees, or following trends. Advised: review old accounts, cut unnecessary expenses, store grain against famine. Avoid: emotional spending, trusting others to partner.",
+  "love": "'One leans on the tower' is an image of solitary cold; the emotional world may feel lonely. 'Many sorrows' means being troubled by love: singles cannot forget old flames, cannot meet new ones; couples have growing rifts or silent treatments. Shi Ke is about biting—arguments like teeth grinding; guard against hurtful words. Jin suggests that if you endure a momentary anger, sunrise and thawing can follow. The best approach is 'calm and steady steps': let go of attachments, don't push. For singles, don't wait idly on the tower; find joy in books or gardening; fate comes when you are calm. For couples, avoid rehashing the past; plan outings to open spaces to dispel gloom.",
+  "health": "Leaning on the tower for long strains muscles and bones. Xun governs wind, corresponding to liver and gallbladder; Shi Ke has lower trigram Zhen (liver) and upper Li (fire disturbing heart). This sign warns of liver qi stagnation, deficiency fire rising. 'Many sorrows' drains heart blood, leading to insomnia, headaches, chest tightness, or red eyes. Jin has external light but internal weakness, so regulate with calmness—soft overcomes hard, avoid anger. Diet: green vegetables, chrysanthemum tea; avoid spicy, heavy foods. Routine: early to bed, early to rise; exercise like Baduanjin or slow walking to smooth liver qi. Warning signs: persistent low mood, rib distension, bitter morning mouth—address promptly, don't let them accumulate into illness.",
+  "study": "This sign for academics is like climbing a tower and looking both ways; 'many sorrows' troubles your studies—heavy pressure, distractions. Shi Ke is like chewing—you must gnaw through weak points with persistence; Jin shows progress if you persist. Most importantly, avoid impatience; 'calm and steady steps' points to the way: a settled mind brings wisdom. Proceed step by step with phased goals; use notes and repetition to consolidate. Exam luck is gradual; favorable for liberal arts (language, history, philosophy) that require depth; unfavorable for subjects needing quick wit. Advised: visit the exam venue beforehand, prepare materials; avoid all-night cramming or comparing progress with others.",
+  "general": "This unfavorable sign contains upward potential; Shi Ke transforming into Jin means breaking barriers to reach light. Key points: the city of sorrow is not a true predicament—it is mind-made. Leaning on the tower is not as good as taking calm steps. Actions: 1. Turn 'what is in the mouth' into concrete problems and crush them one by one—like resolving misunderstandings, clearing backlogs; 2. Calibrate your pace—not aiming for speed but steady progress; 3. Use Xun's soft wind—be humble, avoid sharp edges. Mindset: remember 'matters first become free of worry'—the resolution begins with you, not outside. Keep this tranquil, gradual heart, and though you are in an unfavorable sign, danger can be turned to safety."
 }
 ```
 
 ---
 
-## 第 33 签
-
-⚠️ **缺少英文翻译**
+## 第 161 签
 
 ### 中文原文
 ```json
 {
-  "sign_number": 33,
-  "fortune": "中签",
-  "gua_type": "坎宫 丰变小过",
-  "sign_text": "历过波涛三五重，谁知浪静又无风，须教明达青云路，用舍行藏不费功。",
-  "interpretation1": "签文首句「历过波涛三五重」，以江河波涛隐喻人生旅途的坎坷与考验，「三五重」极言波折之多，正合坎宫之象——坎为水、为险陷，主历经风浪。次句「谁知浪静又无风」，转写眼下风平浪静，然「谁知」二字暗藏警惕：静极思动、安中伏危，不可因一时平宁而松懈。第三句「须教明达青云路」点出关键，「青云路」喻高远前程，但要「明达」——心如明镜、通达时势，方识正道。末句「用舍行藏不费功」化用《论语》「用之则行，舍之则藏」，强调顺势进退、收放自如，如此则不费心力而功成。卦由丰变小过：丰为雷火丰，示盛大光明但易生满溢；小过为雷山小过，卦辞「可小事，不可大事」，寓小有过越，宜下不宜上。合参之，此签意在经历风雨后暂得安宁，然不可强求速进，须明辨时机、知进知退，方能化险为夷，再上层楼。整体为中签之兆，吉凶参半，贵在持守。",
-  "career": "事业征途，签文「历过波涛」直指职场曾历剧烈竞争、人事变动或项目波折，「浪静又无风」预示如今进入平缓期，看似无阻却也无风可借力。丰卦主盛大，暗示过往积累已见成效；小过卦告诫「不宜上宜下」，此刻贸然冲锋易生小过。宜：静心复盘过往得失，打磨核心技能，待人脉和合时再图「青云路」；忌：主动挑起争端、强行争功或跳槽创业。具体而言，若处管理岗，宜放权稳基；技术岗宜深耕细节；考试竞聘则需充分准备而非临阵磨枪。明达者，知「用舍行藏」：当争则争，当让则让，不费功即成。",
-  "wealth": "财运如签中浪涛，历经颠簸后归于「浪静」，主正财平稳，偏财则波澜不兴。丰卦有丰盈之象，但变小过警示莫贪多。签云「不费功」，乃言不刻意强求反有所得。宜：守持主业薪俸，可适度定存或低风险理财；利土、水相关行业（如水利、物流），忌火、雷属性投机。合作不宜轻信高利之诱，用舍行藏指适时减持或收手。若经商，勿扩张门店，稳守老客源。切忌：融资杠杆、赌博式投资。",
-  "love": "情感之域，「波涛三五重」喻过往情路多辗转，或恋史纷杂，或暗生波澜。而今「浪静无风」，关系暂趋和缓，却易流于平淡，似一潭死水。丰卦虽热烈，小过则示口角小过，需防因琐事摩擦。单身者：不宜急切觅偶，宜从旧友、学习圈酝酿缘分，「明达」即看清双方适配度，勿执表象。有伴者：签言「用舍行藏」，朝夕相处当进退有度，热时存礼，冷时添暖；忌翻旧账、逼迫承诺。若处暧昧，静观其变，水到渠成方不费功。",
-  "health": "此签坎象应身，坎为水，对应肾脏、膀胱、耳窍及血液循环系统。诗云「历过波涛」，暗示素有劳损或旧疾时扰，而今「浪静」期，恰是调养良机。丰火易亢，小过如山阻，须防心火上炎、关节酸滞。养生方向：饮食偏清淡，减咸护肾，多食黑豆、黑芝麻；作息宜亥时（21-23点）入眠以养坎水；运动宜缓行八段锦或静坐，忌大汗淋漓。需警惕：耳鸣、腰膝酸软、水肿反复，虽非急症但宜早作调理。",
-  "study": "求学路上，「波涛三五重」指曾遇瓶颈或考学曲折，「浪静」喻目前学业暂趋平坦，但「无风」亦乏动力，当以「明达青云路」自励——青云高远，须扎实筑基。坎宫主智，却带险，小过卦示小错不断，故考试非难题之失，多在粗心。宜：温习错题集，回归课本本源，忌押题猜宝。用舍行藏即合理安排精力，该冲刺时全力，该休息时放松，不费蛮功。学科利水（文科、水利、交通）而忌火雷（电竞、浮躁术科）。考场关键在审题仔细、稳扎稳打。",
-  "general": "综观此签，中平之象重在守中。「历过波涛」已是过往，今虽浪静，但安不忘危，方是明达。关键行动：其一，日常抉择循「用舍行藏」古训，不执一端，看准时机才出手；其二，修身以健体，静养坎水之元，蓄积精力待青云；其三，心态上抱持「不费功」的从容，但凡不能速成者，便如水行舟，顺势蜿蜒。一言蔽之，持盈保泰，后发可期。"
+  "sign_number": 161,
+  "sign_text": "一点着阳春，枯枝朵朵新，志专方遇合，切忌二三心。",
+  "interpretation1": "心志专一始能受到重视，略得提携即可步入佳境。",
+  "career": "你此刻的事业像被寒冬封存的枯枝，表面看似停滞不前，但根脉深处正悄悄积攒着生机。眼下需要做的不是四处寻找新方向，而是把全部心力浇灌在已扎根的土壤里——哪怕这片土地暂时荒芜冷清。\n\n命运给你的考验恰恰在此：当周围诱惑你分心的岔路越多，越要沉住气用钝劲。那些突然冒出来的\"新机会\"可能只是迷眼的柳絮，真正属于你的花期，需要专注到近乎固执的坚持才能催开。记住枯枝发新芽从来不是瞬间的奇迹，是经年累月向下扎根的结果。\n\n别让焦虑逼着自己同时攥住太多可能性，当你的能量被撕扯成碎片，再好的机缘也会从指缝溜走。守住最初选定的道路深耕细作，待到某个寻常清晨，你会突然发现枯槁的枝头早已缀满花苞。",
+  "wealth": "这签文讲的是你的财运像一棵寒冬里枯朽的老树，只要守得住心里那簇火苗，枯枝上也能发出新芽来。眼下你手头的路子还没走通，可能总在琢磨换方向，但你要知道，钱脉的根子早就在土里埋着了，得沉住气把力气往一处使。现在最怕东一榔头西一棒槌，今天看这个项目好，明天又眼馋那个风口，结果白白耗了心力。就像熬中药讲究文火慢炖，该你的财路得用耐心慢慢煨出来，别总掀盖子看火候。记住，枯枝发新芽从来不是靠蛮力掰开的，是等春气透到芯子里自然挣出来的。",
+  "love": "这签像春雪初融时冒出的第一颗嫩芽，带着倔强的生机刺破寒冬的残冰。你心里正酝酿着某种复苏的能量，只是需要像老树抽新枝般沉住气。那些看似枯萎的旧枝桠，正在你专注的凝视里悄悄鼓出花苞——这过程急不得，就像你不能同时给两棵树浇水，否则根系反而会因贪婪而溃烂。\n\n感情里最怕在十字路口反复踱步，既要春风的温柔又贪夏雨的激烈。此刻你面前的路标其实很清晰：选定一个方向就径直向前走，别频频回头丈量来时的脚印。那些犹豫的碎石会在你坚定的脚步里自动滚落，而沿途的荆棘也会在你持续的体温里软化成藤蔓。\n\n真正的契机往往藏在\"不贪多\"的智慧里。就像酿酒师只取第一道晨露，你也要学会把全部心神倾注在最值得浇灌的土壤上。当其他人都忙着采摘整片花园，你要有勇气只守护最初选中的那枝花——因为专注本身，就是最珍贵的养分。",
+  "health": "签文里藏着些关于你健康的机锋。阳春一点火苗就能燎原，是说身子底子那股气若稳得住，哪怕现在像枯枝般虚弱，也能慢慢冒出新芽。这里头有个要紧的暗示——你最近在调养上得学那火苗的专注，别今天信这个方子明天试那个疗法。就像枯木逢春不是一蹴而就，身子要回春得顺着自然节律慢慢熬，最怕东一榔头西一棒槌地折腾。\n\n但火苗到底是暖身还是灼人，全看你拿捏的分寸。若真能沉下心把养生当修行，像老树扎根般日复一日地养气，那些看似死寂的脉络自会重新活泛起来。可若总惦记着走捷径，今天补药当饭吃，明天又跟着旁人瞎折腾，反而容易把这点生机给搅散了。记住，病去如抽丝靠的是绵绵不绝的耐性，不是东抓一把西扯一缕的焦躁。",
+  "study": "你抽的这支签像一粒埋在冻土里的种子，正被春阳轻轻唤醒。那些看似干枯的枝桠其实在表皮底下悄悄鼓胀，很快就要钻出嫩芽——这说的是你学业上暗藏的生发力。现在需要的是像针尖对麦芒那样精准的专注力，把全部心力聚在某个锚点上，哪怕暂时看不到明显变化，也要相信深处的根系在生长。\n\n但这里藏着个陷阱：若总想着同时抓住几根藤蔓，今天攀这根明天扯那枝，看似在努力实则力量涣散，那些刚冒头的芽苞反而会被自己的犹豫掐断。就像用十根手指同时按十个琴键，弹出来的只能是刺耳的杂音。真正的转机往往发生在你屏住呼吸，把所有光都聚在一盏灯芯的时候。",
+  "general": "这签里藏着些微妙的暗示。你手头的事就像寒冬里蛰伏的枝桠，看似干枯无望，其实内里藏着转机。那个\"一点着阳春\"的\"点\"最要紧——眼下需要你找准最关键的那个切口，就像拿火柴头在正确的位置擦燃，整根枯枝才能顺势萌出新芽。\n\n别被表象迷惑了，那些看似死气沉沉的局面，底下正酝酿着重新抽枝的生机。但要切记这生机是脆弱的，就像初春的嫩芽经不起反复折腾。这时候最忌讳东一榔头西一棒槌，今天觉得这条路可行，明天又改换门庭。就像熬糖浆，火候不到就急着搅动，最后只会凝不成形。\n\n运势走向像顺着溪流行船，眼下水流虽缓，但正往开阔处去。你只需把住舵，别被两岸杂生的藤蔓勾住船桨。中途或许会遇到看似更好的岔道，但要记得最初选定的河道，那些突然冒出来的\"机会\"，多半是考验定力的幻象。等到转过前面那道弯，自然会有柳暗花明的景象。"
+}
+```
+
+### 英文翻译
+```json
+{
+  "sign_number": 161,
+  "sign_text": "A touch of spring's warmth,\nWithered branches bloom anew;\nWith focused will, fate meets,\nBeware a heart that's split in two.",
+  "interpretation1": "This oracle uses the imagery of a dead tree meeting spring to show that even in hardship, a chance for renewal appears. The 'touch of spring' hints at a small turning point, like the winter solstice's subtle yang energy that can nurture all things. 'Withered branches bloom anew' speaks of life sprouting from decay, possible only through singleness of purpose. The hexagram shifts from Zhong Fu (Inner Trust) to Huan (Dispersion), where Zhong Fu emphasizes sincerity like a bird incubating eggs, while Huan suggests scattering and division. Gen Palace (Mountain) signifies stillness, yet the change implies hidden movement with unstable foundations. The final lines—'With focused will, fate meets; Beware a heart that's split in two'—are the key: only unwavering commitment can gather the scattered energy. A divided mind will disperse even the spring touch, leaving the branches barren. The oracle teaches that the turning point lies in focus, and failure comes from distraction. The 'moderately unfavorable' rating reflects the ease with which the human heart wavers, urging steadfastness.",
+  "career": "The oracle's 'withered branches bloom anew' suggests your career, though temporarily at a low point or stagnant, has a chance for revival—especially favorable for changing tracks, internal transfers, or returning to a previous path. 'A touch of spring' indicates a supportive person or an unexpected opportunity may appear, but it's still weak, requiring you to actively seize it. The hexagram shift from Zhong Fu to Huan suggests career fluctuations and team dispersion; so it's best to focus on one thing and avoid frequent changes. If seeking a job, late autumn or winter (water months like Hai, Zi) may be more favorable, and industries related to mobility, communication, or shipping are auspicious. What to do: Choose a direction and deepen your efforts, proactively repair relationships with colleagues or superiors, and demonstrate sincerity by perfecting small tasks. What to avoid: Pursuing multiple paths at once, trusting empty promises, or giving up due to temporary setbacks. Only with 'focused will' can you meet the right opportunity.",
+  "wealth": "Wealth is like the 'withered branch' awaiting nourishment—losses may precede gains. 'A touch of spring' hints at an unexpected small gain or the first returns of a long-term investment, but the 'withered branch' indicates a weak financial foundation, not a major profit. The change to Huan suggests money may easily scatter; watch for unplanned expenses or losses through partnerships. Zhong Fu emphasizes trust and single-mindedness in seeking wealth—avoid frequently changing your financial strategy. What to do: Focus on saving from regular income, favor investments related to land or property (Gen Palace belongs to Earth), or long-term savings. What to avoid: Speculation, diversifying funds, or trusting others' high-interest promises. 'With focused will, fate meets'—if partnering, choose like-minded people and operate with unity; mistrust (a divided heart) will lead to losses.",
+  "love": "Withered branches meeting spring suggests rekindled feelings or a thaw in a stagnant relationship. For singles, 'a touch of spring' indicates a subtle romantic opportunity may arise, possibly from an old acquaintance transforming into love. But you need to focus and avoid dating multiple people. Zhong Fu (trust) and Huan (dispersion) hint that mistrust and distance may trouble the relationship; thus 'focused will' is key to breaking the impasse. For those in a relationship, beware of a 'divided heart'—if your mind wanders or you dwell on the past, the relationship may scatter. What to do: Devote attention to your current partner, revisit the sincerity of your early days, and resolve differences through actions. What to avoid: Testing your partner, bringing up old grievances, or pinning hopes on an undefined connection. The touch of spring must be carefully nurtured to make the withered branches bloom lasting.",
+  "health": "The image of 'withered branches blooming anew' reflects a body that has declined but has a chance to recover. However, 'a touch of spring's warmth' clearly states that your vitality is not yet fully restored; you need gentle, gradual nourishment, not haste. The change to Huan involves Kan water (illness) and Xun wind (entry), making you susceptible to wind-cold, damp-heat, or recurrence of old ailments—especially related to the urinary and circulatory systems. Gen Palace governs the spleen and stomach; the shift from Zhong Fu to Huan shows earth deficiency and water flooding, easily causing digestive disorders. For health maintenance, focus on single, consistent practices: regular meals, slow-paced exercises like walking or tai chi, and avoid frequently switching methods (a divided heart), which may harm your vital energy. Mentally, Huan brings worry and distraction; concentrate on one wholesome interest to nourish the spirit. The oracle advises against staying up late and overexertion; sleep early to accumulate yang energy, awaiting the growth of spring qi. Important: If you experience signs like persistent fatigue, dry mouth in the morning, or turbid urine, timely recuperation can prevent major issues.",
+  "study": "Your studies show signs of the 'withered branch' gradually reviving. If you have a weak foundation or feel weary of learning, a 'touch of spring'—such as a good teacher's inspiration or a sudden mental breakthrough—can bring a new outlook. But 'bloom anew' is not achieved overnight; it requires 'focused will' to delve deep. Avoid trying to grasp too much at once. Zhong Fu turning to Huan indicates that thoughts are easily scattered; concentration is difficult. For reading, it's best to focus on one classic or one subject, repeatedly refining, to meet true understanding. Exam fortune is average; favorable for subjects requiring quiet reflection like literature, history, or philosophy, less favorable for subjects requiring rapid switching like mathematics or science. What to do: Set a single-minded study plan, reduce extracurricular distractions, and study with trusted peers. What to avoid: Switching study methods frequently (divided heart) or last-minute cramming.",
+  "general": "This oracle's essence lies in the word 'focus.' While a withered tree meeting spring is joyful, the spring touch is but a single spark—without total devotion, it cannot grow into shade. The shift from Zhong Fu to Huan shows that a scattered mind scatters energy, leading to failure. Three key actions: 1) Choose one feasible task, set aside other thoughts, and work on it daily—like a withered branch receiving water, vitality will come. 2) When dealing with people or partnerships, treat them with sincerity and unwavering trust; do not retreat from minor issues. 3) Self-reflect: whenever a 'divided heart' arises, recall the oracle's warning and forcefully rein in your thoughts. In mindset, view hardship as a winter of accumulation; the spring will surely come, awaiting only the dedicated. With focused will as your boat, you can cross the river of dispersion. Consider this an invitation to self-reflection, not a prediction."
 }
 ```
 
 ---
 
-## 第 34 签
-
-⚠️ **缺少英文翻译**
+## 第 162 签
 
 ### 中文原文
 ```json
 {
-  "sign_number": 34,
-  "fortune": "上上签",
-  "gua_type": "兑宫 归妹变临",
-  "sign_text": "缺月又重圆，枯枝色更鲜，一条夷坦路，翘首望青天。",
-  "interpretation1": "签文首句“缺月又重圆”，取月之盈亏，喻人生起伏。月缺则暗，重圆则明，主旧憾可补、失机复得，恰似天象循环，否极泰来。次句“枯枝色更鲜”，枯木逢春，生机焕发，非仅复苏，更显新色，较昔时尤盛，寓衰败中孕新生，反得升华。三句“一条夷坦路”，大道康庄，无崎岖之阻，寓前路豁然，顺势可成。末句“翘首望青天”，仰观苍穹，志气高旷，既示光明在望，亦警不可低徊，当怀远图。卦出兑宫，归妹变临。归妹者，雷泽相感，有配合、回归之象；变临则地泽相亲，居高俯下，主运势回升而能持。兑为悦，震为动，坤为顺，悦而动则顺乎理，故有团圆、复兴、坦途之应。合签观之，此签大吉，谕人当惜福培元，遇挫不馁，持满戒溢，则盈虚有数，福泽绵长。",
-  "career": "签文“枯枝色更鲜”尤切事业，枯枝喻旧业、冷灶、搁置之案，今色更鲜，主复兴有望，且胜往昔。此前若有未竟之功、失意之局，今可重启，反见奇效。“缺月又重圆”亦示团队重聚、人脉修复之机。乾象（归妹互乾）健行，临卦敦临，事业走势拾级而上。宜：主动请缨承乏旧项目，化陈为新；天时利秋（金旺克木而鲜，金为兑），或月满前后。岗位类型利沟通、协调、复兴类职事，如公关、重建、文化传承。忌：功成自矜，兑为口舌，易因言树敌；勿弃旧图新过急，根基未稳。翘首望青天，可设高标，但须夷坦路步步行之。",
-  "wealth": "缺月重圆，喻财帛先损后益，收支转正。枯枝色更鲜，主旧投资如休眠资产、收藏品、荒置项目，今可增值，尤利木植、园艺、文教类。“一条夷坦路”示正财稳进，偏财小有，无大波折。卦象兑金坐坤土，土生金，宜行业属土金者，如地产、金融、矿产，兼利土产贸易。归妹有嫁资之象，合伙、馈赠之财可期。理财宜守成，不倡扩张；可关注长期定投，枯枝之鲜需时。忌：贪高息冒进，翘首望天易忽脚下，慎防陷阱；莫因小利忘义。",
-  "love": "归妹卦主婚恋，变临则情缘临门，全签意象于感情最吉。缺月重圆，直指破镜重圆、误会冰释之兆；枯枝更鲜，喻旧情复燃，或倦侣重拾新趣，情感胜初。单身者，月圆前后易遇故旧，如旧交重逢，迸发新火；夷坦路喻关系进展顺遂，无多猜阻。有伴者，翘首望青天，可共许远景，规划将来。相处宜：重温定情旧景，主动化解旧隙，兑为悦，多含笑语。忌：翻旧账（缺月既圆，莫追昔亏）、冷暴力。感情重在修葺，而此签正赐修葺之机。",
-  "health": "缺月重圆应身体旧恙可愈，神气渐复；枯枝色更鲜示机能再生，如调理得法，健旺更逾以往。然翘首望青天，抬头之姿需防颈项、头目疾患，如眩晕、鼻塞（兑主鼻）。卦象兑为口、肺，坤为脾、腹，震为肝。养生宜润肺健脾，增深呼吸，食山药、百合；适做缓展运动，如八段锦之“两手托天”，契合仰天之象。需警：月缺怕熬夜伤阴，枯枝忌过劳损耗，康复后须防反复，守常为要。春秋换季尤慎。",
-  "study": "学业运如枯木逢春，签文“枯枝色更鲜”最需深味。此主先前弱科、久攻不下之关节，忽有豁然，或旧知重拾，反成优势。缺月重圆，试场或考运曾有小憾，今番可补，名列前茅。“夷坦路”示升学、晋级之途平顺无阻。翘首望青天，宜立高远之志，如报考名校、攻深研。兑为口，利语言、声乐、辩论；坤为文，利翰墨、史哲。方法宜温故知新，重铸基础。考场忌轻敌（坦路易忽），慎细节。天时春季（木旺）更利发挥。",
-  "general": "此签上上，总括为“转机呈祥，向光而行”。一切困顿如缺月，终有圆时；衰败如枯枝，可再荣华。关键行动有三：一、重拾旧事，无论未竟之业或待修之缘，此为胜负手；二、行坦途亦须稳步，翘首时勿忘脚下，防微杜渐；三、怀悦顺之心，兑悦坤顺，则机缘自临。心态上，当知月有圆缺，盛衰随化，顺境时须培福惜缘，不可骄逸。持此签，宜信光回暖，枯荣有时，保持清明仰望，自得天衢。"
+  "sign_number": 162,
+  "sign_text": "道路迢遥，门庭闭塞，雾拥去兮，云开见日。",
+  "interpretation1": "应守时待运。",
+  "career": "这条路你走得并不轻松。前方山高路远，每一步都像踩在未化的积雪里，脚下时而打滑，时而陷落。此刻你或许正站在雾霭最浓处，连自己的掌纹都模糊不清，但你应当记得，所有的门栓终究会被时间的手指拨动。\n\n那些被卡住的机缘像深冬河面的冰，表面凝固，暗流却在深处涌动。别急着用蛮力凿开冰面，当春汛涨潮时，自然会有裂痕蔓延到每个角落。眼下需要的是把眼睛从紧闭的门扉上挪开，去观察墙角新抽的藤蔓，留意石缝里渗出的泉眼——真正的生机往往藏在被忽略的褶皱里。\n\n云层积压得最厚重时，恰恰是阳光即将刺破天幕的前奏。但你要明白，破云而出的从来不是等待，而是持续向高处攀升的热气。把此刻的困顿当作积蓄能量的熔炉，当温度足够灼热时，连钢铁都会变得柔软。",
+  "wealth": "这签里藏着你财运的起落密码。现在你脚下这条路可能有些曲折漫长，就像走在山间小径总被盘根错节的藤蔓绊着，暂时还没找到直通目标的近道。门庭闭塞说的是眼门前的机会像被上了锁的门，明明知道门后藏着东西，可钥匙总对不上锁眼，越是用力推反而卡得越死。\n\n但别被眼前的雾障住心神，这雾气正在悄悄变薄。现在需要的是像老茶农焙茶那样守着火候，别急着掀锅盖。等云层裂开缝的时辰到了，那些被遮挡的契机自然会露出轮廓。这期间要做的，是擦亮眼睛盯住风向的微妙变化，把该备的柴火码整齐，该磨的刀刃磨锋利。等天光破云那一刻，你积攒的功夫才有用武之地。眼下虽看不到十步外的光景，但脚下每一步踩实了，迷雾散尽时就不会错失路口。",
+  "love": "这条路走起来会有些疲惫。你面前的世界像是被浓雾笼罩的山径，看不清远方，连脚下的石板都变得模糊。心里总有个声音在问\"还要走多久？\"，可四下无人能回答你。\n\n此时的疲惫是真实的。那些被紧闭的门扉，或许是你曾用力叩响过的期待；那些绕不过的弯道，可能藏着你还不愿面对的答案。但你要记得，雾最浓的时候往往离日出最近——那些被云层挡住的晨光，正在你头顶一寸寸撕开裂缝。\n\n别急着和迷雾对抗。试着在朦胧里看清自己的倒影，那些被世事打磨出的棱角，那些被岁月沉淀下的柔软。当你能坦然接纳此刻的困顿时，遮蔽视线的云层会自然剥落，就像深秋的晨露终将在阳光下蒸发。到那时你会明白，所有的曲折都是为了让阳光找到更合适的角度照进你心里。",
+  "health": "你的健康运势像一条需要耐心跋涉的山路。眼下或许会感觉身体像被薄雾笼罩的门户，某些通道暂时受阻，需要仔细清理淤塞的角落。这种状况并非停滞，而是提醒你要重新校准内在的节奏。当积累的浊气渐渐沉淀，身体自会像拨云见日的晴空，在时机的流转中透出澄明的生机。关键在于用柔和的坚持替代急躁的突破，像解开纠缠的丝线般调理每处细微的阻滞。这段路程既是对身体的考验，也是聆听生命律动的契机。",
+  "study": "这条路走起来确实比想象中要费劲些。你眼下像是被什么卡住了劲头，心里想使劲却总找不到发力的方向，像是被什么蒙住了眼睛，连眼前三步远的风景都看不真切。但你要知道，天上的云再浓再厚，总会被风吹散的。现在要做的不是急着拨开迷雾，而是把步子踩稳了，该往哪儿使力就往哪儿使力。等风来的时候，那些雾会自己慢慢散开的，那时候你才会发现，原来该走的路早就铺在脚底下了。",
+  "general": "这条路你走得不算轻松。前方像是绕着一层厚重的雾，明明看得见方向，脚步却总被绊住。你或许正经历一段逼仄的时光，眼前的路被无形的墙堵着，连呼吸都带着滞涩感。但藏在雾后面的太阳终究会露出来，只是需要你多撑过几个阴天的早晨。\n\n当下需要你像雨水冲刷岩石般持续发力，别指望瞬间凿穿阻碍。门庭紧闭的境况或许在提醒你：某些固执的坚持正把自己困在原地。试着把目光从紧闭的门框上挪开，侧耳听听风从哪个方向带来微弱的叩门声。云层裂开的瞬间，你积攒的耐心会化作推开新天地的力气。\n\n别被漫长的路途吓退，每步脚印都在丈量你突破困局的距离。暂时看不清就放慢节奏，把每一步踩得扎实些。等迷雾散尽时，你会发现自己早已走出比想象中更远的路。"
+}
+```
+
+### 英文翻译
+```json
+{
+  "sign_number": 162,
+  "sign_text": "The road is long and far,\nThe gate and courtyard sealed;\nMists gather thick then pass,\nClouds part to see the sun.",
+  "interpretation1": "This oracle uses the image of a traveler's arduous journey to illustrate a period of hardship in life. 'The road is long and far' speaks of a difficult and winding path ahead, echoing the peril of Kan Palace. 'The gate and courtyard sealed' suggests obstacles and blocked opportunities, much like the initial phase of Ge hexagram, where the old order still holds and new beginnings are not yet born—a sense of being trapped inside and out. Yet 'mists gather thick then pass' and 'clouds part to see the sun' turn the tide: though the fog is thick, it will eventually dissipate, and the sun will shine through. This oracle shows good fortune emerging after initial adversity, exactly matching the 'Ge transforming into Sui' pattern: Ge represents radical change and painful upheaval, while Sui signifies following the current and yielding, allowing the gloom to naturally recede. Kan is water, representing hidden dangers and unpredictability, yet water always finds its way to the sea. The message is to hold fast to your true nature in adversity, await the right moment, and you will see through the clouds to daylight.",
+  "career": "The 'gate and courtyard sealed' directly points to a career bottleneck—perhaps a stalled promotion, a stagnant project, or strained workplace relationships. 'The road is long and far' means breaking through will not happen overnight; it requires a long journey. At such times, your career is shrouded in mist ('mists gather thick'), making direction unclear. However, the hexagram 'Ge transforming into Sui' signals the need for proactive change: reform your old work patterns, consider a transfer or a career shift, and avoid stubbornly staying put. As for timing, the clouds part and the sun appears often in late autumn or winter (water periods), when a turning point may come. Specific actions: Stay low-key, build skills quietly, and prepare behind the scenes. What to avoid: Forcing yourself to the forefront or clashing with superiors. Ge is about breaking and rebuilding; break the routine but, as Sui teaches, do not act rashly. If a supportive person (like the sun breaking through clouds) appears, follow the opportunity.",
+  "wealth": "'Gate and courtyard sealed' indicates blocked income sources; regular earnings are hard to come by, and speculative gains are even riskier. 'The road is long and far' warns of a long path to wealth, with investments possibly slow to return. 'Mists gather thick' suggests poor judgment due to obscured vision, so financial partnerships and trades require caution. The hexagram change from Ge to Sui suggests that the financial turning point lies in 'reforming the old'—clearing old accounts, cutting bad investments—before 'clouds part to see the sun' can occur. Priority should be on preserving capital and maintaining cash flow. Industries related to water or mobility (e.g., logistics, trade) may be favorable, but only after the mist clears (when information becomes transparent). What to avoid: Following speculation, guaranteeing loans for others, or aggressive expansion. This oracle's wealth star is hidden behind the clouds; wait patiently for a clearer moment, such as the turn of winter to spring, before acting.",
+  "love": "The imagery 'gate and courtyard sealed' reflects emotional barriers—closed hearts or blocked communication. 'The road is long and far' speaks of a love journey filled with obstacles, especially for long-distance relationships or those beset by external pressures. 'Mists gather thick' indicates confusion in romantic matters: singles may encounter ambiguous connections, while those in relationships may face growing suspicion or misunderstanding. Yet 'clouds part to see the sun' promises eventual clarity. The shift from Ge to Sui suggests that love requires 'reforming' old mindsets: singles should let go of overly high expectations and take the initiative to break the ice; those in relationships should communicate openly rather than harbor resentment. In interactions, Sui advocates yielding—listen more and argue less, especially avoid bringing up old grievances. The clouds part only through sincerity; once genuine feelings are revealed, the ice will melt. Though this oracle appears unfavorable, it does not signal the end of love—only that patience is needed to pierce the fog.",
+  "health": "'The road is long and far' suggests that health recovery requires a long-term commitment, not quick fixes. 'Gate and courtyard sealed' symbolizes blocked qi and blood circulation. Kan Palace governs the kidneys, bladder, and ears, so you may be prone to lower back and knee weakness, tinnitus, or irregular urination and bowel movements. 'Mists gather thick' warns of emotional suppression or pent-up feelings that could harm the liver and spleen. However, 'clouds part to see the sun' indicates a turning point. The hexagram Ge to Sui advises reforming unhealthy habits: eat foods that benefit water metabolism (like black beans, yam), and engage in gentle, dispersing exercises such as tai chi or walking; avoid intense workouts. The health direction should follow the times (Sui)—go to bed early and rise late in winter, avoid cold and seek warmth. Watch for persistent fatigue, dry mouth in the morning, or turbid urine; timely adjustment can prevent serious illness.",
+  "study": "'The road is long and far' clearly shows that the path of learning is arduous and long, not achieved overnight. 'Gate and courtyard sealed' points to mental blockage—difficulty memorizing, understanding, or solving problems. 'Mists gather thick' indicates mental confusion and unclear direction; exam performance may suffer from distraction during tests. This oracle's hexagram Ge to Sui suggests that the turning point in studies lies in 'reforming' methods: change your learning strategy, engage in discussions or practical applications to break through, and avoid rote memorization. Kan Palace's water element favors subjects requiring deep thought, like liberal arts, philosophy, or medicine; it is unfavorable for last-minute cramming. 'Clouds part to see the sun' suggests that exam luck may come on ren-gui days or in winter. Be sure to visit the exam venue in advance and stay clear-headed. The key is persistence; the clouds will eventually clear.",
+  "general": "In summary: hardship may shroud you like mist, but the sun will eventually break through. Kan Palace's peril, the shift from Ge to Sui, advises you to adapt to change and wait for the turning point. Core actions: 1) Reform old habits—whether in career or health, make small proactive adjustments to break the deadlock. 2) Cultivate patience; 'the road is long and far' is not traveled in a day—don't abandon the path because of temporary blockade. 3) Catch the 'clouds part' omen: when a benefactor, information, or opportunity appears, be sensitive and follow it decisively. In mindset, remember that 'mists gather thick' is temporary; the sun beyond the clouds has never moved. Keep your clarity and you will tread danger as if on level ground. Reflect on how this resonates with your current situation."
 }
 ```
 
 ---
 
-## 第 35 签
-
-⚠️ **缺少英文翻译**
+## 第 163 签
 
 ### 中文原文
 ```json
 {
-  "sign_number": 35,
-  "fortune": "上上签",
-  "gua_type": "艮宫 艮变渐",
-  "sign_text": "行路难行路难，今日方知行路难，前程广大何足虑，琼力今朝度此滩。",
-  "interpretation1": "签诗开篇“行路难、行路难”，连声嗟叹，化用古乐府《行路难》之题，喻世事多阻，如涉湍流险滩。“今日方知行路难”一语，着落“方知”二字，非初尝困顿，乃亲历磨砺后方得顿悟，透出阅历积淀后的清醒。下句“前程广大何足虑”，陡然跌宕，以反问振起：前路既辽阔深远，眼前困厄何足萦怀？结句“琼力今朝度此滩”，“琼力”谓如玉之坚、如琼之美，喻自身正心毅力；“度此滩”点破当下关键——以笃实之力，恰可渡过此险。全诗由抑转扬，前后映照，困境中自见天光。\n\n卦属艮宫，本宫为艮，变卦为渐。艮者山也，象止；渐者风山渐，象木植于山，徐生渐长。艮变渐，寓从静定中启步，积微成著，恰应签文“行路难”而终“度此滩”之象。卦理示人：遇阻时当如山屹立，蓄势待发；而后效风之渐入，循序以进。此签核心，在于“知难而进，信步前程”——知难非畏，乃明理；琼力非蛮，乃守正。故虽为上上签，大吉之兆，尤当惜福，勿因顺遂而生骄躁，方得始终。",
-  "career": "签文“行路难”之叹，直指事业途中必有瓶颈，或遇权责不清、派系纠葛，或逢项目迟滞、前路迷惘。“今日方知”暗示此中磨砺非虚度，乃智慧积累之机，当反思过往，觅得破局要点。下句“前程广大何足虑”，予人信心：眼前困局不过一滩耳，渡过即见平川。事业走势主先滞后顺，时机在春末夏初，艮宫渐卦主缓慢升进，宜扎根深耕，勿求速效。具体方向，利土木、教育、文化、咨询等需韧性之业，岗位以稳中求变者为佳。\n\n宜：主动梳理流程、优化细节，展现担当；忌：冲动跳槽、与上级争锋、散布怨言。此刻当如艮山般沉静，以渐卦之风徐图渗透，切勿激流勇进。若逢竞聘或考核，“琼力今朝”便是昭示——凭平日勤勉积淀，可一举克之。",
-  "wealth": "“行路难”喻财运多波折，非坦途暴得之象。签中“今日方知”警醒求财者：莫信捷径，需亲历经营之苦，方明聚财之不易。“前程广大”转言财路长远，不可囿于一时得失；“琼力今朝度此滩”直指偏财勿念，正财可凭劳力心智安稳得之。艮变渐卦，艮主止，渐主进，理财当取“止进有度”之道——积谷防饥，徐徐图利。\n\n财源类型上，利正职薪酬、技艺所得、地产租金等稳定之财，不宜股票短线、虚拟币等高风险投机。合作经营宜选忠厚之伴，渐卦有渐进之德，忌贪急冒进。具体宜忌：宜定投储蓄、修缮宅邸以聚气；忌借贷扩张、为利轻诺。财物进出，当如度滩之舟，步步为营，方可保财库安稳。",
-  "love": "情路如“行路难”，签诗开头已定基调：孤身者恐遇寻觅坎坷，有伴者易生误解隔阂。“今日方知”之叹，或指经历龃龉后方悟相处真谛，如明镜拭尘，感情反得升华。“前程广大”扫除阴霾，预示未来情缘宽广，缘分深厚者可期白首；“琼力今朝度此滩”则强调当下沟通之贵，须以诚意化冰。\n\n单身者：此签主良缘缓至，不必焦虑，多在文化场所、进修途中偶遇，对方性格温稳如艮山，宜主动展露才学，忌急于表白。暧昧者：进展虽慢，却如渐卦之木，扎根渐深，宜共度实务时光（如协作项目）增进默契，忌试探猜疑。稳定关系：小风波后更见真情，共同渡过此“滩”，可定婚期或置业。危机关系：忌翻旧账、冷暴力，当效“今朝度滩”之决，即刻沟通，言辞如山之诚，风之柔。",
-  "health": "签文“行路难”三字，直指肢体劳损或关节疲软之虞。艮为山，对应脾胃与四肢，艮变渐，风山相搏，易有腹胀、风湿、筋脉不通之症。“今日方知”提醒莫待不适显化才生警惕，“前程广大”言体质根基尚可，调节得当可保安康。“琼力今朝”倡以适中之力养身，不求速效。\n\n养生方向：饮食宜温、软、淡，如山药、小米养胃，忌生冷厚味；作息需如渐卦，缓调生物钟，亥时入眠，卯时微动；运动利八段锦、散步等和缓之功，勿剧烈耗气。需警惕信号：膝踝酸软、食欲骤减、晨起指节僵麻，此皆“行路难”于身之应，当及时温灸或舒缓筋骨，度此小恙之滩。",
-  "study": "“行路难”状学业攀登之苦，或遇偏科难进、悟性迟滞。“今日方知”乃顿悟之机，可解为偶遇良师点化，或苦思后豁然贯通，如艮山凿窍，清风徐来。“前程广大”励向学之心，目下所困不过一滩，终将入知识瀚海。“琼力今朝”劝勉把握当下，以勤补拙。\n\n艮变渐卦，利沉潜治学，忌浮光掠影。具体方法：宜将难点逐日分解，如愚公移山，渐进消化；优势科目在文史哲、地质、农学等需耐性者，渐卦应验深。考试运：如签意，考前突击难效，重在平日积累，临场镇定如山，则发挥如风顺水。宜提前梳理脉络，忌与人比速、深夜鏖战。考场利早到静心，若遇难题，默念“琼力今朝”自可安度。",
-  "general": "此签融乐府之慨与易象之智，总体示人：困厄乃觉悟之阶，前程因笃行而广。关键行动有三：其一，遇难时勿溺于嗟叹，当学“今日方知”，复盘得失，化为己用；其二，起伏中不失“前程广大”之信，眼界放远，不因一滩障目；其三，践行“琼力今朝”，以切实努力代替空想，日进一寸。心态上，宜持艮山敦厚之德、渐卦和缓之风，度滩之后更须惜福守正，勿以吉运轻狂。记取：行路虽难，行则必至；滩险虽厉，度则成勋。"
+  "sign_number": 163,
+  "sign_text": "鱼上钩，丝纶弱，收拾难，力再着。",
+  "interpretation1": "将得手之机会或财物，由于条件不济，力量不足，无法承受，须再加努力。",
+  "career": "这签文里的机锋，得往深处琢磨。眼下你像攥着根细线钓上了大鱼，咬钩的力道沉甸甸往下坠——这是遇着份量不轻的机缘了。可钓竿颤巍巍地弯着，线绷得快要断，说明手头的力量可能还不太够称这机缘的斤两。\n\n这时候最怕心急。硬拽怕线断鱼跑，松手又舍不得到嘴边的收获。得稳住手腕，别急着蛮干，该放线时松一松，该收线时缓着劲儿。你或许需要换个更结实的钓竿，或是找人搭把手稳住船身——有些事不是单凭气力就能周全的。\n\n最要紧的是这签文最后那句\"力再着\"。不是说这次不成就算了，而是提醒你这次试过了水深，摸清了鱼性，回去把渔网补结实些，把船桨修牢靠点，改日再来。机缘这东西，往往要反复磨上几回才能真正攥住。眼下这局看似胶着，实则是老天在教你如何把莽劲化成巧劲。",
+  "wealth": "这签文在财运上的启示是：你眼前可能隐约触到了某种机会的轮廓，就像水面下暗流涌动的饵食，但你的准备尚不足以稳稳兜住这份机缘。鱼线太细容易断，这时候若强行收网，反而会把原本的苗头搅散。\n\n这不是说财运离你遥远，而是提醒你此刻更需要沉住气去补足根基。好比修补渔网时要反复检查每一处绳结的韧性，你需要重新审视手头资源的分配是否合理，某些看似无关的积累或许正是关键时刻的支撑点。不妨把这段时间当作调整重心的蛰伏期，等真正能承重的时候再出手，反而能化险为夷。记住，急流中的大鱼往往要迂回着收线才能上岸。",
+  "love": "此刻你面对的情感境遇，像是一尾刚咬钩的游鱼——看似抓住了某种缘分或转机，实则牵动它的丝线太过纤细。你或许正为某段关系的进退而纠结，明明感受到某种联结在萌发，却总觉得这份牵绊根基尚浅，像攥在手里的流沙，越是急着握紧越容易流失。\n\n眼下你需要警惕的，是过早投入全部心力。丝纶薄弱的状态暗示着某些准备尚未周全，也许是彼此信任的根基需要加固，也许是内心某个角落还藏着未化解的芥蒂。就像修补渔网要顺着经纬脉络耐心编织，情感的维系也需要你放慢节奏，细细梳理那些隐而未现的症结。\n\n不必因当下的困顿而气馁，\"力再着\"恰是命运给你的善意提醒：与其执着于立刻收获圆满，不如把气力用在调整应对的方式上。这段关系或许会让你感到疲惫，但别急着责怪自己或对方，试着用更轻盈的姿态去面对，像春风化雨般润物无声，反而能让羁绊在时光里自然生长出韧性。\n\n记住，此刻的阻滞恰是让你重新校准方向的契机。别让一时的困顿消磨了你的信心，当你看清丝线脆弱处所在，便是亲手为它续上韧劲的开始。",
+  "health": "你此刻的健康运势像一张绷紧的弓弦，表面看似抓住了问题的症结，但内在的支撑力却隐含着脆弱。那些看似偶然的疲惫或不适，实则是身体在向你传递需要深层调整的信号。眼下若强行用猛药或激进手段，反而可能像攥紧流沙般越发力越消散。\n\n真正需要的是先松掉紧绷的神经，像园丁修剪枝桠那样，把消耗精力的多余负担逐一卸下。不必执念于立竿见影的改变，倒是该像观察季节轮转般，耐心觉察身体细微的变化韵律。有时候暂时退后两步重新校准呼吸节奏，比蒙头向前冲更能积蓄真实的力量。\n\n记住所有看似停滞的阶段，都是身体在悄悄重组内在秩序。当你学会用春水润物的柔软代替劈山凿石的刚硬，那些卡顿的能量自会找到新的流动通道。健康的根基往往生长在那些被忽视的日常褶皱里，而非惊天动地的转折中。",
+  "study": "这枚签文落在你学业运势上，像是看到你正攥着钓竿站在湍急的河流边。鱼咬钩的瞬间看似转机将至，可手中鱼线却总在关键时刻发颤——你或许正经历着某个需要反复锤炼的关口，那些看似能轻松摘取的果实，其实需要你重新审视自己的根基。就像钓鱼人发现鱼线不够坚韧时，与其急着收杆，不如先低头加固钓具。\n\n最近你可能会遇到某些表面光鲜的机遇，但若盲目去抓反而容易陷入进退两难的境地。这种\"收拾难\"的困顿感，恰恰在提醒你要暂时停下追逐的脚步，把散落的学识碎片重新编织成网，让那些零散的积累真正贯通起来。当知识脉络变得强韧时，再遇到同样的挑战，自会有举重若轻的从容。眼下需要的是沉下心来做些看似枯燥的积累，这种\"力再着\"的重复里，藏着突破瓶颈的玄机。",
+  "general": "你眼下遇到的事像钓到了鱼却拽不上来。鱼咬钩是机会到了，但钓线太细软，显出力不从心的局促。这局面的难处在于，你既不能松手让机会溜走，又没法立刻把收获攥在手里。像站在湍急的溪流里，既要顾着稳住脚下的石头，又得伸手去够对岸的果实。\n\n此刻的运势像被风吹皱的水面，波纹底下藏着转机，但水面晃得让人看不清深浅。你手里握着的是半成型的机缘，需要再添些韧劲重新编网，或是退半步另寻支点。别被眼前的僵局困住，看似卡住的关口往往藏着柳暗花明的岔路。\n\n记住钓竿弯到极致时最考验耐心，绷得太紧反而容易折断。该使巧劲的时候别光用蛮力，该加固根基的时候也别急着收网。命运给你的考题从来不是简单的取舍，而是教你在摇摆中学会平衡的手腕。"
+}
+```
+
+### 英文翻译
+```json
+{
+  "sign_number": 163,
+  "sign_text": "The fish has taken the hook,\nBut the fishing line is weak;\nTo land it is no easy task,\nApply more strength and technique.",
+  "interpretation1": "This oracle uses the image of fishing to show that although an opportunity has arisen (the fish bites), your preparation or external conditions are still insufficient. 'The fish has taken the hook' indicates that the matter you seek has shown promise, like an opportunity at your door. However, 'the fishing line is weak' highlights that your foundation is not yet solid, or you lack support, making it difficult to secure the catch—'land it is no easy task.' The final line, 'apply more strength and technique,' is the key: don't give up when things get tough; instead, gather extra effort and use skill to stabilize the catch. The hexagram belongs to Zhen Palace, with Sui (following) transforming into Zhun (initial difficulty). Sui, with Thunder over Lake, suggests acting in accord with the times—initially things seem to go smoothly (as with the fish biting). But Zhun, with Water over Thunder, symbolizes the hardship of birth, echoing the 'weak line'—progress becomes difficult. Thus 'apply more strength and technique' is needed to overcome the difficulty. Overall meaning: Success is possible, but you must recognize your limitations, use softness to overcome hardness, and persevere with patience to achieve a moderately favorable outcome.",
+  "career": "In career, this oracle is like fishing with a bite: a promotion, project opportunity, or job offer may arise, especially favorable for roles requiring patience and negotiation, like mediation, technical challenges, or teamwork. However, 'the fishing line is weak' suggests your qualifications or team support are still lacking, making it difficult to seize the initiative—expect delays or insufficient backing. Zhen Palace is active, Zhun hexagram is difficult, so adopt a 'follow first, then hold' approach: initially go with the flow, don't rush to stand out, quietly strengthen your weaknesses; when 'apply more strength'—when resources or timing are better—then fully commit. What to do: Voluntarily join cross-departmental collaboration to build goodwill. What to avoid: Forcing quick results or arguing with superiors. In autumn or winter (when Dui Lake energy is strong), a turnaround may come.",
+  "wealth": "Wealth is like catching a big fish with a weak line: there is a chance to gain, but a fragile cash flow or unstable investment channels may make it hard to 'land it.' Regular income is stable, but non-regular gains have twists—avoid leverage. Sui hexagram encourages going with the flow, Zhun hexagram emphasizes accumulation; financial management should prioritize defense, with small cautious steps. 'Apply more strength' implies that if initial investment doesn't work, consider adding a small amount or adjusting direction, not stubborn persistence. What to do: Diversify into earth-related industries (like warehousing, real estate services), since Zhun belongs to Water and Thunder, and earth controls water, reducing risk. What to avoid: Following short-term trends or guaranteeing loans for acquaintances. A small financial opportunity may appear in late autumn; take profits when you see them.",
+  "love": "Love is like a weak line trying to land a fish: a connection may begin, but maintaining it is difficult. 'The fish has taken the hook' suggests a chance encounter or a warming relationship, especially favorable in social settings. But 'the fishing line is weak' points to unresolved emotional barriers or practical obstacles (like distance or family opinions) that slow progress and may lead to misunderstandings or severed contact. Zhen Palace, Sui to Zhun, hints that feelings should be allowed to develop naturally at first, then face challenges together. For singles: Take the initiative to reach out, but don't reveal all your cards too early; wait for the other's response before deepening commitment. For those in a relationship: Avoid bringing up past grievances or forcing promises; instead, use the resilience of 'apply more strength' to jointly handle daily wear and tear. Spring (Zhen wood thriving) may clarify the relationship.",
+  "health": "The oracle's imagery of a weak, easily broken line warns of potential issues with the cardiovascular system or nervous system. Zhen Palace (Wood) governs the liver; Sui (Dui mouth, Lung) and Zhun (Water and Thunder) suggest liver fire rising, qi deficiency, and blood depletion. 'The fish has taken the hook' mirrors a warning symptom—like occasional dizziness or insomnia—because the 'line is weak' (weak constitution). It's best to address it early before it becomes hard to 'land.' 'Apply more strength' means gradual maintenance, not haste. For health, practice gentle morning walks (responding to Zhen's movement), eat more green vegetables and less spicy food, and reduce mental strain at night. Be wary of recurring old ailments during season changes, especially joint discomfort.",
+  "study": "Learning is like fishing: knowledge is the bait, timing is the hook. 'The fish has taken the hook' indicates good exam luck or chance encounter with a good teacher. But 'the fishing line is weak' points to weak spots in your knowledge system that cause hesitation on difficult questions, and 'to land it is no easy task' reflects unstable performance. Zhen Palace favors active thinking, Zhun hexagram requires accumulation. Study strategy: first broaden your scope (Sui), then focus on difficult points (Zhun), and finally 'apply more strength' by repeatedly reviewing mistakes. Good for subjects requiring understanding and verbal expression (because Dui Lake nourishes rhetoric); not good for cramming in science, which may cause frustration. For exams, bring spare stationery (to counter the weak line), arrive early to calm down, and avoid unexpected issues.",
+  "general": "This oracle is moderately favorable: opportunity and challenge coexist, like fishing with a weak line—success depends on patience and continued effort. Three key actions: 1) 'Know your weakness'—recognize your shortcomings and do not force things beyond your capacity. 2) 'Follow the current'—initially test the waters, don't resist the trend. 3) 'Apply again'—when setbacks occur, first stabilize, then make small improvements to break through. In mindset, adopt the resilience of 'apply more strength,' viewing difficulty as a period of gathering strength. Though thunder moves, it must await the clouds and rain; when water surges, you will see the fish transform. Consider this an invitation to self-reflection, not a prediction."
 }
 ```
 
 ---
 
-## 第 36 签
-
-⚠️ **缺少英文翻译**
+## 第 164 签
 
 ### 中文原文
 ```json
 {
-  "sign_number": 36,
-  "fortune": "上签",
-  "gua_type": "乾宫 遁变旅",
-  "sign_text": "春景明，春色新，春意傍水生，春天无限好，好去宴琼林。",
-  "interpretation1": "签文以春日盛景层层展开，意蕴明快。“春景明，春色新”喻示境遇焕然，一扫沉郁，如初阳破晓，万象更新。“春意傍水生”，水主智、主财，春意依水则生机润泽，暗喻时运得水滋养，灵感与机遇如春潮暗涌。“春天无限好，好去宴琼林”，直指佳期已至，当应时赴庆——琼林宴乃古时进士及第之荣典，象征功成欢庆、登科受赏。卦属乾宫，本卦天山遁，变卦火山旅。遁者退隐，旅者出行，此变揭示先有蛰伏守静，今则当动身远行，由退转进，恰合春生之机。乾为健行，离为明丽，艮为止而能行，全卦昭示：一度停滞之事已现明朗，宜舍旧谋新，欣然赴约。此签上吉，主短期内有喜讯临门，如升迁、录用、庆功等，然须主动把握，方不负春光。",
-  "career": "事业运势如签文“春景明，春色新”，主摆脱阻滞，迎来转机。“春意傍水生”喻事业得资源润泽，如水边草木勃发，尤利贸易、物流、文化、咨询等“水性”行业，亦主贵人引荐或资金注入。本卦遁变旅，暗示此前可能淡出核心或隐忍待时，变旅则需动身向前，有外派、出差、调岗或公开亮相之机。“好去宴琼林”直指庆功受赏，主考核优异、项目落地、职位晋升，宜主动请缨承担竞争性任务，把握春季旺时。宜：果断展示才能，参与竞聘、重要会议或路演；忌：徘徊守旧，错失出头良机。乾宫健行，鼓励锐意进取，但旅卦亦提醒客途多变，需提前完备方案。",
-  "wealth": "财运如“春意傍水生”，水为财源，主财路涌动，生机渐旺。签文“春天无限好”暗示短期财运上扬，正财随事业突破而增，偏财来自人际宴请、合作分红或短途贸易。“好去宴琼林”亦指庆功场合易得商机，宜多参与聚会联谊。卦由遁变旅，此前财务或显停滞保守，今则宜加速流转，可关注流动性强的领域，如文化产品、快消品或旅途相关投资。宜：盘活闲置资金，稳健拓展新客源；利在春季洽谈签约。忌：死守储蓄，或贸然投入长期固定项目。旅卦有往来之意，快进快出为佳，同时注意旅途开销管控。",
-  "love": "情感如“春色新”般明丽，“春意傍水生”喻情意如春水滋长，润泽心田。签文“春天无限好”正是恋爱佳期，单身者宜多赴宴游、文化雅集，水畔湖畔尤利缘起。琼林宴象征欢聚庆贺，主感情有喜，如相亲合意、表白成功，或伴侣间甜蜜升温。本卦遁变旅，提示若此前情感低调或回避，今当主动走出心门，旅行、社交中易遇良缘。有伴者感情如春阳和煦，可策划短途出游或家宴庆祝，增进默契。宜：主动表达心意，制造浪漫；忌：封闭自我，或翻旧账误了春光。乾宫阳健，男士宜积极，但旅卦提醒相处需包容漂泊之感，同享当下美好。",
-  "health": "“春景明，春色新”映照身心焕然，沉疴渐退，元气复苏。“春意傍水生”，水应肾与泌尿系统，春季宜多饮水以助排浊，并借水边踏青舒展肝气。“春天无限好”鼓励户外活动，采纳朝阳之气。卦由遁变旅，此前蛰伏少动，旅卦则利出行舒展筋骨，但旅途中注意饮食洁净、水土调和。离火主心、目，艮为脾胃，需防心火过亢、消化不良，保持充足睡眠。养生宜早卧早起，食绿色时蔬，缓步慢行，忌骤然大动。注意春日花粉、湿气，水边活动需防潮寒。",
-  "study": "学业如签文“春景明，春色新”，主思路清朗，开启新章。“春意傍水生”喻智慧如鱼得水，灵感不竭，宜涉猎文史、艺术等“水性”科目。“春天无限好”强调备考黄金期，“好去宴琼林”直指金榜题名，考试运极强，尤利升学、公考、职称评定。卦属遁变旅，此前或闭门苦读，今变旅则当走出书斋，多参与研讨、游学或模拟测试，借交流激发思辨。离火为文明，利文科、传媒、设计；乾宫健行，忌懒散。宜：制定春季冲刺计划，结成学习小组；忌：孤军奋战，信息闭塞。考试日宜提前到场，平心静气，自有佳绩。",
-  "general": "此签欣欣向荣，春机不可失，诸事逢时焕新，但须由静转动，主动步入“琼林”之宴，不可坐待。关键行动建议：其一，把握春时，果断推进搁置计划，走出原有舒适区；其二，广结人脉，乐于赴宴聚会，信息与机缘随人际流转；其三，以庆贺之心面对进展，保持豁达，但不轻浮草率。心态提醒：春光虽美，转瞬即逝；遁变旅卦昭示，从退守到出行需勇气，旅途中宜谦和守拙，珍惜当下明媚，方享琼林之乐。"
+  "sign_number": 164,
+  "sign_text": "相引更相牵，殷勤喜自然，施为无不利，愁事转团圆。",
+  "interpretation1": "得此签者，平时乐于助人，故人际关系良好，事事均如意。",
+  "career": "你抽到这支签，说的是事业上的人和事像藤蔓一样相互缠绕着生长。当下你身边或许有股力量在托着你往前走——可能是同事间的帮扶，也可能是某些机缘在暗中为你铺路。这时候不必强求独当一面，顺势而为反而能借到东风。那些看起来费劲的拉扯，其实是天地在帮你攒着福气。\n\n要注意的是，表面的顺遂里藏着暗涌。你手头的事看似处处绿灯，但容易在人际往来中埋下隐患，就像春水初融的河面，底下还沉着未化的冰碴。与人共事时留三分清醒，别让热络的合作模糊了该守的边界。眼下遇到的阻滞其实像揉皱的纸团，只要耐着性子慢慢抚平，自会显出新的纹路来。记住此刻的困境不是死结，而是命运在教你怎么把线头重新接上。",
+  "wealth": "这份签文里藏着你财运流转的节奏。眼下看似有股力量在推着你往前走，或许是旁人的相助，或许是暗处的机缘，但总归要顺着这股牵引的势头去行动。殷勤二字是关键，你心里得先存着踏实的劲头，像春耕秋收般自然，而不是强求急摘的果子。\n\n要注意的是，人和人之间的牵连可能比你想得更深。财运的起伏或许会随着某些关系的亲疏产生波动，这时候得看清哪些线头该松松手，哪些该紧紧攥住。表面上愁云惨雾的事，内里反而藏着转机，就像揉皱的纸团展开后，折痕里或许能瞧见新的门路。\n\n钱流向来不喜僵局，你越是能顺着变化调整步子，越容易在曲折处找到豁口。别怕迂回，有些利是绕了弯子才显出来的。只要底子里的心气不散，该来的终究会裹着旧事的残片，重新拼成块完整的图景。",
+  "love": "这签文里裹着股柔韧的力道。当下你心头那些牵牵绊绊的线头，未必是困住你的罗网，倒像是命运在教人织网的手艺。人和人之间的纠缠，看似拖累，实则是互相成全的引线——就像藤蔓缠绕着竹架生长，越缠得紧，花开得越盛。\n\n你捧着的那份殷勤别太当任务，像春天自然要发芽那样去待人接物就好。有些事现在看着像愁云压顶，其实是天上飘来的棉花，攒够了份量自然会落成被褥的暖意。只管把种子撒下去，别总盯着土坷垃看，等时机到了，你会发现自己站在一片意料之外的麦浪里。\n\n但得留三分清醒：缠绕太紧的丝线容易打结，殷勤过了头会变成负累。就像酿酒要留出呼吸的陶瓮，你也得给自己留个透气的缝隙。眼下看着圆满的收稍，或许藏着另一段因果的线头，记得留点余地给未来的自己转身。",
+  "health": "这枚签文像从你身体里自然生长出的藤蔓，缠绕着生命的温度。你此刻的愁绪是埋进土里的种子，未来会在滋养中悄然抽芽。\n\n\"相引更相牵\"说的是你与肉身之间隐秘的对话。那些若有似无的疲惫感，是身体在敲打意识的窗棂。不必抗拒这种微妙的牵制，它正在编织新的平衡。就像晨雾缠绕山峦，看似羁绊，实则在酝酿云开雾散的生机。\n\n\"殷勤喜自然\"恰似春蚕吐丝，过度关照反而成了作茧自缚。你守着健康如同捧着易碎的瓷器，殊不知草木向阳而生的姿态最是舒展。该让呼吸回到呼吸本身，心跳回归心跳的节奏，如同溪流漫过卵石般自然流淌。\n\n\"施为无不利\"不是承诺灵丹妙药，而是说春风化雨的力量。你此刻每个细微的调整都在重塑生命的纹路，就像古树在年轮里记载四季。那些看似无用的漫步、无心的冥想，都在悄悄松动板结的土壤。\n\n\"愁事转团圆\"如月相轮回，阴晴圆缺本是天地呼吸。当下的隐忧是未成熟的果实，需要时光的窖藏才能酿出回甘。不必急着撕开结痂，让愈合的过程遵循它隐秘的节律，就像冰雪消融时，春水自会找到新的河道。",
+  "study": "你问学业的运势，这签文里藏着些微妙的暗示。眼下你可能正被某些力量牵扯着——或许是外界过多的意见干扰，也可能是自己内心摇摆不定形成的拉扯。这时候最要紧的是找到\"牵引\"的平衡点，既不能完全拒绝周围助力，也不能让别人的声音盖过自己的主心骨。\n\n\"殷勤\"二字要仔细掂量。你现在的努力方向若是发自本心的踏实耕耘，那成果自然会慢慢显现。但若是为了迎合他人期待而勉强用力，反而容易陷入自我消耗的怪圈。最近做任何学习上的决定，先分辨清楚是内在驱动还是外在压力使然。\n\n行动上倒不必太束手束脚，只要根基扎得稳，大胆尝试新方法反而能破局。但得留个心眼——表面上顺风顺水时，往往藏着需要警惕的惯性思维。你过去发愁的那些问题，其实正处在转化的临界点，就像缠在一起的线团，只要耐住性子找到线头，再复杂的结都能慢慢解开。\n\n保持住这份清醒，既不被暂时的困顿吓退，也不因片刻的顺遂松懈。学业这条路最忌的就是非黑即白的判断，你现在要做的，是在各种牵制力中找准自己的节奏。",
+  "general": "这签文里藏着股温柔的韧劲。眼下你身边看似缠绕的牵绊，实则是暗中推你向前的助力。那些需要你反复周旋的人事，若肯以真心持续灌溉，反而会化作滋养未来的养分。此刻行动不必刻意用力，就像种子在土里自然舒展，只要方向对了，原本磕绊的路径自会替你理清前路。\n\n要留心的是，当事情开始顺遂时别急着松劲。你遇到的机缘都带着考验的意味——越是顺风顺水时，越要守住自己待人接物的准绳。现在看似圆满的收尾，往往需要你在过程中多绕几个弯，多经历几回推拉磨合。别怕暂时的困顿，暗流里正酝酿着新的转机。\n\n烦恼如潮水退去后，岸边留下的会是更有分量的东西。这段时日需记得：该抓紧时别松手，该放手时别强求，顺应着当下的节拍起舞，自然能走出属于自己的圆融轨迹。"
 }
 ```
 
----
-
-## 第 37 签
-
-⚠️ **缺少英文翻译**
-
-### 中文原文
+### 英文翻译
 ```json
 {
-  "sign_number": 37,
-  "fortune": "中下签",
-  "gua_type": "乾宫 大有变乾",
-  "sign_text": "万马归元，千猿朝洞，虎伏龙降，道高德重。",
-  "interpretation1": "签文“万马归元，千猿朝洞，虎伏龙降，道高德重”描绘出一幅万物归服、群雄俯首的宏大图景。“万马归元”，马本驰骋纷争，今归于本元，喻世间喧嚣竞逐之事暂告平息，回归根本；“千猿朝洞”，猿性灵巧好动，却齐朝洞穴，象征众多机巧之士或杂念纷扰皆来归附，然“猿”亦暗藏狡黠，归顺未必真心；“虎伏龙降”，虎龙为威猛之物，今伏首降服，显见强敌暂敛锋芒，冲突暂息。然而此签落于中下，卦属乾宫大有变乾。大有卦象火天大有，如日中天，万物丰盈，变而为乾，则火光隐退，唯余刚健之天，寓示隆盛之势已过，当收敛光华，以内德自守。签文点出“道高德重”，正是转机所在：欲维系统合，必仗深厚道德，否则归服易成虚象，虎伏或成伏患。整体寓意：纷扰暂宁非终点，全凭德厚定根基，稍失中正，易生反覆。",
-  "career": "事业场中，“万马归元”喻竞争趋缓，项目尘埃落定，或有整合、收编之象。但“千猿朝洞”暗示周遭同僚或下属虽表面顺从，实则心思各异，“猿”性机巧，宜防暗藏私心。“虎伏龙降”主强敌或对手暂时退让，压力稍减。此际当以“道高德重”为纲，宜借势巩固权责，以德服人，譬如主动梳理流程、协调分歧，展现公正胸襟。时机在秋冬之交，利主持收尾、审计或团队重建类事务。忌：轻信口头承诺、急于扩张新一轮竞争、恃才傲物引发旧怨。乾卦健行，变大有为乾，正宜整饬内部，蓄力待时。",
-  "wealth": "财运方面，“万马归元”意味着钱财流向渐趋归拢，前期投资或欠款有望回收，但“归元”亦暗示利润空间收窄，回归常态。“千猿朝洞”显示外部融资或合作机会看似纷至，实则条件繁杂，如猿猴般难以捉摸，需仔细甄别。“虎伏龙降”提醒财务隐患暂时潜伏，不宜冒进。卦变大有转乾，大有之富散尽，转为自立自强，故财运并非大顺，宜守正劳作之财，如薪俸、实业，忌投机性偏财。“道高德重”引申为理财需端正心态，勿贪图捷径。具体宜：清理旧账、稳健储蓄、暂停高风险投资，可关注与土地、传统产业相关领域。忌：为他人作保、盲目跟风合伙。",
-  "love": "感情世界，“万马归元”喻情感纠葛或选择期已过，关系趋于稳定或回归平淡；“千猿朝洞”则暗示周遭仍有诱惑或纷扰念头，内心深处偶起波澜，单身者可能遇多人示好，但心性不定。“虎伏龙降”主旧有矛盾暂歇，激烈冲突平息，但若道不足，恐成积怨。中下签提醒“道高德重”，情感维系全在坦诚与包容，宜以厚道待人，而非强求降服对方。单身者宜内观自省，提升心性，忌仓促择偶；有伴者宜共同承担家庭责任，重温初心，忌翻旧账、逞口舌之快。乾卦主健，君子以自强不息，情感也当自修其德，方能感得真心。",
-  "health": "健康解读上，“万马归元”意象对应气血由奔腾归入平静，提示身体宜从操劳转向修养，注意心火过亢易致失眠、头痛。“千猿朝洞”以猿喻思虑纷扰，须防忧思伤脾，进而脾胃不和、食欲时好时坏。“虎伏龙降”中虎象征肝气、龙象征阳气，伏降不当则易肝郁阳亢，潜藏头晕、血压波动之虞。大有变乾，火去天显，应警惕心火与肾水不交。养生之道在“道高德重”——即作息有常、心境恬淡，宜晨起缓步、夜卧安神，饮食多食健脾食材如小米、山药，忌辛辣躁动。需留意信号：莫名烦躁、夜寐多梦、肩颈僵紧。",
-  "study": "学业征途，“万马归元”反映杂学旁收的阶段已过，需回归根本，聚焦核心科目或基础概念，归元即夯实根基。“千猿朝洞”警示心猿意马，学习时容易被外界干扰或同时涉猎过多，导致流于表面，须以戒律驯服浮躁。“虎伏龙降”象征困难的章节或强劲对手暂时不再构成障碍，但若轻敌，恐成绩反复。此签“道高德重”暗喻治学须持敬畏，积德（扎实积累）方能致远。考试运中平，利论述题与综合题，宜反复演练经典题型，忌投机取巧、死记硬背。乾卦主健行，每日定课不可废，晨起诵读尤利记忆。",
-  "general": "总体而言，第37签呈表象归顺、内里潜变之象。万物归服非自然之功，全赖“道高德重”维系，稍失德行，则“虎伏”反成隐患，“猿朝”或化离心。当前局势需把握三点：其一，以退为进，稳固根本，勿被表面和合迷惑而冒进；其二，修德省身，待人接物持厚道公正，消解暗中猜忌；其三，收敛锋芒，大有转乾，当如天行健自强，但不宜张扬。心态上，当视“归元”为沉淀契机，莫作大功告成想，持谦和、存敬畏，方化中下为安稳。"
-}
-```
-
----
-
-## 第 38 签
-
-⚠️ **缺少英文翻译**
-
-### 中文原文
-```json
-{
-  "sign_number": 38,
-  "fortune": "中签",
-  "gua_type": "巽宫 巽变涣",
-  "sign_text": "黄鹂报上林，春色鲜明，提鞭快着，马上速行程。",
-  "interpretation1": "签文“黄鹂报上林，春色鲜明”，以黄鹂为信使，啼鸣于上林苑中，宣告春意正盛时。黄鹂乃应时而鸣之鸟，主好消息与良机；上林为古之苑囿，喻环境优越、平台开阔。此言时机已至，前景如春光般明媚清晰，可一眼望尽。后两句“提鞭快着，马上速行程”，则转静为动：挥鞭上马，疾驰向前，毫无迟疑。此象重在“速”字——春光易逝，黄鹂声歇便难再寻，故须把握当下，果断启程。\n\n卦属巽宫，巽为风，性入而顺；变卦为涣，风水涣散，流动无常。巽变涣，暗喻顺境中易生变数，若行动迟缓，则如风吹水涣，机会四散。中签之稳，在于先机尚存；其险，在于迟则生变。全卦教人顺势而进，同时提防涣散之心，守住目标，方能见春色而及芳林。",
-  "career": "签文“黄鹂报上林”喻事业有佳音传来，可能是内部擢升、外部邀约或重要项目立项。“春色鲜明”主局势明朗，路向清晰；“提鞭快着”则催人即刻行动。此签事业走势如骏马待发，宜争取时机在前半段（春季或当下），巽卦主顺入，利争取需展示沟通力、协调力的职位；但涣卦有团队离散或方向更易之象，故变动中需稳住核心目标。具体而言，宜主动请缨承担开拓性任务、外派或需要快速决策的角色；忌犹豫不决、坐等机会，更忌在多头并进时分散精力、轻易变更既定计划。若面临选择，应择其主道而速进，勿因小径新奇而偏移。",
-  "wealth": "“春色鲜明”虽美，但财气如春光短暂，“提鞭快着”强调速决。签文意象指向短期可见的利好，如正财上的快速回报、偏财中的短线机会。巽卦有“近利市三倍”之说，但变涣则易散财，故得财后须快速落袋或转入稳健渠道，不宜反复追加高风险投入。具体财源上，利于与巽木相关的行业，如文化、绿植、流通贸易等，亦利快速周转的小额投资。理财态度宜果断，事先设定止盈线，及时收手；忌拖泥带水“再看一看”，更忌广撒网导致资金涣散。正财方面，主动提出加薪或争取绩效奖励正当时，勿因谦逊而错失。",
-  "love": "黄鹂啼春，为情感世界送来鲜活的讯息。单身者可能忽遇眼前人，如“上林”初见，春光入眼，宜立刻表达心意，莫待花落空枝。“提鞭快着”在此处意指主动邀约、直率沟通，而非内敛等待。有伴侣者，涣卦需警惕因日常琐碎或外界干扰而生疏离，签文提示共同规划短途旅行或新计划，借“速行程”焕发新鲜感。感情阶段若处暧昧，“春色鲜明”是窗纸将破之时，宜坦诚推进，不可模糊拖延。相处之道上，宜制造共同前行的目标，忌翻旧账或以静制动使关系停滞。若关系已显涣散，不妨借巽风之力，以柔顺沟通化散为聚。",
-  "health": "黄鹂鸣于春，对应人体肝气生发之时。签文意象主整体健康随节气转好，但“提鞭快着”暗喻奔波劳碌，易耗气血，巽为风，当防风邪侵体，尤其在季节交替时留意呼吸道与关节。变卦涣为水，提示肾气或泌尿系统易有疏散不固之状，宜适当固肾，避免过劳。养生上，可晨起缓行如马踏青，吸纳春气；饮食宜青绿蔬果养肝，佐以黑豆、核桃等固肾之物。需警惕的信号是：若忽觉易乏、注意力涣散，即需减负静养，不可仗着“春色鲜明”而透支体力。",
-  "study": "“春色鲜明”喻学业思路顿开，以往晦涩之处豁然开朗，尤利于文科、艺术或需要灵感的科目。黄鹂为悦耳之声，语言、音乐类学习如得神助。但“马上速行程”揭示此为冲刺期，而非久战之局：考试或重要关卡已然临近，须如骑士挥鞭，集中火力攻克重点。巽卦入也，利深度钻研；涣卦散也，忌同时铺开多门功课。宜制定紧凑计划，快速扫清知识盲区；忌拖延或追求完美细节而耽误进度。考场应对，宜先夺取有把握之分，快马加鞭，勿在一题上踟蹰涣散心神。",
-  "general": "黄鹂报春，机不可失，此为签文的根柢。总体而言，当前运势如春光破晓，具备明朗化的趋势，但中签之稳全系于“速”字，缓则涣散。关键行动有三：其一，接到信号（如消息、邀约、灵感）后三日内必有举措，哪怕微小一步，不可搁置；其二，选定一个主目标全力奔赴，莫在途中另辟蹊径或兼顾太多，巽变涣尤忌贪多；其三，行动时保持巽之柔顺，对外谦和，对内坚定，如骑手控马，疾驰而不失控。心态上，常观想“春色”虽好，终有落花时，故竭力求进而非完美，方能不负黄鹂先声。"
-}
-```
-
----
-
-## 第 39 签
-
-⚠️ **缺少英文翻译**
-
-### 中文原文
-```json
-{
-  "sign_number": 39,
-  "fortune": "中上签",
-  "gua_type": "巽宫 颐变损",
-  "sign_text": "大肆放灵丹，救人行万千，到头登彼岸，渡过入仙班。",
-  "interpretation1": "签文“大肆放灵丹，救人行万千”，开篇即显宏阔气象：灵丹喻指珍贵资粮，大肆施放则是不吝惜、不藏私的大度之举，救人万千暗合颐卦养人养德之义，损卦则点明此过程必有己身减损，却正是功德所在。“到头登彼岸，渡过入仙班”，彼岸与仙班皆象征超脱尘劳的归宿，四句一气呵成，揭示由舍而得的因果链条。巽为风，有渐入、渗透之性，颐卦养正，损卦损下益上，合而观之：此签核心在“以舍为养”，看似耗散，实为积厚。卦变由颐至损，正是由内养到外显的转关，付出并非消散，而是转化为更高层次的福缘。整体寓意：福不唐捐，善行终有归舟，但须持恒守正，勿因一时未见回报而心疑。",
-  "career": "此签事业之象，可从“放灵丹”与“渡彼岸”两处参详。“放灵丹”喻指在工作中慷慨分享经验、资源或提携后进，救人万千则暗示你的付出能凝聚团队、广结人脉，损卦虽示短期或有功劳被分薄之虞，但巽风渐入，终将积累声望。“登彼岸”主事业突破，如项目验收、职务晋升，尤利于咨询、教育、医药等需“传道”的行业。宜：主动参与培训指导、跨部门协作，将个人成果转化为公共资产；忌：独占功劳、吝于援手，或急于求成。时机上，秋冬之交易见转机，此前宜如灵丹般默默炼养本事。",
-  "wealth": "签中“灵丹”暗喻财源如良药，珍贵但不可私藏。“大肆放灵丹”并非挥霍，而是指财路宜开、财德宜修，救人万千直指利他得利，损卦明示先舍后得之理。正财上多来自技艺、服务或健康产业，偏财则需通过合作让利方能成事。“登彼岸”提醒，短期或有财务压力或投入未见回报，但如乘舟渡河，坚持至彼岸便豁然开朗。宜：将部分收益用于公益或行业共享资源库，投资可关注民生、养老等长期领域；忌：囤积居奇、高利放贷或追求投机暴利。天地生财，流通为贵，守钱如守药，予人方愈己。",
-  "love": "“灵丹”在情缘中喻真心与关怀，“大肆放”是主动付出、不图回报的姿态，救人万千暗指情感关系中的包容与化解矛盾。“登彼岸”象征感情度过磨合期，乃至修成正果；损卦提醒，爱需减损自我中心，以对方需求为先。单身者此签主“施爱得爱”，不妨先从默默支持、真诚相助开始，而非直奔目的；有伴者，顾养之象显，宜从日常小事滋养感情，如为对方承担压力、创造惊喜。忌：斤斤计较付出对等，或翻旧账损及信任。“渡过入仙班”并非遥不可及，乃是在彼此成就中见真情。",
-  "health": "签中“灵丹”在身则为精气神之喻，“大肆放”警示不可过度耗散，救人万千易让人陷入劳倦而不自知。颐卦本主养，却变损卦，明示养生当知止节，否则反损根本。“登彼岸”指调理得当，可渡亚健康之河；“入仙班”喻回归松静自然。身体信号宜关注：巽风对应肝胆、神经，颐损之变尤需呵护脾胃、避免忧思。宜：饮食定时七分饱，晨起缓行如巽风拂柳，午后小憩养阴，忌：熬夜劳力、暴饮暴食或情绪大起大落。不妨视休息为另一种“放灵丹”，以静养回充元气。",
-  "study": "求学路上，“灵丹”好比精粹的学识或高效方法，“大肆放”指乐于交流切磋，救人万千即教学相长，损卦明示输出知识反而能巩固己学。“登彼岸”对应关键考试或升学关口的顺利过渡。巽风主思虑周密，颐养强调积累，故学习宜深度浸润，忌碎片猎奇。利文科、经典研读或需要耐心打基础的学科；考试运上，宜提前与同窗组成小组互讲互测，分享笔记图表，考场上易触类旁通。忌：闭门死磕、吝啬资料，或临考乱投“速成丹”。功夫在平日，渡河须自撑篙。",
-  "general": "此签以“舍舟登岸”为整体隐喻，核心在于：心量越宽，福缘越深。付出看似减损，实则如播灵种，终成善果。关键行动建议：一、每月固定做一件无名之善，如匿名分享资源、指点迷途；二、设立“利他基金”式的时间或小财，不图即时回报；三、遇困境时默想“渡人即渡己”，借协助他人转移焦虑。心态上，忌急功近利，要如放丹药般从容，信因果不昧。巽风柔入，不急不滞，自有彼岸可登。"
-}
-```
-
----
-
-## 第 40 签
-
-⚠️ **缺少英文翻译**
-
-### 中文原文
-```json
-{
-  "sign_number": 40,
-  "fortune": "中下签",
-  "gua_type": "乾宫 不雅变涣",
-  "sign_text": "一带水，碧澄澄，舟住江上，月到天心；稳步其中，玄妙不闲，非人误己，几丧生身。",
-  "interpretation1": "签文首句“一带水，碧澄澄”，以江水澄碧为象，看似平静清澈，实则暗藏深流，喻人生境遇表面安稳，内中却有不易察觉的险阻。次句“舟住江上，月到天心”，舟泊江中不进，月正当天心，已是极致时刻，有物极必反之忧，暗示停滞与转衰之机。“稳步其中，玄妙不闲”点出在此境中若只求步步为营，不知机变，则玄机幽深而不得闲适，反被俗务所累。结句“非人误己，几丧生身”为本签眼目，直指并非他人牵累，实乃自身执迷或自恃，险些酿成大祸。卦属乾宫，本卦为观，变卦为涣。观卦风行地上，有省察之意，变涣卦风行水上，离散之象，从观察至涣散，警示若过分自信于所见所感，不知进退，反致离散自伤。此签核心寓意：外安内险，自误最危，当于静中察变，审慎观己，勿执一己之见，免致自误丧身。",
-  "career": "签文“舟住江上，月到天心”喻事业停滞于看似圆满的境地，明月高悬却将西沉，提示盛极将衰的转折点。卦象由观变涣，观为省察，涣为离散，主在职场上可能因过分自信，疏于察言观色或固守旧法，导致团队涣散或项目流变。宜：重新审视岗位定位，如“一带水”般澄澈自省，主动求变，避免僵持；利于内部协调、流程优化之职，而非外拓。时机上，秋冬之交或有波动，须警惕人际纷争。忌：执拗己见、忽视同僚提醒，否则“非人误己”，易因刚愎自用而错失良机，甚至影响前程。",
-  "wealth": "“碧澄澄”之水看似清澈，却“玄妙不闲”，暗指财运表面平稳，实则虚浮不定，有难以捉摸之象。“舟住江上”主财路迟滞，不宜强求。卦象涣散，钱财易散难聚，投资恐有离散无归之险。此财偏于正财，当稳固本职，不宜投机或合伙。“月到天心”为盈满之兆，但满易招损，宜趁早收束。具体宜：精简开支，保守理财，尤其忌水属行业扩张（如物流、旅游），可关注土属行业（土地、建筑）以求稳定。忌：轻信他人甜言入局，否则“几丧生身”，恐有财物失脱之灾。",
-  "love": "签文“舟住江上”喻感情关系停滞如舟泊江心，难以前进；“月到天心”暗示情感处于高峰却易转凉，有渐行渐远之势。卦象由观变涣，观察过度反生猜疑，导致离散。单身者：不宜强求，此时遇合多属镜花水月，“玄妙不闲”主因自我设限或标准过高而错失良缘。有伴者：须防“非人误己”，莫将自身猜忌推责对方，宜静心沟通，切忌翻旧账或冷处理，否则“几丧生身”，感情或临溃散。相处之道：如“稳步其中”，当步步为营，互相体恤，方可渡此暗流。",
-  "health": "“一带水”象肾与泌尿系统，碧澄澄却暗流涌动，主表面无病痛，内里恐有隐疾潜伏。“月到天心”为阳极阴生之时，提示作息失调或过度操劳导致的虚耗。卦象涣散，气血易散难聚，须防精神涣散、失眠焦虑。“玄妙不闲”更指心神不得清净，为健康大忌。宜：调和饮食，多食黑色食物养肾，晨起缓步舒展，忌熬夜强撑。养生方向重在静养，“非人误己”警示健康差错多因自身疏忽，应定期体检，切勿讳疾忌医。",
-  "study": "签诗“舟住江上”喻学业困于瓶颈，如行舟不前；“月到天心”则指学至深夜，努力却不得其法。卦象观变涣，观察力分散，难以专注，恐有涣散之态。此签学习上宜自省方法，切忌死读书，“玄妙不闲”提示应灵活变通，避免机械重复。考试运：恐有发挥失常之虞，尤不利需要临场应变之科目。“非人误己”强调不可怨天尤人，须自查知识漏洞。宜：回归基础，温故知新，如“稳步其中”，以扎实步调应对。忌：贪多嚼不烂，或迷信速成之术。",
-  "general": "此签核心在“非人误己”，一切困境皆因自身执迷或自满而起，外境不过镜映。观卦省察之机，涣卦离散之险，警示当谦退内观，莫待“几丧生身”方悔。行动建议有二：其一，如“月到天心”，盛极防衰，凡事宜留余地，见好即收；其二，如“舟住江上”，暂歇止步反是保全，勿强渡险滩。心态上，须领会“碧澄澄”之澄明，放下我执，方能洞察真机，化险为夷。"
-}
-```
-
----
-
-## 第 41 签
-
-⚠️ **缺少英文翻译**
-
-### 中文原文
-```json
-{
-  "sign_number": 41,
-  "fortune": "中签",
-  "gua_type": "坎宫 屯变既济",
-  "sign_text": "桃李舒姘，春光鲜丽，良辰美景君须记，随心所往事事相宜，无用多疑干渎神祗。",
-  "interpretation1": "签文“桃李舒姘，春光鲜丽”，以桃李竞放、春光明媚为象，喻时运亨通、顺境当前。桃李者，佳木也，主人才荟萃、机缘丰美；“春光鲜丽”则言外景明丽，引申为外缘和合、诸事顺遂。“良辰美景君须记”一句，警醒莫负韶光，当惜取眼下机缘；“随心所往事事相宜”，非谓放纵，而是指顺势而为、不违本心则万般自在。结句“无用多疑干渎神祗”，切中人心之弊——顺境生疑，反失天和。\n\n卦属坎宫，坎为水，主险陷，然变卦为水火既济，屯难初度而功业将成，是险中得安之象。既济卦辞曰“初吉终乱”，正合中签之旨：眼下虽春光正好，却有繁华易逝、盛极而衰之虞。故解此签者，贵在知时惜福，行中守正，不可因顺遂而生骄惰，亦不可因猜疑而自乱方寸。整体寓意：把握当下，信天道酬勤，勿以小疑渎神，自毁良机。",
-  "career": "签文“桃李舒姘”喻事业正值生发之季，机遇如春花烂漫，尤利文化、教育、艺术、公关等需展现才华之领域。“随心所往”指示此时宜顺性而为，不强求方向，但求专注深入。坎宫屯变既济，初时或有阻滞，然变卦既济终有小成，故事业主峰回路转，前期困顿可望纾解。具体而言，签约、述职、竞标等事宜，宜选春月前后推动，易得“良辰美景”之助。\n\n宜：主动展示才能，承接能发挥创意的项目；宜与人为善，借团队之力共赴目标。忌：多疑猜忌同僚，临事反复无决断；忌因小成而怠慢细节，致“初吉终乱”之悔。坎水为智，既济卦上坎下离，水火交融，提示沟通至上，避免意气之争。",
-  "wealth": "桃李满园，喻财源有根，非暴发之象，而是凭技能、才学稳中求财。“春光鲜丽”主财运当令，得时之利，正财收入可期，尤利春季生发之行业。然卦属坎，水势无常，既济卦亦防盛极而衰，故偏财、投机皆不宜贪进。“无用多疑”一句，点破理财之忌：若见利好而狐疑不决，反失良机；但若疑心过重，胡乱更张，亦伤财气。\n\n宜：坚守正财，精进主业；宜小额储蓄，积谷防饥；利水属或流动行业（如物流、贸易）。忌：盲目跟风投资，借贷扩张；忌为蝇头小利与人争执，损及人际财路。理财之道，当如桃李，扎根深厚，自然花实丰盈。",
-  "love": "“桃李舒姘”直指情缘春意，单身者有望邂逅良缘，桃花运盛而不滥，所遇之象或如春日花信，端庄美好。“良辰美景君须记”劝君惜取眼前人，已有伴侣者，此际感情和美，宜共营浪漫时光，重拾初心。坎宫险陷，暗示情路未必一帆风顺，既济卦象水火相济，提示相处需平衡付出与索取。\n\n单身者：宜多参与雅集、文旅活动，随心交往，自然吸引同频之人；忌强求速成、自疑魅力。有伴者：宜主动表达爱意，制造惊喜，重温初识情怀；忌因琐事猜忌，翻旧账或冷暴力。“无用多疑”尤指情感中大忌，信任为基，疑心一起，便似春寒料峭，伤及根本。",
-  "health": "春光虽好，易伤肝木。桃李属木，应肝，签文“舒姘”有舒展之意，主此季养生当重疏泄调达。坎宫配肾与水，既济卦火在水上，提示体内水火须平衡，防肾水不足或心火过亢。眼下健康趋势平稳，但中签含屯卦初生之险，不可因一时康泰而纵欲。\n\n宜：晨起散步，吐纳生发之气；食鲜蔬芽苗，少酸多甘以养脾；亥时入睡以养阴。需警惕：劳心过度致失眠、口干；春困缠身而怠惰运动；坎水为耳，注意听力与泌尿小症。谨记“良辰美景”需强健体魄方得久享，勿恃年轻而妄耗。",
-  "study": "桃李满园，本是学有所成之征，“春光鲜丽”更喻学业遇良师益友、环境明媚。“随心所往”劝勉从兴趣入手，不刻板苦读，则领悟更快。坎宫为智，既济卦明暗相济，主研究深邃、触类旁通。此签对备考者而言，尤利文科、艺术、传统文化等科目，考场得时，思路如春水流畅。\n\n宜：制订温故知新计划，借春日清晨背诵记忆；宜与同学切磋，取长补短；考试前宜踏勘考场，调整作息。忌：多疑己力，频繁更换学习方法；忌贪多嚼不烂，东翻西看无定见。“无用多疑干渎神祇”暗指莫因模考波动即否定自身，心诚志坚，自有神助。",
-  "general": "第41签总以“春光”为眼，劝人惜时顺势，然卦象坎险潜伏，既济终乱需防，故持中守正为要。关键行动建议有三：其一，把握当下良机，如签文“随心所往”，凡事宜乘春而行，勿迟疑观望；其二，行事有度，既享“事事相宜”之顺，当思“良辰易逝”，预留退步，不可挥霍天赐；其三，修心为本，“无用多疑”即减内耗，戒自疑、疑人、疑天，清明坦荡则福泽自长。心态上，当常记春光不常，花开堪折，更当培护根本，待风雨时方有抵御之力。"
-}
-```
-
----
-
-## 第 42 签
-
-⚠️ **缺少英文翻译**
-
-### 中文原文
-```json
-{
-  "sign_number": 42,
-  "fortune": "上上签",
-  "gua_type": "巽宫 蛊变大畜",
-  "sign_text": "隐中显，显中微，个中有玄机，参得透了，直上仙梯。",
-  "interpretation1": "签文首句“隐中显”喻指暗藏之机正逐渐明朗，如晨雾渐散，本相将现；“显中微”则言明朗之中仍存精微玄妙，不可只见皮毛。“个中有玄机”点出此签核心：表面现象之下，藏着决定成败的关键脉络。“参得透了，直上仙梯”是奖许之辞，若能看破玄机，便能一步登天，境界超升。签属蛊变大畜，蛊卦（下巽上艮）如物腐生虫，须整治更新；大畜卦（下乾上艮）有厚积薄发、畜德养贤之象。二卦相衔，正合“隐中显”——腐坏暴露则革新之机显，革新有成则德能大畜，是破而后立、困而后通之兆。总体寓意：当前境遇表面平稳或隐伏未发，实则转折点已至，成败系于能否穿透迷雾，抓住那一点“玄机”。上上吉签，却非平白得福，而是褒奖洞察力与悟性，提醒珍惜此际遇，细察人事之微，不可因显象乐观而疏忽精微处。",
-  "career": "签文“隐中显”应事业暗涌之机，如团队症结、流程漏洞或上级隐晦期许，正逐渐暴露，此时恰是立功之机。“显中微”则提醒，明面上的任务指标背后，或有更深层的权力博弈、派系考量。蛊卦主整治积弊，宜主动梳理旧案、优化流程、清理遗留问题，尤利于纪检、审计、研发、项目管理类岗位。“参得透了”意指若能悟透单位真正痛点，提出靶向方案，便能如大畜卦“利涉大川”，获得破格提拔或负责核心项目。具体时机在发现矛盾集中爆发之际，宜向上级大胆建言，忌随大流、避重就轻。忌：只做表面文章、轻信表象乐观、忽视人情暗流。",
-  "wealth": "签文“隐中显”主财运由暗转明，先前被忽略的财源或隐形负债将浮出水面。“显中微”则言明朗的财务机会中仍有细节陷阱，合同条款、合作方底细等需细察。蛊卦象腐坏，暗示财务上或有积弊待清，如坏账、滞销存货，清理后可获意外回笼；大畜卦象积蓄，利长期投资、积累资产。“参得透了”指若能看透某个商业模式或投资逻辑的微妙处，便可“直上仙梯”，获得超额回报。财源偏向正财，偏财需凭专业眼光，如发现被低估的资产、技术专利。宜：重新审视财务报表，在传统行业（巽为入）或仓储、地产（艮为山）等稳健领域布局，忌：盲目跟风、轻信高息诱惑。",
-  "love": "签文“隐中显”在情感上指暧昧不明的关系将变得清晰，或伴侣隐藏的心意、不满逐渐表露。“显中微”则意味着即使表白后，对方反应或关系走向仍有微妙变数，需察言观色。蛊卦主整治，若感情已有积弊（如信任危机、家庭阻力），此时宜坦诚沟通、对症下药；大畜卦主涵容，稳定关系宜蓄积共同目标。单身者，“隐中显”可能是指身边早已相识之人显露出特别情意，“个中有玄机”或在暗示对方某个不易察觉的优点，参透即可升级关系。恋爱中，宜关注伴侣未明言的情感需求，忌麻痹大意、翻旧账。已婚者，利化解长年心结，如能参透家庭矛盾根源，感情可升至新境界。",
-  "health": "签文蛊卦象风入山下，气机不畅，需防肝胆（巽为风，属木）或脾胃（艮为土）郁滞。“隐中显”暗示潜伏的亚健康问题将显露端倪，如长期疲劳、隐痛等，正是调理良机。“显中微”则指明显症状背后可能有更深层的气血失衡，不可头痛医头。大畜卦主积蓄，养生宜注重蓄养精气，避免耗散。“参得透了”喻若能悟得身体发出的预警信号之根由，便可“直上仙梯”，重获健康。具体宜：晨起叩齿咽津、做疏肝理气的拉伸；饮食增甘少酸，忌暴饮暴食、熬夜伤肝。需警惕信号：胁痛、腹胀、莫名烦躁。",
-  "study": "签文“隐中显”应学业上的瓶颈或困惑即将豁然贯通，先前难懂的知识点会变得清晰。“显中微”则提醒，明面掌握的公式定理背后，需深究其原理精微，方可融会贯通。蛊卦象征知识体系有腐旧需更新，宜回顾错题、修正错误方法；大畜卦象博学蓄德，利大量阅读、积累素材。“参得透了”指若能悟出某学科的内在逻辑或考题的设题陷阱，便能“直上仙梯”，名次跃升。考试运利发挥深层理解，理科需留意题目中隐含条件，文科利分析微言大义。宜：多做综合性难题，参与讨论以启发悟性；忌：死记硬背、浅尝辄止。",
-  "general": "此签精髓在于“观微知著，破茧登梯”。当前所遇情境，表象之下皆有玄妙安排，处处暗藏上升阶梯。首要行动建议：一、暂停宏观规划，转而细察人事物的异常细节，那里藏着突破口；二、主动清理旧账、积弊或未完成事项，环境将豁然开朗；三、保持虚心若愚，纵使形势明朗，仍要追问“是否还有未见的精微”。心态上，上上签已是吉兆，但“参得透”三字是条件，不可骄纵懈怠，当以谨慎乐观之心，一步步验证所悟。大畜卦德在蓄积，莫求速成，待玄机自显，福报自临。"
-}
-```
-
----
-
-## 第 43 签
-
-⚠️ **缺少英文翻译**
-
-### 中文原文
-```json
-{
-  "sign_number": 43,
-  "fortune": "中上签",
-  "gua_type": "坤宫 大壮变泰",
-  "sign_text": "无上去，在前头，回头一悟，绳缰好收，千条万线路常在，自好搜求。",
-  "interpretation1": "此签以马喻人，核心意象为“无上去，在前头”——看似前方还有高峰可攀，实则签意劝人无需再盲目登顶。“回头一悟，绳缰好收”是点睛之笔，揭示及时勒马回头、收束心性方为明智。后二句“千条万线路常在，自好搜求”宽慰求者：天地广阔，出路从不单一，关键在于自己静心探寻。卦属坤宫大壮变泰，大壮卦雷行天上，气势刚猛，然变为地天泰，则刚柔交融、通泰安和，正对应签文“收缰”之机：由激进转为顺守，方能避凶就吉。坤宫主柔顺承载，更强化了收敛锋芒、顺时应势的基调。此签对执念深、冲劲足者尤有警示，教人知进退、懂回头，非为败退，而是另辟蹊径。",
-  "career": "签中“马”为事业进取之象，“绳缰”则指事业方向与节奏的掌控。“无上去”直指当下不宜再强求升迁或冒进，恐有过度竞争或无谓之争。大壮变泰，显示先前雷厉风行的做派需转为柔和平稳，宜收敛锋芒，审视内部，或调整赛道。具体而言，宜主动放缓脚步，回头复盘过往疏漏，将精力用于巩固既有成果、优化团队协作；若遇瓶颈，不妨考虑平调、轮岗或另寻更具潜力的“千条万路”。忌：固执己见、与上争锋、盲目扩张新项目。尤其利于从事教育、咨询、文化等需要内敛沉淀的行业。",
-  "wealth": "财运以“绳缰好收”为关键，明确宜守不宜攻。签辞“千条万路”虽示财路非止一端，但必待“回头一悟”后自去搜求，不可强索。大壮变泰，初时可能有看似丰厚的高风险投资机会，实则易因过于冒进而损及根基，变泰则暗示回归稳健可得小利。坤宫属土，与地产、仓储、农业等相关，若有机缘，宜从这些领域寻正财。具体忌：借贷扩张、追逐短线投机、合伙中当出头鸟。宜：梳理现有财务结构，减少不必要开支，保守理财；偏财上可关注长期低风险品种。“自好搜求”更提示需亲自调研，不可轻信他人。",
-  "love": "“回头一悟”是情感签眼。单身者可能陷于对某人的执念或过高期待中，签劝回头看看，或许身边一直有被忽略的情谊，或旧人中有可重新认知者；“绳缰好收”则戒勿穷追不舍，收束过热情感以免自伤。已有伴侣者，此签提醒关系中勿一味要求对方按自己的意愿改变，当收敛控制欲，遇分歧时“收缰”退让，回头反思自己的言辞与态度。大壮变泰，由刚烈转温和，乃感情回暖之兆，宜以柔克刚。千条万路寓意此路不通自有他径，不必在一段关系中钻牛角尖。",
-  "health": "“回头一悟”对应健康上需审视不良积习，绳缰隐喻身体的节制之道。大壮卦象过亢，若长期过度消耗精力、熬夜、饮食不节，此时当“收缰”，刹车调养。坤宫主脾胃，泰卦重平衡，提示消化系统易因压力或饮食无度出现不适，养生方向在于规律进食、细嚼慢咽、少食多餐。绳缰好收也暗指运动不宜剧烈，宜改为缓步、太极等柔和练习。“千条万路”指调理方法多样，须自行甄别，不可跟风。需警惕的信号：频繁疲劳但睡眠不解乏、食欲异常、情绪躁郁交替，皆是身心过张之警。",
-  "study": "签文“无上去”表明学习上可能遇到难以短期突破的高点，硬闯反易受挫，宜“回头一悟”，重拾基础，巩固薄弱环节。绳缰好收比喻学习节奏的把控，忌日夜突击、疲劳作战，当制定松弛有度的计划。大壮变泰，初期阶段或许冲劲足但效率渐降，变换方法、调整心态后可入通泰之境。“千条万路”提醒学习方法多元，不妨尝试思维导图、讨论复述、错题回溯等新路径，自好搜求适合己身的道路。考试运中平，利文科与需要长期积累的科目，宜提前踩点、从容准备，忌临时改换背诵材料。",
-  "general": "此签精髓在于“知止”与“另择”。全签借马行之路，喻人生处处皆有通途，不必执于一端。核心行动建议有三：其一，凡遇阻难或心疲时，立即停下，回头检视初心与现况，果断调整方向；其二，收束不必要的外在竞争心，将精力内收，做好手中事即是最好突破；其三，主动拓宽视野，多探寻被忽略的平行可能，切忌一条道走到黑。心态上，记住“回头一悟”不是失败，而是智慧，千条万路不假外求，正在你自己的从容选择之中。守持坤宫柔顺之意，随势而转，自得泰然。"
-}
-```
-
----
-
-## 第 44 签
-
-⚠️ **缺少英文翻译**
-
-### 中文原文
-```json
-{
-  "sign_number": 44,
-  "fortune": "上上签",
-  "gua_type": "离宫 蒙变未济",
-  "sign_text": "四顾无门路，桃源路可通，修炼成正果，万岁寿如松。",
-  "interpretation1": "签文“四顾无门路，桃源路可通”，如入迷津，环视皆壁，此“无门路”非真绝境，乃喻常途闭塞、外缘不济之象。“桃源”借武陵人旧典，指隐逸幽径，暗言出路不在喧处，须向内求、向静处觅。“修炼成正果”点化前路，非凭空而得，必藉身心砥砺，如丹炉九转方成。“万岁寿如松”收束，以松柏历寒弥茂，喻根基厚则福泽长。卦出离宫蒙变未济：蒙者，山下水气，童蒙之象，主惑而待启；变未济，火在水上，爻位失所，事虽未竟而生机已萌。离为明为南，火土相生之机，寓慧光透雾。此签总体示人：困局非死局，桃源不在天外，在回头转念、守静笃修之间。破暗之钥，惟“修炼”二字，精诚所至，松寿可期。",
-  "career": "“四顾无门路”道出职场困局——晋升常轨壅塞、人脉助力稀薄，或屈就微职、或屡试不第。“桃源路可通”揭示转机在于非常之径：宜转向冷门领域、自主创业、自由职业，或投身文化、教育、公益等“静业”。蒙变未济，卦象山阻水蓄，火在水上难为用，喻事务多反复，须耐烦打磨技艺。修炼成正果，正是事业之基：此签利于进修、考证、钻研独家之长，忌争位夺席、急求显达。火候到时，自有水到渠成之日。具体宜：承接非核心但可深耕之项目，培养跨界之能；忌：抱怨环境、强攀不属己之机。",
-  "wealth": "签中“桃源路可通”巧喻财源：非市肆间熙攘之利，乃隐僻处自有生息。或为偏财，如文物字画、山林川泽产出；或为长期股权投资，不急一时套现。“修炼成正果”警策勿存侥幸，蒙卦启蒙，投资需深研熟虑；未济卦火水相违，慎防财务计划纰漏，宜细盘账目，忌信用扩张。“万岁寿如松”言财富贵在绵长，正财稳当，宜储蓄养基；偏财偶得，却忌追涨杀跌。具体宜：配置固收类资产，关注农业、文化创意产业；忌：跟风投机，抵押房产冒险。",
-  "love": "“四顾无门路”映射情感之困：单身者如行荒原，目遇无同心；有伴者似遇隔阂，话不投机。“桃源路可通”点化，避喧去嚣方觅良缘，宜经由雅集、书苑、古道行旅等清景之处结缘，或于静处重修旧好。“修炼成正果”强调情缘非天降，须共修性灵，蒙卦教人包容童昧，未济提醒琴瑟未调当徐徐和之。松寿之喻，主情意坚久。具体：单身宜扩展心灵之交圈子，忌滥觞于速配；伴侣宜共学一门技艺或同游山水，忌翻旧账强求变改。",
-  "health": "卦象离宫属火，蒙卦坎水艮山，注意心肾不交、水湿停滞之兆。签文“四顾无门路”可应经络不通之感，然“桃源路可通”寓意养生之门不在峻补猛治，而在静中调息，如行小径探源。修炼成正果，直指导引、静坐、太极等内养功夫，持之以恒自见寿征。“松”象苍劲，秋冬尤健，此签主身心渐入安泰，旧恙不宜躁药，须饮食甘淡、作息合辰。需警惕：用脑过度、熬夜伤阴；信号如口疮频发、腰膝酸软，非病兆而体警也，当早循自然之法调之。",
-  "study": "学业逢此签，恰似蒙卦之童求我，“四顾无门路”或感科目纷杂、老师难遇、思路壅塞。“桃源路可通”妙喻蹊径独辟：主流学科之外，偏才异禀者易脱颖而出，如艺文、发明、冷门绝学。“修炼成正果”贵在定心聚神，未济卦火水未交，最忌东驰西骛，宜一门深入，久必透达。考试运：利于自拟题演练，或田野考察式求知，临阵需从容，松柏之姿，不凋于风霜。具体：宜立长志而分小阶，忌攀比速效；宜亲近大自然中读书，忌闭户强记。",
-  "general": "此签精髓在“转念”与“凝神”。当俗径俱塞时，非天绝人，实邀人反观内照。第一宜另辟细径，善于寻常无奇处发现“桃源”，如人际、业态、趣向之微光；第二宜静心修炼，无论技艺、学问或心性，沉着打磨便是护身符；第三宜守柔长视，松寿之征非朝夕功，不争一时浮沉。卦象蒙变未济，如火燃水上，势虽未成，光已透波，故心境上忌急、忌怨、忌弃，当持“探幽”之心，信芳草自碧，清流自引。"
-}
-```
-
----
-
-## 第 45 签
-
-⚠️ **缺少英文翻译**
-
-### 中文原文
-```json
-{
-  "sign_number": 45,
-  "fortune": "中下签",
-  "gua_type": "离宫 旅变离",
-  "sign_text": "不用忙，不用慌，自有驻足乡，鸣鼓响钟地，三宝见门墙。",
-  "interpretation1": "签文首两句“不用忙，不用慌，自有驻足乡”，以口语化的劝慰，描摹旅人仓皇之际忽逢止泊之所的意象。忙与慌皆因心无定所，而“驻足乡”正是动荡中的停靠处，暗喻遇事当持守静气，转机自现。“鸣鼓响钟地”进一步点出机缘显露的场所——钟鼓齐鸣，非寻常巷陌，多是庙堂、庆典或庄重之地，象征机遇以隆重的形式昭示，需郑重以待。“三宝见门墙”，三宝既可释为佛家之佛、法、僧，亦喻珍贵指引或资源，已近门墙却未入门，提醒求者莫因触手可及而懈怠，更须辨明真伪，踏入门内方为实得。卦属离宫，旅变离。《旅》卦上离下艮，山火行旅，漂泊无依；变《离》为火，双火相叠，光明而虚悬，依附之象。从旅至离，喻由动荡转向暂安，但依附若不得其正，则如飞蛾投焰。签为中下，吉中藏凶，虽有一时安顿，长远仍需守正去妄。整体寓意：遇困不必张皇，静候明朗之机，当于庄严处识得引路之宝，但切勿因依附而失却自立，否则止泊终成牢笼。",
-  "career": "签文“不用忙慌”“驻足乡”点出事业急进无益，此刻宜求稳而非求变。旅卦本为奔波，变离后似有依附之机，但离火虚浮，暗示职位变动或依附他人易带虚幻。事业上，“鸣鼓响钟地”是重要场合信号，如内部大会、行业论坛或公开竞聘，机遇藏于庄重仪式中，宜提前准备，以实力发声。“三宝见门墙”则指贵人、核心项目或晋升之门已近，但尚未跨入，须主动叩门却不可强推。离宫属火，利文化、传媒、能源、互联网等光明行业，文职较武职更宜。中下签提醒：忌盲目跳槽、争功冒进或投靠未经考察的派系；宜在现有岗位深耕，借助公开场合展示专业，待“钟鼓”自鸣时顺势而为。",
-  "wealth": "签文“不用忙不用慌”直接告诫求财勿急功近利，“自有驻足乡”指正财犹可守，偏财投机则如旅人无定，易散难聚。“鸣鼓响钟地”揭示财机或现于热闹场域，如节庆、喜宴或文化集会，但此类财随喜而至、随散而逝，不可倚重。“三宝见门墙”喻珍财近在眼前，却需要鉴宝之明，否则门墙即屏障。卦象离为虚明，旅变离更是浮光掠影，财运表面光鲜，实则多虚花少实果。宜守成经营，以工资、储蓄等正财为主；可适度涉足与离火相关之长期投资，如文化内容、照明科技，但忌短线炒作、高息诱惑。理财态度当如驻足乡一般，选安稳之处，不艳羡他人锣鼓喧天。",
-  "love": "签文劝人莫慌忙，感情亦如是。“自有驻足乡”暗示漂泊终有归宿，然旅变离之卦象，情感易呈现若即若离、依附难深的特质。“鸣鼓响钟地”喻示情缘可能生于热闹场合，如朋友聚会、婚宴或文化活动，且伴随正式宣告，可能迅速公开，但敲锣打鼓下仍需冷静。“三宝见门墙”指珍贵之人已近身边，或已到谈婚论嫁阶段，但门墙未破，心意未通，切勿自以为必然。离卦为中女，暗示关系中女方可能主导，或双方个性鲜明易生挑剔。中下签提醒：单身者勿因催促而草率，宜通过文化、宗教或公益场合结识，警惕表面热情；有伴者避免因依附而丧失自我，关系需实质承诺，忌翻旧账或虚浮浪漫。",
-  "health": "签文“不用忙慌”正是养生第一义，旅变离卦，火上加火，易致心火上炎、烦乱失眠。“驻足乡”劝人收摄心神，返观内守。“鸣鼓响钟地”对应耳窍与心脉，鼓声如心跳，钟声如耳鸣，提示防范心悸、耳鸣、高血压等虚火上浮之症。离卦在脏为心、小肠，在窍为目，身体养护需从清心降火入手：作息宜如钟鼓有节，早卧早起；饮食避辛辣炙煿，多食苦味清泄之品如苦瓜、莲子心；运动宜缓如驻足，太极、静坐为佳。三宝见门墙，喻珍重身体犹待入门，宜寻明师指点养生功法，但勿迷信偏方。需警惕持续失眠、目赤头晕等信号，及时调息静养。",
-  "study": "签文以“不用忙慌”点出求学大忌——躁进贪多。“自有驻足乡”指需建立扎实根基，不可如旅人无定。“鸣鼓响钟地”喻重要考试、答辩或竞赛场合，钟鼓之声正是警醒，当郑重以赴，不可轻慢。“三宝见门墙”则指学问门径已现，或遇良师益友引领，好比三宝垂示，但入门仍需自求。卦象离为文明，旅变离示意从驳杂到专精的依附，学业宜转向系统深研，利于文科、艺术、传媒等离火属性方向。考试运起伏，临场易受干扰，务必提前踩点、调整作息。宜结伴学习、多向师长请教，忌单打独斗、考前突击。",
-  "general": "此签谋事，首重心态。“不用忙不用慌”是贯穿始终的箴言，旅中得驻足之乡，虽暂安而非久逸。卦象由旅之动荡化为离之虚明，告诫所求近在门墙，却易因依附而失却自主。综合提醒三点：其一，行动上勿急进，遇抉择宜暂停数日，待喧嚣沉淀（鸣鼓响钟后自有沉寂），方见真章；其二，重视仪式、公开场合带来的机缘，但需以实学实才叩门，莫做表面功夫；其三，珍宝近在眼前，须辨明是究竟依靠还是枷锁，守心如玉，方不致得而复失。心态上，勿因中下之兆而颓丧，反当如旅人见灯火，审慎前行，自可化凶为夷。"
-}
-```
-
----
-
-## 第 46 签
-
-⚠️ **缺少英文翻译**
-
-### 中文原文
-```json
-{
-  "sign_number": 46,
-  "fortune": "下下签",
-  "gua_type": "离宫 未济变晋",
-  "sign_text": "奔波一世，总是虚浮，无常一到万事休，急早回头。",
-  "interpretation1": "签文「奔波一世，总是虚浮」，直指一生劳碌追逐，却如握沙成空，所逐皆镜花水月。「虚浮」二字，喻名利如浮云，根基不实。下接「无常一到万事休」，无常如疾风骤至，刹那间富贵功名、爱恨情仇尽归尘土。「急早回头」是当头棒喝，劝人放下执念，从外逐转向内省。卦象离宫未济变晋，未济卦水火不交，事未成而徒劳；晋卦明出地上，光明渐升。此变示人由奔波无果之境，转向清醒进取之途，回头非退，乃是去伪存真。整签大凶，寓意人生若陷溺虚妄，终将一场空，唯有急流勇退，返本归元，方能免于无常吞噬。",
-  "career": "签云「奔波一世，总是虚浮」，事业上主劳而无功，奔波于无谓竞争或频繁更迭。离宫未济，火水不交，象征团队不合、计划难成，恐有不断开工却无法收尾之困。变卦晋，日出地上，暗示转机在「回头」放下好高骛远之务。宜收敛锋芒，回归核心技能或本行，深耕细作，忌跳槽创业或接手虚浮项目。时机不利春季，宜秋冬稳守。具体行为：宜复盘过往失败案例，夯实根基；忌追逐风口、与人争闲气。若处管理岗，忌朝令夕改，当求稳安众。吉从回头生，舍弃浮华方见真章。",
-  "wealth": "此签财运大凶，「虚浮」二字明示财富如泡沫，追逐投机、快钱终必消散。未济卦火水相克，财源不通，投资多陷僵局；晋卦火土相生，回头求实质收入方有转机。正财尚可勉力维持，偏财如赌博、高风险投资切不可为。财源宜固守本职薪酬，或传统土属性行业（地产、农业），忌借贷扩张、合伙虚浮生意。理财态度：开源不如节流，宜盘点负债，清理无用开销。具体宜忌：宜储蓄防无常之变，忌贪图高息诱惑。回头是岸，稳守即吉。",
-  "love": "签文「奔波一世」指感情若一味追求新鲜刺激，终是虚浮无根。「无常一到万事休」暗喻烂桃花或表面关系易骤然消散。离宫未济，阴阳失交，主沟通不畅、热情忽冷忽热；变晋卦则提醒回头珍视身边平淡真情。单身者宜放低幻想，留意原有圈中踏实之人；恋爱中忌攀比外求，宜收回心神经营当下；婚姻危机者，回头反省自身，放弃抱怨。相处之道：宜共同承担家务俗务，忌翻旧账；宜晨昏问候，忌冷暴力。回头处，灯火阑珊便是家。",
-  "health": "「奔波一世」直指过劳伤身，离宫火未济水，主心肾不交，易有失眠、心烦、口腔溃疡、腰膝酸软。「虚浮」喻气血两虚，精力不济。此签健康大警，过劳恐致突然耗竭，如「无常」骤降。变卦晋为光明，回头即养生，宜调整作息，养阴培元。饮食宜清淡，多食黑豆、山药、百合；运动宜缓如太极、散步，忌剧烈消耗。需警惕信号：长期疲惫、虚火上炎、思虑过度。回头者，早卧早起，恬淡虚无，方能固本避凶。",
-  "study": "学业得此签，主「奔波一世」之困，用功虽勤却成效虚浮，如杂学不精、贪多嚼不烂。未济卦水火无序，学习方法混乱，易临阵磨枪；晋卦明出地上，回头专注一门或回归真题，方能豁然开朗。考试运欠佳，忌猜题押宝，宜系统复习。具体：文科利背诵，理科利纠错，忌频繁更换参考书。考场宜提前静心，忌受他人干扰。回头非弃，是敛神归一，放弃虚泛目标，专攻薄弱环节，方能避无常失意。",
-  "general": "此签下下，大凶之中暗藏生机，全在「急早回头」四字。签文意象如暮鼓晨钟，撞击奔忙人心。核心在于认清「虚浮」本质：所执著者，如沙中楼阁。行动上，当即刻停下徒劳逐求，盘点何者真实不虚。建议三条：一、舍弃一个让你长期疲惫却无意义的目标（如无效社交、过度消费）；二、回归家庭或内心静修三日，观照呼吸；三、处理拖延已久的债务或健康小恙。心态上，莫因凶而惧，当如晋卦日升，视回头为日出前的暂暗。谨记：无常是警，回头是岸。"
-}
-```
-
----
-
-## 第 47 签
-
-⚠️ **缺少英文翻译**
-
-### 中文原文
-```json
-{
-  "sign_number": 47,
-  "fortune": "上上签",
-  "gua_type": "巽宫 无妄变益",
-  "sign_text": "真真真，人不识，真真真，神有灵，归宗返本，方是元精。",
-  "interpretation1": "签文叠用六“真”字，力透纸背，直指人心。“真真真，人不识”慨叹世人往往迷失于虚浮表象，不识内在本真；而后“神有灵”一转，言明至诚感神，真心终有灵应。末句“归宗返本，方是元精”点出玄机：唯有返璞归真、回归根源，方能得见精华。卦由巽宫无妄变益：无妄卦爻辞“元亨利贞，匪正有眚”，诫人摒弃虚妄、守正不欺；变卦为益，利有攸往、利涉大川，昭示守正之后必有增益。巽为风，主柔顺深入，恰似觅寻本真之途，须沉心静气、层层剥落外相。此签上上之吉，非凭空而得，乃因“真”字贯通始终，劝人持守赤诚，则万事皆可归根复命、焕发新机。",
-  "career": "签云“人不识”，事业上或遇怀才不遇、不被理解之困，然“神有灵”示以时日，真心自能动人。“归宗返本”提示宜回归专业根本或初心，摒弃花巧手段与虚名追逐。无妄变益，卦象先抑后扬，须以本真面对职事，忌投机取巧。巽为风，宜谦逊柔进，深耕核心技能，尤其适合需要耐心细作之岗位。时机在扎实铺垫之后，秋冬季或有转机。宜：主动揽下基础性工作，以“元精”赢得信任；忌：夸夸其谈、与同事争表面风光。",
-  "wealth": "签中“真真真”如精金百炼，财富之事贵在真实不欺。“归宗返本”非指退守，而是回归财之源——勤劳与专业。无妄卦直言“不利有攸往”，若起贪妄之心、追逐偏财，恐反受其咎；变益卦则利正道生财，如深耕主业、复利积累。“方是元精”暗喻理财需抓根本，精打细算，去芜存菁。正财稳健，偏财无根，不宜投机。宜：守持熟稔行业，重视信誉与长期回报；忌：跟风炒作、轻信浮言。巽宫属木，土类或实业相关财源更佳。",
-  "love": "签文叠唱“真真真”，情路之要，尽在一个“真”字。“人不识”或喻深情未被察觉，或内心犹戴假面；“神有灵”则示精诚所至，终有感通。无妄变益，从误解走向受益，正应感情破冰或关系升华。“归宗返本”劝人反观初心，剔除杂念，重拾最纯粹的情感。单身者宜真诚示人，不伪饰不矫揉；有伴者宜交心对话，回归相知本怀。宜：坦白心意、共同回忆初遇时光；忌：猜忌试探、翻旧账。巽风入微，细节显真心。",
-  "health": "巽为风，通于肝胆、呼吸，签中“归宗返本”直指元气归藏。复叠“真”字，养生贵在真实不二，遵循自然节律，而非妄求速效奇方。“元精”乃生命本根之精华，不可纵情耗散。无妄卦戒妄动，变益卦得康宁，故须以静摄生。作息当如四季轮回，饮食宜返璞归真，摒弃厚味。需警惕因思虑过甚或作息杂乱引发隐忧，尤注意劳逸结合。宜：晨起缓行、夜卧宁神，辅以柔缓运动；忌：熬夜贪欢、耗神过劳。",
-  "study": "签文精髓在“返本”，学业恰如逆旅寻真。“真真真”非重复，而是一层层剥去浮饰，直探根本。“人不识”或指目前未显锋芒，然“神有灵”褒扬诚心向学者，终得真知。“归宗返本”昭示当弃捷径，重回基础，一字一句皆须真实领会，勿贪速成。无妄变益，踏实积累可获大进。考试运利基本功扎实者，不利投机取巧。宜：精读经典、整理错题本，尤利文科根基；忌：猜题押宝、临时抱佛脚。巽为入，学问贵在深耕细作。",
-  "general": "此签直指本心，警醒世人莫在纷繁世相中迷失。六“真”如鼓震，唤醒元精。总摄各方，无妄之守正是基，得益之亨通为果。关键行动有三：其一，内省初心，于静时扪心自问最珍视之物，删繁就简；其二，行事务求真实，从言语到举止皆不欺暗室，以诚为舟；其三，面临抉择时，循“归宗返本”四字，问自己：此事是否合乎根本？心态上须祛浮戒躁，不必急于求成，清静自正，如巽风徐徐，自能化育万物。当信真金自有光耀时。"
-}
-```
-
----
-
-## 第 48 签
-
-⚠️ **缺少英文翻译**
-
-### 中文原文
-```json
-{
-  "sign_number": 48,
-  "fortune": "中签",
-  "gua_type": "震宫 大过变履",
-  "sign_text": "走尽天涯，风霜历遍，不如问人三天，渐渐有回首见。",
-  "interpretation1": "签文“走尽天涯，风霜历遍”道尽奔波劳苦之象：天涯无尽象征执念追逐，风霜历遍暗喻身心俱疲，此为大过卦“泽灭木”之象，行动过激反致困顿。“不如问人三天”突转，不再独自硬闯，而是停下求问，三日非确数，乃静心请益之期。卦变履卦，履者践行，但强调脚踏实地、依礼而行。“渐渐有回首见”如迷雾渐散，回头时竟见归途与转机。整体寓意：莫再盲目外求，宜内省自牧，向可信者问路，转机不在远方而在回头处。中签吉凶参半，成败在“停”与“问”一念之间，能收能放方得渐入佳境。",
-  "career": "事业如“走尽天涯”，若在职场中东奔西突、频繁跳槽或强推项目，恐“风霜历遍”而收效甚微。签文明示“不如问人三天”，震宫大过变履，过度行动后须以履卦之慎行转圜。宜暂停冒进，主动与前辈、同侪深谈，或重启旧有资源、回头客情。职位上利中后台、稳定型工作，不利冲锋邀功。时机在静心思量后出现，或由旧日人脉带来消息。忌孤行专断、盲目拓展新领域；宜复盘得失、请教经验者，甚至接手遗留项目，看似退实则“回首见”转机。",
-  "wealth": "“走尽天涯”喻四处求财却所得菲薄，“风霜历遍”主辛苦钱难积。“不如问人三天”提示财运转机在合作与借智：或听取有经验者建议理财，或与人合伙经营，而非单打独斗。“渐渐有回首见”或指旧债回收、回头客生意、稳健投资复利之象。大过变履，财气由虚夸转为务实，须克制投机冲动。宜持保守策略，利土金行业（履卦乾金兑金），忌跟风险投资。正财优于偏财，细水长流胜过暴起暴落。",
-  "love": "情感路上“走尽天涯”，寻寻觅觅或一次次受伤，如“风霜历遍”般疲惫。签意教人停下脚步，“不如问人三天”即放下执念，听亲友忠告或与伴侣坦诚对话。单身者若执念某类对象而远求，反不如留意身边人，或旧人复联，“回首见”或指缘份早就在近处。已有伴侣者，争吵多因互相追逐彼此期待，宜停住指责，回头重温初时点滴，关系渐回暖。震卦主动，但大过辞咎在过，莫再情绪化猛冲，履卦教以温和守礼。",
-  "health": "“走尽天涯，风霜历遍”直指身体过用，长期奔波劳累，暗耗气血。大过卦兑金克巽木，震宫惊变，对应肝木受戕、筋骨紧张。履卦乾金兑金，金旺木衰，更须护肝舒筋。“不如问人三天”即休养生息，及时咨询调理，不可硬撑。“渐渐有回首见”非速愈，而是缓慢恢复中见到气色转好。宜规律作息、静坐吐纳，饮食忌辛辣油腻，春夏季尤其注意情绪平稳。若出现易怒、眼干、抽筋等，是身体劝你“停问”的信号。",
-  "study": "求学如“走尽天涯”，资料搜罗甚广，却可能失于精专，受“风霜历遍”的博而不精之困。“不如问人三天”点出症结，须虚心求教，与师友切磋印证，或小组共学。震宫大过变履，粗放式冲刺已无效，履卦强调步骤，宜回归基础，回头看错题、梳理脉络，此即“回首见”之真义。考试运中平，临时突击不利，反而复习旧知、整理笔记可收奇效。文科利背诵回顾，理科忌钻牛角尖，遇阻即问，以静制动。",
-  "general": "一签言尽“回头”之智：天涯风霜虽苦，却是教人止步问心的契机。关键行动有三：其一，暂停盲动，无论工作或情感，按下暂停键，避免决策；其二，就近借力，找可信任的师长、亲友或旧识商议，勿耻于开口；其三，转身打理旧缘，被忽视的人事物可能蕴藏转机。卦象大过变履，提醒过度者返归务实。心态上，接纳“不如”的谦卑，看似后退，实为蓄势。莫慌莫急，三四日内，渐见光亮。"
-}
-```
-
----
-
-## 第 49 签
-
-⚠️ **缺少英文翻译**
-
-### 中文原文
-```json
-{
-  "sign_number": 49,
-  "fortune": "中下签",
-  "gua_type": "震宫 震变丰",
-  "sign_text": "沉沉痾染，不见天心，雷门一震，体健身轻。",
-  "interpretation1": "签文“沉沉痾染，不见天心”，以沉疴缠身喻人生困顿之象，如乌云蔽日，久不见朗朗乾坤，主当前运势低沉压抑，诸事不顺，似有暗昧难明之境。“痾染”二字，点出问题非一日之积，乃长期积累之弊。“雷门一震，体健身轻”，震为雷，雷门一震，如春雷乍响，破开阴霾，万物复苏；此喻转机忽至，冲破桎梏，身心顿时轻安。卦属震宫，震变丰。震主动，有突发、变革之意；丰为雷火丰，下离上震，电闪雷鸣而光明普照，主盛大、充盈。震之变动，催生出丰之盛景，正合签文由困转亨之意。总体而言，此签示人切莫因一时晦暗而消沉，当知沉寂之后必有破局之机，宜蓄势待变，以静制动，待“雷门”一震，自可拨云见日，重获轻安。",
-  "career": "签文意象“沉沉痾染”映射事业陷入胶着，或项目停滞、或人际龃龉、或抱负难伸，如染顽疾，不见起色。“不见天心”有上级不解、前景不明之象。然“雷门一震”预示人事变动、政策转向或意外契机将如惊雷般到来，扫除积弊。震卦主动，宜主动请缨承担破局性工作，或转换思路另辟蹊径。丰卦光明，转机之后前景可观。时机上，春季或突发变革期为最佳发力点。宜：整理积累问题，待机提出方案；忌：因循苟且，被动等待。具体行动如申请调岗、主动汇报陈情、参与竞标攻坚，均可借雷震之势突围。",
-  "wealth": "签文“沉沉痾染”直指财务陷入泥淖，或收入停滞，或开支缠身，如染病般消耗不断。“不见天心”意谓资金周转不灵，难见财星照耀。“雷门一震”则暗示突发性转机，可能来自一笔意外回款、旧账清算或市场震荡中的短线机遇，但中下签下转机多带风险，“体健身轻”方为真正减负。震卦主动荡，变丰卦虽主丰盛，却必经震动方得，故理财当以守成为本，宜清点负债、削减冗余开支，利正财而不宜偏财投机。行业上可关注与“雷”相关领域（如电力、通讯、互联网革新），但忌重仓冒进。具体宜忌：宜收回外债、暂缓扩张；忌盲目跟风投资、融资加杠杆。",
-  "love": "情感层面，“沉沉痾染”喻关系沉闷压抑，如积郁成疾，矛盾越埋越深；“不见天心”则暗示双方心意不通，互不理解，如视线被遮，看不到彼此真心。签文劝戒，僵局非一日之寒，需一场“雷门一震”来涤荡。此“震”或为一次深入沟通、一场争吵、或外来触动事件，反能澄清误会，令真情重现，“体健身轻”。震卦主动，变丰为光明，故宜直面问题，主动打破沉默。单身者宜走出旧伤，拓宽社交；有伴者忌冷战翻旧账，可借短途旅行、共同经历新奇之事激活关系。具体宜：坦诚表达感受；忌：隐忍不发、猜疑试探。",
-  "health": "签文以疾喻运，于健康层面最为贴切。“沉沉痾染”主旧疾迁延或身心俱疲，亚健康潜伏不见好转；“不见天心”有阳气不升、气机郁闭之象。震卦对应肝胆、神经系统，丰卦对应心脏、眼睛，雷门一震，喻通过积极干预，如适当发汗、疏通经络，恢复身体轻健。此签提示养生之要在于“动则升阳”，宜晨起舒展筋骨、行有氧运动以应“震”气；饮食宜清淡少腻，多食青绿蔬菜养护肝胆。需警惕疲劳累积、失眠、情绪郁结等信号，不可讳疾忌医。",
-  "study": "学业如染沉疴，主学习效率低下、专注力不济，似有悟性被蒙蔽，“不见天心”即找不到窍门、疑惑难解。然“雷门一震”点出突破契机：震为雷，主动脑筋急转、灵感迸发，或外因刺激（名师点拨、竞争压力）令思维豁然开朗，学习状态顿感轻快。震宫变丰，卦象由暗转明，利考试发挥与冲刺。建议适时改变学习方法，以互动讨论、实战演练代替埋头死读；考前宜突击薄弱环节，提前模拟考场氛围。具体宜：组建学习小组、参与辩论；忌：孤军奋战、钻牛角尖。",
-  "general": "此签核心在于“否极泰来”的等待与主动。沉沉困境如染顽疾，看似无解，实则雷门一震便化险为夷。整体运势须经一“震”方显生机，此震可以是外来的变故，也可以是自身的大胆破局。关键行动建议：一，整理现状，找出“痾染”根源所在，不逃避痛点；二，关注身边突发的消息、人事变动，往往内藏转机，当机立断方能抓住；三，无论事业、情感或健康，均宜以“动”应“震”——运动、行动、沟通，打破凝滞。心态上，签文提醒莫因云翳遮眼便以为永夜，雷声未至时，安心蓄力即是修行。"
-}
-```
-
----
-
-## 第 50 签
-
-⚠️ **缺少英文翻译**
-
-### 中文原文
-```json
-{
-  "sign_number": 50,
-  "fortune": "中下签",
-  "gua_type": "乾宫 否变不雅",
-  "sign_text": "财马两匆忙，官禄有定方，猪羊牛犬，自去主张。",
-  "interpretation1": "签文“财马两匆忙”以“马”喻奔波劳碌，“财”为生计所求，二者皆显仓皇急促之象，主谋财多辛劳却难见厚积。“官禄有定方”中“定方”即定数或固定方位，指官职俸禄早有格局，非强求可改，宜安守本分。“猪羊牛犬”为家常蓄养之物，喻微末琐事，“自去主张”则言此等小处尚可自作裁夺，大事却难由己控。全签意象散碎，透出动荡中求稳、困局中守常之机。卦属乾宫，否变不雅，否卦天地不交、闭塞不通，君子道消，变爻后仍见幽滞，宜潜藏勿用，待时而动。此签劝人收敛锋芒，于匆忙中觅定力，于限制里求安顿，莫因小得而妄喜，亦莫因大阻而失志。",
-  "career": "签云“财马两匆忙”，喻事业常有奔波劳碌之态，外务频繁却难有实质跃升。“官禄有定方”直指职位固守于既定范围，或久居一职、或在体制内缓慢迁转，无速成之机。此象近否卦之闭塞，乾金欲升而坤土滞下，职场易遇瓶颈，进取宜缓不宜急。宜专注于手头事务，以守成为主，可主动梳理流程、稳扎根基，忌频繁跳槽或与同僚争功邀宠。“猪羊牛犬”暗喻日常杂务，凡常规性工作大可自主安排，重大决策则须随势而行，强行出头反遭阻力。秋冬季或有转圜，可留心上级交派之稳定项目。",
-  "wealth": "“财马两匆忙”显求财奔波之象，劳心费力但财利薄脆，偏财尤不可恃。“官禄有定方”主正财平稳，薪酬依例发放，然浮动收入或意外之财难期。此签暗示流年财库窄涩，否卦天地不交更见财源受阻，忌高风险投资与借贷担保。理财当持“猪羊牛犬”之喻，于小额开销、日常家用可自主决断，大额投入须反复斟酌或暂搁。利处稳健储蓄、长期低风险理财，土属行业或固定产收息尚可守成。此时宜精算细账、量入为出，忌盲目扩张或与人合伙经商。",
-  "love": "签中“财马两匆忙”影射因生计奔波而疏于情缘，情感易陷疲惫。“官禄有定方”喻关系趋于固化，若已有伴侣，情义虽稳却少惊喜，如否卦天地不交，彼此有心却难畅言。宜从小处着手经营，“猪羊牛犬”自去主张，即为对方备粗茶淡饭、操持日常琐务，皆是真情流露。单身者此季遇缘平淡，不宜急切强求，反易忙中错判。相处之道在返璞归真，忌翻旧账、计较名利得失。若嫌情淡，不妨共同照料宠物或整理居所，于烟火气中温养默契。",
-  "health": "签文“财马两匆忙”直指劳神奔波伤及元气，否卦乾金应肺、坤土应脾胃，兼有金土相生却滞涩之象，易见食少倦怠、胸闷气短。宜节劳省神，避深夜应酬，以静养为要。“猪羊牛犬”自去主张，调养之事可听己感知，食饮有节、作息规律即为良方。需警惕时气变化引致旧恙复发，尤其注意季节更迭时的脾胃不适与呼吸道隐疾。适度散步或八段锦等缓柔运动能助气机流转，忌大汗伤阳。",
-  "study": "“财马两匆忙”喻心思易为杂事牵扰，学业难专注，如否卦思绪胶滞，记诵理解须倍下功夫。“官禄有定方”暗示考学路径较固定，旁骛别径恐白耗时光，宜循大纲扎实渐进，自主制定庶务计划，恰合“猪羊牛犬”自去主张之旨。考试运中平，利基础考核不利巧变论述，考场宜提早抵场以定心神。切忌临时突击或投机取巧，积微成著方为正道。",
-  "general": "此签示人处于否蹇之运，财禄功名皆有定限，强求徒增奔波。眼下当如“猪羊牛犬”一般，将心力投注于可控之日常，戒急戒躁。行动上，一宜稳守现有岗位与财法，勿轻言变动；二宜简化生活目标，减免非必要应酬以蓄精力；三宜从细微事中觅成就，如修葺居室、照料家人。心态上，须识得“匆忙”与“定方”本是一体，安于所限即是脱困之始。待气机流转，否极自见新路。"
-}
-```
-
----
-
-## 第 51 签
-
-⚠️ **缺少英文翻译**
-
-### 中文原文
-```json
-{
-  "sign_number": 51,
-  "fortune": "中下签",
-  "gua_type": "兑宫 小过变咸",
-  "sign_text": "空空空，空里得成功，蟠桃千载熟，不怕五更风。",
-  "interpretation1": "签诗“空空空”，连叠三“空”，状眼下之境虚寂无依、所求茫无头绪，非但财帛事业，即心中所愿亦似空花泡影。然紧接“空里得成功”，句锋陡转，点出成功恰从这“空”中酝酿——如天地虚静而万物生。后两句以“蟠桃千载熟”喻成就须极长久之孕育，不争朝夕；“不怕五更风”更言此果经得彻骨寒风，终能坚熟不落。全诗意在：空非死寂，乃蓄势之渊；功不速成，在历劫弥坚。\n\n此签卦属兑宫，小过变咸。小过卦（雷山小过）有“飞鸟遗音，不宜上宜下”之象，主小事可过、大事须敛，正合签中空里求成、不可冒进之戒。变卦咸（泽山咸），上兑下艮，兑为泽、为悦，艮为山、为止，二气感应相与，犹虚怀感通，终得和合。兑宫本主悦、主言、主缺（兑为缺，故有空象），今由小过之谨慎避险，变为咸卦之自然感通，正是“空”极而感，感而遂通之机。故签意总括：眼前之空非祸，乃是去浮华、存实质的必经阶段；成功虽远，若能持守虚静、以诚感物，则如蟠桃历劫，千载必成。中下之判，在勉人勿因暂时空乏而生躁妄，当顺卦理“下、小、感”之道，以待天时。",
-  "career": "签云“空空空”，预表职场当前或陷停滞，岗位虚悬、项目窒碍、晋升无望，甚或面临裁员、失位之忧。然“空里得成功”示此空非绝境，恰是转机伏藏之处，将来成就反由此出。蟠桃千载熟，喻事业大成须经漫长耕耘，此刻宜沉心累积，不争一时浮名。五更风喻职场风浪、人事倾轧，但根基既深，自不畏中伤。\n\n小过卦示宜下不宜上，故此时切忌强出头、争锋躁进，当就低处安守本分，夯实技能；切忌高调揽责、越级陈情。变卦咸，启示感应之道：善与同事上司沟通同声相应、同气相求，以诚待人，则暗助自生。具体言之，宜主动承接基层或辅助性项目，默默做功；若谋变动，尚非良机，恐如飞鸟逆风，徒耗羽翼。待秋深冬至（兑宫金旺、咸卦感通之时），或可见转圜之兆。忌：怨天尤人、跳槽冒险、与同僚争功邀宠。",
-  "wealth": "“空空空”三字，直指眼下财库虚耗、来财无路，或蓄积日减，或投资浮亏，令心如空悬。然接“空里得成功”，暗寓财源将从最不经意处生出——或旧债回收、或滞产变现、或冷门行当薄积厚发。蟠桃千载熟，明示此利非朝夕可获，须忍受长期等待，类如定期之储、养老之备，细水长流，终成硕果。“不怕五更风”者，譬若短期市场波动、意外破耗，亦不能撼其根本。\n\n卦象小过，宜小不宜大，理财方针首在节流守成，切忌举债扩张、跟风投机；咸卦感而遂通，利合作生财，但须择信实之伴，贵在感应诚信，非利机巧。具体宜：削减非必要开支，整理旧账，保守型储蓄或长线低风险品种可关注；忌：听信浮言投机股市、冲动物业买卖、为人担保。土金性质行业（如地产、珠宝、农业）较合卦气，可稍留意。",
-  "love": "签诗“空空空”，于情缘则如荒原独行，单身者颇感孤寂，纵有追求亦似镜花水月，难有实质进展；已有伴侣者，或觉情意转淡，相对无言，心间空空落落。然“空里得成功”言，真空之中自有妙有，经此沉淀，反能觅得真缘或关系升华。“蟠桃千载熟”喻良缘非仓促可就，需彼此以岁月灌溉，耐得平淡与磨合；“不怕五更风”则谓若能熬过外界诱惑、家庭阻力等寒流，此情弥坚。\n\n小过卦戒“不宜上”，情感中宜守拙藏锋，莫强求对方改变或急于确认名分，反生疏离。变卦咸为山泽通气，强调心灵互感：多聆听少辩驳，多关怀少要求，偶为小惊喜以悦泽（兑）对方。单身者：宜借空档修整心性，扩大生活圈但忌滥交，明春或有良缘初萌。有伴者：忌翻旧账、攀比他人恩爱；宜共习才艺或短途旅行，重拾初心。",
-  "health": "签中“空空空”可应身神虚乏、元气不固；“蟠桃千载熟”则喻寿元绵长，关键在持养之道；“不怕五更风”，示体质虽非强实，但若能防微杜渐，可耐急邪侵扰。卦属兑宫，兑为口、为肺、为泽，又小过卦象雷山，雷动而山止，血气或有上实下虚之弊；变咸卦兑艮相感，重在调和肺金与肾水（艮为山、对应脾胃，亦关后天生化）。\n\n养生宜重滋阴润燥、固本培元。作息必守规律，夜卧勿逾子时，以养阴血。饮食宜温润少辛，如山药、百合、银耳之属，忌冷腻厚味，免伤脾胃。运动须缓不宜骤，散步、太极、吐纳为佳，切戒大汗淋漓，徒耗津液。需警惕：偶发之口干、咽痛、失眠多梦，乃虚火上浮，勿轻视；亦防寒暖失时所致肩背酸重、关节不利。整体无大厄，但求“空”中养静，慎疾延年。",
-  "study": "签曰“空空空”，最切学人根基不牢、腹笥空虚之状：平日用功似在，一遇疑难便觉无从下手，成绩起落不定，心生迷惘。然“空里得成功”非虚语，此空正是放空旧习、倒空满溢之机，而后新知可注。“蟠桃千载熟”喻学问无速成之法，须日积月累，久久为功；“不怕五更风”则鼓励莫惧大考、关键测验，只要功夫深，临阵自稳。\n\n小过卦宜下宜小，学业上当重基础、拣细处，逐章逐节清理盲点，切忌贪多冒进、好高骛远，专攻一门往往收效更宏。咸卦感通，有利群居切磋、师友问答，宜多与同学讨论，借他山之石攻错。具体：制定细密复习计划，每日务必熟读精思一小段；考试运中平，利文科、理解记忆类科目，事先宜提前熟悉考场，以免临场心乱。忌：熬夜抱佛脚、猜题取巧、因一两次挫败自弃。",
-  "general": "此签核心在“空里得成功”五字，警醒眼前之虚无、困顿、寂寞，非是天弃，实为淬炼。蟠桃千载熟，昭示一切真成就皆须至耐至忍，五更风不足畏，足见守得云开之功。综观签象，当下宜行三事：一曰守静如兑泽，涵养虚灵，不为浮言所动；二曰感通如咸卦，待人以诚，和合内外；三曰积微如千载桃，每日必有所蓄，不问道程远近。心态上，须将“空”视作壶中天地，看似无物，实含万有之机；切忌躁急求满，满则招损。中下签非终凶，乃天地发人深省之良药，依此而行，终得功成果熟。"
-}
-```
-
----
-
-## 第 52 签
-
-⚠️ **缺少英文翻译**
-
-### 中文原文
-```json
-{
-  "sign_number": 52,
-  "fortune": "中签",
-  "gua_type": "离宫 旅变鼎",
-  "sign_text": "愁脸放，笑颜开，秋月挂高台，人从千里来。",
-  "interpretation1": "签文四句，皆化忧为喜之象。“愁脸放，笑颜开”，喻阴霾散尽，心境由郁转朗，是困局解脱、柳暗花明之兆。“秋月挂高台”，秋月清辉高悬，虽有明朗之意，亦有清冷孤高之象，台高恐有独处之寒；秋主收成，亦主肃杀，故喜中仍需存谨慎。“人从千里来”，远客忽至，或指外力相助、机遇自远方临门，非独力可成，须善借因缘。卦属离宫，旅变鼎。旅卦为羁旅漂泊、行止未定，鼎卦为革故鼎新、稳重而亨。由旅入鼎，是动荡归于安稳，漂泊终得驻足，然鼎须调和百味，警示得势后不可骄躁，当以和顺持中。中签之象，虽非大吉，却示转机已在眼前，宜以悦色承好运，以虚怀纳远人来助。",
-  "career": "“愁脸放，笑颜开”主职场郁结消散，旧有压力或人际摩擦得以缓解。“秋月挂高台”，月高而明，主职位显要、声名渐起，但秋意微凉，亦暗示晋升后责任愈重，高处须防孤立。事业正由旅变鼎，旅象奔波劳顿，鼎象立基稳固，故宜结束往年飘摇，于当下深耕，将手中项目做精做专。时机上看，秋季前后易现转机，可主动争取需跨部门协调或对外展示的任务。“人从千里来”或有远地资源、异地贵人暗助，不妨多参与外联、出差或线上跨域合作。宜：收敛锋芒，以团队利益为先；忌：骤登高台后忘旧恩，或急于求成而忽略基础。",
-  "wealth": "“愁脸放，笑颜开”预示财务困境将解，欠款、账目缠塞之事可望清理。“秋月挂高台”，月有阴晴圆缺，故财运起伏仍存，不可过度乐观；秋属金，利金、土相关行业，但月在高台，投资不宜追高。“人从千里来”主远方财缘，如异地订单、网络经营或外出引财，尤利商贸、物流、文化传媒等流动性质行业。卦变鼎，鼎为烹饪化生之器，财需累积调制，宜守成为主，忌投机冒险。理财策略上，可考虑稳健型储蓄或定投，清理债务为先。宜：将盈余转为实物资产或技艺投资；忌：轻信“熟人”牵线的暴利项目。",
-  "love": "“愁脸放，笑颜开”，感情中的郁结与误会将随诚意消融，关系回温，破镜有望重圆。“秋月挂高台”，秋月澄明却带孤清，暗示感情需高处不胜寒的体谅，双方若相隔两地或地位悬差，当避相责，多添温情。“人从千里来”是重要征兆，单身者或遇远方之人结缘，姻缘不限于近处；已有伴侣者，可能因差旅、异地暂别后重逢，感情更笃。旅变鼎，漂泊的驿动归为鼎食之安，主关系走向稳定，订婚、成家之议可提。宜：主动表达思念，精心安排见面或短途同行；忌：翻旧账、猜疑对方社交圈。",
-  "health": "“愁脸放”直指情志舒展，压抑、焦虑渐解，心神得宁，对肝气郁结、失眠烦躁有良益。“秋月挂高台”，秋应肺金，月为阴，高台多风，需防秋燥伤肺、夜风侵体，易有咽干、咳嗽之扰。卦变鼎，鼎主火候调合，养生重点在饮食温润、作息匀停，忌大补大泄。应增食梨、藕、银耳等润燥之物，早起缓行，收敛神气。“人从千里来”亦可解为远地求医或习得远来养生法，如异地之良方、线上问诊等。需警惕：秋冬交际旧疾微澜，尤以呼吸道与肠胃为甚，勿轻视暖护。",
-  "study": "“愁脸放，笑颜开”，学业上的瓶颈或焦虑情绪散去，思路转清，考场怯弱之态改善。“秋月挂高台”，秋月喻高远志向，高台示目标明晰，学子当立鸿鹄之志，但秋亦有肃杀之气，不可放松日常积累。“人从千里来”或指良师益友远道而现，如线上名师点拨、异校交流或外地访学，勿闭门造车。旅变鼎，旅者取经于途，鼎者成大器之象，故现阶段宜多采集各方治学方法，融汇后自成一家。考试运：秋季考利文科、写作，笔试宜反复检查，忌意气用事；利外语、历史、哲学等需长程记忆科目。",
-  "general": "此签化愁为笑，秋月虽清寒，却照见远方来人，是困局将破、佳音渐至之象。核心在于“转”与“借”：转自身心境，借外力成事。行动上，一宜解开心结，以平和面容接人待物，气场一变，缘法自开；二宜留意远方信息、异地机遇，不可画地为牢；三宜稳扎根基，鼎立前必先清整内务，如梳理财务、调整团队、温习旧学。心态上，秋月高悬，可赏不可亵，得意时留三分清醒，防孤高致损。"
-}
-```
-
----
-
-## 第 53 签
-
-⚠️ **缺少英文翻译**
-
-### 中文原文
-```json
-{
-  "sign_number": 53,
-  "fortune": "中上签",
-  "gua_type": "乾宫 晋变噬嗑",
-  "sign_text": "须着力，莫远游，长竿钓向蟾蜍窟，直欲云中得巨鳌。",
-  "interpretation1": "签文“须着力，莫远游”开篇即点明要旨：收摄心神，专注一事，切勿向外驰求、舍近逐远。“长竿钓向蟾蜍窟”，长竿喻精深策略，蟾蜍窟乃月宫幽隐之所，象征高远而隐秘的目标，非浮泛可得；“直欲云中得巨鳌”，巨鳌乃深海灵物，偏从云中钓取，明言志大而途险，须下非常之力。卦属乾宫，晋变噬嗑：晋卦明出地上，柔进上行，有进取之象；变噬嗑则雷电合章，主破障除碍、咀嚼消化。乾金健行，但需克服火金相克的矛盾，以专注深耕化阻力为助力。中上之签，整体寓意：莫贪多鹜远，定准近身要务着力深耕，如长竿钓月，看似虚悬，实则暗藏天机，终能于平凡中得非凡。",
-  "career": "签云“须着力，莫远游”，事业上最忌分心旁骛、频繁跳槽或追逐虚热。应如“长竿钓向蟾蜍窟”，选择一项看似冷门或需长期积累的项目，倾注心力深耕；蟾蜍窟象征内部资源或未被重视的领域，在此发力反易出奇绩。“巨鳌”喻厚利重职，云中钓之，明示不可急于求成。乾宫健行，晋卦主升，噬嗑主决，宜主动承担攻坚克难的任务，尤利技术研发、流程优化、内部竞聘等。时机在辰戌丑未月土旺生金之时。宜：脚踏实地完善手头细节，主动展现专业深度；忌：好高骛远轻易更换跑道，与同僚争功邀宠，忽视近在咫尺的晋身之阶。",
-  "wealth": "“莫远游”三字对财运的启示是：不宜远赴他乡求财，或投资陌生领域。“长竿钓向蟾蜍窟”，蟾蜍窟喻幽深不显眼的财源，如长线持有之资产、冷门收藏、或需耐心经营的副业。巨鳌虽大，云中得之，主得财过程曲折且需持久守候。乾宫属金，晋卦火地，噬嗑火雷，火金相克，投资理财宜取土属性行业（如地产、基建、农业）以通关生金。宜：专注正财收入，深耕已有资源，稳健储蓄；忌：参与高风险短线投机，轻易与人合伙远行创业，或分散资金多处撒网。守成为上，静待时机。",
-  "love": "签云“须着力”提示感情需主动维系，不可听之任之。“莫远游”暗示两地分隔久则生变，宜多陪伴身边人。“长竿钓向蟾蜍窟”，蟾蜍窟月宫孤高清冷，喻对方心思幽深不易捉摸，需用耐心如长竿般深入试探。“巨鳌”是难得良缘，云中得之，遇合多非寻常途径，或自旧识转化、或由日常相处生根。单身者宜留意身边默默关注之人，勿舍近求远；有伴者宜共同培养一项长线兴趣以增默契，忌翻旧账或过度猜忌。乾卦刚健，表达心意时宜温和含蓄，避免强势主导。春末夏初，情缘易显。",
-  "health": "“须着力”提醒关注体力状况，日常需加强锻炼以固元气。“莫远游”暗指旅途劳顿易耗气血，不宜远行奔波。“蟾蜍窟”在身象应肺与皮毛，且蟾蜍鼓腹，关联脾胃消化；月为太阴，关乎肾水。需留意呼吸系统、肠胃及水湿代谢。“巨鳌”鱼龙之物，主风气动，慎防风寒湿邪。晋卦明出地上，日照当空，宜晨起运动升发阳气；噬嗑主咬合，饮食需细嚼慢咽，滋养后天。宜：早睡养阴，少食生冷厚腻，春季多保暖头颈；忌：熬夜透支，远行疲惫，忽冷忽热。",
-  "study": "签云“须着力，莫远游”，劝学切忌三心二意，宜选定一个主攻方向深钻，如长竿专注一穴。“蟾蜍窟”意象幽隐，对应晦涩难懂之学问（如典籍研读、理科难题），正需着力攻克。“巨鳌”如魁首、高分，云中得之暗示不可侥幸，需脚踏实地，反复咀嚼消化。乾金主刚健，逻辑思辨有利；噬嗑卦有咀嚼消化之象，宜拆解知识点，层层深入。宜：制定长期规划，多做真题实战，虚心请教师长；忌：贪多嚼不烂，频繁变换学习方法，假期打断积累。考场宜提前到场静心，避免匆忙影响发挥。",
-  "general": "此签核心在“专注”与“深耕”。关键行动：其一，收敛心神，将精力聚焦于当前最紧要的一件任务或关系上；其二，打消“远游”妄念，从身边小事或现有资源中挖掘机会，勿舍近求远；其三，如持长竿待月，保持耐心，以守为攻，终见云中巨鳌。心态上，勿羡他人速成，着力处即是云梯。晋变噬嗑，意在咬碎障碍，光明自现。总之一分耕耘一分奇遇，看似无望处正是转机埋藏之所。"
-}
-```
-
----
-
-## 第 54 签
-
-⚠️ **缺少英文翻译**
-
-### 中文原文
-```json
-{
-  "sign_number": 54,
-  "fortune": "中上签",
-  "gua_type": "震宫 震变归妹",
-  "sign_text": "无踪无迹，远近难觅，旱海行舟，空劳费力。",
-  "interpretation1": "签文“无踪无迹，远近难觅”喻示目标若隐若现，看似有路却无痕可循，遍寻远近皆不得要领。“旱海行舟”尤为警醒：舟行须水，旱海乃不毛之地，强行则桨折舟困，徒耗心力。“空劳费力”直指方向悖谬，纵使勤勉，终归架空。此签卦属震宫，震为雷，主动荡、变革，然变卦归妹（雷泽归妹），乃少女归嫁而位不当，暗合所求之事名实难副，或时机未契而强为。震之健行遇归妹之非正，恰如旱海奋桨，愈进愈窘。然吉凶定为中上，非绝境，乃警示：当止则止，回转舵柄，别寻水草丰美之地。总体寓意：执迷于不可为之地，不如静观其变，待风雷相济，自有舟行顺水之时。",
-  "career": "签中“旱海行舟”直指事业困局：若方向有误，纵日夜兼程，亦如沙中行船，寸步难移。“远近难觅”暗示晋升机会或理想岗位似近实远，投递简历、争取项目常石沉大海。震卦主动，但变归妹提示勿因外界催促而仓促择业，恐入职后发觉水土不服。宜暂停盲目行动，如舟子察水文，重新评估自身优势与行业趋势，转向“水草丰茂”之域（如熟悉领域或朝阳产业）。具体时机：秋冬之交或有转机。宜守成、深耕现有职责，忌冲动跳槽或裸辞。忌：与同僚争虚名、孤军奋战。",
-  "wealth": "“旱海行舟，空劳费力”直言财帛如沙，难以聚积。正财虽稳，却需付出超常心力，偏财更是“远近难觅”，彩票、投机类投资如沙中淘金，徒招损失。卦象归妹有“非正之合”，警示合作求财恐遇貌合神离之局，不宜轻信高息诱惑、合伙创业。宜取“舟行需水”之象，理财以流动、灵活为上，如储蓄、低风险基金，忌固定资产重仓或长线死守。行动上：核对账目，削减非必要开支，勿为面子消费。忌：为人担保、借贷扩张。",
-  "love": "“无踪无迹”映照感情世界的迷离：单身者寻寻觅觅，难遇可托之人，如同沙海寻泉，愈急愈渴。“旱海行舟”喻强求之态，若刻意相亲、纠缠，反令缘分远遁。震宫变动之际，不宜仓促定情。已有伴侣者，恐因沟通不畅如隔“旱海”，彼此心意难达，宜细水长流式关怀，忌陈年旧账重提。归妹卦本主婚嫁，此处变象提醒：勿因年龄或外压草率成家。具体行为：宜以静制动，培养共情，如甘霖润泽旱地；忌猜疑试探、情绪爆发。",
-  "health": "签文“旱海”喻体内津液不足，易生燥火。震卦对应肝胆，防肝阳上亢，出现目赤、失眠、偏头痛。“空劳费力”警示勿过劳消耗，熬夜加班如沙海行舟，徒损元气。近远难觅病源，暗示若有不适，勿盲目尝试偏方。养生方向：饮食宜滋阴润燥（梨、银耳），忌辛辣烤炸；作息效法自然，子时前入眠以养肝血。运动可取“舟行”意象，选游泳、瑜伽等柔性项目，避大汗淋漓。需警惕信号：长期口干、莫名焦躁、凌晨易醒，及早调息宁神。",
-  "study": "“旱海行舟”直指学习方法之误：死记硬背如沙地推舟，费时无功。“无踪无迹”形容知识脉络散乱，难成体系，应试时答案似近实远。震卦主思，变归妹却提示勿钻偏题怪题。利：回归基础，以旧出新，梳理错题集，如引水入渠。考试运：恐遇生疏题型，临场宜先览全局，先易后难。具体行动：宜结伴研讨，借“归妹”相合之意互补长短；忌闭门造车、熬夜突击。科目上，利逻辑思辨类（如数学、策论），不利纯记忆类。",
-  "general": "此签之要，在于识得“旱海”非舟行之地，及时转舵。核心提醒有三：一、止妄动，当下所求若劳而无功，便是天意让人调头，勿执“坚持即胜利”之迷；二、重蓄势，旱海需待云雷，归妹卦示阴阳调和乃成，可借此时充电、结善缘；三、养心田，以“远近难觅”之淡然，破执念之困，信步他途，或见柳暗花明。心态上，效法震卦之警醒而不乱，终能行舟于顺水。"
-}
-```
-
----
-
-## 第 55 签
-
-⚠️ **缺少英文翻译**
-
-### 中文原文
-```json
-{
-  "sign_number": 55,
-  "fortune": "中下签",
-  "gua_type": "震宫 震变噬嗑",
-  "sign_text": "细雨蒙蒙湿，江边路不通，道途音信远，凭仗借东风。",
-  "interpretation1": "签文“细雨蒙蒙湿，江边路不通”以迷蒙细雨、湿滑江岸，喻示当下处境如行于泥泞之途，前行多有滞碍。《易》曰震为雷，主动，然变卦噬嗑为“口中啮物”之象，主吞茹艰辛、需砥砺方能通泰。震宫突变，暗示本已起动之事突遇阻隔，信息闭塞、支援难至，正如“道途音信远”。所幸末句“凭仗借东风”，借三国赤壁故事点破转机：东风非力取，乃时运与外力之襄助。卦象震木得风而动，木主仁，风主散，提醒困局非死结，宜静待天时、广结善缘，待机借势破局。全签寓意：际遇低回，然柳暗花明之机藏于“借”字，不可一味用强。中下签之断，是劝人暂敛锋芒，持守中道，待云开雾散。",
-  "career": "事业运恰如“江边路不通”，眼前多有阻滞，项目推进缓慢，或遇流程繁琐、协作失和。签中“细雨”喻外力环境不明朗，“音信远”主上意难测、消息迟滞，此际不宜冒进强求。震卦本主动，变噬嗑则示若强行启动，必遇重重咬合之困，反损元气。故宜退而梳理内务，修葺制度，稳守现有岗位。东风之借，暗指职场贵人往往来自意想不到之处，或为新调任的上司、跨部门同事，宜谦和待人，广结善缘。利后勤、行政、梳理类职务，忌争功出位。待阴雨消散，路自显现。",
-  "wealth": "财运逢“细雨蒙蒙湿”，如水气漫散，主财源不清、意外损耗。江边路不通，切莫涉足陌生领域或跟风投机，否则如陷泥淖。噬嗑卦象口中有物，警示若贪求偏财，必遭咬噬之害。正财尚可，但进展缓慢，宜守不宜攻，尤其此时签署合约、扩增负债皆需再三审度。借东风之意，是言财运转机在外力，或为长期耕耘之回报，或为政策利好，非短期可得。宜将资金投于稳健储蓄或学识增长，培植根本。忌涉足高风险投资、轻信消息面。",
-  "love": "感情世界如细雨湿路，朦胧暧昧，心事难明。江边路不通、音信远，主双方沟通不畅，易生误会，或处异地而疏离。震卦主动荡，情感易生变数；变噬嗑则需“咬合”磨合，双方或正经历三观碰撞之痛。单身者暂难遇合适机缘，“借东风”暗示须借助朋友介绍或社交场合，非刻意而为可得。有伴者切忌翻旧账、冷战相向，宜就事论事，耐心沟通，把话说开，如春雨润物，细而不断。东风起时，恰是回暖之机。",
-  "health": "签文“细雨蒙蒙湿”直指湿邪侵入，易致身体困重、关节酸楚。江边路不通，喻体内气机不畅，如肝气郁结、脾胃运化失司。卦属震木，对应肝胆，变噬嗑则口中有物，消化系统易生积滞，须警腹泻、腹胀或食欲不振。养生宜祛湿为大，饮食清淡，多以薏米、茯苓煲汤，忌生冷油腻。晨间可练八段锦或慢走，借东风喻借自然阳气，卯时日出，迎风缓行，升发体内阳气。若感情绪低落，乃肝郁之兆，可习静坐调息。",
-  "study": "学业逢此签，恰似“道途音信远”，求学路上疑惑无人解，或消息闭塞，错过好方法。细雨湿路，心思迷蒙，理解力暂遇瓶颈，时有力不从心之感。噬嗑卦象咬合，意味须在难啃的知识点上下苦功，不可跳过。借东风者，宜向师长、同窗主动求教，或组团攻书，借他人之智破己之惑。考试运不显山露水，切忌临时抱佛脚，利扎实根基，不利押题取巧。科目上，震主动，利理工实践类，不利需死记硬背者。",
-  "general": "总之，第五十五签喻前路受阻、音书难通，乃一时困顿之象，非永久之局。核心理路在“借”字：借东风、借外力、借天时。具体行动：其一，暂缓扩张之举，转攻内部整合；其二，厘清人际脉络，谦以待人，因贵人即在其中；其三，养精蓄锐，调柔身心，莫陷焦躁。心态上，当解“细雨”为天洗尘埃，为否极泰来之铺垫。衔得东风至，便是扬帆时。中下签非凶绝，实警醒修身以俟命而已。"
-}
-```
-
----
-
-## 第 56 签
-
-⚠️ **缺少英文翻译**
-
-### 中文原文
-```json
-{
-  "sign_number": 56,
-  "fortune": "中下签",
-  "gua_type": "坤宫 大壮变归妹",
-  "sign_text": "平地起云烟，时下未能安，高处觅姻缘。",
-  "interpretation1": "签文“平地起云烟”喻静境中忽生变故，如晴空霹雳，平地起风波。“云烟”为虚浮不实之象，暗示当前处境根基动摇、是非缠绕，看似稳固之事骤然生变。“时下未能安”点明此际动荡未息，人心惶惶，若强求平静反增焦灼。“高处觅姻缘”则转言转机所在：居高望远，另辟蹊径方能化解困局，然“觅姻缘”非仅指婚配，更喻求取外援、另谋靠山。卦属坤宫大壮变归妹：大壮为雷行天上，盛极而骄，易刚愎致险；变归妹则雷泽相激，阴居阳位，有急就苟合之象。《归妹》卦辞“征凶，无攸利”，警示此际举动需审慎，否则得不偿失。签诗整体寓意：平地波澜起于轻心，宜暂守静观，高处之缘或为转机，但须防所托非人，仓促抉择反添乱局。",
-  "career": "事业如“平地起云烟”，主单位内部人事暗涌，或突遭政策调整、职权变动。雷天大壮本有强势进取之象，但变归妹则暗示强求合作或扩张易引发纠纷。“时下未能安”告诫此刻不宜妄动，争权夺利只会跌入陷阱。“高处觅姻缘”对应事业求援之道，宜向高层或有实力者示好借力，但归妹卦“妹”为配属，喻依附于人须防失却自主。具体而言：宜暂守本职，精进技能以避风波；忌冒头争功、轻易站队。秋季前后或有转机，届时可借考察、进修之名暂避锋芒。",
-  "wealth": "财运如平地生烟，虚而不实。雷天大壮资财易聚易散，有虚张声势之象；变归妹则财来不正、或因婚嫁合作损财。“时下未能安”提醒投资环境波动，偏财尤险。“高处觅姻缘”暗喻财需依托贵人，或向远方、高处求索（如省外、涉外贸易），但须防契约陷阱。宜守成勿扩张，整理财务漏洞；忌合伙、担保、短线投机。坤宫属土，土利稳守，如储蓄、地产可做长期备选，但交易须格外审慎。",
-  "love": "情感如云烟变幻，“平地起”主平顺关系忽生误解、外界干涉。“时下未能安”说心绪不宁或感情动荡期，不宜做重大决定。“高处觅姻缘”有双层寓意：单身者宜向条件优于自身者求偶，或经长辈、上级引介，但归妹卦象“以妹陪嫁”，恐有地位不对等之虞，须防委屈将就；有伴者勿因眼前矛盾向外寻求慰藉，高处指理想与现实的落差，当回视内心。相处之道：忌翻旧账、翻查隐私，宜给彼此空间，待烟消云散。",
-  "health": "“平地起云烟”应于身体，喻隐疾突发或旧病忽变。“云烟”属气机不顺，归妹卦涉震（肝）兑（肺），金木相冲，宜防肝火犯肺、咳嗽气逆，或情绪抑郁致气血瘀滞。坤宫主脾胃，大壮为阳盛，易有过劳虚火、消化不良。“时下未能安”强调心神不宁，需调理作息，避免熬夜、过虑。养生宜静坐、散步，饮食清淡，略加百合、莲子安神。警惕突发性眩晕、失眠加剧、肠胃痉挛等信号，及时体检莫拖延。",
-  "study": "学业如平地忽逢迷雾，“云烟”表思路不清、知识点混淆。“时下未能安”主考试备战受外扰分心，或成绩起伏令人焦躁。大壮变归妹，学习上易有虎头蛇尾之弊，或贪多嚼不烂。“高处觅姻缘”指示学而求其道：宜登高望远，请教名师或主攻高远学科（如理科、哲学），但归妹卦提醒不可死记硬背，莫为分数攀附捷径。考试运中平，利文科发散、灵感题，忌答题疏漏；考场宜早到免扑空。",
-  "general": "此签示人平地风波生，当以静制动。时局未稳，切勿仓皇妄动。高处之缘，可作转机，然归妹大象无攸利，攀附须防失己。关键行动建议：一者，暂退守本业，收拢心神，静待云开雾散；二者，若求外援，当察其德信，莫贪快求全；三者，自身修养莫放松，“平地”起烟皆因根未深，趁此境打磨定力。心态上，如坤宫厚德载物，容受暂时不安，信低处亦可蓄势腾空。"
-}
-```
-
----
-
-## 第 57 签
-
-⚠️ **缺少英文翻译**
-
-### 中文原文
-```json
-{
-  "sign_number": 57,
-  "fortune": "中签",
-  "gua_type": "坤宫 大壮变夬",
-  "sign_text": "正直宜守，妄动生灾，利通名达，叶落花开。",
-  "interpretation1": "签文首句“正直宜守”，立身以正，持守为先，恰如大地坤厚载物，柔顺安贞。次句“妄动生灾”，警醒若不循正道，轻举躁进，必招灾咎，此与大壮卦义相契——大壮雷行于天，威势赫赫，然刚强过甚则易折，故爻辞戒“利贞”，不可恃强妄为。三句“利通名达”，转言前景，若能恪守正直，待时运流转，自可亨通显达，名实俱至。末句“叶落花开”，以自然之象譬喻人事枯荣：叶落非终局，花开有其期，喻困境中藏生机，衰极而复盛。卦由大壮变夬，大壮属坤宫，震木克坤土，变夬则兑金泄坤土，卦象昭示：初时多有冲击动荡，须沉潜守静，不可强求；夬为决断，然非莽撞断离，乃守正而后能决。整体签意，是教人于混沌时局中深根固本，以静制动，待阴霾散尽，自见花开月明。",
-  "career": "“妄动生灾”四字，为事业之首要箴规。大壮变夬，职场易有骤然之变，或遇派系角力、权责更迭，此时宜守不宜攻。大壮上震下乾，震为动、为声名，乾为刚健，若顺势而为，可建功名，然“正直宜守”明示：功名须从正道取，莫走捷径，更忌踩踏同僚以自显。夬卦泽天，有决裂之象，若妄动，恐与人起正面冲突，自损前程。此签主宜安守本位，精修专业，如“叶落”般收敛锋芒，待内部调整完毕，上级自能鉴明忠直，届时“花开”，晋升、嘉奖不期而至。忌盲目跳槽、主动求变，更忌因一时不公而负气行事。",
-  "wealth": "财运以“叶落花开”点睛，喻目前或遇财源凋零、进账迟缓之秋，然大壮变夬，卦象乾金震木、兑金乾金，金木相克，易有投资损耗、合作破局之象，故宜步步为营，不宜作风险之举。“正直宜守”又指，正财尚稳，偏财莫贪。坤宫为土，土能生金，暗示根基若厚，财源自生，但不可“妄动”，譬如盲目扩张信用、跟风投机，皆应避之。理财当以保守为尚，现金为王，待“花开”时序，约在秋冬交替（兑主秋，乾主秋冬间）或有转机。若涉诉讼、合约纠纷，尤须持正以待，勿取巧。",
-  "love": "“叶落花开”，恰喻情缘如四时更迭，或有凋零之叹，终有再荣之期。此签对感情，主打和守成。大壮变夬，雷化泽，雷动易生口角，泽蓄可润情缘；暗示热情消退时，莫因一时冷淡而轻言决裂（夬为决），当返观“正直宜守”——忠诚与坦诚，才是情感根基。单身者，此时不宜急切寻觅，宜静修自身，如叶落沃土，待机缘自然萌发；有伴者，若正处冷战或分歧，切莫妄动翻旧账、提分离，守持本心，待彼此情绪平复，关系反能更上一层。坤宫土主信，言行一致、不离不弃，则花终重开。",
-  "health": "坤宫主脾胃、肌肉，大壮雷动木克土，夬卦兑为缺、乾为头首，提示需防消化系统紊乱及头部不适。签诗“妄动生灾”，于身体即是勿过劳、勿暴饮暴食、勿强耗阳气。当前宜守静，仿效“叶落”，减缓节奏，多休少应酬，使气血归元。适当调养之道，可择柔缓运动如太极、八段锦，助脾土运化。秋冬交季（兑乾金旺），需防旧疾复发，尤关注饮食洁净与作息规律。“花开”喻身体复原力尚在，若能静养，自可焕然。",
-  "study": "求学问道，重在“正直宜守”，即正心诚意、扎实根基。大壮卦有雷霆奋发之象，若用于苦读，本可一日千里，但签文诫“妄动生灾”，此劝学子勿投机取巧，勿考前突击，勿笃信旁门左道。坤宫土主思，厚德载物，学问须日积月累，如叶落归根，化作养分。考运则如“利通名达”，若有真正实力，时机一到，必可扬名；最忌浮躁跳脱，如大壮之刚猛无继。夬卦有决断意，表明学习上须有取舍，专攻优势科目，莫贪多求全。考场发挥，宜稳扎稳打，审题细致，自见花开。",
-  "general": "第57签以“叶落花开”作结，昭示人间万事，皆有消长周期。此时天地气机收敛，人宜随之静守，而非逆势强求。首要守“正直”，言行不欺暗室，心境不役于物；次要戒“妄动”，决策、出行、口舌之争，皆须三思。具体可践行：一、每日拨片刻静坐自省，涵养坤德；二、未明局势时，宁退一步，留转圜余地；三、整理旧物、清简居所，如落叶归根，为新机腾出空间。待得云开月霁，自可见枯木逢春，花开满枝。"
-}
-```
-
----
-
-## 第 58 签
-
-⚠️ **缺少英文翻译**
-
-### 中文原文
-```json
-{
-  "sign_number": 58,
-  "fortune": "中上签",
-  "gua_type": "坤宫 需变节",
-  "sign_text": "君子升，小人阻，征战生离苦，前有吉人逢，信在马牛人在楚，事要营求妥。",
-  "interpretation1": "签文首句“君子升，小人阻”，点明君子行道虽有上升之势，却难免遭逢小人嫉妒阻挠，此乃时运之常。“征战生离苦”以征战喻纷争，暗示若陷入意气之争，必致离散痛苦，劝人避免冲突。“前有吉人逢”为转机，预示前路有贤德或地位高于己者相助，遇险可解。“信在马牛人在楚”意象深曲，马牛代指信使输送，楚为异地，寓意音讯往来或有迟延、误会，需耐心传递沟通。“事要营求妥”为全签核心，凡事不可恃才轻进，须周密营求、妥善安置，方能避险。卦属坤宫，需卦变节卦：坤为顺承，需为待机，坎水在前，宜守静待时；节卦象曰泽上有水，制而不过，教导节制适度。二者合言，处境虽有险阻，但非绝境，当以柔顺之心、节制之度，化险为夷。整体寓示：行事忌急，防小人，重沟通，持正守稳，终得贵人援手，成事可期。",
-  "career": "签文“君子升”主事业有晋升之兆，“马”象奔波、远行，对应岗位需走动、外联或异地发展，尤利销售、贸易、驻外等职。然“小人阻”警示职场隐有人妒能争功，忌正面冲突，否则如“征战生离苦”，易引团队离散、自身受损。“前有吉人逢”指出上司或行业前辈乃贵人，宜主动呈报方案、请教疑难，获取支持。“信在马牛人在楚”喻指令传达易生延误或误解，重要决策当书面确认，忌口头草率。坤宫需变节，卦示待时而动，节则节制，故变岗跳槽不宜急迫，秋冬之交时机更佳。宜：暗蓄实力，稳扎稳打，借贵人梯航；忌：与同事公然树敌，越级争功。",
-  "wealth": "签文“事要营求妥”直指财运之道在于缜密经营，忌投机取巧。“小人有阻”暗示合作项目须防同行暗算或合约陷阱，“征战生离苦”警告赌博、杠杆等高风险行为易致破财离析。“前有吉人逢”可望通过年长者或官方渠道得财，如合规补助、稳定订单。“信在马牛人在楚”象财讯迟滞，投资前务必核实数据，勿信小道消息，账款回收或需多次催问。卦变节卦，节为约束，理财当量入为出，预留备用金。利正财、土金类行业（如地产、金融），偏财平淡。宜：整账务，守契约，听忠告；忌：合伙轻信，贪快钱，扩张借贷。",
-  "love": "情感运以“征战生离苦”为警，争执不休或翻旧账易致冷战、分手。已婚者防因工作、财事迁怒伴侣，小人阻象也可能暗指外人搬弄是非。“前有吉人逢”则带来和解之机，单身者易在职场、长辈介绍下遇见良缘，对方或年龄稍长、行事稳健。“信在马牛人在楚”呼应异地恋、网恋或沟通不畅，需多耐心传心意，勿因回复延迟生疑。需卦主等待，情缘不可强求；节卦主分寸，相处宜温和克制，留空间。宜：主动说明误解，借共同事务增进默契；忌：盘查逼问，情绪化对峙。",
-  "health": "签文“征战生离苦”隐喻身心疲敝，劳累过度易引发旧疾。坤宫应脾胃，需卦坎水为肾，节卦兑泽为肺，提示关注消化、泌尿与呼吸道。饮食须有节（节卦），避免暴饮暴食及生冷黏腻。“前有吉人逢”可引申为遇良医或得当调理，宜定期体检。“信在马牛人在楚”象气血运行偶有阻滞，可择温和运动疏通经络，如太极、散步。作息宜顺应坤卦厚德载物之性，安卧守神。勿因小事焦忧虑耗，养心为上。",
-  "study": "“君子升”主学业排名有望提升，但“小人阻”提醒考场或小组作业中防人抄袭、拖累，宜独立审慎。“征战生离苦”劝戒避免同学间恶性竞争，合群共济反更进益。“前有吉人逢”预示师长点拨如明灯，莫耻于问，可获关键启悟。“信在马牛人在楚”象知识点散乱或进度延误，宜制定条理计划，反复温习。需卦强调积累，急不得；节卦强调均衡，勿偏科。考试运中平，利文科、记忆类；考前宜安静备考，忌熬夜突击。",
-  "general": "此签总括，境遇半由人事半由天时。“君子升”是趋势，“小人阻”是考验，二者并存方显持守之贵。行动当牢记“事要营求妥”，凡事三思定策，周密铺排，不可冒失。其二，借“前有吉人逢”之机，主动亲近贤能，耳听他人提点，莫固步自封。其三，深味“信在马牛人在楚”，沟通往来当再三确认，勿因曲解酿祸。心态上，思坤宫需卦之“待”与节卦之“制”，安守本位，不急不争，时运自转。顺境修谦，逆境修韧，是小得圆满之道。"
-}
-```
-
----
-
-## 第 59 签
-
-⚠️ **缺少英文翻译**
-
-### 中文原文
-```json
-{
-  "sign_number": 59,
-  "fortune": "中下签",
-  "gua_type": "坎宫 丰变震",
-  "sign_text": "纷纷复纷纷，欷歔独掩门，敛眉望灯火，伴我坐黄昏。",
-  "interpretation1": "签文“纷纷复纷纷”以纷繁之象开篇，暗喻时局扰攘、思绪缠杂，正应坎宫险陷之性，如水波层叠难平。“欷歔独掩门”化叹息为动作，闭门自守，示人心倦于纷争，退藏于室。“敛眉望灯火”为全诗点睛，灯火虽微却为暗夜独明，眉头紧锁间尚存一丝凝注，喻困境中犹有内省之机。“伴我坐黄昏”收于暮色苍茫，黄昏为昼夜交界，象征前途晦明未定，然静坐之功正是转机之始。卦象坎宫逢丰变震，丰如日中天，盛极则变，震雷起于脚下，主骤变与惊动。丰之盛大转为震之动荡，正切中“纷纷”后“独掩门”的退守意境。坎水为智，此签劝人于纷乱中收摄心神，识得独处之力，灯火虽昏不灭，静待天明。中下之兆非全凶，乃示警以收敛锋芒、守心待时为要。",
-  "career": "签文“纷纷复纷纷”直指职场人事纷扰，或派系倾轧、或流程混乱，“欷歔独掩门”则暗示当前不宜强出头，主动避让是非、暂守岗位乃上策。“敛眉望灯火”提醒在低谷期须专注核心业务，灯火喻关键技能或可靠人脉，皱眉凝望意味着复盘与深耕。丰卦本主丰盛，变震则显示原有成果可能因突发动荡受损，如项目生变、架构重组。坎宫为陷，事业多有阻滞，宜采取守势，切忌冒进转岗或创业。具体宜：梳理手头流程，完善备份方案；忌：公开抱怨环境、与同事争利、轻信空头承诺。待震雷之势过后，黄昏坐尽自见曙光。",
-  "wealth": "“纷纷复纷纷”形同财务信息混乱、收支账目不清，“欷歔独掩门”显示财路渐窄，或有意外开支逼使紧缩。“敛眉望灯火”之灯火可比零星收入或不多的积蓄，皱眉而望意味理财须精打细算，每一分皆当珍视。丰变震，丰为盈余，震为虚损，卦象警示财富易因突发变动（如健康、家庭、市场起伏）而流失。坎宫主水，财如水态，近时应避免高风险投资或借贷担保，尤其涉水属行业（物流、贸易）更需审慎。正财尚可守，偏财难求。宜：盘点债务、制定节约计划、变卖闲置回血；忌：投机博彩、合伙创业、为人作保。",
-  "love": "签文“纷纷复纷纷”映照感情世界杂音四起，“欷歔独掩门”画出争吵后闭门自伤的情境，或单身者因过往失望而心门紧闭。“敛眉望灯火”中灯火是孤独中的一丝温情，皱眉凝望意味着即便在隔阂中仍有牵挂，只是暂时难以言和。黄昏意象主情感关系进入平淡或模糊期，易生倦怠与猜疑。卦象坎为陷，丰变震提示感情根基（丰盛一时）若经不起动荡（震），则易生突变。中下签对爱侣而言，多主沟通不畅、旧账翻涌。宜：给彼此独处冷静之机，事后再以灯火般温和方式重拾话题；忌：追责逼问、在外寻求安慰、沉溺自怜。单身者宜专注自修，勿因寂寞将就。",
-  "health": "“纷纷复纷纷”可对应思绪纷繁引发失眠头痛、心火上炎，“欷歔独掩门”则指情绪郁闷、气机不畅，多叹伤肺，易致气短乏力。“敛眉望灯火”之灯火喻心火或双目，皱眉望灯提示用眼过度、心神消耗，须防眼疾及偏头痛。黄昏为肾经当令，坐黄昏暗示肾气虚损、腰膝酸软，坎宫属水对应肾脏，丰变震加剧情志波动引发内分泌失调。整体无急症，但需警惕长期疲劳累积成疾。养生方向：酉时（黄昏）宜静坐养肾，饮食增黑豆、桑葚，戒熬夜伤阴；运动以缓步、太极调和气息。需警示持续低热、无故消瘦等信号，及时调理。",
-  "study": "签文“纷纷复纷纷”描述学习环境干扰多、专注力易分散，“欷歔独掩门”劝学子暂离喧嚣、自修为主，闭门非逃避，而是深度沉潜。“敛眉望灯火”中灯火指微弱但持续的求知欲，皱眉苦读恰是攻坚必经之路。黄昏意象暗示考试运偏向中后段发力，非一蹴而就。卦象坎为智水，但丰变震，思考易跳跃或混乱，须警惕粗心失分。此签利文科、逻辑推演类科目，不利需临时强记的考试。学习宜：采用番茄钟间隔训练专注，黄昏时段复习巩固；忌：频繁更换目标、与人比速、熬夜突击。考场宜早到熟悉环境，答题先览全局。",
-  "general": "纷扰黄昏之象，道出人世间静躁相生之理。此签虽曰中下，实多警省之功。总结前路：当知“纷纷”为无常常态，“掩门”非懦弱，乃择地蓄力；灯火虽微，照见自己即是生机；黄昏终将破晓，唯静候者得之。建议行动：一、减少无效社交，每日留一段独处省思，如签文坐黄昏；二、凡事务分轻重，仿灯火专一之德，一事清方可再启一事；三、坎宫险陷，此季谨言慎行，凡涉金钱、契约、口舌之事，皆缓做决断。持此心态：以静眼观众声，以微光守内心，待震雷消散，天明自现。"
-}
-```
-
----
-
-## 第 60 签
-
-⚠️ **缺少英文翻译**
-
-### 中文原文
-```json
-{
-  "sign_number": 60,
-  "fortune": "上上签",
-  "gua_type": "兑宫 归妹变睽",
-  "sign_text": "红颜美，休挂怀，人在车中，舟行水里。",
-  "interpretation1": "签文“红颜美，休挂怀”，以红颜譬喻世间令人眷恋的美好表象，如美色、虚名、浮利，其美虽动人，却易凋零，故劝人莫要执着挂怀，陷于忧思。“人在车中，舟行水里”，车行于陆，舟泛于波，各得其所，喻人生际遇自有依凭，如行者得车、渡者得舟，无需强求或忧虑前路。此两句暗合卦象：兑宫归妹，兑为悦、为少女，归妹卦言嫁娶归宿，主情缘、合作有所依归；然变卦为睽，睽为乖离、相违，火泽相背，示事物在和谐中隐含分歧之机。幸得签属上上，明示虽有波折，终能各安其位。核心寓意：世事如舟车流转，自有安排，放下对表象的执念，安守本分，则得失不惊，顺遂自来。",
-  "career": "签中“人在车中”喻事业已上轨道，得安稳之位；“舟行水里”示外部环境恰如顺水行舟，利于施展。兑宫归妹卦，主合作、依附之象，职场中宜配合团队，借力而行；变睽则提醒，看似平顺时或有意见分歧、同僚相违。此签事业吉在其位可守，但应警惕微小矛盾演化。宜：安守现有岗位，精进专业，不宜频繁求变；若遇外派、出差或项目调整，顺势接纳可积累资粮。忌：强出头争功，或在细节上与人口舌计较，失却人和。谋晋升者，可借展示协调能力上位，而非单打独斗。",
-  "wealth": "“红颜美，休挂怀”直指勿被华丽外表的财运所惑，莫贪高风险投机之利。“车中舟里”隐喻财源有固定通道，正财如车轮稳健，偏财如舟随水起伏，当以正财为主。归妹卦有嫁娶得财之象，或因合作、联姻增利，但变睽警示利益分配易生间隙，故合伙需明算账。财运趋势：收入平稳，不宜冒进扩张。宜：守成经营，专注主业，可购置实物资产以求安稳；若有余力，可考虑水陆运输、流通类小额投入。忌：听信诱人宣传而跟风投机，或为表象光鲜而浪费资财。",
-  "love": "“红颜美”直指情感中的容颜迷恋或旧情执念，签文劝“休挂怀”，告诫勿因外表或过往而困扰本心。归妹卦本就是婚姻之卦，主有归宿之缘，但变睽卦暗示相处中易生误会、短暂分离，须小心化解。单身者，红颜或指偶遇吸引之人，但宜观其内质，勿急于投入；车中舟里喻缘分在路上，可经友人介绍或出行中结识。有伴者，近期易因琐事口角，舟车之象提醒双方如行船乘车，需彼此包容颠簸，休要翻旧账。相处之道：少计较表面言辞，多关注共同方向，则睽而复归。",
-  "health": "兑卦对应口舌、肺系，归妹变睽，情绪隐忧易扰动气机。“休挂怀”是核心养生之钥，切忌思虑过度，耗伤心脾。“人在车中”喻身体承载得当，但车马劳顿需防疲劳累积；“舟行水里”应水湿之气，兑为泽，恐有痰湿或呼吸系统不适。养生方向：饮食宜清润养肺，如百合、梨、银耳；作息上，车舟皆动，宜动静相宜，晨起舒展筋骨。警惕信号：若咽干、干咳、胸闷或情绪莫名低落，是内里失调之兆，当以静养调节，避免熬夜伤阴。不适勿硬撑，及时调息。",
-  "study": "“人在车中，舟行水里”譬喻求学如行路，车舟乃工具，学者已有门径可循，只需乘势而进。“红颜美”在此可解为外物干扰，如情感、游戏、仪容等，签曰“休挂怀”，即劝专注学业，莫被表象分心。兑为悦，归妹变睽，学习或有起伏，尤其合作课题、小组研讨易有意见相左，需以包容心态交流。考试运中上，利逻辑清晰、稳扎稳打的科目，答题如驾车，稳中求进；忌投机取巧，考前突击。宜：制定规律计划，善用图表、比喻加深理解，可借舟车意象联想记忆法，如水陆并进，优势互补。",
-  "general": "此签核心理念乃“安时处顺，各得其所”。红颜不挂怀，是破执；车舟各行其道，是顺势。上上之吉，非凭空而降，源自内心放下得失、外境从容应对。关键行动建议：一、检视当下忧虑之事，多属自扰，不妨如卸重负，轻装前行；二、遇变不惊，如车入曲径、舟过险滩，稳住方向盘即是出路；三、珍惜已有之位、之缘、之能，莫羡他人风光，自有一番天地。心态上，常思“人在车中”已得护持，“舟行水里”总有航道，便觉心宽。"
+  "sign_number": 164,
+  "sign_text": "They draw and pull each other,\nWarm and sincere, joy comes naturally;\nAll actions meet no hindrance,\nWorries turn to reunion.",
+  "interpretation1": "This oracle's 'they draw and pull each other' depicts two people hand in hand, connected by constant pulling. The hexagram shifts from Pi (stagnation) to Wu Wang (innocence/truth), reflecting the principle that interpersonal ties and mutual aid lead to success. 'Warm and sincere, joy comes naturally'—'warm and sincere' is a state of genuine depth, while 'joy comes naturally' indicates results that arise effortlessly, not forced. This aligns with Wu Wang's message: 'movement with strength, the mandate of Heaven,' urging a pure heart that naturally attracts help. 'All actions meet no hindrance' goes further, declaring that everything you do will go smoothly—because Pi's Heaven-Earth non-interaction has transformed; the obstruction is gone, like spring ice melting and boats sailing freely. 'Worries turn to reunion' means all anxieties will dissolve, like a crescent moon gradually filling, or a cobweb after rain reforming into a perfect circle. The key words are 'draw' and 'turn,' showing that current troubles are a process, not the end. By maintaining a sincere heart and relying on others' help, you can transform stagnation into prosperity, worry into joy. Qian Palace represents strong, ceaseless movement; the change to Wu Wang warns against delusion—go with the flow and wait for the right moment, and success will come naturally.",
+  "career": "The 'draw and pull each other' suggests career support from a benefactor or colleague collaboration. Qian Palace's strong movement with Wu Wang's thunder implies a shift from stagnation to activity. It's favorable to actively seek cooperation and share resources. 'Warm and sincere, joy comes naturally' hints that those who show diligence and sincerity will be appreciated—avoid pretending or grabbing credit. For a long-pending project, a key person's recommendation may suddenly open doors, fulfilling 'worries turn to reunion.' Actively reconnect with old contacts and join team efforts, especially in roles requiring cross-department coordination or business trips. What to avoid: being closed off or stubborn; learn from Zhen hexagram's soft movement while maintaining principles. The timing is often from late spring to midsummer, when you may gain your superior's trust.",
+  "wealth": "'Draw and pull each other' in wealth indicates that financial opportunities come through introductions—such as cooperative investments or referrals from friends and family. Qian Palace's Pi turning to prosperity suggests leveraging connections rather than going alone. 'Warm and sincere, joy comes naturally' shows that money does not enter through rush; the more you chase, the more it eludes, while unexpected small gains may come as pleasant surprises. Wu Wang hexagram warns against greed and delusion, so speculation and gambling are strictly to be avoided. Regular income is stable; non-regular income depends on relationships, perhaps from old debts paid back or gifts, fulfilling 'worries turn to reunion.' Financial management should be conservative, favoring agriculture, real estate, or industries related to Earth and Mountain (Kun/Gen). Avoid using leverage. If there are debt disputes, seek amicable negotiation, drawing in a mediator to resolve.",
+  "love": "This oracle is filled with the word 'draw,' signifying that love is guided by fate. Singles may easily encounter a romantic opportunity through introductions by friends or reunion with an old flame. Don't force it; sincerity and naturalness bring joy. Wu Wang hexagram emphasizes authenticity—if you have someone in mind, treat them with a simple heart; excessive decoration may backfire. For those in a passionate relationship, mutual pulling and care is at its peak; 'all actions meet no hindrance' means that marriage or meeting the parents may go smoothly without obstacles. For those who have had conflicts, 'worries turn to reunion' subtly hints that a heart knot may dissolve through a frank conversation, like a spider's web re-forming. Take the initiative to invite or give a small gift to break the ice. But avoid bringing up the past or judging each other; learn from Zhen hexagram's flexibility and gently pull back the warmth.",
+  "health": "Qian (Pi to Wu Wang): Qian governs the head, Zhen governs the liver. 'Draw and pull each other' suggests the flow of qi and blood through meridians, so it's beneficial to stretch and open the liver and gallbladder. Pi hexagram originally indicated congestion; after the change, qi suddenly moves—beware of headaches or red eyes from liver yang rising in spring. 'Warm and sincere, joy comes naturally' means that a peaceful mood wards off illness; the relief of worries actually helps chronic conditions. For health, practice gentle exercises like tai chi or baduanjin; avoid rage and staying up late; eat more sweet and less sour to nourish the spleen. If you have had a lingering ailment, a good doctor may appear or a new therapy may bring improvement—especially favorable for joints and the digestive system.",
+  "study": "'Draw and pull each other' in studies indicates mentorship and helpful peers. If you encounter difficulties, don't dwell alone; discuss with classmates or ask teachers for advice, and you may get the key insight. Wu Wang hexagram values genuine learning; 'warm and sincere, joy comes naturally' warns that those who cut corners may be at a disadvantage, while diligent accumulators will eventually rejoice. Exam luck is even; the material studied often connects like puzzle pieces, as if bait draws the fish. Focus on linking notes and reviewing mistakes; avoid trying to grasp too much. For oral exams or defenses, be alert and organized (like Zhen hexagram's sensitivity) and your natural responses will impress. 'Worries turn to reunion' hints that a weak subject may see a sudden improvement—don't give up.",
+  "general": "This oracle takes 'draw' as its backbone and 'reunion' as its destination, showing that you are at the end of Pi (stagnation) and the beginning of Wu Wang (innocence). By following the natural pull without delusion or greed, obstacles will dissolve. After many twists and turns, there will be a complete resolution. Therefore: first, cherish connections—value every kind tie that appears in your life; second, uphold sincerity—abandon cunning, treat people and affairs with diligence and purity; third, wait for the right moment—though worries exist, the turning point is already hidden in daily minutiae, so don't rush or force. Qian Palace's ceaseless strength and Wu Wang's pure intention embody the state of 'walking to where the water ends, sitting and watching the clouds rise.' With this mindset, the road itself becomes clear. Reflect on how this resonates with your current situation."
 }
 ```
 

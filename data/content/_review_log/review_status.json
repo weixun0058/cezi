@@ -1,0 +1,111 @@
+{
+  "total_signs": 384,
+  "last_updated": "2026-07-08T00:07:37",
+  "summary": {
+    "gemini_reviewed": 164,
+    "manual_llm_review": 132,
+    "applied_via_script": 32,
+    "pending": 220,
+    "progress_percent": 42
+  },
+  "next_unreviewed_start": 165,
+  "batches": [
+    {
+      "start": 1,
+      "end": 4,
+      "count": 4,
+      "file": "gemini_review_result_signs_1_4.md",
+      "finalized_method": "manual_llm_review"
+    },
+    {
+      "start": 5,
+      "end": 8,
+      "count": 4,
+      "file": "gemini_review_result_signs_5_8.md",
+      "finalized_method": "manual_llm_review"
+    },
+    {
+      "start": 9,
+      "end": 12,
+      "count": 4,
+      "file": "gemini_review_result_signs_9_12.md",
+      "finalized_method": "manual_llm_review"
+    },
+    {
+      "start": 13,
+      "end": 32,
+      "count": 20,
+      "file": "gemini_review_result_signs_13-32.md",
+      "finalized_method": "applied_via_script"
+    },
+    {
+      "start": 33,
+      "end": 44,
+      "count": 12,
+      "file": "gemini_review_result_signs_33-44.md",
+      "finalized_method": "applied_via_script"
+    },
+    {
+      "start": 45,
+      "end": 56,
+      "count": 12,
+      "file": "gemini_review_result_signs_45-56.md",
+      "finalized_method": "manual_llm_review"
+    },
+    {
+      "start": 57,
+      "end": 68,
+      "count": 12,
+      "file": "gemini_review_result_signs_57-68.md",
+      "finalized_method": "manual_llm_review"
+    },
+    {
+      "start": 69,
+      "end": 80,
+      "count": 12,
+      "file": "gemini_review_result_signs_69-80.md",
+      "finalized_method": "manual_llm_review"
+    },
+    {
+      "start": 81,
+      "end": 92,
+      "count": 12,
+      "file": "gemini_review_result_signs_81-92.md",
+      "finalized_method": "manual_llm_review"
+    },
+    {
+      "start": 93,
+      "end": 104,
+      "count": 12,
+      "file": "gemini_review_result_signs_93-104.md",
+      "finalized_method": "manual_llm_review"
+    },
+    {
+      "start": 105,
+      "end": 116,
+      "count": 12,
+      "file": "gemini_review_result_signs_105-116.md",
+      "finalized_method": "manual_llm_review"
+    },
+    {
+      "start": 105,
+      "end": 140,
+      "count": 36,
+      "file": "gemini_review_result_signs_105-140.md",
+      "finalized_method": "manual_llm_review"
+    },
+    {
+      "start": 141,
+      "end": 164,
+      "count": 24,
+      "file": "gemini_review_result_signs_141-164.md",
+      "finalized_method": "manual_llm_review"
+    }
+  ],
+  "unreviewed_gaps": [
+    [
+      165,
+      384
+    ]
+  ]
+}
