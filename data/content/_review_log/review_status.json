@@ -1,10 +1,10 @@
 {
   "total_signs": 384,
-  "last_updated": "2026-07-08T00:07:37",
+  "last_updated": "2026-07-11T19:58:41",
   "summary": {
     "gemini_reviewed": 164,
-    "manual_llm_review": 132,
-    "applied_via_script": 32,
+    "manual_llm_review": 164,
+    "applied_via_script": 0,
     "pending": 220,
     "progress_percent": 42
   },
@@ -36,14 +36,14 @@
       "end": 32,
       "count": 20,
       "file": "gemini_review_result_signs_13-32.md",
-      "finalized_method": "applied_via_script"
+      "finalized_method": "manual_llm_review"
     },
     {
       "start": 33,
       "end": 44,
       "count": 12,
       "file": "gemini_review_result_signs_33-44.md",
-      "finalized_method": "applied_via_script"
+      "finalized_method": "manual_llm_review"
     },
     {
       "start": 45,

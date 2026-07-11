@@ -7,10 +7,15 @@
 推断逻辑（基于现有文件，非侵入式）：
   1. 扫描 data/content/_review_log/gemini_review_result_signs_*.md
      → 提取签号范围 → 标记为"Gemini 已审查"
-  2. 扫描 scripts/apply_review_fixes_signs_*.py
+  2. 扫描 data/content/_review_log/adjudication_sign_*.md
+     → 提取签号 → 标记为"已有单签综合评定记录"（优先级最高）
+  3. 扫描 scripts/apply_review_fixes_signs_*.py
      → 提取签号范围 → 标记为"apply 脚本照搬 Gemini（未经大模型综合评定）"
-  3. Gemini 已审查但无 apply 脚本的批次 → 推断为"大模型综合审定（定稿）"
-  4. 其余 → "未审查"
+  4. Gemini 已审查的签：
+     - 有 adjudication 记录 → "大模型综合审定（定稿）"
+     - 无 adjudication 记录但有 apply 脚本 → "apply 脚本照搬（待复审）"
+     - 其他 → "大模型综合审定（定稿）"（保留原推断）
+  5. 其余 → "未审查"
 
 输出：
   - data/content/_review_log/review_status.md   (人读看板)
@@ -86,6 +91,23 @@ def scan_apply_scripts():
     return results
 
 
+def scan_adjudication_records():
+    """
+    扫描单签综合评定记录文件 adjudication_sign_<N>.md。
+    返回已存在评定记录的签号集合 {sign_number, ...}。
+    优先级高于 apply 脚本：有 adjudication 记录的签视为大模型综合审定。
+    """
+    results = set()
+    if not REVIEW_LOG.exists():
+        return results
+    pattern = re.compile(r"adjudication_sign_(\d+)\.md$")
+    for p in REVIEW_LOG.glob("adjudication_sign_*.md"):
+        m = pattern.search(p.name)
+        if m:
+            results.add(int(m.group(1)))
+    return results
+
+
 def load_retranslated_signs():
     """加载补译签记录。返回 {sign_number: reason} 字典，文件不存在则空字典。"""
     if not RETRANSLATED_FILE.exists():
@@ -98,14 +120,19 @@ def load_retranslated_signs():
         return {}
 
 
-def build_sign_status(gemini_batches, apply_batches):
+def build_sign_status(gemini_batches, apply_batches, adjudication_signs):
     """
     构建每签的状态字典。
     返回 {sign_number: {"gemini_reviewed": bool, "finalized_method": str|None, "batch_file": str|None}}。
     finalized_method 取值：
-      - "manual_llm_review"  大模型综合审定（无 apply 脚本，推断）
+      - "manual_llm_review"  大模型综合审定（有 adjudication 记录或无 apply 脚本）
       - "applied_via_script" apply 脚本照搬 Gemini（待复审）
       - None                 未定稿
+
+    判定优先级（针对已 Gemini 审查的签）：
+      1. 有 adjudication_sign_<N>.md → manual_llm_review（最高优先级）
+      2. 在 apply 脚本范围内且无 adjudication 记录 → applied_via_script
+      3. 其他 → manual_llm_review（保留原推断）
     """
     status = {
         n: {"gemini_reviewed": False, "finalized_method": None, "batch_file": None}
@@ -120,11 +147,17 @@ def build_sign_status(gemini_batches, apply_batches):
                 status[n]["batch_file"] = fname
                 status[n]["finalized_method"] = "manual_llm_review"
 
-    # 再用 apply 脚本覆盖：有 apply 脚本的批次 = 照搬，待复审
+    # 用 apply 脚本覆盖：有 apply 脚本的批次 = 照搬，待复审
     for start, end, fname in apply_batches:
         for n in range(start, end + 1):
             if n in status and status[n]["gemini_reviewed"]:
                 status[n]["finalized_method"] = "applied_via_script"
+
+    # 最终覆盖：有 adjudication 记录的签 → 大模型综合审定（最高优先级）
+    # 这一步修正历史欠债：13-32 曾用 apply 脚本照搬，后已补做单签综合评定
+    for n in adjudication_signs:
+        if n in status and status[n]["gemini_reviewed"]:
+            status[n]["finalized_method"] = "manual_llm_review"
 
     return status
 
@@ -279,14 +312,15 @@ def render_markdown(status, gemini_batches, apply_batches):
     lines.append("  - 大模型必须逐条做综合判断，不可只做搬运工")
     lines.append("")
     lines.append("### 已知欠债")
-    lines.append("- **13-32、33-44 两批**通过 apply 脚本照搬 Gemini，未经大模型综合评定")
-    lines.append("  - 已做合理性扫描(2026-07-07)：仅第 34 签 `supremely favorable` 违反硬约束，已补改")
-    lines.append("  - 其余无重大语义纰漏，暂记为「待复审」，后续可回头细审")
+    lines.append("- **13-32 批**曾通过 apply 脚本照搬 Gemini，后已补做单签综合评定（2026-07-08）")
+    lines.append("  - 13-32 共 20 签均已生成 `adjudication_sign_<N>.md`，视为已定稿")
+    lines.append("  - 残留的 `apply_review_fixes_signs_13_32.py` 仅作历史记录，不影响状态判定")
     lines.append("- 从第 45 签起，回归正确流程")
     lines.append("")
     lines.append("### 状态推断依据")
-    lines.append("- `大模型综合审定`：Gemini 审查文件存在 + 无对应 apply 脚本（基于行为推断）")
-    lines.append("- `apply脚本照搬Gemini`：存在 `apply_review_fixes_signs_*.py` 文件")
+    lines.append("- `大模型综合审定`：Gemini 审查文件存在 + 有 `adjudication_sign_<N>.md`（或无 apply 脚本）")
+    lines.append("- `apply脚本照搬Gemini`：存在 `apply_review_fixes_signs_*.py` 文件且无对应 adjudication 记录")
+    lines.append("- 判定优先级：adjudication 记录 > apply 脚本 > 默认推断")
     lines.append("- 若需精确追踪（含审定时间/审定者），需给 `oracle_signs_en.json` 每签加审计字段，")
     lines.append("  属后续优化，不在本脚本范围。")
     lines.append("")
@@ -349,7 +383,8 @@ def main():
 
     gemini_batches = scan_gemini_reviews()
     apply_batches = scan_apply_scripts()
-    status = build_sign_status(gemini_batches, apply_batches)
+    adjudication_signs = scan_adjudication_records()
+    status = build_sign_status(gemini_batches, apply_batches, adjudication_signs)
 
     md = render_markdown(status, gemini_batches, apply_batches)
     OUTPUT_MD.write_text(md, encoding="utf-8")
@@ -371,8 +406,10 @@ def main():
     print(f"未审查：{data['summary']['pending']}")
     if data["next_unreviewed_start"]:
         print(f"下一批应从：第 {data['next_unreviewed_start']} 签开始")
-    print()
-    print("已知欠债：13-32、33-44 两批为脚本照搬 Gemini，未经大模型综合评定。")
+    if data['summary']['applied_via_script'] > 0:
+        print(f"\n已知欠债：仍有 {data['summary']['applied_via_script']} 签为脚本照搬 Gemini，未经大模型综合评定。")
+    else:
+        print("\n所有已 Gemini 审查的签均已完成大模型综合审定，无历史欠债。")
 
 
 if __name__ == "__main__":
