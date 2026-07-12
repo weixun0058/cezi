@@ -61,8 +61,51 @@
     <!-- 变换动画区（仅 Three Words 模式，提交后显示） -->
     <div class="en-oracle-transform" id="oracle-transform" hidden></div>
 
-    <!-- 结果区 -->
-    <div class="en-oracle-result" id="oracle-result" aria-live="polite"></div>
+    <!-- 结果区：4 阶段分步揭示 -->
+    <div class="en-oracle-result" id="oracle-result" aria-live="polite">
+
+        <!-- 阶段 1：签号 -->
+        <div class="en-oracle-stage" id="stage-sign-number" hidden>
+            <p class="en-sign-number" id="result-sign-number"></p>
+            <button type="button" class="en-btn en-btn-stage" id="btn-reveal-sign-text">Reveal the Sign Text</button>
+        </div>
+
+        <!-- 阶段 2：签文（打字机） -->
+        <div class="en-oracle-stage" id="stage-sign-text" hidden>
+            <div class="en-sign-text" id="result-sign-text"></div>
+            <button type="button" class="en-btn en-btn-stage" id="btn-reveal-interpretation" hidden>Reveal the Interpretation</button>
+        </div>
+
+        <!-- 阶段 3：整体解读（打字机） -->
+        <div class="en-oracle-stage" id="stage-interpretation" hidden>
+            <div class="en-sign-section">
+                <h3>Interpretation</h3>
+                <p id="result-interpretation"></p>
+            </div>
+            <button type="button" class="en-btn en-btn-stage" id="btn-choose-area" hidden>Choose an Area to Explore</button>
+        </div>
+
+        <!-- 阶段 4：分项选择 -->
+        <div class="en-oracle-stage" id="stage-area-select" hidden>
+            <div class="en-area-prompt">Select one area to delve deeper:</div>
+            <div class="en-area-buttons" id="area-buttons">
+                <button type="button" class="en-area-btn" data-area="career">Career</button>
+                <button type="button" class="en-area-btn" data-area="wealth">Wealth</button>
+                <button type="button" class="en-area-btn" data-area="love">Love &amp; Relationships</button>
+                <button type="button" class="en-area-btn" data-area="health">Health</button>
+                <button type="button" class="en-area-btn" data-area="study">Study &amp; Learning</button>
+                <button type="button" class="en-area-btn" data-area="general">General Outlook</button>
+            </div>
+            <div class="en-sign-section en-area-result" id="area-result" hidden>
+                <h3 id="area-title"></h3>
+                <p id="area-text"></p>
+            </div>
+            <div class="en-responsible-use" id="responsible-use" hidden></div>
+            <p class="en-support-note" id="support-note" hidden>This reading is free. If it resonated, consider supporting the project.</p>
+            <button type="button" class="en-btn en-btn-secondary" id="btn-restart">Draw Another Sign</button>
+        </div>
+
+    </div>
 
     <!-- 折叠项：数字如何形成（输入前不展示公式，故默认折叠） -->
     <details class="en-oracle-explanation">

@@ -413,34 +413,6 @@ def translate_festivals(raw, terms: dict, missing: dict) -> list:
     return result
 
 
-def translate_peng_zu(raw: str, terms: dict, missing: dict) -> dict | None:
-    """彭祖百忌 → summary 结构化（D-W5-5：固定文化说明 + pillar 拼音，不译全文谚语）。
-
-    输入：raw - 中文彭祖百忌（如 "丙不作灶必见灾殃，午不苫盖更主张"）
-    输出：{"summary": "Peng Zu's Taboos for pillar Bing-Wu: ...", "note": "..."}
-    """
-    if not raw:
-        return None
-    # raw = "丙不作灶必见灾殃，午不苫盖更主张"
-    # 提取天干（第一字）和地支（逗号后第一字）
-    parts = raw.split("，")
-    gan_cn = parts[0][0] if parts[0] else ""
-    zhi_cn = parts[1][0] if len(parts) > 1 and parts[1] else ""
-    gan_py = GAN_PINYIN.get(gan_cn)
-    zhi_py = terms.get("branches", {}).get(zhi_cn)
-    if gan_py and zhi_py:
-        pillar = f"{gan_py}-{zhi_py}"
-        return {
-            "summary": (
-                f"Peng Zu's Taboos for pillar {pillar}: traditional guidance on "
-                "activities to approach with care."
-            ),
-            "note": "Detailed taboo text is available in the Chinese edition.",
-        }
-    missing.setdefault("peng_zu", []).append(raw)
-    return None
-
-
 def translate_spirits(raw: str, terms: dict, spirit_type: str, missing: dict) -> list:
     """神煞中文 → 英文列表（D-W5-1 方案 C：命中 gods 输出译名，未命中隐藏+missing）。
 
@@ -740,8 +712,6 @@ class HuangLiEnglish:
             record.get("xiong_shen", ""), self.terms, "inauspicious", missing
         )
 
-        peng_zu = translate_peng_zu(record.get("peng_zu_bai_ji", ""), self.terms, missing)
-
         directions = {
             "joy": translate_position(record.get("xi_shen", ""), self.terms, missing),
             "fortune": translate_position(record.get("fu_shen", ""), self.terms, missing),
@@ -763,7 +733,6 @@ class HuangLiEnglish:
             "special_indications": activities["special_indications"],
             "auspicious_spirits": auspicious_spirits,
             "inauspicious_spirits": inauspicious_spirits,
-            "peng_zu_taboos": peng_zu,
             "directions": directions,
             "conflict_clash": chong_sha,
             "festivals": festivals,
@@ -800,7 +769,6 @@ class HuangLiEnglish:
                 "favorable_activities": daily["favorable_activities"],
                 "unfavorable_activities": daily["unfavorable_activities"],
                 "conflict_clash": daily["conflict_clash"],
-                "peng_zu_taboos": daily["peng_zu_taboos"],
                 "directions": daily["directions"],
                 "solar_term": daily["solar_term"],
                 "scenario_assessment": daily["scenario_assessment"],

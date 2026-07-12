@@ -408,6 +408,79 @@ a:hover { border-bottom-color: var(--wo-accent); }
 .en-oracle-result { display: none; margin-top: 2rem; }
 .en-oracle-result.is-visible { display: block; }
 
+/* 阶段容器：分步揭示 */
+.en-oracle-stage {
+    animation: en-stage-fade-in 0.4s ease-out;
+}
+@keyframes en-stage-fade-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* 阶段切换按钮 */
+.en-btn-stage {
+    display: block;
+    margin: 1.5rem auto 0;
+    padding: 0.6rem 1.8rem;
+    background: var(--wo-surface);
+    border: 1px solid var(--wo-accent);
+    border-radius: var(--wo-radius);
+    color: var(--wo-accent);
+    font-family: var(--wo-font-serif);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+.en-btn-stage:hover {
+    background: var(--wo-accent);
+    color: var(--wo-surface);
+}
+
+/* 分项选择按钮组 */
+.en-area-prompt {
+    font-family: var(--wo-font-serif);
+    font-size: 1.05rem;
+    color: var(--wo-text-soft);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+.en-area-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+.en-area-btn {
+    padding: 0.5rem 1.2rem;
+    background: var(--wo-surface);
+    border: 1px solid var(--wo-border);
+    border-radius: var(--wo-radius);
+    color: var(--wo-text);
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.en-area-btn:hover {
+    border-color: var(--wo-accent);
+    color: var(--wo-accent);
+}
+.en-area-btn.selected {
+    background: var(--wo-accent);
+    border-color: var(--wo-accent);
+    color: var(--wo-surface);
+}
+.en-area-result {
+    animation: en-stage-fade-in 0.4s ease-out;
+}
+.en-support-note {
+    margin-top: 1rem;
+    text-align: center;
+    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--wo-text-soft);
+}
+
 .en-sign-number {
     font-family: var(--wo-font-serif);
     font-size: 1.1rem;
@@ -771,6 +844,200 @@ a:hover { border-bottom-color: var(--wo-accent); }
     margin-bottom: 1.25rem;
     border-radius: 14px;
     background: #f2eadc;
+}
+
+/* 日期导航按钮 */
+.en-almanac-nav {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    margin: 1rem 0;
+}
+.en-btn-nav {
+    padding: 0.4rem 1rem;
+    font-size: 0.9rem;
+    background: var(--wo-surface);
+    border: 1px solid var(--wo-border);
+    color: var(--wo-text);
+    cursor: pointer;
+    border-radius: var(--wo-radius);
+    transition: border-color 0.2s, color 0.2s;
+}
+.en-btn-nav:hover {
+    border-color: var(--wo-accent);
+    color: var(--wo-accent);
+}
+
+/* 干支卡片 */
+.en-almanac-ganzhi,
+.en-almanac-solar-terms,
+.en-almanac-festivals {
+    padding: 1.25rem;
+    margin-bottom: 1.25rem;
+    border-radius: 14px;
+    background: #f2eadc;
+}
+.en-almanac-ganzhi h2,
+.en-almanac-solar-terms h2,
+.en-almanac-festivals h2 {
+    margin: 0 0 0.5rem;
+    font-size: 1.1rem;
+    color: var(--wo-ink);
+}
+.en-almanac-ganzhi dl,
+.en-almanac-solar-terms dl {
+    margin: 0;
+}
+.en-almanac-ganzhi dt,
+.en-almanac-solar-terms dt {
+    font-weight: 600;
+    color: var(--wo-text-soft);
+    font-size: 0.9rem;
+    margin-top: 0.3rem;
+}
+.en-almanac-ganzhi dd,
+.en-almanac-solar-terms dd {
+    margin: 0 0 0.3rem 0;
+    color: var(--wo-ink);
+}
+.en-almanac-festivals ul {
+    margin: 0;
+    padding-left: 1.2rem;
+}
+.en-festival-type {
+    color: var(--wo-text-soft);
+    font-size: 0.85rem;
+}
+.en-special-desc {
+    color: var(--wo-text-soft);
+}
+
+/* 九天黄历网格 */
+.en-almanac-week {
+    margin: 1.5rem 0;
+}
+.en-week-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.8rem 1rem;
+    background: var(--wo-surface-alt);
+    border: 1px solid var(--wo-border);
+    border-radius: var(--wo-radius);
+    font-family: var(--wo-font-serif);
+    font-size: 1.05rem;
+    color: var(--wo-ink);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.en-week-toggle:hover {
+    background: var(--wo-surface);
+}
+.en-week-title {
+    flex: 1;
+    text-align: left;
+}
+.en-week-indicator {
+    transition: transform 0.2s;
+}
+.en-week-toggle[aria-expanded="true"] .en-week-indicator {
+    transform: rotate(90deg);
+}
+.en-week-panel {
+    margin-top: 1rem;
+}
+.en-week-scenarios {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+.en-week-scenario {
+    padding: 0.35rem 0.9rem;
+    background: var(--wo-surface);
+    border: 1px solid var(--wo-border);
+    border-radius: var(--wo-radius);
+    font-size: 0.88rem;
+    color: var(--wo-text);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.en-week-scenario:hover {
+    border-color: var(--wo-accent);
+    color: var(--wo-accent);
+}
+.en-week-scenario.is-active {
+    background: var(--wo-accent);
+    border-color: var(--wo-accent);
+    color: var(--wo-surface);
+}
+.en-week-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 0.8rem;
+}
+.en-week-card {
+    padding: 0.8rem;
+    background: var(--wo-surface-alt);
+    border: 1px solid var(--wo-border);
+    border-radius: 10px;
+    font-size: 0.85rem;
+}
+.en-week-card.is-today {
+    border-color: var(--wo-accent);
+    border-width: 2px;
+}
+.en-week-date {
+    font-weight: 600;
+    color: var(--wo-ink);
+    margin-bottom: 0.2rem;
+}
+.en-week-lunar {
+    color: var(--wo-text-soft);
+    font-size: 0.8rem;
+    margin-bottom: 0.3rem;
+}
+.en-week-ganzhi {
+    color: var(--wo-accent);
+    font-size: 0.8rem;
+    margin-bottom: 0.3rem;
+}
+.en-week-term {
+    color: var(--wo-text-soft);
+    font-style: italic;
+    font-size: 0.8rem;
+    margin-bottom: 0.3rem;
+}
+.en-week-fav {
+    color: #2d7a3e;
+    font-size: 0.78rem;
+    margin-bottom: 0.2rem;
+}
+.en-week-unfav {
+    color: #b04040;
+    font-size: 0.78rem;
+    margin-bottom: 0.2rem;
+}
+.en-week-clash {
+    color: var(--wo-text-soft);
+    font-size: 0.78rem;
+}
+.en-week-scenario-status {
+    margin-top: 0.3rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+.en-week-loading,
+.en-week-error {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 1rem;
+    color: var(--wo-text-soft);
+}
+.en-week-error {
+    color: var(--wo-error, #b04040);
 }
 
 .en-scenario-card h2 {

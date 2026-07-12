@@ -34,6 +34,12 @@
         <button type="submit" class="en-btn">View Almanac</button>
     </form>
 
+    <div class="en-almanac-nav">
+        <button type="button" class="en-btn en-btn-nav" data-nav="prev">◀ Previous Day</button>
+        <button type="button" class="en-btn en-btn-nav" data-nav="today">Today</button>
+        <button type="button" class="en-btn en-btn-nav" data-nav="next">Next Day ▶</button>
+    </div>
+
     <div class="en-almanac-status" data-almanac-status role="status" aria-live="polite">
         Loading the almanac…
     </div>
@@ -58,6 +64,21 @@
             </div>
         </section>
 
+        <section class="en-almanac-ganzhi" data-ganzhi-card hidden>
+            <h2>Heavenly Stems &amp; Earthly Branches</h2>
+            <dl data-list="ganzhi"></dl>
+        </section>
+
+        <section class="en-almanac-solar-terms" data-solar-terms-card hidden>
+            <h2>Solar Terms</h2>
+            <dl data-list="solar-terms"></dl>
+        </section>
+
+        <section class="en-almanac-festivals" data-festivals-card hidden>
+            <h2>Festivals</h2>
+            <ul data-list="festivals"></ul>
+        </section>
+
         <section class="en-scenario-card" data-scenario-card hidden>
             <span class="en-summary-label">Selected focus</span>
             <h2 data-field="scenario-label">—</h2>
@@ -77,6 +98,10 @@
                 <h2>Mixed Indications</h2>
                 <ul data-list="mixed"></ul>
             </section>
+            <section class="en-almanac-card en-almanac-card-special" data-special-card hidden>
+                <h2>Special Indications</h2>
+                <ul data-list="special"></ul>
+            </section>
             <section class="en-almanac-card">
                 <h2>Traditional Spirits</h2>
                 <div data-list="spirits"></div>
@@ -93,9 +118,27 @@
 
         <section class="en-almanac-context">
             <h2>How to read this page</h2>
-            <p data-field="peng-zu">—</p>
             <p data-field="responsible-use">—</p>
             <p data-field="footer-disclaimer">—</p>
+        </section>
+
+        <section class="en-almanac-week" data-week-section>
+            <button type="button" class="en-week-toggle" data-week-toggle aria-expanded="false">
+                <span class="en-week-title">Nine-Day Almanac</span>
+                <span class="en-week-indicator" aria-hidden="true">▸</span>
+            </button>
+            <div class="en-week-panel" data-week-panel hidden>
+                <div class="en-week-scenarios" data-week-scenarios>
+                    <button type="button" class="en-week-scenario is-active" data-scenario="">General</button>
+                    <button type="button" class="en-week-scenario" data-scenario="wedding">Wedding</button>
+                    <button type="button" class="en-week-scenario" data-scenario="moving">Moving</button>
+                    <button type="button" class="en-week-scenario" data-scenario="business_opening">Business</button>
+                    <button type="button" class="en-week-scenario" data-scenario="travel">Travel</button>
+                    <button type="button" class="en-week-scenario" data-scenario="signing">Signing</button>
+                    <button type="button" class="en-week-scenario" data-scenario="haircut">Haircut</button>
+                </div>
+                <div class="en-week-grid" data-week-grid></div>
+            </div>
         </section>
     </div>
 </section>
