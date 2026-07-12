@@ -13,7 +13,7 @@
 本计划基于以下两份已有文档重写：
 
 - `docs/business/2026-06-global-commercialization-plan.md`
-- `docs/business/Wise_Oracle_Outbound_Plan.md`
+- `archive/legacy-docs/Wise_Oracle_Outbound_Plan.md`（已归档，原路径 `docs/business/`）
 
 本计划只保留对执行有直接帮助的内容。已经否定、无关或容易误导执行者的历史讨论，不应在执行计划里反复出现。
 
@@ -33,9 +33,9 @@
 
 | 阶段 | 目标 | 状态 | 负责人 | 完成日期 | 验收证据 |
 | --- | --- | --- | --- | --- | --- |
-| P0 | 项目现状审计与术语冻结 | 进行中 | Codex | 待定 | 已完成路由/API/模板基础审计；考据文档已完成（`docs/research/zhuge-origin-research.md`）；英文产品术语表与文化表达指南仍待定稿 |
+| P0 | 项目现状审计与术语冻结 | 已完成 | Codex | 2026-06-30 | 路由/API/模板基础审计完成；考据文档完成（`docs/research/zhuge-origin-research.md`）；英文产品规格、术语表、文化表达指南、文案风格指南、AI prompt 边界、错误码策略均已完成定稿 |
 | P1 | 繁体中文改造 | 已完成 | Codex | 2026-06-26 | 提交 `3a4a25e`、`d66fad4`；`python -m pytest -q` 通过；2026-06-28 基于考据结论删除卦属/吉凶展示（4.5 节） |
-| P2-P5 | 英文站改造（产品方案、数据、后端、前端） | 进行中 | — | — | 详细任务已迁移至 `docs/plans/2026-06-27-english-site-execution-plan.md`（W0-W8）；W2.1 英文签文翻译 384/384 已超额完成（计划仅要 20 条样本），其余工作包未开始 |
+| P2-P5 | 英文站改造（产品方案、数据、后端、前端） | 进行中 | — | — | 详细任务见 `docs/plans/2026-06-27-english-site-execution-plan.md`（W0-W8）。W0-W7 已完成（产品边界冻结、术语体系、路由骨架、Ask the Oracle 后端/前端、Daily Almanac 后端/前端、Birth Chart 后端/前端、合规页）；W2.2-W2.6 已完成（签文审校 384/384 全部定稿）；W8 暂停（D3 未定，Deep Reading 冻结） |
 | P6 | 商业化基础代码 | 未开始 | 待定 | 待定 | 配置开关、赞助入口、付费墙原型、订单模型设计 |
 | P7 | SEO 与合规上线准备 | 未开始 | 待定 | 待定 | sitemap、robots、法律页、Search Console 清单 |
 | P8 | 商业化预验证与上线复盘 | 未开始 | 待定 | 待定 | 平台核验表、单位经济模型、4 周运营台账 |
@@ -60,22 +60,18 @@
 6. 黄历动态数据已经新增项目内本地化层 `zhugeshensuan/huangli_i18n.py`，覆盖 `lunar_python` 生成的宜忌、神煞、生肖、方位、节气、彭祖百忌、状态词等繁体化。
 7. `/api/huangli` 和 `/api/week_huangli` 已按 `lang=zh-hant` 返回繁体展示值，并为 `scenario_assessment` 增加 `status_code`、`source_code`，前端不再比较中文状态文案。
 8. 前端农历日期格式化已抽为 `frontend/static/js/lang/lunar-format.js`，`huangli_lunar_handler.js` 与 `lunar_date_handler.js` 不再直接显示 `lunar.js` 的简体 `toString()`。
-9. 英文黄历暂不进入生产路径，但已形成后续指导文档：`docs/business/huangli-english-localization-guidance.md`。
+9. 英文黄历已实现并接通 API：`zhugeshensuan/huangli_english.py` 提供翻译服务，`huangli_en_api.py` 提供英文端点，`huangli_terms_en.json` 和 `huangli_scenarios_en.json` 已生成（详见 `docs/business/huangli-english-localization-guidance.md`）。
 10. 最新已验证命令：`python -m pytest -q`，结果为通过，包含 2 个既有 skip。
 11. 卦属/吉凶已从简繁前端删除（`frontend/templates/suanshi.html`、`frontend/templates/index.html`、`frontend/static/js/main.js`、`frontend/static/js/lang/dictionary.json`）；后端 `divination.py`、`database.py`、`reference.db` 保留存量数据未动。
 12. 英文签文翻译 384/384 完成（`data/content/oracle_signs_en.json`），含质量遗留：7 条 interpretation1 残留中文（签号 50/63/101/222/237/261/286）、4 条 general 为空（197-200），待独立 Agent 渐进修复，不阻塞程序落实。
 13. 考据文档完成（`docs/research/zhuge-origin-research.md`），确认原版诸葛神算无卦属/吉凶；12,700 字表全量推导 384 条签文已完成。
 14. 打字机效果已实现（`main.js` 的 `typeWriter`，chunkSize=1, interval=50，尊重 `prefers-reduced-motion`，每 6 字符自动滚动）。
-15. 翻译脚本与提示词已建立（`scripts/translate_oracle_signs.py`、`prompts/translator_system_prompt.md`）；Gemini 审核因 API 缺失仅完成前 12 条（`data/content/_review_log/gemini_review_result_signs_1_4.md` 等）。
+15. 翻译脚本与提示词已建立（`scripts/translate_oracle_signs.py`、`prompts/translator_system_prompt.md`）；签文审校已完成，384/384 条全部定稿（详见 `data/content/_review_log/review_status.md`，最后更新 2026-07-12）。
 
 仍未完成的内容：
 
-1. 英文主站、英文三大工具页、英文 API、英文 SEO 页面尚未实现。
-2. 英文产品规格、文案风格指南、报告分层和文化表达指南尚未定稿。
-3. 英文黄历术语表、英文文章简报和合规页面草稿尚未形成可开发数据（英文签文样本已超额完成 384/384）。
-4. 英文签文质量遗留（7 条 interpretation1 残留中文、4 条 general 为空）待独立 Agent 渐进修复。
-5. W0-W8 工作包进度日志需回填（W2.1 已超额完成，其余未开始）。
-6. 商业化代码、支付 / 赞助 / 广告配置和平台政策核验尚未开始。
+1. W8（SEO/合规/商业化预埋）暂停：D3 文章系统格式未定，Deep Reading 付费产品冻结。
+2. 商业化代码（P6）、支付/赞助/广告配置和平台政策核验（P8）尚未开始。
 
 每完成一个任务，在对应阶段的“进度日志”追加一行：
 
@@ -395,6 +391,7 @@ python -m pytest -q
 **进度日志：**
 
 - 2026-06-27 - 独立文档创建完成，P2-P5 详细任务迁移至 `docs/plans/2026-06-27-english-site-execution-plan.md` - 决策门 D1/D2/D4-D7/D9/D10/D12 已确认 - 下一步按 W0 开始执行。
+- 2026-06-30 - 助手 - W0-W7 全部完成（产品边界冻结/术语体系/路由骨架/Ask the Oracle 后端/Daily Almanac 后端/Birth Chart 后端/英文前端+合规页）- 76+59+40 项测试全过，W7.8/W7.9 验收通过 - W2.2-W2.6 签文审校完成（384/384 定稿，2026-07-12），W8 暂停。
 
 ## 9. P6 商业化基础代码构建和植入
 
@@ -728,3 +725,4 @@ pytest tests/test_sitemap.py tests/test_robots.py tests/test_articles.py -q
 | 日期 | 修订人 | 变更内容 | 原因 |
 | --- | --- | --- | --- |
 | 2026-06-30 | 助手 | 总纲对齐现状：回填 P1 卦属/吉凶删除实施、W2.1 签文翻译超额完成、考据结论入硬约束；新增 D13-D17 决策门；新增第 15 节考据影响 | 总纲落后于实际进度，避免认知偏差 |
+| 2026-07-12 | 助手 | 总纲再次对齐现状：P0 标记已完成；P2-P5 进度更新为 W0-W7 已完成（英文三大工具页+API+合规页全部落地）；"仍未完成"清单从 6 项缩减为 4 项（移除已完成的英文主站/API/产品规格/术语表等）；基线第 9 项更新为英文黄历已上线；基线第 15 项更新审校进度至 164/384；归档已废止文档 | 文档与代码严重脱节，W5/W6/W7 完成但总纲未同步 |

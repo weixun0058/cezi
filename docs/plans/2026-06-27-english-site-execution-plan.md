@@ -23,6 +23,8 @@
 | 0.11 | 2026-06-30 | 助手 | W4 完成：oracle_algorithm.py（纯函数：stroke_digit/compose_three_character_number/reduce_to_start_index/compose_english_three_number_seed/word_to_letter_sum/word_to_stroke_digit/three_words_to_start_index/word_transform）；oracle_english.py（load_english_signs 加载到内存 + _sanitize_record 剔除 fortune/gua_type + CJK 残留/空字段 fallback + ask_with_words/ask_with_numbers）；blueprints/oracle_en_api.py（POST /api/en/oracle/ask，words/numbers 双模式，错误码 INVALID_JSON/INVALID_ORACLE_MODE/ORACLE_WORDS_INSUFFICIENT/INVALID_ORACLE_NUMBER/ORACLE_NUMBERS_ALL_ZERO/CONTENT_NOT_FOUND）；config.py 加 ENGLISH_SIGNS_PATH；app.py 启动期加载 english_signs 到 extensions（无缝切换）；测试 76 项全过（含 LOVE/WORK/FATE→Sign #88、314/159/265→Sign #33、D14 字段剔除、CJK fallback、空字段 fallback、384 全覆盖） |
 | 0.12 | 2026-06-30 | 助手 | W6 完成：birth_chart_english.py（BirthChartEnglish 服务 + ZODIAC_EN/GAN_EN/ZHI_EN/ELEMENT_EN 映射表 + build_english_prompt 引用 W0.3 边界 + _parse_ai_report + analyze/analyze_stream/build_chart_summary）；birth_chart_en_api.py（POST /analyze + POST /stream）；app.py 注入 birth_chart_en 扩展（复用 lunming 的 OpenAI client）；blueprints/__init__.py 注册蓝图；测试 59 项全过。**两项设计修正：** (1) stream 端点改用 POST（原计划写 GET，与中文 lunming_api.py 一致便于传 JSON body，W7.6 同步更新）；(2) done 帧归属 API 层统一补发（服务层 analyze_stream 只产 chart/report/responsible_use，避免重复 done，与 lunming.analyze_bazi_stream 对齐）。W6.1 文章加载（content.py/seo.py）划归 W8（暂停） |
 | 0.13 | 2026-06-30 | 助手 | W7 完成：W7.2 base.html（CSS 链接改为 wise_oracle.css + canonical + wise_oracle_common.js）+ wise_oracle.css（640 行东方克制风：米色背景/墨红/墨色/金色变量、Georgia 衬线标题、卡片式工具布局、@media max-width:640px 响应式）+ wise_oracle_common.js（ERROR_MESSAGES 错误码映射 + postJSON fetch 封装 + readSSE 手动流读取 + DOM 辅助）；W7.3 英文首页（brand + 三大工具入口）；W7.4 Ask the Oracle（ask_oracle.html + ask_oracle_en.js 274 行：模式切换/校验/POST /api/en/oracle/ask/变换动画 word→letter_sum→digit 逐行淡入/9 字段渲染/responsible_use/赞助占位/Draw Another Sign 重启）；W7.5 Daily Almanac 降级（W5 暂停，用户友好 "Coming soon" + 图例保留，去 Yellow Calendar）；W7.6 Birth Chart（birth_chart.html + birth_chart_en.js 290 行：birth_time_unknown checkbox 联动/校验/POST /api/en/birth-chart/stream SSE 流消费，事件 chart/report/responsible_use/error/done）；W7.7 合规页（privacy/terms/disclaimer/about/contact 真实内容 8/10/6/3/2 节 + 隐私提示 + 非预测定位）；W7.9 契约测试 40 项全过（11 路由 200 + base.html 共享布局 + 首页 + Ask the Oracle + Daily Almanac + Birth Chart + 合规页）。**两项决策：** (1) 英文 base.html 链接 wise_oracle.css 而非中文 style.css，中英两套独立布局（W7.2 已知技术债确认落实）；(2) W5/W8 暂停 → 黄历页 "Coming soon" 降级 + articles 占位。**未做：** W7.1（视觉方向文档已在前序定稿，代码落地无独立产出）、W7.8（响应式与可访问性，留待浏览器人工验收） |
+| 0.14 | 2026-07-01 | 助手 | W7.8/W7.9 验收通过：响应式与可访问性人工验收完成（桌面 1440×900 + 移动 390×844 浏览器矩阵，所有页面 HTTP 200、唯一 H1、lang=en、无横向溢出），详见 `docs/reviews/2026-07-01-w7-8-w7-9-english-site-acceptance.md` | W7 全部子项完成 |
+| 0.15 | 2026-07-12 | 助手 | W5 解除暂停并标记完成：英文黄历已实现并接通 API（`huangli_english.py` + `huangli_en_api.py` + `huangli_terms_en.json` + `huangli_scenarios_en.json` + `test_huangli_english.py`）；W7.5 从"Coming soon"降级改为已接通 API（`daily_almanac.js` 调用 `/api/en/daily-almanac`）；§1 代码基线表和 §3 工作包总览表同步更新；归档已废止文档（`Wise_Oracle_Outbound_Plan.md`、`2026-06-21-production-readiness.md`、`p1-technical-analysis-2026-06-24.md`） | 文档与代码对齐 |
 
 > 变更规则：任何对本计划的修改（增删任务、调整顺序、状态变更）都追加一行修订记录，并在第 7 节变更日志写明细节。任务状态变更不记修订记录，只更新任务内的进度日志。
 
@@ -74,17 +76,44 @@
 | 翻译脚本与提示词 | `scripts/translate_oracle_signs.py`、`prompts/translator_system_prompt.md` | 已存在 |
 | 中文解签数据 | `data/content/oracle_signs_reinterpreted.json` | 已存在（384 条） |
 
-### 未开始（英文站其余）
+### 已完成（W5 英文黄历后端）
+
+| 能力 | 代码位置 | 状态 |
+| --- | --- | --- |
+| 英文黄历翻译服务 | `zhugeshensuan/huangli_english.py` | 已实现（纯函数翻译：农历日期/干支/生肖/节气/宜忌/神煞/方位/冲煞/彭祖百忌，活动类别合并流水线，场景判断三级匹配） |
+| 英文黄历 API | `zhugeshensuan/blueprints/huangli_en_api.py` | 已实现（`/api/en/daily-almanac` + `/api/en/week-almanac`，支持 scenario 和 debug 参数） |
+| 英文黄历词表 | `data/content/huangli_terms_en.json` | 已生成（39 活动类别 + 20 神煞 + 24 节气 + 60 甲子 + 12 生肖等 21 命名空间） |
+| 英文黄历场景 | `data/content/huangli_scenarios_en.json` | 已生成（6 场景：wedding/moving/business_opening/travel/signing/haircut） |
+| 英文黄历测试 | `tests/test_huangli_english.py` | 已实现（词表/场景加载、翻译无中文泄漏、活动流水线、场景判断、API 契约、2026 全年回归） |
+
+### 已完成（W6 英文论命后端）
+
+| 能力 | 代码位置 | 状态 |
+| --- | --- | --- |
+| 英文论命服务 | `zhugeshensuan/birth_chart_english.py` | 已实现（四柱拼音/生肖/五行/日主英文化 + W0.3 红线 AI prompt + 报告解析 + analyze/analyze_stream） |
+| 英文论命 API | `zhugeshensuan/blueprints/birth_chart_en_api.py` | 已实现（`/api/en/birth-chart/analyze` 同步 + `/api/en/birth-chart/stream` SSE，事件序列 chart→report→responsible_use→done） |
+| 英文论命测试 | `tests/test_birth_chart_english.py` | 已实现（59 项测试：基础盘英文化/AI prompt 边界/报告解析/服务层/API 契约） |
+
+### 已完成（W7 英文前端）
+
+| 能力 | 代码位置 | 状态 |
+| --- | --- | --- |
+| 英文共享布局 | `frontend/templates/en/base.html` + `frontend/static/css/wise_oracle.css` | 已实现（`<html lang="en">` + 导航栏 + responsible-use 页脚 + skip-link + 640 行东方克制风样式 + 响应式） |
+| 英文共享 JS | `frontend/static/js/wise_oracle_common.js` | 已实现（错误码映射 + postJSON + readSSE + DOM 辅助） |
+| Ask the Oracle 前端 | `frontend/templates/en/ask_oracle.html` + `frontend/static/js/ask_oracle_en.js` | 已实现（Tab 模式切换/校验/变换动画/9 字段渲染/responsible_use） |
+| Daily Almanac 前端 | `frontend/templates/en/daily_almanac.html` + `frontend/static/js/daily_almanac.js` | 已实现（已接通 `/api/en/daily-almanac`，非 Coming soon 降级） |
+| Birth Chart 前端 | `frontend/templates/en/birth_chart.html` + `frontend/static/js/birth_chart_en.js` | 已实现（checkbox 联动/SSE 流消费/四柱+报告+responsible-use 渲染） |
+| 合规页 | `frontend/templates/en/privacy.html` 等 5 页 | 已实现（Privacy/Terms/Disclaimer/About/Contact 真实内容） |
+| 英文前端契约测试 | `tests/test_english_frontend_contract.py` | 已实现（40 项测试：11 路由 200 + base.html 布局 + 各页面契约 + focus/移动端 CSS） |
+| W7.8/W7.9 验收 | `docs/reviews/2026-07-01-w7-8-w7-9-english-site-acceptance.md` | 已通过（响应式 + 可访问性，2026-07-01） |
+
+### 未开始（W8 及后续）
 
 | 能力 | 预期位置 | 状态 |
 | --- | --- | --- |
-| 英文黄历适配 | `zhugeshensuan/huangli_english.py` | 不存在 |
-| 英文内容加载 | `zhugeshensuan/content.py` | 不存在 |
-| SEO 模块 | `zhugeshensuan/seo.py`、`blueprints/seo.py` | 不存在 |
-| 商业化模块 | `zhugeshensuan/commerce*.py`、`blueprints/commerce_api.py` | 不存在 |
-| 英文黄历术语/场景数据 | `data/content/huangli_terms_en.json`、`huangli_scenarios_en.json` | 不存在 |
-| 英文合规页草稿 | `data/content/legal/*_en.md` | 不存在 |
-| 英文相关测试 | `tests/test_english_*.py` | 不存在（已有 `tests/test_oracle_english.py`） |
+| 英文内容加载 | `zhugeshensuan/content.py` | 不存在（W8 暂停，D3 文章系统格式未定） |
+| SEO 模块 | `zhugeshensuan/seo.py`、`blueprints/seo.py` | 不存在（W8 暂停） |
+| 商业化模块 | `zhugeshensuan/commerce*.py`、`blueprints/commerce_api.py` | 不存在（P6 未开始） |
 
 ### 已有相关文档
 
@@ -129,12 +158,12 @@
 | --- | --- | --- | --- | --- |
 | W0 | 英文产品边界冻结 | E0 / P2.1-P2.5、P2.8 | D1、D2、D11 | 已完成（用户授权按文档落实代码，视为通过；黄历上线范围待用户核实，Deep Reading 冻结） |
 | W1 | 英文术语体系 | E1 / P2.6、P2.7 | W0、D6 | 已完成（W1.1 术语表草稿+脚本完成，W1.2 错误码策略定稿） |
-| W2 | 英文内容数据 | E2 / P3.1-P3.7 | W0、W1、D5、D6、D7 | 进行中（W2.1 已超额完成 384/384；W2.2-W2.6 暂停，用户将用其他 Agent 更新后台数据） |
+| W2 | 英文内容数据 | E2 / P3.1-P3.7 | W0、W1、D5、D6、D7 | 已完成（W2.1 翻译 384/384；W2.2-W2.6 审校 384/384 全部定稿，2026-07-12） |
 | W3 | 英文路由骨架 | E3 / P4.1、P4.1a、P4.2 | W0、D2、D12 | 已完成（11 条英文路由 + 错误码模块 + 11 个英文模板，test_client 全部通过） |
 | W4 | Ask the Oracle 后端 | E4 / P4.3-P4.5 | W0、W2、D4、D12 | 已完成（oracle_algorithm.py + oracle_english.py + oracle_en_api.py + 76 项测试全过） |
-| W5 | Daily Almanac 后端 | E5 / P4.6、P4.6a | W0、W2、D6、D7、D12 | 暂停（黄历上线范围待用户核实） |
-| W6 | Birth Chart Reading 后端 | E6 / P4.7、P4.8 | W0、W2、D11、D12 | 进行中 |
-| W7 | 英文前端 | E7 / P5.1-P5.8 | W3、W4、W5、W6 | 未开始 |
+| W5 | Daily Almanac 后端 | E5 / P4.6、P4.6a | W0、W2、D6、D7、D12 | 已完成（huangli_english.py + huangli_en_api.py + huangli_terms_en.json + huangli_scenarios_en.json + test_huangli_english.py，前端已接通 API） |
+| W6 | Birth Chart Reading 后端 | E6 / P4.7、P4.8 | W0、W2、D11、D12 | 已完成（birth_chart_english.py + birth_chart_en_api.py + test_birth_chart_english.py，59 项测试全过） |
+| W7 | 英文前端 | E7 / P5.1-P5.8 | W3、W4、W5、W6 | 已完成（base.html + 11 页面 + wise_oracle.css + wise_oracle_common.js + ask_oracle_en.js + birth_chart_en.js + daily_almanac.js + 40 项契约测试全过 + W7.8/W7.9 验收通过） |
 | W8 | SEO / 合规 / 商业化预埋 | E8 / P7 部分 + P6 部分 | W2、W7、D3、D8、D9、D10 | 暂停（D3 未定，Deep Reading 冻结） |
 
 状态枚举：未开始 / 进行中 / 阻塞 / 待验收 / 已完成

@@ -137,3 +137,66 @@ SSE 流式分析，事件类型：`chart`、`report`、`responsible_use`、`erro
 - 生产环境必须设置 `AI_GLOBAL_DAILY_LIMIT`。
 
 超限统一返回 HTTP 429、稳定错误码和 `Retry-After` 响应头。预留奖励额度扩展点，当前版本未接入广告、支付或会员。
+
+## 英文站 API
+
+英文站 API 统一使用 `/api/en/*` 前缀，错误响应使用 `error_codes.py` 中的中英文双语错误码。
+
+### `POST /api/en/oracle/ask`
+
+英文算事接口，支持三词和三数字两种模式。
+
+```json
+{"mode": "words", "words": ["LOVE", "WORK", "FATE"]}
+```
+
+```json
+{"mode": "numbers", "numbers": [3, 1, 4]}
+```
+
+返回 9 个字段：`sign_number`、`sign_text`、`interpretation1`、`career`、`wealth`、`love`、`health`、`study`、`general`，不含 `fortune`/`gua_type`（D14 硬约束）。三词模式按 A=1..Z=26 字母求和 + stroke_digit 映射签号；三数字模式按九位种子合成。
+
+错误码：`INVALID_JSON`、`INVALID_ORACLE_MODE`、`ORACLE_WORDS_INSUFFICIENT`、`INVALID_ORACLE_NUMBER`、`ORACLE_NUMBERS_ALL_ZERO`、`CONTENT_NOT_FOUND`。
+
+### `GET /api/en/daily-almanac`
+
+参数：
+
+- `date`：可选，`YYYY-MM-DD`，默认今天。
+- `scenario`：可选，`wedding`、`moving`、`business_opening`、`travel`、`signing`、`haircut`。
+- `debug`：可选，设为 `1` 返回 `_missing` 审计字段。
+
+返回结构化英文黄历数据，包含农历日期、干支、生肖、节气、宜忌活动、神煞、方位、冲煞、彭祖百忌和场景评估。所有展示值均为英文，无中文泄漏。
+
+### `GET /api/en/week-almanac`
+
+返回前两天、今天和后六天，共九天的英文黄历。支持相同的 `scenario` 参数。
+
+### `POST /api/en/birth-chart/analyze`
+
+同步返回英文命盘和 AI 文化反思报告。
+
+```json
+{
+  "name": "John",
+  "gender": "male",
+  "birth_date": "1990-01-01",
+  "birth_time": "12:00",
+  "birth_time_unknown": false,
+  "timezone": "America/New_York"
+}
+```
+
+`birth_time` 支持 `HH:MM` 或省略（`birth_time_unknown` 为 `true` 时）。AI 报告遵循 W0.3 prompt 边界：禁止医疗/法律/财务/预测建议，定位为 cultural self-reflection。
+
+### `POST /api/en/birth-chart/stream`
+
+SSE 流式版本，响应类型 `text/event-stream`。事件序列：
+
+- `chart`：英文基础命盘（四柱拼音、生肖、五行、日主、农历日期）。
+- `report`：AI 文化反思报告（JSON 结构）。
+- `responsible_use`：底线提示。
+- `error`：流式错误。
+- `done`：流结束。
+
+复用 AI 用量配额控制，限流规则与中文论命一致。
