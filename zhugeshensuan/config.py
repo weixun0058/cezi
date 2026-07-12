@@ -64,6 +64,18 @@ class Config:
 
     REFERENCE_DB_PATH = _path_from_env("REFERENCE_DB_PATH", "data/reference/reference.db")
     RUNTIME_DB_PATH = _path_from_env("RUNTIME_DB_PATH", "instance/runtime.db")
+    # 简体签文（权威 JSON，运行时内存加载，不入数据库）
+    SIGNS_SIMP_PATH = _path_from_env(
+        "SIGNS_SIMP_PATH", "data/content/oracle_signs_reinterpreted.json"
+    )
+    # 繁体签文（由 scripts/build_hant_json.py 离线 OpenCC s2t 生成）
+    SIGNS_HANT_PATH = _path_from_env(
+        "SIGNS_HANT_PATH", "data/content/oracle_signs_reinterpreted_hant.json"
+    )
+    # 简体彭祖百忌
+    PZBJ_SIMP_PATH = _path_from_env("PZBJ_SIMP_PATH", "data/reference/pzbj.json")
+    # 繁体彭祖百忌（由 scripts/build_hant_json.py 离线 OpenCC s2t 生成）
+    PZBJ_HANT_PATH = _path_from_env("PZBJ_HANT_PATH", "data/content/pzbj_hant.json")
     ENGLISH_SIGNS_PATH = _path_from_env(
         "ENGLISH_SIGNS_PATH", "data/content/oracle_signs_en.json"
     )

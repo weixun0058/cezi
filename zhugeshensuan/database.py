@@ -1,3 +1,4 @@
+import json
 import logging
 import re
 import sqlite3
@@ -11,19 +12,6 @@ from bs4 import BeautifulSoup
 from .i18n_utils import get_gua_table_name, get_pzbj_table_name
 
 LOGGER = logging.getLogger(__name__)
-GUA_COLUMNS = (
-    "sign_number",
-    "fortune",
-    "gua_type",
-    "sign_text",
-    "interpretation1",
-    "career",
-    "wealth",
-    "love",
-    "health",
-    "study",
-    "general",
-)
 
 
 @contextmanager
@@ -51,19 +39,24 @@ def sqlite_connection(path, *, readonly=False):
 
 class Database:
     def __init__(
-        self, reference_db="data/reference/reference.db", runtime_db="instance/runtime.db"
+        self,
+        reference_db="data/reference/reference.db",
+        runtime_db="instance/runtime.db",
+        signs_simp_path="data/content/oracle_signs_reinterpreted.json",
+        signs_hant_path="data/content/oracle_signs_reinterpreted_hant.json",
+        pzbj_simp_path="data/reference/pzbj.json",
+        pzbj_hant_path="data/content/pzbj_hant.json",
     ):
         self.reference_db = Path(reference_db)
         self.runtime_db = Path(runtime_db)
         self._stroke_failure_cache = {}
         self._stroke_failure_ttl = 300
         self._init_runtime_db()
-        # 同时加载简体和繁体签文索引
-        self.gua_index = self._load_gua_index("gua")
-        self.gua_hant_index = self._load_gua_index("gua_hant")
-        # 同时加载简体和繁体彭祖百忌
-        self.pzbj = self._load_pzbj("pzbj")
-        self.pzbj_hant = self._load_pzbj("pzbj_hant")
+        # 签文和彭祖百忌从 JSON 内存加载（权威数据源，不入数据库）
+        self.gua_index = self._load_signs_from_json(signs_simp_path)
+        self.gua_hant_index = self._load_signs_from_json(signs_hant_path)
+        self.pzbj = self._load_pzbj_from_json(pzbj_simp_path)
+        self.pzbj_hant = self._load_pzbj_from_json(pzbj_hant_path)
 
     def _init_runtime_db(self):
         with sqlite_connection(self.runtime_db) as connection:
@@ -79,23 +72,28 @@ class Database:
                 """
             )
 
-    def _load_gua_index(self, table_name: str):
-        """加载指定签文表的全部记录到内存索引"""
-        with sqlite_connection(self.reference_db, readonly=True) as connection:
-            rows = connection.execute(
-                f"SELECT {', '.join(GUA_COLUMNS)} FROM {table_name}"
-            ).fetchall()
-        index = {row["sign_number"]: dict(row) for row in rows}
-        LOGGER.info("Loaded %d records from %s", len(index), table_name)
+    def _load_signs_from_json(self, json_path):
+        """从签文 JSON 加载全部记录到内存索引。
+
+        输入：json_path - oracle_signs_reinterpreted(_hant).json 路径
+        输出：{sign_number: {sign_number, sign_text, interpretation1, ...}}
+        """
+        path = Path(json_path)
+        data = json.loads(path.read_text(encoding="utf-8"))
+        index = {item["sign_number"]: item for item in data}
+        LOGGER.info("Loaded %d signs from %s", len(index), path.name)
         return index
 
-    def _load_pzbj(self, table_name: str):
-        """加载指定彭祖百忌表"""
-        with sqlite_connection(self.reference_db, readonly=True) as connection:
-            rows = connection.execute(
-                f"SELECT text, explanation FROM {table_name}"
-            ).fetchall()
-        return {row["text"]: row["explanation"] for row in rows}
+    def _load_pzbj_from_json(self, json_path):
+        """从彭祖百忌 JSON 加载到内存字典。
+
+        输入：json_path - pzbj(_hant).json 路径
+        输出：{text: explanation}
+        """
+        path = Path(json_path)
+        data = json.loads(path.read_text(encoding="utf-8"))
+        LOGGER.info("Loaded %d pzbj entries from %s", len(data), path.name)
+        return data
 
     def get_gua_info(self, sign_number, lang: str | None = None):
         """根据语言返回签文信息。

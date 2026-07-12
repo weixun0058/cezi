@@ -57,7 +57,7 @@
 {"strokes": [8, 10, 12]}
 ```
 
-签号范围为 1 至 383。
+签号范围为 1 至 384。
 
 ### `POST /get_gua_info`
 
@@ -65,7 +65,9 @@
 {"sign_number": 123}
 ```
 
-返回 `sign_text`、`gua_type`、`fortune`、`interpretation1`、`career`、`wealth`、`love`、`health`、`study` 和 `general` 命名字段。
+返回 9 字段：`sign_number`、`sign_text`、`interpretation1`、`career`、`wealth`、`love`、`health`、`study`、`general`。
+
+**数据源**：简体从 `data/content/oracle_signs_reinterpreted.json` 内存加载，繁体从 `data/content/oracle_signs_reinterpreted_hant.json` 内存加载（详见 `docs/architecture/data-source-migration-2026-07-13.md`）。不再包含 `fortune`/`gua_type` 字段。
 
 ## 论命
 

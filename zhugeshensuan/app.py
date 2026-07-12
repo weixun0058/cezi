@@ -87,7 +87,12 @@ def create_app(test_config=None):
     Path(app.instance_path).mkdir(parents=True, exist_ok=True)
 
     app.extensions["database"] = Database(
-        app.config["REFERENCE_DB_PATH"], app.config["RUNTIME_DB_PATH"]
+        reference_db=app.config["REFERENCE_DB_PATH"],
+        runtime_db=app.config["RUNTIME_DB_PATH"],
+        signs_simp_path=app.config["SIGNS_SIMP_PATH"],
+        signs_hant_path=app.config["SIGNS_HANT_PATH"],
+        pzbj_simp_path=app.config["PZBJ_SIMP_PATH"],
+        pzbj_hant_path=app.config["PZBJ_HANT_PATH"],
     )
     app.extensions["huangli"] = HuangLi(app.config["RUNTIME_DB_PATH"])
     app.extensions["lunming"] = LunMing(
