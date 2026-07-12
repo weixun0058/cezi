@@ -101,6 +101,34 @@
 
 只支持 POST；`GET /api/lunming/stream` 返回 HTTP 405。
 
+## 英文 API（Wise Oracle）
+
+英文 API 统一走 `/api/en/*` 前缀（D12 已确认）。返回 9 字段结构，不含 `fortune`/`gua_type`（D14 已确认）。
+
+### `POST /api/en/oracle/ask`
+
+英文算事，支持两种输入模式：
+
+```json
+// Three Words 模式
+{"mode": "words", "words": ["love", "work", "fate"]}
+
+// Three Numbers 模式（每位 0-9）
+{"mode": "numbers", "numbers": [3, 1, 4]}
+```
+
+返回 9 字段：`sign_number`、`sign_text`、`interpretation1`、`career`、`wealth`、`love`、`health`、`study`、`general`。
+
+错误码：`INVALID_JSON`、`INVALID_ORACLE_MODE`、`ORACLE_WORDS_INSUFFICIENT`、`INVALID_ORACLE_NUMBER`、`ORACLE_NUMBERS_ALL_ZERO`、`CONTENT_NOT_FOUND`。
+
+### `POST /api/en/birth-chart/analyze`
+
+同步返回基础盘 + AI 报告。
+
+### `POST /api/en/birth-chart/stream`
+
+SSE 流式分析，事件类型：`chart`、`report`、`responsible_use`、`error`、`done`。
+
 ## AI 额度与限流
 
 - 每设备每天免费 3 次，按北京时间重置。
