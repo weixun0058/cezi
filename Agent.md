@@ -82,20 +82,23 @@
 Gemini 有神经质敏感倾向（曾禁用 `with` 这种常见词），Agent 须主动否决此类过度审查。
 
 ### 硬约束检查清单（每签必查）
-- [ ] 禁止词（仅这些是硬禁止）：`destiny` / `Li Ge` / `heal`(作动词表确定疗效)
-- [ ] `fortune` / `gua_type` 字段必须剔除（不翻译这两项）
+- [ ] `fortune` / `gua_type` 字段必须剔除（不翻译这两项）——仅指字段名剔除，不含 favorable/fortune 等普通英文词
 - [ ] 禁止绝对化预测：`will improve` / `will fail` 等（但保留诗句中 `will` 等文学表达）
-- [ ] sign_text 必须 4 行结构（用 \n 分隔）
+- [ ] sign_text 行数应与中文原文句数大致对应，允许译者合理合并短句，但不可合并为单行散文
 - [ ] 字段完整：sign_number/sign_text/interpretation1/career/wealth/love/health/study/general 共 9 字段
 - [ ] 英文不含中文字符
+- [ ] 翻译准确性：不可出现翻译错乱（如把卦名或术语错译为不相关词汇）
 
-### 非自动禁止项（按上下文判断，勿过度审查）
-- `supremely favorable` / `extremely favorable` 等副词堆叠：
-  - **不是禁止词**。原文为吉签时（如"终有庆也"）使用是合理的
-  - 仅当原文非吉签却译成 highly favorable 时才需复核
-- `fate` 在诗句中：文学表达，保留
+### 非禁止词（以下均非禁止词，不可机械字符串匹配）
+- `favorable` / `unfavorable` / `fortune` 等普通英文词：正常使用，不是禁止词
+- `destiny`：不是禁止词
+- `heal` / `heals`：不是禁止词
+- `fate`：不是禁止词
+- `supremely favorable` / `extremely favorable` 等副词堆叠：原文吉签时使用合理
 - `with` 等常见词：Gemini 曾误禁，Agent 须主动否决
 - `will` 在哲理总结中：表自然规律/谚语时保留（如 "real effort will bring real honor"）
+
+**禁止词的唯一权威来源是 `prompts/translator_system_prompt.md` 的禁止词清单，且必须按上下文判断，不可一刀切字符串匹配。**
 
 ### 禁止行为
 - **禁止写 `apply_review_fixes_*.py` 脚本机械照搬 Gemini 意见**

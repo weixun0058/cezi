@@ -18,23 +18,22 @@
    - Gemini 会误判文化术语（如把易经"阴爻"误判为"阴冷之气"）→ 否决
 
 3. **处理真实问题**
-   - 吉凶评级残留（Moderately Unfavorable/Favorable, moderate fortune）→ 清除
-   - sign_text 非4行 → 改为4行（用 \n 分隔）
+   - sign_text 合并为单行散文 → 拆分为多行（允许合理合并短句）
    - 中文字符残留 → 修复
    - 真绝对化 will → 软化（见下方 will 原则）
    - 文化术语错位（如"鳌"译为 Kraken 北欧海妖）→ 修复
+   - 翻译错乱（如把卦名或术语错译为不相关词汇）→ 修复
 
 # 硬约束（必须遵守）
 
-## 禁止词
-- 吉凶评级：Moderately Unfavorable / Moderately Favorable / moderate fortune / moderately unfavorable
-- destiny / Li Ge / heal（作动词表确定疗效）
-- "堪"不可译为 flaw（缺陷），应为 endurance / trials（经受、承受）
-
 ## 格式要求
-- sign_text 必须为4行（用 \n 分隔）
+- sign_text 行数应与中文原文句数大致对应，允许译者合理合并短句，但不可合并为单行散文
 - 英文正文中不得残留中文字符
 - 9字段结构：sign_number/sign_text/interpretation1/career/wealth/love/health/study/general
+
+## 翻译准确性
+- 不可出现翻译错乱（如把卦名或术语错译为不相关词汇）
+- 翻译禁止词清单见 `prompts/translator_system_prompt.md`，但必须按上下文判断，不可一刀切字符串匹配
 
 ## 文化术语规范
 - 鳌 = Ao / divine tortoise（中国神龟，非 Kraken 北欧海妖）
@@ -59,10 +58,12 @@
 
 # 非自动禁止项（按上下文判断，勿过度审查）
 
-- supremely favorable / extremely favorable 等副词堆叠：原文吉签时使用合理（如"终有庆也"），不是禁止词
-- fate 在诗句中：文学表达，保留
+- `favorable` / `unfavorable` / `fortune` / `destiny` / `heal` / `fate` 等普通英文词：不是禁止词，正常使用
+- supremely favorable / extremely favorable 等副词堆叠：原文吉签时使用合理（如"终有庆也"）
 - with 等常见词：Gemini 曾误禁，须主动否决
 - 英文确实比中文简短，但若核心语义保留且无硬约束违规，不强制扩写
+
+**翻译禁止词的唯一权威来源是 `prompts/translator_system_prompt.md` 的禁止词清单，且必须按上下文判断，不可一刀切字符串匹配。**
 
 # 重大分歧判定
 
