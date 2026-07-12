@@ -70,7 +70,7 @@ def load_single_sign(sign_number):
 
     Returns:
         tuple: (cn_sign, en_sign)
-            - cn_sign: 中文签文 dict（含 sign_number/fortune/gua_type/8字段）
+            - cn_sign: 中文签文 dict（含 sign_number + 8字段）
             - en_sign: 英文签文 dict（9字段）
     """
     cn_data = json.loads(REINTERPRETED_JSON.read_text(encoding="utf-8"))
@@ -174,15 +174,13 @@ def build_gemini_review_prompt(cn_signs, en_signs):
     return "\n".join(lines)
 
 
-def build_single_sign_prompt(sign_number, cn_sign, en_sign, fortune="", gua_type=""):
+def build_single_sign_prompt(sign_number, cn_sign, en_sign):
     """构建单签 Gemini 审查 prompt。
 
     Args:
         sign_number: 签号
         cn_sign: 中文签文 dict（含 8 个字段）
         en_sign: 英文签文 dict（9字段）
-        fortune: 吉凶（仅供参考，英文版不展示）
-        gua_type: 卦属（仅供参考，英文版不展示）
 
     Returns:
         str: 单签审查 prompt 文本
@@ -191,8 +189,6 @@ def build_single_sign_prompt(sign_number, cn_sign, en_sign, fortune="", gua_type
         f"# 第 {sign_number} 签 Gemini 审查 prompt",
         f"> 生成时间：{datetime.now().strftime('%Y-%m-%d %H:%M')}",
         f"> 签号：{sign_number}",
-        f"> 吉凶：{fortune}",
-        f"> 卦属：{gua_type}",
         "",
         "## 审查任务",
         "请审查以下签文的英文翻译，重点关注：",
@@ -205,9 +201,9 @@ def build_single_sign_prompt(sign_number, cn_sign, en_sign, fortune="", gua_type
         "- **不需要对比中文原文**判断是否漏译/误译",
         "- **不审占卜硬要素**（方位/五行/时令等是否漏译）",
         "- **不审 will 用法**（will 软化由综合评定环节处理）",
-        "- **不审吉凶评级**（禁止词检查由综合评定环节处理）",
+        "- **不审吉凶评级**（favorable/unfavorable 等不是禁止词）",
         "- 禁止过度审查（如禁用 with 等常见词），避免神经质敏感",
-        "- sign_text 必须为 4 行结构",
+        "- sign_text 行数应与中文原文句数大致对应，允许合理合并短句",
         "",
         "## 中英对照",
         "",

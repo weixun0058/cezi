@@ -10,7 +10,7 @@
   3. 用 opencc s2t 转换，更新 gua_hant 表（繁体）的 7 个解签字段
 
 注意：只更新解签字段（interpretation1/career/wealth/love/health/study/general），
-      不动 fortune/gua_type/sign_text（这些是原始签文数据，保持不变）。
+      不动 fortune/gua_type/sign_text（这些字段由 build_reference_db.py 从权威 CSV 同步，本脚本不负责）。
 """
 
 import json

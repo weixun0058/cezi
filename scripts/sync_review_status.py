@@ -280,7 +280,7 @@ def render_markdown(status, gemini_batches, apply_batches):
     lines.append("2. **贴入 Gemini 审查**：用户把 prompt 贴入 Gemini Studio，拿到审查意见")
     lines.append("3. **保存审查结果**：用户把 Gemini 输出存为 `data/content/_review_log/gemini_review_result_signs_起-止.md`")
     lines.append("4. **大模型综合评定**（核心步骤，不可跳过）：")
-    lines.append("   - 输入：中文原文(reference.db gua 表) + DeepSeek 原译(当前 json) + Gemini 意见(md)")
+    lines.append("   - 输入：中文原文(reinterpreted.json) + DeepSeek 原译(当前 en.json) + Gemini 意见(md)")
     lines.append("   - 逐条判断：接受 Gemini 意见 / 否决 Gemini 误判 / 提出第三种更优译法")
     lines.append("   - 形成定稿后**直接修改 `oracle_signs_en.json`**")
     lines.append("5. **刷新看板**：`python scripts/sync_review_status.py`")

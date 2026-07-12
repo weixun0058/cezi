@@ -1,7 +1,7 @@
 """Wise Oracle 英文签文翻译脚本（DeepSeek 初译版）
 
-用途：从 reference.db 提取中文签文，调用 DeepSeek API 批量翻译为英文。
-输入：data/reference/reference.db 的 gua 表
+用途：从 oracle_signs_reinterpreted.json 提取中文签文，调用 DeepSeek API 批量翻译为英文。
+输入：data/content/oracle_signs_reinterpreted.json（权威中文解读，9 字段）
 输出：data/content/oracle_signs_en.json + 翻译日志
 
 使用方式：
@@ -27,7 +27,6 @@ import argparse
 import json
 import logging
 import os
-import sqlite3
 import sys
 import time
 from datetime import datetime
@@ -44,7 +43,7 @@ LOGGER = logging.getLogger("translate_oracle")
 
 # 路径常量
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-REFERENCE_DB = PROJECT_ROOT / "data" / "reference" / "reference.db"
+REINTERPRETED_JSON = PROJECT_ROOT / "data" / "content" / "oracle_signs_reinterpreted.json"
 PROMPT_FILE = PROJECT_ROOT / "prompts" / "translator_system_prompt.md"
 OUTPUT_DIR = PROJECT_ROOT / "data" / "content"
 OUTPUT_FILE = OUTPUT_DIR / "oracle_signs_en.json"
@@ -97,7 +96,7 @@ def load_system_prompt():
 
 
 def fetch_signs(start: int, limit: int):
-    """从 reference.db 提取指定范围的中文签文。
+    """从 reinterpreted.json 提取指定范围的中文签文（9 字段）。
 
     Args:
         start: 起始签号（含）
@@ -106,25 +105,15 @@ def fetch_signs(start: int, limit: int):
     Returns:
         list[dict]: 签文字典列表
     """
-    if not REFERENCE_DB.exists():
-        LOGGER.error("数据库不存在：%s", REFERENCE_DB)
+    if not REINTERPRETED_JSON.exists():
+        LOGGER.error("中文解读文件不存在：%s", REINTERPRETED_JSON)
         raise SystemExit(1)
 
-    conn = sqlite3.connect(REFERENCE_DB)
-    conn.row_factory = sqlite3.Row
-    try:
-        rows = conn.execute(
-            "SELECT sign_number, fortune, gua_type, sign_text, interpretation1, "
-            "career, wealth, love, health, study, general "
-            "FROM gua WHERE sign_number >= ? ORDER BY sign_number LIMIT ?",
-            (start, limit),
-        ).fetchall()
-        signs = [dict(row) for row in rows]
-        LOGGER.info("从数据库提取 %d 条签文（签号 %d-%d）",
-                    len(signs), start, start + len(signs) - 1)
-        return signs
-    finally:
-        conn.close()
+    data = json.loads(REINTERPRETED_JSON.read_text(encoding="utf-8"))
+    signs = [s for s in data if s["sign_number"] >= start][:limit]
+    LOGGER.info("从 reinterpreted.json 提取 %d 条签文（签号 %d-%d）",
+                len(signs), start, start + len(signs) - 1 if signs else start)
+    return signs
 
 
 def call_deepseek(api_key: str, system_prompt: str, user_message: str,
@@ -372,7 +361,7 @@ def load_failed_sign_numbers():
 
 
 def fetch_signs_by_numbers(sign_numbers):
-    """从 reference.db 提取指定签号的中文签文（用于重试失败签号）。
+    """从 reinterpreted.json 提取指定签号的中文签文（用于重试失败签号）。
 
     Args:
         sign_numbers: 签号集合/列表
@@ -382,25 +371,18 @@ def fetch_signs_by_numbers(sign_numbers):
     """
     if not sign_numbers:
         return []
-    if not REFERENCE_DB.exists():
-        LOGGER.error("数据库不存在：%s", REFERENCE_DB)
+    if not REINTERPRETED_JSON.exists():
+        LOGGER.error("中文解读文件不存在：%s", REINTERPRETED_JSON)
         raise SystemExit(1)
 
-    conn = sqlite3.connect(REFERENCE_DB)
-    conn.row_factory = sqlite3.Row
-    try:
-        placeholders = ",".join("?" * len(sign_numbers))
-        rows = conn.execute(
-            "SELECT sign_number, fortune, gua_type, sign_text, interpretation1, "
-            "career, wealth, love, health, study, general "
-            f"FROM gua WHERE sign_number IN ({placeholders}) ORDER BY sign_number",
-            list(sign_numbers),
-        ).fetchall()
-        signs = [dict(row) for row in rows]
-        LOGGER.info("从数据库提取 %d 条失败签文", len(signs))
-        return signs
-    finally:
-        conn.close()
+    data = json.loads(REINTERPRETED_JSON.read_text(encoding="utf-8"))
+    num_set = set(sign_numbers)
+    signs = sorted(
+        [s for s in data if s["sign_number"] in num_set],
+        key=lambda x: x["sign_number"],
+    )
+    LOGGER.info("从 reinterpreted.json 提取 %d 条签文", len(signs))
+    return signs
 
 
 def build_translate_message(batch_signs):
@@ -449,7 +431,7 @@ def main():
 
         signs = fetch_signs_by_numbers(failed_numbers)
         if not signs:
-            LOGGER.error("未能从数据库提取失败签文，退出")
+            LOGGER.error("未能从 reinterpreted.json 提取失败签文，退出")
             raise SystemExit(1)
 
         # 复用正常批次翻译流程（重试同样分批，同样记录 per-sign 日志）

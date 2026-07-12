@@ -1,9 +1,9 @@
 """按签号列表重译英文签文（用于中文原文修正后的定向重译）
 
-用途：从 reference.db 提取指定签号的完整中文签文（9 字段），调用 DeepSeek API
+用途：从 oracle_signs_reinterpreted.json 提取指定签号的完整中文签文（9 字段），调用 DeepSeek API
       重译为英文，合并覆盖到 oracle_signs_en.json（按 sign_number 去重，新翻译覆盖旧翻译）。
 
-输入：data/reference/reference.db 的 gua 表（完整 9 字段中文内容）
+输入：data/content/oracle_signs_reinterpreted.json（权威中文解读，9 字段）
 输出：data/content/oracle_signs_en.json（合并覆盖）+ 翻译日志
 
 使用方式：
@@ -92,17 +92,17 @@ def main():
     system_prompt = load_system_prompt()
     LOGGER.info("系统提示词已加载（%d 字符）", len(system_prompt))
 
-    # 3. 从数据库提取完整中文签文（9 字段）
+    # 3. 从 reinterpreted.json 提取完整中文签文（9 字段）
     signs = fetch_signs_by_numbers(sign_numbers)
     if not signs:
-        LOGGER.error("未能从数据库提取签文，退出")
+        LOGGER.error("未能从 reinterpreted.json 提取签文，退出")
         raise SystemExit(1)
 
     # 验证提取的签号与请求一致
     fetched_numbers = {s["sign_number"] for s in signs}
     missing = set(sign_numbers) - fetched_numbers
     if missing:
-        LOGGER.warning("以下签号在数据库中未找到：%s", sorted(missing))
+        LOGGER.warning("以下签号在 reinterpreted.json 中未找到：%s", sorted(missing))
 
     LOGGER.info("成功提取 %d 条签文", len(signs))
 

@@ -12,23 +12,22 @@
 非权威（派生物，由 backfill 从权威文件同步）：
 - reference.db（数据库，不作为本流程的数据源）
 
-完整流程（步骤 1-8 脚本自动完成，4-5 手动）：
+完整流程（步骤 1-7 脚本自动完成，4-5 手动）：
 1. 从权威 CSV 读 sign_text（最权威源头）
-2. 从 reinterpreted.json 读 fortune/gua_type（保持一致，不改）
-3. 调 DeepSeek（interpreter_system_prompt.md）生成 7 个中文解读字段
-4. 覆盖写入 reinterpreted.json（按 sign_number 去重）
-5. 调 DeepSeek（translator_system_prompt.md）翻译为英文（仅 9 字段，不含 fortune/gua_type）
-6. 覆盖写入 en.json（按 sign_number 去重）
-7. 生成 Gemini 审查 prompt 文件：_review_log/gemini_review_prompt_sign_{N}.md
+2. 调 DeepSeek（interpreter_system_prompt.md）生成 7 个中文解读字段
+3. 覆盖写入 reinterpreted.json（按 sign_number 去重）
+4. 调 DeepSeek（translator_system_prompt.md）翻译为英文（仅 9 字段）
+5. 覆盖写入 en.json（按 sign_number 去重）
+6. 生成 Gemini 审查 prompt 文件：_review_log/gemini_review_prompt_sign_{N}.md
 
 后续手动步骤：
-8. 把 prompt 贴入 Gemini Studio，拿到审查意见
-9. 把结果存为 _review_log/gemini_review_result_sign_{N}.md
+7. 把 prompt 贴入 Gemini Studio，拿到审查意见
+8. 把结果存为 _review_log/gemini_review_result_sign_{N}.md
 
 自动步骤（--resume 时自动执行）：
-10. 调 DeepSeek（adjudicator_system_prompt.md）做综合评定
-11. 根据 DeepSeek 评定结果，自动修改 en.json
-12. 生成评定记录：_review_log/adjudication_sign_{N}.md
+9. 调 DeepSeek（adjudicator_system_prompt.md）做综合评定
+10. 根据 DeepSeek 评定结果，自动修改 en.json
+11. 生成评定记录：_review_log/adjudication_sign_{N}.md
 
 挂起条件（交用户评判）：
 - 无 Gemini 审查结果文件 → 挂起，提示用户先做 Gemini 审查
@@ -66,7 +65,6 @@ from reinterpret_oracle_signs import (
     parse_interpretation,
     load_api_key,
     load_system_prompt as load_interpreter_prompt,
-    build_user_message as build_interpretation_message,
 )
 from translate_oracle_signs import (
     call_deepseek as call_deepseek_for_translation,
@@ -121,72 +119,55 @@ def load_sign_text_from_csv(sign_number):
     raise SystemExit(1)
 
 
-def load_fortune_gua_type(sign_number):
-    """从 reinterpreted.json 读取指定签号的 fortune/gua_type。
+def build_interpretation_message(sign):
+    """构建发送给 DeepSeek 的中文解读用户消息。
 
-    这两个字段是历史遗留的元数据（英文版不展示），仅用于 DeepSeek 解读时参考。
-    保持与现有内容一致，不修改。
+    仅传入签号和签文诗（CSV 数据源不含 fortune/gua_type）。
 
     Args:
-        sign_number: 签号
+        sign: 签文字典，含 sign_number/sign_text
 
     Returns:
-        tuple: (fortune, gua_type)
-
-    Raises:
-        SystemExit: 签号不存在时退出。
+        str: 用户消息文本
     """
-    if not REINTERPRETED_JSON.exists():
-        LOGGER.error("reinterpreted.json 不存在：%s", REINTERPRETED_JSON)
-        raise SystemExit(1)
-
-    data = json.loads(REINTERPRETED_JSON.read_text(encoding="utf-8"))
-    for s in data:
-        if s["sign_number"] == sign_number:
-            fortune = s.get("fortune", "")
-            gua_type = s.get("gua_type", "")
-            LOGGER.info("从 reinterpreted.json 读取第 %d 签 fortune=%s, gua_type=%s",
-                        sign_number, fortune, gua_type)
-            return fortune, gua_type
-
-    LOGGER.error("签号 %d 在 reinterpreted.json 中不存在", sign_number)
-    raise SystemExit(1)
+    return (
+        f"请为以下签文生成完整的中文解读。\n\n"
+        f"签号：第{sign['sign_number']}签\n"
+        f"签文：{sign['sign_text']}\n\n"
+        f"请严格按照系统提示词的风格、字数、文化边界和输出格式要求，"
+        f"返回 JSON 对象，包含 interpretation1/career/wealth/love/health/study/general "
+        f"七个字段。"
+    )
 
 
-def step1_2_load_authoritative_sign(sign_number):
-    """步骤 1-2：从权威源读取签文数据。
-
-    - sign_text 从权威 CSV 读取（最权威源头）
-    - fortune/gua_type 从 reinterpreted.json 读取（历史元数据，不改）
+def step1_load_authoritative_sign(sign_number):
+    """步骤 1：从权威 CSV 读取签文数据。
 
     Args:
         sign_number: 签号
 
     Returns:
-        dict: 含 sign_number/fortune/gua_type/sign_text
+        dict: 含 sign_number/sign_text
     """
     LOGGER.info("=" * 60)
-    LOGGER.info("步骤 1-2：从权威源读取第 %d 签数据", sign_number)
+    LOGGER.info("步骤 1：从权威源读取第 %d 签数据", sign_number)
     LOGGER.info("=" * 60)
 
     sign_text = load_sign_text_from_csv(sign_number)
-    fortune, gua_type = load_fortune_gua_type(sign_number)
 
     sign = {
         "sign_number": sign_number,
-        "fortune": fortune,
-        "gua_type": gua_type,
         "sign_text": sign_text,
     }
     LOGGER.info("签文数据准备完成：%s", sign["sign_text"][:50] + "...")
     return sign
 
 
-def step3_4_regenerate_chinese(sign, api_key, system_prompt):
-    """步骤 3-4：调 DeepSeek 重新生成中文解读 + 覆盖写入 reinterpreted.json。
+def step2_3_regenerate_chinese(sign, api_key, system_prompt):
+    """步骤 2-3：调 DeepSeek 重新生成中文解读 + 覆盖写入 reinterpreted.json。
 
     Args:
-        sign: 签文数据（含 sign_number/fortune/gua_type/sign_text）
+        sign: 签文数据（含 sign_number/sign_text）
         api_key: DeepSeek API key
         system_prompt: interpreter 系统提示词
 
@@ -198,10 +179,10 @@ def step3_4_regenerate_chinese(sign, api_key, system_prompt):
     """
     sign_number = sign["sign_number"]
     LOGGER.info("=" * 60)
-    LOGGER.info("步骤 3-4：重新生成第 %d 签中文解读", sign_number)
+    LOGGER.info("步骤 2-3：重新生成第 %d 签中文解读", sign_number)
     LOGGER.info("=" * 60)
 
-    # 步骤 3：调 DeepSeek 生成解读
+    # 步骤 2：调 DeepSeek 生成解读
     user_message = build_interpretation_message(sign)
     LOGGER.info("调用 DeepSeek（interpreter）生成中文解读...")
     content = call_deepseek_for_interpretation(api_key, system_prompt, user_message)
@@ -211,14 +192,12 @@ def step3_4_regenerate_chinese(sign, api_key, system_prompt):
     total_chars = sum(len(v) for v in interpretation.values())
     LOGGER.info("中文解读生成成功（共 %d 字）", total_chars)
 
-    # 步骤 4：覆盖写入 reinterpreted.json
+    # 步骤 3：覆盖写入 reinterpreted.json
     LOGGER.info("覆盖写入 reinterpreted.json...")
     data = json.loads(REINTERPRETED_JSON.read_text(encoding="utf-8"))
 
     new_entry = {
         "sign_number": sign_number,
-        "fortune": sign["fortune"],
-        "gua_type": sign["gua_type"],
         "sign_text": sign["sign_text"],
         **interpretation,
     }
@@ -245,14 +224,13 @@ def step3_4_regenerate_chinese(sign, api_key, system_prompt):
     return interpretation
 
 
-def step5_6_translate_to_english(sign, interpretation, api_key, system_prompt):
-    """步骤 5-6：调 DeepSeek 翻译英文 + 覆盖写入 en.json。
+def step4_5_translate_to_english(sign, interpretation, api_key, system_prompt):
+    """步骤 4-5：调 DeepSeek 翻译英文 + 覆盖写入 en.json。
 
-    翻译输入仅含 9 字段（sign_number + sign_text + 7 个解读字段），
-    不含 fortune/gua_type（英文版不展示这两项）。
+    翻译输入仅含 9 字段（sign_number + sign_text + 7 个解读字段）。
 
     Args:
-        sign: 签文数据（含 sign_number/fortune/gua_type/sign_text）
+        sign: 签文数据（含 sign_number/sign_text）
         interpretation: 7 个中文解读字段
         api_key: DeepSeek API key
         system_prompt: translator 系统提示词
@@ -265,7 +243,7 @@ def step5_6_translate_to_english(sign, interpretation, api_key, system_prompt):
     """
     sign_number = sign["sign_number"]
     LOGGER.info("=" * 60)
-    LOGGER.info("步骤 5-6：翻译第 %d 签为英文", sign_number)
+    LOGGER.info("步骤 4-5：翻译第 %d 签为英文", sign_number)
     LOGGER.info("=" * 60)
 
     # 构建翻译输入（仅 9 字段，不含 fortune/gua_type）
@@ -299,13 +277,13 @@ def step5_6_translate_to_english(sign, interpretation, api_key, system_prompt):
     return en_result
 
 
-def step7_generate_gemini_prompt(sign, interpretation, en_result):
-    """步骤 7：生成 Gemini 审查 prompt 文件。
+def step6_generate_gemini_prompt(sign, interpretation, en_result):
+    """步骤 6：生成 Gemini 审查 prompt 文件。
 
     委托给 gemini_prompt_builder 模块构建 prompt 文本，本函数只负责保存文件。
 
     Args:
-        sign: 签文数据（含 sign_number/fortune/gua_type/sign_text）
+        sign: 签文数据（含 sign_number/sign_text）
         interpretation: 7 个中文解读字段
         en_result: 英文翻译结果（9 字段）
 
@@ -314,16 +292,16 @@ def step7_generate_gemini_prompt(sign, interpretation, en_result):
     """
     sign_number = sign["sign_number"]
     LOGGER.info("=" * 60)
-    LOGGER.info("步骤 7：生成第 %d 签 Gemini 审查 prompt", sign_number)
+    LOGGER.info("步骤 6：生成第 %d 签 Gemini 审查 prompt", sign_number)
     LOGGER.info("=" * 60)
 
     # 委托给共享模块构建 prompt 文本
+    # cn_sign 需包含 sign_text + 7 个解读字段，故合并 sign 与 interpretation
+    cn_sign_full = {**sign, **interpretation}
     prompt_text = build_single_sign_prompt(
         sign_number=sign_number,
-        cn_sign=interpretation,  # interpretation 含 7 个解读字段
+        cn_sign=cn_sign_full,
         en_sign=en_result,
-        fortune=sign["fortune"],
-        gua_type=sign["gua_type"],
     )
 
     # 保存到文件
@@ -448,17 +426,17 @@ def main():
     translator_prompt = load_translator_prompt()
     LOGGER.info("translator 提示词已加载（%d 字符）", len(translator_prompt))
 
-    # 步骤 1-2：从权威源读取签文数据
-    sign = step1_2_load_authoritative_sign(sign_number)
+    # 步骤 1：从权威源读取签文数据
+    sign = step1_load_authoritative_sign(sign_number)
 
-    # 步骤 3-4：重新生成中文解读 + 写入 reinterpreted.json
-    interpretation = step3_4_regenerate_chinese(sign, api_key, interpreter_prompt)
+    # 步骤 2-3：重新生成中文解读 + 写入 reinterpreted.json
+    interpretation = step2_3_regenerate_chinese(sign, api_key, interpreter_prompt)
 
-    # 步骤 5-6：翻译英文 + 写入 en.json
-    en_result = step5_6_translate_to_english(sign, interpretation, api_key, translator_prompt)
+    # 步骤 4-5：翻译英文 + 写入 en.json
+    en_result = step4_5_translate_to_english(sign, interpretation, api_key, translator_prompt)
 
-    # 步骤 7：生成 Gemini 审查 prompt
-    prompt_file = step7_generate_gemini_prompt(sign, interpretation, en_result)
+    # 步骤 6：生成 Gemini 审查 prompt
+    prompt_file = step6_generate_gemini_prompt(sign, interpretation, en_result)
 
     elapsed = time.time() - start_time
     LOGGER.info("#" * 60)
@@ -477,7 +455,7 @@ def main():
     LOGGER.info("  6. 续跑综合评定：python scripts/reprocess_single_sign.py --sign %d --resume", sign_number)
     LOGGER.info("")
     LOGGER.info("注意：")
-    LOGGER.info("  - 数据库（reference.db）未同步，如需同步请运行 backfill_reinterpreted_to_db.py")
+    LOGGER.info("  - 数据库（reference.db）未同步，如需同步请运行 backfill_reinterpreted_to_db.py（数据库是派生物，非数据源头）")
 
 
 if __name__ == "__main__":

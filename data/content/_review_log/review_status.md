@@ -1,7 +1,7 @@
 # 诸葛神算英文签文审查进度看板
 
 > 自动生成，请勿手工编辑。运行 `python scripts/sync_review_status.py` 刷新。
-> 最后更新：2026-07-12 14:15:37
+> 最后更新：2026-07-12 16:11:32
 
 ## 总览
 
@@ -49,7 +49,7 @@
 2. **贴入 Gemini 审查**：用户把 prompt 贴入 Gemini Studio，拿到审查意见
 3. **保存审查结果**：用户把 Gemini 输出存为 `data/content/_review_log/gemini_review_result_signs_起-止.md`
 4. **大模型综合评定**（核心步骤，不可跳过）：
-   - 输入：中文原文(reference.db gua 表) + DeepSeek 原译(当前 json) + Gemini 意见(md)
+   - 输入：中文原文(reinterpreted.json) + DeepSeek 原译(当前 en.json) + Gemini 意见(md)
    - 逐条判断：接受 Gemini 意见 / 否决 Gemini 误判 / 提出第三种更优译法
    - 形成定稿后**直接修改 `oracle_signs_en.json`**
 5. **刷新看板**：`python scripts/sync_review_status.py`

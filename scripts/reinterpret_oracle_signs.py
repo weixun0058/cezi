@@ -1,6 +1,6 @@
 """诸葛神算中文解签重写脚本（DeepSeek）
 
-用途：从 reference.db 读取签号/吉凶/卦属/签文诗，调用 DeepSeek API 重新生成
+用途：从权威 CSV 读取签号/签文诗，调用 DeepSeek API 重新生成
       7 个解读字段（interpretation1/career/wealth/love/health/study/general），
       输出 Markdown 文件供人工审阅 + JSON 文件供程序处理。
 
@@ -25,11 +25,11 @@
 """
 
 import argparse
+import csv
 import json
 import logging
 import os
 import re
-import sqlite3
 import sys
 import time
 from datetime import datetime
@@ -46,7 +46,7 @@ LOGGER = logging.getLogger("reinterpret_oracle")
 
 # 路径常量
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-REFERENCE_DB = PROJECT_ROOT / "data" / "reference" / "reference.db"
+AUTHORITATIVE_CSV = PROJECT_ROOT / "data" / "reference" / "oracle_signs_authoritative_sc.csv"
 PROMPT_FILE = PROJECT_ROOT / "prompts" / "interpreter_system_prompt.md"
 OUTPUT_DIR = PROJECT_ROOT / "data" / "content"
 MD_FILE = OUTPUT_DIR / "oracle_signs_reinterpreted.md"
@@ -98,35 +98,37 @@ def load_system_prompt():
 
 
 def fetch_signs(start: int, limit: int):
-    """从 reference.db 提取签文原始数据（签号/吉凶/卦属/签文诗）。
+    """从权威 CSV 提取签文原始数据（签号/签文诗）。
 
-    数据库内容由 build_reference_db.py 从 Excel 导入，内容一致。
+    CSV 是最权威的源头，仅含 sign_number 和 sign_text 两列。
 
     Args:
         start: 起始签号（含）
         limit: 提取条数
 
     Returns:
-        list[dict]: 签文字典列表，含 sign_number/fortune/gua_type/sign_text
+        list[dict]: 签文字典列表，含 sign_number/sign_text
     """
-    if not REFERENCE_DB.exists():
-        LOGGER.error("数据库不存在：%s", REFERENCE_DB)
+    if not AUTHORITATIVE_CSV.exists():
+        LOGGER.error("权威 CSV 不存在：%s", AUTHORITATIVE_CSV)
         raise SystemExit(1)
 
-    conn = sqlite3.connect(REFERENCE_DB)
-    conn.row_factory = sqlite3.Row
-    try:
-        rows = conn.execute(
-            "SELECT sign_number, fortune, gua_type, sign_text "
-            "FROM gua WHERE sign_number >= ? ORDER BY sign_number LIMIT ?",
-            (start, limit),
-        ).fetchall()
-        signs = [dict(row) for row in rows]
-        LOGGER.info("从数据库提取 %d 条签文（签号 %d-%d）",
-                    len(signs), start, start + len(signs) - 1)
-        return signs
-    finally:
-        conn.close()
+    signs = []
+    with AUTHORITATIVE_CSV.open(encoding="utf-8-sig") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            sn = int(row["sign_number"])
+            if sn >= start:
+                signs.append({
+                    "sign_number": sn,
+                    "sign_text": row["sign_text"],
+                })
+            if len(signs) >= limit:
+                break
+
+    LOGGER.info("从权威 CSV 提取 %d 条签文（签号 %d-%d）",
+                len(signs), start, start + len(signs) - 1 if signs else start)
+    return signs
 
 
 def load_completed_sign_numbers():
@@ -269,7 +271,7 @@ def build_user_message(sign):
     """构建发送给 DeepSeek 的用户消息。
 
     Args:
-        sign: 签文字典，含 sign_number/fortune/gua_type/sign_text
+        sign: 签文字典，含 sign_number/sign_text
 
     Returns:
         str: 用户消息文本
@@ -277,8 +279,6 @@ def build_user_message(sign):
     return (
         f"请为以下签文生成完整的中文解读。\n\n"
         f"签号：第{sign['sign_number']}签\n"
-        f"吉凶：{sign['fortune']}\n"
-        f"卦属：{sign['gua_type']}\n"
         f"签文：{sign['sign_text']}\n\n"
         f"请严格按照系统提示词的风格、字数、文化边界和输出格式要求，"
         f"返回 JSON 对象，包含 interpretation1/career/wealth/love/health/study/general "
@@ -290,14 +290,14 @@ def format_md_section(sign, interpretation):
     """把一条签文及其解读格式化为 Markdown 片段。
 
     Args:
-        sign: 签文原始数据
+        sign: 签文原始数据（含 sign_number/sign_text）
         interpretation: 解读字段字典
 
     Returns:
         str: Markdown 文本
     """
     lines = [
-        f"## 第{sign['sign_number']}签 · {sign['fortune']} · {sign['gua_type']}",
+        f"## 第{sign['sign_number']}签",
         "",
         "### 签文",
         sign["sign_text"],
@@ -473,8 +473,7 @@ def retry_process(signs, api_key, system_prompt, results):
 
     for i, sign in enumerate(signs, 1):
         sign_number = sign["sign_number"]
-        LOGGER.info("[%d/%d] 重试第%d签 %s %s",
-                    i, len(signs), sign_number, sign["fortune"], sign["gua_type"])
+        LOGGER.info("[%d/%d] 重试第%d签", i, len(signs), sign_number)
 
         # 清理旧片段
         remove_md_section(sign_number)
@@ -539,20 +538,19 @@ def main():
         system_prompt = load_system_prompt()
         LOGGER.info("系统提示词已加载（%d 字符）", len(system_prompt))
 
-        # 从数据库提取所有失败签号的数据
+        # 从权威 CSV 提取所有失败签号的数据
         all_signs = []
-        conn = sqlite3.connect(REFERENCE_DB)
-        conn.row_factory = sqlite3.Row
-        try:
-            placeholders = ",".join("?" * len(failed_numbers))
-            rows = conn.execute(
-                f"SELECT sign_number, fortune, gua_type, sign_text "
-                f"FROM gua WHERE sign_number IN ({placeholders}) ORDER BY sign_number",
-                list(failed_numbers),
-            ).fetchall()
-            all_signs = [dict(row) for row in rows]
-        finally:
-            conn.close()
+        if AUTHORITATIVE_CSV.exists():
+            with AUTHORITATIVE_CSV.open(encoding="utf-8-sig") as f:
+                reader = csv.DictReader(f)
+                for row in reader:
+                    sn = int(row["sign_number"])
+                    if sn in failed_numbers:
+                        all_signs.append({
+                            "sign_number": sn,
+                            "sign_text": row["sign_text"],
+                        })
+        all_signs.sort(key=lambda x: x["sign_number"])
 
         LOGGER.info("待重试签文：%d 条", len(all_signs))
 
@@ -628,8 +626,7 @@ def main():
 
     for i, sign in enumerate(pending, 1):
         sign_number = sign["sign_number"]
-        LOGGER.info("[%d/%d] 第%d签 %s %s",
-                    i, len(pending), sign_number, sign["fortune"], sign["gua_type"])
+        LOGGER.info("[%d/%d] 第%d签", i, len(pending), sign_number)
 
         user_message = build_user_message(sign)
 

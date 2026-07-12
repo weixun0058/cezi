@@ -160,10 +160,10 @@ def load_adjudicator_prompt():
 def build_adjudication_message(sign, interpretation, en_result, gemini_review_text):
     """构建 DeepSeek 综合评定的用户消息。
 
-    包含：签号、吉凶/卦属、中文原文、英文翻译、Gemini 审查报告。
+    包含：签号、中文原文、英文翻译、Gemini 审查报告。
 
     Args:
-        sign: 签文数据（含 sign_number/fortune/gua_type/sign_text）
+        sign: 签文数据（含 sign_number/sign_text）
         interpretation: 7 个中文解读字段
         en_result: 英文翻译结果（9 字段）
         gemini_review_text: Gemini 审查报告全文
@@ -175,8 +175,6 @@ def build_adjudication_message(sign, interpretation, en_result, gemini_review_te
     lines = [
         f"# 第 {sign_number} 签综合评定任务",
         f"> 签号：{sign_number}",
-        f"> 吉凶：{sign['fortune']}",
-        f"> 卦属：{sign['gua_type']}",
         "",
         "## 中文原文（reinterpreted.json）",
         "",
@@ -464,7 +462,7 @@ def load_sign_from_json(sign_number):
 
     Returns:
         tuple: (sign, interpretation, en_result)
-            - sign: 含 sign_number/fortune/gua_type/sign_text
+            - sign: 含 sign_number/sign_text
             - interpretation: 7 个中文解读字段
             - en_result: 英文翻译结果（9 字段）
 
@@ -485,8 +483,6 @@ def load_sign_from_json(sign_number):
 
     sign = {
         "sign_number": sign_number,
-        "fortune": cn_sign.get("fortune", ""),
-        "gua_type": cn_sign.get("gua_type", ""),
         "sign_text": cn_sign.get("sign_text", ""),
     }
 
