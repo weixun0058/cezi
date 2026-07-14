@@ -1,7 +1,7 @@
 # 诸葛神算 V4 项目问题清单与真假问题判定
 
 > 审查日期：2026-07-14
-> 审查对象：`codex/i18n-commercialization` 当前工作区，以及远端最新提交 `47ba334`
+> 审查对象：`codex/i18n-commercialization` 当前工作区；起始基线为远端提交 `47ba334`
 > 审查性质：审查与修复记录；本轮已修改业务代码、测试、依赖和工程格式。
 > 目的：区分真实缺陷、契约变更、过时测试、格式债务、环境误报和尚未完成的产品工作。
 
@@ -28,14 +28,16 @@
 本轮已完成所有不需要进一步产品决策的修改：
 
 - pytest：**280 passed / 0 failed**。修复前的 22 个失败已全部处理，并新增笔画持久化、权威源同步和 `LunMing` 显式语言测试。
-- Black：**75 个受检文件全部通过**。修复前报告的 39 个文件已格式化。
+- Black：**76 个受检文件全部通过**。修复前报告的 39 个文件已格式化。
 - Ruff：**0 项问题**。修复前的 124 项已通过安全自动修复、Black 和人工整理清零。
 - Click：从 `8.2.1` 升级到 `8.3.3`；`pip check` 通过，`pip-audit` 报告 **No known vulnerabilities found**。
 - Node：CI 中的 `huangli.js`、`lunming.js`、`main.js`，以及本次涉及的 `daily_almanac.js`、`birth_chart_en.js`、`lang_switcher.js` 均通过 `node --check`。
-- Docker：生产镜像构建成功，容器内部健康检查为 `healthy`，`/readyz` 返回 200。Windows 宿主端口转发在本机返回连接失败，但容器日志确认 Gunicorn 正常监听 `0.0.0.0:8000`，属于本机 Docker Desktop 转发层问题。
+- Docker：生产镜像构建成功，容器内部健康检查为 `healthy`；Windows 宿主访问 `/healthz` 与 `/readyz` 均返回 200。
 - `git diff --check`：通过；仅有 Git 的 LF/CRLF 转换提示，无空白错误。
+- GitHub CI #13 暴露了 Linux 下直接调用 `pytest` 时仓库根目录未进入模块搜索路径的问题；现已在 pytest 配置中声明 `pythonpath = ["."]`，并统一由 `python -m pytest` 启动。
+- GitHub Actions 官方组件已升级到 Node 24 运行时版本，并将工作流权限收紧为 `contents: read`，消除旧组件的 Node 20 弃用警告。
 
-当前唯一仍会阻塞完整 CI 的已知项是数据库可重建性：
+此前会阻塞完整 CI 的数据库可重建性问题也已解决：
 
 | 数据库 | `hanzi` 数量 |
 | --- | ---: |
@@ -54,7 +56,7 @@
 | 类别 | 数量/状态 | 结论 |
 | --- | ---: | --- |
 | 当前工作区 pytest | 280 passed / 0 failed | 已修复并全量验证通过 |
-| 当前工作区 Black | 0 个文件 | 75 个受检文件全部符合格式要求 |
+| 当前工作区 Black | 0 个文件 | 76 个受检文件全部符合格式要求 |
 | 当前工作区 Ruff | 0 项 | 124 项已全部处理 |
 | 远端 `47ba334` Black | 34 个文件 | CI #12 的确定性首个失败点 |
 | 远端 `47ba334` Ruff | 110 项 | CI 若通过 Black，下一步仍会失败 |
@@ -459,8 +461,29 @@ CI 关键顺序：
 
 - CI #12 不是 GitHub 偶发故障。
 - 即使 Black 修完，Ruff 和 pytest 仍会继续让 CI 失败。
-- 当前工作区已经达到 Black 0 / Ruff 0 / pytest 0 failed；远端 `47ba334` 仍是 34/110/1，因为本轮修复尚未提交推送。
+- 当前工作区已经达到 Black 0 / Ruff 0 / pytest 0 failed；`47ba334` 的 34/110/1 是修复前基线，首轮修复已由提交 `61b662a` 推送。
 - 修 CI 时必须针对“准备提交的最终工作区”一次性跑完整门禁，不能只修远端的 34 个 Black 文件。
+
+### 5.1 GitHub CI #13 的新增跨平台问题
+
+远端页面：<https://github.com/weixun0058/cezi/actions/runs/29350288452>
+
+提交 `61b662a` 已通过 GitHub 上的 Black 和 Ruff，但 pytest 在收集测试前退出，日志为：
+
+```text
+ImportError while loading conftest '/home/runner/work/cezi/cezi/tests/conftest.py'.
+tests/conftest.py:6: in <module>
+    from app import create_app
+E   ModuleNotFoundError: No module named 'app'
+```
+
+判定：**[真问题：跨平台测试入口配置]**。Windows 本地环境能够解析仓库根目录的 `app.py`，掩盖了 Linux 上 pytest 控制台入口的路径差异；这不是业务测试失败，也不是 GitHub 偶发误报。
+
+解决：
+
+1. 在 `pyproject.toml` 的 pytest 配置中显式加入 `pythonpath = ["."]`；
+2. CI 使用 `python -m pytest`，确保当前仓库根目录进入 Python 模块搜索路径；
+3. 保留两层设置，使开发者直接运行 `pytest` 与 CI 运行方式都能工作。
 
 ## 6. 其他应修复或需要决策的问题
 
