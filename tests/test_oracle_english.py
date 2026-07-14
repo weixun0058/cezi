@@ -11,7 +11,6 @@
 
 from __future__ import annotations
 
-import json
 from pathlib import Path
 
 import pytest
@@ -36,7 +35,6 @@ from zhugeshensuan.oracle_english import (
     ask_with_words,
     load_english_signs,
 )
-
 
 # ============================================================
 # W4.1 三词算法
@@ -412,14 +410,16 @@ class TestLoadEnglishSigns:
                 if field == "sign_number":
                     continue
                 value = record[field]
-                assert not CJK_RE.search(value), (
-                    f"Sign #{sign_number} field={field} 仍有 CJK: {value[:50]}"
-                )
+                assert not CJK_RE.search(
+                    value
+                ), f"Sign #{sign_number} field={field} 仍有 CJK: {value[:50]}"
 
-    def test_known_empty_general_gets_fallback(self, english_signs):
-        """已知质量遗留：sign #197-200 的 general 为空 → 应触发 fallback。"""
+    def test_previously_empty_general_is_now_reviewed(self, english_signs):
+        """197-200 签已补齐正式内容，不应继续使用历史 fallback。"""
         for sign_number in (197, 198, 199, 200):
-            assert english_signs[sign_number]["general"] == FALLBACK_TEXT
+            general = english_signs[sign_number]["general"]
+            assert general
+            assert general != FALLBACK_TEXT
 
 
 # ============================================================

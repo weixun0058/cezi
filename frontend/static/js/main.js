@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     function setStatus(message, type = '') {
         const status = document.getElementById('suanshiStatus');
+        if (!status) return;
         status.textContent = message;
         status.dataset.type = type;
     }
@@ -47,15 +48,21 @@ document.addEventListener('DOMContentLoaded', async function() {
         strokes = [];
         setStatus(i18n.t('suanshi.status.querying_strokes'));
         try {
-            for (const input of inputs) {
+            for (let i = 0; i < inputs.length; i++) {
                 const response = await fetch(i18n.apiUrl('/get_strokes'), {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ character: input.value })
+                    body: JSON.stringify({ character: inputs[i].value })
                 });
                 const data = await response.json();
-                if (!response.ok || !data.strokes) throw new Error(data.error?.message || i18n.t('suanshi.status.strokes_error'));
-                strokes.push(data.strokes);
+                if (response.ok && data.strokes) {
+                    strokes.push(data.strokes);
+                } else if (response.status === 404) {
+                    // 笔画未查询到，用 null 占位，显示时提示用户点击修改
+                    strokes.push(null);
+                } else {
+                    throw new Error(data.error?.message || i18n.t('suanshi.status.strokes_error'));
+                }
             }
         } catch (error) {
             setStatus(error.message || i18n.t('suanshi.status.strokes_failed'), 'error');
@@ -70,21 +77,86 @@ document.addEventListener('DOMContentLoaded', async function() {
             element.classList.add('hidden');
         });
 
-        // 直接显示笔画数结果 + 查看签号按钮（新流程：跳过"请选择求测类型"）
+        // 显示笔画结果（每个笔画数可点击修改）
+        showStrokeResult();
+    });
+
+    // 显示笔画结果 + 查看签号按钮
+    function showStrokeResult() {
         const strokeUnit = i18n.t('calendar.unit.画');
-        document.getElementById('stroke1').innerHTML =
-            `<span class="char-display">${inputs[0].value}</span>
-             <span class="stroke-display">${numToChineseUpper(strokes[0])}${strokeUnit}</span>`;
-        document.getElementById('stroke2').innerHTML =
-            `<span class="char-display">${inputs[1].value}</span>
-             <span class="stroke-display">${numToChineseUpper(strokes[1])}${strokeUnit}</span>`;
-        document.getElementById('stroke3').innerHTML =
-            `<span class="char-display">${inputs[2].value}</span>
-             <span class="stroke-display">${numToChineseUpper(strokes[2])}${strokeUnit}</span>`;
+        for (let i = 0; i < 3; i++) {
+            const el = document.getElementById('stroke' + (i + 1));
+            const s = strokes[i];
+            const displayText = s === null
+                ? `<span class="stroke-display-placeholder">${i18n.t('suanshi.stroke_not_found')}</span>`
+                : `${numToChineseUpper(s)}${strokeUnit}`;
+            el.innerHTML =
+                `<span class="char-display">${inputs[i].value}</span>` +
+                `<span class="stroke-display" data-index="${i}" title="${i18n.t('suanshi.stroke_edit_hint')}">${displayText}</span>`;
+        }
         document.getElementById('strokeResult').classList.remove('hidden');
         document.getElementById('showSignBtn').classList.remove('hidden');
-        setStatus('');
-    });
+        // 给每个笔画显示框绑定点击编辑事件
+        document.querySelectorAll('.stroke-display').forEach(el => {
+            el.addEventListener('click', function() {
+                startEditStroke(this);
+            });
+        });
+        setStatus(i18n.t('suanshi.stroke_edit_hint'));
+    }
+
+    // 开始编辑笔画数：把显示文本替换为输入框
+    function startEditStroke(el) {
+        if (el.classList.contains('editing')) return;
+        const idx = parseInt(el.dataset.index, 10);
+        const current = strokes[idx];
+        el.classList.add('editing');
+        el.classList.remove('invalid');
+        const input = document.createElement('input');
+        input.type = 'number';
+        input.min = '1';
+        input.max = '52';
+        input.value = current === null ? '' : current;
+        input.placeholder = '1-52';
+        el.innerHTML = '';
+        el.appendChild(input);
+        input.focus();
+        input.select();
+
+        // 回车或失焦时保存
+        const saveEdit = () => {
+            const val = parseInt(input.value, 10);
+            if (isNaN(val) || val < 1 || val > 52) {
+                el.classList.add('invalid');
+                setStatus(i18n.t('suanshi.stroke_invalid'), 'error');
+                input.focus();
+                return;
+            }
+            strokes[idx] = val;
+            const strokeUnit = i18n.t('calendar.unit.画');
+            el.classList.remove('editing', 'invalid');
+            el.innerHTML = `${numToChineseUpper(val)}${strokeUnit}`;
+            setStatus(i18n.t('suanshi.stroke_edit_hint'));
+        };
+
+        input.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                saveEdit();
+            } else if (e.key === 'Escape') {
+                // 取消编辑，恢复原值
+                el.classList.remove('editing', 'invalid');
+                const strokeUnit = i18n.t('calendar.unit.画');
+                if (current === null) {
+                    el.innerHTML = `<span class="stroke-display-placeholder">${i18n.t('suanshi.stroke_not_found')}</span>`;
+                } else {
+                    el.innerHTML = `${numToChineseUpper(current)}${strokeUnit}`;
+                }
+                setStatus(i18n.t('suanshi.stroke_edit_hint'));
+            }
+        });
+        input.addEventListener('blur', saveEdit);
+    }
 
     // 求测类型按钮点击事件（新流程：在解签详解之后，显示对应分项解签）
     document.querySelectorAll('.qc-type-btn, .qc-sy-type-btn').forEach(btn => {
@@ -152,6 +224,11 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     // 显示签号
     document.getElementById('showSignBtn').addEventListener('click', async function() {
+        // 校验：是否有未查到且未手动补全的笔画
+        if (strokes.some(s => s === null || s === undefined)) {
+            setStatus(i18n.t('suanshi.stroke_incomplete'), 'error');
+            return;
+        }
         try {
             // 禁用按钮防止重复点击
             this.disabled = true;

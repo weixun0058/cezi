@@ -126,21 +126,34 @@ def test_language_prefixed_homepages_render_matching_html_lang(client):
     assert b'<html lang="zh-Hant">' in zh_hant.data
 
 
+def test_legacy_chinese_page_urls_redirect_to_traditional(client):
+    expected = {
+        "/huangli": "/zh-hant/almanac",
+        "/suanshi": "/zh-hant/divination",
+        "/lunming": "/zh-hant/bazi",
+    }
+
+    for source, target in expected.items():
+        response = client.get(source)
+        assert response.status_code == 301
+        assert response.headers["Location"].endswith(target)
+
+
 def test_shared_language_switcher_supports_english_and_page_mapping():
-    script = (
-        ROOT / "frontend" / "static" / "js" / "lang" / "lang_switcher.js"
-    ).read_text(encoding="utf-8")
+    script = (ROOT / "frontend" / "static" / "js" / "lang" / "lang_switcher.js").read_text(
+        encoding="utf-8"
+    )
 
     assert "{ code: 'en', label: 'EN' }" in script
+    assert "{ code: 'zh-hant', label: '中' }" in script
+    assert "{ code: 'zh-hans', label:" not in script
     assert "'/ask-oracle': 'divination'" in script
     assert "'/daily-almanac': 'almanac'" in script
     assert "'/birth-chart-reading': 'bazi'" in script
 
 
 def test_i18n_uses_url_language_prefix_before_local_storage():
-    script = (ROOT / "frontend" / "static" / "js" / "lang" / "i18n.js").read_text(
-        encoding="utf-8"
-    )
+    script = (ROOT / "frontend" / "static" / "js" / "lang" / "i18n.js").read_text(encoding="utf-8")
 
     assert "function languageFromPath()" in script
     assert "URL 语言前缀优先" in script
@@ -149,7 +162,9 @@ def test_i18n_uses_url_language_prefix_before_local_storage():
 
 def test_lunar_date_handlers_use_project_formatters_not_lunar_to_string():
     # 共享模块 lunar-format.js 应承载项目的汉字化逻辑
-    shared = (ROOT / "frontend" / "static" / "js" / "lang" / "lunar-format.js").read_text(encoding="utf-8")
+    shared = (ROOT / "frontend" / "static" / "js" / "lang" / "lunar-format.js").read_text(
+        encoding="utf-8"
+    )
     assert "calendar.month_prefix_leap" in shared
     assert "month.toString()" not in shared
     assert "chineseDigits" not in shared
@@ -162,8 +177,8 @@ def test_lunar_date_handlers_use_project_formatters_not_lunar_to_string():
     for handler in handlers:
         script = handler.read_text(encoding="utf-8")
         assert "LunarFormat" in script, f"{handler.name} 必须引用 LunarFormat 共享模块"
-        assert "calendar.month_prefix_leap" not in script, (
-            f"{handler.name} 不应再定义 calendar.month_prefix_leap，已迁移到 lunar-format.js"
-        )
+        assert (
+            "calendar.month_prefix_leap" not in script
+        ), f"{handler.name} 不应再定义 calendar.month_prefix_leap，已迁移到 lunar-format.js"
         assert "month.toString()" not in script
         assert "chineseDigits" not in script

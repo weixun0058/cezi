@@ -35,9 +35,28 @@ document.addEventListener('DOMContentLoaded', () => {
         const unknown = els.timeUnknown.checked;
         els.timeInput.disabled = unknown;
         if (unknown) els.timeInput.value = '';
+        syncFilled(els.timeInput);
     }
+
+    // ============================================================
+    // date/time 原生控件中文占位覆盖：有值时切 is-filled 显示值
+    // ============================================================
+    const dateInput = document.getElementById('bc-date');
+    function syncFilled(input) {
+        if (input.value) {
+            input.classList.add('is-filled');
+        } else {
+            input.classList.remove('is-filled');
+        }
+    }
+    [dateInput, els.timeInput].forEach(input => {
+        input.addEventListener('input', () => syncFilled(input));
+        input.addEventListener('change', () => syncFilled(input));
+    });
+
     els.timeUnknown.addEventListener('change', syncTimeUnknown);
     syncTimeUnknown();
+    syncFilled(dateInput);
 
     // ============================================================
     // 校验与 payload
@@ -118,9 +137,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 WO.el('div', 'en-bc-fact-label', 'Element Balance'),
                 WO.el('div', 'en-bc-fact-value', balanceText)
             );
+            // 五行平衡小英文说明
+            const balanceHint = WO.el('p', 'en-bc-balance-hint',
+                'A balanced spread of the five elements is considered ideal. ' +
+                'When one element is excessive or lacking, traditional practice suggests ' +
+                'balancing it through lifestyle, environment, or wearing complementary accessories.'
+            );
             const wrap = WO.el('div', 'en-bc-facts');
             wrap.append(balanceFact);
             els.result.append(wrap);
+            els.result.append(balanceHint);
         }
 
         // 局限说明
@@ -249,7 +275,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            els.loading.classList.remove('is-visible');
+            // 注意：loading 在此不立即移除，要等首个 chart 事件到达后再隐藏。
+            // 服务器收到请求 → 计算基础盘 → 发送 chart 事件，这段时间才是真正的等待。
             els.result.classList.add('is-visible');
             WO.setStatus(els.status, 'Reflecting on your chart…');
 
@@ -257,6 +284,8 @@ document.addEventListener('DOMContentLoaded', () => {
             await WO.readSSE(response, (event) => {
                 if (!event || !event.type) return;
                 if (event.type === 'chart') {
+                    // 首个 chart 事件到达，AI 已开始响应，隐藏 loading
+                    els.loading.classList.remove('is-visible');
                     renderChart(event);
                     WO.setStatus(els.status, 'Composing reflections…');
                 } else if (event.type === 'report') {

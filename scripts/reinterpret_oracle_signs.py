@@ -30,12 +30,11 @@ import json
 import logging
 import os
 import re
-import sys
 import time
 from datetime import datetime
 from pathlib import Path
+from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
-from urllib.error import URLError, HTTPError
 
 # 日志配置
 logging.basicConfig(
@@ -119,15 +118,21 @@ def fetch_signs(start: int, limit: int):
         for row in reader:
             sn = int(row["sign_number"])
             if sn >= start:
-                signs.append({
-                    "sign_number": sn,
-                    "sign_text": row["sign_text"],
-                })
+                signs.append(
+                    {
+                        "sign_number": sn,
+                        "sign_text": row["sign_text"],
+                    }
+                )
             if len(signs) >= limit:
                 break
 
-    LOGGER.info("从权威 CSV 提取 %d 条签文（签号 %d-%d）",
-                len(signs), start, start + len(signs) - 1 if signs else start)
+    LOGGER.info(
+        "从权威 CSV 提取 %d 条签文（签号 %d-%d）",
+        len(signs),
+        start,
+        start + len(signs) - 1 if signs else start,
+    )
     return signs
 
 
@@ -151,8 +156,9 @@ def load_completed_sign_numbers():
     return completed
 
 
-def call_deepseek(api_key: str, system_prompt: str, user_message: str,
-                  max_retries: int = 3, timeout: int = 120):
+def call_deepseek(
+    api_key: str, system_prompt: str, user_message: str, max_retries: int = 3, timeout: int = 120
+):
     """调用 DeepSeek API 生成解签内容。
 
     Args:
@@ -238,7 +244,7 @@ def parse_interpretation(content: str):
                     depth -= 1
                     if depth == 0:
                         try:
-                            data = json.loads(content[start:i+1])
+                            data = json.loads(content[start : i + 1])
                             break
                         except json.JSONDecodeError:
                             continue
@@ -256,10 +262,9 @@ def parse_interpretation(content: str):
                     except json.JSONDecodeError:
                         pass
         if data is None:
-            raise ValueError(f"无法解析返回内容为 JSON：{content[:200]}...")
+            raise ValueError(f"无法解析返回内容为 JSON：{content[:200]}...") from None
 
-    required_fields = ["interpretation1", "career", "wealth", "love",
-                       "health", "study", "general"]
+    required_fields = ["interpretation1", "career", "wealth", "love", "health", "study", "general"]
     missing = [f for f in required_fields if f not in data]
     if missing:
         raise ValueError(f"返回 JSON 缺少字段：{missing}")
@@ -492,8 +497,7 @@ def retry_process(signs, api_key, system_prompt, results):
             append_run_log(sign_number, "success")
 
             success_count += 1
-            LOGGER.info("  重试成功（%d 字）",
-                        sum(len(v) for v in interpretation.values()))
+            LOGGER.info("  重试成功（%d 字）", sum(len(v) for v in interpretation.values()))
 
         except (RuntimeError, ValueError) as e:
             fail_count += 1
@@ -506,8 +510,7 @@ def retry_process(signs, api_key, system_prompt, results):
 
     elapsed = time.time() - start_time
     LOGGER.info("=== 重试完成 ===")
-    LOGGER.info("成功：%d 条，失败：%d 条，耗时：%.1f 秒",
-                success_count, fail_count, elapsed)
+    LOGGER.info("成功：%d 条，失败：%d 条，耗时：%.1f 秒", success_count, fail_count, elapsed)
     LOGGER.info("Markdown 文件：%s", MD_FILE)
     LOGGER.info("JSON 文件：%s", JSON_FILE)
     if fail_count > 0:
@@ -516,11 +519,13 @@ def retry_process(signs, api_key, system_prompt, results):
 
 def main():
     parser = argparse.ArgumentParser(description="诸葛神算中文解签重写（DeepSeek）")
-    parser.add_argument("--start", type=int, default=None,
-                        help="起始签号（默认：自动从上次完成位置+1 继续）")
+    parser.add_argument(
+        "--start", type=int, default=None, help="起始签号（默认：自动从上次完成位置+1 继续）"
+    )
     parser.add_argument("--limit", type=int, default=24, help="解签条数（默认 24）")
-    parser.add_argument("--retry-failed", action="store_true",
-                        help="重试之前失败的签文（从运行日志中识别）")
+    parser.add_argument(
+        "--retry-failed", action="store_true", help="重试之前失败的签文（从运行日志中识别）"
+    )
     args = parser.parse_args()
 
     LOGGER.info("=== 诸葛神算解签重写启动 ===")
@@ -546,10 +551,12 @@ def main():
                 for row in reader:
                     sn = int(row["sign_number"])
                     if sn in failed_numbers:
-                        all_signs.append({
-                            "sign_number": sn,
-                            "sign_text": row["sign_text"],
-                        })
+                        all_signs.append(
+                            {
+                                "sign_number": sn,
+                                "sign_text": row["sign_text"],
+                            }
+                        )
         all_signs.sort(key=lambda x: x["sign_number"])
 
         LOGGER.info("待重试签文：%d 条", len(all_signs))
@@ -641,8 +648,7 @@ def main():
             append_run_log(sign_number, "success")
 
             success_count += 1
-            LOGGER.info("  完成（%d 字）",
-                        sum(len(v) for v in interpretation.values()))
+            LOGGER.info("  完成（%d 字）", sum(len(v) for v in interpretation.values()))
 
         except (RuntimeError, ValueError) as e:
             fail_count += 1
@@ -655,8 +661,7 @@ def main():
 
     elapsed = time.time() - start_time
     LOGGER.info("=== 解签完成 ===")
-    LOGGER.info("成功：%d 条，失败：%d 条，耗时：%.1f 秒",
-                success_count, fail_count, elapsed)
+    LOGGER.info("成功：%d 条，失败：%d 条，耗时：%.1f 秒", success_count, fail_count, elapsed)
     LOGGER.info("Markdown 文件：%s", MD_FILE)
     LOGGER.info("JSON 文件：%s", JSON_FILE)
     LOGGER.info("运行日志：%s", RUN_LOG)

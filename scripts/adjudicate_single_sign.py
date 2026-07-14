@@ -33,10 +33,10 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 # 复用 translate_oracle_signs 的 API 调用逻辑
+from reinterpret_oracle_signs import load_api_key
 from translate_oracle_signs import (
     call_deepseek as call_deepseek_api,
 )
-from reinterpret_oracle_signs import load_api_key
 
 # 日志配置
 logging.basicConfig(
@@ -53,8 +53,15 @@ REVIEW_LOG_DIR = PROJECT_ROOT / "data" / "content" / "_review_log"
 ADJUDICATOR_PROMPT = PROJECT_ROOT / "prompts" / "adjudicator_system_prompt.md"
 
 # 7个解读字段（中英共有的解读字段）
-INTERPRETATION_FIELDS = ["interpretation1", "career", "wealth",
-                         "love", "health", "study", "general"]
+INTERPRETATION_FIELDS = [
+    "interpretation1",
+    "career",
+    "wealth",
+    "love",
+    "health",
+    "study",
+    "general",
+]
 
 
 # ============================================================================
@@ -96,8 +103,10 @@ def detect_review_status(sign_number):
                     batch_gemini = p
                     break
 
-    gemini_file = single_gemini if single_gemini.exists() else (
-        batch_gemini if batch_gemini and batch_gemini.exists() else None
+    gemini_file = (
+        single_gemini
+        if single_gemini.exists()
+        else (batch_gemini if batch_gemini and batch_gemini.exists() else None)
     )
 
     # 检查单签 adjudication 文件
@@ -114,9 +123,9 @@ def detect_review_status(sign_number):
                     break
 
     adjudication_file = (
-        single_adjudication if single_adjudication.exists() else (
-            batch_adjudication if batch_adjudication and batch_adjudication.exists() else None
-        )
+        single_adjudication
+        if single_adjudication.exists()
+        else (batch_adjudication if batch_adjudication and batch_adjudication.exists() else None)
     )
 
     # 检查 Gemini prompt 文件
@@ -186,31 +195,35 @@ def build_adjudication_message(sign, interpretation, en_result, gemini_review_te
         lines.append(f"**{field}**：{interpretation.get(field, '')}")
         lines.append("")
 
-    lines.extend([
-        "## 英文翻译（en.json）",
-        "",
-        f"**sign_text**：{en_result.get('sign_text', '')}",
-        "",
-    ])
+    lines.extend(
+        [
+            "## 英文翻译（en.json）",
+            "",
+            f"**sign_text**：{en_result.get('sign_text', '')}",
+            "",
+        ]
+    )
 
     for field in INTERPRETATION_FIELDS:
         lines.append(f"**{field}**：{en_result.get(field, '')}")
         lines.append("")
 
-    lines.extend([
-        "## Gemini 审查报告",
-        "",
-        gemini_review_text,
-        "",
-        "## 评定要求",
-        "",
-        "请基于以上信息，逐条核查 Gemini 的指控是否属实，并输出结构化 JSON。",
-        "若 Gemini 指控与中文原文不符，判定为幻觉并否决。",
-        "若 Gemini 指控属实，给出修改后的完整字段文本。",
-        "若出现重大分歧，将 status 设为 pending_user_review。",
-        "",
-        "请只输出合法 JSON，不要输出其他文本。",
-    ])
+    lines.extend(
+        [
+            "## Gemini 审查报告",
+            "",
+            gemini_review_text,
+            "",
+            "## 评定要求",
+            "",
+            "请基于以上信息，逐条核查 Gemini 的指控是否属实，并输出结构化 JSON。",
+            "若 Gemini 指控与中文原文不符，判定为幻觉并否决。",
+            "若 Gemini 指控属实，给出修改后的完整字段文本。",
+            "若出现重大分歧，将 status 设为 pending_user_review。",
+            "",
+            "请只输出合法 JSON，不要输出其他文本。",
+        ]
+    )
 
     return "\n".join(lines)
 
@@ -238,8 +251,11 @@ def call_deepseek_for_adjudication(api_key, system_prompt, user_message):
         RuntimeError: API 调用失败时抛出。
     """
     return call_deepseek_api(
-        api_key, system_prompt, user_message,
-        max_retries=3, timeout=300,
+        api_key,
+        system_prompt,
+        user_message,
+        max_retries=3,
+        timeout=300,
     )
 
 
@@ -277,7 +293,7 @@ def parse_adjudication_response(content):
                     depth -= 1
                     if depth == 0:
                         try:
-                            data = json.loads(content[start:i+1])
+                            data = json.loads(content[start : i + 1])
                             break
                         except json.JSONDecodeError:
                             continue
@@ -343,7 +359,10 @@ def apply_adjudication_to_en(sign_number, adjudication):
                 modified_fields.append(field)
                 LOGGER.info("  修改字段 %s（verdict=%s）", field, verdict)
                 LOGGER.info("    旧：%s", old_text[:80] + "..." if len(old_text) > 80 else old_text)
-                LOGGER.info("    新：%s", modified_text[:80] + "..." if len(modified_text) > 80 else modified_text)
+                LOGGER.info(
+                    "    新：%s",
+                    modified_text[:80] + "..." if len(modified_text) > 80 else modified_text,
+                )
 
     # 写回 en.json
     if modified_fields:
@@ -384,8 +403,8 @@ def generate_adjudication_record(sign, adjudication, modified_fields, gemini_fil
         "",
         f"> 评定时间：{datetime.now().strftime('%Y-%m-%d %H:%M')}",
         f"> Gemini 审查结果：{gemini_file.name if gemini_file else '无'}",
-        f"> 评定人：DeepSeek（综合评定）",
-        f"> 评定原则：纠偏 Gemini 过度审查，主动否决神经质敏感；语义忠实度以中文原文为准",
+        "> 评定人：DeepSeek（综合评定）",
+        "> 评定原则：纠偏 Gemini 过度审查，主动否决神经质敏感；语义忠实度以中文原文为准",
         "",
         "## 综合评定",
         "",
@@ -431,14 +450,17 @@ def generate_adjudication_record(sign, adjudication, modified_fields, gemini_fil
         lines.append("- 手动修改 en.json")
         lines.append("")
 
-    lines.extend([
-        "## 状态",
-        "",
-        f"- **综合评定完成**：{datetime.now().strftime('%Y-%m-%d')}",
-        f"- **en.json 已修改**：{'是' if modified_fields else '否'}",
-        f"- **修改字段**：{', '.join(modified_fields) if modified_fields else '无'}",
-        f"- **状态**：{'定稿' if adjudication.get('status') == 'finalized' else '挂起（待用户评判）'}",
-    ])
+    status_text = "定稿" if adjudication.get("status") == "finalized" else "挂起（待用户评判）"
+    lines.extend(
+        [
+            "## 状态",
+            "",
+            f"- **综合评定完成**：{datetime.now().strftime('%Y-%m-%d')}",
+            f"- **en.json 已修改**：{'是' if modified_fields else '否'}",
+            f"- **修改字段**：{', '.join(modified_fields) if modified_fields else '无'}",
+            f"- **状态**：{status_text}",
+        ]
+    )
 
     record_file.write_text("\n".join(lines), encoding="utf-8")
     LOGGER.info("评定记录已生成：%s", record_file)
@@ -486,10 +508,7 @@ def load_sign_from_json(sign_number):
         "sign_text": cn_sign.get("sign_text", ""),
     }
 
-    interpretation = {
-        field: cn_sign.get(field, "")
-        for field in INTERPRETATION_FIELDS
-    }
+    interpretation = {field: cn_sign.get(field, "") for field in INTERPRETATION_FIELDS}
 
     # 从 en.json 读取英文数据
     en_data = json.loads(EN_JSON.read_text(encoding="utf-8"))
@@ -550,10 +569,12 @@ def adjudicate(sign_number, api_key, sign=None, interpretation=None, en_result=N
     gemini_file = review_status["gemini_file"]
 
     if not gemini_file:
-        msg = (f"Gemini 审查结果文件不存在，无法做综合评定。\n"
-               f"请先把 Gemini prompt 贴入 Gemini Studio 审查，\n"
-               f"结果存为：data/content/_review_log/gemini_review_result_sign_{sign_number}.md\n"
-               f"然后重新运行")
+        msg = (
+            f"Gemini 审查结果文件不存在，无法做综合评定。\n"
+            f"请先把 Gemini prompt 贴入 Gemini Studio 审查，\n"
+            f"结果存为：data/content/_review_log/gemini_review_result_sign_{sign_number}.md\n"
+            f"然后重新运行"
+        )
         LOGGER.warning(msg)
         return {
             "status": "pending_gemini_review",
@@ -604,13 +625,13 @@ def adjudicate(sign_number, api_key, sign=None, interpretation=None, en_result=N
 
     if status == "pending_user_review":
         # 挂起，交用户评判
-        record_file = generate_adjudication_record(
-            sign, adjudication, [], gemini_file
+        record_file = generate_adjudication_record(sign, adjudication, [], gemini_file)
+        msg = (
+            f"DeepSeek 评定返回 pending_user_review，已挂起。\n"
+            f"原因：{adjudication.get('pending_reason', '（未说明）')}\n"
+            f"评定记录：{record_file}\n"
+            f"请用户评判后决定下一步。"
         )
-        msg = (f"DeepSeek 评定返回 pending_user_review，已挂起。\n"
-               f"原因：{adjudication.get('pending_reason', '（未说明）')}\n"
-               f"评定记录：{record_file}\n"
-               f"请用户评判后决定下一步。")
         LOGGER.warning(msg)
         return {
             "status": "pending_user_review",
@@ -624,12 +645,11 @@ def adjudicate(sign_number, api_key, sign=None, interpretation=None, en_result=N
     modified_fields = apply_adjudication_to_en(sign_number, adjudication)
 
     # 8. 生成评定记录
-    record_file = generate_adjudication_record(
-        sign, adjudication, modified_fields, gemini_file
-    )
+    record_file = generate_adjudication_record(sign, adjudication, modified_fields, gemini_file)
 
-    LOGGER.info("综合评定完成，状态：%s，修改字段：%s",
-                status, modified_fields if modified_fields else "无")
+    LOGGER.info(
+        "综合评定完成，状态：%s，修改字段：%s", status, modified_fields if modified_fields else "无"
+    )
 
     return {
         "status": status,
@@ -702,14 +722,19 @@ def run_batch():
         LOGGER.info("  - 还有签未做 Gemini 审查（pending_gemini_review）")
         LOGGER.info("  - 还没有生成 Gemini prompt（需先运行 reprocess_single_sign.py）")
         return {
-            "total": 0, "finalized": 0, "pending": 0, "failed": 0,
-            "results": [], "batch_report": None,
+            "total": 0,
+            "finalized": 0,
+            "pending": 0,
+            "failed": 0,
+            "results": [],
+            "batch_report": None,
         }
 
-    LOGGER.info("找到 %d 签待评定：%s",
-                len(pending_signs),
-                ", ".join(str(n) for n in pending_signs[:10]) +
-                ("..." if len(pending_signs) > 10 else ""))
+    LOGGER.info(
+        "找到 %d 签待评定：%s",
+        len(pending_signs),
+        ", ".join(str(n) for n in pending_signs[:10]) + ("..." if len(pending_signs) > 10 else ""),
+    )
     LOGGER.info("")
 
     # 2. 加载 API key
@@ -729,13 +754,15 @@ def run_batch():
 
         try:
             result = adjudicate(sign_number, api_key)
-            results.append({
-                "sign_number": sign_number,
-                "status": result["status"],
-                "modified_fields": result["modified_fields"],
-                "message": result["message"],
-                "record_file": str(result["record_file"]) if result["record_file"] else None,
-            })
+            results.append(
+                {
+                    "sign_number": sign_number,
+                    "status": result["status"],
+                    "modified_fields": result["modified_fields"],
+                    "message": result["message"],
+                    "record_file": str(result["record_file"]) if result["record_file"] else None,
+                }
+            )
 
             if result["status"] == "finalized":
                 finalized_count += 1
@@ -751,18 +778,23 @@ def run_batch():
             # 不中断批量，记录失败继续下一签
             failed_count += 1
             LOGGER.error("第 %d 签评定失败：%s", sign_number, e)
-            results.append({
-                "sign_number": sign_number,
-                "status": "failed",
-                "modified_fields": [],
-                "message": str(e),
-                "record_file": None,
-            })
+            results.append(
+                {
+                    "sign_number": sign_number,
+                    "status": "failed",
+                    "modified_fields": [],
+                    "message": str(e),
+                    "record_file": None,
+                }
+            )
 
     # 4. 生成批量报告
     batch_report = generate_batch_report(
-        pending_signs, results,
-        finalized_count, pending_count, failed_count,
+        pending_signs,
+        results,
+        finalized_count,
+        pending_count,
+        failed_count,
     )
 
     return {
@@ -796,7 +828,7 @@ def generate_batch_report(pending_signs, results, finalized_count, pending_count
         "# 批量综合评定报告",
         "",
         f"> 生成时间：{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
-        f"> 评定人：DeepSeek（综合评定）",
+        "> 评定人：DeepSeek（综合评定）",
         "",
         "## 总览",
         "",
@@ -841,16 +873,22 @@ def generate_batch_report(pending_signs, results, finalized_count, pending_count
                 lines.append(f"- **第 {r['sign_number']} 签**：{r['message']}")
         lines.append("")
 
-    lines.extend([
-        "## 后续操作建议",
-        "",
-    ])
+    lines.extend(
+        [
+            "## 后续操作建议",
+            "",
+        ]
+    )
     if pending_count > 0:
-        lines.append(f"- 有 {pending_count} 签挂起，请逐签评判后决定：重新翻译 / 重新审查 / 手动修改")
+        lines.append(
+            f"- 有 {pending_count} 签挂起，请逐签评判后决定：重新翻译 / 重新审查 / 手动修改"
+        )
     if failed_count > 0:
         lines.append(f"- 有 {failed_count} 签失败，请检查日志排查原因后重试")
     if finalized_count > 0:
-        lines.append(f"- 有 {finalized_count} 签已定稿，如需同步数据库请运行 backfill_reinterpreted_to_db.py")
+        lines.append(
+            f"- 有 {finalized_count} 签已定稿，如需同步数据库请运行 backfill_reinterpreted_to_db.py"
+        )
     lines.append("")
 
     report_file.write_text("\n".join(lines), encoding="utf-8")
@@ -867,16 +905,19 @@ def generate_batch_report(pending_signs, results, finalized_count, pending_count
 def main():
     parser = argparse.ArgumentParser(
         description="综合评定（DeepSeek 综合评定，自动应用修改到 en.json）。\n"
-                   "无参数时进入批量模式，自动处理所有待评定的签。"
+        "无参数时进入批量模式，自动处理所有待评定的签。"
     )
     parser.add_argument(
-        "--sign", type=int, default=None,
-        help="要评定的签号（如 --sign 142）。不指定时进入批量模式。"
+        "--sign",
+        type=int,
+        default=None,
+        help="要评定的签号（如 --sign 142）。不指定时进入批量模式。",
     )
     parser.add_argument(
-        "--resume", action="store_true",
+        "--resume",
+        action="store_true",
         help="续跑模式（单签时使用）：检测当前进度，从断点继续。"
-             "若已定稿（adjudication 文件存在），则跳过。"
+        "若已定稿（adjudication 文件存在），则跳过。",
     )
     args = parser.parse_args()
 
@@ -919,10 +960,14 @@ def main():
     review_status = detect_review_status(sign_number)
     status = review_status["status"]
     LOGGER.info("当前进度状态：%s", status)
-    LOGGER.info("  Gemini 审查文件：%s",
-                review_status["gemini_file"].name if review_status["gemini_file"] else "无")
-    LOGGER.info("  评定记录文件：%s",
-                review_status["adjudication_file"].name if review_status["adjudication_file"] else "无")
+    LOGGER.info(
+        "  Gemini 审查文件：%s",
+        review_status["gemini_file"].name if review_status["gemini_file"] else "无",
+    )
+    LOGGER.info(
+        "  评定记录文件：%s",
+        review_status["adjudication_file"].name if review_status["adjudication_file"] else "无",
+    )
 
     if status == "finalized":
         LOGGER.info("第 %d 签已定稿（adjudication 文件已存在），无需继续。", sign_number)
@@ -937,8 +982,12 @@ def main():
         else:
             LOGGER.info("  1. 先运行 reprocess_single_sign.py 生成 Gemini prompt")
         LOGGER.info("  2. 把 prompt 贴入 Gemini Studio 审查")
-        LOGGER.info("  3. 结果存为：data/content/_review_log/gemini_review_result_sign_%d.md", sign_number)
-        LOGGER.info("  4. 重新运行：python scripts/adjudicate_single_sign.py --sign %d", sign_number)
+        LOGGER.info(
+            "  3. 结果存为：data/content/_review_log/gemini_review_result_sign_%d.md", sign_number
+        )
+        LOGGER.info(
+            "  4. 重新运行：python scripts/adjudicate_single_sign.py --sign %d", sign_number
+        )
         return
 
     # status == "pending_adjudication"：Gemini 审查已完成，可以继续评定

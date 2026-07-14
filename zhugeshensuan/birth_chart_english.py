@@ -24,11 +24,15 @@ import json
 import logging
 import re
 from collections.abc import Iterator
+from pathlib import Path
 from typing import Any
 
 from .bazi_service import calculate_bazi
 
 LOGGER = logging.getLogger(__name__)
+
+# 按模板绝对路径缓存；服务实例通过构造函数注入路径，不依赖 Flask 全局状态。
+_PROMPT_TEMPLATE_CACHE: dict[Path, str] = {}
 
 # 固定免责声明（W0.3 第 1.5 节）
 RESPONSIBLE_USE_TEXT = (
@@ -55,33 +59,46 @@ ZODIAC_EN: dict[str, str] = {
 }
 
 # 天干中文 → 英文（拼音）
-GAN_EN: dict[str, str] = {
-    "甲": "Jia",
-    "乙": "Yi",
-    "丙": "Bing",
-    "丁": "Ding",
-    "戊": "Wu",
-    "己": "Ji",
-    "庚": "Geng",
-    "辛": "Xin",
-    "壬": "Ren",
-    "癸": "Gui",
+# 天干 → 阴阳 + 五行（用于 pillar 描述式翻译）
+GAN_YIN_YANG: dict[str, str] = {
+    "甲": "Yang",
+    "丙": "Yang",
+    "戊": "Yang",
+    "庚": "Yang",
+    "壬": "Yang",
+    "乙": "Yin",
+    "丁": "Yin",
+    "己": "Yin",
+    "辛": "Yin",
+    "癸": "Yin",
+}
+GAN_ELEMENT: dict[str, str] = {
+    "甲": "Wood",
+    "乙": "Wood",
+    "丙": "Fire",
+    "丁": "Fire",
+    "戊": "Earth",
+    "己": "Earth",
+    "庚": "Metal",
+    "辛": "Metal",
+    "壬": "Water",
+    "癸": "Water",
 }
 
-# 地支中文 → 英文（拼音）
-ZHI_EN: dict[str, str] = {
-    "子": "Zi",
-    "丑": "Chou",
-    "寅": "Yin",
-    "卯": "Mao",
-    "辰": "Chen",
-    "巳": "Si",
-    "午": "Wu",
-    "未": "Wei",
-    "申": "Shen",
-    "酉": "You",
-    "戌": "Xu",
-    "亥": "Hai",
+# 地支 → 生肖英文（用于 pillar 描述式翻译，与黄历一致）
+ZHI_TO_ZODIAC: dict[str, str] = {
+    "子": "Rat",
+    "丑": "Ox",
+    "寅": "Tiger",
+    "卯": "Rabbit",
+    "辰": "Dragon",
+    "巳": "Snake",
+    "午": "Horse",
+    "未": "Goat",
+    "申": "Monkey",
+    "酉": "Rooster",
+    "戌": "Dog",
+    "亥": "Pig",
 }
 
 # 五行中文 → 英文
@@ -150,18 +167,33 @@ def _lunar_date_to_english(value: str) -> str | None:
 
 
 def _pillar_to_english(pillar: str | None) -> str | None:
-    """四柱中文 → 英文。如 "甲子" → "Jia-Zi"。"""
+    """四柱中文 → 英文描述式。如 "丙午" → "Yang Fire Horse"。
+
+    格式：阴阳 + 五行（天干） + 生肖（地支），与黄历页面干支显示保持一致。
+    """
     if not pillar or len(pillar) != 2:
         return None
     gan, zhi = pillar[0], pillar[1]
-    return f"{GAN_EN.get(gan, gan)}-{ZHI_EN.get(zhi, zhi)}"
+    yin_yang = GAN_YIN_YANG.get(gan, "")
+    element = GAN_ELEMENT.get(gan, "")
+    zodiac = ZHI_TO_ZODIAC.get(zhi, "")
+    if yin_yang and element and zodiac:
+        return f"{yin_yang} {element} {zodiac}"
+    return None
 
 
 def _gan_to_english(gan: str | None) -> str | None:
-    """天干中文 → 英文。"""
+    """天干中文 → 英文描述式。如 "丁" → "Yin Fire"。
+
+    格式：阴阳 + 五行，与 pillar 显示风格一致。
+    """
     if not gan or len(gan) != 1:
         return None
-    return GAN_EN.get(gan, gan)
+    yin_yang = GAN_YIN_YANG.get(gan, "")
+    element = GAN_ELEMENT.get(gan, "")
+    if yin_yang and element:
+        return f"{yin_yang} {element}"
+    return None
 
 
 def _wu_xing_to_english(value: str | None) -> str | None:
@@ -241,25 +273,45 @@ def build_english_chart_summary(payload: dict, default_timezone: str = "Asia/Sha
 
 
 # ============================================================
-# AI prompt（引用 W0.3 红线）
+# AI prompt（从 prompts/birth_chart_en_prompt.md 加载，引用 W0.3 红线）
 # ============================================================
 
 
-def build_english_prompt(chart_data: dict, payload: dict) -> str:
-    """构建英文 AI prompt。
+def _load_prompt_template(prompt_path: str | Path | None = None) -> str:
+    """加载提示词模板。
 
-    依据 W0.3 ``docs/business/wise-oracle-ai-prompt-boundaries.md``：
-    - 定位 cultural self-reflection prompt，非 prediction
-    - 禁止医疗/法律/财务/心理/生育/死亡/灾难/确定性未来/吉凶分级/卦属
-    - 措辞用 "traditionally suggests" / "invites reflection on"
-    - 末尾含 responsible-use 免责声明
+    优先从 config.BIRTH_CHART_PROMPT_PATH 读取 Markdown 文件；
+    文件缺失时回退到代码内置的最小模板（保证服务可用）。
+
+    模板中使用占位符：
+    - {chart_data_json} — 命盘数据 JSON 字符串
+    - {name} — 用户姓名
+    - {gender} — 用户性别
+
+    用 str.replace 替换（非 str.format），避免 JSON 中的花括号被误解析。
     """
-    name = payload.get("name", "")
-    gender = payload.get("gender", "")
+    if prompt_path:
+        template_path = Path(prompt_path).resolve()
+        cached = _PROMPT_TEMPLATE_CACHE.get(template_path)
+        if cached is not None:
+            return cached
+        try:
+            template = template_path.read_text(encoding="utf-8")
+            _PROMPT_TEMPLATE_CACHE[template_path] = template
+            LOGGER.info("Loaded birth chart prompt template from %s", template_path)
+            return template
+        except (OSError, UnicodeDecodeError) as exc:
+            LOGGER.warning("Failed to load prompt template from %s: %s", template_path, exc)
+
+    # 回退：代码内置最小模板
+    LOGGER.warning("Using fallback inline prompt template")
     return (
         "You are a cultural interpreter for traditional Chinese BaZi (Four Pillars) astrology. "
         "Your role is to offer cultural self-reflection prompts, NOT predictions or advice.\n\n"
-        "RED LINES (must follow strictly):\n"
+        "LANGUAGE: You MUST respond entirely in English. "
+        "Do NOT output any Chinese characters in your response. "
+        "Translate all Chinese terms in the input data to English.\n\n"
+        "RED LINES:\n"
         "- Do NOT output medical, legal, financial, psychological, fertility, death, "
         "or disaster statements.\n"
         "- Do NOT use 'will' for life predictions.\n"
@@ -280,14 +332,40 @@ def build_english_prompt(chart_data: dict, payload: dict) -> str:
         '    "Cultural caution 2"\n'
         "  ]\n"
         "}\n\n"
-        "reflection_points must have 2-4 items with labels like Career, Relationships, "
-        "Personal Growth, or Energy Patterns. "
-        "cautions must be cultural reflections, NOT predictions (e.g., 'This pattern invites "
-        "reflection on patience' rather than 'You will face delays'). "
-        "Do NOT include a responsible_use field; the system appends it automatically.\n\n"
-        f"Birth chart data (Chinese terms preserved for accuracy): "
-        f"{json.dumps(chart_data, ensure_ascii=False)}\n"
-        f"Name: {name}\nGender: {gender}\n"
+        "reflection_points must have 2-4 items. "
+        "cautions must be cultural reflections, NOT predictions. "
+        "Do NOT include a responsible_use field.\n\n"
+        "Birth chart data (Chinese terms preserved for accuracy, "
+        "but you MUST translate them to English in your response):\n"
+        "{chart_data_json}\n"
+        "Name: {name}\nGender: {gender}\n"
+    )
+
+
+def build_english_prompt(
+    chart_data: dict,
+    payload: dict,
+    prompt_path: str | Path | None = None,
+) -> str:
+    """构建英文 AI prompt。
+
+    从 ``prompts/birth_chart_en_prompt.md`` 加载模板，替换占位符：
+    - {chart_data_json} — 命盘数据 JSON
+    - {name} — 用户姓名
+    - {gender} — 用户性别
+
+    依据 W0.3 ``docs/business/wise-oracle-ai-prompt-boundaries.md``：
+    - 定位 cultural self-reflection prompt，非 prediction
+    - 禁止医疗/法律/财务/心理/生育/死亡/灾难/确定性未来/吉凶分级/卦属
+    - 强制英文输出（输入数据含中文术语，AI 必须翻译为英文）
+    """
+    template = _load_prompt_template(prompt_path)
+    chart_data_json = json.dumps(chart_data, ensure_ascii=False)
+    # 用 replace 而非 format，避免 JSON 中的花括号被误解析
+    return (
+        template.replace("{chart_data_json}", chart_data_json)
+        .replace("{name}", str(payload.get("name", "")))
+        .replace("{gender}", str(payload.get("gender", "")))
     )
 
 
@@ -346,15 +424,22 @@ class BirthChartEnglish:
     复用 LunMing 的 OpenAI client（配置统一），独立实现英文 prompt 和返回结构。
     """
 
-    def __init__(self, lunming, default_timezone: str = "Asia/Shanghai"):
+    def __init__(
+        self,
+        lunming,
+        default_timezone: str = "Asia/Shanghai",
+        prompt_path: str | Path | None = None,
+    ):
         """初始化。
 
         输入：
             lunming: LunMing 实例（复用其 client/model/temperature）
             default_timezone: 默认时区
+            prompt_path: 提示词模板路径；由应用工厂注入，服务不读取 Flask 全局状态
         """
         self.lunming = lunming
         self.default_timezone = default_timezone
+        self.prompt_path = prompt_path
 
     @property
     def client(self):
@@ -383,7 +468,10 @@ class BirthChartEnglish:
                     "content": (
                         "You are a cultural interpreter for traditional Chinese BaZi astrology. "
                         "You offer cultural self-reflection, NOT predictions. "
-                        "You respect factual boundaries and do not use fear-based tactics."
+                        "You respect factual boundaries and do not use fear-based tactics. "
+                        "You MUST respond entirely in English. "
+                        "Do NOT output any Chinese characters in your response. "
+                        "Translate all Chinese terms in the input data to English."
                     ),
                 },
                 {"role": "user", "content": prompt},
@@ -414,7 +502,7 @@ class BirthChartEnglish:
         """
         chart_data = self.build_chart_summary(payload)
         raw_chart = chart_data.pop("_raw_chart", {})
-        prompt = build_english_prompt(raw_chart, payload)
+        prompt = build_english_prompt(raw_chart, payload, self.prompt_path)
         LOGGER.info("Starting English birth chart analysis with model %s", self.model)
         report = self._generate_report(prompt)
         return {
@@ -439,7 +527,7 @@ class BirthChartEnglish:
         """
         chart_data = self.build_chart_summary(payload)
         raw_chart = chart_data.pop("_raw_chart", {})
-        prompt = build_english_prompt(raw_chart, payload)
+        prompt = build_english_prompt(raw_chart, payload, self.prompt_path)
         LOGGER.info("Starting English birth chart stream with model %s", self.model)
         yield {
             "type": "chart",

@@ -24,9 +24,10 @@ import pytest
 from zhugeshensuan.bazi_service import BaziInputError
 from zhugeshensuan.birth_chart_english import (
     ELEMENT_EN,
-    GAN_EN,
+    GAN_ELEMENT,
+    GAN_YIN_YANG,
     RESPONSIBLE_USE_TEXT,
-    ZHI_EN,
+    ZHI_TO_ZODIAC,
     ZODIAC_EN,
     BirthChartEnglish,
     _normalize_gender,
@@ -107,15 +108,17 @@ class TestMappingTables:
         assert ZODIAC_EN["鼠"] == "Rat"
         assert ZODIAC_EN["猪"] == "Pig"
 
-    def test_gan_complete(self):
-        assert len(GAN_EN) == 10
-        assert GAN_EN["甲"] == "Jia"
-        assert GAN_EN["癸"] == "Gui"
+    def test_gan_yin_yang_and_element_complete(self):
+        assert len(GAN_YIN_YANG) == 10
+        assert len(GAN_ELEMENT) == 10
+        assert GAN_YIN_YANG["甲"] == "Yang"
+        assert GAN_YIN_YANG["癸"] == "Yin"
+        assert GAN_ELEMENT["庚"] == "Metal"
 
-    def test_zhi_complete(self):
-        assert len(ZHI_EN) == 12
-        assert ZHI_EN["子"] == "Zi"
-        assert ZHI_EN["亥"] == "Hai"
+    def test_zhi_zodiac_complete(self):
+        assert len(ZHI_TO_ZODIAC) == 12
+        assert ZHI_TO_ZODIAC["子"] == "Rat"
+        assert ZHI_TO_ZODIAC["亥"] == "Pig"
 
     def test_element_complete(self):
         assert len(ELEMENT_EN) == 5
@@ -126,8 +129,9 @@ class TestPillarToEnglish:
     """四柱中文 → 英文。"""
 
     def test_basic(self):
-        assert _pillar_to_english("甲子") == "Jia-Zi"
-        assert _pillar_to_english("庚午") == "Geng-Wu"
+        assert _pillar_to_english("甲子") == "Yang Wood Rat"
+        assert _pillar_to_english("庚午") == "Yang Metal Horse"
+        assert _pillar_to_english("乙丑") == "Yin Wood Ox"
 
     def test_none_or_short(self):
         assert _pillar_to_english(None) is None
@@ -195,13 +199,18 @@ class TestBuildEnglishChartSummary:
         "birth_time": "14:30",
     }
 
-    def test_pillars_english_pinyin_format(self):
+    def test_pillars_use_yin_yang_element_zodiac_format(self):
         result = build_english_chart_summary(self.PAYLOAD)
         summary = result["chart_summary"]
-        assert summary["year_pillar"] == "Geng-Wu"  # 1990 庚午年
-        assert "-" in summary["month_pillar"]
-        assert "-" in summary["day_pillar"]
+        pillar_pattern = re.compile(
+            r"^(Yin|Yang) (Wood|Fire|Earth|Metal|Water) "
+            r"(Rat|Ox|Tiger|Rabbit|Dragon|Snake|Horse|Goat|Monkey|Rooster|Dog|Pig)$"
+        )
+        assert summary["year_pillar"] == "Yang Metal Horse"  # 1990 庚午年
+        assert pillar_pattern.fullmatch(summary["month_pillar"])
+        assert pillar_pattern.fullmatch(summary["day_pillar"])
         assert summary["time_pillar"] is not None
+        assert pillar_pattern.fullmatch(summary["time_pillar"])
 
     def test_zodiac_english(self):
         result = build_english_chart_summary(self.PAYLOAD)
@@ -210,7 +219,7 @@ class TestBuildEnglishChartSummary:
     def test_day_master_english(self):
         result = build_english_chart_summary(self.PAYLOAD)
         dm = result["chart_summary"]["day_master"]
-        assert dm in GAN_EN.values()
+        assert re.fullmatch(r"(Yin|Yang) (Wood|Fire|Earth|Metal|Water)", dm)
 
     def test_time_known(self):
         result = build_english_chart_summary(self.PAYLOAD)
@@ -287,6 +296,23 @@ class TestBuildEnglishPrompt:
         """prompt 应要求 AI 不返回 responsible_use（由系统追加）。"""
         prompt = build_english_prompt({}, {"name": "Alex", "gender": "male"})
         assert "responsible_use" in prompt.lower()
+
+    def test_uses_injected_prompt_path(self, tmp_path):
+        prompt_path = tmp_path / "prompt.md"
+        prompt_path.write_text(
+            "Custom template {chart_data_json} / {name} / {gender}",
+            encoding="utf-8",
+        )
+
+        prompt = build_english_prompt(
+            {"pillars": {"year": "庚午"}},
+            {"name": "Alex", "gender": "male"},
+            prompt_path=prompt_path,
+        )
+
+        assert "Custom template" in prompt
+        assert "庚午" in prompt
+        assert "Alex / male" in prompt
 
 
 # ============================================================
@@ -430,7 +456,8 @@ class TestBirthChartEnglishService:
         chart = events[0]
         assert chart["type"] == "chart"
         assert chart["chart_summary"]["zodiac"] == "Horse"
-        assert "-" in chart["chart_summary"]["year_pillar"]
+        assert chart["chart_summary"]["year_pillar"] == "Yang Metal Horse"
+        assert "Geng-Wu" not in chart["chart_summary"]["year_pillar"]
 
     def test_analyze_stream_responsible_use_event(self):
         events = list(_make_service().analyze_stream(self.PAYLOAD))
@@ -612,7 +639,8 @@ class TestBirthChartEnApiContract:
         )
         text = r.data.decode("utf-8")
         assert "Horse" in text  # 英文生肖
-        assert "Geng-Wu" in text  # 英文四柱
+        assert "Yang Metal Horse" in text  # 阴阳 + 五行 + 生肖
+        assert "Geng-Wu" not in text  # 不再沿用旧拼音四柱契约
         assert '"zodiac": "马"' not in text  # 不含中文生肖
 
     def test_stream_no_fortune_no_gua_type(self, client):

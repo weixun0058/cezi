@@ -21,8 +21,6 @@
 
 from __future__ import annotations
 
-from typing import Optional
-
 from .api_utils import failure
 
 
@@ -121,16 +119,28 @@ MESSAGES_EN: dict[str, str] = {
     # 算事
     ErrorCode.INVALID_JSON: "The request body must be a JSON object.",
     ErrorCode.INVALID_CHARACTER: "Please enter a single Chinese character.",
-    ErrorCode.STROKE_NOT_FOUND: "Could not determine the stroke count. Please try a different character.",
+    ErrorCode.STROKE_NOT_FOUND: (
+        "Could not determine the stroke count. Please try a different character."
+    ),
     ErrorCode.INVALID_STROKES: "Strokes must be three integers between 1 and 100.",
     ErrorCode.INVALID_SIGN: "The sign number must be an integer between 1 and 383.",
     ErrorCode.SIGN_NOT_FOUND: "This oracle sign could not be found.",
     # 论命
-    ErrorCode.INVALID_BIRTH_DATA: "The birth data provided was invalid. Please check and try again.",
-    ErrorCode.MODEL_NOT_CONFIGURED: "The analysis service is not configured. Please contact support.",
-    ErrorCode.ANALYSIS_FAILED: "The analysis service is temporarily unavailable. Please try again later.",
-    ErrorCode.AI_DAILY_QUOTA_EXHAUSTED: "Your daily free analysis quota has been used up. Please try again tomorrow.",
-    ErrorCode.AI_GLOBAL_QUOTA_EXHAUSTED: "The analysis service quota has been exhausted today. Please try again tomorrow.",
+    ErrorCode.INVALID_BIRTH_DATA: (
+        "The birth data provided was invalid. Please check and try again."
+    ),
+    ErrorCode.MODEL_NOT_CONFIGURED: (
+        "The analysis service is not configured. Please contact support."
+    ),
+    ErrorCode.ANALYSIS_FAILED: (
+        "The analysis service is temporarily unavailable. Please try again later."
+    ),
+    ErrorCode.AI_DAILY_QUOTA_EXHAUSTED: (
+        "Your daily free analysis quota has been used up. Please try again tomorrow."
+    ),
+    ErrorCode.AI_GLOBAL_QUOTA_EXHAUSTED: (
+        "The analysis service quota has been exhausted today. Please try again tomorrow."
+    ),
     ErrorCode.AI_RATE_LIMITED: "Too many requests. Please slow down.",
     ErrorCode.AI_CONCURRENCY_LIMITED: "The analysis service is busy. Please try again shortly.",
     # 英文版新增
@@ -207,8 +217,8 @@ def get_http_status(code: str) -> int:
 def failure_with_code(
     code: str,
     lang: str = "en",
-    status: Optional[int] = None,
-    details: Optional[dict] = None,
+    status: int | None = None,
+    details: dict | None = None,
     **legacy_fields,
 ):
     """封装 failure()，按 code 和 lang 自动取消息和 status。

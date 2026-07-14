@@ -162,7 +162,14 @@ class HuangLi:
                 [values.get(name) for name in columns],
             )
 
-    def get_week_huangli(self, base_date=None):
+    def get_week_huangli(self, base_date=None, days=9):
+        """获取多日黄历。
+
+        输入：
+            base_date - 基准日期，默认今天
+            days - 返回天数，默认 9（前后各约一半）
+        输出：record 列表
+        """
         center = base_date or datetime.now()
         fields = (
             "date",
@@ -179,7 +186,8 @@ class HuangLi:
             "solar_term",
         )
         records = []
-        for offset in range(-2, 7):
+        half = days // 2
+        for offset in range(-half, days - half):
             date_text = (center + timedelta(days=offset)).strftime("%Y-%m-%d")
             record = self.get_daily_huangli(date_text)
             if record:

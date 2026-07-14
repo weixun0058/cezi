@@ -10,7 +10,8 @@
   3. 用 opencc s2t 转换，更新 gua_hant 表（繁体）的 7 个解签字段
 
 注意：只更新解签字段（interpretation1/career/wealth/love/health/study/general），
-      不动 fortune/gua_type/sign_text（这些字段由 build_reference_db.py 从权威 CSV 同步，本脚本不负责）。
+      不动 fortune/gua_type/sign_text（这些字段由 build_reference_db.py
+      从权威 CSV 同步，本脚本不负责）。
 """
 
 import json
@@ -25,7 +26,13 @@ DB_FILE = PROJECT / "data" / "reference" / "reference.db"
 
 # 需要更新的 7 个解签字段
 INTERPRETATION_FIELDS = [
-    "interpretation1", "career", "wealth", "love", "health", "study", "general",
+    "interpretation1",
+    "career",
+    "wealth",
+    "love",
+    "health",
+    "study",
+    "general",
 ]
 
 
@@ -41,9 +48,7 @@ def main():
     conn = sqlite3.connect(DB_FILE)
     try:
         # 检查 gua_hant 表的 CHECK 约束是否已是 1-384
-        schema = conn.execute(
-            "SELECT sql FROM sqlite_master WHERE name='gua_hant'"
-        ).fetchone()[0]
+        schema = conn.execute("SELECT sql FROM sqlite_master WHERE name='gua_hant'").fetchone()[0]
         if "383" in schema:
             print("警告：gua_hant 表 CHECK 约束仍是 1-383，需要重建表。")
             # 重建 gua_hant 表（CHECK 1-384）
@@ -98,9 +103,7 @@ def main():
 
         # 4. 验证
         print("\n验证第 1 签（简体）:")
-        row = conn.execute(
-            "SELECT interpretation1, career FROM gua WHERE sign_number=1"
-        ).fetchone()
+        row = conn.execute("SELECT interpretation1, career FROM gua WHERE sign_number=1").fetchone()
         print(f"  interpretation1: {row[0][:60]}...")
         print(f"  career: {row[1][:60]}...")
 
@@ -126,8 +129,12 @@ def main():
         print(f"  career: {row[1][:60]}...")
 
         # 统计
-        count_simp = conn.execute("SELECT COUNT(*) FROM gua WHERE interpretation1 != ''").fetchone()[0]
-        count_hant = conn.execute("SELECT COUNT(*) FROM gua_hant WHERE interpretation1 != ''").fetchone()[0]
+        count_simp = conn.execute(
+            "SELECT COUNT(*) FROM gua WHERE interpretation1 != ''"
+        ).fetchone()[0]
+        count_hant = conn.execute(
+            "SELECT COUNT(*) FROM gua_hant WHERE interpretation1 != ''"
+        ).fetchone()[0]
         print(f"\n非空解签统计: gua {count_simp}/384, gua_hant {count_hant}/384")
 
     finally:

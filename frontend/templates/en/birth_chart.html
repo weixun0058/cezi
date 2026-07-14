@@ -48,11 +48,17 @@
         <div class="en-field-row">
             <div class="en-field">
                 <label for="bc-date">Birth date</label>
-                <input type="date" id="bc-date" required>
+                <div class="en-input-wrap">
+                    <input type="date" id="bc-date" lang="en" required>
+                    <span class="en-input-placeholder" data-for="bc-date">YYYY-MM-DD</span>
+                </div>
             </div>
             <div class="en-field">
                 <label for="bc-time">Birth time</label>
-                <input type="time" id="bc-time">
+                <div class="en-input-wrap">
+                    <input type="time" id="bc-time" lang="en">
+                    <span class="en-input-placeholder" data-for="bc-time">HH:MM (24h)</span>
+                </div>
             </div>
         </div>
 
@@ -66,7 +72,10 @@
         <button type="submit" class="en-btn" id="bc-submit">Generate Chart</button>
     </form>
 
-    <p class="en-bc-loading" id="bc-loading" role="status" aria-live="polite">Reading the chart and reflecting…</p>
+    <p class="en-bc-loading" id="bc-loading" role="status" aria-live="polite">
+        <span class="en-bc-spinner" aria-hidden="true"></span>
+        <span>Reading the chart and reflecting…</span>
+    </p>
 
     <div class="en-bc-result" id="bc-result" aria-live="polite"></div>
 </section>

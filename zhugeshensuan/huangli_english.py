@@ -652,6 +652,41 @@ def assess_scenario(record: dict, scenario_key: str, scenario_map: dict) -> dict
     }
 
 
+def find_next_favored_date(
+    huangli, start_date: str, scenario_key: str, scenario_map: dict, max_days: int = 120
+) -> dict | None:
+    """择日：从 start_date（含当天）向后查找第一个场景 favored 的日子。
+
+    输入：
+        huangli - HuangLi 实例（提供 get_daily_huangli）
+        start_date - 起算日期 'YYYY-MM-DD'（含当天）
+        scenario_key - 场景 key（如 "travel"）
+        scenario_map - 场景映射（self._scenario_map）
+        max_days - 最多向后查多少天（默认 120）
+    输出：
+        命中时返回 {date, days_ahead}；未命中返回 None
+    """
+    from datetime import datetime, timedelta
+
+    try:
+        base = datetime.strptime(start_date, "%Y-%m-%d")
+    except ValueError:
+        return None
+
+    for offset in range(max_days):
+        check_date = (base + timedelta(days=offset)).strftime("%Y-%m-%d")
+        record = huangli.get_daily_huangli(check_date)
+        if not record:
+            continue
+        assessment = assess_scenario(record, scenario_key, scenario_map)
+        if assessment and assessment.get("status_code") == "favored":
+            return {
+                "date": check_date,
+                "days_ahead": offset,
+            }
+    return None
+
+
 # ============================================================
 # S6: HuangLiEnglish 类 + translate_daily/translate_week 组装
 # ============================================================

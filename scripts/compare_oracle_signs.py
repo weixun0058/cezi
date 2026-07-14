@@ -16,17 +16,19 @@
   - 提取标点位置，统计分段字数
   - 判断是否符合诗句节奏（五言/七言）
 """
+
 import csv
+from collections import Counter
+from pathlib import Path
+
 import openpyxl
 from opencc import OpenCC
-from pathlib import Path
-from collections import Counter
 
 XLSX_PATH = Path("data/reference/zhugeshenshuan_jq.xlsx")
 CSV_PATH = Path("data/reference/original_oracle_signs.csv")
 OUTPUT_PATH = Path("data/reference/signs_comparison.csv")
 
-PUNCTUATION = set('，。、；：""''""''！？·…—（）()[]【】《》〈〉「」『』 \n\r\t.,;:!?\'"')
+PUNCTUATION = set('，。、；：""' '""' "！？·…—（）()[]【】《》〈〉「」『』 \n\r\t.,;:!?'\"")
 
 
 def strip_punct(text: str) -> str:
@@ -65,8 +67,8 @@ def find_diffs(a: str, b: str) -> list[str]:
         ca = a[j] if j < len(a) else "<无>"
         cb = b[j] if j < len(b) else "<无>"
         if ca != cb:
-            ctx_a = a[max(0, j - 3):j + 4]
-            ctx_b = b[max(0, j - 3):j + 4]
+            ctx_a = a[max(0, j - 3) : j + 4]
+            ctx_b = b[max(0, j - 3) : j + 4]
             diffs.append(f"pos{j}: xlsx={ca}({ctx_a}) csv={cb}({ctx_b})")
     return diffs
 
@@ -110,8 +112,8 @@ def main():
 
     all_sns = sorted(set(xlsx_signs) | set(csv_signs))
     results = []
-    real_diffs = []      # 真正文字差异
-    variant_diffs = []   # 仅异体字差异
+    real_diffs = []  # 真正文字差异
+    variant_diffs = []  # 仅异体字差异
 
     for sn in all_sns:
         xlsx_text = xlsx_signs.get(sn, "")
@@ -143,28 +145,40 @@ def main():
         # 标点分析
         punct_info = analyze_punctuation(xlsx_text)
 
-        results.append({
-            "sign_number": sn,
-            "category": category,
-            "xlsx_text": xlsx_text,
-            "csv_text": csv_text,
-            "xlsx_simp_no_punct": xlsx_no_punct,
-            "csv_simp_no_punct": csv_simp,
-            "simp_match": simp_match,
-            "trad_match": trad_match,
-            "diff_detail": diff_detail,
-            "punct_segments": str(punct_info["segments"]),
-            "punct_count": punct_info["punct_count"],
-        })
+        results.append(
+            {
+                "sign_number": sn,
+                "category": category,
+                "xlsx_text": xlsx_text,
+                "csv_text": csv_text,
+                "xlsx_simp_no_punct": xlsx_no_punct,
+                "csv_simp_no_punct": csv_simp,
+                "simp_match": simp_match,
+                "trad_match": trad_match,
+                "diff_detail": diff_detail,
+                "punct_segments": str(punct_info["segments"]),
+                "punct_count": punct_info["punct_count"],
+            }
+        )
 
     # 写 CSV
     with open(OUTPUT_PATH, "w", encoding="utf-8-sig", newline="") as f:
-        writer = csv.DictWriter(f, fieldnames=[
-            "sign_number", "category", "simp_match", "trad_match",
-            "xlsx_text", "csv_text",
-            "xlsx_simp_no_punct", "csv_simp_no_punct",
-            "diff_detail", "punct_segments", "punct_count"
-        ])
+        writer = csv.DictWriter(
+            f,
+            fieldnames=[
+                "sign_number",
+                "category",
+                "simp_match",
+                "trad_match",
+                "xlsx_text",
+                "csv_text",
+                "xlsx_simp_no_punct",
+                "csv_simp_no_punct",
+                "diff_detail",
+                "punct_segments",
+                "punct_count",
+            ],
+        )
         writer.writeheader()
         writer.writerows(results)
 
@@ -172,7 +186,7 @@ def main():
     fully = sum(1 for r in results if r["category"] == "完全一致")
     variant = sum(1 for r in results if r["category"] == "仅异体字")
     real = sum(1 for r in results if r["category"] == "真正差异")
-    print(f"\n=== 比对统计 ===")
+    print("\n=== 比对统计 ===")
     print(f"完全一致:   {fully}")
     print(f"仅异体字:   {variant}（繁体字形差异，非真正错误）")
     print(f"真正差异:   {real}（需人工裁定）")
@@ -189,7 +203,7 @@ def main():
             print(f"  差异: {r['diff_detail']}")
 
     # 标点分析
-    print(f"\n=== 标点分析（文字一致的签）===")
+    print("\n=== 标点分析（文字一致的签）===")
     consistent = [r for r in results if r["category"] == "完全一致"]
     seg_patterns = Counter()
     punct_counts = Counter()
@@ -199,11 +213,11 @@ def main():
         punct_counts[r["punct_count"]] += 1
 
     print(f"分析样本: {len(consistent)} 签")
-    print(f"\n标点数量分布:")
+    print("\n标点数量分布:")
     for cnt, num in sorted(punct_counts.items()):
         print(f"  {cnt} 个标点: {num} 签")
 
-    print(f"\n分段字数模式（前 15 常见）:")
+    print("\n分段字数模式（前 15 常见）:")
     for pattern, num in seg_patterns.most_common(15):
         print(f"  {list(pattern)}: {num} 签")
 

@@ -3,10 +3,14 @@
 本模块只保留运行期必须使用的语言常量、路由映射和静态文案。
 繁体签文、解签、彭祖百忌等内容应来自已生成的数据表；OpenCC 仅允许用于离线数据构建脚本。
 """
+
 from flask import g, has_app_context
 
 LANGS = ("zh-hans", "zh-hant")
+# 无语言参数的 API 与领域服务继续使用简体，保持历史兼容。
 DEFAULT_LANG = "zh-hans"
+# 公开中文页面入口使用繁体；不要将此常量用于 API 或领域服务默认值。
+DEFAULT_CHINESE_UI_LANG = "zh-hant"
 
 PAGE_URL_NAMES = {
     "almanac": "huangli",
@@ -22,7 +26,7 @@ PAGE_TEMPLATES = {
 
 
 def get_current_lang() -> str:
-    """返回当前请求语言；API 或后台调用未设置时使用默认简体。"""
+    """返回当前请求语言；API 或后台调用未设置时使用兼容默认简体。"""
     if not has_app_context():
         return DEFAULT_LANG
     return getattr(g, "lang", None) or DEFAULT_LANG

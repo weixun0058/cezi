@@ -53,7 +53,6 @@ import json
 import logging
 import sys
 import time
-from datetime import datetime
 from pathlib import Path
 
 # 确保能 import 同目录下的模块
@@ -62,17 +61,25 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 # 复用现有模块的核心函数
 from reinterpret_oracle_signs import (
     call_deepseek as call_deepseek_for_interpretation,
-    parse_interpretation,
+)
+from reinterpret_oracle_signs import (
     load_api_key,
+    parse_interpretation,
+)
+from reinterpret_oracle_signs import (
     load_system_prompt as load_interpreter_prompt,
 )
 from translate_oracle_signs import (
-    call_deepseek as call_deepseek_for_translation,
+    append_run_log,
+    build_translate_message,
     parse_translation_response,
     write_output,
+)
+from translate_oracle_signs import (
+    call_deepseek as call_deepseek_for_translation,
+)
+from translate_oracle_signs import (
     load_system_prompt as load_translator_prompt,
-    build_translate_message,
-    append_run_log,
 )
 
 # 日志配置
@@ -111,8 +118,11 @@ def load_sign_text_from_csv(sign_number):
         reader = csv.DictReader(f)
         for row in reader:
             if int(row["sign_number"]) == sign_number:
-                LOGGER.info("从权威 CSV 读取第 %d 签 sign_text：%s",
-                            sign_number, row["sign_text"][:30] + "...")
+                LOGGER.info(
+                    "从权威 CSV 读取第 %d 签 sign_text：%s",
+                    sign_number,
+                    row["sign_text"][:30] + "...",
+                )
                 return row["sign_text"]
 
     LOGGER.error("签号 %d 在权威 CSV 中不存在", sign_number)
@@ -262,8 +272,7 @@ def step4_5_translate_to_english(sign, interpretation, api_key, system_prompt):
 
     translations = parse_translation_response(content, expected_count=1)
     en_result = translations[0]
-    LOGGER.info("英文翻译成功（sign_text 开头：%s...）",
-                en_result.get("sign_text", "")[:50])
+    LOGGER.info("英文翻译成功（sign_text 开头：%s...）", en_result.get("sign_text", "")[:50])
 
     # 步骤 6：覆盖写入 en.json（复用 write_output 的去重合并逻辑）
     LOGGER.info("覆盖写入 oracle_signs_en.json...")
@@ -317,27 +326,32 @@ def step6_generate_gemini_prompt(sign, interpretation, en_result):
 # 步骤 8-10：DeepSeek 综合评定（委托给 adjudicate_single_sign 模块）
 # ============================================================================
 
-from adjudicate_single_sign import (
+from adjudicate_single_sign import (  # noqa: E402
     adjudicate as run_deepseek_adjudication,
+)
+from adjudicate_single_sign import (  # noqa: E402
     detect_review_status as detect_adjudication_status,
+)
+from adjudicate_single_sign import (  # noqa: E402
     load_sign_from_json as load_sign_from_existing_json,
 )
-from gemini_prompt_builder import build_single_sign_prompt
+from gemini_prompt_builder import build_single_sign_prompt  # noqa: E402
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description="单签复检完整流程（重新生成中文解读 + 翻译英文 + 生成 Gemini prompt + DeepSeek 综合评定）"
+        description=(
+            "单签复检完整流程（重新生成中文解读 + 翻译英文 + "
+            "生成 Gemini prompt + DeepSeek 综合评定）"
+        )
     )
+    parser.add_argument("--sign", type=int, required=True, help="要复检的签号（如 --sign 142）")
     parser.add_argument(
-        "--sign", type=int, required=True,
-        help="要复检的签号（如 --sign 142）"
-    )
-    parser.add_argument(
-        "--resume", action="store_true",
+        "--resume",
+        action="store_true",
         help="续跑模式：检测当前进度，从断点继续。"
-             "若 Gemini 审查结果已存在，自动执行 DeepSeek 综合评定。"
-             "若已定稿（adjudication 文件存在），则跳过。"
+        "若 Gemini 审查结果已存在，自动执行 DeepSeek 综合评定。"
+        "若已定稿（adjudication 文件存在），则跳过。",
     )
     args = parser.parse_args()
 
@@ -356,10 +370,14 @@ def main():
         review_status = detect_adjudication_status(sign_number)
         status = review_status["status"]
         LOGGER.info("当前进度状态：%s", status)
-        LOGGER.info("  Gemini 审查文件：%s",
-                    review_status["gemini_file"].name if review_status["gemini_file"] else "无")
-        LOGGER.info("  评定记录文件：%s",
-                    review_status["adjudication_file"].name if review_status["adjudication_file"] else "无")
+        LOGGER.info(
+            "  Gemini 审查文件：%s",
+            review_status["gemini_file"].name if review_status["gemini_file"] else "无",
+        )
+        LOGGER.info(
+            "  评定记录文件：%s",
+            review_status["adjudication_file"].name if review_status["adjudication_file"] else "无",
+        )
 
         if status == "finalized":
             LOGGER.info("第 %d 签已定稿（adjudication 文件已存在），无需继续。", sign_number)
@@ -374,8 +392,14 @@ def main():
             else:
                 LOGGER.info("  1. 先运行不带 --resume 的命令生成 Gemini prompt")
             LOGGER.info("  2. 把 prompt 贴入 Gemini Studio 审查")
-            LOGGER.info("  3. 结果存为：data/content/_review_log/gemini_review_result_sign_%d.md", sign_number)
-            LOGGER.info("  4. 重新运行：python scripts/reprocess_single_sign.py --sign %d --resume", sign_number)
+            LOGGER.info(
+                "  3. 结果存为：data/content/_review_log/gemini_review_result_sign_%d.md",
+                sign_number,
+            )
+            LOGGER.info(
+                "  4. 重新运行：python scripts/reprocess_single_sign.py --sign %d --resume",
+                sign_number,
+            )
             return
 
         # status == "pending_adjudication"：Gemini 审查已完成，可以继续评定
@@ -388,8 +412,7 @@ def main():
         sign, interpretation, en_result = load_sign_from_existing_json(sign_number)
 
         # 步骤 8-10：DeepSeek 综合评定（委托给 adjudicate_single_sign 模块）
-        result = run_deepseek_adjudication(sign_number, api_key,
-                                           sign, interpretation, en_result)
+        result = run_deepseek_adjudication(sign_number, api_key, sign, interpretation, en_result)
 
         elapsed = time.time() - start_time
         LOGGER.info("#" * 60)
@@ -451,11 +474,18 @@ def main():
     LOGGER.info("")
     LOGGER.info("后续手动步骤：")
     LOGGER.info("  4. 把 prompt 贴入 Gemini Studio 审查")
-    LOGGER.info("  5. 把结果存为 data/content/_review_log/gemini_review_result_sign_%d.md", sign_number)
-    LOGGER.info("  6. 续跑综合评定：python scripts/reprocess_single_sign.py --sign %d --resume", sign_number)
+    LOGGER.info(
+        "  5. 把结果存为 data/content/_review_log/gemini_review_result_sign_%d.md", sign_number
+    )
+    LOGGER.info(
+        "  6. 续跑综合评定：python scripts/reprocess_single_sign.py --sign %d --resume", sign_number
+    )
     LOGGER.info("")
     LOGGER.info("注意：")
-    LOGGER.info("  - 数据库（reference.db）未同步，如需同步请运行 backfill_reinterpreted_to_db.py（数据库是派生物，非数据源头）")
+    LOGGER.info(
+        "  - 数据库（reference.db）未同步，如需同步请运行 "
+        "backfill_reinterpreted_to_db.py（数据库是派生物，非数据源头）"
+    )
 
 
 if __name__ == "__main__":

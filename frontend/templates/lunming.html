@@ -11,6 +11,7 @@
     <script src="{{ url_for('static', filename='js/lunar.js') }}"></script>
 </head>
 <body>
+    {% include 'partials/cn_header.html' %}
     <div class="ancient-bg">
         <div class="scroll-container">
             <div class="scroll-header"></div>
@@ -21,7 +22,6 @@
                     <a href="/{{ current_lang }}/almanac" class="ancient-btn nav-btn" data-i18n="huangli.title_h1">黄历</a>
                     <a href="/{{ current_lang }}/divination" class="ancient-btn nav-btn" data-i18n="common.nav_suanshi">算事</a>
                 </div>
-                <div id="lang-switcher" class="lang-switcher"></div>
 
                 <div class="poetry-section">
                     <div class="poetry-container">

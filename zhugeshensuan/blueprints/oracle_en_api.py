@@ -49,11 +49,7 @@ def ask():
 def _handle_words(payload: dict, signs: dict) -> tuple:
     """处理三词模式。"""
     words = payload.get("words")
-    if (
-        not isinstance(words, list)
-        or len(words) != 3
-        or any(not isinstance(w, str) for w in words)
-    ):
+    if not isinstance(words, list) or len(words) != 3 or any(not isinstance(w, str) for w in words):
         return failure_with_code(ErrorCode.ORACLE_WORDS_INSUFFICIENT, "en")
     try:
         result = ask_with_words(words, signs)

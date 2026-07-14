@@ -213,26 +213,30 @@ def build_single_sign_prompt(sign_number, cn_sign, en_sign):
         cn_text = cn_sign.get(field_key, "") if cn_sign else ""
         en_text = en_sign.get(field_key, "") if en_sign else ""
 
-        lines.extend([
-            f"### {field_name}（{field_key}）",
-            "",
-            "**中文原文**：",
-            cn_text,
-            "",
-            "**英文翻译**：",
-            en_text,
-            "",
-            "---",
-            "",
-        ])
+        lines.extend(
+            [
+                f"### {field_name}（{field_key}）",
+                "",
+                "**中文原文**：",
+                cn_text,
+                "",
+                "**英文翻译**：",
+                en_text,
+                "",
+                "---",
+                "",
+            ]
+        )
 
-    lines.extend([
-        "## 审查输出格式",
-        "请按字段逐条给出审查意见：",
-        "- 严重问题（Critical）：必须修改",
-        "- 改进建议（High/Medium/Low）：可选修改",
-        "- 评级（A/B/C）：A=优秀，B=合格，C=需重译",
-        "",
-    ])
+    lines.extend(
+        [
+            "## 审查输出格式",
+            "请按字段逐条给出审查意见：",
+            "- 严重问题（Critical）：必须修改",
+            "- 改进建议（High/Medium/Low）：可选修改",
+            "- 评级（A/B/C）：A=优秀，B=合格，C=需重译",
+            "",
+        ]
+    )
 
     return "\n".join(lines)

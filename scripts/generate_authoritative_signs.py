@@ -23,6 +23,7 @@
   - data/reference/oracle_signs_authoritative_sc.csv  简体权威文本
   - data/reference/oracle_signs_authoritative_tc.csv  繁体权威文本
 """
+
 import csv
 from pathlib import Path
 
@@ -34,15 +35,26 @@ CSV_PATH = Path("data/reference/original_oracle_signs.csv")
 SC_OUTPUT = Path("data/reference/oracle_signs_authoritative_sc.csv")
 TC_OUTPUT = Path("data/reference/oracle_signs_authoritative_tc.csv")
 
-PUNCTUATION = set('，。、；：""''""''！？·…—（）()[]【】《》〈〉「」『』 \n\r\t.,;:!?\'"')
+PUNCTUATION = set('，。、；：""' '""' "！？·…—（）()[]【】《》〈〉「」『』 \n\r\t.,;:!?'\"")
 
 # OpenCC t2s 不识别的异体字补充映射（csv底本字 → 对应简体字）
 # 这些字 t2s 转换后不等于简体字，但实为异体字，应保留底本原貌
 # 依据 scripts/check_variants.py 诊断结果人工筛选
 VARIANT_TO_SIMP = {
-    '啣': '衔', '凟': '渎', '疴': '痾', '歛': '敛', '尅': '克',
-    '濶': '阔', '嚦': '唳', '氷': '冰', '妬': '妒', '覩': '睹',
-    '朶': '朵', '兎': '兔', '沈': '沉', '麟': '鳞',
+    "啣": "衔",
+    "凟": "渎",
+    "疴": "痾",
+    "歛": "敛",
+    "尅": "克",
+    "濶": "阔",
+    "嚦": "唳",
+    "氷": "冰",
+    "妬": "妒",
+    "覩": "睹",
+    "朶": "朵",
+    "兎": "兔",
+    "沈": "沉",
+    "麟": "鳞",
 }
 
 # A类（13签，回退到CSV底本）+ B类（9签，第三方考据）+ C类特殊（260签）
@@ -66,8 +78,8 @@ TEXT_FIXES = {
     # === B类：第三方考据 ===
     # 注：14签「藏却拙」语序取CSV底本，但「蹉跎」保留xlsx原版
     # （CSV底本「嗟跎」为OCR误认，二轮校勘纠正）
-    14:  "鼎沸起风波，孤舟要渡河，巧中藏却拙，人事转蹉跎。",
-    96:  "可以寄百里之命，可以托六尺之孤，钟期既遇毋迟误。笑呼呼，他乡聚首，各自乐康。",
+    14: "鼎沸起风波，孤舟要渡河，巧中藏却拙，人事转蹉跎。",
+    96: "可以寄百里之命，可以托六尺之孤，钟期既遇毋迟误。笑呼呼，他乡聚首，各自乐康。",
     142: "利在中邦出战征，一番获丑在王庭，凤衔丹诏归阳畔，得享佳名四海荣。",
     313: "耕牛伏轭，辟土开疆，坐看收获，黍稷稻梁。",
     332: "时变多艰，战战兢兢，戒谨恐惧，如履薄冰，须识前程危与险，一笼风里一枝灯。",
@@ -81,7 +93,7 @@ TEXT_FIXES = {
     260: "终身不习上，在世却枉然，轮回不能免，永落深坑堑。",
     # === 二轮校勘（繁体CSV审查后发现的新问题）===
     # 85签：删除OCR乱码「??」（CSV底本为「展愁眉」无乱码）
-    85:  "倾一杯，展愁眉，天地合，好思为。",
+    85: "倾一杯，展愁眉，天地合，好思为。",
     # 167签：删除多余右括号「）」（无匹配左括号）
     167: "大事可成功，有益还无咎，云中执鞭人，报在三秋后。",
     # 216签：删除OCR乱码「??」（CSV底本为「朱衣臨日月」无乱码）
@@ -92,7 +104,7 @@ TEXT_FIXES = {
 
 # 标点修订（3签，文字不变）
 PUNCT_FIXES = {
-    4:  "春花娇媚，不禁雨打风飘；秋菊幽芳，反耐霜凌雪傲。",
+    4: "春花娇媚，不禁雨打风飘；秋菊幽芳，反耐霜凌雪傲。",
     25: "见不见，也防人背面；遇不遇，到底无凭据。",
     26: "一番桃李一番春，谁识当初气象新。林下水边寻活计，见山了了称心意。",
 }
@@ -218,7 +230,7 @@ def build_authoritative_tc(sc_signs, csv_signs):
         else:
             # 字符数不一致，回退到 s2t
             authoritative[sn] = converter.convert(sc_text)
-            fallback_warnings.append((sn, f"字符数不一致(s2t回退)"))
+            fallback_warnings.append((sn, "字符数不一致(s2t回退)"))
 
     if fallback_warnings:
         print(f"警告: {len(fallback_warnings)} 签回退到 s2t 转换:")

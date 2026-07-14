@@ -64,15 +64,17 @@
             </div>
         </section>
 
-        <section class="en-almanac-ganzhi" data-ganzhi-card hidden>
-            <h2>Heavenly Stems &amp; Earthly Branches</h2>
-            <dl data-list="ganzhi"></dl>
-        </section>
+        <div class="en-almanac-row-ganzhi-solar">
+            <section class="en-almanac-ganzhi" data-ganzhi-card hidden>
+                <h2>Heavenly Stems &amp; Earthly Branches</h2>
+                <dl data-list="ganzhi"></dl>
+            </section>
 
-        <section class="en-almanac-solar-terms" data-solar-terms-card hidden>
-            <h2>Solar Terms</h2>
-            <dl data-list="solar-terms"></dl>
-        </section>
+            <section class="en-almanac-solar-terms" data-solar-terms-card hidden>
+                <h2>Solar Terms</h2>
+                <dl data-list="solar-terms"></dl>
+            </section>
+        </div>
 
         <section class="en-almanac-festivals" data-festivals-card hidden>
             <h2>Festivals</h2>
@@ -82,7 +84,8 @@
         <section class="en-scenario-card" data-scenario-card hidden>
             <span class="en-summary-label">Selected focus</span>
             <h2 data-field="scenario-label">—</h2>
-            <p data-field="scenario-status">—</p>
+            <p class="en-scenario-today" data-field="scenario-today">—</p>
+            <p class="en-scenario-next" data-field="scenario-next" hidden></p>
         </section>
 
         <div class="en-almanac-grid">
@@ -94,15 +97,11 @@
                 <h2>Traditionally Avoided</h2>
                 <ul data-list="unfavorable"></ul>
             </section>
-            <section class="en-almanac-card">
-                <h2>Mixed Indications</h2>
-                <ul data-list="mixed"></ul>
-            </section>
             <section class="en-almanac-card en-almanac-card-special" data-special-card hidden>
                 <h2>Special Indications</h2>
                 <ul data-list="special"></ul>
             </section>
-            <section class="en-almanac-card">
+            <section class="en-almanac-card en-almanac-card-fullspan">
                 <h2>Traditional Spirits</h2>
                 <div data-list="spirits"></div>
             </section>
@@ -122,14 +121,13 @@
             <p data-field="footer-disclaimer">—</p>
         </section>
 
-        <section class="en-almanac-week" data-week-section>
+        <section class="en-almanac-week en-week-section" data-week-section>
             <button type="button" class="en-week-toggle" data-week-toggle aria-expanded="false">
-                <span class="en-week-title">Nine-Day Almanac</span>
+                <span class="en-week-title">Ten-Day Almanac</span>
                 <span class="en-week-indicator" aria-hidden="true">▸</span>
             </button>
             <div class="en-week-panel" data-week-panel hidden>
                 <div class="en-week-scenarios" data-week-scenarios>
-                    <button type="button" class="en-week-scenario is-active" data-scenario="">General</button>
                     <button type="button" class="en-week-scenario" data-scenario="wedding">Wedding</button>
                     <button type="button" class="en-week-scenario" data-scenario="moving">Moving</button>
                     <button type="button" class="en-week-scenario" data-scenario="business_opening">Business</button>
@@ -137,6 +135,7 @@
                     <button type="button" class="en-week-scenario" data-scenario="signing">Signing</button>
                     <button type="button" class="en-week-scenario" data-scenario="haircut">Haircut</button>
                 </div>
+                <p class="en-week-focus" data-week-focus></p>
                 <div class="en-week-grid" data-week-grid></div>
             </div>
         </section>

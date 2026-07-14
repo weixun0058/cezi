@@ -1,7 +1,8 @@
 """英文签文服务。
 
 职责：
-1. 启动时从 ``data/content/oracle_signs_en.json`` 加载 384 条签文到内存（D15：JSON 内存加载，不入数据库）
+1. 启动时从 ``data/content/oracle_signs_en.json`` 加载 384 条签文到内存
+   （D15：JSON 内存加载，不入数据库）
 2. 加载时剔除 ``fortune``/``gua_type``（D14/D16 硬约束），保留 9 必填字段 + 可选 ``responsible_use``
 3. CJK 残留或空字段触发 fallback 占位（项目硬约束：未译签文显示占位文案）
 4. 运行期只读，不修改原 JSON 文件（用户用其他 Agent 更新数据后，重启服务器即生效）
@@ -20,8 +21,8 @@ from __future__ import annotations
 import json
 import logging
 import re
+from collections.abc import Sequence
 from pathlib import Path
-from typing import Optional, Sequence
 
 from .oracle_algorithm import (
     english_three_numbers_to_start_index,
@@ -117,7 +118,7 @@ def load_english_signs_safe(json_path: Path) -> dict[int, dict]:
         return {}
 
 
-def get_english_sign(sign_number: int, signs: dict[int, dict]) -> Optional[dict]:
+def get_english_sign(sign_number: int, signs: dict[int, dict]) -> dict | None:
     """按签号取英文签文。
 
     输入：sign_number 1..384，signs 内存字典

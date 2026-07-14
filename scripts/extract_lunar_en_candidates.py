@@ -94,7 +94,7 @@ def extract_messages_block(content: str, lang: str) -> dict[str, str]:
     if not close_match:
         raise ValueError(f"未找到 {lang} messages 块的闭合括号")
 
-    block_content = content[search_start:close_match.start()]
+    block_content = content[search_start : close_match.start()]
 
     messages: dict[str, str] = {}
     for line in block_content.splitlines():
@@ -137,17 +137,24 @@ def render_markdown(
     lines: list[str] = []
     lines.append("# 英文黄历术语表草稿（6tail 候选词抽取）")
     lines.append("")
-    lines.append("> **文档定位**：W1.1 产出。从 `frontend/static/js/lunar.js` 的 6tail I18n 英文 messages 抽取候选词，供人工审校。")
+    lines.append(
+        "> **文档定位**：W1.1 产出。从 `frontend/static/js/lunar.js` 的 "
+        "6tail I18n 英文 messages 抽取候选词，供人工审校。"
+    )
     lines.append("> **创建日期**：2026-06-30")
     lines.append("> **状态**：草稿，待人工审校定稿")
     lines.append("> **硬约束引用**：D6（神煞采用音译+解释）")
-    lines.append("> **注意**：本草稿只抽取候选，不直接上线。定稿后再写入项目英文黄历词表，不改 `lunar.js`。")
+    lines.append(
+        "> **注意**：本草稿只抽取候选，不直接上线。定稿后再写入项目英文黄历词表，不改 `lunar.js`。"
+    )
     lines.append("")
     lines.append("---")
     lines.append("")
     lines.append("## 一、命名空间含义对照（纠正执行计划注释错误）")
     lines.append("")
-    lines.append("> 执行计划 W1.1 列出的 6 个命名空间（sx/yj/jq/sn/ps/bg）含义正确，但注释有误，已纠正：")
+    lines.append(
+        "> 执行计划 W1.1 列出的 6 个命名空间（sx/yj/jq/sn/ps/bg）含义正确，但注释有误，已纠正："
+    )
     lines.append("> - `sx.*` = 生肖（非十神）")
     lines.append("> - `ss.*` = 十神（en 完全缺失）")
     lines.append("> - `ps.*` = 方位（非彭祖百忌）")
@@ -188,9 +195,14 @@ def render_markdown(
     # 各命名空间详情
     lines.append("## 三、各命名空间候选词详情")
     lines.append("")
-    lines.append("> 每个命名空间列出：key、中文源词、6tail 英文候选、产品英文候选（待人工填写）、使用场景、是否可直接用于 UI、风险备注。")
+    lines.append(
+        "> 每个命名空间列出：key、中文源词、6tail 英文候选、"
+        "产品英文候选（待人工填写）、使用场景、是否可直接用于 UI、风险备注。"
+    )
     lines.append("> - **产品英文候选**：留空表示沿用 6tail 候选；填入表示建议替换。")
-    lines.append("> - **是否可直接用于 UI**：✅ 可直接用 / ⚠️ 需审校 / ❌ 不建议（将回退到中文或需重译）。")
+    lines.append(
+        "> - **是否可直接用于 UI**：✅ 可直接用 / ⚠️ 需审校 / ❌ 不建议（将回退到中文或需重译）。"
+    )
     lines.append("")
 
     for ns in all_namespaces:
@@ -200,8 +212,11 @@ def render_markdown(
 
         lines.append(f"### `{ns}.*` — {meaning}")
         lines.append("")
-        lines.append(f"| key | 中文源词 | 6tail 英文候选 | 产品英文候选 | 使用场景 | 可直接用于 UI | 风险备注 |")
-        lines.append(f"| --- | --- | --- | --- | --- | --- | --- |")
+        lines.append(
+            "| key | 中文源词 | 6tail 英文候选 | 产品英文候选 | "
+            "使用场景 | 可直接用于 UI | 风险备注 |"
+        )
+        lines.append("| --- | --- | --- | --- | --- | --- | --- |")
 
         for key in sorted(chs_items.keys()):
             chs_val = chs_items[key]
@@ -213,9 +228,7 @@ def render_markdown(
                 ui_flag = "❌ 缺失（回退中文）"
                 risk = "en 未翻译，运行时回退到中文"
 
-            lines.append(
-                f"| `{key}` | {chs_val} | {en_val} |  |  | {ui_flag} | {risk} |"
-            )
+            lines.append(f"| `{key}` | {chs_val} | {en_val} |  |  | {ui_flag} | {risk} |")
 
         lines.append("")
 
@@ -225,7 +238,11 @@ def render_markdown(
     lines.append("")
     lines.append("以下 6 个命名空间 en 完全缺失，运行时回退到中文显示，需补译：")
     lines.append("")
-    missing_ns = [ns for ns in all_namespaces if len(en_grouped.get(ns, {})) == 0 and len(chs_grouped.get(ns, {})) > 0]
+    missing_ns = [
+        ns
+        for ns in all_namespaces
+        if len(en_grouped.get(ns, {})) == 0 and len(chs_grouped.get(ns, {})) > 0
+    ]
     if missing_ns:
         lines.append("| 前缀 | 含义 | chs 条目数 | 补译优先级 |")
         lines.append("| --- | --- | --- | --- |")
@@ -243,9 +260,17 @@ def render_markdown(
     lines.append("")
     lines.append("## 五、彭祖百忌说明")
     lines.append("")
-    lines.append("彭祖百忌不在 I18n messages 里，而在 `_arrays.LunarUtil.PENGZU_GAN` 和 `PENGZU_ZHI` 数组中（lunar.js 行 8260-8261），通过 `{tg.jia}` 等占位符引用 messages，由 `_updateArray` 渲染。")
+    lines.append(
+        "彭祖百忌不在 I18n messages 里，而在 "
+        "`_arrays.LunarUtil.PENGZU_GAN` 和 `PENGZU_ZHI` 数组中"
+        "（lunar.js 行 8260-8261），通过 `{tg.jia}` 等占位符引用 messages，"
+        "由 `_updateArray` 渲染。"
+    )
     lines.append("")
-    lines.append("若需抽取彭祖百忌英文候选，需单独解析这两个数组（本草稿暂不覆盖，待 W5 黄历后端实施时按需处理）。")
+    lines.append(
+        "若需抽取彭祖百忌英文候选，需单独解析这两个数组"
+        "（本草稿暂不覆盖，待 W5 黄历后端实施时按需处理）。"
+    )
     lines.append("")
 
     lines.append("---")

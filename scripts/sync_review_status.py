@@ -28,6 +28,7 @@
   本脚本只读不改原数据。可随时安全重跑。
   13-44 标记为"待复审定稿"是已知欠债，需大模型回头补审。
 """
+
 import json
 import re
 import sys
@@ -114,8 +115,10 @@ def load_retranslated_signs():
         return {}
     try:
         data = json.loads(RETRANSLATED_FILE.read_text(encoding="utf-8"))
-        return {item["sign_number"]: item.get("reason", "")
-                for item in data.get("retranslated_signs", [])}
+        return {
+            item["sign_number"]: item.get("reason", "")
+            for item in data.get("retranslated_signs", [])
+        }
     except (json.JSONDecodeError, KeyError):
         return {}
 
@@ -123,7 +126,8 @@ def load_retranslated_signs():
 def build_sign_status(gemini_batches, apply_batches, adjudication_signs):
     """
     构建每签的状态字典。
-    返回 {sign_number: {"gemini_reviewed": bool, "finalized_method": str|None, "batch_file": str|None}}。
+    返回 {sign_number: {"gemini_reviewed": bool, "finalized_method": str|None,
+    "batch_file": str|None}}。
     finalized_method 取值：
       - "manual_llm_review"  大模型综合审定（有 adjudication 记录或无 apply 脚本）
       - "applied_via_script" apply 脚本照搬 Gemini（待复审）
@@ -148,7 +152,7 @@ def build_sign_status(gemini_batches, apply_batches, adjudication_signs):
                 status[n]["finalized_method"] = "manual_llm_review"
 
     # 用 apply 脚本覆盖：有 apply 脚本的批次 = 照搬，待复审
-    for start, end, fname in apply_batches:
+    for start, end, _fname in apply_batches:
         for n in range(start, end + 1):
             if n in status and status[n]["gemini_reviewed"]:
                 status[n]["finalized_method"] = "applied_via_script"
@@ -202,14 +206,16 @@ def render_markdown(status, gemini_batches, apply_batches):
     lines.append("## 总览")
     lines.append("")
     lines.append(f"- 总签数：**{TOTAL_SIGNS}**")
-    lines.append(f"- 已 Gemini 审查：**{gemini_reviewed}** ({gemini_reviewed * 100 // TOTAL_SIGNS}%)")
+    lines.append(
+        f"- 已 Gemini 审查：**{gemini_reviewed}** ({gemini_reviewed * 100 // TOTAL_SIGNS}%)"
+    )
     lines.append(f"  - 大模型综合审定（定稿）：**{manual_review}**")
     lines.append(f"  - apply 脚本照搬 Gemini（[待复审]）：**{via_script}**")
     lines.append(f"- 未审查：**{pending}** ({pending * 100 // TOTAL_SIGNS}%)")
     if retranslated_nums:
         lines.append(f"- 补译签：**{len(retranslated_nums)}** 签（因中文考据修正后重译）")
         lines.append(f"  - 签号：{', '.join(str(n) for n in retranslated_nums)}")
-        lines.append(f"  - 详见：`data/content/_review_log/retranslated_signs.json`")
+        lines.append("  - 详见：`data/content/_review_log/retranslated_signs.json`")
     lines.append("")
 
     # 下一批起点
@@ -276,11 +282,19 @@ def render_markdown(status, gemini_batches, apply_batches):
     lines.append("## 流程说明")
     lines.append("")
     lines.append("### 正确流程（每批必走）")
-    lines.append("1. **生成 Gemini prompt**：`python scripts/build_gemini_review_prompt.py --start 起 --limit 批大小`")
+    lines.append(
+        "1. **生成 Gemini prompt**："
+        "`python scripts/build_gemini_review_prompt.py --start 起 --limit 批大小`"
+    )
     lines.append("2. **贴入 Gemini 审查**：用户把 prompt 贴入 Gemini Studio，拿到审查意见")
-    lines.append("3. **保存审查结果**：用户把 Gemini 输出存为 `data/content/_review_log/gemini_review_result_signs_起-止.md`")
+    lines.append(
+        "3. **保存审查结果**：用户把 Gemini 输出存为 "
+        "`data/content/_review_log/gemini_review_result_signs_起-止.md`"
+    )
     lines.append("4. **大模型综合评定**（核心步骤，不可跳过）：")
-    lines.append("   - 输入：中文原文(reinterpreted.json) + DeepSeek 原译(当前 en.json) + Gemini 意见(md)")
+    lines.append(
+        "   - 输入：中文原文(reinterpreted.json) + DeepSeek 原译(当前 en.json) + Gemini 意见(md)"
+    )
     lines.append("   - 逐条判断：接受 Gemini 意见 / 否决 Gemini 误判 / 提出第三种更优译法")
     lines.append("   - 形成定稿后**直接修改 `oracle_signs_en.json`**")
     lines.append("5. **刷新看板**：`python scripts/sync_review_status.py`")
@@ -293,14 +307,19 @@ def render_markdown(status, gemini_batches, apply_batches):
     lines.append("")
     lines.append("- [ ] 禁止词（仅这些是硬禁止）：`destiny` / `Li Ge` / `heal`(作动词表确定疗效)")
     lines.append("- [ ] `fortune` / `gua_type` 字段必须剔除（不翻译这两项）")
-    lines.append("- [ ] 禁止绝对化预测：`will improve` / `will fail` 等（但保留诗句中 `fate` 等文学表达）")
+    lines.append(
+        "- [ ] 禁止绝对化预测：`will improve` / `will fail` 等（但保留诗句中 `fate` 等文学表达）"
+    )
     lines.append("- [ ] sign_text 必须 4 行结构")
-    lines.append("- [ ] 字段完整：sign_number/sign_text/interpretation1/career/wealth/love/health/study/general 共 9 字段")
+    lines.append(
+        "- [ ] 字段完整：sign_number/sign_text/interpretation1/career/wealth/"
+        "love/health/study/general 共 9 字段"
+    )
     lines.append("- [ ] 英文不含中文字符")
     lines.append("")
     lines.append("### 非自动禁止项（按上下文判断，勿过度审查）")
     lines.append("- `supremely favorable` / `extremely favorable` 等副词堆叠：")
-    lines.append("  - **不是禁止词**。原文为吉签时（如\"终有庆也\"）使用是合理的")
+    lines.append('  - **不是禁止词**。原文为吉签时（如"终有庆也"）使用是合理的')
     lines.append("  - 仅当原文非吉签却译成 highly favorable 时才需复核")
     lines.append("  - 曾误把 supremely favorable 列为禁止词并改第34签，已回退(2026-07-07)")
     lines.append("- `fate` 在诗句中：文学表达，保留")
@@ -318,10 +337,17 @@ def render_markdown(status, gemini_batches, apply_batches):
     lines.append("- 从第 45 签起，回归正确流程")
     lines.append("")
     lines.append("### 状态推断依据")
-    lines.append("- `大模型综合审定`：Gemini 审查文件存在 + 有 `adjudication_sign_<N>.md`（或无 apply 脚本）")
-    lines.append("- `apply脚本照搬Gemini`：存在 `apply_review_fixes_signs_*.py` 文件且无对应 adjudication 记录")
+    lines.append(
+        "- `大模型综合审定`：Gemini 审查文件存在 + 有 `adjudication_sign_<N>.md`（或无 apply 脚本）"
+    )
+    lines.append(
+        "- `apply脚本照搬Gemini`：存在 `apply_review_fixes_signs_*.py` 文件"
+        "且无对应 adjudication 记录"
+    )
     lines.append("- 判定优先级：adjudication 记录 > apply 脚本 > 默认推断")
-    lines.append("- 若需精确追踪（含审定时间/审定者），需给 `oracle_signs_en.json` 每签加审计字段，")
+    lines.append(
+        "- 若需精确追踪（含审定时间/审定者），需给 `oracle_signs_en.json` 每签加审计字段，"
+    )
     lines.append("  属后续优化，不在本脚本范围。")
     lines.append("")
 
@@ -352,13 +378,15 @@ def build_json(status, gemini_batches, apply_batches):
             method = "mixed"
         else:
             method = None
-        batches_info.append({
-            "start": start,
-            "end": end,
-            "count": end - start + 1,
-            "file": fname,
-            "finalized_method": method,
-        })
+        batches_info.append(
+            {
+                "start": start,
+                "end": end,
+                "count": end - start + 1,
+                "file": fname,
+                "finalized_method": method,
+            }
+        )
 
     return {
         "total_signs": TOTAL_SIGNS,
@@ -400,14 +428,20 @@ def main():
     print(f"状态 JSON 已生成：{OUTPUT_JSON}")
     print()
     print(f"总签数：{TOTAL_SIGNS}")
-    print(f"已 Gemini 审查：{data['summary']['gemini_reviewed']} ({data['summary']['progress_percent']}%)")
+    print(
+        f"已 Gemini 审查：{data['summary']['gemini_reviewed']} "
+        f"({data['summary']['progress_percent']}%)"
+    )
     print(f"  - 大模型综合审定：{data['summary']['manual_llm_review']}")
     print(f"  - apply脚本照搬（待复审）：{data['summary']['applied_via_script']}")
     print(f"未审查：{data['summary']['pending']}")
     if data["next_unreviewed_start"]:
         print(f"下一批应从：第 {data['next_unreviewed_start']} 签开始")
-    if data['summary']['applied_via_script'] > 0:
-        print(f"\n已知欠债：仍有 {data['summary']['applied_via_script']} 签为脚本照搬 Gemini，未经大模型综合评定。")
+    if data["summary"]["applied_via_script"] > 0:
+        print(
+            f"\n已知欠债：仍有 {data['summary']['applied_via_script']} "
+            "签为脚本照搬 Gemini，未经大模型综合评定。"
+        )
     else:
         print("\n所有已 Gemini 审查的签均已完成大模型综合审定，无历史欠债。")
 

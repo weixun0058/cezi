@@ -8,6 +8,7 @@
     <!-- <link rel="stylesheet" media="screen and (max-width: 480px)" href="{{ url_for('static', filename='css/style_mobile.css') }}"> -->
 </head>
 <body>
+    {% include 'partials/cn_header.html' %}
     <div class="ancient-bg">
         <div class="scroll-container">
             <div class="scroll-header"></div>
@@ -17,7 +18,6 @@
                 <div class="nav-links">
                     <a href="/{{ current_lang }}/almanac" class="ancient-btn small-btn" data-i18n="common.nav_huangli">每日黄历</a>
                 </div>
-                <div id="lang-switcher" class="lang-switcher"></div>
 
                 <div class="poetry-section">
                     <div class="poetry-container">
@@ -47,6 +47,7 @@
                         <input type="text" maxlength="1" class="char-input" id="char3">
                     </div>
                     <button id="calculateBtn" class="ancient-btn" data-i18n="suanshi.calculate_btn">开始测算</button>
+                    <div id="suanshiStatus" class="inline-status" role="status" aria-live="polite"></div>
                 </div>
 
                 <div class="intro-text">

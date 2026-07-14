@@ -79,7 +79,7 @@ def extract_messages_block(content: str, lang: str) -> dict[str, str]:
     if not close_match:
         raise ValueError(f"未找到 {lang} messages 块的闭合括号")
 
-    block_content = content[search_start:close_match.start()]
+    block_content = content[search_start : close_match.start()]
     messages: dict[str, str] = {}
     for line in block_content.splitlines():
         m = LINE_RE.match(line)
@@ -101,7 +101,9 @@ def load_curate() -> dict:
     return json.loads(CURATE_JSON.read_text(encoding="utf-8"))
 
 
-def build_other_namespaces(en_messages: dict[str, str], chs_messages: dict[str, str]) -> tuple[dict, dict]:
+def build_other_namespaces(
+    en_messages: dict[str, str], chs_messages: dict[str, str]
+) -> tuple[dict, dict]:
     """构建非 activities 命名空间的中文→英文映射。
 
     输入：
@@ -176,14 +178,14 @@ def apply_term_overrides(other_terms: dict, overrides: dict) -> tuple[dict, list
         updated["sexagenary"] = new_sexagenary
         if missing:
             applied_log.append(
-                f"sexagenary 派生（{len(new_sexagenary)} 条，{len(missing)} 条缺失保留原值：{missing}）"
+                f"sexagenary 派生（{len(new_sexagenary)} 条，"
+                f"{len(missing)} 条缺失保留原值：{missing}）"
             )
         else:
-            applied_log.append(
-                f"sexagenary 派生为阴阳五行+生肖组合（{len(new_sexagenary)} 条）"
-            )
+            applied_log.append(f"sexagenary 派生为阴阳五行+生肖组合（{len(new_sexagenary)} 条）")
 
-    # 3. 其他命名空间直接覆盖（moon_phases/rokuyo/twenty_eight_mansions/divination_directions/gods 等）
+    # 3. 其他命名空间直接覆盖
+    # （moon_phases/rokuyo/twenty_eight_mansions/divination_directions/gods 等）
     # stems 已在上方处理（并参与 sexagenary 派生），_meta/branch_to_zodiac 为辅助映射，均跳过
     # 允许新增 override-only 命名空间（如 gods：无 lunar.js 候选词，仅由 term_overrides 提供）
     AUX_KEYS = {"_meta", "branch_to_zodiac"}
@@ -206,9 +208,11 @@ def main() -> None:
 
     # 1. 读取人工审校定稿
     curate = load_curate()
-    print(f"读取 curate：{len(curate['activity_categories'])} 类别，"
-          f"{len(curate['excluded_activities'])} 剔除，"
-          f"{len(curate['special_rules'])} 特殊规则")
+    print(
+        f"读取 curate：{len(curate['activity_categories'])} 类别，"
+        f"{len(curate['excluded_activities'])} 剔除，"
+        f"{len(curate['special_rules'])} 特殊规则"
+    )
 
     # 2. 抽取 lunar.js 其他命名空间候选词
     content = LUNAR_JS.read_text(encoding="utf-8")
@@ -231,7 +235,9 @@ def main() -> None:
     # 其他命名空间保持中文→英文映射
     output: dict = {
         "_meta": {
-            "source": "huangli_activities_curated.json (activities) + lunar.js I18n (other namespaces)",
+            "source": (
+                "huangli_activities_curated.json (activities) + " "lunar.js I18n (other namespaces)"
+            ),
             "generated_by": "scripts/build_huangli_terms_en.py",
             "policy": (
                 "activities 为人工审校定稿（39 类别+19 剔除+馀事勿取特殊），"
@@ -240,7 +246,9 @@ def main() -> None:
                 "未审核神煞运行时隐藏并记录 translation_missing，缺失命名空间 translation_missing"
             ),
             "activities_source": "data/content/huangli_activities_curated.json",
-            "term_overrides_source": "data/content/huangli_activities_curated.json (term_overrides 区块)",
+            "term_overrides_source": (
+                "data/content/huangli_activities_curated.json (term_overrides 区块)"
+            ),
             "other_namespaces_source": "frontend/static/js/lunar.js I18n messages (6tail)",
             "applied_overrides": applied_log,
             "gods_policy": (
@@ -248,8 +256,12 @@ def main() -> None:
                 "其余神煞运行时隐藏并记录 translation_missing"
             ),
             "missing_namespaces": [
-                "d (农历日)", "m (农历月)", "h (候/72物候)",
-                "ss (十神)", "ds (十二长生)", "od (孟仲季)",
+                "d (农历日)",
+                "m (农历月)",
+                "h (候/72物候)",
+                "ss (十神)",
+                "ds (十二长生)",
+                "od (孟仲季)",
             ],
             "other_namespaces_stats": other_stats,
         },
@@ -264,19 +276,17 @@ def main() -> None:
     }
 
     OUTPUT_JSON.parent.mkdir(parents=True, exist_ok=True)
-    OUTPUT_JSON.write_text(
-        json.dumps(output, ensure_ascii=False, indent=2), encoding="utf-8"
-    )
+    OUTPUT_JSON.write_text(json.dumps(output, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"\n输出：{OUTPUT_JSON}")
     print(f"文件大小：{OUTPUT_JSON.stat().st_size} 字节")
     print(f"\nactivities：{len(curate['activity_categories'])} 类别（人工审校定稿）")
     print(f"excluded：{len(curate['excluded_activities'])} 词")
     print(f"special_rules：{len(curate['special_rules'])} 条")
     if applied_log:
-        print(f"\n应用的人工覆盖（term_overrides）：")
+        print("\n应用的人工覆盖（term_overrides）：")
         for line in applied_log:
             print(f"  - {line}")
-    print(f"\n其他命名空间：")
+    print("\n其他命名空间：")
     for json_key, count in other_stats.items():
         print(f"  {json_key}: {count} 条")
     gods_count = other_stats.get("gods", 0)

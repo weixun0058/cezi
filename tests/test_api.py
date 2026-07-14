@@ -143,7 +143,8 @@ def test_post_stream_and_deprecated_get_headers(app, client):
             return {"pillars": {"year": "己巳"}}
 
         @staticmethod
-        def analyze_bazi_stream(_payload):
+        def analyze_bazi_stream(_payload, *, lang):
+            assert lang == "zh-hans"
             yield {"type": "chart", "chart": {"pillars": {"year": "己巳"}}}
             yield {"type": "text", "text": "测试文本块"}
 
@@ -164,7 +165,8 @@ def test_fourth_ai_request_returns_daily_quota_error(app, client):
             return {}
 
         @staticmethod
-        def analyze_bazi(_payload):
+        def analyze_bazi(_payload, *, lang):
+            assert lang == "zh-hans"
             return {"chart": {}, "report": {}, "disclaimer": "test"}
 
     app.extensions["lunming"] = FakeService()
@@ -190,7 +192,8 @@ def test_stream_interruption_returns_safe_error_event(app, client):
             return {"pillars": {"year": "己巳"}}
 
         @staticmethod
-        def analyze_bazi_stream(_payload):
+        def analyze_bazi_stream(_payload, *, lang):
+            assert lang == "zh-hans"
             yield {"type": "chart", "chart": {"pillars": {"year": "己巳"}}}
             raise RuntimeError("provider details must not leak")
 

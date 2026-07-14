@@ -53,8 +53,7 @@ class AIUsagePolicy:
     def _init_db(self):
         with sqlite_connection(self.runtime_db) as connection:
             connection.execute("PRAGMA journal_mode=WAL")
-            connection.executescript(
-                """
+            connection.executescript("""
                 CREATE TABLE IF NOT EXISTS ai_daily_usage (
                     scope TEXT NOT NULL,
                     subject TEXT NOT NULL,
@@ -81,8 +80,7 @@ class AIUsagePolicy:
                     source TEXT NOT NULL,
                     PRIMARY KEY (device_subject, usage_date, source)
                 );
-                """
-            )
+                """)
 
     def resolve_client(self, signed_client_id=None):
         client_id = None

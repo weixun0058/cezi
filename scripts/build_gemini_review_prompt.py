@@ -21,18 +21,19 @@
 注意：基于 D16 硬约束，英文版不含 fortune/gua_type 字段，
       中文原文也只取 9 字段以保持对照一致，避免 Gemini 重复标记已废弃字段。
 """
-import argparse
 
-from pathlib import Path
+import argparse
 
 # 确保能 import 同目录下的模块
 import sys
+from pathlib import Path
+
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from gemini_prompt_builder import (
+    build_gemini_review_prompt,
     load_chinese_signs,
     load_english_signs,
-    build_gemini_review_prompt,
 )
 
 # 输出路径
@@ -53,7 +54,7 @@ def main():
 
     print(f"中文原文：{len(cn_signs)} 条（签号 {args.start}-{end}）")
     print(f"英文翻译：{len(en_signs)} 条")
-    print(f"数据源：reinterpreted.json + en.json（权威 JSON）")
+    print("数据源：reinterpreted.json + en.json（权威 JSON）")
 
     missing_cn = set(s["sign_number"] for s in en_signs) - set(s["sign_number"] for s in cn_signs)
     missing_en = set(s["sign_number"] for s in cn_signs) - set(s["sign_number"] for s in en_signs)
@@ -72,11 +73,11 @@ def main():
 
     print(f"\n审核 prompt 已生成：{output_file}")
     print(f"文件大小：{len(prompt)} 字符")
-    print(f"\n使用方法：")
-    print(f"1. 打开 https://aistudio.google.com/")
-    print(f"2. System instructions 填入：prompts/gemini_review_system_instructions.md 的内容")
+    print("\n使用方法：")
+    print("1. 打开 https://aistudio.google.com/")
+    print("2. System instructions 填入：prompts/gemini_review_system_instructions.md 的内容")
     print(f"3. Prompt 填入：{output_file} 的内容")
-    print(f"4. 运行 Gemini，获取审核结果")
+    print("4. 运行 Gemini，获取审核结果")
     print(f"5. 结果存为：data/content/_review_log/gemini_review_result_signs_{args.start}-{end}.md")
 
 

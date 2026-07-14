@@ -76,14 +76,16 @@ class Config:
     PZBJ_SIMP_PATH = _path_from_env("PZBJ_SIMP_PATH", "data/reference/pzbj.json")
     # 繁体彭祖百忌（由 scripts/build_hant_json.py 离线 OpenCC s2t 生成）
     PZBJ_HANT_PATH = _path_from_env("PZBJ_HANT_PATH", "data/content/pzbj_hant.json")
-    ENGLISH_SIGNS_PATH = _path_from_env(
-        "ENGLISH_SIGNS_PATH", "data/content/oracle_signs_en.json"
-    )
+    ENGLISH_SIGNS_PATH = _path_from_env("ENGLISH_SIGNS_PATH", "data/content/oracle_signs_en.json")
     HUANGLI_TERMS_EN_PATH = _path_from_env(
         "HUANGLI_TERMS_EN_PATH", "data/content/huangli_terms_en.json"
     )
     HUANGLI_SCENARIOS_EN_PATH = _path_from_env(
         "HUANGLI_SCENARIOS_EN_PATH", "data/content/huangli_scenarios_en.json"
+    )
+    # 英文八字 AI 提示词模板（Markdown 文件，启动时加载到内存）
+    BIRTH_CHART_PROMPT_PATH = _path_from_env(
+        "BIRTH_CHART_PROMPT_PATH", "prompts/birth_chart_en_prompt.md"
     )
 
 

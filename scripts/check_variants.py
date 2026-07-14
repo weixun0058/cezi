@@ -7,11 +7,13 @@
   - 异体字（csv字是简体字的繁体异体形式）→ 应保留 csv字，需加入补充映射
   - OCR错误（csv字与简体字无关的误认）→ 应使用 s2t(简体字) 修正
 """
+
 import csv
 from collections import defaultdict
+
 from opencc import OpenCC
 
-PUNCTUATION = set('，。、；：""''""''！？·…—（）()[]【】《》〈〉「」『』 \n\r\t.,;:!?\'"')
+PUNCTUATION = set('，。、；：""' '""' "！？·…—（）()[]【】《》〈〉「」『』 \n\r\t.,;:!?'\"")
 
 
 def strip_punct(text):
@@ -54,7 +56,9 @@ def main():
     print("-" * 70)
     for (tc, c), sns in sorted(mismatches.items(), key=lambda x: -len(x[1])):
         s2t_c = s2t.convert(c)
-        sns_str = ",".join(str(s) for s in sns[:8]) + (f"...(+{len(sns)-8})" if len(sns) > 8 else "")
+        sns_str = ",".join(str(s) for s in sns[:8]) + (
+            f"...(+{len(sns)-8})" if len(sns) > 8 else ""
+        )
         print(f"{tc:<6}{c:<6}{s2t_c:<8}{sns_str}  (共{len(sns)}签)")
 
 

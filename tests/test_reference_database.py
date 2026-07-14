@@ -42,6 +42,10 @@ def test_build_reference_database_contains_all_sources(tmp_path):
     with closing(sqlite3.connect(output)) as connection:
         assert connection.execute("PRAGMA quick_check").fetchone()[0] == "ok"
         assert connection.execute("SELECT COUNT(*) FROM gua").fetchone()[0] == 384
+        assert connection.execute("SELECT COUNT(*) FROM hanzi").fetchone()[0] == 18751
+        assert connection.execute(
+            "SELECT kangxi_strokes FROM hanzi WHERE character = ?", ("𱁬",)
+        ).fetchone() == (84,)
 
 
 def test_reference_database_build_is_deterministic(tmp_path):

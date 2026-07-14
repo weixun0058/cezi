@@ -70,9 +70,7 @@ def test_localize_2026_full_year_no_newly_covered_char_residual():
         for src in texts:
             converted = localize_text(src, "zh-hant")
             residual = NEWLY_COVERED_CHARS & set(converted)
-            assert not residual, (
-                f"{d}: '{src}' 转换为 '{converted}' 后仍有简体残留 {residual}"
-            )
+            assert not residual, f"{d}: '{src}' 转换为 '{converted}' 后仍有简体残留 {residual}"
         d += timedelta(days=1)
 
 

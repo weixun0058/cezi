@@ -280,6 +280,38 @@ a:hover { border-bottom-color: var(--wo-accent); }
     box-shadow: 0 0 0 3px rgba(138, 51, 36, 0.1);
 }
 
+/* 原生 date/time picker 在中文 locale 下空值显示"年/月/日"等中文占位，
+   lang="en" 无法改变。用 wrapper + 绝对定位英文占位覆盖。 */
+.en-input-wrap {
+    position: relative;
+}
+.en-input-wrap input[type="date"],
+.en-input-wrap input[type="time"] {
+    color: transparent;          /* 隐藏原生中文占位文字 */
+}
+.en-input-wrap input[type="date"]:focus,
+.en-input-wrap input[type="time"]:focus {
+    color: transparent;
+}
+/* 有值后显示用户输入的日期/时间 */
+.en-input-wrap input[type="date"].is-filled,
+.en-input-wrap input[type="time"].is-filled {
+    color: var(--wo-text);
+}
+.en-input-placeholder {
+    position: absolute;
+    top: 50%;
+    left: 0.7rem;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: var(--wo-text-soft);
+    font-size: 1rem;
+    font-family: var(--wo-font-sans);
+}
+.en-input-wrap input.is-filled + .en-input-placeholder {
+    display: none;
+}
+
 .en-fieldset {
     min-width: 0;
     padding: 0;
@@ -549,8 +581,23 @@ a:hover { border-bottom-color: var(--wo-accent); }
     margin: 1.5rem 0;
     color: var(--wo-text-soft);
     font-style: italic;
+    align-items: center;
+    gap: 0.8rem;
 }
-.en-bc-loading.is-visible { display: block; }
+.en-bc-loading.is-visible { display: flex; }
+
+.en-bc-spinner {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    border: 3px solid var(--wo-border);
+    border-top-color: var(--wo-accent);
+    border-radius: 50%;
+    animation: en-bc-spin 0.8s linear infinite;
+}
+@keyframes en-bc-spin {
+    to { transform: rotate(360deg); }
+}
 
 .en-bc-result { display: none; margin-top: 2rem; }
 .en-bc-result.is-visible { display: block; }
@@ -595,6 +642,16 @@ a:hover { border-bottom-color: var(--wo-accent); }
 }
 .en-bc-fact-label { font-size: 0.85rem; color: var(--wo-text-soft); }
 .en-bc-fact-value { font-weight: 600; color: var(--wo-ink); }
+.en-bc-balance-hint {
+    margin: -0.8rem 0 1.5rem;
+    padding: 0.6rem 0.9rem;
+    background: var(--wo-surface-alt);
+    border-left: 3px solid var(--wo-gold);
+    border-radius: 0 var(--wo-radius) var(--wo-radius) 0;
+    font-size: 0.88rem;
+    color: var(--wo-text-soft);
+    font-style: italic;
+}
 
 .en-bc-section { margin-bottom: 1.5rem; }
 .en-bc-section h3 { color: var(--wo-accent); margin-bottom: 0.5rem; }
@@ -805,6 +862,7 @@ a:hover { border-bottom-color: var(--wo-accent); }
 
 .en-almanac-controls .en-btn {
     white-space: nowrap;
+    align-self: end;
 }
 
 .en-almanac-status {
@@ -868,6 +926,14 @@ a:hover { border-bottom-color: var(--wo-accent); }
     color: var(--wo-accent);
 }
 
+/* 干支 + 节气 并排容器 */
+.en-almanac-row-ganzhi-solar {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+}
+
 /* 干支卡片 */
 .en-almanac-ganzhi,
 .en-almanac-solar-terms,
@@ -877,6 +943,12 @@ a:hover { border-bottom-color: var(--wo-accent); }
     border-radius: 14px;
     background: #f2eadc;
 }
+
+/* 并排容器内的子卡片取消自身下边距，避免双重间距 */
+.en-almanac-row-ganzhi-solar > .en-almanac-ganzhi,
+.en-almanac-row-ganzhi-solar > .en-almanac-solar-terms {
+    margin-bottom: 0;
+}
 .en-almanac-ganzhi h2,
 .en-almanac-solar-terms h2,
 .en-almanac-festivals h2 {
@@ -884,21 +956,51 @@ a:hover { border-bottom-color: var(--wo-accent); }
     font-size: 1.1rem;
     color: var(--wo-ink);
 }
+/* 干支 / 节气 dl：标头与内容上下分布，两列排列
+   布局示意（ganzhi 4 对）：
+     Year            Month
+     Yang Fire...    Yin Wood...
+     Day             Hour
+     Yang Earth...   Yang Water...
+   solar-terms 2 对同理占左上一组 + 右上一组 */
 .en-almanac-ganzhi dl,
 .en-almanac-solar-terms dl {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.35rem 1.5rem;
     margin: 0;
 }
+/* 显式定位每对 dt/dd 的网格位置 */
+.en-almanac-ganzhi dl > :nth-child(1),
+.en-almanac-solar-terms dl > :nth-child(1) { grid-column: 1; grid-row: 1; }
+.en-almanac-ganzhi dl > :nth-child(2),
+.en-almanac-solar-terms dl > :nth-child(2) { grid-column: 1; grid-row: 2; }
+.en-almanac-ganzhi dl > :nth-child(3),
+.en-almanac-solar-terms dl > :nth-child(3) { grid-column: 2; grid-row: 1; }
+.en-almanac-ganzhi dl > :nth-child(4),
+.en-almanac-solar-terms dl > :nth-child(4) { grid-column: 2; grid-row: 2; }
+.en-almanac-ganzhi dl > :nth-child(5) { grid-column: 1; grid-row: 3; }
+.en-almanac-ganzhi dl > :nth-child(6) { grid-column: 1; grid-row: 4; }
+.en-almanac-ganzhi dl > :nth-child(7) { grid-column: 2; grid-row: 3; }
+.en-almanac-ganzhi dl > :nth-child(8) { grid-column: 2; grid-row: 4; }
+
+/* 标头：小号、大写、字距，与内容形成层次 */
 .en-almanac-ganzhi dt,
 .en-almanac-solar-terms dt {
+    font-size: 0.78rem;
     font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
     color: var(--wo-text-soft);
-    font-size: 0.9rem;
-    margin-top: 0.3rem;
+    margin: 0;
 }
+/* 内容：稍大、中粗、深色，突出主信息 */
 .en-almanac-ganzhi dd,
 .en-almanac-solar-terms dd {
-    margin: 0 0 0.3rem 0;
+    font-size: 1.02rem;
+    font-weight: 500;
     color: var(--wo-ink);
+    margin: 0;
 }
 .en-almanac-festivals ul {
     margin: 0;
@@ -919,24 +1021,31 @@ a:hover { border-bottom-color: var(--wo-accent); }
 .en-week-toggle {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
-    width: 100%;
-    padding: 0.8rem 1rem;
-    background: var(--wo-surface-alt);
-    border: 1px solid var(--wo-border);
+    margin: 0 auto;
+    width: fit-content;
+    padding: 0.8rem 2.2rem;
+    background: var(--wo-accent);
+    border: 1px solid var(--wo-accent);
     border-radius: var(--wo-radius);
     font-family: var(--wo-font-serif);
-    font-size: 1.05rem;
-    color: var(--wo-ink);
+    font-size: 1.1rem;
+    color: #fff;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: background 0.2s, transform 0.15s;
+    box-shadow: var(--wo-shadow);
 }
 .en-week-toggle:hover {
-    background: var(--wo-surface);
+    background: var(--wo-accent-soft);
+    transform: translateY(-1px);
+}
+.en-week-section {
+    text-align: center;
+    margin-top: 2rem;
 }
 .en-week-title {
-    flex: 1;
-    text-align: left;
+    text-align: center;
 }
 .en-week-indicator {
     transition: transform 0.2s;
@@ -975,7 +1084,7 @@ a:hover { border-bottom-color: var(--wo-accent); }
 }
 .en-week-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    grid-template-columns: repeat(5, 1fr);
     gap: 0.8rem;
 }
 .en-week-card {
@@ -1025,9 +1134,35 @@ a:hover { border-bottom-color: var(--wo-accent); }
     font-size: 0.78rem;
 }
 .en-week-scenario-status {
-    margin-top: 0.3rem;
-    font-size: 0.78rem;
+    display: inline-block;
+    margin-top: 0.4rem;
+    padding: 0.15rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
     font-weight: 600;
+}
+.en-week-scenario-status.is-favored {
+    background: #e8f5e9;
+    color: #2d7a3e;
+    border: 1px solid #c8e6c9;
+}
+.en-week-scenario-status.is-avoided {
+    background: #fbe9e7;
+    color: #b04040;
+    border: 1px solid #ffccbc;
+}
+.en-week-scenario-status.is-neutral {
+    background: #f5f5f5;
+    color: #666;
+    border: 1px solid #e0e0e0;
+}
+.en-week-focus {
+    text-align: center;
+    font-family: var(--wo-font-serif);
+    font-size: 1rem;
+    color: var(--wo-accent);
+    margin: 0 0 0.8rem;
+    font-style: italic;
 }
 .en-week-loading,
 .en-week-error {
@@ -1042,6 +1177,19 @@ a:hover { border-bottom-color: var(--wo-accent); }
 
 .en-scenario-card h2 {
     margin: 0.25rem 0;
+}
+.en-scenario-today {
+    margin: 0.3rem 0;
+    color: var(--wo-text);
+}
+.en-scenario-next {
+    margin: 0.3rem 0 0;
+    padding: 0.5rem 0.8rem;
+    background: #e8f5e9;
+    border-left: 3px solid #2d7a3e;
+    border-radius: 0 var(--wo-radius) var(--wo-radius) 0;
+    color: #1b5e20;
+    font-weight: 500;
 }
 
 .en-almanac-grid {
@@ -1101,10 +1249,41 @@ a:hover { border-bottom-color: var(--wo-accent); }
     color: #50483e;
 }
 
+/* Traditional Spirits 贯穿整行，内部吉/凶两组横向排列 */
+.en-almanac-card-fullspan {
+    grid-column: 1 / -1;
+}
+.en-almanac-card-fullspan [data-list="spirits"] {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem 2rem;
+}
+.en-spirit-group h3 {
+    margin: 0 0 0.4rem;
+    font-size: 1rem;
+}
+
 @media (max-width: 760px) {
     .en-almanac-controls,
     .en-almanac-summary,
-    .en-almanac-grid {
+    .en-almanac-grid,
+    .en-almanac-row-ganzhi-solar {
         grid-template-columns: 1fr;
+    }
+    .en-week-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .en-almanac-card-fullspan [data-list="spirits"] {
+        grid-template-columns: 1fr;
+    }
+    /* 窄屏下干支/节气 dl 回退为单列，标头与内容依次纵向排列 */
+    .en-almanac-ganzhi dl,
+    .en-almanac-solar-terms dl {
+        grid-template-columns: 1fr;
+    }
+    .en-almanac-ganzhi dl > *,
+    .en-almanac-solar-terms dl > * {
+        grid-column: 1 !important;
+        grid-row: auto !important;
     }
 }

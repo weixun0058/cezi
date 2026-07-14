@@ -67,9 +67,7 @@ from ..error_codes import ErrorCode, failure_with_code
 from ..lunming import ModelConfigurationError
 
 LOGGER = logging.getLogger(__name__)
-birth_chart_en_api_bp = Blueprint(
-    "birth_chart_en_api", __name__, url_prefix="/api/en/birth-chart"
-)
+birth_chart_en_api_bp = Blueprint("birth_chart_en_api", __name__, url_prefix="/api/en/birth-chart")
 
 LANG = "en"
 
@@ -92,9 +90,7 @@ def _payload_from_request() -> dict:
     birth_time = payload.get("birth_time")
     if birth_time is not None and not isinstance(birth_time, str):
         raise BaziInputError("Birth time must be a string or null")
-    if "birth_time_unknown" in payload and not isinstance(
-        payload.get("birth_time_unknown"), bool
-    ):
+    if "birth_time_unknown" in payload and not isinstance(payload.get("birth_time_unknown"), bool):
         raise BaziInputError("birth_time_unknown must be a boolean")
     return payload
 
@@ -107,9 +103,7 @@ def _sse(payload: dict) -> str:
 def _acquire_usage():
     """获取 AI 用量配额。返回 (policy, grant, signed_client_id)。"""
     policy = current_app.extensions["ai_usage"]
-    client_id, signed_client_id = policy.resolve_client(
-        request.cookies.get(DEVICE_COOKIE)
-    )
+    client_id, signed_client_id = policy.resolve_client(request.cookies.get(DEVICE_COOKIE))
     grant = policy.acquire(client_id, request.remote_addr or "unknown")
     return policy, grant, signed_client_id
 
@@ -159,11 +153,7 @@ def analyze():
     except Exception:
         LOGGER.exception("English birth chart analysis failed")
         response = make_response(failure_with_code(ErrorCode.ANALYSIS_FAILED, LANG))
-        return (
-            _set_device_cookie(response, signed_client_id)
-            if signed_client_id
-            else response
-        )
+        return _set_device_cookie(response, signed_client_id) if signed_client_id else response
     finally:
         if policy and grant:
             policy.release(grant.lease_id)

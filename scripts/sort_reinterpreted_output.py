@@ -29,7 +29,9 @@ def sort_json():
         encoding="utf-8",
     )
 
-    moved = sum(1 for i, (a, b) in enumerate(zip(before_order, after_order)) if a != b)
+    moved = sum(
+        1 for i, (a, b) in enumerate(zip(before_order, after_order, strict=False)) if a != b
+    )
     print(f"[JSON] 总签数: {len(data)}, 排序后位置变动: {moved}")
     print(f"[JSON] 首签: 第{after_order[0]}签, 末签: 第{after_order[-1]}签")
     return len(data)
@@ -45,11 +47,13 @@ def sort_md():
         print("[MD] 未找到任何签文章节")
         return 0
 
-    header = content[:first_sign_match.start()]
+    header = content[: first_sign_match.start()]
 
     # 按签号章节切分（每个章节从 "## 第N签" 开始到下一个 "## 第" 或文件末尾）
     # 用 split 保留分隔符
-    sections = re.split(r"(?=^##\s*第\s*\d+\s*签)", content[first_sign_match.start():], flags=re.MULTILINE)
+    sections = re.split(
+        r"(?=^##\s*第\s*\d+\s*签)", content[first_sign_match.start() :], flags=re.MULTILINE
+    )
     sections = [s for s in sections if s.strip()]
 
     # 提取签号并按签号排序
@@ -64,7 +68,9 @@ def sort_md():
     MD_FILE.write_text(new_content, encoding="utf-8")
 
     sign_numbers = [get_sign_number(s) for s in sections]
-    print(f"[MD] 总章节: {len(sections)}, 首签: 第{sign_numbers[0]}签, 末签: 第{sign_numbers[-1]}签")
+    print(
+        f"[MD] 总章节: {len(sections)}, 首签: 第{sign_numbers[0]}签, 末签: 第{sign_numbers[-1]}签"
+    )
 
     # 验证连续性
     expected = list(range(1, len(sections) + 1))

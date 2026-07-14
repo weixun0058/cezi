@@ -6,6 +6,7 @@ from flask import Blueprint, Response, current_app, make_response, request, stre
 from ..ai_usage import DEVICE_COOKIE, UsageLimitError
 from ..api_utils import failure, success
 from ..bazi_service import BaziInputError
+from ..i18n_utils import get_current_lang
 from ..lunming import ModelConfigurationError
 
 LOGGER = logging.getLogger(__name__)
@@ -69,9 +70,10 @@ def analyze_bazi():
     try:
         payload = _payload_from_request()
         service = current_app.extensions["lunming"]
+        lang = get_current_lang()
         service.build_chart(payload)
         policy, grant, signed_client_id = _acquire_usage()
-        result = service.analyze_bazi(payload)
+        result = service.analyze_bazi(payload, lang=lang)
         return _set_device_cookie(make_response(success(result)), signed_client_id)
     except BaziInputError as exc:
         return failure("INVALID_BIRTH_DATA", str(exc))
@@ -95,6 +97,7 @@ def stream_bazi_analysis():
     try:
         payload = _payload_from_request()
         service = current_app.extensions["lunming"]
+        lang = get_current_lang()
         service.build_chart(payload)
         policy, grant, signed_client_id = _acquire_usage()
     except BaziInputError as exc:
@@ -105,7 +108,7 @@ def stream_bazi_analysis():
     @stream_with_context
     def generate():
         try:
-            for event in service.analyze_bazi_stream(payload):
+            for event in service.analyze_bazi_stream(payload, lang=lang):
                 yield _sse(event)
             yield _sse({"type": "done", "done": True})
         except ModelConfigurationError as exc:

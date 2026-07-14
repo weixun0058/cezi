@@ -27,12 +27,11 @@ import argparse
 import json
 import logging
 import os
-import sys
 import time
 from datetime import datetime
 from pathlib import Path
+from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
-from urllib.error import URLError, HTTPError
 
 # 日志配置
 logging.basicConfig(
@@ -111,13 +110,18 @@ def fetch_signs(start: int, limit: int):
 
     data = json.loads(REINTERPRETED_JSON.read_text(encoding="utf-8"))
     signs = [s for s in data if s["sign_number"] >= start][:limit]
-    LOGGER.info("从 reinterpreted.json 提取 %d 条签文（签号 %d-%d）",
-                len(signs), start, start + len(signs) - 1 if signs else start)
+    LOGGER.info(
+        "从 reinterpreted.json 提取 %d 条签文（签号 %d-%d）",
+        len(signs),
+        start,
+        start + len(signs) - 1 if signs else start,
+    )
     return signs
 
 
-def call_deepseek(api_key: str, system_prompt: str, user_message: str,
-                  max_retries: int = 3, timeout: int = 180):
+def call_deepseek(
+    api_key: str, system_prompt: str, user_message: str, max_retries: int = 3, timeout: int = 180
+):
     """调用 DeepSeek API 完成翻译。
 
     Args:
@@ -199,7 +203,7 @@ def parse_translation_response(content: str, expected_count: int):
         if start >= 0 and end > start:
             data = json.loads(content[start:end])
         else:
-            raise ValueError(f"无法解析返回内容为 JSON：{content[:200]}...")
+            raise ValueError(f"无法解析返回内容为 JSON：{content[:200]}...") from None
 
     # 兼容两种返回格式：直接数组 或 {"signs": [...]} 或 {"data": [...]}
     if isinstance(data, dict):
@@ -283,9 +287,13 @@ def write_output(translations, source_signs):
         encoding="utf-8",
     )
     LOGGER.info("翻译结果已写入：%s", OUTPUT_FILE)
-    LOGGER.info("合并统计：原有 %d 条，新增 %d 条，替换 %d 条，总计 %d 条",
-                before_count, len(translations) - len(replaced),
-                len(replaced), after_count)
+    LOGGER.info(
+        "合并统计：原有 %d 条，新增 %d 条，替换 %d 条，总计 %d 条",
+        before_count,
+        len(translations) - len(replaced),
+        len(replaced),
+        after_count,
+    )
     if replaced:
         LOGGER.info("被替换的签号：%s", replaced)
 
@@ -405,13 +413,16 @@ def build_translate_message(batch_signs):
 
 def main():
     parser = argparse.ArgumentParser(description="Wise Oracle 英文签文翻译（DeepSeek 初译）")
-    parser.add_argument("--start", type=int, default=None,
-                        help="起始签号（默认：自动从上次完成位置+1 继续）")
+    parser.add_argument(
+        "--start", type=int, default=None, help="起始签号（默认：自动从上次完成位置+1 继续）"
+    )
     parser.add_argument("--limit", type=int, default=24, help="翻译条数（默认 24）")
-    parser.add_argument("--batch-size", type=int, default=4,
-                        help="每批翻译条数（默认 4，避免 API 响应截断）")
-    parser.add_argument("--retry-failed", action="store_true",
-                        help="重试之前失败的签文（从运行日志中识别）")
+    parser.add_argument(
+        "--batch-size", type=int, default=4, help="每批翻译条数（默认 4，避免 API 响应截断）"
+    )
+    parser.add_argument(
+        "--retry-failed", action="store_true", help="重试之前失败的签文（从运行日志中识别）"
+    )
     args = parser.parse_args()
 
     # 重试失败模式：从日志中识别失败签号，重新分批翻译
@@ -447,8 +458,13 @@ def main():
             batch_num = batch_idx + 1
             sn_range = f"{batch_signs[0]['sign_number']}-{batch_signs[-1]['sign_number']}"
 
-            LOGGER.info("--- 重试批次 %d/%d（签号 %s，%d 条）---",
-                        batch_num, total_batches, sn_range, len(batch_signs))
+            LOGGER.info(
+                "--- 重试批次 %d/%d（签号 %s，%d 条）---",
+                batch_num,
+                total_batches,
+                sn_range,
+                len(batch_signs),
+            )
 
             user_message = build_translate_message(batch_signs)
 
@@ -462,8 +478,12 @@ def main():
                 for s in batch_signs:
                     append_run_log(s["sign_number"], "success")
                 elapsed = time.time() - batch_start_time
-                LOGGER.info("重试批次 %d 完成（%d 条，耗时 %.1f 秒）",
-                            batch_num, len(batch_translations), elapsed)
+                LOGGER.info(
+                    "重试批次 %d 完成（%d 条，耗时 %.1f 秒）",
+                    batch_num,
+                    len(batch_translations),
+                    elapsed,
+                )
             except Exception as e:
                 LOGGER.error("重试批次 %d 失败：%s", batch_num, e)
                 for s in batch_signs:
@@ -481,9 +501,11 @@ def main():
         LOGGER.info("=== 重试流程结束 ===")
         LOGGER.info("输出文件：%s", OUTPUT_FILE)
         LOGGER.info("日志文件：%s", TRANSLATE_LOG)
-        LOGGER.info("成功 %d 条，仍失败 %d 条",
-                    len(all_translations),
-                    len(failed_numbers) - len(all_translations))
+        LOGGER.info(
+            "成功 %d 条，仍失败 %d 条",
+            len(all_translations),
+            len(failed_numbers) - len(all_translations),
+        )
         if len(all_translations) < len(failed_numbers):
             LOGGER.warning("仍有失败签号，可再次运行 --retry-failed")
         return
@@ -493,15 +515,19 @@ def main():
         existing = load_existing_translations()
         if existing:
             args.start = max(t["sign_number"] for t in existing) + 1
-            LOGGER.info("自动续跑：从已有翻译最大签号 %d 之后开始（起始签号 %d）",
-                        args.start - 1, args.start)
+            LOGGER.info(
+                "自动续跑：从已有翻译最大签号 %d 之后开始（起始签号 %d）",
+                args.start - 1,
+                args.start,
+            )
         else:
             args.start = 1
             LOGGER.info("无已有翻译，从第 1 签开始")
 
     LOGGER.info("=== Wise Oracle 英文签文翻译启动 ===")
-    LOGGER.info("签号范围：%d-%d，每批 %d 条",
-                args.start, args.start + args.limit - 1, args.batch_size)
+    LOGGER.info(
+        "签号范围：%d-%d，每批 %d 条", args.start, args.start + args.limit - 1, args.batch_size
+    )
 
     # 1. 加载 API key
     api_key = load_api_key()
@@ -531,8 +557,13 @@ def main():
         batch_num = batch_idx + 1
         sn_range = f"{batch_signs[0]['sign_number']}-{batch_signs[-1]['sign_number']}"
 
-        LOGGER.info("--- 批次 %d/%d（签号 %s，%d 条）---",
-                    batch_num, total_batches, sn_range, len(batch_signs))
+        LOGGER.info(
+            "--- 批次 %d/%d（签号 %s，%d 条）---",
+            batch_num,
+            total_batches,
+            sn_range,
+            len(batch_signs),
+        )
 
         # 构建用户消息
         user_message = build_translate_message(batch_signs)
@@ -547,8 +578,9 @@ def main():
             for s in batch_signs:
                 append_run_log(s["sign_number"], "success")
             elapsed = time.time() - batch_start_time
-            LOGGER.info("批次 %d 完成（%d 条，耗时 %.1f 秒）",
-                        batch_num, len(batch_translations), elapsed)
+            LOGGER.info(
+                "批次 %d 完成（%d 条，耗时 %.1f 秒）", batch_num, len(batch_translations), elapsed
+            )
         except Exception as e:
             LOGGER.error("批次 %d 失败：%s", batch_num, e)
             failed_batches.append((batch_num, sn_range, str(e)))
@@ -563,9 +595,11 @@ def main():
     elapsed_total = time.time() - start_time
     LOGGER.info("全部批次完成，总耗时 %.1f 秒", elapsed_total)
     if failed_batches:
-        LOGGER.warning("失败批次 %d 个：%s",
-                       len(failed_batches),
-                       ", ".join(f"批次{b[0]}({b[1]})" for b in failed_batches))
+        LOGGER.warning(
+            "失败批次 %d 个：%s",
+            len(failed_batches),
+            ", ".join(f"批次{b[0]}({b[1]})" for b in failed_batches),
+        )
 
     # 5. 写入输出
     if all_translations:
@@ -574,8 +608,7 @@ def main():
     LOGGER.info("=== 翻译流程结束 ===")
     LOGGER.info("输出文件：%s", OUTPUT_FILE)
     LOGGER.info("日志文件：%s", TRANSLATE_LOG)
-    LOGGER.info("成功 %d 条，失败 %d 条",
-                len(all_translations), args.limit - len(all_translations))
+    LOGGER.info("成功 %d 条，失败 %d 条", len(all_translations), args.limit - len(all_translations))
     LOGGER.info("下一步：用网页版 Gemini 审核 %s 的内容", OUTPUT_FILE)
 
 

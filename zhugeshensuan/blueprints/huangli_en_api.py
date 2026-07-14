@@ -45,6 +45,16 @@ def daily_almanac():
     data = current_app.extensions["huangli_en"].translate_daily(
         dict(record), scenario=scenario, debug=_debug_enabled()
     )
+
+    # 择日：选了场景时，额外查找下一个适合该场景的日子
+    if scenario:
+        from ..huangli_english import find_next_favored_date
+
+        huangli = current_app.extensions["huangli"]
+        scenario_map = current_app.extensions["huangli_en"]._scenario_map
+        next_favored = find_next_favored_date(huangli, date_text, scenario, scenario_map)
+        data["next_favored_date"] = next_favored
+
     return success(data)
 
 
@@ -54,7 +64,7 @@ def week_almanac():
     if scenario is None:
         return failure_with_code(ErrorCode.INVALID_SCENARIO, LANG)
 
-    records = current_app.extensions["huangli"].get_week_huangli()
+    records = current_app.extensions["huangli"].get_week_huangli(days=10)
     data = current_app.extensions["huangli_en"].translate_week(
         [dict(record) for record in records],
         scenario=scenario,

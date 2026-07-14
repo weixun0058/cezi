@@ -3,6 +3,7 @@
 `lunar_python` 只提供简体中文词库。本模块在项目内维护运行期可控的本地化层，
 避免修改 site-packages，也避免把 OpenCC 放回网站请求路径。
 """
+
 from __future__ import annotations
 
 from copy import deepcopy
@@ -307,7 +308,9 @@ def localize_text(value: str, lang: str | None = None) -> str:
         return value
 
     text = value
-    for source, target in sorted(PHRASE_REPLACEMENTS.items(), key=lambda item: len(item[0]), reverse=True):
+    for source, target in sorted(
+        PHRASE_REPLACEMENTS.items(), key=lambda item: len(item[0]), reverse=True
+    ):
         text = text.replace(source, target)
     return text.translate(CHAR_REPLACEMENTS)
 

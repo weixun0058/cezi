@@ -2,25 +2,32 @@
 
 URL 结构（D2 已确认：/ 作为英文首页，由 pages_en.py 处理）：
   /                         → 英文首页（由 pages_en_bp 处理，不在本蓝图）
-  /huangli                  → 301 → /zh-hans/almanac
-  /suanshi                  → 301 → /zh-hans/divination
-  /lunming                  → 301 → /zh-hans/bazi
+  /huangli                  → 301 → /zh-hant/almanac
+  /suanshi                  → 301 → /zh-hant/divination
+  /lunming                  → 301 → /zh-hant/bazi
   /<lang>/almanac           → 黄历页面
   /<lang>/divination        → 算事页面
   /<lang>/bazi              → 论命页面
 
 其中 <lang> ∈ {zh-hans, zh-hant}。
 """
+
 from flask import Blueprint, abort, g, redirect, render_template, request
 
-from ..i18n_utils import DEFAULT_LANG, LANGS, PAGE_TEMPLATES, PAGE_URL_NAMES, html_lang_for
+from ..i18n_utils import (
+    DEFAULT_CHINESE_UI_LANG,
+    LANGS,
+    PAGE_TEMPLATES,
+    PAGE_URL_NAMES,
+    html_lang_for,
+)
 
 pages_bp = Blueprint("pages", __name__)
 
 
 def _redirect_to_default(page: str = "almanac"):
-    """301 重定向到默认语言的对应页面"""
-    return redirect(f"/{DEFAULT_LANG}/{page}", code=301)
+    """301 重定向到公开中文入口（繁体）的对应页面。"""
+    return redirect(f"/{DEFAULT_CHINESE_UI_LANG}/{page}", code=301)
 
 
 @pages_bp.get("/<lang>")

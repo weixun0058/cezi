@@ -9,6 +9,7 @@ from werkzeug.middleware.proxy_fix import ProxyFix
 
 from .ai_usage import AIUsagePolicy
 from .api_utils import failure, success
+from .birth_chart_english import BirthChartEnglish
 from .blueprints import ALL_BLUEPRINTS
 from .config import Config, validate_config
 from .database import Database
@@ -21,7 +22,6 @@ from .huangli_english import (
 from .i18n_utils import DEFAULT_LANG, LANGS
 from .logging_config import configure_logging
 from .lunming import LunMing
-from .birth_chart_english import BirthChartEnglish
 from .oracle_english import load_english_signs_safe
 
 LOGGER = logging.getLogger(__name__)
@@ -114,23 +114,18 @@ def create_app(test_config=None):
     )
     # 英文签文内存字典（D15：JSON 内存加载，不入数据库）
     # 用户用其他 Agent 更新 JSON 文件后，重启服务器即生效（无缝切换）
-    app.extensions["english_signs"] = load_english_signs_safe(
-        app.config["ENGLISH_SIGNS_PATH"]
-    )
+    app.extensions["english_signs"] = load_english_signs_safe(app.config["ENGLISH_SIGNS_PATH"])
     huangli_terms_en = load_huangli_terms_safe(app.config["HUANGLI_TERMS_EN_PATH"])
-    huangli_scenarios_en = load_huangli_scenarios_safe(
-        app.config["HUANGLI_SCENARIOS_EN_PATH"]
-    )
+    huangli_scenarios_en = load_huangli_scenarios_safe(app.config["HUANGLI_SCENARIOS_EN_PATH"])
     app.extensions["huangli_terms_en"] = huangli_terms_en
     app.extensions["huangli_scenarios_en"] = huangli_scenarios_en
-    app.extensions["huangli_en"] = HuangLiEnglish(
-        huangli_terms_en, huangli_scenarios_en
-    )
+    app.extensions["huangli_en"] = HuangLiEnglish(huangli_terms_en, huangli_scenarios_en)
     # 英文 Birth Chart Reading 服务（W6）
     # 复用 lunming 实例的 OpenAI client（配置统一，避免重复创建）
     app.extensions["birth_chart_en"] = BirthChartEnglish(
         app.extensions["lunming"],
         default_timezone=app.config["DEFAULT_TIMEZONE"],
+        prompt_path=app.config["BIRTH_CHART_PROMPT_PATH"],
     )
 
     for blueprint in ALL_BLUEPRINTS:

@@ -4,7 +4,7 @@ import logging
 from openai import OpenAI
 
 from .bazi_service import calculate_bazi
-from .i18n_utils import get_current_lang, get_disclaimer, get_report_section_titles
+from .i18n_utils import DEFAULT_LANG, get_disclaimer, get_report_section_titles
 
 LOGGER = logging.getLogger(__name__)
 
@@ -45,10 +45,8 @@ class LunMing:
         chart = calculate_bazi(payload, self.default_timezone)
         return chart
 
-    def generate_prompt(self, payload, chart):
+    def generate_prompt(self, payload, chart, *, lang=DEFAULT_LANG):
         time_note = "时辰未知，不得推断时柱相关内容。" if chart["time_unknown"] else ""
-        # 根据当前请求语言决定输出语言
-        lang = get_current_lang()
         if lang == "zh-hant":
             output_lang_note = "请使用繁体中文输出所有内容。"
         else:
@@ -105,7 +103,7 @@ class LunMing:
     def _text(value, fallback=""):
         return value.strip() if isinstance(value, str) and value.strip() else fallback
 
-    def _parse_report(self, raw_response):
+    def _parse_report(self, raw_response, *, lang=DEFAULT_LANG):
         text = raw_response.strip()
         if text.startswith("```"):
             text = text.removeprefix("```json").removeprefix("```")
@@ -119,7 +117,7 @@ class LunMing:
 
         keywords = [self._text(item) for item in payload.get("keywords", [])]
         keywords = [item for item in keywords if item][:4]
-        section_titles = get_report_section_titles()
+        section_titles = get_report_section_titles(lang)
         source_sections = {
             item.get("id"): item
             for item in payload.get("sections", [])
@@ -166,15 +164,15 @@ class LunMing:
             "closing": self._text(payload.get("closing")),
         }
 
-    def _generate_report(self, prompt):
-        return self._parse_report("".join(self._completion_stream(prompt)))
+    def _generate_report(self, prompt, *, lang=DEFAULT_LANG):
+        return self._parse_report("".join(self._completion_stream(prompt)), lang=lang)
 
-    def analyze_bazi_stream(self, payload):
+    def analyze_bazi_stream(self, payload, *, lang=DEFAULT_LANG):
         chart = self.build_chart(payload)
-        prompt = self.generate_prompt(payload, chart)
+        prompt = self.generate_prompt(payload, chart, lang=lang)
         LOGGER.info("Starting bazi interpretation with model %s", self.model)
-        yield {"type": "chart", "chart": chart, "disclaimer": get_disclaimer()}
-        report = self._generate_report(prompt)
+        yield {"type": "chart", "chart": chart, "disclaimer": get_disclaimer(lang)}
+        report = self._generate_report(prompt, lang=lang)
         yield {
             "type": "report_start",
             "summary": report["summary"],
@@ -188,8 +186,8 @@ class LunMing:
             "closing": report["closing"],
         }
 
-    def analyze_bazi(self, payload):
+    def analyze_bazi(self, payload, *, lang=DEFAULT_LANG):
         chart = self.build_chart(payload)
-        prompt = self.generate_prompt(payload, chart)
-        report = self._generate_report(prompt)
-        return {"chart": chart, "report": report, "disclaimer": get_disclaimer()}
+        prompt = self.generate_prompt(payload, chart, lang=lang)
+        report = self._generate_report(prompt, lang=lang)
+        return {"chart": chart, "report": report, "disclaimer": get_disclaimer(lang)}

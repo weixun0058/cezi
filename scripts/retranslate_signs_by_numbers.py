@@ -20,7 +20,8 @@
       （每批 1 条，最安全但最慢；每签含 9 字段，内容较长）
 
 特性：
-  - 复用 translate_oracle_signs.py 的所有核心函数（fetch_signs_by_numbers/call_deepseek/merge_translations/write_output）
+  - 复用 translate_oracle_signs.py 的核心函数
+    （fetch_signs_by_numbers/call_deepseek/merge_translations/write_output）
   - 按 sign_number 去重合并，新翻译覆盖同号旧翻译，其他签号保留
   - 分批翻译避免 API 响应截断
   - 记录每签成功/失败日志（与 --retry-failed 机制兼容）
@@ -40,14 +41,14 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from translate_oracle_signs import (
     LOGGER,
-    load_api_key,
-    load_system_prompt,
-    fetch_signs_by_numbers,
-    call_deepseek,
-    parse_translation_response,
-    write_output,
     append_run_log,
     build_translate_message,
+    call_deepseek,
+    fetch_signs_by_numbers,
+    load_api_key,
+    load_system_prompt,
+    parse_translation_response,
+    write_output,
 )
 
 # 默认重译签号：因中文权威文本修正导致意义反转的 5 签
@@ -60,16 +61,23 @@ def main():
         description="按签号列表重译英文签文（定向重译，合并覆盖到 oracle_signs_en.json）"
     )
     parser.add_argument(
-        "signs", nargs="*", type=int, default=DEFAULT_SIGNS,
-        help="要重译的签号列表（空格分隔，默认：96 142 146 260 332）"
+        "signs",
+        nargs="*",
+        type=int,
+        default=DEFAULT_SIGNS,
+        help="要重译的签号列表（空格分隔，默认：96 142 146 260 332）",
     )
     parser.add_argument(
-        "--signs-csv", type=str, default=None,
-        help="以逗号分隔的签号列表（替代位置参数，如 --signs-csv 96,142,146,260,332）"
+        "--signs-csv",
+        type=str,
+        default=None,
+        help="以逗号分隔的签号列表（替代位置参数，如 --signs-csv 96,142,146,260,332）",
     )
     parser.add_argument(
-        "--batch-size", type=int, default=2,
-        help="每批翻译条数（默认 2，避免 API 响应截断；每签含 9 字段，内容较长）"
+        "--batch-size",
+        type=int,
+        default=2,
+        help="每批翻译条数（默认 2，避免 API 响应截断；每签含 9 字段，内容较长）",
     )
     args = parser.parse_args()
 
@@ -118,13 +126,14 @@ def main():
         batch_end = min(batch_start + args.batch_size, len(signs))
         batch_signs = signs[batch_start:batch_end]
         batch_num = batch_idx + 1
-        sn_range = "{}-{}".format(
-            batch_signs[0]["sign_number"], batch_signs[-1]["sign_number"]
-        )
+        sn_range = "{}-{}".format(batch_signs[0]["sign_number"], batch_signs[-1]["sign_number"])
 
         LOGGER.info(
             "--- 批次 %d/%d（签号 %s，%d 条）---",
-            batch_num, total_batches, sn_range, len(batch_signs)
+            batch_num,
+            total_batches,
+            sn_range,
+            len(batch_signs),
         )
 
         user_message = build_translate_message(batch_signs)
@@ -139,8 +148,7 @@ def main():
                 append_run_log(s["sign_number"], "success")
             elapsed = time.time() - batch_start_time
             LOGGER.info(
-                "批次 %d 完成（%d 条，耗时 %.1f 秒）",
-                batch_num, len(batch_translations), elapsed
+                "批次 %d 完成（%d 条，耗时 %.1f 秒）", batch_num, len(batch_translations), elapsed
             )
         except Exception as e:
             LOGGER.error("批次 %d 失败：%s", batch_num, e)

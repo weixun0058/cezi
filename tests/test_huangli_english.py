@@ -110,6 +110,7 @@ def test_daily_api_contract_and_no_chinese_leak(client):
     data = payload["data"]
     assert data["date"] == "2026-07-01"
     assert data["scenario_assessment"]["scenario"] == "wedding"
+    assert set(data["next_favored_date"]) == {"date", "days_ahead"}
     assert not _contains_cjk(data)
     assert "fortune" not in data
     assert "gua_type" not in data
@@ -138,7 +139,10 @@ def test_week_api_contract(client):
 
     assert response.status_code == 200
     data = response.get_json()["data"]
-    assert len(data) == 9
+    assert len(data) == 10
+    dates = [record["date"] for record in data]
+    assert dates == sorted(dates)
+    assert len(set(dates)) == 10
     assert all(not _contains_cjk(record) for record in data)
 
 

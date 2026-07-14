@@ -4,7 +4,8 @@
 本模块只放纯函数，无 Flask 依赖，便于独立测试。
 
 函数分组：
-- 源书方法（中文版也用）：``stroke_digit`` / ``compose_three_character_number`` / ``reduce_to_start_index``
+- 源书方法（中文版也用）：``stroke_digit`` / ``compose_three_character_number`` /
+  ``reduce_to_start_index``
 - 英文三数字专用：``compose_english_three_number_seed`` / ``english_three_numbers_to_start_index``
 - 英文三词专用：``word_to_stroke_digit`` / ``three_words_to_start_index``
 
@@ -21,7 +22,7 @@
 
 from __future__ import annotations
 
-from typing import Iterable, Sequence
+from collections.abc import Iterable, Sequence
 
 STEP = 384
 

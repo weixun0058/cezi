@@ -7,6 +7,7 @@ gua_hant.sign_text，使数据库繁体与权威文本一致。
 build_reference_db.py 用 OpenCC s2t 自动生成 gua_hant（会标准化异体字），
 故重建数据库后必须运行本脚本恢复异体字。
 """
+
 import csv
 import sqlite3
 from pathlib import Path
@@ -66,7 +67,7 @@ def main():
 
     print(f"\n差异签数: {len(diffs)}")
     if diffs:
-        print(f"\n=== 差异详情（前20签）===")
+        print("\n=== 差异详情（前20签）===")
         for sn, db_text, csv_text in diffs[:20]:
             print(f"\n第 {sn} 签:")
             print(f"  DB(旧): {db_text}")

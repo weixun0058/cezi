@@ -46,21 +46,24 @@ document.addEventListener('DOMContentLoaded', () => {
             ['Inauspicious', data.inauspicious_spirits || []],
         ];
         groups.forEach(([title, spirits]) => {
+            const group = document.createElement('div');
+            group.className = 'en-spirit-group';
             const heading = document.createElement('h3');
             heading.textContent = title;
-            container.appendChild(heading);
+            group.appendChild(heading);
             if (!spirits.length) {
                 const empty = document.createElement('p');
                 empty.textContent = 'No reviewed spirit is listed.';
-                container.appendChild(empty);
-                return;
+                group.appendChild(empty);
+            } else {
+                spirits.forEach((spirit) => {
+                    const item = document.createElement('p');
+                    item.className = 'en-spirit';
+                    item.textContent = `${spirit.name} (${spirit.pinyin}) — ${spirit.explanation}`;
+                    group.appendChild(item);
+                });
             }
-            spirits.forEach((spirit) => {
-                const item = document.createElement('p');
-                item.className = 'en-spirit';
-                item.textContent = `${spirit.name} (${spirit.pinyin}) — ${spirit.explanation}`;
-                container.appendChild(item);
-            });
+            container.appendChild(group);
         });
     };
 
@@ -188,7 +191,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         renderList('favorable', data.favorable_activities);
         renderList('unfavorable', data.unfavorable_activities);
-        renderList('mixed', data.mixed_activities);
         renderSpirits(data);
 
         const directions = app.querySelector('[data-list="directions"]');
@@ -216,9 +218,30 @@ document.addEventListener('DOMContentLoaded', () => {
         );
 
         const scenarioCard = app.querySelector('[data-scenario-card]');
+        const scenarioTodayEl = app.querySelector('[data-field="scenario-today"]');
+        const scenarioNextEl = app.querySelector('[data-field="scenario-next"]');
         if (data.scenario_assessment) {
-            setText('scenario-label', data.scenario_assessment.label);
-            setText('scenario-status', data.scenario_assessment.status_label);
+            const sa = data.scenario_assessment;
+            setText('scenario-label', sa.label);
+            // 今日评估
+            const todayText = sa.status_code === 'favored'
+                ? `Today is traditionally favored for ${sa.label.toLowerCase()}.`
+                : sa.status_code === 'avoided'
+                    ? `Today is traditionally avoided for ${sa.label.toLowerCase()}.`
+                    : `Today has no specific indication for ${sa.label.toLowerCase()}.`;
+            scenarioTodayEl.textContent = todayText;
+            // 下一个适合的日子
+            const nf = data.next_favored_date;
+            if (nf) {
+                const daysWord = nf.days_ahead === 0 ? 'today'
+                    : nf.days_ahead === 1 ? 'tomorrow'
+                        : `in ${nf.days_ahead} days`;
+                scenarioNextEl.textContent =
+                    `Next favored day for ${sa.label.toLowerCase()}: ${nf.date} (${daysWord}).`;
+                scenarioNextEl.hidden = false;
+            } else {
+                scenarioNextEl.hidden = true;
+            }
             scenarioCard.hidden = false;
         } else {
             scenarioCard.hidden = true;
@@ -285,11 +308,15 @@ document.addEventListener('DOMContentLoaded', () => {
         weekGrid.replaceChildren();
         const loading = document.createElement('p');
         loading.className = 'en-week-loading';
-        loading.textContent = 'Loading the nine-day almanac…';
+        loading.textContent = 'Loading the ten-day almanac…';
         weekGrid.appendChild(loading);
 
         const activeBtn = weekScenarios.querySelector('.is-active');
         const scenario = activeBtn ? activeBtn.dataset.scenario : '';
+        const focusEl = app.querySelector('[data-week-focus]');
+        if (focusEl && activeBtn) {
+            focusEl.textContent = `Current focus: ${activeBtn.textContent}`;
+        }
         const params = new URLSearchParams();
         if (scenario) params.set('scenario', scenario);
 
@@ -299,7 +326,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             const payload = await response.json();
             if (!response.ok || !payload.success) {
-                throw new Error(payload.error?.message || 'The nine-day almanac could not be loaded.');
+                throw new Error(payload.error?.message || 'The ten-day almanac could not be loaded.');
             }
             renderWeekGrid(payload.data || []);
             weekLoaded = true;
@@ -381,10 +408,17 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const sa = day.scenario_assessment;
-            if (sa && sa.status_label) {
+            const statusCode = sa && sa.status_code ? sa.status_code : '';
+            // 仅在 Favored / Avoided 时显示 badge；Not Loaded 不显示
+            if (sa && sa.status_label && (statusCode === 'favored' || statusCode === 'avoided')) {
                 const saLine = document.createElement('div');
                 saLine.className = 'en-week-scenario-status';
                 saLine.textContent = sa.status_label;
+                if (statusCode === 'favored') {
+                    saLine.classList.add('is-favored');
+                } else {
+                    saLine.classList.add('is-avoided');
+                }
                 card.appendChild(saLine);
             }
 
@@ -398,6 +432,11 @@ document.addEventListener('DOMContentLoaded', () => {
         weekToggle.setAttribute('aria-expanded', String(!expanded));
         weekPanel.hidden = expanded;
         if (!expanded && !weekLoaded) {
+            // 首次展开若无选中场景，默认选第一个（已删除 General，必须有具体场景）
+            if (!weekScenarios.querySelector('.is-active')) {
+                const first = weekScenarios.querySelector('.en-week-scenario');
+                if (first) first.classList.add('is-active');
+            }
             loadWeekAlmanac();
         }
     });

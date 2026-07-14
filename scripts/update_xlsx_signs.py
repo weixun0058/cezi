@@ -6,6 +6,7 @@
 
 备份策略：修改前自动备份为 .bak。
 """
+
 import csv
 import shutil
 from pathlib import Path
@@ -62,7 +63,7 @@ def main():
 
     changes = update_xlsx(sc_signs)
     print(f"修改签数: {len(changes)}")
-    print(f"\n=== 修改详情 ===")
+    print("\n=== 修改详情 ===")
     for sn, old, new in changes:
         print(f"\n第 {sn} 签:")
         print(f"  旧: {old}")

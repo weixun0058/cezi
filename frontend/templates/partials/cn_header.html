@@ -1,0 +1,15 @@
+{# 中文页面顶部导航栏。
+   风格与中文页面保持一致：深棕底、楷体、米黄字色。
+   布局：品牌名(左) + 导航(中) + 语言切换(右)，与英文页面 header 结构对齐。
+   保留页面内原有 .nav-links，此 header 为补充固定导航。 #}
+<header class="cn-header">
+    <div class="cn-header-inner">
+        <a href="/{{ current_lang }}" class="cn-brand">明照玄鉴</a>
+        <nav class="cn-nav-links">
+            <a href="/{{ current_lang }}/divination" data-i18n="common.nav_suanshi">算事</a>
+            <a href="/{{ current_lang }}/almanac" data-i18n="common.nav_huangli">黄历</a>
+            <a href="/{{ current_lang }}/bazi" data-i18n="common.nav_lunming">论命</a>
+        </nav>
+        <div id="lang-switcher" class="lang-switcher" aria-label="語言切換"></div>
+    </div>
+</header>

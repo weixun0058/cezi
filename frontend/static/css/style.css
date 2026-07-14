@@ -25,7 +25,6 @@ body {
     background: #2c1810 url('../images/ancient-bg.jpg') center/cover fixed;
     color: var(--text-color);
     margin: 0;
-    padding: 10px;
     line-height: 1.6;
 }
 
@@ -303,6 +302,44 @@ h2, h3 {
 .stroke-display {
     font-size: 18px;
     color: var(--text-color);
+    cursor: pointer;
+    padding: 2px 8px;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.stroke-display:hover {
+    background: rgba(139, 26, 26, 0.1);
+}
+
+.stroke-display.editing {
+    cursor: default;
+    background: rgba(255,255,255,0.9);
+}
+
+.stroke-display input {
+    width: 60px;
+    font-size: 18px;
+    text-align: center;
+    border: 2px solid var(--primary-color);
+    border-radius: 4px;
+    background: rgba(255,255,255,0.9);
+    font-family: 'KaiTi', 'STKaiti', serif;
+    color: var(--text-color);
+    padding: 2px;
+}
+
+.stroke-display input:focus {
+    outline: none;
+}
+
+.stroke-display.invalid input {
+    border-color: #8f1d1d;
+}
+
+.stroke-display-placeholder {
+    color: #8f1d1d;
+    font-style: italic;
 }
 
 /* 求测类型区域样式 */
@@ -414,3 +451,64 @@ a {
 .inline-status { min-height: 1.5rem; margin-top: 10px; text-align: center; }
 .inline-status[data-type="error"] { color: #8f1d1d; }
 .responsible-use-notice { color: #66584b; font-size: 0.9rem; }
+
+/* ============================================================
+   中文页面顶部导航栏（sticky）
+   风格与中文页面保持一致：深棕底、楷体、米黄字色
+   ============================================================ */
+.cn-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(44, 24, 16, 0.92);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+.cn-header-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0.6rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.cn-brand {
+    font-family: 'YanTi', 'STKaiti', serif;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #f4e4bc;
+    text-decoration: none;
+    letter-spacing: 0.15em;
+    border-bottom: none;
+    transition: color 0.2s ease;
+}
+.cn-brand:hover {
+    color: var(--secondary-color);
+}
+
+.cn-nav-links {
+    display: flex;
+    gap: 1.8rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.cn-nav-links a {
+    color: #f4e4bc;
+    font-family: 'KaiTi', 'STKaiti', serif;
+    font-size: 1.2rem;
+    text-decoration: none;
+    padding: 0.3rem 0;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+.cn-nav-links a:hover {
+    color: var(--secondary-color);
+    border-bottom-color: var(--secondary-color);
+}

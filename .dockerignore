@@ -10,4 +10,7 @@ archive
 .pytest_cache
 .ruff_cache
 .coverage
-
+*.tar
+_tmp_*.py
+_verify_*.py
+outputs

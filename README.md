@@ -45,7 +45,20 @@ node --check frontend\static\js\main.js
 .\.venv\Scripts\python.exe scripts\build_reference_db.py
 ```
 
-该命令会读取 `data/reference/kanxi_dict.db`、`data/reference/zhugeshenshuan_jq.xlsx` 和 `data/reference/pzbj.json`，生成 `data/reference/reference.db`。
+该命令会读取 `data/reference/kanxi_dict.db`、汉典补充权威源
+`data/reference/hanzi_strokes_zdic.csv`、`data/reference/zhugeshenshuan_jq.xlsx`
+、`data/content/oracle_signs_reinterpreted.json`、
+`data/content/oracle_signs_reinterpreted_hant.json` 和 `data/reference/pzbj.json`，
+生成 `data/reference/reference.db`。
+
+汉字笔画查询顺序固定为：先查本地数据库，缺字时再查询汉典。汉典成功返回的
+新字会写入 `runtime.db`，在可写的本地环境还会同步到 `reference.db`。发布前运行
+以下命令，将所有新增字纳入可审查、可重建的权威补充源：
+
+```powershell
+.\.venv\Scripts\python.exe scripts\sync_stroke_to_hanzi.py
+.\.venv\Scripts\python.exe scripts\build_reference_db.py
+```
 
 ## 部署
 
@@ -54,6 +67,7 @@ node --check frontend\static\js\main.js
 ```powershell
 docker build -f deploy/Dockerfile -t zhugeshensuan:local .
 docker compose --env-file .env -f deploy/compose.prod.yml up -d --build
+
 ```
 
 详细服务器部署流程见 [docs/部署指南.md](docs/部署指南.md)，接口说明见 [docs/API文档.md](docs/API文档.md)。

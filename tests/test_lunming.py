@@ -92,6 +92,23 @@ def test_stream_emits_structured_report_sections():
     assert events[-1]["type"] == "report_end"
 
 
+def test_language_is_explicit_without_flask_request_context():
+    service = LunMing(client=FakeClient())
+    payload = {
+        "name": "測試",
+        "gender": "女",
+        "birth_date": "1990-01-01",
+        "birth_time": "未知",
+    }
+
+    result = service.analyze_bazi(payload, lang="zh-hant")
+
+    prompt = FakeCompletions.last_kwargs["messages"][1]["content"]
+    assert "请使用繁体中文输出所有内容" in prompt
+    assert result["report"]["sections"][0]["title"] == "五行氣象"
+    assert result["disclaimer"] == "傳統文化娛樂參考，不構成醫療、投資或人生決策建議。"
+
+
 def test_invalid_model_json_is_rejected():
     service = LunMing(client=FakeClient())
     with pytest.raises(ValueError, match="有效的结构化解读"):

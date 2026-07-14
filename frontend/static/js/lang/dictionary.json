@@ -283,6 +283,42 @@
       "ja": ""
     }
   },
+  "suanshi.stroke_not_found": {
+    "source": "未查到",
+    "translations": {
+      "zh-hans": "未查到",
+      "zh-hant": "未查到",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "suanshi.stroke_edit_hint": {
+    "source": "点击笔画数可修改",
+    "translations": {
+      "zh-hans": "点击笔画数可修改",
+      "zh-hant": "點擊筆畫數可修改",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "suanshi.stroke_invalid": {
+    "source": "请输入 1-52 之间的整数",
+    "translations": {
+      "zh-hans": "请输入 1-52 之间的整数",
+      "zh-hant": "請輸入 1-52 之間的整數",
+      "en": "",
+      "ja": ""
+    }
+  },
+  "suanshi.stroke_incomplete": {
+    "source": "请先补全未查到的笔画",
+    "translations": {
+      "zh-hans": "请先补全未查到的笔画",
+      "zh-hant": "請先補全未查到的筆畫",
+      "en": "",
+      "ja": ""
+    }
+  },
   "suanshi.status.select_direction": {
     "source": "请选择求测方向",
     "translations": {
