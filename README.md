@@ -79,4 +79,4 @@ docker compose --env-file .env -f deploy/compose.prod.yml up -d --build
 ```
 
 详细服务器部署流程见 [docs/部署指南.md](docs/部署指南.md)，接口说明见 [docs/API文档.md](docs/API文档.md)。
-当前修复状态与剩余产品工作见 [项目问题清单与真假问题判定](docs/reviews/2026-07-14-project-completion-issues-audit.md)。
+当前修复状态见 [项目问题清单与真假问题判定](docs/reviews/2026-07-14-project-completion-issues-audit.md)；后续待办的唯一活动计划见 [项目后续工作主台账](docs/plans/2026-07-15-project-completion-master-ledger.md)。

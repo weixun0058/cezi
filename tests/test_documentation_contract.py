@@ -56,3 +56,20 @@ def test_deployment_commands_use_current_workspace_layout():
     assert r"V:\诸葛神算V4" in deployment
     assert r".\deploy\compose.prod.yml" in deployment
     assert "docker build -f deploy/Dockerfile" in deployment
+
+
+def test_master_ledger_is_the_active_plan_for_remaining_work():
+    readme = _read("README.md")
+    global_plan = _read("docs/plans/2026-06-24-global-i18n-commercialization-execution-plan.md")
+    english_plan = _read("docs/plans/2026-06-27-english-site-execution-plan.md")
+    ledger = _read("docs/plans/2026-07-15-project-completion-master-ledger.md")
+
+    ledger_name = "2026-07-15-project-completion-master-ledger.md"
+    assert ledger_name in readme
+    assert ledger_name in global_plan
+    assert ledger_name in english_plan
+    assert "已取消任务（墓碑）" in ledger
+    assert "计划变更记录" in ledger
+    assert "DEC-001" in ledger
+    assert "SAFE-001" in ledger
+    assert "OPS-005" in ledger

@@ -582,7 +582,7 @@ E   ModuleNotFoundError: No module named 'app'
 - [x] 删除/改写 197-200 签 fallback 过时测试。
 - [x] 补齐简体兼容、繁体公开入口、旧短链接和英文输出契约测试。
 - [x] `LunMing` 领域服务显式接收 `lang`；仅 Web 蓝图读取 Flask 请求语言，业务层不再隐式读取 `g`。
-- [x] 全量 pytest 已达到 284 passed / 0 failed（含 4 项文档契约防漂移测试）。
+- [x] 全量 pytest 已达到 285 passed / 0 failed（含 5 项文档契约防漂移测试）。
 - [x] 同步 README、API、产品规格、架构、部署、翻译工作流与执行计划的当前契约。
 - [x] 移除 `reprocess_single_sign.py` 和 `adjudicate_single_sign.py` 中过时的签文数据库 backfill 指引。
 
