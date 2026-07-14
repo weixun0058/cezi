@@ -485,7 +485,7 @@ E   ModuleNotFoundError: No module named 'app'
 2. CI 使用 `python -m pytest`，确保当前仓库根目录进入 Python 模块搜索路径；
 3. 保留两层设置，使开发者直接运行 `pytest` 与 CI 运行方式都能工作。
 
-最终验证：提交 `664458f` 触发的 [GitHub CI #14](https://github.com/weixun0058/cezi/actions/runs/29353385374) 已完整通过。Black、Ruff、pytest、pip-audit、数据库可重建检查、Node 语法检查、生产 Docker 构建和健康检查均为 `success`。
+最终验证：提交 `664458f` 触发的 [GitHub CI #14](https://github.com/weixun0058/cezi/actions/runs/29353385374) 以及记录文档状态的 [GitHub CI #15](https://github.com/weixun0058/cezi/actions/runs/29354293627) 均完整通过。Black、Ruff、pytest、pip-audit、数据库可重建检查、Node 语法检查、生产 Docker 构建和健康检查均为 `success`。
 
 ## 6. 其他应修复或需要决策的问题
 
@@ -582,7 +582,9 @@ E   ModuleNotFoundError: No module named 'app'
 - [x] 删除/改写 197-200 签 fallback 过时测试。
 - [x] 补齐简体兼容、繁体公开入口、旧短链接和英文输出契约测试。
 - [x] `LunMing` 领域服务显式接收 `lang`；仅 Web 蓝图读取 Flask 请求语言，业务层不再隐式读取 `g`。
-- [x] 全量 pytest 已达到 280 passed / 0 failed。
+- [x] 全量 pytest 已达到 284 passed / 0 failed（含 4 项文档契约防漂移测试）。
+- [x] 同步 README、API、产品规格、架构、部署、翻译工作流与执行计划的当前契约。
+- [x] 移除 `reprocess_single_sign.py` 和 `adjudicate_single_sign.py` 中过时的签文数据库 backfill 指引。
 
 ### P0：恢复质量门禁
 
@@ -592,7 +594,7 @@ E   ModuleNotFoundError: No module named 'app'
 - [x] 处理剩余 E501。
 - [x] 运行 `git diff --check`。
 - [x] 推送前已按 CI 顺序完整执行：Black、Ruff、pytest、pip-audit、数据库 logical dump、Node、Docker 构建与健康检查全部通过。
-- [x] GitHub CI #14 已完整变绿。
+- [x] GitHub CI #14 与后续文档同步 CI #15 均完整变绿。
 
 ### P1：数据和构建一致性
 

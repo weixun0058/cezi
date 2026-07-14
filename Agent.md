@@ -15,7 +15,7 @@
 
 ### 2. 中文解读（DeepSeek 生成）
 - 文件：`data/content/oracle_signs_reinterpreted.json`
-- 内容：9 字段（sign_number/fortune/gua_type/sign_text + 7 个解读字段）
+- 内容：9 字段（sign_number/sign_text + 7 个解读字段，**不含 fortune/gua_type**）
 - 性质：DeepSeek 基于权威签文生成的典雅散文风解读
 - 生成脚本：`scripts/reinterpret_oracle_signs.py`（批量）/ `scripts/reprocess_single_sign.py`（单签复检）
 
@@ -26,8 +26,15 @@
 - 生成脚本：`scripts/translate_oracle_signs.py`（批量）/ `scripts/reprocess_single_sign.py`（单签复检）
 
 ### 非权威（派生物，不得作为数据源）
-- `data/reference/reference.db`（数据库，由 backfill 从权威文件同步，**不是数据源头**）
+- `data/reference/reference.db`（可重建数据库；运行时只读取 `hanzi` 笔画表，**不是签文/彭祖百忌数据源头**）
 - `data/reference/zhugeshenshuan_jq.xlsx`（Excel，已被权威 CSV 反向覆盖，不是源头）
+
+### 运行时数据源约束（2026-07-13 起）
+
+- 简体、繁体签文均从 `data/content/*.json` 启动时加载到内存。
+- 简体、繁体彭祖百忌均从 JSON 启动时加载到内存。
+- `reference.db` 的 `gua/gua_hant/pzbj/pzbj_hant` 只为历史构建兼容保留，运行时代码不得读取。
+- 禁止运行 `backfill_reinterpreted_to_db.py` 作为发布或内容同步步骤；该脚本仅作历史参考。
 
 ## 二、英文签文审查工作流程
 
@@ -118,23 +125,25 @@ python scripts/reprocess_single_sign.py --sign N
 
 该脚本会一口气完成：
 1. 从权威 CSV 读 sign_text
-2. 从 reinterpreted.json 读 fortune/gua_type
-3. 调 DeepSeek 重新生成中文解读
-4. 覆盖写入 reinterpreted.json
-5. 调 DeepSeek 翻译英文
-6. 覆盖写入 en.json
-7. 生成 Gemini 审查 prompt
+2. 调 DeepSeek 重新生成 7 个中文解读字段
+3. 覆盖写入 reinterpreted.json（9 字段，不含 fortune/gua_type）
+4. 调 DeepSeek 翻译英文
+5. 覆盖写入 en.json
+6. 生成 Gemini 审查 prompt
 
 **数据源是权威文件，不是数据库。**
 
-## 五、数据库同步（非自动）
+## 五、内容发布与数据库边界
 
-数据库（reference.db）不自动同步。如需同步，手动运行：
-```bash
-python scripts/backfill_reinterpreted_to_db.py
-```
+签文或彭祖百忌修改后，发布流程不再包含数据库 backfill：
 
-backfill 不会动 sign_text/fortune/gua_type，只同步 7 个解读字段。
+1. 修改对应权威 CSV/JSON；
+2. 如修改简体签文或解读，运行 `python scripts/build_hant_json.py` 生成繁体 JSON；
+3. 运行测试并重启应用，使 JSON 内存索引重新加载。
+
+汉字笔画是独立流程：新字查询先查库、缺字再查汉典，查询成功必须写入
+`runtime.db`；发布前运行 `scripts/sync_stroke_to_hanzi.py`，把新增字纳入
+`data/reference/hanzi_strokes_zdic.csv` 权威补充源，再重建 `reference.db`。
 
 ## 六、当前真实审查状态（2026-07-12）
 

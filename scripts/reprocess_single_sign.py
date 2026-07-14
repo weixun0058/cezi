@@ -9,8 +9,8 @@
 - 中文解读：data/content/oracle_signs_reinterpreted.json（DeepSeek 生成的解读）
 - 英文翻译：data/content/oracle_signs_en.json（DeepSeek 翻译的英文）
 
-非权威（派生物，由 backfill 从权威文件同步）：
-- reference.db（数据库，不作为本流程的数据源）
+非权威（派生物）：
+- reference.db（运行时不读取其中的签文表，本流程不得 backfill）
 
 完整流程（步骤 1-7 脚本自动完成，4-5 手动）：
 1. 从权威 CSV 读 sign_text（最权威源头）
@@ -434,7 +434,7 @@ def main():
             LOGGER.info("该签已挂起，请用户评判后决定下一步。")
         elif result["status"] == "finalized":
             LOGGER.info("")
-            LOGGER.info("该签已定稿。如需同步数据库，请运行 backfill_reinterpreted_to_db.py")
+            LOGGER.info("该签已定稿；运行时会在应用重启后从 JSON 重新加载，无需同步数据库")
         return
 
     # 非 --resume 模式：执行完整流程（步骤 1-7）
@@ -481,11 +481,7 @@ def main():
         "  6. 续跑综合评定：python scripts/reprocess_single_sign.py --sign %d --resume", sign_number
     )
     LOGGER.info("")
-    LOGGER.info("注意：")
-    LOGGER.info(
-        "  - 数据库（reference.db）未同步，如需同步请运行 "
-        "backfill_reinterpreted_to_db.py（数据库是派生物，非数据源头）"
-    )
+    LOGGER.info("注意：运行时签文来自 JSON；完成审定并重启应用后生效，无需同步数据库")
 
 
 if __name__ == "__main__":

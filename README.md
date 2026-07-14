@@ -4,6 +4,14 @@
 
 > 本项目内容仅用于传统文化娱乐参考，不构成医疗、投资或人生决策建议。
 
+## 当前产品契约
+
+- 公开语言切换器只展示繁体中文和英文；`/zh-hans/*` 与无 `lang` 参数的简体 API 继续保留兼容，不删除后端简体能力。
+- 旧中文短链接 `/huangli`、`/suanshi`、`/lunming` 固定 301 到对应繁体页面。
+- 中文 `/api/week_huangli` 返回 9 日；英文 `/api/en/week-almanac` 返回 10 日，端点名称为兼容历史保留。
+- 英文四柱使用“阴阳 + 五行 + 生肖”格式，例如 `Yang Metal Horse`；日主使用“阴阳 + 五行”，不再采用 `Geng-Wu` 等拼音显示契约。
+- 签文和彭祖百忌运行时从 JSON 加载；`reference.db` 运行时只用于汉字笔画查询。数据库内保留的旧签文表不是运行时或权威数据源。
+
 ## 目录结构
 
 - `zhugeshensuan/`：Flask 后端包，包含应用工厂、蓝图、业务服务、配置和数据库访问。
@@ -71,3 +79,4 @@ docker compose --env-file .env -f deploy/compose.prod.yml up -d --build
 ```
 
 详细服务器部署流程见 [docs/部署指南.md](docs/部署指南.md)，接口说明见 [docs/API文档.md](docs/API文档.md)。
+当前修复状态与剩余产品工作见 [项目问题清单与真假问题判定](docs/reviews/2026-07-14-project-completion-issues-audit.md)。

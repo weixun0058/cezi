@@ -6,6 +6,8 @@
 
 **涉及技术：** Python、当前后端应用、模板页面、SQLite/reference data、pytest、原生 JavaScript、CSS、Docker/Gunicorn 部署配置。
 
+> **2026-07-15 实现同步说明**：本文保留早期计划和进度日志作为历史记录；当前契约以本说明、README、API 文档和自动化测试为准。公开语言切换器只展示繁体中文与英文，`/zh-hans/*` 和无 `lang` 参数的简体 API 继续兼容；旧短链接固定 301 到繁体页面；英文多日黄历为 10 日；英文四柱为“阴阳 + 五行 + 生肖”；签文和彭祖百忌运行时均从 JSON 加载；质量门禁已在 GitHub CI 完整通过。尚未完成的是 W8/P6-P8（内容安全审校、SEO、文章、上线与商业化），不是当前代码回归。
+
 ---
 
 ## 0. 计划来源与执行边界
@@ -98,15 +100,15 @@
 | 英文 | 免责声明 | `/disclaimer` | 新增 |
 | 英文 | 关于 | `/about` | 新增 |
 | 英文 | 联系 | `/contact` | 新增 |
-| 简体中文 | 黄历 | `/zh-hans/almanac` | 当前主入口 |
-| 简体中文 | 算事 | `/zh-hans/divination` | 当前主入口 |
-| 简体中文 | 论命 | `/zh-hans/bazi` | 当前主入口 |
-| 繁體中文 | 黃曆 | `/zh-hant/almanac` | 新增 |
-| 繁體中文 | 算事 | `/zh-hant/divination` | 新增 |
-| 繁體中文 | 論命 | `/zh-hant/bazi` | 新增 |
-| 兼容入口 | 黄历 | `/huangli` | 可 301 到 `/zh-hans/almanac` |
-| 兼容入口 | 算事 | `/suanshi` | 可 301 到 `/zh-hans/divination` |
-| 兼容入口 | 论命 | `/lunming` | 可 301 到 `/zh-hans/bazi` |
+| 简体中文 | 黄历 | `/zh-hans/almanac` | 兼容入口；公开切换器隐藏 |
+| 简体中文 | 算事 | `/zh-hans/divination` | 兼容入口；公开切换器隐藏 |
+| 简体中文 | 论命 | `/zh-hans/bazi` | 兼容入口；公开切换器隐藏 |
+| 繁體中文 | 黃曆 | `/zh-hant/almanac` | 公开中文入口 |
+| 繁體中文 | 算事 | `/zh-hant/divination` | 公开中文入口 |
+| 繁體中文 | 論命 | `/zh-hant/bazi` | 公开中文入口 |
+| 兼容入口 | 黄历 | `/huangli` | 301 到 `/zh-hant/almanac` |
+| 兼容入口 | 算事 | `/suanshi` | 301 到 `/zh-hant/divination` |
+| 兼容入口 | 论命 | `/lunming` | 301 到 `/zh-hant/bazi` |
 
 ### 2.2 英文命名
 
@@ -248,7 +250,7 @@ For entertainment, cultural exploration, and self-reflection only. Not medical, 
 
 **已验证事项（无需再审计）：**
 
-- DB 笔画查询支持繁体字输入：`hanzi` 表同时存储简繁（18620 条，7456 条有 traditional_strokes），查询优先返回 `kangxi_strokes`，康熙笔画对简繁统一。详见 `docs/plans/p1-technical-analysis-2026-06-24.md` 难点 4。
+- DB 笔画查询支持繁体字输入：`hanzi` 表现有 18,751 条（康熙库 18,620 条 + 汉典补充权威源 131 条）。查询优先使用本地库，缺字才查汉典；新结果必须持久化并在发布前同步到 `hanzi_strokes_zdic.csv`。
 
 **验证命令：**
 
@@ -681,7 +683,7 @@ pytest tests/test_sitemap.py tests/test_robots.py tests/test_articles.py -q
 | D8 Deep Reading 首测价格 | 待确认 | USD 2.99 / 4.99 |
 | D9 先做模拟 checkout | 已确认 | — |
 | D10 第一阶段不做邮件订阅 | 已确认 | — |
-| D11 是否弱化 Birth Chart 入口 | 待确认 | 隐私合规复杂度 |
+| D11 是否弱化 Birth Chart 入口 | 已确认保留完整入口 | 隐私合规边界由页面提示和 AI prompt 约束 |
 | D12 API 前缀 `/api/en/*` | 已确认 | — |
 | D13 英文签文字段是否沿用 GUA_COLUMNS | 已确认 | 沿用 GUA_COLUMNS（11 字段），用户 2026-06-30 拍板 |
 | D14 fortune/gua_type 字段在英文加载时剔除还是保留不展示 | 已确认 | 加载时剔除，用户 2026-06-30 拍板 |

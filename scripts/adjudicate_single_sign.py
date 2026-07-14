@@ -887,7 +887,7 @@ def generate_batch_report(pending_signs, results, finalized_count, pending_count
         lines.append(f"- 有 {failed_count} 签失败，请检查日志排查原因后重试")
     if finalized_count > 0:
         lines.append(
-            f"- 有 {finalized_count} 签已定稿，如需同步数据库请运行 backfill_reinterpreted_to_db.py"
+            f"- 有 {finalized_count} 签已定稿；应用重启后直接加载 JSON，无需同步签文到数据库"
         )
     lines.append("")
 
@@ -944,7 +944,7 @@ def main():
             LOGGER.info("批量报告：%s", batch_result["batch_report"])
         if batch_result["finalized"] > 0:
             LOGGER.info("")
-            LOGGER.info("已定稿的签如需同步数据库，请运行 backfill_reinterpreted_to_db.py")
+            LOGGER.info("已定稿内容由应用重启后直接加载 JSON，无需同步签文到数据库。")
         return
 
     # 单签模式
@@ -1019,7 +1019,7 @@ def main():
         LOGGER.info("该签已挂起，请用户评判后决定下一步。")
     elif result["status"] == "finalized":
         LOGGER.info("")
-        LOGGER.info("该签已定稿。如需同步数据库，请运行 backfill_reinterpreted_to_db.py")
+        LOGGER.info("该签已定稿。应用重启后直接加载 JSON，无需同步签文到数据库。")
 
 
 if __name__ == "__main__":

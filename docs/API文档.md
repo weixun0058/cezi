@@ -14,6 +14,8 @@
 
 错误响应中的 `error` 包含稳定的 `code` 和可展示的 `message`。算事旧接口在一个兼容周期内同时保留原顶层字段。
 
+中文接口的 `lang` 支持 `zh-hans` 和 `zh-hant`；未显式传入时为兼容旧调用默认使用 `zh-hans`。公开语言切换器只提供繁体中文和英文，但 `/zh-hans/*` 路由仍可直接访问。
+
 ## 健康检查
 
 ### `GET /healthz`
@@ -103,33 +105,11 @@
 
 只支持 POST；`GET /api/lunming/stream` 返回 HTTP 405。
 
-## 英文 API（Wise Oracle）
+## 英文 API 概览（Wise Oracle）
 
 英文 API 统一走 `/api/en/*` 前缀（D12 已确认）。返回 9 字段结构，不含 `fortune`/`gua_type`（D14 已确认）。
 
-### `POST /api/en/oracle/ask`
-
-英文算事，支持两种输入模式：
-
-```json
-// Three Words 模式
-{"mode": "words", "words": ["love", "work", "fate"]}
-
-// Three Numbers 模式（每位 0-9）
-{"mode": "numbers", "numbers": [3, 1, 4]}
-```
-
-返回 9 字段：`sign_number`、`sign_text`、`interpretation1`、`career`、`wealth`、`love`、`health`、`study`、`general`。
-
-错误码：`INVALID_JSON`、`INVALID_ORACLE_MODE`、`ORACLE_WORDS_INSUFFICIENT`、`INVALID_ORACLE_NUMBER`、`ORACLE_NUMBERS_ALL_ZERO`、`CONTENT_NOT_FOUND`。
-
-### `POST /api/en/birth-chart/analyze`
-
-同步返回基础盘 + AI 报告。
-
-### `POST /api/en/birth-chart/stream`
-
-SSE 流式分析，事件类型：`chart`、`report`、`responsible_use`、`error`、`done`。
+英文站提供算事、单日/十日黄历和四柱论命接口。具体请求参数、返回字段与 SSE 事件契约统一见下方“英文站 API”，避免在同一文档中维护两份定义。
 
 ## AI 额度与限流
 
@@ -172,7 +152,7 @@ SSE 流式分析，事件类型：`chart`、`report`、`responsible_use`、`erro
 
 ### `GET /api/en/week-almanac`
 
-返回前两天、今天和后六天，共九天的英文黄历。支持相同的 `scenario` 参数。
+返回以今天为基准的 10 条英文黄历记录，日期升序且不重复。支持相同的 `scenario` 参数。端点中的 `week` 是兼容名称，不代表固定七日或九日。
 
 ### `POST /api/en/birth-chart/analyze`
 
@@ -195,7 +175,7 @@ SSE 流式分析，事件类型：`chart`、`report`、`responsible_use`、`erro
 
 SSE 流式版本，响应类型 `text/event-stream`。事件序列：
 
-- `chart`：英文基础命盘（四柱拼音、生肖、五行、日主、农历日期）。
+- `chart`：英文基础命盘。完整四柱采用“阴阳 + 五行 + 生肖”，例如 `Yang Metal Horse`；日主采用“阴阳 + 五行”。不再输出 `Geng-Wu` 等拼音四柱契约。
 - `report`：AI 文化反思报告（JSON 结构）。
 - `responsible_use`：底线提示。
 - `error`：流式错误。

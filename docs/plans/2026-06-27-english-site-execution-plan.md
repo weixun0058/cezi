@@ -1,5 +1,7 @@
 # Wise Oracle 英文站改造执行计划
 
+> **2026-07-15 实现同步说明**：本文的逐日进度日志保留历史原文，不代表当前契约。当前代码已经实现三大英文工具和合规页；英文黄历多日接口固定返回 10 日；英文四柱固定使用“阴阳 + 五行 + 生肖”；旧中文短链接跳转繁体，简体仅保留兼容；签文和彭祖百忌均为 JSON 内存数据源。W8 的文章、sitemap、robots、Search Console 和商业化仍未实现。
+
 > **文档定位：** 本计划从 `2026-06-24-global-i18n-commercialization-execution-plan.md` 总纲拆出，专门追踪英文站改造（原总纲 P2-P5 + E0-E8 + 相关待决策项）。总纲保留 P0/P1/P6/P7/P8 及非英文阶段；本文档与总纲在英文站范围内互斥，避免双轨追踪。
 >
 > **维护规则：** 可追溯（每任务有进度日志）、可修改（变更走修订记录）、可插入（新任务用 W{n}.{m} 编号不破坏既有）、与代码严格一致（每工作包标注代码现状）。
@@ -90,7 +92,7 @@
 
 | 能力 | 代码位置 | 状态 |
 | --- | --- | --- |
-| 英文论命服务 | `zhugeshensuan/birth_chart_english.py` | 已实现（四柱拼音/生肖/五行/日主英文化 + W0.3 红线 AI prompt + 报告解析 + analyze/analyze_stream） |
+| 英文论命服务 | `zhugeshensuan/birth_chart_english.py` | 已实现（四柱“阴阳 + 五行 + 生肖”、日主“阴阳 + 五行” + W0.3 红线 AI prompt + 报告解析 + analyze/analyze_stream） |
 | 英文论命 API | `zhugeshensuan/blueprints/birth_chart_en_api.py` | 已实现（`/api/en/birth-chart/analyze` 同步 + `/api/en/birth-chart/stream` SSE，事件序列 chart→report→responsible_use→done） |
 | 英文论命测试 | `tests/test_birth_chart_english.py` | 已实现（59 项测试：基础盘英文化/AI prompt 边界/报告解析/服务层/API 契约） |
 
@@ -140,7 +142,7 @@
 | D8 | `Wise Oracle Deep Reading` 首测价格 USD 2.99 还是 4.99 | W8（商业化预埋） | 暂时搁置（Deep Reading 冻结） | 暂停（2026-06-30，待付费方案深度思考） |
 | D9 | 是否先做模拟 checkout，等平台政策核验后再接真实 checkout | W8 | 是 | 已确认 |
 | D10 | 是否需要邮件订阅作为第一阶段留存 | W8 | 否 | 已确认 |
-| D11 | 第一阶段是否弱化 Birth Chart Reading 入口（隐私合规复杂度） | W0、W6 | 未定 | 待确认 |
+| D11 | 第一阶段是否弱化 Birth Chart Reading 入口（隐私合规复杂度） | W0、W6 | 保留完整入口 | 已确认 |
 | D12 | 英文 API 路径前缀统一策略：`/api/en/*` 还是 `/api/*` 靠 Accept-Language | W4、W5、W6 | `/api/en/*` | 已确认 |
 | D13 | 英文签文字段是否沿用 GUA_COLUMNS（11 字段）还是重构为 `oracle_title/message/guidance/caution/...` | W0、W2、W4 | 沿用 GUA_COLUMNS | 已确认（2026-06-30 用户拍板） |
 | D14 | `fortune`/`gua_type` 字段在英文加载时剔除还是保留不展示 | W4 | 加载时剔除 | 已确认（2026-06-30 用户拍板） |
@@ -460,7 +462,7 @@ pytest tests/test_english_routes.py tests/test_api_error_codes.py -q
 5. 测试：确定性（同三词同签号）、范围（N=111..999 → 1-384）、边界（空词、单字母词如"A"=1、超长词、含非字母字符的词）、字母求和正确性（LOVE=54→4, WORK=67→7, FATE=32→2）、0→1 规则（如字母和为 50/60/70 的词→1）。
 
 #### W4.1a 英文签文数据加载（D15、D16、D17 硬约束）
-1. 从 `data/content/oracle_signs_en.json` 加载 384 条签文到内存字典（D15：JSON 内存加载，不入数据库；中文仍走 `database.py`）。
+1. 从 `data/content/oracle_signs_en.json` 加载 384 条签文到内存字典（D15：JSON 内存加载，不入数据库；简体和繁体签文也已迁移为 JSON 内存加载）。
 2. **加载时剔除 `fortune` 和 `gua_type` 字段**（D14 倾向确认，D16 硬约束）：英文 API 响应不包含这两个字段。
 3. 内存字典键为 `sign_number`（int），值为剔除后的字段 dict（`sign_number, sign_text, interpretation1, career, wealth, love, health, study, general`，共 9 字段）。
 4. **未译签文 fallback**（项目硬约束）：若某签号的 `interpretation1` 含中文残留（CJK 字符检测）或 `general` 等必填字段为空，对应字段返回 `"This sign's English translation is under review."` 占位。

@@ -24,7 +24,7 @@
 
 > 详见 `docs/architecture/data-source-migration-2026-07-13.md`
 
-签文和彭祖百忌已从 SQLite 数据库迁移为 JSON 内存加载。`reference.db` 仅保留汉字笔画查询功能。
+签文和彭祖百忌已从 SQLite 数据库迁移为 JSON 内存加载。`reference.db` 运行时仅承担汉字笔画查询；其中保留的旧签文/彭祖百忌表只用于历史构建产物可重建，不得作为运行时数据源。
 
 | 数据 | 运行时数据源 | 权威来源 |
 |------|------------|---------|
@@ -32,7 +32,7 @@
 | 繁体签文 | `data/content/oracle_signs_reinterpreted_hant.json` | sign_text 从 CSV 取，解读 OpenCC s2t 转换 |
 | 简体彭祖百忌 | `data/reference/pzbj.json` | 同左 |
 | 繁体彭祖百忌 | `data/content/pzbj_hant.json` | 从 pzbj.json OpenCC s2t 转换 |
-| 汉字笔画 | `data/reference/reference.db` hanzi 表 | kanxi_dict.db |
+| 汉字笔画 | `data/reference/reference.db` hanzi 表；缺字查询结果写入 `instance/runtime.db` | `kanxi_dict.db` + `hanzi_strokes_zdic.csv` |
 | 英文签文 | `data/content/oracle_signs_en.json` | 同左 |
 
 **禁止**：将 reference.db 作为签文/彭祖百忌的数据源，或恢复 backfill 同步流程。

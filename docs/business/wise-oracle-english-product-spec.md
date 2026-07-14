@@ -2,8 +2,10 @@
 
 > **文档定位**：W0.1 / W0.2 / W0.3 / W0.4 / W0.6 产出。定义英文版的 URL 信息架构、三大工具页交互、上线范围。
 > **创建日期**：2026-06-30
-> **状态**：W0 定稿，待用户审阅
+> **状态**：核心工具已实现；SEO、文章内容和商业化仍未完成（2026-07-15 同步）
 > **硬约束引用**：D13（沿用 GUA_COLUMNS）、D14（剔除 fortune/gua_type）、D15（JSON 内存加载）、D16（卦属/吉凶不展示）、D17（解签定位为 interpretation）
+
+> **2026-07-15 契约补充**：公开中文入口采用繁体，简体只保留后端和直接 URL 兼容；英文黄历固定返回 10 日；英文四柱统一使用“阴阳 + 五行 + 生肖”，不再采用拼音四柱显示。
 
 ---
 
@@ -28,7 +30,8 @@
 ### 1.2 路由兼容策略
 
 - `/` 作为英文首页（D2 已确认）
-- 旧中文路由 `/huangli`、`/suanshi`、`/lunming` 保持 301 到 `/zh-hans/almanac`、`/zh-hans/divination`、`/zh-hans/bazi`
+- 旧中文路由 `/huangli`、`/suanshi`、`/lunming` 保持 301 到 `/zh-hant/almanac`、`/zh-hant/divination`、`/zh-hant/bazi`
+- `/zh-hans/*` 继续作为兼容 URL 可直接访问，但不出现在公开语言切换器中
 - 英文 API 统一走 `/api/en/*` 前缀（D12 已确认）
 - 英文前端路由使用 `/ask-oracle`、`/daily-almanac`、`/birth-chart-reading`（不复用中文拼音路径）
 
@@ -54,6 +57,7 @@
 - **主按钮**：View This Week
 - **次级按钮**：View Details（场景详情）
 - **responsible-use 位置**：页面底部
+- **多日视图**：`/api/en/week-almanac` 固定返回 10 日；`week` 仅为兼容端点名称
 
 #### 论命 `/birth-chart-reading`
 
@@ -223,7 +227,7 @@ This sign's English translation is under review.
 - 英文签文从 `data/content/oracle_signs_en.json` 加载到内存字典
 - 启动时加载一次，运行期只读
 - 加载时剔除 fortune/gua_type 字段（D14）
-- 不入数据库，中文仍走 `database.py`
+- 不入数据库；简体和繁体签文也已经改为 JSON 内存加载，`reference.db` 不再提供运行时签文
 - 内存字典键为 `sign_number`（int），值为 9 字段 dict
 
 ---
@@ -249,12 +253,15 @@ This sign's English translation is under review.
 - 不输出医疗、法律、财务、心理治疗、生育、死亡、灾难、重大人生决策的确定性结论
 - 定位为 reflection prompt，不是 advice
 
-### 3.4 D11 待确认
+### 3.4 D11 已确认
 
-是否弱化 Birth Chart Reading 入口（隐私合规复杂度）。若弱化：
+保留完整 Birth Chart Reading 入口。基础命盘和 AI 文化反思接口均已实现；付费 Deep Reading 仍冻结，不属于当前上线能力。
 
-- 首页不直接展示入口，改为文章页引导
-- 第一轮上线仅做基础盘，不做 AI 深度诠释
+英文命盘显示契约：
+
+- 完整四柱：`Yin|Yang + Wood|Fire|Earth|Metal|Water + Zodiac`，例如 `Yang Metal Horse`；
+- 日主：`Yin|Yang + Wood|Fire|Earth|Metal|Water`；
+- 不再输出 `Jia-Zi`、`Geng-Wu` 等拼音四柱作为公开契约。
 
 ---
 
@@ -298,6 +305,8 @@ This sign's English translation is under review.
 ---
 
 ## 五、英文上线范围（W0.6）
+
+本节是目标范围，不表示所有项目已经上线。当前实现快照：三大工具页与合规页已落地；文章页仍为占位；`sitemap.xml`、`robots.txt`、Search Console、商业化配置和真实支付尚未实现。
 
 ### 5.1 第一轮上线
 
