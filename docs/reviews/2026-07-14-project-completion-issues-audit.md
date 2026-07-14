@@ -485,6 +485,8 @@ E   ModuleNotFoundError: No module named 'app'
 2. CI 使用 `python -m pytest`，确保当前仓库根目录进入 Python 模块搜索路径；
 3. 保留两层设置，使开发者直接运行 `pytest` 与 CI 运行方式都能工作。
 
+最终验证：提交 `664458f` 触发的 [GitHub CI #14](https://github.com/weixun0058/cezi/actions/runs/29353385374) 已完整通过。Black、Ruff、pytest、pip-audit、数据库可重建检查、Node 语法检查、生产 Docker 构建和健康检查均为 `success`。
+
 ## 6. 其他应修复或需要决策的问题
 
 ### G. `reference.db` 不可从权威源完整重建（已修复）
@@ -590,7 +592,7 @@ E   ModuleNotFoundError: No module named 'app'
 - [x] 处理剩余 E501。
 - [x] 运行 `git diff --check`。
 - [x] 推送前已按 CI 顺序完整执行：Black、Ruff、pytest、pip-audit、数据库 logical dump、Node、Docker 构建与健康检查全部通过。
-- [ ] 确认 GitHub CI 变绿。
+- [x] GitHub CI #14 已完整变绿。
 
 ### P1：数据和构建一致性
 
