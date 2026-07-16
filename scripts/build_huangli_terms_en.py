@@ -11,7 +11,7 @@
 - 未审核的新词一律隐藏并记录 translation_missing=true
 
 依据：
-- 用户审校定稿（2026-07-01）：39 活动类别 + 19 剔除 + 馀事勿取特殊处理
+- 用户审校定稿及 SAFE-004 修订：38 活动类别 + 19 剔除 + 馀事勿取特殊处理
 - D6 神煞音译+解释（本表不预存，运行时 fallback）
 - W5.2 fallback 策略（缺失命名空间 translation_missing）
 """
@@ -240,7 +240,8 @@ def main() -> None:
             ),
             "generated_by": "scripts/build_huangli_terms_en.py",
             "policy": (
-                "activities 为人工审校定稿（39 类别+19 剔除+馀事勿取特殊），"
+                f"activities 为人工审校定稿（{len(curate['activity_categories'])} "
+                "类别+19 剔除+馀事勿取特殊），"
                 "其他命名空间为 6tail 候选词经 term_overrides 覆盖"
                 "（天干阴阳五行、六十甲子阴阳五行+生肖组合、神煞方案 C 小批审校），"
                 "未审核神煞运行时隐藏并记录 translation_missing，缺失命名空间 translation_missing"

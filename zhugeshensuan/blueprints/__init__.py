@@ -6,8 +6,10 @@ from .lunming_api import lunming_bp
 from .oracle_en_api import oracle_en_api_bp
 from .pages import pages_bp
 from .pages_en import pages_en_bp
+from .seo import seo_bp
 
 ALL_BLUEPRINTS = (
+    seo_bp,
     pages_en_bp,
     pages_bp,
     divination_bp,

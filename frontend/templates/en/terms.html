@@ -1,12 +1,9 @@
 {% extends "en/base.html" %}
 
-{% block title %}Terms of Service — Wise Oracle{% endblock %}
-{% block meta_description %}Terms of service for Wise Oracle: acceptable use, no warranty, limitation of liability, and AI content disclaimer.{% endblock %}
-
 {% block content %}
 <section class="en-legal">
     <h1>Terms of Service</h1>
-    <p class="en-legal-updated">Last updated: June 30, 2026</p>
+    <p class="en-legal-updated">Last updated: July 16, 2026</p>
 
     <p>
         By accessing or using Wise Oracle, you agree to these Terms of Service. If you do not
@@ -78,7 +75,7 @@
 
     <h2>10. Contact</h2>
     <div class="en-legal-contact">
-        <p>For questions about these Terms, please use the <a href="/contact">Contact page</a>.</p>
+        <p>For questions about these Terms, email <a href="mailto:{{ contact_email }}">{{ contact_email }}</a> or use the <a href="/contact">Contact page</a>.</p>
     </div>
 </section>
 {% endblock %}

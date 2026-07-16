@@ -1,8 +1,5 @@
 {% extends "en/base.html" %}
 
-{% block title %}Daily Chinese Almanac — Favorable Activities & Solar Terms{% endblock %}
-{% block meta_description %}Explore the daily Chinese almanac: traditional activity indications, lunar date, solar terms, zodiac, directions, and cultural context.{% endblock %}
-
 {% block content %}
 <section class="en-almanac" data-almanac-app>
     <div class="en-almanac-hero">
@@ -86,6 +83,12 @@
             <h2 data-field="scenario-label">—</h2>
             <p class="en-scenario-today" data-field="scenario-today">—</p>
             <p class="en-scenario-next" data-field="scenario-next" hidden></p>
+        </section>
+
+        <section class="en-almanac-safety-notice" data-safety-card hidden
+                 aria-labelledby="almanac-safety-heading">
+            <h2 id="almanac-safety-heading">Legal matters notice</h2>
+            <ul data-list="safety-notices"></ul>
         </section>
 
         <div class="en-almanac-grid">

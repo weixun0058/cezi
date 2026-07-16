@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex,nofollow,noarchive">
+    <title>文章发布 · Get Wise Oracle</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/article_admin.css') }}">
+</head>
+<body>
+<main class="admin-shell">
+    <p class="admin-eyebrow">GET WISE ORACLE · PRIVATE</p>
+    {% if not authorized %}
+    <section class="admin-panel admin-login">
+        <h1>文章发布</h1>
+        <p>输入访问密码后进入 Markdown 上传页面。</p>
+        {% if error %}<div class="admin-message admin-error" role="alert">{{ error }}</div>{% endif %}
+        <form method="post" action="{{ url_for('article_admin.unlock') }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+            <label>访问密码
+                <input type="password" name="password" autocomplete="current-password" required autofocus>
+            </label>
+            <button type="submit">进入页面</button>
+        </form>
+    </section>
+    {% else %}
+    <header class="admin-header">
+        <div>
+            <h1>上传 Markdown 文章</h1>
+            <p>上传成功后立即进入网站文章列表、详情页和 sitemap，不经过 GitHub 或重新部署。</p>
+        </div>
+        {% if password_enabled %}<form method="post" action="{{ url_for('article_admin.lock') }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+            <button class="admin-button-secondary" type="submit">锁定页面</button>
+        </form>{% endif %}
+    </header>
+
+    {% if uploaded %}<div class="admin-message admin-success" role="status">文章 {{ uploaded }} 已发布并立即生效。</div>{% endif %}
+    {% if error %}<div class="admin-message admin-error" role="alert">{{ error }}</div>{% endif %}
+
+    <section class="admin-panel">
+        <h2>上传文章</h2>
+        <form method="post" action="{{ url_for('article_admin.upload') }}" enctype="multipart/form-data">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+            <label>Markdown 文件
+                <input type="file" name="article" accept=".md,text/markdown,text/plain" required>
+            </label>
+            <p class="admin-help">必须是 UTF-8、TOML front matter + Markdown，状态为 published；最大 {{ max_upload_kib }} KiB。</p>
+            <label class="admin-checkbox">
+                <input type="checkbox" name="overwrite" value="yes">
+                如果相同 slug 已存在，确认覆盖原文章
+            </label>
+            <button type="submit">上传并立即发布</button>
+        </form>
+    </section>
+
+    <section class="admin-panel">
+        <div class="admin-section-heading">
+            <div>
+                <h2>网站文章</h2>
+                <p>当前共 {{ articles|length }} 篇公开文章。</p>
+            </div>
+            <a class="admin-button" href="{{ url_for('article_admin.download_articles') }}">打包下载全部文章</a>
+        </div>
+        {% if articles %}
+        <ul class="admin-article-list">
+            {% for article in articles %}
+            <li>
+                <div><strong>{{ article.title }}</strong><span>{{ article.slug }}.md</span></div>
+                <time datetime="{{ article.published_at.isoformat() }}">{{ article.published_at.isoformat() }}</time>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="admin-empty">目前还没有文章。上传第一篇 Markdown 后会显示在这里。</p>
+        {% endif %}
+    </section>
+    {% endif %}
+</main>
+</body>
+</html>

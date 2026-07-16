@@ -1,12 +1,9 @@
 {% extends "en/base.html" %}
 
-{% block title %}Disclaimer — Wise Oracle{% endblock %}
-{% block meta_description %}Wise Oracle disclaimer: all readings are for entertainment, cultural exploration, and self-reflection only. Not professional advice.{% endblock %}
-
 {% block content %}
 <section class="en-legal">
     <h1>Disclaimer</h1>
-    <p class="en-legal-updated">Last updated: June 30, 2026</p>
+    <p class="en-legal-updated">Last updated: July 16, 2026</p>
 
     <h2>Entertainment and Cultural Exploration Only</h2>
     <p>
@@ -60,7 +57,7 @@
 
     <h2>Contact</h2>
     <div class="en-legal-contact">
-        <p>For questions about this disclaimer, please use the <a href="/contact">Contact page</a>.</p>
+        <p>For questions about this disclaimer, email <a href="mailto:{{ contact_email }}">{{ contact_email }}</a> or use the <a href="/contact">Contact page</a>.</p>
     </div>
 </section>
 {% endblock %}

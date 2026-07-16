@@ -743,6 +743,76 @@ a:hover { border-bottom-color: var(--wo-accent); }
     color: var(--wo-text-soft);
 }
 
+.en-article-list {
+    display: grid;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.en-article-card {
+    padding: 1.25rem;
+    border: 1px solid var(--wo-border);
+    border-radius: var(--wo-radius);
+    background: var(--wo-surface);
+}
+
+.en-article-card h2 {
+    margin: 0.25rem 0 0.65rem;
+}
+
+.en-article-date {
+    color: var(--wo-text-soft);
+    font-size: 0.9rem;
+}
+
+.en-article-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0.9rem 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.en-article-tags li {
+    padding: 0.2rem 0.55rem;
+    border-radius: 999px;
+    background: var(--wo-surface-alt);
+    color: var(--wo-text-soft);
+    font-size: 0.85rem;
+}
+
+.en-article {
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+.en-article-header {
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--wo-border);
+}
+
+.en-article-description {
+    color: var(--wo-text-soft);
+    font-size: 1.1rem;
+}
+
+.en-article-body {
+    margin-top: 2rem;
+}
+
+.en-article-body h2,
+.en-article-body h3 {
+    margin-top: 1.8rem;
+}
+
+.en-article-sources {
+    margin-top: 2.5rem;
+    padding: 1rem 1.25rem;
+    border-left: 3px solid var(--wo-accent-soft);
+    background: var(--wo-surface-alt);
+}
+
 /* ============================================================
    页脚
    ============================================================ */
@@ -897,11 +967,25 @@ a:hover { border-bottom-color: var(--wo-accent); }
 }
 
 .en-scenario-card,
+.en-almanac-safety-notice,
 .en-almanac-context {
     padding: 1.25rem;
     margin-bottom: 1.25rem;
     border-radius: 14px;
     background: #f2eadc;
+}
+
+.en-almanac-safety-notice {
+    border-left: 4px solid #9a5b2c;
+    background: #fff6e9;
+}
+
+.en-almanac-safety-notice h2 {
+    margin-top: 0;
+}
+
+.en-almanac-safety-notice ul {
+    margin-bottom: 0;
 }
 
 /* 日期导航按钮 */
@@ -1170,6 +1254,15 @@ a:hover { border-bottom-color: var(--wo-accent); }
     text-align: center;
     padding: 1rem;
     color: var(--wo-text-soft);
+}
+
+.en-week-notice {
+    margin: 0.6rem 0 0;
+    padding: 0.5rem;
+    border-left: 3px solid #9a5b2c;
+    background: #fff6e9;
+    color: var(--wo-text-soft);
+    font-size: 0.82rem;
 }
 .en-week-error {
     color: var(--wo-error, #b04040);

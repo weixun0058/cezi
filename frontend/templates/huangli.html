@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title data-i18n="huangli.page_title">诸葛神算 - 传统黄历</title>
+    {% include 'partials/seo_head.html' %}
     <link rel="stylesheet" media="screen and (min-width: 481px)" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" media="screen and (max-width: 480px)" href="{{ url_for('static', filename='css/style_mobile.css') }}">
     <link rel="stylesheet" media="screen and (min-width: 481px)" href="{{ url_for('static', filename='css/huangli.css') }}">
@@ -25,10 +25,10 @@
 
                 <div class="poetry-section">
                     <div class="poetry-container">
-                        <div class="poem-line" data-i18n="poem.huangli.line1" style="animation-delay: 1.0s">日月星辰运行间</div>
-                        <div class="poem-line" data-i18n="poem.huangli.line2" style="animation-delay: 0.7s">黄历记载天地理</div>
-                        <div class="poem-line" data-i18n="poem.huangli.line3" style="animation-delay: 0.4s">吉凶祸福皆有源</div>
-                        <div class="poem-line" data-i18n="poem.huangli.line4" style="animation-delay: 0.1s">顺应时节得安然</div>
+                        <div class="poem-line" data-i18n="poem.huangli.line1" style="animation-delay: 0.1s">日月星辰运行间</div>
+                        <div class="poem-line" data-i18n="poem.huangli.line2" style="animation-delay: 0.4s">黄历记载天地理</div>
+                        <div class="poem-line" data-i18n="poem.huangli.line3" style="animation-delay: 0.7s">吉凶祸福皆有源</div>
+                        <div class="poem-line" data-i18n="poem.huangli.line4" style="animation-delay: 1.0s">顺应时节得安然</div>
                     </div>
                 </div>
                 <div class="divider">

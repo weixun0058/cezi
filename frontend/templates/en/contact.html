@@ -1,8 +1,5 @@
 {% extends "en/base.html" %}
 
-{% block title %}Contact — Wise Oracle{% endblock %}
-{% block meta_description %}Contact Wise Oracle for questions, feedback, privacy inquiries, or support.{% endblock %}
-
 {% block content %}
 <section class="en-legal">
     <h1>Contact</h1>
@@ -16,7 +13,7 @@
         <h2>General Inquiries</h2>
         <p>
             For questions about the service, feature requests, or general feedback, please email:
-            <br><strong>contact@wise-oracle.example</strong>
+            <br><strong><a href="mailto:{{ contact_email }}">{{ contact_email }}</a></strong>
         </p>
     </div>
 
@@ -24,7 +21,7 @@
         <h2>Privacy Inquiries</h2>
         <p>
             For privacy or data-related questions, please email:
-            <br><strong>privacy@wise-oracle.example</strong>
+            <br><strong><a href="mailto:{{ contact_email }}">{{ contact_email }}</a></strong>
         </p>
         <p>
             See our <a href="/privacy">Privacy Policy</a> for details on how we handle data.

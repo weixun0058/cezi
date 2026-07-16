@@ -176,6 +176,22 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
+    const renderSafetyNotices = (notices) => {
+        const card = app.querySelector('[data-safety-card]');
+        const list = app.querySelector('[data-list="safety-notices"]');
+        list.replaceChildren();
+        if (!notices || !notices.length) {
+            card.hidden = true;
+            return;
+        }
+        notices.forEach((notice) => {
+            const item = document.createElement('li');
+            item.textContent = notice.text;
+            list.appendChild(item);
+        });
+        card.hidden = false;
+    };
+
     const renderData = (data) => {
         setText('date', data.date);
         setText('lunar-date', data.lunar_date);
@@ -188,6 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
         renderSolarTerms(data);
         renderFestivals(data);
         renderSpecialIndications(data);
+        renderSafetyNotices(data.safety_notices);
 
         renderList('favorable', data.favorable_activities);
         renderList('unfavorable', data.unfavorable_activities);
@@ -398,6 +415,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 unfavLine.textContent = `✕ ${unfav}`;
                 card.appendChild(unfavLine);
             }
+
+            (day.safety_notices || []).forEach((notice) => {
+                const noticeLine = document.createElement('p');
+                noticeLine.className = 'en-week-notice';
+                noticeLine.textContent = notice.text;
+                card.appendChild(noticeLine);
+            });
 
             const cc = day.conflict_clash;
             if (cc && cc.clashes_with) {

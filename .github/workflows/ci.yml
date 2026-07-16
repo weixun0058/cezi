@@ -37,9 +37,9 @@ jobs:
 
           assert logical_dump("data/reference/reference.db") == logical_dump("/tmp/reference.db")
           PY
-      - run: node --check frontend/static/js/huangli.js
-      - run: node --check frontend/static/js/lunming.js
-      - run: node --check frontend/static/js/main.js
+      - name: Check all JavaScript syntax
+        run: >-
+          python -c "import pathlib, subprocess; files=sorted(pathlib.Path('frontend/static/js').rglob('*.js')); assert files; [subprocess.run(['node', '--check', str(path)], check=True) for path in files]; print(f'node --check: {len(files)}/{len(files)} passed')"
       - name: Build and health-check production image
         run: |
           docker build -f deploy/Dockerfile --build-arg APP_VERSION=ci -t zhugeshensuan:ci .
@@ -50,6 +50,7 @@ jobs:
             -p 127.0.0.1:8000:8000 \
             -e APP_ENV=production \
             -e APP_DEBUG=false \
+            -e SITE_BASE_URL=https://getwiseoracle.com \
             -e SECRET_KEY=ci-only-secret-key-at-least-32-characters \
             -e AI_API_KEY=ci-readiness-placeholder \
             -e AI_GLOBAL_DAILY_LIMIT=100 \

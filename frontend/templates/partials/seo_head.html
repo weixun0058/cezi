@@ -1,0 +1,16 @@
+<title>{{ seo.title }}</title>
+<meta name="description" content="{{ seo.description }}">
+<meta name="robots" content="{{ seo.robots }}">
+<link rel="canonical" href="{{ seo.canonical_url }}">
+{% for language, url in seo.alternates.items() %}
+<link rel="alternate" hreflang="{{ language }}" href="{{ url }}">
+{% endfor %}
+<meta property="og:title" content="{{ seo.title }}">
+<meta property="og:description" content="{{ seo.description }}">
+<meta property="og:type" content="{{ seo.og_type }}">
+<meta property="og:url" content="{{ seo.canonical_url }}">
+<meta property="og:site_name" content="{{ seo.site_name }}">
+<meta property="og:locale" content="{{ seo.og_locale }}">
+{% for graph in seo.json_ld %}
+<script type="application/ld+json">{{ graph|tojson }}</script>
+{% endfor %}

@@ -37,6 +37,16 @@ RESPONSIBLE_USE_TEXT = (
     "Not medical, legal, financial, psychological, or life-critical advice."
 )
 
+LEGAL_MATTERS_NOTICE = {
+    "category": "legal_matters",
+    "label": "Legal matters notice",
+    "text": (
+        "Traditional almanac references to legal matters are cultural context only. "
+        "They are not legal advice or a prediction of any case outcome. "
+        "Consult a qualified legal professional for decisions about your situation."
+    ),
+}
+
 # 天干拼音（clash_pillar / peng_zu 需要，terms.stems 是阴阳五行非拼音）
 GAN_PINYIN: dict[str, str] = {
     "甲": "Jia",
@@ -577,6 +587,18 @@ def process_activities(
     }
 
 
+def build_activity_safety_notices(activities: dict) -> list[dict]:
+    """Return contextual notices for reviewed high-stakes activity categories."""
+    category_keys = {
+        item.get("category")
+        for group in ("favorable_activities", "unfavorable_activities", "mixed_activities")
+        for item in activities.get(group, [])
+    }
+    if "legal_matters" in category_keys:
+        return [dict(LEGAL_MATTERS_NOTICE)]
+    return []
+
+
 # ============================================================
 # S5: 场景判断（对齐中文 _scenario_result 三级匹配）
 # ============================================================
@@ -739,6 +761,7 @@ class HuangLiEnglish:
             self._word_to_category,
             missing,
         )
+        safety_notices = build_activity_safety_notices(activities)
 
         auspicious_spirits = translate_spirits(
             record.get("ji_shen", ""), self.terms, "auspicious", missing
@@ -766,6 +789,7 @@ class HuangLiEnglish:
             "unfavorable_activities": activities["unfavorable_activities"],
             "mixed_activities": activities["mixed_activities"],
             "special_indications": activities["special_indications"],
+            "safety_notices": safety_notices,
             "auspicious_spirits": auspicious_spirits,
             "inauspicious_spirits": inauspicious_spirits,
             "directions": directions,
@@ -803,6 +827,7 @@ class HuangLiEnglish:
                 },
                 "favorable_activities": daily["favorable_activities"],
                 "unfavorable_activities": daily["unfavorable_activities"],
+                "safety_notices": daily["safety_notices"],
                 "conflict_clash": daily["conflict_clash"],
                 "directions": daily["directions"],
                 "solar_term": daily["solar_term"],

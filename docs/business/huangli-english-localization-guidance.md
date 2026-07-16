@@ -4,7 +4,7 @@
 
 > **更新（2026-07-12）：** 英文黄历已实现并接通 API，本文档从"后续指导"转为"实现参考"。
 >
-> 英文 Daily Almanac 已在 W5 阶段完成实现：`zhugeshensuan/huangli_english.py` 提供翻译服务，`zhugeshensuan/blueprints/huangli_en_api.py` 提供 `/api/en/daily-almanac` 和 `/api/en/week-almanac` 端点，前端 `daily_almanac.js` 已接通 API（非 Coming soon 降级）。`data/content/huangli_terms_en.json` 和 `huangli_scenarios_en.json` 已生成，覆盖 39 活动类别、6 场景判断、20 个审校神煞。`tests/test_huangli_english.py` 覆盖翻译函数、活动流水线、场景判断和 API 契约，含 2026 全年无中文泄漏回归测试。
+> 英文 Daily Almanac 已在 W5 阶段完成实现：`zhugeshensuan/huangli_english.py` 提供翻译服务，`zhugeshensuan/blueprints/huangli_en_api.py` 提供 `/api/en/daily-almanac` 和 `/api/en/week-almanac` 端点，前端 `daily_almanac.js` 已接通 API（非 Coming soon 降级）。`data/content/huangli_terms_en.json` 和 `huangli_scenarios_en.json` 已生成，SAFE-004 后覆盖 38 活动类别、6 场景判断、20 个审校神煞；医疗宜忌分类已移除，法律事项出现时显示上下文提示。`tests/test_huangli_english.py` 覆盖翻译函数、活动流水线、场景判断和 API 契约，含 2026 全年无中文泄漏回归测试。
 
 英文黄历已上线。本文档保留术语来源和实现路线作为参考。
 

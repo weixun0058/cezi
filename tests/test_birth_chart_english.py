@@ -714,3 +714,51 @@ class TestBirthChartEnApiWithMockAi:
         assert RESPONSIBLE_USE_TEXT in text
         assert "fortune" not in text.lower()
         assert "gua_type" not in text.lower()
+
+    def test_analyze_ai_timeout_returns_generic_502(self, app, client, monkeypatch):
+        """上游超时不得泄漏异常细节，应返回稳定的通用错误。"""
+        service = app.extensions["birth_chart_en"]
+
+        def raise_timeout(_prompt):
+            raise TimeoutError("upstream provider timeout with internal details")
+
+        monkeypatch.setattr(service, "_generate_report", raise_timeout)
+        response = client.post(
+            "/api/en/birth-chart/analyze",
+            json={
+                "name": "Alex",
+                "birth_date": "1990-05-01",
+                "birth_time": "14:30",
+                "gender": "male",
+            },
+        )
+
+        assert response.status_code == 502
+        assert response.get_json()["error"]["code"] == "ANALYSIS_FAILED"
+        assert "internal details" not in response.get_data(as_text=True)
+
+    def test_stream_ai_timeout_ends_with_error_and_done(self, app, client, monkeypatch):
+        """流式上游超时应保留基础盘，并用 error + done 正常结束。"""
+        service = app.extensions["birth_chart_en"]
+
+        def raise_timeout(_prompt):
+            raise TimeoutError("upstream provider timeout with internal details")
+
+        monkeypatch.setattr(service, "_generate_report", raise_timeout)
+        response = client.post(
+            "/api/en/birth-chart/stream",
+            json={
+                "name": "Alex",
+                "birth_date": "1990-05-01",
+                "birth_time": "14:30",
+                "gender": "male",
+            },
+        )
+        text = response.get_data(as_text=True)
+
+        assert response.status_code == 200
+        assert "text/event-stream" in response.headers["Content-Type"]
+        assert '"type": "chart"' in text
+        assert '"error_code": "ANALYSIS_FAILED"' in text
+        assert '"type": "done"' in text
+        assert "internal details" not in text

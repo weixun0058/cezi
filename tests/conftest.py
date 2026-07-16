@@ -31,10 +31,15 @@ def app(tmp_path, reference_db):
     application = create_app(
         {
             "TESTING": True,
+            "SITE_BASE_URL": "https://getwiseoracle.com",
+            "CONTACT_EMAIL": "5siwei@gmail.com",
             "AI_API_KEY": "",
             "AI_GLOBAL_DAILY_LIMIT": 100,
             "REFERENCE_DB_PATH": reference_db,
             "RUNTIME_DB_PATH": tmp_path / "runtime.db",
+            "ARTICLES_PATH": tmp_path / "articles",
+            "ARTICLE_ADMIN_PATH": "165131",
+            "ARTICLE_ADMIN_PASSWORD": "test-owner-password",
         }
     )
     yield application

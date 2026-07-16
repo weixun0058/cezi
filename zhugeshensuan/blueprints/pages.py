@@ -12,7 +12,7 @@ URL 结构（D2 已确认：/ 作为英文首页，由 pages_en.py 处理）：
 其中 <lang> ∈ {zh-hans, zh-hant}。
 """
 
-from flask import Blueprint, abort, g, redirect, render_template, request
+from flask import Blueprint, abort, current_app, g, redirect, render_template, request
 
 from ..i18n_utils import (
     DEFAULT_CHINESE_UI_LANG,
@@ -21,6 +21,7 @@ from ..i18n_utils import (
     PAGE_URL_NAMES,
     html_lang_for,
 )
+from ..seo import build_page_seo
 
 pages_bp = Blueprint("pages", __name__)
 
@@ -41,6 +42,7 @@ def lang_index(lang: str):
         "index.html",
         current_lang=lang,
         html_lang=html_lang_for(lang),
+        seo=build_page_seo(current_app.config["SITE_BASE_URL"], f"{lang}.home"),
     )
 
 
@@ -74,4 +76,9 @@ def lang_page(lang: str):
     g.lang = lang
     g.page = page
     template = PAGE_TEMPLATES[page]
-    return render_template(template, current_lang=lang, html_lang=html_lang_for(lang))
+    return render_template(
+        template,
+        current_lang=lang,
+        html_lang=html_lang_for(lang),
+        seo=build_page_seo(current_app.config["SITE_BASE_URL"], f"{lang}.{page}"),
+    )

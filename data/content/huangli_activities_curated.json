@@ -189,11 +189,6 @@
       "sources": ["赴任"],
       "status": "approved"
     },
-    "medical_care": {
-      "label": "Medical Care",
-      "sources": ["针灸", "求医", "治病", "求医疗病"],
-      "status": "approved"
-    },
     "legal_matters": {
       "label": "Legal Matters",
       "sources": ["词讼"],

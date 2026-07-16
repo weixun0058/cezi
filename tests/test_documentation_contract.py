@@ -56,6 +56,7 @@ def test_deployment_commands_use_current_workspace_layout():
     assert r"V:\诸葛神算V4" in deployment
     assert r".\deploy\compose.prod.yml" in deployment
     assert "docker build -f deploy/Dockerfile" in deployment
+    assert "CONTACT_EMAIL=5siwei@gmail.com" in deployment
 
 
 def test_master_ledger_is_the_active_plan_for_remaining_work():
@@ -73,3 +74,68 @@ def test_master_ledger_is_the_active_plan_for_remaining_work():
     assert "DEC-001" in ledger
     assert "SAFE-001" in ledger
     assert "OPS-005" in ledger
+    assert "GOV-003" in ledger
+    assert "OPS-006" in ledger
+
+
+def test_ops001_production_acceptance_is_documented():
+    acceptance = _read("docs/operations/production-acceptance.md")
+    ledger = _read("docs/plans/2026-07-15-project-completion-master-ledger.md")
+
+    assert "OPS-001" in acceptance
+    assert "https://getwiseoracle.com" in acceptance
+    assert "AI_API_KEY" in acceptance
+    assert "原文未输出" in acceptance
+    assert "healthz" in acceptance
+    assert "readyz" in acceptance
+    assert "OPS-001 | 完成生产环境配置和域名/HTTPS 验收 | P1 | 已完成" in ledger
+
+
+def test_ops004_search_console_acceptance_is_documented():
+    acceptance = _read("docs/operations/search-console-acceptance.md")
+    ledger = _read("docs/plans/2026-07-15-project-completion-master-ledger.md")
+
+    assert "OPS-004" in acceptance
+    assert "sc-domain:getwiseoracle.com" in acceptance
+    assert "https://getwiseoracle.com/sitemap.xml" in acceptance
+    assert "| 状态 | 成功 |" in acceptance
+    assert "| 发现的网页 | 9 |" in acceptance
+    assert "网页已编入索引" in acceptance
+    assert "google-site-verification=" not in acceptance
+    assert "OPS-004 | 提交 Search Console 并验证收录 | P1 | 已完成" in ledger
+
+
+def test_server_uploaded_article_publishing_decision_is_documented():
+    architecture = _read("docs/architecture/article-publishing-architecture-2026-07-16.md")
+    ledger = _read("docs/plans/2026-07-15-project-completion-master-ledger.md")
+
+    assert "服务器私密 URL 上传并即时发布" in architecture
+    assert "https://getwiseoracle.com/165131" in architecture
+    assert "手机、其他电脑或任何地点" in architecture
+    assert "不触发 Git commit、GitHub Actions、Docker build 或部署" in architecture
+    assert "下载全部文章" in architecture
+    assert "服务器私密 URL 上传并即时发布" in ledger
+    assert "GitHub 仅管理程序代码" in ledger
+
+
+def test_article_system_and_site_management_acceptance_is_documented():
+    acceptance = _read("docs/reviews/2026-07-16-art-001-002-site-management-acceptance.md")
+    ledger = _read("docs/plans/2026-07-15-project-completion-master-ledger.md")
+
+    for required in (
+        "ART-001、ART-002 已按纠正后的方案完成",
+        "https://getwiseoracle.com/165131",
+        "不提交 Git、不触发 Actions、不构建镜像、不重新部署",
+        "打包下载全部文章",
+        "zhugeshensuan_article-content",
+        "zhugeshensuan:2026.07.16-article-upload",
+        "手机或另一台电脑",
+        "待生产验收",
+    ):
+        assert required in acceptance
+
+    assert "ART-001 | 确定英文文章存储与发布架构 | P1 | 已完成" in ledger
+    assert "ART-002 | 实现文章加载、列表、详情与服务器上传 | P1 | 已完成" in ledger
+    assert "ART-003 | 发布第一批 10 篇基础文化解释文章 | P1 | 就绪" in ledger
+    assert "OPS-003 | 建立错误、存活性与资源监控 | P1 | 待验收" in ledger
+    assert "OPS-006 | 处理 Cloudflare Browser Insights 与 CSP 冲突 | P2 | 待验收" in ledger

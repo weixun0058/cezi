@@ -24,6 +24,9 @@ windows-tray-backup-*/
 *.bak
 *.bak.*
 
+# Docker 镜像导出工件仅用于部署，不得提交到 Git
+*.tar
+
 # 运行时输出目录
 outputs/
 

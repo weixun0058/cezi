@@ -24,6 +24,24 @@ def test_low_value_result_actions_are_not_rendered():
         assert button_labels.isdisjoint(removed_labels), template_name
 
 
+def test_chinese_poetry_columns_read_from_right_to_left():
+    templates = ("index.html", "suanshi.html", "lunming.html", "huangli.html")
+
+    for template_name in templates:
+        markup = (ROOT / "frontend" / "templates" / template_name).read_text(encoding="utf-8")
+        soup = BeautifulSoup(markup, "html.parser")
+        poetry = soup.select_one(".poetry-container")
+        assert poetry is not None, template_name
+        assert poetry.select(".poem-line"), template_name
+
+    for stylesheet_name in ("style.css", "style_mobile.css"):
+        stylesheet = (ROOT / "frontend" / "static" / "css" / stylesheet_name).read_text(
+            encoding="utf-8"
+        )
+        poetry_rule = stylesheet.split(".poetry-container", maxsplit=1)[1].split("}", maxsplit=1)[0]
+        assert "flex-direction: row-reverse;" in poetry_rule, stylesheet_name
+
+
 def test_suanshi_does_not_store_or_render_local_history():
     markup = (ROOT / "frontend" / "templates" / "suanshi.html").read_text(encoding="utf-8")
     script = (ROOT / "frontend" / "static" / "js" / "main.js").read_text(encoding="utf-8")
@@ -124,6 +142,10 @@ def test_language_prefixed_homepages_render_matching_html_lang(client):
     assert zh_hant.status_code == 200
     assert b'<html lang="zh-Hans">' in zh_hans.data
     assert b'<html lang="zh-Hant">' in zh_hant.data
+    assert b'media="screen and (max-width: 480px)"' in zh_hans.data
+    assert b"/static/css/style_mobile.css" in zh_hans.data
+    assert b'media="screen and (max-width: 480px)"' in zh_hant.data
+    assert b"/static/css/style_mobile.css" in zh_hant.data
 
 
 def test_legacy_chinese_page_urls_redirect_to_traditional(client):

@@ -6,6 +6,7 @@ from zhugeshensuan.huangli_english import (
     CJK_RE,
     HuangLiEnglish,
     assess_scenario,
+    build_activity_safety_notices,
     build_word_to_category,
     load_huangli_scenarios,
     load_huangli_terms,
@@ -87,6 +88,54 @@ def test_activity_pipeline_filters_and_merges_categories():
     assert not _contains_cjk(result)
 
 
+def test_medical_activity_category_is_not_published():
+    terms = load_huangli_terms(TERMS_PATH)
+    missing = {}
+    result = process_activities(
+        "求医、针灸",
+        "",
+        terms,
+        build_word_to_category(terms),
+        missing,
+    )
+
+    assert "medical_care" not in terms["activity_categories"]
+    assert result["favorable_activities"] == []
+    assert missing["activities"] == ["求医", "针灸"]
+
+    translated = HuangLiEnglish(terms, {"scenarios": {}}).translate_daily(
+        {"date": "2026-07-15", "suitable": "求医、针灸", "unsuitable": ""}
+    )
+    assert translated["favorable_activities"] == []
+    assert translated["safety_notices"] == []
+
+
+def test_legal_activity_emits_contextual_notice():
+    terms = load_huangli_terms(TERMS_PATH)
+    missing = {}
+    result = process_activities(
+        "词讼",
+        "",
+        terms,
+        build_word_to_category(terms),
+        missing,
+    )
+    notices = build_activity_safety_notices(result)
+
+    assert result["favorable_activities"] == [
+        {"category": "legal_matters", "label": "Legal Matters"}
+    ]
+    assert len(notices) == 1
+    assert "not legal advice" in notices[0]["text"]
+    assert "qualified legal professional" in notices[0]["text"]
+    assert not _contains_cjk(notices)
+
+    translated = HuangLiEnglish(terms, {"scenarios": {}}).translate_daily(
+        {"date": "2026-07-15", "suitable": "词讼", "unsuitable": ""}
+    )
+    assert translated["safety_notices"] == notices
+
+
 def test_scenario_assessment_keeps_source_words_internal():
     scenarios = load_huangli_scenarios(SCENARIOS_PATH)["scenarios"]
     assessment = assess_scenario(
@@ -111,6 +160,7 @@ def test_daily_api_contract_and_no_chinese_leak(client):
     assert data["date"] == "2026-07-01"
     assert data["scenario_assessment"]["scenario"] == "wedding"
     assert set(data["next_favored_date"]) == {"date", "days_ahead"}
+    assert "safety_notices" in data
     assert not _contains_cjk(data)
     assert "fortune" not in data
     assert "gua_type" not in data

@@ -1,7 +1,7 @@
 """W7 英文前端契约测试。
 
 覆盖（依据 docs/plans/2026-06-27-english-site-execution-plan.md W7.3-W7.7）：
-- 11 条英文路由全部 200
+- 10 条已发布英文路由全部 200；未发布文章详情返回 404
 - base.html 共享布局：html lang=en、canonical、wise_oracle.css、wise_oracle_common.js
 - W7.3 首页：H1 Wise Oracle、三大工具入口
 - W7.4 Ask the Oracle：两输入模式、Draw a Sign、How were these numbers formed 折叠项、
@@ -57,7 +57,6 @@ def _raw(client, path: str) -> str:
         "/daily-almanac",
         "/birth-chart-reading",
         "/articles",
-        "/articles/how-oracle-signs-work",
         "/privacy",
         "/terms",
         "/disclaimer",
@@ -66,9 +65,15 @@ def _raw(client, path: str) -> str:
     ],
 )
 def test_english_route_returns_200(client, path):
-    """11 条英文路由全部返回 200。"""
+    """10 条已发布英文路由全部返回 200。"""
     resp = client.get(path)
     assert resp.status_code == 200, f"{path} returned {resp.status_code}"
+
+
+def test_unpublished_article_slug_returns_404(client):
+    resp = client.get("/articles/nonexistent-78e868ea-9542-49fe-a3ef-e46e1761f4c1")
+
+    assert resp.status_code == 404
 
 
 # ============================================================
@@ -214,6 +219,16 @@ def test_daily_almanac_does_not_contain_yellow_calendar(client):
     assert "Yellow Calendar" not in body
 
 
+def test_daily_almanac_has_contextual_legal_notice_container(client):
+    """法律事项提示容器默认隐藏，由 API 返回 legal_matters 时显示。"""
+    raw = _raw(client, "/daily-almanac")
+    script = (ROOT / "frontend/static/js/daily_almanac.js").read_text(encoding="utf-8")
+
+    assert "data-safety-card" in raw
+    assert 'data-list="safety-notices"' in raw
+    assert "renderSafetyNotices(data.safety_notices)" in script
+
+
 # ============================================================
 # W7.6 Birth Chart Reading
 # ============================================================
@@ -309,12 +324,33 @@ def test_about_page_has_real_content(client):
     assert "/birth-chart-reading" in body
 
 
-def test_contact_page_has_real_content(client):
+def test_contact_page_has_real_content(client, app):
     """联系页含真实内容。"""
     body = _body(client, "/contact")
+    raw = _raw(client, "/contact")
     assert "Contact" in body
-    assert "@" in body  # 邮箱
+    assert app.config["CONTACT_EMAIL"] in body
+    assert f'mailto:{app.config["CONTACT_EMAIL"]}' in raw
     assert "/privacy" in body  # 引用隐私政策
+
+
+def test_public_templates_do_not_contain_placeholder_domains():
+    template_root = ROOT / "frontend" / "templates"
+    offenders = [
+        str(path.relative_to(ROOT))
+        for path in template_root.rglob("*.html")
+        if ".example" in path.read_text(encoding="utf-8").lower()
+    ]
+
+    assert offenders == []
+
+
+@pytest.mark.parametrize("path", ["/privacy", "/terms", "/disclaimer"])
+def test_legal_pages_publish_contact_email(client, app, path):
+    raw = _raw(client, path)
+
+    assert app.config["CONTACT_EMAIL"] in raw
+    assert f'mailto:{app.config["CONTACT_EMAIL"]}' in raw
 
 
 @pytest.mark.parametrize(

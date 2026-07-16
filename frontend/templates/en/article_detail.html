@@ -1,15 +1,27 @@
 {% extends "en/base.html" %}
 
-{% block title %}Article — Wise Oracle{% endblock %}
-{% block meta_description %}An article on Chinese divination culture and self-reflection.{% endblock %}
-
 {% block content %}
 <article class="en-article">
-    <h1>Article</h1>
-    <div class="en-articles-placeholder">
-        <p><strong>Coming soon.</strong></p>
-        <p>This article is not available yet. Please check back later.</p>
-        <p><a href="/articles">← Back to Articles</a></p>
-    </div>
+    <p class="en-article-back"><a href="/articles">← Back to Articles</a></p>
+    <header class="en-article-header">
+        <h1>{{ article.title }}</h1>
+        <p class="en-article-description">{{ article.description }}</p>
+        <p class="en-article-date">
+            Published <time datetime="{{ article.published_at.isoformat() }}">{{ article.published_at.isoformat() }}</time>
+            {% if article.updated_at %}
+            · Updated <time datetime="{{ article.updated_at.isoformat() }}">{{ article.updated_at.isoformat() }}</time>
+            {% endif %}
+        </p>
+        <ul class="en-article-tags" aria-label="Article tags">
+            {% for tag in article.tags %}<li>{{ tag }}</li>{% endfor %}
+        </ul>
+    </header>
+    <div class="en-article-body">{{ article_html }}</div>
+    {% if article.source_notes %}
+    <aside class="en-article-sources" aria-label="Source notes">
+        <h2>Source notes</h2>
+        <p>{{ article.source_notes }}</p>
+    </aside>
+    {% endif %}
 </article>
 {% endblock %}

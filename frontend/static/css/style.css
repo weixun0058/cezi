@@ -78,7 +78,8 @@ body {
 
 .poetry-container {
     display: flex;
-    flex-direction: row;
+    /* 古典竖排：单列自上而下，列序从右向左。 */
+    flex-direction: row-reverse;
     gap: 20px;
     padding: 20px;
     flex-wrap: wrap;

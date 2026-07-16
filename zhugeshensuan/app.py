@@ -11,7 +11,9 @@ from .ai_usage import AIUsagePolicy
 from .api_utils import failure, success
 from .birth_chart_english import BirthChartEnglish
 from .blueprints import ALL_BLUEPRINTS
+from .blueprints.article_admin import create_article_admin_blueprint
 from .config import Config, validate_config
+from .content import ArticleRepository
 from .database import Database
 from .huangli import HuangLi
 from .huangli_english import (
@@ -31,7 +33,7 @@ REQUEST_ID_PATTERN = re.compile(r"^[A-Za-z0-9_-]{8,64}$")
 CSP = "; ".join(
     (
         "default-src 'self'",
-        "script-src 'self'",
+        "script-src 'self' https://static.cloudflareinsights.com",
         "style-src 'self' 'unsafe-inline'",
         "img-src 'self' data:",
         "font-src 'self'",
@@ -86,6 +88,8 @@ def create_app(test_config=None):
     configure_logging(app.config.get("APP_DEBUG", False))
     Path(app.instance_path).mkdir(parents=True, exist_ok=True)
 
+    app.extensions["articles"] = ArticleRepository(app.config["ARTICLES_PATH"])
+
     app.extensions["database"] = Database(
         reference_db=app.config["REFERENCE_DB_PATH"],
         runtime_db=app.config["RUNTIME_DB_PATH"],
@@ -130,6 +134,10 @@ def create_app(test_config=None):
 
     for blueprint in ALL_BLUEPRINTS:
         app.register_blueprint(blueprint)
+    app.register_blueprint(
+        create_article_admin_blueprint(),
+        url_prefix=f"/{app.config['ARTICLE_ADMIN_PATH']}",
+    )
 
     @app.before_request
     def start_request_timer():
@@ -180,6 +188,8 @@ def create_app(test_config=None):
             failures.append("REFERENCE_OR_RUNTIME_DB")
         if not app.extensions["ai_usage"].check_ready():
             failures.append("AI_USAGE_DB")
+        if not app.extensions["articles"].check_ready():
+            failures.append("ARTICLE_CONTENT")
         if failures:
             return failure("NOT_READY", "服务尚未就绪", 503, details={"checks": failures})
         return success({"status": "ready", "version": "4.1"})
