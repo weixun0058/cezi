@@ -44,16 +44,21 @@ jobs:
         run: |
           docker build -f deploy/Dockerfile --build-arg APP_VERSION=ci -t zhugeshensuan:ci .
           docker volume create zhugeshensuan-ci-data
+          docker volume create zhugeshensuan-ci-content
           docker run -d --name zhugeshensuan-ci \
             --read-only --tmpfs /tmp:rw,noexec,nosuid,size=64m \
             -v zhugeshensuan-ci-data:/app/instance \
+            -v zhugeshensuan-ci-content:/app/content \
             -p 127.0.0.1:8000:8000 \
             -e APP_ENV=production \
             -e APP_DEBUG=false \
             -e SITE_BASE_URL=https://getwiseoracle.com \
+            -e CONTACT_EMAIL=ci@getwiseoracle.com \
+            -e ARTICLE_ADMIN_PATH=165131 \
             -e SECRET_KEY=ci-only-secret-key-at-least-32-characters \
             -e AI_API_KEY=ci-readiness-placeholder \
             -e AI_GLOBAL_DAILY_LIMIT=100 \
+            -e ARTICLES_PATH=/app/content/articles_en \
             zhugeshensuan:ci
           for attempt in {1..20}; do
             if curl --fail --silent http://127.0.0.1:8000/healthz >/dev/null \

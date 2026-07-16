@@ -306,7 +306,7 @@ This sign's English translation is under review.
 
 ## 五、英文上线范围（W0.6）
 
-本节是目标范围，不表示所有项目已经上线。当前实现快照：三大工具页与合规页已落地；文章页仍为占位；`sitemap.xml`、`robots.txt`、Search Console、商业化配置和真实支付尚未实现。
+本节是目标范围，不表示所有增长和商业化项目已经完成。当前实现快照（2026-07-17）：三大工具页、合规页、服务器私密文章上传、文章列表/详情、动态 `sitemap.xml`、`robots.txt` 和 Search Console 基础接入均已上线；正式站已有首篇文章。首批 10 篇基础文化文章尚未完成，UptimeRobot/Cloudflare Analytics 仍待外部验收，商业化配置和真实支付尚未实现。
 
 ### 5.1 第一轮上线
 

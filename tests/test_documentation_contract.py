@@ -130,7 +130,9 @@ def test_article_system_and_site_management_acceptance_is_documented():
         "zhugeshensuan_article-content",
         "zhugeshensuan:2026.07.16-article-upload",
         "手机或另一台电脑",
-        "待生产验收",
+        "生产状态更新（2026-07-17）",
+        "新镜像与 Compose 已部署",
+        "sitemap.xml` 已动态包含文章列表和首篇文章 URL，共 11 个 URL",
     ):
         assert required in acceptance
 
@@ -139,3 +141,27 @@ def test_article_system_and_site_management_acceptance_is_documented():
     assert "ART-003 | 发布第一批 10 篇基础文化解释文章 | P1 | 就绪" in ledger
     assert "OPS-003 | 建立错误、存活性与资源监控 | P1 | 待验收" in ledger
     assert "OPS-006 | 处理 Cloudflare Browser Insights 与 CSP 冲突 | P2 | 待验收" in ledger
+
+
+def test_current_product_and_ledger_status_match_the_deployed_article_system():
+    product_spec = _read("docs/business/wise-oracle-english-product-spec.md")
+    ledger = _read("docs/plans/2026-07-15-project-completion-master-ledger.md")
+    seo_acceptance = _read("docs/reviews/2026-07-16-seo-001-003-acceptance.md")
+    search_console = _read("docs/operations/search-console-acceptance.md")
+
+    stale_snapshot = (
+        "文章页仍为占位；`sitemap.xml`、`robots.txt`、Search Console、"
+        "商业化配置和真实支付尚未实现"
+    )
+    assert stale_snapshot not in product_spec
+    assert "服务器私密文章上传" in product_spec
+    assert "正式站已有首篇文章" in product_spec
+
+    assert "**当前版本：** 1.16" in ledger
+    assert "2026-07-17 实测 11 URL" in ledger
+    assert "OPS-005 | 执行上线后统一全量验收" in ledger
+    assert "下一步先部署包含文章持久卷" not in ledger
+    assert "GitHub 自动部署生产验收并行" not in ledger
+
+    assert "9 URL 是 SEO 批次验收时的静态基线" in seo_acceptance
+    assert "生产 sitemap 已扩展到 11 URL" in search_console

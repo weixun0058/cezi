@@ -42,10 +42,11 @@ Copy-Item .env.example .env
 .\.venv\Scripts\python.exe -m black --check app.py zhugeshensuan deploy/gunicorn.conf.py scripts tests
 .\.venv\Scripts\python.exe -m ruff check app.py zhugeshensuan deploy/gunicorn.conf.py scripts tests
 .\.venv\Scripts\python.exe -m pytest -W error::ResourceWarning
-node --check frontend\static\js\huangli.js
-node --check frontend\static\js\lunming.js
-node --check frontend\static\js\main.js
+Get-ChildItem frontend\static\js -Recurse -Filter *.js | ForEach-Object { node --check $_.FullName }
 ```
+
+GitHub Actions 会重复执行上述门禁，并使用生产配置、独立 runtime/article-content
+数据卷启动 Docker 镜像，检查 `/healthz` 与 `/readyz`。
 
 ## 数据重建
 
