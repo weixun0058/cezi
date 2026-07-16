@@ -13,9 +13,9 @@
 ## 1. 台账定位与效力
 
 - **建立日期：** 2026-07-15
-- **当前版本：** 1.16
+- **当前版本：** 1.17
 - **主维护人：** 项目所有者 + 当次执行者
-- **状态基线：** 2026-07-17 复核时，`main` 与 `origin/main` 同步于 `8c60f4e`，生产站与文章系统已上线；修复后本地基线为 pytest 450/450、Black、Ruff、14/14 JavaScript、pip-audit 和生产 Docker 冒烟通过。该提交的 GitHub CI run 19 在生产 Docker 冒烟步骤失败，根因是工作流漏传必填 `CONTACT_EMAIL`；修复已进入工作树，推送后仍需以远端 CI 绿色结果关闭 OPS-005。
+- **状态基线：** 2026-07-17，生产站与文章系统已上线；CI 修复提交 `44f6925` 已推送到 `main`，GitHub Actions run 20 全部通过。本地基线为 pytest 450/450、Black、Ruff、14/14 JavaScript、pip-audit 和生产 Docker 冒烟通过。run 19 的红灯根因已关闭，OPS-005 只保留外部监控和统一验收证据收尾。
 - **上位契约：** `README.md`、`docs/API文档.md`、`Agent.md`。
 - **历史依据：**
   - `docs/reviews/2026-07-14-project-completion-issues-audit.md`
@@ -97,7 +97,7 @@
 | OPS-002 | 建立备份、恢复和回滚演练 | P1 | 已完成 | OPS-001 | `docs/operations/backup-restore-runbook.md`；隔离卷完成 `runtime.db` 备份/恢复和不同 image ID 镜像回滚，生产卷未挂载；见 `docs/operations/ops-002-acceptance.md` |
 | OPS-003 | 建立错误、存活性与资源监控 | P1 | 待验收 | DEC-003 已决定、OPS-001 | UptimeRobot `readyz`/5 分钟/邮件口径和运行手册已固化；待项目所有者创建账号并验证 Down/恢复邮件；第三方错误平台默认关闭 |
 | OPS-004 | 提交 Search Console 并验证收录 | P1 | 已完成 | SEO-002、OPS-001 均已完成 | DNS 所有权验证成功；sitemap 成功读取并发现 9 个网页；首页已编入索引且 HTTPS 正常；见 `docs/operations/search-console-acceptance.md` |
-| OPS-005 | 执行上线后统一全量验收 | P1 | 阻塞 | SAFE/SEO/TRUST/OPS 的 P0-P1 项 | `8c60f4e` 的远端 CI 当前红灯；工作流修复推送并取得绿色结果后，再汇总同一提交上的 CI、Docker 健康、桌面/移动、断网和回滚证据 |
+| OPS-005 | 执行上线后统一全量验收 | P1 | 阻塞 | SAFE/SEO/TRUST/OPS 的 P0-P1 项 | CI 修复提交 `44f6925` 的 GitHub Actions run 20 已通过；待 OPS-003 外部监控验收后，汇总 CI、Docker 健康、桌面/移动、断网和回滚证据 |
 | OPS-006 | 处理 Cloudflare Browser Insights 与 CSP 冲突 | P2 | 待验收（非阻塞） | 已决定使用 Cloudflare Web Analytics | `script-src` 仅增加 `https://static.cloudflareinsights.com`，无脚本 inline/eval；待部署、Cloudflare 启用、浏览器无 CSP 错误且出现 Analytics 数据 |
 | COM-001 | 实时核验支付、赞助和广告平台政策 | P2 | 就绪 | 上线地区/主体信息 | 官方来源、核验日期、提现/类目/webhook/费用对比 |
 | COM-002 | 确定是否解冻赞助/广告/Deep Reading | P2 | 待决策 | COM-001、DEC-004/005 | 明确“上线/不上线”及触发条件 |
@@ -113,7 +113,7 @@
 2. **批次 B（已完成）：** SAFE-002 完成全量覆盖和语义初筛；项目所有者完成 SAFE-003/004 最终裁决，批准修改已进入正文和运行路径。
 3. **批次 C（已完成）：** SEO-001 → SEO-002 → SEO-003；代码、测试、Docker、正式域名、Schema.org Validator 和桌面/移动验收均已完成，证据见 `docs/reviews/2026-07-16-seo-001-003-acceptance.md`。
 4. **批次 D（业主输入已完成）：** DEC-001 已解锁 ART-001；DEC-002 已解锁 TRUST-001。
-5. **批次 E（进行中）：** OPS-001/002/004、ART-001/002 已完成并已上线；先关闭当前 CI 红灯，再并行推进 ART-003 与 OPS-003/006 外部验收，最后汇总 OPS-005。
+5. **批次 E（进行中）：** OPS-001/002/004、ART-001/002 已完成并已上线，CI 红灯已关闭；并行推进 ART-003 与 OPS-003/006 外部验收，最后汇总 OPS-005。
 6. **批次 F（上线后增长）：** ART-004/005、MET-001/002。
 7. **批次 G（最后考虑商业化）：** COM-001 → COM-002 → COM-003/004/005。
 
@@ -274,7 +274,7 @@ python -c "import pathlib, subprocess; files=sorted(pathlib.Path('frontend/stati
 | 2026-07-16 | 自动发布骨架 | 项目所有者 + Codex | 待生产验收 → 已取消 | 删除 `.github/workflows/publish.yml`、`deploy/promote_image.sh` 及相关测试和文档 | 日常文章不应依赖 GitHub 网络、CI、镜像重建或整站部署；程序代码继续使用既有 CI 与手工部署 | 无替代自动部署任务；文章由服务器私密页面即时发布 |
 | 2026-07-16 | UI-001 | 项目所有者 + Codex | 新增 → 已完成 | 项目所有者发现算事、论命、黄历定场诗列序反向；桌面和手机共用样式改为 `row-reverse`，保留每列 `vertical-rl`，并校正黄历动画顺序 | 定向契约 1/1、前端契约 15/15、全量 448/448、Black 89、Ruff、diff 通过；真实 Chrome 在 1280px/390px 下三页均确认第一句位于第二句右侧 | 将修复纳入本批部署镜像；生产部署后做一次页面刷新验收 |
 | 2026-07-17 | ART-001/002、UI-001 | Codex | 生产状态复核 | 正式站已运行文章管理版本；`/165131`、文章列表、首篇文章、动态 sitemap 和桌面/移动 `row-reverse` 静态资源均存在 | `/readyz` ready；管理页 200 且 noindex/no-store；sitemap 11 URL；文章详情 200 | 补写入/覆盖/ZIP/真实文章备份和中文页面最终视觉记录 |
-| 2026-07-17 | OPS-005 | Codex | 阻塞原因明确 → 修复待远端验收 | GitHub CI run 19 仅在生产 Docker 冒烟失败；工作流漏传生产必填 `CONTACT_EMAIL`，且未显式覆盖独立 article-content 路径；已补齐邮箱、管理路径、文章路径和独立内容卷，并增加工作流契约测试 | pytest 450/450、Black、Ruff、14/14 JavaScript、pip-audit、diff 和独立双卷 Docker `healthz/readyz` 冒烟通过；最终以 GitHub Actions 绿色结果为准 | 推送修复并确认远端 CI；随后汇总 OPS-005 |
+| 2026-07-17 | OPS-005 | Codex | 阻塞原因明确 → CI 阻塞已关闭 | GitHub CI run 19 仅在生产 Docker 冒烟失败；工作流漏传生产必填 `CONTACT_EMAIL`，且未显式覆盖独立 article-content 路径；已补齐邮箱、管理路径、文章路径和独立内容卷，并增加工作流契约测试 | pytest 450/450、Black、Ruff、14/14 JavaScript、pip-audit、diff 和独立双卷 Docker `healthz/readyz` 冒烟通过；提交 `44f6925` 对应 GitHub Actions run 20 成功 | 等待 OPS-003 外部验收，随后汇总 OPS-005 |
 
 ## 9. 已取消任务（墓碑）
 
@@ -286,6 +286,7 @@ python -c "import pathlib, subprocess; files=sorted(pathlib.Path('frontend/stati
 
 | 版本 | 日期 | 修订人 | 类型 | 变更内容 | 原因 |
 | --- | --- | --- | --- | --- | --- |
+| 1.17 | 2026-07-17 | Codex | CI 远端验收收尾 | 记录修复提交 `44f6925` 已推送且 GitHub Actions run 20 成功；OPS-005 的 CI 阻塞关闭，仅保留外部监控和统一验收收尾 | 1.16 写入时远端 CI 尚未运行完成，必须用真实远端结果替换“待验收”状态 |
 | 1.16 | 2026-07-17 | Codex | 生产状态与 CI 契约同步 | 将文章系统从“待部署”更新为已上线，记录首篇文章和 11 URL sitemap；将 OPS-005 改为上线后统一验收；登记并修复 CI Docker 冒烟遗漏生产必填邮箱和文章卷路径的问题 | 代码、生产状态和当前文档已超出 1.15 基线，且 `8c60f4e` 的远端 CI 实际为红灯，必须恢复真实可追溯状态 |
 | 1.15 | 2026-07-16 | 项目所有者 + Codex | 中文文化呈现纠正 | 新增并完成 UI-001；中文算事、论命、黄历定场诗改为右起竖排，同时增加桌面/移动契约和真实浏览器验收 | 旧样式明确使用 `flex-direction: row`，使第一句落在最左侧，不符合中国古典竖排的阅读顺序 |
 | 1.14 | 2026-07-16 | 项目所有者 + Codex | 重大纠偏 | 废止 1.12/1.13 中“本机编辑器 + GitHub 自动发布文章”；DEC-001 改为 `/165131` 服务器私密上传、简单密码、独立持久卷、上传即时刷新和全部文章 ZIP 下载；删除错误实现与文档 | 原方案不能从手机或其他电脑使用，而且把每篇文章绑定到 GitHub、CI、镜像构建和部署，故障面与运营成本不符合项目所有者需求 |
@@ -306,7 +307,7 @@ python -c "import pathlib, subprocess; files=sorted(pathlib.Path('frontend/stati
 
 ## 11. 下一个可执行批次
 
-**ART-001/002 已按纠正后的服务器上传架构完成并上线。下一步先推送 CI Docker 冒烟修复并确认 GitHub Actions 绿色；随后由项目所有者补齐手机/其他电脑上传、同 slug 覆盖、全部文章 ZIP 和首次真实文章卷备份记录，同时进入 ART-003 的 10 篇基础文化解释文章。**
+**ART-001/002 已按纠正后的服务器上传架构完成并上线，CI 红灯也已关闭。下一步由项目所有者补齐手机/其他电脑上传、同 slug 覆盖、全部文章 ZIP 和首次真实文章卷备份记录，同时进入 ART-003 的 10 篇基础文化解释文章。**
 
 可并行的项目所有者外部步骤：确认 Cloudflare Web Analytics 数据；创建 UptimeRobot monitor 并验证 Down/恢复邮件。这些外部验收不包含 GitHub 文章发布或 GHCR 自动部署。
 

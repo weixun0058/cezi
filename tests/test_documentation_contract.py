@@ -157,9 +157,10 @@ def test_current_product_and_ledger_status_match_the_deployed_article_system():
     assert "服务器私密文章上传" in product_spec
     assert "正式站已有首篇文章" in product_spec
 
-    assert "**当前版本：** 1.16" in ledger
+    assert "**当前版本：** 1.17" in ledger
     assert "2026-07-17 实测 11 URL" in ledger
     assert "OPS-005 | 执行上线后统一全量验收" in ledger
+    assert "GitHub Actions run 20 已通过" in ledger
     assert "下一步先部署包含文章持久卷" not in ledger
     assert "GitHub 自动部署生产验收并行" not in ledger
 
