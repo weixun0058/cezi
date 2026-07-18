@@ -1,5 +1,6 @@
 import logging
 import re
+import sqlite3
 import time
 import uuid
 from pathlib import Path
@@ -24,6 +25,7 @@ from .huangli_english import (
 from .i18n_utils import DEFAULT_LANG, LANGS
 from .logging_config import configure_logging
 from .lunming import LunMing
+from .metrics import ENDPOINT_METRICS, DailyMetricsStore
 from .oracle_english import load_english_signs_safe
 
 LOGGER = logging.getLogger(__name__)
@@ -116,6 +118,7 @@ def create_app(test_config=None):
         max_concurrent=app.config["AI_MAX_CONCURRENT"],
         lease_seconds=int(app.config["AI_TIMEOUT_SECONDS"] + 30),
     )
+    app.extensions["daily_metrics"] = DailyMetricsStore(app.config["RUNTIME_DB_PATH"])
     # 英文签文内存字典（D15：JSON 内存加载，不入数据库）
     # 用户用其他 Agent 更新 JSON 文件后，重启服务器即生效（无缝切换）
     app.extensions["english_signs"] = load_english_signs_safe(app.config["ENGLISH_SIGNS_PATH"])
@@ -162,6 +165,12 @@ def create_app(test_config=None):
             duration_ms,
             g.request_id,
         )
+        metric_name = ENDPOINT_METRICS.get((request.endpoint, request.method))
+        if metric_name and 200 <= response.status_code < 300:
+            try:
+                app.extensions["daily_metrics"].increment(metric_name)
+            except (OSError, sqlite3.Error, ValueError):
+                LOGGER.exception("Failed to record aggregate product metric")
         response.headers.setdefault("X-Content-Type-Options", "nosniff")
         response.headers.setdefault("Referrer-Policy", "strict-origin-when-cross-origin")
         response.headers.setdefault("X-Frame-Options", "SAMEORIGIN")

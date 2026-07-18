@@ -13,9 +13,9 @@
 ## 1. 台账定位与效力
 
 - **建立日期：** 2026-07-15
-- **当前版本：** 1.23
+- **当前版本：** 1.24
 - **主维护人：** 项目所有者 + 当次执行者
-- **状态基线：** 2026-07-18，生产站与文章系统已上线；CI 修复提交 `44f6925` 已推送到 `main`，GitHub Actions run 20 全部通过。本地基线为 pytest 450/450、Black、Ruff、14/14 JavaScript、pip-audit 和生产 Docker 冒烟通过。外部监控与统一上线验收均已闭环，证据见 `docs/operations/ops-005-final-acceptance.md`。
+- **状态基线：** 2026-07-19，生产站与文章系统已上线；GitHub Actions run 20 全部通过，OPS/GOV 收尾已通过 PR #1 合并到 `main`（merge commit `6af5f7e`）。本地基线为 Python 3.13.13、pytest 450/450、Black、Ruff、14/14 JavaScript、pip-audit 和生产 Docker 冒烟通过。外部监控与统一上线验收均已闭环；商业化尚未上线，当前进入异机备份、聚合指标和四周运营观察。
 - **上位契约：** `README.md`、`docs/API文档.md`、`Agent.md`。
 - **历史依据：**
   - `docs/reviews/2026-07-14-project-completion-issues-audit.md`
@@ -99,12 +99,12 @@
 | OPS-004 | 提交 Search Console 并验证收录 | P1 | 已完成 | SEO-002、OPS-001 均已完成 | DNS 所有权验证成功；sitemap 成功读取并发现 9 个网页；首页已编入索引且 HTTPS 正常；见 `docs/operations/search-console-acceptance.md` |
 | OPS-005 | 执行上线后统一全量验收 | P1 | 已完成 | SAFE/SEO/TRUST/OPS 的 P0-P1 项均已完成 | `docs/operations/ops-005-final-acceptance.md`；CI run 20、Docker 健康、桌面/移动、受控 API 失败、备份恢复、镜像回滚和外部告警证据均已统一汇总 |
 | OPS-006 | 处理 Cloudflare Browser Insights 与 CSP 冲突 | P2 | 已完成 | 已决定使用 Cloudflare Web Analytics | `docs/operations/ops-006-cloudflare-web-analytics-acceptance.md`；生产 CSP 最小放行，浏览器实际加载 beacon 并请求同源 `/cdn-cgi/rum`，Cloudflare 后台显示最近 24 小时 7 page views、2 visits |
-| COM-001 | 实时核验支付、赞助和广告平台政策 | P2 | 就绪 | 上线地区/主体信息 | 官方来源、核验日期、提现/类目/webhook/费用对比 |
+| COM-001 | 实时核验支付、赞助和广告平台政策 | P2 | 进行中 | 上线地区/主体信息 | `docs/business/2026-07-19-commercialization-readiness-roadmap.md` 已建立阶段、隐私和决策边界；仍需按项目所有者实际地区核验全部候选平台的提现、类目、webhook、费用与税务条件 |
 | COM-002 | 确定是否解冻赞助/广告/Deep Reading | P2 | 待决策 | COM-001、DEC-004/005 | 明确“上线/不上线”及触发条件 |
 | COM-003 | 实现默认关闭的商业化配置开关 | P3 | 阻塞 | COM-002 | 关闭时零 UI/零外部请求，配置和测试完整 |
 | COM-004 | 实现赞助组件或广告占位 | P3 | 阻塞 | COM-002/003 | 开关控制、布局安全、无误导点击或运势暗示 |
 | COM-005 | 实现模拟付费墙、订单模型与 webhook 边界 | P3 | 阻塞 | COM-002/003、DEC-005 | 无平台时不持久化真订单；未签名 webhook 不可用 |
-| MET-001 | 建立隐私友好的使用/成本指标 | P2 | 就绪 | OPS-001 | 只记聚合数据，不记姓名、出生时间或原始问题 |
+| MET-001 | 建立隐私友好的使用/成本指标 | P2 | 进行中 | OPS-001 | 已实现按日 Oracle/Almanac 聚合计数、复用全局AI请求聚合、周报导出和隐私契约；不记姓名、出生时间、IP、设备ID、原问题或结果文本；待部署生产并完成首周导出验收 |
 | MET-002 | 连续四周运营复盘 | P3 | 阻塞 | MET-001、OPS-004 | 4/4 周记录，形成内容、成本和商业化去留决策 |
 
 ## 4. 推荐执行顺序
@@ -281,6 +281,8 @@ python -c "import pathlib, subprocess; files=sorted(pathlib.Path('frontend/stati
 | 2026-07-18 | GOV-003 | Codex | 就绪（非阻塞） → 已完成 | 建立 Git、OCI label、image ID、tar SHA-256 和 CI 的分级追溯；明确历史未提交工作树工件不能倒推为可逐字节复现 | `docs/operations/release-provenance.md`；根目录 tar 重新计算 SHA-256 并读取 manifest/config；历史工件采用验收记录 | 后续镜像写入完整 OCI revision SHA，并保留不可变发布标签 |
 | 2026-07-18 | OPS-006 | 项目所有者 + Codex | 待验收（非阻塞） → 已完成 | 核验生产 CSP、Cloudflare beacon、同源 RUM 请求和 Web Analytics 后台非零数据 | `docs/operations/ops-006-cloudflare-web-analytics-acceptance.md`；后台显示 Automatic setup、最近 24 小时 7 page views/2 visits | 后续仅作持续运营观察；新增分析服务或用户标识需重新决策 |
 | 2026-07-18 | OPS-002/ART-002 | 项目所有者 + Codex | 持续运维证据补齐 | 在生产服务器短暂停机完成首次 runtime 与文章卷快照，生成 SHA-256，验证 SQLite/归档并恢复服务 | `docs/operations/2026-07-18-production-backup-acceptance.md`；本机与公网 health/readiness 通过；失败尝试文件已隔离保留 | 建立每日备份与加密异机副本；按月做隔离恢复演练 |
+| 2026-07-19 | OPS-002 | Codex + 项目所有者 | 持续运维实施中 | 新增生产每日双数据备份脚本、7日/4周本地保留、失败隔离、不可变R2上传和systemd定时器；确认R2尚未启用且启用会创建绑定现有付款方式的用量计费订阅 | `scripts/production_backup.sh`、`deploy/wise-oracle-backup.*`、`docs/operations/automated-backup-r2-runbook.md`；外部订阅未越权点击 | 项目所有者明确确认R2订阅后创建私有bucket和最小权限token，部署定时器并做异机下载校验 |
+| 2026-07-19 | COM-001/MET-001 | Codex | 就绪 → 进行中 | 明确“生产版本完成、商业化未完成”；新增商业化准备路线、按日无个人数据聚合指标、周报导出和四周复盘模板 | `docs/business/2026-07-19-commercialization-readiness-roadmap.md`、`docs/business/weekly-growth-review-template.md`、`zhugeshensuan/metrics.py`、`scripts/weekly_metrics_report.py` | 先部署MET-001并完成四周观察；同期按实际收款主体完成平台核验，不提前接真实支付或广告 |
 
 ## 9. 已取消任务（墓碑）
 
@@ -292,6 +294,7 @@ python -c "import pathlib, subprocess; files=sorted(pathlib.Path('frontend/stati
 
 | 版本 | 日期 | 修订人 | 类型 | 变更内容 | 原因 |
 | --- | --- | --- | --- | --- | --- |
+| 1.24 | 2026-07-19 | 项目所有者 + Codex | 运维与商业化阶段澄清 | 将当前状态统一为“生产版本完成、商业化未完成”；建立R2自动备份、隐私聚合指标、商业化准备路线和四周复盘模板；COM-001/MET-001进入实施，R2财务订阅保留业主确认门 | 网站已经产生可变生产数据且业主需要经营指导；应先补齐灾难恢复和真实运营基线，再决定打赏、AdSense或付费产品，不能把商业功能缺失误写成生产站未完成 |
 | 1.23 | 2026-07-18 | 项目所有者 + Codex | Cloudflare Analytics 验收完成 | 新增 OPS-006 验收记录；生产 CSP、beacon、同源 RUM 与 Cloudflare 后台非零统计均通过，OPS-006 标记已完成 | 代码、正式浏览器和私有控制台三层证据齐备，CSP 冲突已实际关闭 |
 | 1.22 | 2026-07-18 | Codex | 发布追溯完成 | 新增 `docs/operations/release-provenance.md`，关闭 GOV-003；补充 SEO 验收的后续 Git 映射说明 | 根目录旧 tar 可通过 OCI label 精确映射，SEO/TRUST/article 历史工件则需诚实记录为提交前工作树构建，并关联首次完整持久化提交 |
 | 1.21 | 2026-07-18 | Codex | 统一上线验收完成 | 新增 OPS-005 最终验收记录，统一汇总最新 CI/Docker、浏览器、失败降级、备份恢复、镜像回滚和外部监控证据；OPS-005 标记已完成 | 所有 P0-P1 前置项和最后的外部告警闭环均已有证据，剩余事项已明确为非阻塞运维或增长任务 |
