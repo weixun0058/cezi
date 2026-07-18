@@ -10,7 +10,7 @@ User=root
 Group=root
 WorkingDirectory=/root/zhugeshensuan
 Environment=WISE_ORACLE_PROJECT_DIR=/root/zhugeshensuan
-Environment=WISE_ORACLE_R2_REMOTE=wise-oracle-crypt:production
+EnvironmentFile=-/root/zhugeshensuan/backup.env
 ExecStart=/usr/bin/env bash /root/zhugeshensuan/scripts/production_backup.sh
 Nice=10
 IOSchedulingClass=best-effort
