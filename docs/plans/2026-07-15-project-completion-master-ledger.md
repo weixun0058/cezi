@@ -13,9 +13,9 @@
 ## 1. 台账定位与效力
 
 - **建立日期：** 2026-07-15
-- **当前版本：** 1.17
+- **当前版本：** 1.23
 - **主维护人：** 项目所有者 + 当次执行者
-- **状态基线：** 2026-07-17，生产站与文章系统已上线；CI 修复提交 `44f6925` 已推送到 `main`，GitHub Actions run 20 全部通过。本地基线为 pytest 450/450、Black、Ruff、14/14 JavaScript、pip-audit 和生产 Docker 冒烟通过。run 19 的红灯根因已关闭，OPS-005 只保留外部监控和统一验收证据收尾。
+- **状态基线：** 2026-07-18，生产站与文章系统已上线；CI 修复提交 `44f6925` 已推送到 `main`，GitHub Actions run 20 全部通过。本地基线为 pytest 450/450、Black、Ruff、14/14 JavaScript、pip-audit 和生产 Docker 冒烟通过。外部监控与统一上线验收均已闭环，证据见 `docs/operations/ops-005-final-acceptance.md`。
 - **上位契约：** `README.md`、`docs/API文档.md`、`Agent.md`。
 - **历史依据：**
   - `docs/reviews/2026-07-14-project-completion-issues-audit.md`
@@ -78,7 +78,7 @@
 | --- | --- | --- | --- | --- | --- |
 | GOV-001 | 建立剩余工作唯一主台账 | P0 | 已完成 | 无 | 本文档、README/旧计划引用、文档契约测试 |
 | GOV-002 | 为后续每批实施建立统一验收记录 | P0 | 已完成 | GOV-001 | `docs/reviews/2026-07-15-safe-001-002-acceptance.md`，含范围、验证、限制和回滚记录 |
-| GOV-003 | 为已部署源码、镜像与导出工件建立 Git 发布追溯 | P1 | 就绪（非阻塞） | SEO-001/002/003 已完成 | 对应源码提交、镜像标签 `2026.07.16-seo` 与 tar SHA-256 的映射记录；不改变当前生产运行结果 |
+| GOV-003 | 为已部署源码、镜像与导出工件建立 Git 发布追溯 | P1 | 已完成 | SEO-001/002/003 已完成 | `docs/operations/release-provenance.md`；区分内嵌 `f90a852` 的旧 tar、提交前工作树构建的 SEO/TRUST/article 工件及首次完整持久化提交 `8c60f4e`，记录 image ID/tar SHA-256/CI 边界 |
 | UI-001 | 修正中文定场诗的古典右起列序 | P0 | 已完成 | 无 | 算事、论命、黄历的诗句保持单列自上而下、列序从右向左；桌面/390px 浏览器坐标、契约测试和全量回归通过；见 `docs/reviews/2026-07-16-chinese-poetry-direction-acceptance.md` |
 | SAFE-001 | 确定英文产品内容边界与业主裁决规则 | P0 | 已完成 | 无 | 第 2.4 节、`docs/reviews/english-content-boundary-policy.md`、候选格式和项目所有者确认记录 |
 | SAFE-002 | 全量检查英文内容并生成极端判词审查册 | P0 | 已完成 | SAFE-001 | 384/384 签、3,072 字段实例均已检查；只确认 69 签的 74 个极端问题字段和 2 个非签文问题；每项有具体问题句，受审内容零修改 |
@@ -90,15 +90,15 @@
 | SEO-003 | 完善页面 title、description、Open Graph 和结构化数据 | P1 | 已完成 | SEO-001 | 生产核心页唯一元数据与 Open Graph 正确；Schema.org Validator 0 错误/0 警告；1440/390 验收通过 |
 | ART-001 | 确定英文文章存储与发布架构 | P1 | 已完成 | DEC-001 已纠正：服务器私密 URL 上传并即时发布 | `/165131` 跨设备入口、可选简单密码、独立文章持久卷、原子上传/覆盖和全部 Markdown ZIP 下载；GitHub 不参与日常文章发布；2026-07-17 已确认生产入口与文章卷版本上线 |
 | ART-002 | 实现文章加载、列表、详情与服务器上传 | P1 | 已完成 | ART-001 | 上传后无需重启或部署即可跨 worker 刷新列表、详情、canonical/OG/JSON-LD/sitemap；生产已有首篇文章且 sitemap 动态增至 11 URL；剩余生产写入/覆盖/ZIP/真实备份证据见验收文档第 5 节 |
-| ART-003 | 发布第一批 10 篇基础文化解释文章 | P1 | 就绪 | ART-002、SAFE-001 均已完成 | 正式站当前有 1 篇文章，但尚无 10/10 基础文化文章人工审校完成证据；每篇仍需内链、来源和负责使用说明 |
-| ART-004 | 发布 10 篇搜索意图文章 | P2 | 阻塞 | ART-003、Search Console 基线 | 10/10 审校，无重复/薄内容，有搜索意图记录 |
-| ART-005 | 发布 5 篇工具使用/转化辅助文章 | P2 | 阻塞 | ART-003、商业化边界 | 5/5 审校，不暗示付费提高准确性 |
+| ART-003 | 按机会持续发布基础文化解释文章 | P3 | 就绪（非阻塞、非硬性） | ART-002、SAFE-001 均已完成 | 不设固定篇数和完成期限；有合适选题和时间时发布，每篇仍需人工审校、内链、来源和负责使用说明；不阻塞网站验收、运营指标或其他工程任务 |
+| ART-004 | 按机会发布搜索意图文章 | P3 | 就绪（非阻塞、非硬性） | Search Console 基线已完成 | 不设固定篇数和完成期限；发布时避免重复/薄内容，并保留搜索意图记录；不依赖 ART-003 |
+| ART-005 | 按机会发布工具使用/转化辅助文章 | P3 | 阻塞（非硬性） | 商业化边界 | 不设固定篇数和完成期限；发布时不得暗示付费提高准确性；不依赖 ART-003 |
 | OPS-001 | 完成生产环境配置和域名/HTTPS 验收 | P1 | 已完成 | TRUST-001、SEO-001 | `docs/operations/production-acceptance.md`；域名、HTTPS、脱敏环境变量、静态资源、安全头、AI 降级、health/readiness 均通过 |
 | OPS-002 | 建立备份、恢复和回滚演练 | P1 | 已完成 | OPS-001 | `docs/operations/backup-restore-runbook.md`；隔离卷完成 `runtime.db` 备份/恢复和不同 image ID 镜像回滚，生产卷未挂载；见 `docs/operations/ops-002-acceptance.md` |
-| OPS-003 | 建立错误、存活性与资源监控 | P1 | 待验收 | DEC-003 已决定、OPS-001 | UptimeRobot `readyz`/5 分钟/邮件口径和运行手册已固化；待项目所有者创建账号并验证 Down/恢复邮件；第三方错误平台默认关闭 |
+| OPS-003 | 建立错误、存活性与资源监控 | P1 | 已完成 | DEC-003 已决定、OPS-001 | UptimeRobot 公共状态页 `https://stats.uptimerobot.com/wOqljyqoWd` 已核验：监控对象为 `getwiseoracle.com/readyz`，Operational、100% uptime；项目所有者已提供 Down 与恢复（UP）邮件同屏证据；第三方错误平台默认关闭 |
 | OPS-004 | 提交 Search Console 并验证收录 | P1 | 已完成 | SEO-002、OPS-001 均已完成 | DNS 所有权验证成功；sitemap 成功读取并发现 9 个网页；首页已编入索引且 HTTPS 正常；见 `docs/operations/search-console-acceptance.md` |
-| OPS-005 | 执行上线后统一全量验收 | P1 | 阻塞 | SAFE/SEO/TRUST/OPS 的 P0-P1 项 | CI 修复提交 `44f6925` 的 GitHub Actions run 20 已通过；待 OPS-003 外部监控验收后，汇总 CI、Docker 健康、桌面/移动、断网和回滚证据 |
-| OPS-006 | 处理 Cloudflare Browser Insights 与 CSP 冲突 | P2 | 待验收（非阻塞） | 已决定使用 Cloudflare Web Analytics | `script-src` 仅增加 `https://static.cloudflareinsights.com`，无脚本 inline/eval；待部署、Cloudflare 启用、浏览器无 CSP 错误且出现 Analytics 数据 |
+| OPS-005 | 执行上线后统一全量验收 | P1 | 已完成 | SAFE/SEO/TRUST/OPS 的 P0-P1 项均已完成 | `docs/operations/ops-005-final-acceptance.md`；CI run 20、Docker 健康、桌面/移动、受控 API 失败、备份恢复、镜像回滚和外部告警证据均已统一汇总 |
+| OPS-006 | 处理 Cloudflare Browser Insights 与 CSP 冲突 | P2 | 已完成 | 已决定使用 Cloudflare Web Analytics | `docs/operations/ops-006-cloudflare-web-analytics-acceptance.md`；生产 CSP 最小放行，浏览器实际加载 beacon 并请求同源 `/cdn-cgi/rum`，Cloudflare 后台显示最近 24 小时 7 page views、2 visits |
 | COM-001 | 实时核验支付、赞助和广告平台政策 | P2 | 就绪 | 上线地区/主体信息 | 官方来源、核验日期、提现/类目/webhook/费用对比 |
 | COM-002 | 确定是否解冻赞助/广告/Deep Reading | P2 | 待决策 | COM-001、DEC-004/005 | 明确“上线/不上线”及触发条件 |
 | COM-003 | 实现默认关闭的商业化配置开关 | P3 | 阻塞 | COM-002 | 关闭时零 UI/零外部请求，配置和测试完整 |
@@ -113,8 +113,8 @@
 2. **批次 B（已完成）：** SAFE-002 完成全量覆盖和语义初筛；项目所有者完成 SAFE-003/004 最终裁决，批准修改已进入正文和运行路径。
 3. **批次 C（已完成）：** SEO-001 → SEO-002 → SEO-003；代码、测试、Docker、正式域名、Schema.org Validator 和桌面/移动验收均已完成，证据见 `docs/reviews/2026-07-16-seo-001-003-acceptance.md`。
 4. **批次 D（业主输入已完成）：** DEC-001 已解锁 ART-001；DEC-002 已解锁 TRUST-001。
-5. **批次 E（进行中）：** OPS-001/002/004、ART-001/002 已完成并已上线，CI 红灯已关闭；并行推进 ART-003 与 OPS-003/006 外部验收，最后汇总 OPS-005。
-6. **批次 F（上线后增长）：** ART-004/005、MET-001/002。
+5. **批次 E（已完成）：** OPS-001/002/003/004/005/006、ART-001/002 已完成并已上线，CI、外部监控、Cloudflare Web Analytics 和统一上线验收均已闭环。ART-003 不参与上线或验收阻塞链。
+6. **批次 F（上线后增长）：** MET-001/002；ART-003/004/005 仅在有合适选题和时间时机会型推进，不设篇数或期限门槛。
 7. **批次 G（最后考虑商业化）：** COM-001 → COM-002 → COM-003/004/005。
 
 ## 5. 详细任务卡
@@ -181,7 +181,7 @@
 4. Markdown 写入独立 Docker volume；上传成功后当前 worker 重载，其他 worker 在下一请求通过目录指纹刷新。
 5. 管理页不出现在导航、robots 或 sitemap，统一 `noindex/no-store/no-referrer`；密码由服务器核对，不做可绕过的纯前端判断。
 6. 运行 `python -m pytest tests/test_article_admin.py tests/test_articles.py tests/test_english_frontend_contract.py -q`。
-7. 内容按 10 + 10 + 5 三批由站长上传，每批附人工审校记录；文章本身不进入 GitHub 发布流水线。
+7. 内容由站长按选题和时间机会持续上传，不设 10 + 10 + 5 的硬性篇数或期限；每篇仍须完成人工审校，文章本身不进入 GitHub 发布流水线，也不阻塞其他网站任务。
 
 ### Task TRUST/OPS: 信任页与生产上线
 
@@ -225,7 +225,7 @@
 | --- | --- | --- | --- | --- | --- |
 | DEC-001 | 英文文章存储与发布方式 | 服务器私密上传 / Git-backed 编辑 / 数据库后台 / Headless CMS | 已决定：默认 `/165131` + 可选简单密码；任意设备上传 Markdown 到独立持久卷并立即生效；可打包下载全部文章；GitHub 仅管理程序代码 | ART-001/002、部署与备份 | 已决定（纠正后） |
 | DEC-002 | 对外联系方式 | 单邮箱 / contact+privacy 分开 | 已决定：Contact 与 Privacy 统一使用 `5siwei@gmail.com` | TRUST-001、OPS-005 | 已决定 |
-| DEC-003 | 生产监控与告警通道 | 自建/托管；邮件/即时通知 | 已决定：首批使用 UptimeRobot 免费 HTTP monitor 检查公网 `readyz`，5 分钟，邮件到 `5siwei@gmail.com`；第三方错误平台保持关闭 | OPS-003/005 | 已决定（待外部验收） |
+| DEC-003 | 生产监控与告警通道 | 自建/托管；邮件/即时通知 | 已决定：首批使用 UptimeRobot 免费 HTTP monitor 检查公网 `readyz`，5 分钟，邮件到 `5siwei@gmail.com`；第三方错误平台保持关闭 | OPS-003/005 | 已决定并完成外部验收 |
 | DEC-004 | 商业化解冻门槛 | 按时间 / 流量 / 使用量 / 全部满足 | 同时满足政策可行、站点稳定、有 4 周真实数据 | COM-002 | 待决策 |
 | DEC-005 | Deep Reading 价格与是否上线 | 不上线 / USD 2.99 / USD 4.99 | 先不定价；等 COM-001 与单位经济模型完成 | COM-002/005 | 待决策 |
 
@@ -275,6 +275,11 @@ python -c "import pathlib, subprocess; files=sorted(pathlib.Path('frontend/stati
 | 2026-07-16 | UI-001 | 项目所有者 + Codex | 新增 → 已完成 | 项目所有者发现算事、论命、黄历定场诗列序反向；桌面和手机共用样式改为 `row-reverse`，保留每列 `vertical-rl`，并校正黄历动画顺序 | 定向契约 1/1、前端契约 15/15、全量 448/448、Black 89、Ruff、diff 通过；真实 Chrome 在 1280px/390px 下三页均确认第一句位于第二句右侧 | 将修复纳入本批部署镜像；生产部署后做一次页面刷新验收 |
 | 2026-07-17 | ART-001/002、UI-001 | Codex | 生产状态复核 | 正式站已运行文章管理版本；`/165131`、文章列表、首篇文章、动态 sitemap 和桌面/移动 `row-reverse` 静态资源均存在 | `/readyz` ready；管理页 200 且 noindex/no-store；sitemap 11 URL；文章详情 200 | 补写入/覆盖/ZIP/真实文章备份和中文页面最终视觉记录 |
 | 2026-07-17 | OPS-005 | Codex | 阻塞原因明确 → CI 阻塞已关闭 | GitHub CI run 19 仅在生产 Docker 冒烟失败；工作流漏传生产必填 `CONTACT_EMAIL`，且未显式覆盖独立 article-content 路径；已补齐邮箱、管理路径、文章路径和独立内容卷，并增加工作流契约测试 | pytest 450/450、Black、Ruff、14/14 JavaScript、pip-audit、diff 和独立双卷 Docker `healthz/readyz` 冒烟通过；提交 `44f6925` 对应 GitHub Actions run 20 成功 | 等待 OPS-003 外部验收，随后汇总 OPS-005 |
+| 2026-07-18 | OPS-003 | 项目所有者 + Codex | 待验收 → 待告警通道验收 | 项目所有者完成 UptimeRobot 设置；公开状态页已显示 `getwiseoracle.com/readyz` 为 Operational，100% uptime | `https://stats.uptimerobot.com/wOqljyqoWd`，2026-07-18 公开页面核验 | 确认一次 Down 与恢复邮件实际送达后，将 OPS-003 标记已完成并汇总 OPS-005 |
+| 2026-07-18 | OPS-003/005 | 项目所有者 + Codex | 待告警通道验收 → 已完成；OPS-005 阻塞 → 就绪 | 项目所有者提供 UptimeRobot Down 与恢复（UP）邮件同屏截图，告警通道闭环成立 | 截图可见 `TEST: Monitor is DOWN` 与 `TEST: Monitor is UP` 两封邮件，目标均为 `getwiseoracle.com/readyz` | 汇总现有上线证据，完成 OPS-005；OPS-006 保持非阻塞独立验收 |
+| 2026-07-18 | OPS-005 | Codex | 就绪 → 已完成 | 汇总 SAFE/SEO/TRUST/OPS、最新 CI/Docker、桌面/移动、受控 API 失败、备份恢复、不同镜像回滚和 UptimeRobot 告警证据 | `docs/operations/ops-005-final-acceptance.md`；明确本次未重跑测试及六类非阻塞后续 | 主线上线验收关闭；后续按 OPS-006、GOV-003、真实备份和运营任务独立推进 |
+| 2026-07-18 | GOV-003 | Codex | 就绪（非阻塞） → 已完成 | 建立 Git、OCI label、image ID、tar SHA-256 和 CI 的分级追溯；明确历史未提交工作树工件不能倒推为可逐字节复现 | `docs/operations/release-provenance.md`；根目录 tar 重新计算 SHA-256 并读取 manifest/config；历史工件采用验收记录 | 后续镜像写入完整 OCI revision SHA，并保留不可变发布标签 |
+| 2026-07-18 | OPS-006 | 项目所有者 + Codex | 待验收（非阻塞） → 已完成 | 核验生产 CSP、Cloudflare beacon、同源 RUM 请求和 Web Analytics 后台非零数据 | `docs/operations/ops-006-cloudflare-web-analytics-acceptance.md`；后台显示 Automatic setup、最近 24 小时 7 page views/2 visits | 后续仅作持续运营观察；新增分析服务或用户标识需重新决策 |
 
 ## 9. 已取消任务（墓碑）
 
@@ -286,6 +291,12 @@ python -c "import pathlib, subprocess; files=sorted(pathlib.Path('frontend/stati
 
 | 版本 | 日期 | 修订人 | 类型 | 变更内容 | 原因 |
 | --- | --- | --- | --- | --- | --- |
+| 1.23 | 2026-07-18 | 项目所有者 + Codex | Cloudflare Analytics 验收完成 | 新增 OPS-006 验收记录；生产 CSP、beacon、同源 RUM 与 Cloudflare 后台非零统计均通过，OPS-006 标记已完成 | 代码、正式浏览器和私有控制台三层证据齐备，CSP 冲突已实际关闭 |
+| 1.22 | 2026-07-18 | Codex | 发布追溯完成 | 新增 `docs/operations/release-provenance.md`，关闭 GOV-003；补充 SEO 验收的后续 Git 映射说明 | 根目录旧 tar 可通过 OCI label 精确映射，SEO/TRUST/article 历史工件则需诚实记录为提交前工作树构建，并关联首次完整持久化提交 |
+| 1.21 | 2026-07-18 | Codex | 统一上线验收完成 | 新增 OPS-005 最终验收记录，统一汇总最新 CI/Docker、浏览器、失败降级、备份恢复、镜像回滚和外部监控证据；OPS-005 标记已完成 | 所有 P0-P1 前置项和最后的外部告警闭环均已有证据，剩余事项已明确为非阻塞运维或增长任务 |
+| 1.20 | 2026-07-18 | 项目所有者 + Codex | 外部监控验收完成 | 根据项目所有者提供的 Down/UP 邮件同屏截图，将 OPS-003 标记已完成、DEC-003 标记完成外部验收，并解除 OPS-005 的最后阻塞 | 正式 monitor、公开 Operational 状态和告警/恢复邮件三类证据均已齐备 |
+| 1.19 | 2026-07-18 | 项目所有者 + Codex | 外部监控验收进展 | 记录 UptimeRobot 公共状态页、`readyz` 监控对象、Operational 与 100% uptime；OPS-003 收窄为仅待 Down/恢复邮件验收 | 公开证据足以确认站外监控已经创建并运行，但不能代替私有邮箱中的告警送达证据 |
+| 1.18 | 2026-07-18 | 项目所有者 + Codex | 内容目标去阻塞 | ART-003 从“首批 10 篇”改为无固定篇数和期限的机会型运营项；ART-004/005 同步取消对 ART-003 的依赖，文章数量不再进入网站验收或其他工程任务的阻塞链 | 文章上传、即时发布和持久化通道已经打通；后续文章属于持续运营，不应把任意篇数目标误作网站工程完成门槛 |
 | 1.17 | 2026-07-17 | Codex | CI 远端验收收尾 | 记录修复提交 `44f6925` 已推送且 GitHub Actions run 20 成功；OPS-005 的 CI 阻塞关闭，仅保留外部监控和统一验收收尾 | 1.16 写入时远端 CI 尚未运行完成，必须用真实远端结果替换“待验收”状态 |
 | 1.16 | 2026-07-17 | Codex | 生产状态与 CI 契约同步 | 将文章系统从“待部署”更新为已上线，记录首篇文章和 11 URL sitemap；将 OPS-005 改为上线后统一验收；登记并修复 CI Docker 冒烟遗漏生产必填邮箱和文章卷路径的问题 | 代码、生产状态和当前文档已超出 1.15 基线，且 `8c60f4e` 的远端 CI 实际为红灯，必须恢复真实可追溯状态 |
 | 1.15 | 2026-07-16 | 项目所有者 + Codex | 中文文化呈现纠正 | 新增并完成 UI-001；中文算事、论命、黄历定场诗改为右起竖排，同时增加桌面/移动契约和真实浏览器验收 | 旧样式明确使用 `flex-direction: row`，使第一句落在最左侧，不符合中国古典竖排的阅读顺序 |
@@ -307,8 +318,8 @@ python -c "import pathlib, subprocess; files=sorted(pathlib.Path('frontend/stati
 
 ## 11. 下一个可执行批次
 
-**ART-001/002 已按纠正后的服务器上传架构完成并上线，CI 红灯也已关闭。下一步由项目所有者补齐手机/其他电脑上传、同 slug 覆盖、全部文章 ZIP 和首次真实文章卷备份记录，同时进入 ART-003 的 10 篇基础文化解释文章。**
+**主线上线验收、GOV-003 发布追溯和 OPS-006 Cloudflare Web Analytics 均已完成。下一批可按运维窗口补齐手机/其他电脑上传、同 slug 覆盖、全部文章 ZIP 和首次真实文章卷备份记录，或进入 MET-001 聚合指标；文章内容按机会持续发布，不设固定篇数或期限。**
 
-可并行的项目所有者外部步骤：确认 Cloudflare Web Analytics 数据；创建 UptimeRobot monitor 并验证 Down/恢复邮件。这些外部验收不包含 GitHub 文章发布或 GHCR 自动部署。
+UptimeRobot monitor、公开状态、Down/恢复邮件及 Cloudflare Web Analytics 数据均已验收。后续外部动作属于持续运营或真实备份，不包含 GitHub 文章发布或 GHCR 自动部署。
 
 GOV-003 仍是已登记的非阻塞工程收尾项。SEO 完整验收证据见 `docs/reviews/2026-07-16-seo-001-003-acceptance.md`，本批证据见 `docs/reviews/2026-07-16-art-001-002-site-management-acceptance.md`。

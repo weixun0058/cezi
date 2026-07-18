@@ -16,10 +16,10 @@
 | 入口 | 主要看什么 | 当前状态 | 不在这里做什么 |
 | --- | --- | --- | --- |
 | Google Search Console | 收录、搜索展示、点击、关键词、页面索引和 sitemap | 网域所有权已验证；sitemap 状态成功；首页已编入 Google 索引 | 不看实时服务存活，不把收录等同于排名保证 |
-| Cloudflare Analytics & Logs | 总访问、请求趋势、边缘响应、缓存与安全事件 | Edge Analytics 可用；Web Analytics/Browser Insights 需完成 CSP 的生产验收 | 不依赖用户级跟踪；Logs 的粒度和保留期取决于当前套餐，不假定付费功能已开通 |
+| Cloudflare Analytics & Logs | 总访问、请求趋势、边缘响应、缓存与安全事件 | 已完成 Web Analytics/CSP 生产验收；Automatic setup 与非零数据均已确认 | 不依赖用户级跟踪；Logs 的粒度和保留期取决于当前套餐，不假定付费功能已开通 |
 | 私密文章上传页 | 从手机或任意电脑上传 Markdown、覆盖更新、下载全部文章 ZIP | 默认入口 `/165131`；文章写入独立持久卷并立即生效 | 不经过 GitHub，不重新构建或部署网站；不上传 `.env`、数据库或用户数据 |
 | GitHub Actions | 程序代码测试和代码版本记录 | CI 已有；不参与日常文章发布 | 不在 workflow 或日志中显示 production secret |
-| UptimeRobot | 从站外每 5 分钟访问公网 `readyz`，下线和恢复时发邮件 | 待项目所有者创建并完成告警/恢复验证 | 不发送请求体，不监控带出生资料或占卜问题的 URL |
+| UptimeRobot | 从站外每 5 分钟访问公网 `readyz`，下线和恢复时发邮件 | 已完成；公开状态、Down 和恢复邮件均已验收 | 不发送请求体，不监控带出生资料或占卜问题的 URL |
 | Docker health/readiness | 容器、本机 `healthz`/`readyz`、应用 JSON 日志 | 生产 Compose 已配置 readiness healthcheck | 不先猜 Cloudflare 或 Google 故障；它是源站真相入口 |
 | OPS-002 备份/恢复 | `runtime.db` 与文章卷备份、校验、隔离恢复和镜像回滚 | runtime 本地安全演练已完成；文章卷已加入手册；首次真实生产备份仍需服务器操作者执行 | 不删除任何生产数据卷，不运行 `down -v` |
 
