@@ -306,7 +306,7 @@ This sign's English translation is under review.
 
 ## 五、英文上线范围（W0.6）
 
-本节是目标范围，不表示所有增长和商业化项目已经完成。当前实现快照（2026-07-17）：三大工具页、合规页、服务器私密文章上传、文章列表/详情、动态 `sitemap.xml`、`robots.txt` 和 Search Console 基础接入均已上线；正式站已有首篇文章。首批 10 篇基础文化文章尚未完成，UptimeRobot/Cloudflare Analytics 仍待外部验收，商业化配置和真实支付尚未实现。
+本节是目标范围，不表示所有增长和商业化项目已经完成。当前实现快照（2026-07-18）：三大工具页、合规页、服务器私密文章上传、文章列表/详情、动态 `sitemap.xml`、`robots.txt`、Search Console、UptimeRobot 和 Cloudflare Web Analytics 均已上线并完成外部验收；正式站已有首篇文章。后续文章按选题和时间机会持续发布，不设固定篇数或期限，也不阻塞网站其他任务；商业化配置和真实支付尚未实现。
 
 ### 5.1 第一轮上线
 
@@ -316,7 +316,7 @@ This sign's English translation is under review.
 | 工具页 | `/ask-oracle`（算事） | 上线 |
 | 工具页 | `/daily-almanac`（黄历） | 上线（待用户核实黄历上线条件） |
 | 工具页 | `/birth-chart-reading`（论命） | 上线（D11 已确认保留完整入口） |
-| 内容页 | `/articles` + ≥10 篇文章 | 上线 |
+| 内容页 | `/articles` + 按机会持续发布文章 | 上线（无固定篇数门槛） |
 | 合规页 | `/privacy`、`/terms`、`/disclaimer` | 上线 |
 | 信息页 | `/about`、`/contact` | 上线 |
 | 商业化 | 赞助/付费墙 | 赞助占位；付费墙暂时冻结（Deep Reading 待深度思考） |

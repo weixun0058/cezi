@@ -4,7 +4,8 @@
 - **外部检查目标：** `https://getwiseoracle.com/readyz`
 - **告警邮箱：** `5siwei@gmail.com`
 - **文档日期：** 2026-07-16
-- **当前状态：** 操作口径已固化；UptimeRobot 账号、monitor 和告警/恢复邮件仍待项目所有者验收
+- **当前状态：** 已完成；UptimeRobot monitor、公开 Operational 状态、Down 告警和恢复（UP）邮件均已验收
+- **公开状态页：** `https://stats.uptimerobot.com/wOqljyqoWd`
 
 ## 1. 第一批监控的范围
 
@@ -18,6 +19,12 @@
 | Monitoring interval | 5 分钟 |
 | Alert contact | `5siwei@gmail.com` |
 | 预期正常结果 | HTTP 200，JSON 含 `status=ready` |
+
+2026-07-18 公开状态页核验结果：监控对象显示为 `getwiseoracle.com/readyz`，状态为
+`Operational`，页面显示 `100.000%` uptime。该证据确认站外 monitor 已建立并正在工作，
+项目所有者随后提供同屏截图，确认 `TEST: Monitor is DOWN` 和
+`TEST: Monitor is UP` 两封邮件均已送达，目标均为 `getwiseoracle.com/readyz`；OPS-003
+验收闭环完成。
 
 选择 `readyz` 而不是首页，是因为它除了进程存活，还检查生产必填配置、reference/runtime SQLite 和 AI 使用策略数据库。这是“能不能正常接受业务请求”的保守信号，不代表 AI 上游的每一次请求都会成功。
 

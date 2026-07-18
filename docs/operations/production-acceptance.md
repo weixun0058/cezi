@@ -105,23 +105,22 @@ OPS-001 完成后：
 
 - OPS-002 可开始备份、恢复和镜像回滚演练。
 - OPS-004 解除阻塞，可进行 Google Search Console 所有权验证与 sitemap 提交。
-- OPS-003 仍需项目所有者决定监控/告警方案，不因 OPS-001 自动完成。
+- OPS-003 已于 2026-07-18 完成：UptimeRobot 公开状态页、Down 告警和恢复（UP）邮件均已验收。
 
-## 9. OPS-006 Cloudflare Web Analytics 后续验收
+## 9. OPS-006 Cloudflare Web Analytics 验收
 
 2026-07-16 已在下一发布版本中把脚本 CSP 从 `script-src 'self'` 精确调整为
 `script-src 'self' https://static.cloudflareinsights.com`，并保持 `connect-src 'self'` 不变。
 没有增加脚本 `'unsafe-inline'`、`'unsafe-eval'` 或通配域名。
 
-代码门禁通过不等于生产采集已经完成。正式站在该版本部署前，`/cdn-cgi/rum` 的 GET
-探测仍返回 404，且首页源码未出现 Cloudflare beacon。项目所有者还需在 Cloudflare 控制台启用
-Web Analytics/Browser Insights，然后完成以下验收：
+历史上代码门禁通过时生产采集尚未完成；当时 `/cdn-cgi/rum` 的 GET 探测返回 404，且首页
+源码未出现 Cloudflare beacon。2026-07-18 已完成以下生产验收：
 
-1. 部署包含上述 CSP 的新镜像。
-2. 在浏览器开发者工具确认 `beacon.min.js` 没有被 CSP 拒绝。
-3. 对 Cloudflare 代理站点，确认 beacon 向同源 `/cdn-cgi/rum` 发送 POST；不要用 GET 200
-   作为判断标准。
-4. 在 Cloudflare Web Analytics 中看到测试访问记录。
-5. 如生产实测需要额外 `connect-src`，只添加实际观察到的精确 origin；不得先行放宽。
+1. 正式响应头包含最小 `script-src` 放行。
+2. 浏览器实际加载 `beacon.min.js`。
+3. Resource Timing 出现同源 `/cdn-cgi/rum?` 请求；没有依赖 GET 200 误判。
+4. Cloudflare Web Analytics 显示 `getwiseoracle.com` Automatic setup，最近 24 小时
+   7 page views、2 visits。
+5. 没有增加额外 `connect-src`、`unsafe-inline` 或 `unsafe-eval`。
 
-完成这些证据前，OPS-006 状态仍为“待生产验收”。
+完整证据见 `docs/operations/ops-006-cloudflare-web-analytics-acceptance.md`；OPS-006 已完成。

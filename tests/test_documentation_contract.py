@@ -138,9 +138,9 @@ def test_article_system_and_site_management_acceptance_is_documented():
 
     assert "ART-001 | 确定英文文章存储与发布架构 | P1 | 已完成" in ledger
     assert "ART-002 | 实现文章加载、列表、详情与服务器上传 | P1 | 已完成" in ledger
-    assert "ART-003 | 发布第一批 10 篇基础文化解释文章 | P1 | 就绪" in ledger
-    assert "OPS-003 | 建立错误、存活性与资源监控 | P1 | 待验收" in ledger
-    assert "OPS-006 | 处理 Cloudflare Browser Insights 与 CSP 冲突 | P2 | 待验收" in ledger
+    assert "ART-003 | 按机会持续发布基础文化解释文章 | P3 | 就绪（非阻塞、非硬性）" in ledger
+    assert "OPS-003 | 建立错误、存活性与资源监控 | P1 | 已完成" in ledger
+    assert "OPS-006 | 处理 Cloudflare Browser Insights 与 CSP 冲突 | P2 | 已完成" in ledger
 
 
 def test_current_product_and_ledger_status_match_the_deployed_article_system():
@@ -157,10 +157,10 @@ def test_current_product_and_ledger_status_match_the_deployed_article_system():
     assert "服务器私密文章上传" in product_spec
     assert "正式站已有首篇文章" in product_spec
 
-    assert "**当前版本：** 1.17" in ledger
+    assert "**当前版本：** 1.23" in ledger
     assert "2026-07-17 实测 11 URL" in ledger
-    assert "OPS-005 | 执行上线后统一全量验收" in ledger
-    assert "GitHub Actions run 20 已通过" in ledger
+    assert "OPS-005 | 执行上线后统一全量验收 | P1 | 已完成" in ledger
+    assert "GitHub Actions run 20 全部通过" in ledger
     assert "下一步先部署包含文章持久卷" not in ledger
     assert "GitHub 自动部署生产验收并行" not in ledger
 
