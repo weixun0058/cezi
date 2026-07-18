@@ -73,6 +73,17 @@ rclone config
 4. 让rclone生成crypt密码和salt，并把恢复所需值单独保存到密码管理器；
 5. 确认 `/root/.config/rclone/rclone.conf` 权限为`600`。
 
+确认crypt remote可读后，在服务器私有环境文件中启用异机上传：
+
+```bash
+printf '%s\n' 'WISE_ORACLE_R2_REMOTE=wise-oracle-crypt:production' \
+  > /root/zhugeshensuan/backup.env
+chmod 600 /root/zhugeshensuan/backup.env
+```
+
+该文件不包含R2 token，但仍不进入Git。R2尚未启用时保持文件不存在或内容为空，脚本会正常
+完成服务器本地备份，不尝试异机上传。
+
 不要在聊天或命令行参数中传递token。若crypt密码丢失，即使R2对象存在也无法恢复。
 
 ## 6. 安装和启用定时器
@@ -82,6 +93,7 @@ rclone config
 ```bash
 cd /root/zhugeshensuan
 chmod 700 scripts/production_backup.sh
+install -m 600 /dev/null /root/zhugeshensuan/backup.env
 install -m 644 deploy/wise-oracle-backup.service /etc/systemd/system/
 install -m 644 deploy/wise-oracle-backup.timer /etc/systemd/system/
 systemctl daemon-reload
@@ -89,8 +101,9 @@ systemctl enable --now wise-oracle-backup.timer
 systemctl list-timers wise-oracle-backup.timer
 ```
 
-定时器每天UTC 19:15触发并增加最多15分钟随机延迟，即北京时间约03:15–03:30。服务器时区变化
-不会改变UTC计划；如果该时段出现真实高峰，再通过一次受控变更调整。
+首次安装的空 `backup.env` 只执行服务器本地备份；完成第5节R2配置后才异机上传。定时器每天
+UTC 19:15触发并增加最多15分钟随机延迟，即北京时间约03:15–03:30。服务器时区变化不会改变
+UTC计划；如果该时段出现真实高峰，再通过一次受控变更调整。
 
 ## 7. 首次验收
 

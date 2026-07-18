@@ -41,7 +41,8 @@ def test_backup_timer_is_daily_and_persistent():
     timer = _read("deploy/wise-oracle-backup.timer")
 
     assert "scripts/production_backup.sh" in service
-    assert "wise-oracle-crypt:production" in service
+    assert "EnvironmentFile=-/root/zhugeshensuan/backup.env" in service
+    assert "WISE_ORACLE_R2_REMOTE=wise-oracle-crypt:production" not in service
     assert "OnCalendar=*-*-* 19:15:00 UTC" in timer
     assert "RandomizedDelaySec=15m" in timer
     assert "Persistent=true" in timer
