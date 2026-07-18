@@ -59,7 +59,7 @@ Docker 冒烟通过；桌面/移动、AI 失败降级、备份恢复、镜像回
 
 1. **OPS-006（已于 2026-07-18 完成）：** 生产 CSP、beacon、同源 RUM 请求及 Cloudflare 后台非零统计均已验收，见 `docs/operations/ops-006-cloudflare-web-analytics-acceptance.md`。
 2. **GOV-003（已于 2026-07-18 完成）：** 历史源码提交、镜像标签和导出 tar SHA-256 的映射见 `docs/operations/release-provenance.md`。
-3. **真实生产备份：** 按 runbook 生成首次 runtime 与文章卷备份，记录脱敏文件名、大小、SHA-256 和完整性结果。
+3. **真实生产备份（已于 2026-07-18 完成首次快照）：** runtime 与文章卷的公开验收结论见 `docs/operations/2026-07-18-production-backup-acceptance.md`；精确文件名、大小和 SHA-256 仅保留在服务器侧，加密异机副本属于持续运维。
 4. **文章写入链路：** 从手机/其他电脑补一次登录上传、同 slug 覆盖拒绝/确认和 ZIP 下载记录。
 5. **可选增强：** HSTS 与合格的 1200×630 `og:image` 仍未启用；启用前应独立验收。
 6. **持续运营：** 文章数量不设硬性门槛；指标、四周复盘和商业化继续按台账独立推进。

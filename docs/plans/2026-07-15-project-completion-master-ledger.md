@@ -280,6 +280,7 @@ python -c "import pathlib, subprocess; files=sorted(pathlib.Path('frontend/stati
 | 2026-07-18 | OPS-005 | Codex | 就绪 → 已完成 | 汇总 SAFE/SEO/TRUST/OPS、最新 CI/Docker、桌面/移动、受控 API 失败、备份恢复、不同镜像回滚和 UptimeRobot 告警证据 | `docs/operations/ops-005-final-acceptance.md`；明确本次未重跑测试及六类非阻塞后续 | 主线上线验收关闭；后续按 OPS-006、GOV-003、真实备份和运营任务独立推进 |
 | 2026-07-18 | GOV-003 | Codex | 就绪（非阻塞） → 已完成 | 建立 Git、OCI label、image ID、tar SHA-256 和 CI 的分级追溯；明确历史未提交工作树工件不能倒推为可逐字节复现 | `docs/operations/release-provenance.md`；根目录 tar 重新计算 SHA-256 并读取 manifest/config；历史工件采用验收记录 | 后续镜像写入完整 OCI revision SHA，并保留不可变发布标签 |
 | 2026-07-18 | OPS-006 | 项目所有者 + Codex | 待验收（非阻塞） → 已完成 | 核验生产 CSP、Cloudflare beacon、同源 RUM 请求和 Web Analytics 后台非零数据 | `docs/operations/ops-006-cloudflare-web-analytics-acceptance.md`；后台显示 Automatic setup、最近 24 小时 7 page views/2 visits | 后续仅作持续运营观察；新增分析服务或用户标识需重新决策 |
+| 2026-07-18 | OPS-002/ART-002 | 项目所有者 + Codex | 持续运维证据补齐 | 在生产服务器短暂停机完成首次 runtime 与文章卷快照，生成 SHA-256，验证 SQLite/归档并恢复服务 | `docs/operations/2026-07-18-production-backup-acceptance.md`；本机与公网 health/readiness 通过；失败尝试文件已隔离保留 | 建立每日备份与加密异机副本；按月做隔离恢复演练 |
 
 ## 9. 已取消任务（墓碑）
 

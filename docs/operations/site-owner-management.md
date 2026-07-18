@@ -21,7 +21,7 @@
 | GitHub Actions | 程序代码测试和代码版本记录 | CI 已有；不参与日常文章发布 | 不在 workflow 或日志中显示 production secret |
 | UptimeRobot | 从站外每 5 分钟访问公网 `readyz`，下线和恢复时发邮件 | 已完成；公开状态、Down 和恢复邮件均已验收 | 不发送请求体，不监控带出生资料或占卜问题的 URL |
 | Docker health/readiness | 容器、本机 `healthz`/`readyz`、应用 JSON 日志 | 生产 Compose 已配置 readiness healthcheck | 不先猜 Cloudflare 或 Google 故障；它是源站真相入口 |
-| OPS-002 备份/恢复 | `runtime.db` 与文章卷备份、校验、隔离恢复和镜像回滚 | runtime 本地安全演练已完成；文章卷已加入手册；首次真实生产备份仍需服务器操作者执行 | 不删除任何生产数据卷，不运行 `down -v` |
+| OPS-002 备份/恢复 | `runtime.db` 与文章卷备份、校验、隔离恢复和镜像回滚 | 隔离恢复/回滚演练与首次真实生产 runtime/文章卷备份均已完成；加密异机副本需持续执行 | 不删除任何生产数据卷，不运行 `down -v` |
 
 Search Console 的已验收证据见 `docs/operations/search-console-acceptance.md`。备份、恢复和回滚必须使用 `docs/operations/backup-restore-runbook.md`，不根据本页的概要自行编写生产命令。
 
