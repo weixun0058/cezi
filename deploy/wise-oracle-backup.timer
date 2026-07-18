@@ -1,0 +1,11 @@
+[Unit]
+Description=Run Wise Oracle backup daily
+
+[Timer]
+OnCalendar=*-*-* 19:15:00 UTC
+RandomizedDelaySec=15m
+Persistent=true
+Unit=wise-oracle-backup.service
+
+[Install]
+WantedBy=timers.target

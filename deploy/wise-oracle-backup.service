@@ -1,0 +1,22 @@
+[Unit]
+Description=Wise Oracle production data backup
+Requires=docker.service
+After=docker.service network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=root
+Group=root
+WorkingDirectory=/root/zhugeshensuan
+Environment=WISE_ORACLE_PROJECT_DIR=/root/zhugeshensuan
+Environment=WISE_ORACLE_R2_REMOTE=wise-oracle-crypt:production
+ExecStart=/usr/bin/env bash /root/zhugeshensuan/scripts/production_backup.sh
+Nice=10
+IOSchedulingClass=best-effort
+IOSchedulingPriority=7
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
