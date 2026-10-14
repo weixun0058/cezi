@@ -84,3 +84,12 @@ git diff --check: passed
 - 文档和演练脚本只新增文件，不改变应用运行路径。
 - 删除这些新增文件即可回滚本批代码；不得删除 `zhugeshensuan_runtime-data`。
 - 演练资源已自动清理，无需对 Docker 生产资源做任何回滚操作。
+
+## 8. 首次真实生产备份状态
+
+2026-07-18 已在正式服务器完成 runtime 数据库与文章卷备份：SQLite `quick_check=ok`，
+两份 SHA-256、文章归档、本机 health/readiness 和公网 readiness 均通过。公开验收结论、
+失败尝试隔离和限制见 `docs/operations/2026-07-18-production-backup-acceptance.md`；精确文件名、
+大小、哈希和环境标识仅保留在服务器侧。
+
+该证据关闭了本文第 5 节“尚无首次真实生产备份”的历史限制；加密异机副本仍是持续运维项。
