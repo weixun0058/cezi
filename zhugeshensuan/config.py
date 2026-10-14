@@ -95,9 +95,29 @@ class Config:
     ARTICLE_ADMIN_PATH = os.getenv("ARTICLE_ADMIN_PATH", "165131").strip().strip("/")
     ARTICLE_ADMIN_PASSWORD = os.getenv("ARTICLE_ADMIN_PASSWORD", "").strip()
 
+    # Optional owner analytics integrations.  Credentials are read only on the
+    # server and are never rendered into HTML or returned by the status API.
+    CLOUDFLARE_ANALYTICS_TOKEN = os.getenv("CLOUDFLARE_ANALYTICS_TOKEN", "").strip()
+    CLOUDFLARE_ZONE_ID = os.getenv("CLOUDFLARE_ZONE_ID", "").strip()
+    CLOUDFLARE_ANALYTICS_HOSTNAME = os.getenv(
+        "CLOUDFLARE_ANALYTICS_HOSTNAME", "getwiseoracle.com"
+    ).strip()
+    ANALYTICS_HTTP_TIMEOUT_SECONDS = float(os.getenv("ANALYTICS_HTTP_TIMEOUT_SECONDS", "10"))
+    ANALYTICS_CACHE_SECONDS = int(os.getenv("ANALYTICS_CACHE_SECONDS", "300"))
+    ANALYTICS_MAX_RANGE_DAYS = int(os.getenv("ANALYTICS_MAX_RANGE_DAYS", "31"))
+    CLOUDFLARE_MAX_LOOKBACK_DAYS = int(os.getenv("CLOUDFLARE_MAX_LOOKBACK_DAYS", "7"))
+
+    # Search Console uses an OAuth refresh token.  GSC_ACCESS_TOKEN is useful
+    # only for short-lived testing and should not be used for production.
+    GSC_SITE_URL = os.getenv("GSC_SITE_URL", "sc-domain:getwiseoracle.com").strip()
+    GSC_CLIENT_ID = os.getenv("GSC_CLIENT_ID", "").strip()
+    GSC_CLIENT_SECRET = os.getenv("GSC_CLIENT_SECRET", "").strip()
+    GSC_REFRESH_TOKEN = os.getenv("GSC_REFRESH_TOKEN", "").strip()
+    GSC_ACCESS_TOKEN = os.getenv("GSC_ACCESS_TOKEN", "").strip()
+
     AI_API_KEY = os.getenv("AI_API_KEY", "")
     AI_BASE_URL = os.getenv("AI_BASE_URL", "https://api.deepseek.com")
-    AI_MODEL = os.getenv("AI_MODEL", "deepseek-v4-flash")
+    AI_MODEL = os.getenv("AI_MODEL", "deepseek-flash")
     AI_TIMEOUT_SECONDS = float(os.getenv("AI_TIMEOUT_SECONDS", "60"))
     AI_TEMPERATURE = float(os.getenv("AI_TEMPERATURE", "0.7"))
     AI_DAILY_LIMIT = int(os.getenv("AI_DAILY_LIMIT", "3"))

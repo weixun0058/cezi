@@ -11,6 +11,21 @@ archive
 .ruff_cache
 .coverage
 *.tar
+*.tar.gz
 _tmp_*.py
 _verify_*.py
 outputs
+
+# 本地备份与 IDE 配置，不进镜像
+windows-tray-backup-*
+.trae
+
+# 运行时只读取 data/content 与 data/reference；data/ 下其他文件（如下载的凭据）一律不进镜像
+data/*
+!data/content
+!data/reference
+data/content/_review_log
+**/*.bak*
+
+# 凭据文件无论放在哪里都不得打进镜像
+**/client_secret*.json

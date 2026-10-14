@@ -8,9 +8,11 @@ from flask import Flask, g, request
 from werkzeug.middleware.proxy_fix import ProxyFix
 
 from .ai_usage import AIUsagePolicy
+from .analytics import CloudflareAnalyticsClient, SearchConsoleClient
 from .api_utils import failure, success
 from .birth_chart_english import BirthChartEnglish
 from .blueprints import ALL_BLUEPRINTS
+from .blueprints.analytics_admin import create_analytics_admin_blueprint
 from .blueprints.article_admin import create_article_admin_blueprint
 from .config import Config, validate_config
 from .content import ArticleRepository
@@ -131,12 +133,34 @@ def create_app(test_config=None):
         default_timezone=app.config["DEFAULT_TIMEZONE"],
         prompt_path=app.config["BIRTH_CHART_PROMPT_PATH"],
     )
+    app.extensions["cloudflare_analytics"] = CloudflareAnalyticsClient(
+        token=app.config["CLOUDFLARE_ANALYTICS_TOKEN"],
+        zone_id=app.config["CLOUDFLARE_ZONE_ID"],
+        hostname=app.config["CLOUDFLARE_ANALYTICS_HOSTNAME"],
+        timezone_name=app.config["DEFAULT_TIMEZONE"],
+        timeout_seconds=app.config["ANALYTICS_HTTP_TIMEOUT_SECONDS"],
+        cache_seconds=app.config["ANALYTICS_CACHE_SECONDS"],
+        max_lookback_days=app.config["CLOUDFLARE_MAX_LOOKBACK_DAYS"],
+    )
+    app.extensions["search_console"] = SearchConsoleClient(
+        site_url=app.config["GSC_SITE_URL"],
+        client_id=app.config["GSC_CLIENT_ID"],
+        client_secret=app.config["GSC_CLIENT_SECRET"],
+        refresh_token=app.config["GSC_REFRESH_TOKEN"],
+        access_token=app.config["GSC_ACCESS_TOKEN"],
+        timeout_seconds=app.config["ANALYTICS_HTTP_TIMEOUT_SECONDS"],
+        cache_seconds=app.config["ANALYTICS_CACHE_SECONDS"],
+    )
 
     for blueprint in ALL_BLUEPRINTS:
         app.register_blueprint(blueprint)
     app.register_blueprint(
         create_article_admin_blueprint(),
         url_prefix=f"/{app.config['ARTICLE_ADMIN_PATH']}",
+    )
+    app.register_blueprint(
+        create_analytics_admin_blueprint(),
+        url_prefix=f"/{app.config['ARTICLE_ADMIN_PATH']}/analytics",
     )
 
     @app.before_request

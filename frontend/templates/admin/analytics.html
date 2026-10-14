@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex,nofollow,noarchive">
+    <title>网站统计 · Get Wise Oracle</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/analytics_admin.css') }}">
+</head>
+<body>
+<main id="analytics-app" class="analytics-shell"
+      data-overview-url="{{ overview_url }}"
+      data-search-console-url="{{ search_console_url }}">
+    <header class="analytics-header">
+        <div>
+            <p class="analytics-eyebrow">GET WISE ORACLE · PRIVATE ANALYTICS</p>
+            <h1>网站统计</h1>
+            <p class="analytics-lede">把 Cloudflare 和 Google Search Console 的数据整理成容易阅读的摘要。</p>
+        </div>
+        <nav class="analytics-nav" aria-label="管理员导航">
+            <a href="{{ article_admin_url }}">文章管理</a>
+            <a href="{{ overview_url }}" target="_blank" rel="noreferrer">查看 JSON</a>
+        </nav>
+    </header>
+
+    <section class="analytics-toolbar" aria-label="统计筛选">
+        <label for="range-select">统计范围
+            <select id="range-select">
+                <option value="7">最近 7 天</option>
+                <option value="30" selected>最近 30 天</option>
+            </select>
+        </label>
+        <button id="refresh-button" type="button">刷新数据</button>
+        <span id="last-updated" class="analytics-muted" role="status"></span>
+    </section>
+
+    <div id="dashboard-error" class="analytics-message analytics-error" role="alert" hidden></div>
+    <div id="dashboard-loading" class="analytics-loading" role="status">正在读取统计数据…</div>
+
+    <section id="dashboard-content" hidden>
+        <div id="coverage-note" class="analytics-message analytics-note" hidden></div>
+
+        <section class="metric-grid" aria-label="核心指标">
+            <article class="metric-card metric-card-accent">
+                <p>页面请求</p><strong id="metric-requests">—</strong>
+                <span>符合条件的 GET 请求</span>
+            </article>
+            <article class="metric-card">
+                <p>访问次数</p><strong id="metric-visits">—</strong>
+                <span>Cloudflare visits</span>
+            </article>
+            <article class="metric-card">
+                <p>响应流量</p><strong id="metric-bytes">—</strong>
+                <span>边缘返回数据量</span>
+            </article>
+            <article class="metric-card">
+                <p>热门页面</p><strong id="metric-top-page">—</strong>
+                <span id="metric-top-page-count">—</span>
+            </article>
+        </section>
+
+        <section class="analytics-panel">
+            <div class="panel-heading">
+                <div><p class="analytics-kicker">TRAFFIC RHYTHM</p><h2>每日访问趋势</h2></div>
+                <span class="analytics-muted">按服务器时区汇总</span>
+            </div>
+            <div id="daily-chart" class="daily-chart" role="img" aria-label="每日页面请求趋势"></div>
+            <p id="daily-empty" class="analytics-empty" hidden>这段时间没有可用数据。</p>
+        </section>
+
+        <div class="split-grid">
+            <section class="analytics-panel">
+                <div class="panel-heading"><div><p class="analytics-kicker">TOP PAGES</p><h2>热门页面</h2></div></div>
+                <div class="table-wrap"><table><thead><tr><th>路径</th><th>请求</th><th>访问</th></tr></thead><tbody id="pages-table"></tbody></table></div>
+            </section>
+            <section class="analytics-panel">
+                <div class="panel-heading"><div><p class="analytics-kicker">AUDIENCE</p><h2>访客国家/地区</h2></div></div>
+                <div class="table-wrap"><table><thead><tr><th>国家/地区</th><th>请求</th><th>访问</th></tr></thead><tbody id="countries-table"></tbody></table></div>
+            </section>
+        </div>
+
+        <section class="analytics-panel">
+            <div class="panel-heading"><div><p class="analytics-kicker">REFERRERS</p><h2>来源网站</h2></div></div>
+            <p id="referrers-summary" class="analytics-muted"></p>
+            <div class="table-wrap"><table><thead><tr><th>来源</th><th>请求</th><th>访问</th></tr></thead><tbody id="referrers-table"></tbody></table></div>
+        </section>
+
+        <section class="analytics-panel search-panel">
+            <div class="panel-heading"><div><p class="analytics-kicker">GOOGLE SEARCH CONSOLE</p><h2>Google 搜索表现</h2></div><span class="analytics-muted">点击与展示</span></div>
+            <div class="search-metrics">
+                <div><span>点击</span><strong id="search-clicks">—</strong></div>
+                <div><span>展示</span><strong id="search-impressions">—</strong></div>
+                <div><span>点击率</span><strong id="search-ctr">—</strong></div>
+                <div><span>平均排名</span><strong id="search-position">—</strong></div>
+            </div>
+            <p id="search-summary" class="analytics-muted"></p>
+        </section>
+    </section>
+</main>
+<script src="{{ url_for('static', filename='js/analytics_admin.js') }}"></script>
+</body>
+</html>

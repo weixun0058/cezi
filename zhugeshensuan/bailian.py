@@ -9,7 +9,7 @@ def get_completion(organization=None, system_prompt="", user_message="", tempera
     provider = organization or {
         "API_KEY": os.getenv("AI_API_KEY", ""),
         "base_url": os.getenv("AI_BASE_URL", "https://api.deepseek.com"),
-        "model_name": os.getenv("AI_MODEL", "deepseek-v4-flash"),
+        "model_name": os.getenv("AI_MODEL", "deepseek-flash"),
     }
     if not provider.get("API_KEY"):
         raise RuntimeError("AI_API_KEY is not configured")

@@ -26,6 +26,7 @@ windows-tray-backup-*/
 
 # Docker 镜像导出工件仅用于部署，不得提交到 Git
 *.tar
+*.tar.gz
 
 # 运行时输出目录
 outputs/
@@ -39,4 +40,6 @@ scripts/test.ipynb
 # 数据库备份
 data/reference/*.bak*
 
-
+# 本地凭据文件，不得入库
+data/client_secret_*.json
+data/*.txt

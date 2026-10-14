@@ -49,9 +49,9 @@ OUTPUT_FILE = OUTPUT_DIR / "oracle_signs_en.json"
 LOG_DIR = OUTPUT_DIR / "_review_log"
 TRANSLATE_LOG = LOG_DIR / "translate_log.jsonl"
 
-# DeepSeek API 配置（与项目 .env 一致：AI_API_KEY / deepseek-v4-flash）
+# DeepSeek API 配置（与项目 .env 一致：AI_API_KEY / deepseek-flash）
 DEEPSEEK_API_URL = "https://api.deepseek.com/v1/chat/completions"
-DEEPSEEK_MODEL = "deepseek-v4-flash"
+DEEPSEEK_MODEL = "deepseek-flash"
 
 
 def load_api_key():

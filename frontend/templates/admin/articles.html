@@ -29,10 +29,13 @@
             <h1>上传 Markdown 文章</h1>
             <p>上传成功后立即进入网站文章列表、详情页和 sitemap，不经过 GitHub 或重新部署。</p>
         </div>
-        {% if password_enabled %}<form method="post" action="{{ url_for('article_admin.lock') }}">
-            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
-            <button class="admin-button-secondary" type="submit">锁定页面</button>
-        </form>{% endif %}
+        <div class="admin-header-actions">
+            <a class="admin-button admin-button-secondary" href="{{ url_for('analytics_admin.dashboard') }}">查看网站统计</a>
+            {% if password_enabled %}<form method="post" action="{{ url_for('article_admin.lock') }}">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+                <button class="admin-button-secondary" type="submit">锁定页面</button>
+            </form>{% endif %}
+        </div>
     </header>
 
     {% if uploaded %}<div class="admin-message admin-success" role="status">文章 {{ uploaded }} 已发布并立即生效。</div>{% endif %}

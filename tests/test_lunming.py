@@ -67,7 +67,7 @@ def test_full_analysis_consumes_json_stream_into_structured_result():
     assert result["report"]["sections"][0]["title"] == "五行气象"
     assert result["chart"]["pillars"]["time"] is None
     assert result["disclaimer"]
-    assert FakeCompletions.last_kwargs["model"] == "deepseek-v4-flash"
+    assert FakeCompletions.last_kwargs["model"] == "deepseek-flash"
     assert FakeCompletions.last_kwargs["response_format"] == {"type": "json_object"}
     assert FakeCompletions.last_kwargs["stream"] is True
 
