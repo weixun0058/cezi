@@ -13,9 +13,9 @@
 ## 1. 台账定位与效力
 
 - **建立日期：** 2026-07-15
-- **当前版本：** 1.24
+- **当前版本：** 1.25
 - **主维护人：** 项目所有者 + 当次执行者
-- **状态基线：** 2026-07-19，生产站与文章系统已上线；GitHub Actions run 20 全部通过，OPS/GOV 收尾已通过 PR #1 合并到 `main`（merge commit `6af5f7e`）。本地基线为 Python 3.13.13、pytest 450/450、Black、Ruff、14/14 JavaScript、pip-audit 和生产 Docker 冒烟通过。外部监控与统一上线验收均已闭环；商业化尚未上线，当前进入异机备份、聚合指标和四周运营观察。
+- **状态基线：** 2026-10-14，旧生产服务器于 2026-10 到期未续费，生产站已迁移到新服务器 lisa（Docker + 复用原 Cloudflare Tunnel，流程见 `docs/部署指南.md`）；旧服务器上的运行时数据和 2026-07-18 的本地备份随服务器丢失，3 篇已发布文章由本地原稿恢复。当前生产镜像 `4.1.7-analytics` 由 `lisa-migration` 分支构建，合并了 `main` 的 7 月运维提交与 9 月的站长统计后台，MET-001 聚合指标已上线；本地全量 pytest 470 通过（2 项因缺 opencc 跳过）、Black、Ruff 通过，JavaScript 语法检查未在本机执行。每日本地自动备份已启用，R2 异机副本仍待项目所有者确认；商业化尚未上线。迁移前的上一次 CI 基线为 2026-07-19 GitHub Actions run 20 全部通过（OPS/GOV 收尾经 PR #1 合并到 `main`，merge commit `6af5f7e`）。
 - **上位契约：** `README.md`、`docs/API文档.md`、`Agent.md`。
 - **历史依据：**
   - `docs/reviews/2026-07-14-project-completion-issues-audit.md`
@@ -104,7 +104,7 @@
 | COM-003 | 实现默认关闭的商业化配置开关 | P3 | 阻塞 | COM-002 | 关闭时零 UI/零外部请求，配置和测试完整 |
 | COM-004 | 实现赞助组件或广告占位 | P3 | 阻塞 | COM-002/003 | 开关控制、布局安全、无误导点击或运势暗示 |
 | COM-005 | 实现模拟付费墙、订单模型与 webhook 边界 | P3 | 阻塞 | COM-002/003、DEC-005 | 无平台时不持久化真订单；未签名 webhook 不可用 |
-| MET-001 | 建立隐私友好的使用/成本指标 | P2 | 进行中 | OPS-001 | 已实现按日 Oracle/Almanac 聚合计数、复用全局AI请求聚合、周报导出和隐私契约；不记姓名、出生时间、IP、设备ID、原问题或结果文本；待部署生产并完成首周导出验收 |
+| MET-001 | 建立隐私友好的使用/成本指标 | P2 | 进行中 | OPS-001 | 已实现按日 Oracle/Almanac 聚合计数、复用全局AI请求聚合、周报导出和隐私契约；不记姓名、出生时间、IP、设备ID、原问题或结果文本；2026-10-14 已部署生产（镜像 `4.1.7-analytics`），待完成首周导出验收 |
 | MET-002 | 连续四周运营复盘 | P3 | 阻塞 | MET-001、OPS-004 | 4/4 周记录，形成内容、成本和商业化去留决策 |
 
 ## 4. 推荐执行顺序
@@ -283,6 +283,9 @@ python -c "import pathlib, subprocess; files=sorted(pathlib.Path('frontend/stati
 | 2026-07-18 | OPS-002/ART-002 | 项目所有者 + Codex | 持续运维证据补齐 | 在生产服务器短暂停机完成首次 runtime 与文章卷快照，生成 SHA-256，验证 SQLite/归档并恢复服务 | `docs/operations/2026-07-18-production-backup-acceptance.md`；本机与公网 health/readiness 通过；失败尝试文件已隔离保留 | 建立每日备份与加密异机副本；按月做隔离恢复演练 |
 | 2026-07-19 | OPS-002 | Codex + 项目所有者 | 持续运维实施中 | 新增生产每日双数据备份脚本、7日/4周本地保留、失败隔离、不可变R2上传和systemd定时器；确认R2尚未启用且启用会创建绑定现有付款方式的用量计费订阅 | `scripts/production_backup.sh`、`deploy/wise-oracle-backup.*`、`docs/operations/automated-backup-r2-runbook.md`；外部订阅未越权点击 | 项目所有者明确确认R2订阅后创建私有bucket和最小权限token，部署定时器并做异机下载校验 |
 | 2026-07-19 | COM-001/MET-001 | Codex | 就绪 → 进行中 | 明确“生产版本完成、商业化未完成”；新增商业化准备路线、按日无个人数据聚合指标、周报导出和四周复盘模板 | `docs/business/2026-07-19-commercialization-readiness-roadmap.md`、`docs/business/weekly-growth-review-template.md`、`zhugeshensuan/metrics.py`、`scripts/weekly_metrics_report.py` | 先部署MET-001并完成四周观察；同期按实际收款主体完成平台核验，不提前接真实支付或广告 |
+| 2026-10-12 | OPS-001/OPS-002 | 项目所有者 + Claude | 生产迁移 | 旧服务器到期未续费，生产迁移到 lisa：服务器上构建镜像、复用原 Cloudflare Tunnel、与 Tailscale 出口节点共存；旧服务器上的 runtime 卷和 2026-07-18 本地备份随服务器丢失，3 篇已发布文章由本地原稿恢复 | `docs/部署指南.md`；公网 readyz、文章列表/详情和 sitemap 均返回 200 | 在 lisa 启用自动备份 |
+| 2026-10-14 | OPS-002 | Claude | 持续运维实施中 | 在 lisa 安装 `production_backup.sh` 与 `wise-oracle-backup.timer`（`backup.env` 为空，仅本地备份）；首次手动快照 SQLite `quick_check=ok`、两项 SHA-256 通过、服务恢复，快照已下载到站长本地 | `docs/operations/automated-backup-r2-runbook.md`、`docs/部署指南.md` 第十一节 | 项目所有者确认 R2 订阅后配置异机副本；R2 启用前定期下载本地快照 |
+| 2026-10-14 | MET-001 | Claude | 进行中 | 生产部署 `4.1.7-analytics`，`daily_product_metrics` 开始按日累计 | 生产容器内查询到 almanac/oracle 计数 | 满一周后运行 `scripts/weekly_metrics_report.py` 完成首周导出 |
 
 ## 9. 已取消任务（墓碑）
 
@@ -294,6 +297,7 @@ python -c "import pathlib, subprocess; files=sorted(pathlib.Path('frontend/stati
 
 | 版本 | 日期 | 修订人 | 类型 | 变更内容 | 原因 |
 | --- | --- | --- | --- | --- | --- |
+| 1.25 | 2026-10-14 | 项目所有者 + Claude | 生产迁移与状态校正 | 状态基线改为 lisa 生产环境；MET-001 主表从“待部署生产”改为“已部署生产、待首周导出”；第 11 节补充迁移后的下一批工作 | 旧服务器到期后，2026-07 记录的生产备份与运行数据已不存在，台账须反映当前真实状态 |
 | 1.24 | 2026-07-19 | 项目所有者 + Codex | 运维与商业化阶段澄清 | 将当前状态统一为“生产版本完成、商业化未完成”；建立R2自动备份、隐私聚合指标、商业化准备路线和四周复盘模板；COM-001/MET-001进入实施，R2财务订阅保留业主确认门 | 网站已经产生可变生产数据且业主需要经营指导；应先补齐灾难恢复和真实运营基线，再决定打赏、AdSense或付费产品，不能把商业功能缺失误写成生产站未完成 |
 | 1.23 | 2026-07-18 | 项目所有者 + Codex | Cloudflare Analytics 验收完成 | 新增 OPS-006 验收记录；生产 CSP、beacon、同源 RUM 与 Cloudflare 后台非零统计均通过，OPS-006 标记已完成 | 代码、正式浏览器和私有控制台三层证据齐备，CSP 冲突已实际关闭 |
 | 1.22 | 2026-07-18 | Codex | 发布追溯完成 | 新增 `docs/operations/release-provenance.md`，关闭 GOV-003；补充 SEO 验收的后续 Git 映射说明 | 根目录旧 tar 可通过 OCI label 精确映射，SEO/TRUST/article 历史工件则需诚实记录为提交前工作树构建，并关联首次完整持久化提交 |
@@ -321,6 +325,8 @@ python -c "import pathlib, subprocess; files=sorted(pathlib.Path('frontend/stati
 | 1.0 | 2026-07-15 | Codex | 新增 | 建立 GOV/SAFE/SEO/ART/TRUST/OPS/COM/MET/DEC 统一台账 | 原有三份计划同时记录待办，存在重复、过时和不可追溯风险 |
 
 ## 11. 下一个可执行批次
+
+**2026-10-14 更新：** 生产已迁移到 lisa，每日本地自动备份已启用，MET-001 已部署。下一批：项目所有者确认 R2 订阅以建立异机副本；满一周后完成 MET-001 首周导出。以下为 2026-07-19 时的记录，其中“首次真实文章卷备份记录”指旧服务器，已不适用。
 
 **主线上线验收、GOV-003 发布追溯和 OPS-006 Cloudflare Web Analytics 均已完成。下一批可按运维窗口补齐手机/其他电脑上传、同 slug 覆盖、全部文章 ZIP 和首次真实文章卷备份记录，或进入 MET-001 聚合指标；文章内容按机会持续发布，不设固定篇数或期限。**
 

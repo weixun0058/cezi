@@ -3,7 +3,7 @@
 - **对应任务：** OPS-002 持续运维
 - **脚本：** `scripts/production_backup.sh`
 - **定时器：** `deploy/wise-oracle-backup.service`、`deploy/wise-oracle-backup.timer`
-- **当前状态（2026-07-19）：** 本地自动化已实现；R2订阅、私有bucket、专用token和生产定时器待外部配置与验收
+- **当前状态（2026-10-14）：** 生产已迁移到 lisa，本地每日定时器已启用，首次手动快照验收通过（SQLite `quick_check=ok`、两项 SHA-256 通过、服务恢复）；R2尚未启用，订阅、私有bucket和专用token待项目所有者确认后配置。R2 启用前，须按 `docs/部署指南.md` 第十一节定期把快照下载到服务器以外
 
 ## 1. 备份内容与边界
 
@@ -88,14 +88,16 @@ chmod 600 /root/zhugeshensuan/backup.env
 
 ## 6. 安装和启用定时器
 
-代码到达生产服务器后执行：
+代码到达生产服务器后执行。lisa 上源码解压在 `/root/zhugeshensuan/build/src`（见 `docs/部署指南.md`），
+脚本需要复制到 service 引用的 `/root/zhugeshensuan/scripts/`：
 
 ```bash
 cd /root/zhugeshensuan
-chmod 700 scripts/production_backup.sh
-install -m 600 /dev/null /root/zhugeshensuan/backup.env
-install -m 644 deploy/wise-oracle-backup.service /etc/systemd/system/
-install -m 644 deploy/wise-oracle-backup.timer /etc/systemd/system/
+install -d -m 700 scripts
+install -m 700 build/src/scripts/production_backup.sh scripts/production_backup.sh
+[ -e backup.env ] || install -m 600 /dev/null backup.env
+install -m 644 build/src/deploy/wise-oracle-backup.service /etc/systemd/system/
+install -m 644 build/src/deploy/wise-oracle-backup.timer /etc/systemd/system/
 systemctl daemon-reload
 systemctl enable --now wise-oracle-backup.timer
 systemctl list-timers wise-oracle-backup.timer
@@ -113,7 +115,7 @@ UTC计划；如果该时段出现真实高峰，再通过一次受控变更调�
 systemctl start wise-oracle-backup.service
 systemctl status wise-oracle-backup.service --no-pager
 journalctl -u wise-oracle-backup.service -n 100 --no-pager
-rclone lsf wise-oracle-crypt:production/daily --dirs-only
+rclone lsf wise-oracle-crypt:production/daily --dirs-only   # 仅在已配置 R2 时执行
 curl --fail http://127.0.0.1:8000/readyz
 curl --fail https://getwiseoracle.com/readyz
 ```
